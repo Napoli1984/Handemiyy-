@@ -990,6 +990,60 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .pz-stats { gap: 12px; }
   .pz-chip { padding: 0 10px; font-size: 13px; }
 }
+/* ---------- online rooms ---------- */
+.onl {
+  overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
+  padding: max(8px, env(safe-area-inset-top, 0px)) clamp(16px, 5vw, 40px) max(26px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--bg-glow), transparent 72%), var(--bg);
+}
+.onl-inner { max-width: 520px; margin: 0 auto; display: grid; gap: 14px; }
+.onl-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; min-height: 56px; }
+.onl-card { display: grid; gap: 12px; padding: 18px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 16px 30px -24px rgb(var(--shadow-color) / .9); }
+.onl-lead { margin: 0; font-size: 16px; line-height: 1.5; text-wrap: pretty; }
+.onl-label { font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+#onl-name { width: 100%; min-width: 0; font: 500 18px var(--font-ui); padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line-strong); background: var(--bg); color: var(--ink); }
+.onl-wait { justify-items: center; text-align: center; padding: 34px 18px; color: var(--muted); }
+.onl-wait p { margin: 0; }
+.onl-spin { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--line); border-top-color: var(--wine); animation: spin .8s linear infinite; }
+.onl-err-t { margin: 0; font-size: 16px; line-height: 1.5; }
+.onl-room { display: grid; gap: 14px; }
+.onl-codebox { justify-items: center; text-align: center; gap: 4px; }
+.onl-kicker { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.onl-dot { width: 8px; height: 8px; border-radius: 50%; background: #2fa36b; box-shadow: 0 0 0 3px rgba(47, 163, 107, .2); }
+.onl-dot.off { background: var(--danger); box-shadow: 0 0 0 3px rgba(180, 34, 50, .2); }
+.onl-code { margin: 0; padding-left: .2em; font: 500 clamp(34px, 9vw, 44px)/1.15 var(--font-num); letter-spacing: .2em; color: var(--accent-ink); }
+.onl-invite { width: 100%; display: grid; gap: 10px; margin-top: 8px; }
+.onl-link { margin: 0; padding: 9px 12px; border-radius: 12px; background: var(--surface-2); font: 400 13px var(--font-num); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.onl-share { display: flex; gap: 8px; }
+.onl-share .btn { flex: 1 1 0; min-width: 0; }
+.onl-players { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.onl-p { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; padding: 4px 2px; }
+.onl-av { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 2px solid var(--line); overflow: hidden; }
+.onl-av svg { width: 36px; height: 36px; display: block; }
+.onl-p.free .onl-av { border-style: dashed; background: transparent; }
+.onl-p.free b { color: var(--muted); font-weight: 400; font-style: italic; }
+.onl-p.off { opacity: .55; }
+.onl-pn { display: grid; min-width: 0; }
+.onl-pn b { font-weight: 600; font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.onl-pn small { font-size: 13px; color: var(--muted); min-height: 1em; }
+.onl-chips { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.onl-chips button { padding: 10px 0; border-radius: 12px; border: 1px solid var(--line); background: transparent; color: var(--ink); font: 500 16px var(--font-num); cursor: pointer; }
+.onl-chips button[aria-pressed="true"] { background: var(--wine); color: var(--wine-ink); border-color: var(--wine); }
+.onl-chips button:disabled { cursor: default; }
+.onl-chips button:disabled:not([aria-pressed="true"]) { opacity: .5; }
+.onl-status { margin: 0; text-align: center; color: var(--muted); font-size: 15px; text-wrap: balance; }
+.online-btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+.online-btn svg.i { width: 21px; height: 21px; }
+#duo-bar.many { gap: 6px; }
+#btn-again:disabled { opacity: .62; cursor: default; box-shadow: none; }
+#duo-bar.many .pchip { flex: 1 1 0; max-width: 150px; padding: 5px 5px 5px 10px; gap: 6px; }
+#duo-bar.many .pchip .ppairs { min-width: 24px; height: 24px; font-size: 14px; }
+.pchip.me .pname { font-weight: 700; }
+.pchip.off { opacity: .5; }
+.board.waiting .card:not(.matched) { cursor: default; }
+.opp.off { opacity: .5; }
+.net-gone { z-index: 67; }
+@media (max-width: 380px) { .onl-chips { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @keyframes pzFlash { 0% { opacity: 1; } 55% { opacity: .9; } 100% { opacity: 0; } }
 @keyframes flow { to { stroke-dashoffset: -100; } }
 @keyframes ucIn { 0% { opacity: 0; translate: 0 30px; } 100% { opacity: 1; translate: 0 0; } }
@@ -1125,6 +1179,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           </label>
         </div>
         <button type="button" class="btn primary play-btn" id="btn-play" data-i18n="play"></button>
+        <button type="button" class="btn online-btn" data-net-game="memory" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
         <p class="record-line" id="record-line"></p>
         </div>
 
@@ -1152,6 +1207,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <ol id="uc-rules-list"></ol>
           </details>
           <button type="button" class="btn primary play-btn" id="btn-uc-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="uc" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
           <p class="record-line" id="uc-record"></p>
         </div>
 
@@ -1287,6 +1343,44 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     </div>
   </section>
 
+  <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
+    <div class="onl-inner">
+      <header class="onl-head">
+        <button type="button" class="icon-btn" id="onl-back" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="uc-titles"><h2 class="uc-title" data-i18n="netTitle"></h2><span class="uc-sub" id="onl-sub"></span></div>
+      </header>
+      <div class="onl-card" id="onl-intro">
+        <p class="onl-lead" id="onl-lead"></p>
+        <label class="onl-label" for="onl-name" data-i18n="netNameLabel"></label>
+        <input id="onl-name" maxlength="14" autocomplete="nickname" enterkeyhint="go" data-i18n-attr="placeholder:namePh">
+        <button type="button" class="btn primary play-btn" id="onl-go"></button>
+      </div>
+      <div class="onl-card onl-wait" id="onl-wait" hidden><span class="onl-spin" aria-hidden="true"></span><p id="onl-wait-t" aria-live="polite"></p></div>
+      <div class="onl-card" id="onl-err" hidden role="alert"><p class="onl-err-t" id="onl-err-t"></p><button type="button" class="btn primary" id="onl-retry" data-i18n="netRetry"></button></div>
+      <div class="onl-room" id="onl-room" hidden>
+        <div class="onl-card onl-codebox">
+          <p class="onl-kicker"><span class="onl-dot" id="onl-dot" aria-hidden="true"></span><span data-i18n="netRoom"></span></p>
+          <p class="onl-code" id="onl-code"></p>
+          <div class="onl-invite" id="onl-invite">
+            <p class="onl-link" id="onl-link"></p>
+            <div class="onl-share"><button type="button" class="btn primary" id="onl-share"></button><button type="button" class="btn" id="onl-copy" data-i18n="netCopy"></button></div>
+          </div>
+        </div>
+        <div class="onl-card">
+          <div class="count-head"><span class="count-label" data-i18n="netPlayers"></span><span class="count-tag" id="onl-count"></span></div>
+          <ul class="onl-players" id="onl-players"></ul>
+        </div>
+        <div class="onl-card" id="onl-opts" hidden>
+          <div class="count-head"><span class="count-label" data-i18n="cardsLabel"></span><span class="count-tag" id="onl-cards-tag"></span></div>
+          <div class="onl-chips" id="onl-cards" role="group" data-i18n-attr="aria-label:cardsLabel"></div>
+        </div>
+        <p class="onl-status" id="onl-status" aria-live="polite"></p>
+        <button type="button" class="btn primary play-btn" id="onl-start" data-i18n="netStart"></button>
+        <button type="button" class="btn ghost" id="onl-leave" data-i18n="netLeave"></button>
+      </div>
+    </div>
+  </section>
+
   <section id="map" class="screen mapscreen" hidden data-i18n-attr="aria-label:mapLabel">
     <header class="map-head">
       <button type="button" class="icon-btn" id="map-back" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -1400,6 +1494,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   </div>
 </div>
 
+<div class="overlay net-gone" id="net-gone" hidden role="alertdialog" aria-modal="true" aria-labelledby="net-gone-t">
+  <div class="panel small">
+    <h2 class="cf-title" id="net-gone-t"></h2>
+    <p class="cf-text" data-i18n="netGoneText"></p>
+    <div class="res-actions"><button type="button" class="btn primary" id="net-gone-ok" data-i18n="toMenu"></button></div>
+  </div>
+</div>
+
 <div class="overlay" id="confirm" hidden role="dialog" aria-modal="true" aria-labelledby="cf-title">
   <div class="panel small">
     <h2 class="cf-title" id="cf-title" data-i18n="cfTitle"></h2>
@@ -1452,6 +1554,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   <symbol id="av-fox" viewBox="0 0 40 40"><path d="M5 5l9 9h12l9-9-1 15c0 8-6 14-14 16C12 34 6 28 6 20z" fill="#e07a2e"/><path d="M6.5 19.5c3 6 8 9.6 13.5 16.5 5.5-6.9 10.5-10.5 13.5-16.5-4.6 2.4-9 4.4-13.5 6.2-4.5-1.8-8.9-3.8-13.5-6.2z" fill="#fff4ea"/><circle cx="14.2" cy="19.5" r="1.9" fill="#2a1219"/><circle cx="25.8" cy="19.5" r="1.9" fill="#2a1219"/><path d="M17.8 31h4.4L20 33.6z" fill="#2a1219"/><path d="M9 9.5l4 4.5M31 9.5l-4 4.5" stroke="#9c4a14" stroke-width="1.4"/></symbol>
   <symbol id="av-cat" viewBox="0 0 40 40"><path d="M7 6l8 8.5h10L33 6v18c0 7.5-6 11.5-13 11.5S7 31.5 7 24z" fill="#8d93a0"/><path d="M10 10.5l3.6 3.8M30 10.5l-3.6 3.8" stroke="#e8a2b0" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="14.8" cy="21.5" rx="2.1" ry="2.6" fill="#2a1219"/><ellipse cx="25.2" cy="21.5" rx="2.1" ry="2.6" fill="#2a1219"/><path d="M18.3 26.4h3.4L20 28.4z" fill="#e8a2b0"/><path d="M4 25.5l8.5 1M4 29.5l8.5-1M36 25.5l-8.5 1M36 29.5l-8.5-1" stroke="#2a1219" stroke-width="1" stroke-linecap="round"/></symbol>
   <symbol id="av-owl" viewBox="0 0 40 40"><path d="M8 8.5l6 4.2q6-3 12 0l6-4.2v18c0 6.5-5.4 10.5-12 10.5S8 33 8 26.5z" fill="#8b5e3c"/><path d="M12 31q8 5 16 0" stroke="#c99a6a" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="15" cy="20.5" r="5.2" fill="#fff4ea"/><circle cx="25" cy="20.5" r="5.2" fill="#fff4ea"/><circle cx="15.4" cy="20.8" r="2.4" fill="#2a1219"/><circle cx="24.6" cy="20.8" r="2.4" fill="#2a1219"/><path d="M18.4 25h3.2L20 28z" fill="#e2b95c"/></symbol>
+  <symbol id="av-bunny" viewBox="0 0 40 40"><ellipse cx="14.5" cy="10" rx="4.2" ry="9" fill="#ece3de"/><ellipse cx="25.5" cy="10" rx="4.2" ry="9" fill="#ece3de"/><ellipse cx="14.5" cy="10.6" rx="2" ry="6.4" fill="#f2a7b6"/><ellipse cx="25.5" cy="10.6" rx="2" ry="6.4" fill="#f2a7b6"/><circle cx="20" cy="25.5" r="11.5" fill="#ece3de"/><circle cx="15.6" cy="24" r="1.9" fill="#2a1219"/><circle cx="24.4" cy="24" r="1.9" fill="#2a1219"/><path d="M18.3 28.2h3.4L20 30.2z" fill="#e8a2b0"/><path d="M20 30.2v1.8M17.6 32.6c1.3.9 3.5.9 4.8 0" stroke="#2a1219" stroke-width="1" fill="none" stroke-linecap="round"/></symbol>
 </svg>
 
 <p class="sr-only" id="live" aria-live="polite"></p>
@@ -1602,6 +1705,29 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       pzRowTime: 'Tempo', pzRowBest: 'Record da battere', pzRowAids: 'Aiuti', pzNoAids: 'Nessuno', pzAidsUsed: 'Usati', pzRowDone: 'Foto completate', pzDoneOf: '{d} su {t}',
       pzAgain: 'Un altro puzzle', pzSeePhoto: 'Guarda la foto',
       aPzStart: 'Puzzle da {n} pezzi: trascina i pezzi sulla foto.', aPzPlaced: 'Pezzo al suo posto: {m} su {n}.',
+      // ---- online ----
+      netPlayOnline: 'Gioca online con gli amici', netLabel: 'Gioca online', netTitle: 'Gioca online',
+      netLeadCreate: 'Crea una stanza per {game} e manda il link agli amici: potete giocare da 2 a 4, ognuno sul suo telefono.',
+      netLeadJoin: 'Ti hanno invitato nella stanza {code}. Scrivi il tuo nome ed entra.',
+      netLeadJoinOf: '{name} ti ha invitato a giocare a {game}. Scrivi il tuo nome ed entra nella stanza {code}.',
+      netNameLabel: 'Il tuo nome', netCreate: 'Crea la stanza', netEnter: 'Entra nella stanza',
+      netConnecting: 'Mi collego…', netLooking: 'Cerco la stanza…',
+      netErrConn: 'Connessione non riuscita. Controlla internet e riprova.',
+      netErrLib: 'Non riesco a preparare il gioco online. Controlla internet e riprova.',
+      netErrNotFound: 'Questa stanza non esiste più o è stata chiusa.',
+      netErrFull: 'La stanza è piena: ci sono già 4 giocatori.',
+      netErrStarted: 'In questa stanza la partita è già cominciata. Riprova quando finisce.',
+      netRetry: 'Riprova', netRoom: 'Stanza', netShare: 'Invia il link', netCopy: 'Copia il link', netCopied: 'Link copiato!',
+      netShareText: 'Giochiamo a {game} con le foto di Hande! Entra nella mia stanza:',
+      netPlayers: 'Giocatori', netCountOf: '{n} su 4', netYou: 'tu', netHostTag: 'ha creato la stanza', netOffline: 'non collegato', netFree: 'Posto libero',
+      netStatusHost1: "Manda il link agli amici: puoi iniziare quando c'è almeno un altro giocatore.",
+      netStatusHost: 'Ci siete? Puoi iniziare la partita.', netStatusGuest: 'Aspetta che {name} inizi la partita.',
+      netStart: 'Inizia la partita', netLeave: 'Esci dalla stanza', netRoomN: 'Stanza {code}',
+      netYourTurn: 'Tocca a te', netTurnOf: 'Tocca a {name}', netGuest: 'Giocatore',
+      netHostGone: '{name} non è più nella stanza', netGoneText: 'Se torna tra poco, la partita riprende da sola.',
+      netCfTitle: 'Uscire dalla stanza?', netCfTextHost: 'La stanza si chiude anche per gli altri giocatori.', netCfText: 'Gli altri continuano senza di te.',
+      netWaitAgain: 'Aspetta la rivincita di {name}…', netAgain: 'Rivincita', netYouWin: 'Hai vinto!', netKicker: 'Online · {game}',
+      netLeft: '{name} è uscito', netAway: 'Gioca il computer per {name}',
     },
     tr: {
       menuLabel: 'Oyun menüsü', fanLabel: 'Önizleme fotoğraflarını karıştır',
@@ -1743,6 +1869,29 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       pzRowTime: 'Süre', pzRowBest: 'Geçilecek rekor', pzRowAids: 'Yardım', pzNoAids: 'Yok', pzAidsUsed: 'Kullanıldı', pzRowDone: 'Tamamlanan fotoğraflar', pzDoneOf: '{t} içinde {d}',
       pzAgain: 'Başka bir yapboz', pzSeePhoto: 'Fotoğrafa bak',
       aPzStart: '{n} parçalık yapboz: parçaları fotoğrafın üstüne sürükle.', aPzPlaced: 'Parça yerinde: {n} parçadan {m}.',
+      // ---- çevrimiçi ----
+      netPlayOnline: 'Arkadaşlarınla çevrimiçi oyna', netLabel: 'Çevrimiçi oyna', netTitle: 'Çevrimiçi oyna',
+      netLeadCreate: '{game} için bir oda kur ve bağlantıyı arkadaşlarına gönder: 2 ile 4 kişi, herkes kendi telefonunda oynayabilir.',
+      netLeadJoin: '{code} odasına davet edildin. Adını yaz ve gir.',
+      netLeadJoinOf: '{name} seni {game} oynamaya davet etti. Adını yaz ve {code} odasına gir.',
+      netNameLabel: 'Adın', netCreate: 'Oda kur', netEnter: 'Odaya gir',
+      netConnecting: 'Bağlanıyor…', netLooking: 'Oda aranıyor…',
+      netErrConn: 'Bağlantı kurulamadı. İnternetini kontrol et ve tekrar dene.',
+      netErrLib: 'Çevrimiçi oyun hazırlanamadı. İnternetini kontrol et ve tekrar dene.',
+      netErrNotFound: 'Bu oda artık yok ya da kapatıldı.',
+      netErrFull: 'Oda dolu: zaten 4 oyuncu var.',
+      netErrStarted: 'Bu odada oyun çoktan başladı. Bitince tekrar dene.',
+      netRetry: 'Tekrar dene', netRoom: 'Oda', netShare: 'Bağlantıyı gönder', netCopy: 'Bağlantıyı kopyala', netCopied: 'Bağlantı kopyalandı!',
+      netShareText: 'Hande fotoğraflarıyla {game} oynayalım! Odama gel:',
+      netPlayers: 'Oyuncular', netCountOf: '{n}/4', netYou: 'sen', netHostTag: 'odayı kurdu', netOffline: 'bağlı değil', netFree: 'Boş yer',
+      netStatusHost1: 'Bağlantıyı arkadaşlarına gönder: en az bir oyuncu daha gelince başlayabilirsin.',
+      netStatusHost: 'Hazır mısınız? Oyunu başlatabilirsin.', netStatusGuest: '{name} oyunu başlatana kadar bekle.',
+      netStart: 'Oyunu başlat', netLeave: 'Odadan çık', netRoomN: 'Oda {code}',
+      netYourTurn: 'Sıra sende', netTurnOf: 'Sıra: {name}', netGuest: 'Oyuncu',
+      netHostGone: '{name} artık odada değil', netGoneText: 'Birazdan dönerse oyun kendiliğinden devam eder.',
+      netCfTitle: 'Odadan çıkılsın mı?', netCfTextHost: 'Oda diğer oyuncular için de kapanacak.', netCfText: 'Diğerleri sensiz devam eder.',
+      netWaitAgain: '{name} rövanşı başlatacak…', netAgain: 'Rövanş', netYouWin: 'Kazandın!', netKicker: 'Çevrimiçi · {game}',
+      netLeft: '{name} çıktı', netAway: '{name} yerine bilgisayar oynuyor',
     },
   };
   const store = {
@@ -2212,6 +2361,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     ucRenderSetup(); pzRenderSetup();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (!mapEl.hidden) renderMap(false);
+    if (N && N.view) netRenderRoom();
+    if (!onlineEl.hidden && !$('#onl-intro').hidden) netRenderIntro();
   }
   function setLang(l) { lang = l; store.set('hm-lang', l); applyLang(); }
 
@@ -2537,6 +2688,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     pzStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
+    renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
     $('#duo-bar').hidden = !cfg.duo;
     $('#st-moves').hidden = cfg.timed;
     $('#st-pairs').hidden = !cfg.timed;
@@ -2713,7 +2865,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function updateDuo() {
     if (!S || !S.duo) return;
     S.players.forEach((p, i) => {
-      const chip = $('#pc' + i);
+      const chip = $('#pc' + i); if (!chip) return;
+      chip.classList.toggle('me', !!p.me); chip.classList.toggle('off', !!p.off);
       $('.pname', chip).textContent = p.name;
       $('.ppairs', chip).textContent = p.pairs;
       chip.classList.toggle('active', i === S.current);
@@ -2731,6 +2884,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function onCard(c) {
     const s = S;
+    if (s && s.online) {
+      // online: only the player whose turn it is may turn a card; the room decides what happens
+      if (!N || s.phase !== 'play' || c.state !== 'down' || c.sent || s.current !== s.mySeat) return;
+      c.sent = true; AudioCore.get(); netAct({ t: 'flip', slot: c.slot });
+      return;
+    }
     if (!s || s.phase !== 'play' || s.peeking || c.state !== 'down') return;
     if (s.pending) resolvePending();
     if (s.lock) return;
@@ -2990,12 +3149,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#btn-photos').hidden = !o.photos;
     $('#btn-photos').textContent = o.photosLabel || t('photos');
     $('#result').classList.toggle('pz', o.action === 'pz');
-    $('#btn-again').textContent = o.again;
+    $('#btn-again').hidden = !o.again; $('#btn-again').disabled = !!o.againOff; if (o.again) $('#btn-again').textContent = o.again;
+    $('#btn-menu').textContent = o.menuLabel || t('toMenu');
     lastFocus = null;
     $('#result').hidden = false;
     if (o.score != null) countUp($('#res-score'), o.score, 1200);
     if (o.stars != null) Array.from(stars.children).forEach((x, i) => { if (i < o.stars) setTimeout(() => { if (!$('#result').hidden) { x.classList.add('on'); Sound.star(i); } }, 500 + i * 300); });
-    setTimeout(() => $('#btn-again').focus({ preventScroll: true }), 60);
+    setTimeout(() => (o.again && !o.againOff ? $('#btn-again') : $('#btn-menu')).focus({ preventScroll: true }), 60);
     announce(o.title + (o.score != null ? ' ' + fmtNum(o.score) + ' ' + t('unit') : '') + (o.stars != null ? ', ' + t('aStars', { n: o.stars }) : '') + '.');
   }
   function showFinale() {
@@ -3152,7 +3312,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function ucRenderHead() {
     const s = ucSession, n = U.players.length - 1;
-    $('#uc-sub').textContent = t(n === 1 ? 'ucSub1' : 'ucSub', { r: s.round, n });
+    const sub = t(n === 1 ? 'ucSub1' : 'ucSub', { r: s.round, n });
+    $('#uc-sub').textContent = U.online && N ? t('netRoomN', { code: N.code }) + ' · ' + sub.split(' · ')[0] : sub;
     $('#uc-st-hand').textContent = s.round;
     $('#uc-st-deck').textContent = U.deck.length;
     $('#uc-st-pts').textContent = fmtNum(s.totals[0]);
@@ -3163,7 +3324,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     g.players.forEach((p, pi) => {
       if (pi === 0) return;
       const d = document.createElement('div');
-      d.className = 'opp seat-' + seats[pi - 1] + (g.phase === 'play' && g.turn === pi ? ' turn' : '');
+      d.className = 'opp seat-' + seats[pi - 1] + (g.phase === 'play' && g.turn === pi ? ' turn' : '') + (p.off ? ' off' : '');
       d.id = 'uc-seat-' + pi;
       d.innerHTML = '<span class="avatar">' + svgUse('av-' + p.av, '', '0 0 40 40') + '</span><span class="o-info"><span class="name"></span><span class="mini"></span><span class="count"></span></span>';
       $('.name', d).textContent = p.name;
@@ -3437,6 +3598,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     }
     let color = null;
     if (ucWild(c)) { color = await ucPickColor(); if (U !== g || !color || !ucMyTurn()) return; }
+    if (g.online) { unSend(g, { t: 'play', id, color }); return; }
     g.waiting = false;
     $('#uc-draw').classList.remove('ready');
     await ucPlay(0, id, color, el.getBoundingClientRect());
@@ -3450,6 +3612,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   async function ucDrawBtn() {
     const g = U;
     if (!ucMyTurn()) return;
+    if (g.online) { unSend(g, { t: g.drawn != null ? 'pass' : 'draw' }); return; }
     if (g.drawn != null) { ucPass(); return; }
     g.busy = true; $('#uc-draw').classList.remove('ready'); ucRenderActions(); ucRenderHand();
     const got = await ucDraw(0, 1); if (U !== g) return;
@@ -3466,12 +3629,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     const g = U; if (!g) return;
     const me = g.players[0];
     if (me.called || g.phase !== 'play' || !((ucMyTurn() && me.hand.length === 2) || (g.grace && me.hand.length === 1))) return;
+    if (g.online) { g.grace = false; ucRenderActions(); netAct({ t: 'call' }); return; }
     me.called = true; Sound.correct(); buzz(20);
     FX.banner(t('ucCall'), me.hand.length === 1 ? t('bUcCalledYou') : '', 'gold');
     ucRenderActions();
   }
   async function ucCatch() {
     const g = U; if (!g || g.catchable == null) return;
+    if (g.online) { g.catchable = null; ucRenderActions(); netAct({ t: 'catch' }); return; }
     const pi = g.catchable, p = g.players[pi];
     g.catchable = null; ucRenderActions();
     if (p.hand.length !== 1 || p.called) return;
@@ -3565,7 +3730,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     ucEl.hidden = true;
   }
   function ucRequestExit() {
-    if (U && U.phase === 'play') { lastFocus = document.activeElement; $('#confirm').hidden = false; $('#cf-stay').focus(); }
+    if (U && U.online) { openConfirm(true); return; }
+    if (U && U.phase === 'play') openConfirm(false);
     else goHome();
   }
 
@@ -3949,7 +4115,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     pzEl.hidden = true;
   }
   function pzRequestExit() {
-    if (P && P.phase === 'play' && P.started) { lastFocus = document.activeElement; $('#confirm').hidden = false; $('#cf-stay').focus(); }
+    if (P && P.phase === 'play' && P.started) openConfirm(false);
     else goHome();
   }
 
@@ -4357,12 +4523,917 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     });
   }
 
+  /* ---------- online rooms: play with friends, each on their own phone ----------
+     One player creates a room and sends a link; up to four people join. Messages travel through a free public MQTT
+     relay. The device that created the room keeps the game and sends each player only what they may see: the
+     others follow it and animate what happened. Rooms are offered only where the page can reach the relay
+     (a normal website, not the Claude page). */
+  const NET_TOPIC = 'handemiyy/r1/';
+  const NET_BROKERS = ['wss://broker.emqx.io:8084/mqtt', 'wss://broker.hivemq.com:8884/mqtt', 'wss://test.mosquitto.org:8081/mqtt', 'wss://mqtt.eclipseprojects.io:443/mqtt'];
+  const NET_LIBS = ['https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js', 'https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js', 'https://unpkg.com/mqtt@4.3.7/dist/mqtt.min.js'];
+  const NET_AV = ['fox', 'cat', 'owl', 'bunny'];
+  const NET_MAX = 4;
+  const NET_CARDS = [12, 16, 20, 24, 30, 40];
+  const NET_CODE = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const onlineEl = $('#online');
+  const PHOTO_BY_ID = new Map(PHOTOS.map((p) => [p.id, p]));
+  const netOk = () => /^https?:$/.test(location.protocol) && !/(^|\.)(claude\.ai|claudeusercontent\.com|anthropic\.com|claude\.site)$/i.test(location.hostname);
+  const netRand = (n, chars) => Array.from({ length: n }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  const netClean = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u2028-\u202e\u2060-\u206f]/g, '').trim().slice(0, 14);
+  const netGameName = (g) => t(g === 'uc' ? 'gameUc' : 'gameMemory');
+  let N = null;             // the room this device is in
+  let netLib = null;
+  let netPrep = { game: 'memory', code: null, b: null, mode: 'create' };
+
+  function netPid(code) {
+    let id = null;
+    try { id = sessionStorage.getItem('hm-pid-' + code); } catch (e) { /* storage unavailable */ }
+    if (!id || !/^[a-z0-9]{10}$/.test(id)) {
+      id = netRand(10, 'abcdefghijkmnopqrstuvwxyz23456789');
+      try { sessionStorage.setItem('hm-pid-' + code, id); } catch (e) { /* storage unavailable */ }
+    }
+    return id;
+  }
+  function netLoadLib() {
+    if (window.mqtt && window.mqtt.connect) return Promise.resolve(true);
+    if (netLib) return netLib;
+    netLib = (async () => {
+      for (const src of NET_LIBS) {
+        const ok = await new Promise((res) => {
+          const s = document.createElement('script'); s.src = src; s.async = true;
+          const tm = setTimeout(() => res(false), 12000);
+          s.onload = () => { clearTimeout(tm); res(true); };
+          s.onerror = () => { clearTimeout(tm); s.remove(); res(false); };
+          document.head.appendChild(s);
+        });
+        if (ok && window.mqtt && window.mqtt.connect) return true;
+      }
+      netLib = null;
+      return false;
+    })();
+    return netLib;
+  }
+  // connect to the relay the link names, or to the first one that answers
+  async function netConnect(b, will) {
+    const order = b != null && NET_BROKERS[b] ? [b] : NET_BROKERS.map((_, i) => i);
+    for (const i of order) {
+      const client = await new Promise((res) => {
+        let done = false, c = null;
+        const fail = () => { if (done) return; done = true; try { c.end(true); } catch (e) { /* closed */ } res(null); };
+        const tm = setTimeout(fail, 9000);
+        try {
+          c = window.mqtt.connect(NET_BROKERS[i], {
+            clientId: 'hmy_' + netRand(12, 'abcdefghijklmnopqrstuvwxyz0123456789'), clean: true, keepalive: 25,
+            connectTimeout: 8000, reconnectPeriod: 2500, will,
+          });
+        } catch (e) { clearTimeout(tm); res(null); return; }
+        c.once('connect', () => { if (done) return; done = true; clearTimeout(tm); res(c); });
+      });
+      if (client) return { client, b: i };
+    }
+    return null;
+  }
+  const netTopic = (k) => NET_TOPIC + N.code + '/' + k;
+  function netPub(k, obj, retain) {
+    if (!N || !N.client) return;
+    try { N.client.publish(netTopic(k), obj == null ? '' : JSON.stringify(obj), { qos: 1, retain: !!retain }); } catch (e) { /* offline: the next update repairs it */ }
+  }
+  function netWire(client) {
+    client.on('message', (topic, payload) => {
+      if (!N || N.client !== client) return;
+      let m = null;
+      try { m = JSON.parse(new TextDecoder().decode(payload)); } catch (e) { return; }
+      if (!m || typeof m !== 'object') return;
+      const k = topic.slice((NET_TOPIC + N.code + '/').length);
+      if (N.host) { if (k === 'in') netHostMsg(m); return; }
+      if (k === 'host') netHostState(m);
+      else if (k === 'to/' + N.me) netGuestMsg(m);
+    });
+    client.on('connect', () => {
+      if (!N || N.client !== client) return;
+      N.online = true; netRenderLink();
+      if (N.host) { netPub('host', { on: true, game: N.game, name: N.players[0].name }, true); netPublishAll(); }
+      else if (N.entered) netPub('in', { t: 'hello', pid: N.me, name: N.name });
+    });
+    client.on('offline', () => { if (N && N.client === client) { N.online = false; netRenderLink(); } });
+  }
+
+  /* entering: create a room, or open the one a link points to */
+  function netShow(mode) {
+    closeOverlays(); FX.clear();
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
+    onlineEl.scrollTop = 0;
+    $('#onl-intro').hidden = mode !== 'intro';
+    $('#onl-wait').hidden = mode !== 'wait';
+    $('#onl-err').hidden = mode !== 'err';
+    $('#onl-room').hidden = mode !== 'room';
+  }
+  function netOpenCreate(game) {
+    if (N) netLeave();
+    netPrep = { game, code: null, b: null, mode: 'create' };
+    netShow('intro'); netRenderIntro();
+    $('#onl-name').value = store.get('hm-net-name', '') || '';
+    setTimeout(() => $('#onl-name').focus({ preventScroll: true }), 60);
+  }
+  async function netOpenJoin(code, b) {
+    if (N) netLeave();
+    netPrep = { game: null, code, b, mode: 'join', host: null };
+    netShow('wait'); $('#onl-wait-t').textContent = t('netLooking');
+    $('#onl-sub').textContent = t('netRoomN', { code });
+    if (!(await netLoadLib())) { netFail('lib'); return; }
+    if (netPrep.code !== code || N) return;
+    const pid = netPid(code);
+    const r = await netConnect(b, { topic: NET_TOPIC + code + '/in', payload: JSON.stringify({ t: 'bye', pid }), qos: 1, retain: false });
+    if (netPrep.code !== code || N) { if (r) r.client.end(true); return; }
+    if (!r) { netFail('conn'); return; }
+    N = { code, b: r.b, me: pid, host: false, client: r.client, game: null, name: '', entered: false, hostInfo: null, view: null, lastSeq: -1, online: true, pingT: 0, lookT: 0 };
+    netWire(r.client);
+    r.client.subscribe([netTopic('host'), netTopic('to/' + pid)], { qos: 1 });
+    // no answer from the room: it is gone
+    N.lookT = setTimeout(() => { if (N && !N.host && !N.hostInfo) netFail('notfound'); }, 6500);
+  }
+  function netRenderIntro() {
+    const p = netPrep, name = p.host && p.host.name ? p.host.name : '';
+    const game = netGameName(p.game || (p.host && p.host.game) || 'memory');
+    $('#onl-lead').textContent = p.mode === 'create' ? t('netLeadCreate', { game })
+      : name ? t('netLeadJoinOf', { name, game, code: p.code }) : t('netLeadJoin', { code: p.code });
+    $('#onl-go').textContent = t(p.mode === 'create' ? 'netCreate' : 'netEnter');
+    $('#onl-sub').textContent = p.mode === 'create' ? game : t('netRoomN', { code: p.code });
+  }
+  function netFail(why) {
+    const was = N; N = null;
+    if (was) { clearTimeout(was.lookT); clearInterval(was.pingT); clearInterval(was.tick); try { was.client.end(true); } catch (e) { /* closed */ } }
+    netShow('err');
+    $('#onl-err-t').textContent = t({ lib: 'netErrLib', conn: 'netErrConn', notfound: 'netErrNotFound', full: 'netErrFull', started: 'netErrStarted' }[why] || 'netErrConn');
+    $('#onl-retry').hidden = why === 'notfound';
+    $('#onl-retry').focus({ preventScroll: true });
+  }
+  async function netGo() {
+    const name = netClean($('#onl-name').value) || t('netGuest');
+    store.set('hm-net-name', name);
+    AudioCore.get(); Sound.flip();
+    if (netPrep.mode === 'join') {
+      if (!N || N.host) { netOpenJoin(netPrep.code, netPrep.b); return; }
+      N.name = name; N.entered = true;
+      netShow('wait'); $('#onl-wait-t').textContent = t('netConnecting');
+      netPub('in', { t: 'hello', pid: N.me, name });
+      clearInterval(N.pingT); N.pingT = setInterval(() => netPub('in', { t: 'ping', pid: N && N.me }), 12000);
+      return;
+    }
+    netShow('wait'); $('#onl-wait-t').textContent = t('netConnecting');
+    if (!(await netLoadLib())) { netFail('lib'); return; }
+    const code = netRand(5, NET_CODE), pid = netPid(code);
+    const r = await netConnect(null, { topic: NET_TOPIC + code + '/host', payload: JSON.stringify({ on: false }), qos: 1, retain: true });
+    if (!r) { netFail('conn'); return; }
+    if (onlineEl.hidden) { r.client.end(true); return; } // left meanwhile
+    const cards = NET_CARDS.includes(store.get('hm-net-cards', 20)) ? store.get('hm-net-cards', 20) : 20;
+    N = {
+      code, b: r.b, me: pid, host: true, hostPid: pid, client: r.client, game: netPrep.game, name, phase: 'lobby',
+      players: [{ pid, name, on: true, seat: 0, seen: Date.now() }], opts: { cards }, seq: 0, eng: null, ses: null, round: 0,
+      view: null, lastSeq: -1, online: true, pubT: 0, tick: 0,
+    };
+    netWire(r.client);
+    r.client.subscribe(netTopic('in'), { qos: 1 });
+    netPub('host', { on: true, game: N.game, name }, true);
+    N.tick = setInterval(netHostTick, 1000);
+    try { history.replaceState(null, '', location.pathname + '?room=' + code + (N.b ? '&b=' + N.b : '')); } catch (e) { /* not allowed */ }
+    netPublishAll();
+  }
+
+  /* guest side */
+  function netHostState(m) {
+    const was = N.hostInfo;
+    N.hostInfo = m;
+    if (m.on) {
+      clearTimeout(N.lookT);
+      if (!N.entered && !N.view) {
+        netPrep.host = m; netPrep.game = m.game;
+        if (!was) { netShow('intro'); netRenderIntro(); $('#onl-name').value = store.get('hm-net-name', '') || ''; setTimeout(() => $('#onl-name').focus({ preventScroll: true }), 60); }
+      }
+      $('#net-gone').hidden = true;
+      return;
+    }
+    if (!N.entered && !N.view) { netFail('notfound'); return; }
+    netGone(m.name || (N.view && N.view.players[0] && N.view.players[0].name) || '');
+  }
+  function netGuestMsg(m) {
+    if (m.err) { if (!N.view) netFail(m.err); return; }
+    if (typeof m.seq !== 'number') return;
+    if (!N.entered) {
+      // a view for this device already exists: it was in the room before a reload, so it goes straight back in
+      N.entered = true; N.name = (m.players && m.players[m.you] && m.players[m.you].name) || store.get('hm-net-name', '') || t('netGuest');
+      netPub('in', { t: 'hello', pid: N.me, name: N.name });
+      clearInterval(N.pingT); N.pingT = setInterval(() => netPub('in', { t: 'ping', pid: N && N.me }), 12000);
+    }
+    netApply(m);
+  }
+  function netGone(name) {
+    if (!N) return;
+    const box = $('#net-gone');
+    $('#net-gone-t').textContent = t('netHostGone', { name: name || t('netGuest') });
+    box.hidden = false;
+    setTimeout(() => $('#net-gone-ok').focus({ preventScroll: true }), 40);
+  }
+
+  /* host side */
+  function netHostMsg(m) {
+    if (typeof m.pid !== 'string' || !/^[a-z0-9]{10}$/.test(m.pid) || m.pid === N.me) return;
+    const p = N.players.find((x) => x.pid === m.pid);
+    if (m.t === 'hello') {
+      const name = netClean(m.name) || t('netGuest');
+      if (p) { p.on = true; p.seen = Date.now(); p.name = name; netPublishAll(); return; }
+      if (N.players.length >= NET_MAX) { netPub('to/' + m.pid, { err: 'full' }, false); return; }
+      if (N.phase !== 'lobby') { netPub('to/' + m.pid, { err: 'started' }, false); return; }
+      N.players.push({ pid: m.pid, name, on: true, seat: N.players.length, seen: Date.now() });
+      Sound.turn(); buzz(15);
+      netPublishAll();
+      return;
+    }
+    if (!p) return;
+    p.seen = Date.now();
+    if (m.t === 'ping') { if (!p.on) { p.on = true; netPublishAll(); } return; }
+    if (m.t === 'bye') {
+      if (N.phase === 'lobby') {
+        N.players = N.players.filter((x) => x !== p);
+        N.players.forEach((x, i) => { x.seat = i; });
+        netPub('to/' + p.pid, null, true);
+      } else p.on = false;
+      netPublishAll();
+      return;
+    }
+    if (!p.on) { p.on = true; netPublishAll(); }
+    if (m.t === 'act' && N.eng && m.a && typeof m.a === 'object' && N.phase === 'play') { N.eng.act(p.seat, m.a); netPublishAll(); }
+  }
+  function netHostTick() {
+    if (!N || !N.host) return;
+    let changed = false;
+    N.players.forEach((p) => { if (p.pid !== N.me && p.on && Date.now() - p.seen > 45000) { p.on = false; changed = true; } });
+    if (N.eng && N.phase === 'play' && N.eng.tick && N.eng.tick()) changed = true;
+    if (changed) netPublishAll();
+  }
+  function netAct(a) {
+    if (!N) return;
+    if (N.host) { if (N.eng && N.phase === 'play') { N.eng.act(0, a); netPublishAll(); } return; }
+    netPub('in', { t: 'act', pid: N.me, a });
+  }
+  function netPublishAll() {
+    if (!N || !N.host || N.pubT) return;
+    N.pubT = setTimeout(netFlush, 0);
+  }
+  function netFlush() {
+    if (!N || !N.host) return;
+    N.pubT = 0; N.seq++;
+    const base = { v: 1, seq: N.seq, code: N.code, b: N.b, game: N.game, phase: N.phase, opts: N.opts, players: N.players.map((p) => ({ name: p.name, on: p.on })) };
+    N.players.forEach((p) => {
+      const view = Object.assign({ you: p.seat }, base, { g: N.eng ? N.eng.view(p.seat) : null });
+      if (p.pid === N.me) netApply(view); else netPub('to/' + p.pid, view, true);
+    });
+  }
+  function netStartGame() {
+    if (!N || !N.host) return;
+    // whoever left during the last game gives up the seat
+    if (N.players.some((p) => !p.on)) {
+      N.players.filter((p) => !p.on).forEach((p) => netPub('to/' + p.pid, null, true));
+      N.players = N.players.filter((p) => p.on);
+      N.players.forEach((p, i) => { p.seat = i; });
+      N.ses = null;
+    }
+    if (N.players.length < 2) { N.phase = 'lobby'; N.eng = null; netPublishAll(); return; }
+    N.round++;
+    if (N.eng && N.eng.stop) N.eng.stop();
+    if (N.game === 'uc') {
+      if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, totals: N.players.map(() => 0), wins: N.players.map(() => 0) };
+      N.ses.round++;
+      N.eng = unNew(N.players.length, N.ses);
+    } else N.eng = mnNew(N.players.length, N.opts.cards, N.round);
+    N.phase = 'play';
+    netPublishAll();
+  }
+  function netLeave() {
+    const n = N; if (!n) return;
+    N = null;
+    clearTimeout(n.lookT); clearInterval(n.pingT); clearInterval(n.tick); clearTimeout(n.pubT);
+    if (n.eng && n.eng.stop) n.eng.stop();
+    const T = NET_TOPIC + n.code + '/';
+    try {
+      if (n.host) {
+        n.client.publish(T + 'host', JSON.stringify({ on: false, name: n.players[0].name }), { qos: 1, retain: true });
+        n.players.forEach((p) => { if (p.pid !== n.me) n.client.publish(T + 'to/' + p.pid, '', { qos: 1, retain: true }); });
+      } else if (n.entered) n.client.publish(T + 'in', JSON.stringify({ t: 'bye', pid: n.me }), { qos: 1 });
+      setTimeout(() => { try { n.client.end(); } catch (e) { /* closed */ } }, 500);
+    } catch (e) { /* closed */ }
+    $('#net-gone').hidden = true;
+    onlineEl.hidden = true;
+    try { if (/[?&]room=/.test(location.search)) history.replaceState(null, '', location.pathname); } catch (e) { /* not allowed */ }
+  }
+
+  /* the room screen */
+  function netApply(v) {
+    if (!N || typeof v.seq !== 'number' || v.seq <= N.lastSeq) return;
+    const before = N.view;
+    N.lastSeq = v.seq; N.view = v; N.game = v.game;
+    if (before && !N.host) netNotifyPeople(before, v);
+    netRenderRoom();
+    if (v.phase === 'lobby' || !v.g) {
+      if (!game.hidden || !ucEl.hidden) { S = null; ucStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
+      return;
+    }
+    if (v.game === 'uc') unApply(v); else mnApply(v);
+  }
+  function netNotifyPeople(a, b) {
+    if (!b.g) return;
+    b.players.forEach((p, i) => {
+      const o = a.players[i];
+      if (o && o.on && !p.on && i !== b.you) FX.float(t(b.game === 'uc' ? 'netAway' : 'netLeft', { name: p.name }), window.innerWidth / 2, 90, '');
+    });
+  }
+  function netRenderLink() {
+    if (!N) return;
+    const url = location.origin + location.pathname + '?room=' + N.code + (N.b ? '&b=' + N.b : '');
+    $('#onl-link').textContent = url.replace(/^https?:\/\//, '');
+    $('#onl-code').textContent = N.code;
+    $('#onl-dot').classList.toggle('off', !N.online);
+  }
+  function netRenderRoom() {
+    if (!N || !N.view) return;
+    const v = N.view, host = N.host, hostName = (v.players[0] && v.players[0].name) || '';
+    $('#onl-sub').textContent = netGameName(v.game);
+    netRenderLink();
+    $('#onl-invite').hidden = !host;
+    $('#onl-share').textContent = navigator.share ? t('netShare') : t('netCopy');
+    $('#onl-copy').hidden = !navigator.share;
+    const ul = $('#onl-players'); ul.textContent = '';
+    for (let i = 0; i < NET_MAX; i++) {
+      const p = v.players[i], li = document.createElement('li');
+      li.className = 'onl-p' + (p ? '' : ' free') + (p && !p.on ? ' off' : '');
+      li.innerHTML = '<span class="onl-av">' + (p ? svgUse('av-' + NET_AV[i], '', '0 0 40 40') : '') + '</span><span class="onl-pn"><b></b><small></small></span>';
+      $('b', li).textContent = p ? p.name : t('netFree');
+      const tags = [];
+      if (p && i === v.you) tags.push(t('netYou'));
+      if (p && i === 0) tags.push(t('netHostTag'));
+      if (p && !p.on) tags.push(t('netOffline'));
+      $('small', li).textContent = tags.join(' · ');
+      ul.appendChild(li);
+    }
+    $('#onl-count').textContent = t('netCountOf', { n: v.players.length });
+    const memOpts = v.game !== 'uc';
+    $('#onl-opts').hidden = !memOpts || v.phase !== 'lobby';
+    if (memOpts) {
+      const box = $('#onl-cards'); box.textContent = '';
+      NET_CARDS.forEach((n) => {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = n;
+        b.setAttribute('aria-pressed', String(v.opts && v.opts.cards === n));
+        b.disabled = !host;
+        b.addEventListener('click', () => { if (!N || !N.host || N.opts.cards === n) return; N.opts.cards = n; store.set('hm-net-cards', n); Sound.tick2(); netPublishAll(); });
+        box.appendChild(b);
+      });
+      $('#onl-cards-tag').textContent = t('pairsN', { n: (v.opts && v.opts.cards || 20) / 2 });
+    }
+    const enough = v.players.filter((p) => p.on).length >= 2;
+    $('#onl-start').hidden = !host;
+    $('#onl-start').disabled = !enough;
+    $('#onl-status').textContent = host ? t(enough ? 'netStatusHost' : 'netStatusHost1') : t('netStatusGuest', { name: hostName });
+  }
+  async function netShare() {
+    if (!N) return;
+    const url = location.origin + location.pathname + '?room=' + N.code + (N.b ? '&b=' + N.b : '');
+    const text = t('netShareText', { game: netGameName(N.game) });
+    if (navigator.share) {
+      try { await navigator.share({ title: 'Handemiyy', text, url }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    netCopy();
+  }
+  async function netCopy() {
+    if (!N) return;
+    const url = location.origin + location.pathname + '?room=' + N.code + (N.b ? '&b=' + N.b : '');
+    let ok = false;
+    try { await navigator.clipboard.writeText(url); ok = true; } catch (e) {
+      const ta = document.createElement('textarea'); ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      ta.remove();
+    }
+    const b = $('#onl-copy').hidden ? $('#onl-share') : $('#onl-copy'), r = b.getBoundingClientRect();
+    if (ok) { FX.float(t('netCopied'), r.left + r.width / 2, r.top - 8, 'gold'); Sound.pickup(); }
+  }
+
+  /* ---------- Memory online ---------- */
+  function mnNew(n, cards, round) {
+    const pairs = cards / 2;
+    const photos = pickPhotos(pairs, pairs <= 8 ? 1 : pairs <= 15 ? 2 : 3, null);
+    const deck = shuffle(photos.flatMap((p, i) => [{ pair: i, photo: p.id }, { pair: i, photo: p.id }]));
+    const E = {
+      gid: netRand(6, NET_CODE), pairs, deck, st: deck.map(() => 'd'), first: null, pend: null, pendT: 0,
+      turn: (round - 1) % n, scores: new Array(n).fill(0), moves: 0, matches: 0, golden: Math.floor(Math.random() * pairs), gold: [],
+      last: { k: 'start', n: 1 }, ln: 1, photos: photos.map((p) => p.id), over: false,
+    };
+    const nextOn = (s) => { for (let k = 1; k <= n; k++) { const x = (s + k) % n; if (N.players[x] && N.players[x].on) return x; } return s; };
+    if (!N.players[E.turn].on) E.turn = nextOn(E.turn);
+    const settle = () => {
+      if (!E.pend) return;
+      const { a, b } = E.pend; E.pend = null; clearTimeout(E.pendT);
+      E.st[a] = 'd'; E.st[b] = 'd';
+      E.turn = nextOn(E.turn);
+      E.last = { k: 'turn', n: ++E.ln, p: E.turn };
+    };
+    E.view = () => {
+      const faces = {};
+      E.st.forEach((s, i) => { if (s !== 'd') faces[i] = deck[i].photo; });
+      return { gid: E.gid, pairs, n: deck.length, photos: E.photos, st: E.st.join(''), faces, turn: E.turn, scores: E.scores, moves: E.moves, last: E.last, gold: E.gold, over: E.over };
+    };
+    E.act = (seat, a) => {
+      if (a.t !== 'flip') return;
+      const i = a.slot | 0;
+      if (E.over || seat !== E.turn || E.pend || i < 0 || i >= deck.length || E.st[i] !== 'd') return;
+      E.st[i] = 'u';
+      if (E.first == null) { E.first = i; E.last = { k: 'flip', n: ++E.ln, s: [i], p: seat }; return; }
+      const x = E.first; E.first = null; E.moves++;
+      if (deck[x].pair === deck[i].pair) {
+        E.st[x] = 'm'; E.st[i] = 'm';
+        const gold = deck[x].pair === E.golden;
+        E.scores[seat] += gold ? 2 : 1; E.matches++;
+        if (gold) E.gold = [x, i];
+        E.last = { k: 'match', n: ++E.ln, s: [x, i], p: seat, gold };
+        if (E.matches === pairs) { E.over = true; N.phase = 'over'; }
+        return;
+      }
+      E.last = { k: 'miss', n: ++E.ln, s: [x, i], p: seat };
+      E.pend = { a: x, b: i };
+      E.pendT = setTimeout(() => { if (N && N.eng === E && E.pend) { settle(); netPublishAll(); } }, 1350);
+    };
+    E.tick = () => {
+      if (E.over || E.pend || (N.players[E.turn] && N.players[E.turn].on)) return false;
+      // the player whose turn it is has gone: their card goes back and the next one plays
+      if (E.first != null) { E.st[E.first] = 'd'; E.first = null; }
+      const nx = nextOn(E.turn);
+      if (nx === E.turn) return false;
+      E.turn = nx; E.last = { k: 'turn', n: ++E.ln, p: E.turn };
+      return true;
+    };
+    E.stop = () => clearTimeout(E.pendT);
+    return E;
+  }
+  function mnCardEl(c) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'card';
+    b.innerHTML = '<span class="lift"><span class="inner"><span class="face back"><span class="mono" aria-hidden="true">H</span></span><span class="face front"><img alt="" draggable="false"></span></span></span>';
+    c.el = b; labelCard(c);
+    b.addEventListener('click', () => onCard(c));
+    return b;
+  }
+  function mnSetup(v) {
+    const g = v.g;
+    closeOverlays(); FX.clear(); ucStop(); pzStop();
+    onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
+    const s = S = {
+      online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
+      cards: [], players: [], current: g.turn, phase: 'play', lock: false, peeking: false, started: true, running: false, elapsed: 0,
+      moves: 0, matches: 0, combo: 0, maxCombo: 0, score: 0, peeks: 0, photos: g.photos.map((id) => PHOTO_BY_ID.get(id)).filter(Boolean),
+      lastN: g.last ? g.last.n : 0, overShown: false, first: null, pending: null,
+    };
+    $('#hud-level').textContent = t('netRoomN', { code: N.code });
+    $('#hud-stats').hidden = true; $('#duo-bar').hidden = false; $('#btn-peek').hidden = true;
+    $('#timebar').hidden = true;
+    board.textContent = ''; boardMsg.hidden = true;
+    for (let i = 0; i < g.n; i++) {
+      const c = { slot: i, idx: i, state: 'down', el: null, pair: null, photo: null, special: null, sent: false };
+      s.cards.push(c); board.appendChild(mnCardEl(c));
+    }
+    layoutBoard();
+    preload(s.photos.map(cardSrc), 8000);
+    deal(s);
+    return s;
+  }
+  function mnApply(v) {
+    const g = v.g;
+    let s = S;
+    if (!s || !s.online || s.gid !== g.gid) s = mnSetup(v);
+    $('#result').hidden = true;
+    s.players = v.players.map((p, i) => ({ name: p.name, pairs: g.scores[i] || 0, peeks: 0, me: i === v.you, off: !p.on }));
+    const turnChanged = s.current !== g.turn;
+    s.current = g.turn; s.mySeat = v.you; s.moves = g.moves;
+    renderChips(s.players.length); updateDuo();
+    const newEvent = g.last && g.last.n !== s.lastN;
+    for (let i = 0; i < g.n; i++) {
+      const c = s.cards[i], st = g.st[i], want = st === 'd' ? 'down' : st === 'u' ? 'up' : 'matched';
+      const ph = g.faces[i] && PHOTO_BY_ID.get(g.faces[i]);
+      if (ph && c.photo !== ph) { c.photo = ph; $('img', c.el).src = cardSrc(ph); }
+      c.sent = false;
+      if (want === c.state) continue;
+      if (want === 'up') flipUp(c);
+      else if (want === 'down') { c.el.classList.remove('shake'); if (c.state === 'up') flipDown(c); else { c.state = 'down'; c.el.classList.remove('up', 'matched'); labelCard(c); } }
+      else {
+        c.state = 'matched'; c.el.classList.remove('up'); c.el.classList.add('matched', 'flash');
+        c.el.setAttribute('aria-disabled', 'true'); labelCard(c);
+        setTimeout(() => c.el.classList.remove('flash'), 650);
+      }
+    }
+    if (newEvent) {
+      s.lastN = g.last.n;
+      const L = g.last, who = v.players[L.p] ? v.players[L.p].name : '';
+      if (L.k === 'miss') {
+        const [a, b] = L.s.map((i) => s.cards[i]);
+        setTimeout(() => { if (S !== s || a.state !== 'up') return; a.el.classList.add('shake'); b.el.classList.add('shake'); Sound.miss(); buzz([18, 40, 18]); }, 420);
+      } else if (L.k === 'match') {
+        const [a, b] = L.s.map((i) => s.cards[i]);
+        const [ax, ay] = cardCenter(a), [bx, by, br] = cardCenter(b), nb = g.n > 40 ? 8 : 14;
+        FX.burst(ax, ay, L.gold ? 34 : nb, L.gold); FX.burst(bx, by, L.gold ? 34 : nb, L.gold);
+        Sound.shutter(); setTimeout(() => Sound.match(1), 70); buzz(L.gold ? [20, 30, 20, 30, 40] : 16);
+        if (L.gold) { a.el.classList.add('golden'); b.el.classList.add('golden'); setTimeout(() => Sound.golden(), 180); FX.banner(t('goldFound'), t('goldDuo', { name: L.p === v.you ? t('ucYou') : who }), 'gold'); }
+        else FX.float(pickOne(t('cheers')), bx, br.top, '');
+        announce(t(L.gold ? 'aDuoGold' : 'aDuoFound', { name: who }));
+      }
+    }
+    if (g.gold && g.gold.length) g.gold.forEach((i) => s.cards[i] && s.cards[i].el.classList.add('golden'));
+    if (!g.over && (turnChanged || (newEvent && (g.last.k === 'start' || g.last.k === 'turn')))) {
+      if (g.turn === v.you) { FX.banner(t('netYourTurn')); Sound.turn(); announce(t('netYourTurn')); }
+      else announce(t('netTurnOf', { name: v.players[g.turn] ? v.players[g.turn].name : '' }));
+    }
+    board.classList.toggle('waiting', !g.over && g.turn !== v.you);
+    if (g.over && !s.overShown) {
+      s.overShown = true; s.phase = 'over';
+      setTimeout(() => { if (S === s && N) mnResult(N.view); }, 900);
+    }
+  }
+  function mnResult(v) {
+    const g = v.g, best = Math.max(...g.scores), win = g.scores.map((x, i) => (x === best ? i : -1)).filter((i) => i >= 0);
+    const me = v.you, tie = win.length > 1;
+    const title = tie ? t('tie') : win[0] === me ? t('netYouWin') : t('wins', { name: v.players[win[0]].name });
+    const rows = v.players.map((p, i) => [p.name + (i === me ? ' (' + t('netYou') + ')' : ''), ptsText(g.scores[i])]);
+    rows.push([t('rTotalMoves'), String(g.moves)]);
+    const host = N && N.host, hostName = v.players[0] ? v.players[0].name : '';
+    showResult({
+      kicker: t('netKicker', { game: t('gameMemory') }), title, stars: null, score: null, record: false, photos: true,
+      again: host ? t('netAgain') : t('netWaitAgain', { name: hostName }), againOff: !host, action: 'net', rows, menuLabel: t('netLeave'),
+    });
+    if (!tie && win[0] === me) celebrate(); else if (!tie) Sound.lose(); else celebrate();
+  }
+  function renderChips(n) {
+    const bar = $('#duo-bar');
+    while (bar.children.length < n) {
+      const i = bar.children.length, d = document.createElement('div');
+      d.className = 'pchip'; d.id = 'pc' + i; d.innerHTML = '<span class="pname"></span><span class="ppairs">0</span>';
+      bar.appendChild(d);
+    }
+    while (bar.children.length > n) bar.lastChild.remove();
+    bar.classList.toggle('many', n > 2);
+  }
+
+  /* ---------- Ultima carta online: the engine on the device that made the room ---------- */
+  const UN_KINDS = ['num', 'salta', 'inverti', 'piu2', 'jolly', 'jolly4'];
+  function unNew(n, ses) {
+    const photos = pickPhotos(54, 99, null);
+    const cards = ucDeck(shuffle(photos.slice()));
+    const E = {
+      gid: netRand(6, NET_CODE), round: ses.round, n, cards, deck: shuffle(cards.map((c) => c.id)), pile: [], hands: new Array(n).fill(0).map(() => []),
+      called: new Array(n).fill(false), turn: (ses.round - 1) % n, dir: 1, color: null, over: false, drawn: null, passes: 0, catchable: null,
+      rot: {}, ev: [], en: 0, ses, winner: null, pts: 0, botAt: 0,
+      table: cards.map((c) => [c.suit ? UC_SUITS.indexOf(c.suit) : -1, UN_KINDS.indexOf(c.kind), c.value == null ? -1 : c.value, c.photo.id]),
+    };
+    const ev = (e) => { e.n = ++E.en; E.ev.push(e); if (E.ev.length > 48) E.ev.splice(0, E.ev.length - 48); };
+    const top = () => E.cards[E.pile[E.pile.length - 1]];
+    const can = (c) => {
+      if (ucWild(c) || c.suit === E.color) return true;
+      const tp = top();
+      if (!tp || ucWild(tp)) return false;
+      return c.kind === 'num' ? tp.kind === 'num' && tp.value === c.value : c.kind === tp.kind;
+    };
+    const next = (i, steps = 1) => (((i + E.dir * steps) % n) + n) % n;
+    const on = (p) => !!(N && N.players[p] && N.players[p].on);
+    const draw = (p, k) => {
+      const got = [];
+      for (let i = 0; i < k; i++) {
+        if (!E.deck.length) {
+          if (E.pile.length > 1) { const tp = E.pile.pop(); E.deck = shuffle(E.pile); E.pile = [tp]; ev({ k: 'reshuffle', deck: E.deck.length }); } else break;
+        }
+        got.push(E.deck.pop());
+      }
+      E.hands[p].push(...got);
+      if (E.hands[p].length > 1) E.called[p] = false;
+      if (got.length) ev({ k: 'draw', p, ids: got });
+      return got;
+    };
+    const handPts = (p) => E.hands[p].reduce((a, id) => a + ucPoints(E.cards[id]), 0);
+    const win = (w) => {
+      E.over = true; E.catchable = null; E.drawn = null;
+      const pts = E.hands.reduce((s, h, i) => (i === w ? s : s + handPts(i)), 0);
+      ses.totals[w] += pts; ses.wins[w]++; E.winner = w; E.pts = pts;
+      ev({ k: 'win', p: w, pts });
+      N.phase = 'over';
+    };
+    const turnTo = (p) => {
+      E.turn = p; E.drawn = null;
+      if (E.catchable && E.catchable.p === p) E.catchable = null;
+      ev({ k: 'turn', p });
+      E.botAt = Date.now() + 1800;
+    };
+    const stuck = () => {
+      if (E.passes < n * 2) return false;
+      let w = 0, lo = Infinity;
+      for (let i = 0; i < n; i++) { const v = handPts(i); if (v < lo) { lo = v; w = i; } }
+      win(w);
+      return true;
+    };
+    const play = (p, id, color) => {
+      if (E.over || E.turn !== p) return false;
+      const hand = E.hands[p], c = E.cards[id];
+      if (!c || !hand.includes(id)) return false;
+      if (E.drawn && E.drawn.p === p && E.drawn.id !== id) return false;
+      if (!can(c)) return false;
+      const wild = ucWild(c);
+      if (wild && !UC_SUITS.includes(color)) return false;
+      hand.splice(hand.indexOf(id), 1);
+      E.pile.push(id); E.color = wild ? color : c.suit; E.rot[id] = Math.round(rand(-13, 13));
+      E.drawn = null; E.passes = 0;
+      ev({ k: 'play', p, id, color: E.color, rot: E.rot[id] });
+      if (hand.length === 1 && !E.called[p]) {
+        if (!on(p)) { E.called[p] = true; ev({ k: 'call', p }); } // the computer plays for whoever left, and never forgets
+        else E.catchable = { p, until: Date.now() + 4500 };
+      }
+      let nx = next(E.turn);
+      if (c.kind === 'salta') { ev({ k: 'skip', p: n === 2 ? p : nx, by: p }); nx = next(E.turn, 2); }
+      else if (c.kind === 'inverti') {
+        if (n === 2) { ev({ k: 'again', p }); nx = E.turn; } else { E.dir *= -1; ev({ k: 'rev', dir: E.dir }); nx = next(E.turn); }
+      } else if (c.kind === 'piu2' || c.kind === 'jolly4') {
+        const k = c.kind === 'piu2' ? 2 : 4;
+        ev({ k: 'plus', p: nx, n: k, color: E.color });
+        draw(nx, k); nx = next(E.turn, 2);
+      } else if (c.kind === 'jolly') ev({ k: 'wild', color });
+      if (!hand.length) { win(p); return true; }
+      turnTo(nx);
+      return true;
+    };
+    const drawAct = (p) => {
+      if (E.over || E.turn !== p) return;
+      if (E.drawn && E.drawn.p === p) { pass(p); return; }
+      const got = draw(p, 1);
+      if (!got.length) { E.passes++; if (stuck()) return; ev({ k: 'pass', p }); turnTo(next(p)); return; }
+      const c = E.cards[got[0]];
+      if (can(c)) { E.drawn = { p, id: c.id }; E.botAt = Date.now() + 1200; return; }
+      ev({ k: 'pass', p }); turnTo(next(p));
+    };
+    const pass = (p) => {
+      if (E.over || E.turn !== p || !E.drawn || E.drawn.p !== p) return;
+      E.drawn = null; ev({ k: 'pass', p }); turnTo(next(p));
+    };
+    const call = (p) => {
+      if (E.over || E.called[p]) return;
+      const h = E.hands[p].length;
+      if ((E.turn === p && h === 2) || (E.catchable && E.catchable.p === p && h === 1)) {
+        E.called[p] = true;
+        if (E.catchable && E.catchable.p === p) E.catchable = null;
+        ev({ k: 'call', p });
+      }
+    };
+    const caught = (by) => {
+      const cv = E.catchable;
+      if (E.over || !cv || cv.p === by || Date.now() > cv.until) return;
+      E.catchable = null;
+      const v = cv.p;
+      if (E.hands[v].length !== 1 || E.called[v]) return;
+      ev({ k: 'caught', by, p: v });
+      draw(v, 2);
+    };
+    // the computer's choice for a player who left (same habits as the computer players)
+    const botMove = (p) => {
+      const hand = E.hands[p].map((id) => E.cards[id]);
+      const color = (except) => {
+        const cnt = {};
+        hand.forEach((c) => { if (c.id !== except && c.suit) cnt[c.suit] = (cnt[c.suit] || 0) + 1; });
+        return Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0] || pickOne(UC_SUITS);
+      };
+      if (E.drawn && E.drawn.p === p) { const c = E.cards[E.drawn.id]; play(p, c.id, ucWild(c) ? color(c.id) : null); return; }
+      const ok = hand.filter(can);
+      if (!ok.length) { drawAct(p); return; }
+      const pick = ok.sort((a, b) => (a.kind === 'num' ? 0 : ucWild(a) ? 2 : 1) - (b.kind === 'num' ? 0 : ucWild(b) ? 2 : 1))[0];
+      play(p, pick.id, ucWild(pick) ? color(pick.id) : null);
+    };
+    E.view = (s) => ({
+      gid: E.gid, round: E.round, n, table: E.table, deck: E.deck.length, pile: E.pile.slice(-3), rot: Object.fromEntries(E.pile.slice(-3).map((id) => [id, E.rot[id] || 0])),
+      color: E.color, dir: E.dir, turn: E.turn, over: E.over, hand: E.hands[s].slice(), counts: E.hands.map((h) => h.length), called: E.called.slice(),
+      drawn: E.drawn && E.drawn.p === s ? E.drawn.id : null,
+      catchable: E.catchable ? { p: E.catchable.p, left: Math.max(0, E.catchable.until - Date.now()) } : null,
+      totals: ses.totals.slice(), wins: ses.wins.slice(), winner: E.winner, pts: E.pts, en: E.en,
+      ev: E.ev.slice(-30).map((e) => (e.k === 'draw' && e.p !== s ? { k: 'draw', n: e.n, p: e.p, c: e.ids.length } : e)),
+    });
+    E.act = (seat, a) => {
+      if (a.t === 'play') play(seat, a.id | 0, a.color);
+      else if (a.t === 'draw') drawAct(seat);
+      else if (a.t === 'pass') pass(seat);
+      else if (a.t === 'call') call(seat);
+      else if (a.t === 'catch') caught(seat);
+    };
+    E.tick = () => {
+      if (E.over) return false;
+      let changed = false;
+      if (E.catchable && Date.now() > E.catchable.until) { E.catchable = null; changed = true; }
+      if (!on(E.turn) && Date.now() >= E.botAt) { botMove(E.turn); changed = true; }
+      return changed;
+    };
+    // deal seven each, then the first card of the pile (a number)
+    for (let r = 0; r < 7; r++) for (let p = 0; p < n; p++) E.hands[p].push(E.deck.pop());
+    ev({ k: 'deal' });
+    let first = E.deck.pop();
+    while (E.cards[first].kind !== 'num') { E.deck.unshift(first); first = E.deck.pop(); }
+    E.pile.push(first); E.color = E.cards[first].suit; E.rot[first] = Math.round(rand(-10, 10));
+    ev({ k: 'flip', id: first, rot: E.rot[first] });
+    turnTo(E.turn);
+    return E;
+  }
+
+  /* Ultima carta online: what every player's device shows */
+  function unSend(g, a) {
+    g.waiting = false; g.busy = true; $('#uc-draw').classList.remove('ready');
+    ucRenderHand(); ucRenderActions();
+    netAct(a);
+    clearTimeout(g.unlockT);
+    g.unlockT = setTimeout(() => { if (U === g && g.busy) { g.busy = false; g.waiting = g.phase === 'play' && g.turn === 0; ucRenderHand(); ucRenderActions(); } }, 6000);
+  }
+  let unChain = Promise.resolve();
+  function unApply(v) { unChain = unChain.then(() => unProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
+  function unCardsFrom(table) {
+    return table.map(([s, k, val, ph], id) => ({ id, suit: s >= 0 ? UC_SUITS[s] : null, kind: UN_KINDS[k], value: val >= 0 ? val : null, photo: PHOTO_BY_ID.get(ph) || PHOTOS[0] }));
+  }
+  function unSetup(v) {
+    const g = v.g, n = g.n, me = v.you;
+    closeOverlays(); FX.clear(); pzStop();
+    S = null; board.textContent = '';
+    onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
+    $$('.uc-fly').forEach((e) => e.remove());
+    const cards = unCardsFrom(g.table);
+    const players = [];
+    for (let li = 0; li < n; li++) { const s = (me + li) % n; players.push({ name: li === 0 ? t('ucYou') : v.players[s].name, av: NET_AV[s], hand: [], called: false, seat: s }); }
+    U = {
+      online: true, gid: g.gid, cards, deck: new Array(108).fill(-1), pile: [], players, turn: -1, dir: 1, color: null, phase: 'play', waiting: false, busy: true,
+      drawn: null, rot: {}, grace: false, catchable: null, catchUntil: 0, catching: false, passes: 0, en: 0, me, n,
+      photos: Array.from(new Set(cards.map((c) => c.photo))),
+    };
+    ucSession = { round: g.round, totals: players.map((p) => g.totals[p.seat]), wins: players.map((p) => g.wins[p.seat]) };
+    ucHandEl.textContent = ''; $('#uc-discard').textContent = '';
+    ucRenderOpps(); ucRenderDeck(); ucRenderDir(); ucRenderPile(); ucRenderHead(); ucRenderActions();
+    ucLayout();
+    ucStatus(t('ucDealing'));
+    preload(U.photos.map(cardSrc), 6000);
+  }
+  const unL = (seat) => (seat - U.me + U.n) % U.n;
+  const unName = (seat) => (unL(seat) === 0 ? t('ucYou') : U.players[unL(seat)].name);
+  async function unAnim(e) {
+    const g = U, li = e.p != null ? unL(e.p) : -1;
+    const deckR = () => $('#uc-draw').getBoundingClientRect();
+    switch (e.k) {
+      case 'deal': {
+        const flights = [];
+        for (let r = 0; r < 7; r++) {
+          for (let k = 0; k < g.n; k++) {
+            const pl = g.players[k];
+            g.deck.pop(); ucRenderDeck();
+            flights.push(ucFly(deckR(), k === 0 ? ucHandRect() : ucSeatRect(k), { dur: 300 }).then(() => { if (U !== g) return; pl.hand.push(-1); if (k !== 0) ucRenderOpps(); }));
+            if (k === 0) Sound.deal();
+            await wait(reduceMotion.matches ? 0 : 60); if (U !== g) return;
+          }
+        }
+        await Promise.all(flights);
+        return;
+      }
+      case 'flip':
+        g.deck.pop(); ucRenderDeck(); g.rot[e.id] = e.rot || 0;
+        await ucFly(deckR(), $('#uc-discard').getBoundingClientRect(), { card: g.cards[e.id], flip: true, rot: g.rot[e.id] });
+        if (U !== g) return;
+        g.pile.push(e.id); g.color = g.cards[e.id].suit; Sound.flip(); ucRenderPile();
+        return;
+      case 'play': {
+        const c = g.cards[e.id];
+        let from;
+        if (li === 0) {
+          const el = $('#uc-hand .uc-card[data-id="' + e.id + '"]');
+          from = el ? el.getBoundingClientRect() : ucHandRect();
+          g.players[0].hand = g.players[0].hand.filter((x) => x !== e.id); ucRenderHand();
+        } else { from = ucSeatRect(li); g.players[li].hand.pop(); ucRenderOpps(); }
+        g.rot[e.id] = e.rot || 0; Sound.flip();
+        await ucFly(from, $('#uc-discard').getBoundingClientRect(), { card: c, flip: li !== 0, rot: g.rot[e.id], r0: li === 0 ? 0 : -20 });
+        if (U !== g) return;
+        g.pile.push(e.id); g.color = e.color || c.suit; buzz(10); ucRenderPile();
+        announce(tu('aUcPlay', li, { name: unName(e.p), card: ucCardName(c) + (ucWild(c) ? ' · ' + ucSuit(e.color) : '') }));
+        return;
+      }
+      case 'draw': {
+        const k = e.ids ? e.ids.length : e.c || 0, flights = [];
+        for (let i = 0; i < k; i++) {
+          const id = e.ids ? e.ids[i] : -1;
+          g.deck.pop(); ucRenderDeck(); Sound.deal();
+          flights.push(ucFly(deckR(), li === 0 ? ucHandRect() : ucSeatRect(li), { card: li === 0 && id >= 0 ? g.cards[id] : null, flip: li === 0, dur: 380 })
+            .then(() => { if (U !== g) return; g.players[li].hand.push(id); if (li === 0) ucRenderHand([id]); else ucRenderOpps(); }));
+          if (i < k - 1) await wait(reduceMotion.matches ? 0 : 160);
+          if (U !== g) return;
+        }
+        await Promise.all(flights);
+        if (U === g && li === 0 && e.ids && e.ids.length === 1) announce(t('aUcDrawYou', { card: ucCardName(g.cards[e.ids[0]]) }));
+        return;
+      }
+      case 'reshuffle':
+        g.deck = new Array(e.deck || 0).fill(-1); g.pile = g.pile.slice(-1); ucRenderDeck(); ucRenderPile();
+        FX.banner(t('bUcReshuffle')); Sound.whoosh(); await wait(500);
+        return;
+      case 'skip':
+        FX.banner(t('bUcSkip'), g.n === 2 ? tu('bUcAgain', unL(e.by), { name: unName(e.by) }) : tu('bUcSkipSub', li, { name: unName(e.p) }));
+        Sound.miss(); await wait(600);
+        return;
+      case 'rev':
+        g.dir = e.dir || -g.dir; ucRenderDir(); FX.banner(t('bUcRev'), t('bUcRevSub')); Sound.whoosh(); await wait(600);
+        return;
+      case 'again':
+        FX.banner(t('bUcRev'), tu('bUcAgain', li, { name: unName(e.p) })); Sound.whoosh(); await wait(600);
+        return;
+      case 'plus':
+        FX.banner('+' + e.n, tu(e.n === 2 ? 'bUcDraw2' : 'bUcDraw4', li, { name: unName(e.p) }) + (e.n === 4 ? ' · ' + ucSuit(e.color) : ''), e.n === 4 ? 'gold' : '');
+        if (e.n === 4) Sound.golden(); else Sound.pickup();
+        await wait(520);
+        return;
+      case 'wild':
+        FX.banner(t('bUcWild'), t('bUcWildSub', { suit: ucSuit(e.color) }), 'gold'); Sound.sparkle(); await wait(480);
+        return;
+      case 'call':
+        g.players[li].called = true; ucRenderOpps();
+        FX.banner(t('ucCall'), tu('bUcCalled', li, { name: unName(e.p) }), 'gold'); Sound.correct(); await wait(450);
+        return;
+      case 'caught': {
+        const by = unL(e.by);
+        if (li === 0) { FX.banner(t('bUcCaughtMe'), t('bUcCaughtYou', { name: unName(e.by) })); Sound.miss(); buzz([40, 30, 40]); }
+        else if (by === 0) { FX.banner(t('bUcGotcha'), t('bUcCaughtBot', { name: unName(e.p) })); Sound.correct(); buzz(20); }
+        else { FX.banner(t('bUcCaught'), t('bUcCaughtBy', { by: unName(e.by), name: unName(e.p) })); Sound.miss(); }
+        await wait(500);
+        return;
+      }
+      default:
+    }
+  }
+  async function unProcess(v) {
+    if (!N || !v.g) return;
+    const g = v.g;
+    let fresh = false;
+    if (!U || !U.online || U.gid !== g.gid) { unSetup(v); fresh = true; }
+    const u = U;
+    u.busy = true; ucRenderActions(); ucRenderHand();
+    clearTimeout(u.unlockT);
+    const todo = g.ev.filter((e) => e.n > u.en);
+    const gap = !fresh && todo.length && todo[0].n !== u.en + 1;
+    if ((fresh && g.ev.length && g.ev[0].n === 1) || (!fresh && !gap)) {
+      for (const e of todo) { await unAnim(e); if (U !== u || !N) return; u.en = e.n; }
+    }
+    // then everything exactly as the room has it
+    u.en = g.en;
+    u.players.forEach((p, li) => {
+      const s = p.seat;
+      p.hand = li === 0 ? g.hand.slice() : new Array(g.counts[s]).fill(-1);
+      p.called = !!g.called[s];
+      p.name = li === 0 ? t('ucYou') : v.players[s].name;
+      p.off = !v.players[s].on;
+    });
+    u.deck = new Array(g.deck).fill(-1); u.pile = g.pile.slice(); Object.assign(u.rot, g.rot);
+    u.color = g.color; u.dir = g.dir; u.turn = unL(g.turn);
+    u.phase = g.over ? 'over' : 'play'; u.drawn = g.drawn;
+    u.grace = !!(g.catchable && g.catchable.p === v.you);
+    u.catchable = g.catchable && g.catchable.p !== v.you ? unL(g.catchable.p) : null;
+    u.catchUntil = g.catchable ? performance.now() + g.catchable.left : 0;
+    ucSession = { round: g.round, totals: u.players.map((p) => g.totals[p.seat]), wins: u.players.map((p) => g.wins[p.seat]) };
+    const mine = !g.over && g.turn === v.you;
+    const wasMine = u.waiting;
+    u.waiting = mine; u.busy = false;
+    ucRenderOpps(); ucRenderDeck(); ucRenderDir(); ucRenderPile(); ucRenderHead(); ucRenderHand(); ucRenderActions();
+    if (u.catchable != null) { clearTimeout(u.catchT); u.catchT = setTimeout(() => { if (U === u) ucRenderActions(); }, Math.max(0, u.catchUntil - performance.now()) + 80); }
+    Music.setEnergy(g.counts.some((x) => x === 1));
+    if (g.over) {
+      ucStatus(g.winner === v.you ? t('ucWin') : t('ucLose', { name: v.players[g.winner].name }));
+      if (!u.overShown) { u.overShown = true; setTimeout(() => { if (U === u && N) unResult(N.view); }, 700); }
+      return;
+    }
+    if (mine) {
+      if (u.drawn != null) ucStatus(t('ucDrawnPlayable'));
+      else ucStatusTurn();
+      $('#uc-draw').classList.toggle('ready', u.drawn == null && !u.players[0].hand.some((id) => ucCanPlay(u.cards[id])));
+      if (!wasMine) Sound.turn();
+    } else ucStatus(t('netTurnOf', { name: v.players[g.turn].name }) + (v.players[g.turn].on ? '' : ' · ' + t('netOffline')));
+  }
+  function unResult(v) {
+    const g = v.g, me = v.you, w = g.winner;
+    const rows = v.players.map((p, s) => [p.name + (s === me ? ' (' + t('netYou') + ')' : ''), s === w ? t('ucRowWin', { p: fmtNum(g.pts) }) : g.counts[s] === 1 ? t('ucOneCard') : t('ucNCards', { n: g.counts[s] })]);
+    rows.push([t('ucRowWins'), t('ucWinsOf', { w: g.wins[me], n: g.round })]);
+    const host = N && N.host, hostName = v.players[0] ? v.players[0].name : '';
+    showResult({
+      kicker: t('ucKicker', { r: g.round }), title: w === me ? t('ucWin') : t('ucLose', { name: v.players[w].name }),
+      stars: null, score: w === me ? g.pts : null, record: false, photos: true, again: host ? t('ucAgain') : t('netWaitAgain', { name: hostName }), againOff: !host, action: 'net', rows, menuLabel: t('netLeave'),
+    });
+    if (w === me) celebrate(); else Sound.lose();
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
     ['#result', '#confirm', '#gallery', '#lightbox', '#finale', '#uc-pick'].forEach((id) => { $(id).hidden = true; }); $('#countdown').hidden = true;
   }
   function goHome() {
+    if (N) netLeave();
+    onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
     closeOverlays(); ucStop(); pzStop(); FX.clear(); Music.setEnergy(false);
@@ -4371,9 +5442,15 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup();
     $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (!ucEl.hidden || !pzEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function openConfirm(online) {
+    $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
+    $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
+    lastFocus = document.activeElement; $('#confirm').hidden = false; $('#cf-stay').focus();
+  }
   function requestExit() {
-    if (S && S.phase === 'play' && S.started) { lastFocus = document.activeElement; $('#confirm').hidden = false; $('#cf-stay').focus(); }
+    if (S && S.online) { openConfirm(true); return; }
+    if (S && S.phase === 'play' && S.started) openConfirm(false);
     else leaveGame();
   }
 
@@ -4430,6 +5507,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#cf-stay').addEventListener('click', () => { $('#confirm').hidden = true; if (lastFocus) lastFocus.focus({ preventScroll: true }); });
   $('#cf-leave').addEventListener('click', leaveGame);
   $('#btn-again').addEventListener('click', () => {
+    if (resultAction === 'net') { if (N && N.host) netStartGame(); return; }
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'map') { showMap(); return; }
@@ -4503,12 +5581,29 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     else if (S.autoPaused) { S.autoPaused = false; startClock(); }
   });
 
+  $$('.online-btn').forEach((b) => b.addEventListener('click', () => { AudioCore.get(); Sound.flip(); netOpenCreate(b.dataset.netGame); }));
+  $('#onl-go').addEventListener('click', netGo);
+  $('#onl-name').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); netGo(); } });
+  $('#onl-back').addEventListener('click', goHome);
+  $('#onl-leave').addEventListener('click', goHome);
+  $('#onl-retry').addEventListener('click', () => { if (netPrep.mode === 'join' && netPrep.code) netOpenJoin(netPrep.code, netPrep.b); else netOpenCreate(netPrep.game || gameSel); });
+  $('#onl-start').addEventListener('click', () => { AudioCore.get(); Sound.flip(); netStartGame(); });
+  $('#onl-share').addEventListener('click', netShare);
+  $('#onl-copy').addEventListener('click', netCopy);
+  $('#net-gone-ok').addEventListener('click', goHome);
+
   /* ---------- boot ---------- */
   buildMap();
   applyGoldBack();
   applyLang();
   setMode(mode);
   setGameSel(gameSel);
+  $$('.online-btn').forEach((b) => { b.hidden = !netOk(); });
+  (() => {
+    // an invite link: ?room=CODE (and the relay it uses)
+    const q = new URLSearchParams(location.search), code = (q.get('room') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
+    if (code && netOk()) { const b = q.get('b'); netOpenJoin(code, b != null && /^[0-9]$/.test(b) ? +b : null); }
+  })();
   fillFan(false);
   requestAnimationFrame(() => setTimeout(() => $('#fan').classList.remove('closed'), reduceMotion.matches ? 0 : 250));
 })();
