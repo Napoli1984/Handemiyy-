@@ -1,12 +1,12 @@
 {
   "name": "Handemiyy",
   "short_name": "Handemiyy",
-  "description": "Memory, Ultima carta e Puzzle con le foto di Hande.",
+  "description": "Memory, Ultima carta, Puzzle e Bowling con le foto di Hande.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#150910",
-  "theme_color": "#6e1129",
+  "background_color": "#f6f1ea",
+  "theme_color": "#f6f1ea",
   "lang": "it",
   "icons": [
     {

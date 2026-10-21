@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta e Puzzle con le foto di Hande. Fan game in italiano e in turco.">
-<meta name="theme-color" content="#6e1129">
+<meta name="description" content="Memory, Ultima carta, Puzzle e Bowling con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="theme-color" content="#f6f1ea">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta e Puzzle con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle e Bowling con le foto di Hande. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,64 +22,49 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Jost:wght@400;500;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Jost:wght@400;500;600;800&family=Pinyon+Script&display=swap">
 <style>
-/* Layout: one-screen game. Home = fashion-magazine masthead + a fanned hand of photo cards beside the treasure hunt and
-   free-play setup (stacked on phones). Game = HUD on top, board sized by JS to fit the screen. Map = illustrated treasure
+/* Layout: one-screen game. Home = photos of Hande behind a gold signature masthead and the four games, beside the
+   treasure hunt and free-play setup (stacked on phones). Game = HUD on top, board sized by JS to fit the screen. Map = illustrated treasure
    map beside the clue letter (clue on top on phones). */
 :root {
-  --bg: #f8f0ed;
-  --bg-glow: #f1d9dc;
-  --surface: #fffaf8;
-  --surface-2: #f3e7e3;
-  --ink: #2a1219;
-  --muted: #7a5c64;
-  --line: rgba(42, 18, 25, .14);
-  --line-strong: rgba(42, 18, 25, .3);
-  --wine: #6e1129;
-  --wine-deep: #4a0a1b;
-  --wine-ink: #fff4ee;
-  --accent-ink: #8a1733;
-  --gold: #a8781c;
-  --gold-soft: #e2bf6c;
-  --on-gold: #2a1219;
-  --pattern: rgba(226, 191, 108, .24);
-  --sheen-lo: #9a6a14;
-  --sheen-hi: #fff1bf;
-  --shadow-color: 42 18 25;
-  --overlay: rgba(32, 10, 18, .55);
-  --lb-bg: rgba(12, 5, 8, .96);
-  --lb-ink: #fff4ee;
-  --danger: #b42232;
-  --map-paper: #f3e5cf;
-  --map-sea: #e9d8bd;
-  --map-land: #f9efdf;
-  --map-ink: #6e1129;
-  --map-line: rgba(110, 17, 41, .5);
+  --bg: #f6f1ea;
+  --bg-glow: #fffaf2;
+  --surface: #fffdf9;
+  --surface-2: #f2ebe2;
+  --ink: #2a211e;
+  --muted: #7b6d65;
+  --line: rgba(66, 48, 36, .12);
+  --line-strong: rgba(66, 48, 36, .25);
+  --wine: #c9a469;          /* the accent fill: champagne gold (the name is kept from the first palette) */
+  --wine-deep: #a7803f;
+  --wine-ink: #2a211e;
+  --accent-ink: #8f6630;
+  --gold: #c39a55;
+  --gold-soft: #e6cd98;
+  --on-gold: #2a211e;
+  --pattern: rgba(195, 154, 85, .2);
+  --sheen-lo: #a7803f;
+  --sheen-hi: #fff4d8;
+  --shadow-color: 74 54 38;
+  --overlay: rgba(46, 34, 26, .34);
+  --lb-bg: rgba(246, 241, 234, .97);
+  --lb-ink: #2a211e;
+  --danger: #b8452f;
+  --map-paper: #f7eedf;
+  --map-sea: #efe3cd;
+  --map-land: #fcf7ee;
+  --map-ink: #7a5a2e;
+  --map-line: rgba(122, 90, 46, .5);
+  --glass: rgba(255, 253, 249, .7);
+  --glass-line: rgba(255, 255, 255, .8);
+  --champ: linear-gradient(180deg, #f4e4c0 0%, #dcbf86 46%, #c49f60 100%);
 
   --font-display: "Bodoni Moda", "Bodoni 72", Didot, "Times New Roman", serif;
   --font-ui: "Jost", Futura, "Century Gothic", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-num: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #150910; --bg-glow: #3b1121; --surface: #231019; --surface-2: #2d1520;
-    --ink: #f7e9e2; --muted: #bf9da5; --line: rgba(247, 233, 226, .15); --line-strong: rgba(247, 233, 226, .32);
-    --wine: #7c1631; --wine-deep: #520c20; --wine-ink: #fff4ee; --accent-ink: #f2a7b6;
-    --gold: #e2b95c; --gold-soft: #ebc877; --on-gold: #1c0a10; --pattern: rgba(235, 200, 119, .2);
-    --shadow-color: 0 0 0; --overlay: rgba(6, 2, 4, .72); --danger: #ff7380;
-    --map-paper: #22121a; --map-sea: #1b0f16; --map-land: #2e1824; --map-ink: #ebc877; --map-line: rgba(235, 200, 119, .5);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #150910; --bg-glow: #3b1121; --surface: #231019; --surface-2: #2d1520;
-  --ink: #f7e9e2; --muted: #bf9da5; --line: rgba(247, 233, 226, .15); --line-strong: rgba(247, 233, 226, .32);
-  --wine: #7c1631; --wine-deep: #520c20; --wine-ink: #fff4ee; --accent-ink: #f2a7b6;
-  --gold: #e2b95c; --gold-soft: #ebc877; --on-gold: #1c0a10; --pattern: rgba(235, 200, 119, .2);
-  --shadow-color: 0 0 0; --overlay: rgba(6, 2, 4, .72); --danger: #ff7380;
-  --map-paper: #22121a; --map-sea: #1b0f16; --map-land: #2e1824; --map-ink: #ebc877; --map-line: rgba(235, 200, 119, .5);
-  color-scheme: dark;
+  --font-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -104,21 +89,41 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
    for backs, Memory fronts and Ultima carta cards only read these variables, so a preview can show another model than
    the page. A var() inside a set is resolved where the set is declared, so the sets only use page-wide colours. */
 :root, [data-deck="classico"] {
-  --sp-bg: radial-gradient(circle at 50% 42%, var(--sheen-hi) 0, var(--gold-soft) 24%, var(--wine) 64%, var(--wine-deep) 100%); --sp-ink: var(--wine-deep);
-  --bk-bg: var(--wine);
-  --bk-img: linear-gradient(135deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .18)), radial-gradient(circle, var(--pattern) 0 .9cqw, transparent 1.15cqw), radial-gradient(circle, var(--pattern) 0 .9cqw, transparent 1.15cqw);
+  --sp-bg: radial-gradient(circle at 50% 42%, #fff1bf 0, #e2bf6c 24%, #6e1129 64%, #4a0a1b 100%); --sp-ink: #4a0a1b;
+  --bk-bg: #6e1129;
+  --bk-img: linear-gradient(135deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .18)), radial-gradient(circle, rgba(226, 191, 108, .24) 0 .9cqw, transparent 1.15cqw), radial-gradient(circle, rgba(226, 191, 108, .24) 0 .9cqw, transparent 1.15cqw);
   --bk-size: 100% 100%, 11cqw 11cqw, 11cqw 11cqw;
   --bk-pos: 0 0, 0 0, 5.5cqw 5.5cqw;
-  --bk-fr-inset: 5cqw; --bk-fr-border: 1px solid var(--gold-soft); --bk-fr-radius: 4cqw; --bk-fr-bg: none; --bk-fr-shadow: none; --bk-fr-op: .75;
+  --bk-fr-inset: 5cqw; --bk-fr-border: 1px solid #e2bf6c; --bk-fr-radius: 4cqw; --bk-fr-bg: none; --bk-fr-shadow: none; --bk-fr-op: .75;
   --bk-af: none; --bk-af-inset: 0; --bk-af-bg: none; --bk-af-ink: currentColor; --bk-af-size: 10cqw; --bk-af-tf: none; --bk-af-fx: none;
-  --mono-ink: var(--gold-soft); --mono-shadow: 0 .6cqw 0 rgba(0, 0, 0, .3); --mono-size: 54cqw; --mono-y: -3%; --mono-op: 1;
-  --mini-bg: var(--wine); --mini-line: var(--gold-soft);
+  --mono-ink: #e2bf6c; --mono-shadow: 0 .6cqw 0 rgba(0, 0, 0, .3); --mono-size: 54cqw; --mono-y: -3%; --mono-op: 1;
+  --mini-bg: #6e1129; --mini-line: #e2bf6c;
   --fr-bg: var(--surface-2); --fr-t: 0px; --fr-s: 0px; --fr-b: 0px; --fr-r: 0px; --fr-line: none; --fr-dev: none;
   --uc-rubino: #b3173f; --uc-rubino-hi: #e9577b; --uc-rubino-lo: #5c0a1e;
   --uc-zaffiro: #1f55c4; --uc-zaffiro-hi: #5d93f0; --uc-zaffiro-lo: #0d2563;
   --uc-smeraldo: #0e8a5d; --uc-smeraldo-hi: #3fc690; --uc-smeraldo-lo: #05442d;
   --uc-ambra: #d4950f; --uc-ambra-hi: #f7cd55; --uc-ambra-lo: #7d5104;
   --uc-ink: #fff; --uc-edge: transparent; --uc-edge-k: 0; --uc-ph-ring: 0 0 0 0 transparent; --uc-ph-r: 5cqw; --uc-tex: none;
+}
+/* Avorio: ivory and champagne gold, the model a new player starts with */
+[data-deck="avorio"] {
+  --sp-bg: radial-gradient(circle at 50% 42%, #fff 0, #f6e7c4 30%, #dcbf86 70%, #b8914e 100%); --sp-ink: #6e4f24;
+  --bk-bg: #fbf6ec;
+  --bk-img: repeating-linear-gradient(60deg, rgba(185, 145, 78, .17) 0 1px, transparent 1px 6.5cqw), repeating-linear-gradient(-60deg, rgba(185, 145, 78, .17) 0 1px, transparent 1px 6.5cqw), radial-gradient(ellipse 85% 65% at 50% 42%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 72%);
+  --bk-size: auto, auto, 100% 100%; --bk-pos: 0 0, 0 0, 0 0;
+  --bk-fr-inset: 7cqw; --bk-fr-border: 1px solid #c9a469; --bk-fr-radius: 1.5cqw;
+  --bk-fr-bg: radial-gradient(ellipse 90% 70% at 50% 40%, #fffdf8, #f6eddd 80%);
+  --bk-fr-shadow: inset 0 0 0 1.4cqw #fbf6ec, inset 0 0 0 calc(1.4cqw + 1px) rgba(201, 164, 105, .75); --bk-fr-op: 1;
+  --bk-af: ""; --bk-af-inset: 10.5cqw; --bk-af-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg transform='rotate(0 12 12)' fill='none' stroke='%23b8914e' stroke-width='.9'%3E%3Cpath d='M1 15A14 14 0 0 1 15 1'/%3E%3Cpath d='M1 9.5A8.5 8.5 0 0 1 9.5 1'/%3E%3Cpath d='M1 1l7 7M1 1l3.2 9.6M1 1l9.6 3.2'/%3E%3C/g%3E%3Cg transform='rotate(0 12 12)'%3E%3Cpath d='M1 1h3.4v3.4H1z' fill='%23b8914e'/%3E%3C/g%3E%3C/svg%3E") left top / 15cqw no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg transform='rotate(90 12 12)' fill='none' stroke='%23b8914e' stroke-width='.9'%3E%3Cpath d='M1 15A14 14 0 0 1 15 1'/%3E%3Cpath d='M1 9.5A8.5 8.5 0 0 1 9.5 1'/%3E%3Cpath d='M1 1l7 7M1 1l3.2 9.6M1 1l9.6 3.2'/%3E%3C/g%3E%3Cg transform='rotate(90 12 12)'%3E%3Cpath d='M1 1h3.4v3.4H1z' fill='%23b8914e'/%3E%3C/g%3E%3C/svg%3E") right top / 15cqw no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg transform='rotate(180 12 12)' fill='none' stroke='%23b8914e' stroke-width='.9'%3E%3Cpath d='M1 15A14 14 0 0 1 15 1'/%3E%3Cpath d='M1 9.5A8.5 8.5 0 0 1 9.5 1'/%3E%3Cpath d='M1 1l7 7M1 1l3.2 9.6M1 1l9.6 3.2'/%3E%3C/g%3E%3Cg transform='rotate(180 12 12)'%3E%3Cpath d='M1 1h3.4v3.4H1z' fill='%23b8914e'/%3E%3C/g%3E%3C/svg%3E") right bottom / 15cqw no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg transform='rotate(270 12 12)' fill='none' stroke='%23b8914e' stroke-width='.9'%3E%3Cpath d='M1 15A14 14 0 0 1 15 1'/%3E%3Cpath d='M1 9.5A8.5 8.5 0 0 1 9.5 1'/%3E%3Cpath d='M1 1l7 7M1 1l3.2 9.6M1 1l9.6 3.2'/%3E%3C/g%3E%3Cg transform='rotate(270 12 12)'%3E%3Cpath d='M1 1h3.4v3.4H1z' fill='%23b8914e'/%3E%3C/g%3E%3C/svg%3E") left bottom / 15cqw no-repeat;
+  --bk-af-ink: currentColor; --bk-af-size: 10cqw; --bk-af-tf: none; --bk-af-fx: none;
+  --mono-ink: #b48a48; --mono-shadow: 0 .6cqw 0 rgba(255, 255, 255, .9), 0 0 5cqw rgba(201, 164, 105, .3); --mono-size: 54cqw; --mono-y: -3%; --mono-op: 1;
+  --mini-bg: #fbf6ec; --mini-line: #c9a469;
+  --fr-bg: #fbf6ec; --fr-t: 3cqw; --fr-s: 3cqw; --fr-b: 3cqw; --fr-r: 1.5cqw; --fr-line: 0 0 0 1px rgba(201, 164, 105, .9); --fr-dev: none;
+  --uc-rubino: #b3173f; --uc-rubino-hi: #e9577b; --uc-rubino-lo: #5c0a1e;
+  --uc-zaffiro: #1f55c4; --uc-zaffiro-hi: #5d93f0; --uc-zaffiro-lo: #0d2563;
+  --uc-smeraldo: #0e8a5d; --uc-smeraldo-hi: #3fc690; --uc-smeraldo-lo: #05442d;
+  --uc-ambra: #d4950f; --uc-ambra-hi: #f7cd55; --uc-ambra-lo: #7d5104;
+  --uc-ink: #fff; --uc-edge: #ead3a2; --uc-edge-k: .017; --uc-ph-ring: 0 0 0 .6cqw rgba(255, 250, 240, .95); --uc-ph-r: 4cqw; --uc-tex: none;
 }
 /* Polaroid: the back is an instant photo still developing; the photo appears when the card turns */
 [data-deck="polaroid"] {
@@ -738,14 +743,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 .gp-tile:active { transform: scale(.98); }
 @media (hover: hover) { .gp-tile[aria-pressed="false"]:hover { border-color: var(--accent-ink); transform: translateY(-2px); } }
 .gp-tile[aria-pressed="true"] {
-  color: #fff4ee; border-color: var(--gold-soft);
-  background: linear-gradient(150deg, #9b1b3b, #6e1129 55%, #4a0a1b);
-  box-shadow: 0 0 0 3px rgba(226, 191, 108, .32), 0 18px 34px -18px rgba(110, 17, 41, .85);
+  color: var(--ink); border-color: #c9a469;
+  background: linear-gradient(160deg, rgba(255, 251, 240, .94), rgba(246, 230, 196, .88));
 }
 .gp-text { display: grid; gap: 4px; min-width: 0; justify-items: center; }
 .gp-name { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: clamp(18px, 2vw, 23px); line-height: 1.05; text-wrap: balance; }
 .gp-tag { font-size: 13px; line-height: 1.3; color: var(--muted); text-wrap: balance; }
-.gp-tile[aria-pressed="true"] .gp-tag { color: rgba(255, 244, 238, .82); }
 .gp-check {
   position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
   display: grid; place-items: center; border: 2px solid var(--line-strong); transition: background-color .25s, border-color .25s;
@@ -759,16 +762,119 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 .gp-art canvas { position: absolute; left: -8px; top: -6px; width: 80px; height: 74px; display: block; }
 .gp-photo { display: block; width: 36px; aspect-ratio: 5 / 7; border-radius: 4px; overflow: hidden; background: var(--surface-2); box-shadow: 0 6px 12px -6px rgb(var(--shadow-color) / .7), 0 0 0 2px #fff4ee; }
 .gp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; max-width: none; }
-@media (max-width: 460px) {
-  .gp-tiles { gap: 8px; }
-  .gp-tile { padding: 11px 4px 12px; gap: 5px; border-radius: 18px; }
-  .gp-tag { display: none; }
-  .gp-name { font-size: 17px; }
-  .gp-art { height: 56px; transform: scale(.9); transform-origin: 50% 0; }
-  .gp-tile[aria-pressed="false"] .gp-check { display: none; }
-}
-@media (max-width: 350px) { .gp-name { font-size: 15px; } }
 .pz-hero { width: min(100%, 360px); margin-block: clamp(10px, 2.2vw, 22px) 4px; }
+/* ---------- premium look: photos of Hande behind the home, glass panels, champagne buttons ---------- */
+.home-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--bg); }
+.hb-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.8s ease; }
+.hb-slide.on { opacity: 1; }
+.hb-slide img { width: 100%; height: 100%; object-fit: cover; object-position: var(--x, 50%) 0; display: block; max-width: none; transform: scale(1.03); filter: saturate(.94); }
+.hb-slide.on img { animation: hbZoom 13s ease-out forwards; }
+@keyframes hbZoom { to { transform: scale(1.12) translateY(-1.2%); } }
+.hb-shade {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(246, 241, 234, .9) 0%, rgba(246, 241, 234, .55) 15%, rgba(246, 241, 234, .08) 29%, rgba(246, 241, 234, 0) 40%, rgba(246, 241, 234, .2) 52%, rgba(246, 241, 234, .82) 66%, #f6f1ea 78%);
+}
+/* phones: the photo is the cover of the first screen and scrolls away with it */
+@media (max-width: 919px) { .home-bg { position: absolute; bottom: auto; height: 100svh; } }
+@media (min-width: 920px) {
+  /* the photo starts a little lower so the signature sits above her face */
+  .hb-slide { right: 34%; top: 9%; -webkit-mask-image: linear-gradient(180deg, transparent, #000 16%); mask-image: linear-gradient(180deg, transparent, #000 16%); }
+  .hb-shade {
+    background:
+      linear-gradient(90deg, rgba(246, 241, 234, 0) 0%, rgba(246, 241, 234, 0) 40%, rgba(246, 241, 234, .7) 56%, #f6f1ea 66%),
+      linear-gradient(180deg, rgba(246, 241, 234, .92) 0%, rgba(246, 241, 234, .66) 17%, rgba(246, 241, 234, .2) 29%, rgba(246, 241, 234, 0) 38%, rgba(246, 241, 234, 0) 54%, rgba(246, 241, 234, .9) 82%);
+  }
+}
+.home-inner { position: relative; z-index: 1; }
+.home .fan, .home .pz-hero { display: none !important; }
+.cover { min-height: calc(100svh - 2 * clamp(22px, 5vh, 56px)); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.game-pick { margin-top: auto; }
+.lede { margin-top: 6px; font-size: 16px; color: rgba(42, 33, 30, .82); }
+@media (min-width: 920px) {
+  .home-inner { align-items: start; }
+  .cover { position: sticky; top: clamp(22px, 5vh, 56px); min-height: 0; height: calc(100dvh - 2 * clamp(22px, 5vh, 56px)); }
+}
+/* the masthead: a signature in gold leaf */
+.masthead { margin: 0; line-height: 1; font-size: clamp(66px, 19vw, 128px); }
+.mh-1 {
+  display: block; padding: 0 .14em; font-family: var(--font-script); font-weight: 400; font-style: normal;
+  font-size: 1em; line-height: 1.1; letter-spacing: 0;
+  background: linear-gradient(178deg, #f9edc9 0%, #e2c27f 30%, #a77a35 55%, #e9cf94 72%, #b48a48 100%) 0 0 / 100% 230%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: .5px rgba(110, 76, 30, .4);
+  filter: drop-shadow(0 2px 0 rgba(255, 250, 240, .9)) drop-shadow(0 8px 16px rgba(74, 54, 38, .35));
+  animation: mhGold 9s ease-in-out infinite alternate;
+}
+@keyframes mhGold { to { background-position: 0 100%; } }
+.mh-swash { display: block; width: min(2.85em, 60vw); height: auto; aspect-ratio: 210 / 26; margin: -.3em auto 0; }
+.mh-kicker { margin: -4px 0 0; padding-left: .4em; font: 600 11px var(--font-ui); letter-spacing: .4em; text-transform: uppercase; color: #7a5626; text-shadow: 0 0 8px #fbf6ee, 0 0 3px #fbf6ee; }
+.gp-label { color: #4d3f37; text-shadow: 0 0 14px rgba(255, 250, 242, .95); }
+/* glass panels on the home */
+.home :is(.count-box, .opts, .uc-intro, .deck-row, .uc-rules, .gp-tile, .hunt-card) {
+  background: var(--glass); border-color: var(--glass-line);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4); backdrop-filter: blur(22px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 18px 40px -26px rgb(var(--shadow-color) / .55);
+}
+.home .hunt-card { background: linear-gradient(135deg, rgba(247, 233, 205, .82), var(--glass) 60%); }
+.hunt-art { color: #a7803f; }
+.overlay { -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+/* buttons */
+.btn { min-height: 50px; letter-spacing: .03em; transition: transform .15s ease, box-shadow .2s ease, filter .2s ease; }
+.btn.primary {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--champ); color: #2a211e; border: 0; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; font-size: 15px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75), inset 0 -2px 0 rgba(120, 84, 32, .18), 0 14px 26px -14px rgba(150, 108, 48, .7), 0 2px 4px rgba(150, 108, 48, .18);
+}
+.btn.primary::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, .55) 46%, transparent 62%);
+  transform: translateX(-110%); animation: btnShine 5.5s ease-in-out infinite;
+}
+@keyframes btnShine { 0%, 62% { transform: translateX(-110%); } 82%, 100% { transform: translateX(110%); } }
+@media (hover: hover) { .btn.primary:hover { filter: brightness(1.04) saturate(1.05); } }
+.btn.primary:disabled { filter: saturate(.4); opacity: .7; }
+.play-btn { min-height: 56px; font-size: 16px; letter-spacing: .2em; }
+.btn:not(.primary):not(.ghost):not(.gold):not(.catch) {
+  background: rgba(255, 253, 249, .8); border: 1px solid rgba(167, 128, 63, .38); color: var(--ink);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 10px 22px -16px rgb(var(--shadow-color) / .6);
+}
+.online-btn svg.i { color: #a7803f; }
+.icon-btn { background: rgba(255, 253, 249, .85); border-color: rgba(167, 128, 63, .28); box-shadow: 0 6px 16px -10px rgb(var(--shadow-color) / .6); }
+.seg { background: rgba(66, 48, 36, .06); border-color: rgba(255, 255, 255, .7); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.seg button { color: #6f6159; }
+.seg button[aria-pressed="true"] { background: #fffdf9; color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(66, 48, 36, .14), 0 6px 14px -6px rgba(66, 48, 36, .3); }
+.switch { background: rgba(66, 48, 36, .16); }
+.sw-input:checked + .switch { background: var(--champ); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6); }
+.switch::after { background: #fff; box-shadow: 0 2px 6px rgba(66, 48, 36, .3); }
+.step { background: rgba(255, 253, 249, .85); border-color: rgba(167, 128, 63, .35); color: var(--accent-ink); box-shadow: 0 6px 14px -10px rgb(var(--shadow-color) / .7); }
+.lang { background: rgba(255, 253, 249, .6); }
+.lang button[aria-pressed="true"] { background: var(--champ); color: var(--ink); }
+.pill-toggle { background: rgba(255, 253, 249, .6); }
+.lb-btn { background: rgba(66, 48, 36, .08); }
+/* the number-of-cards slider */
+#count { -webkit-appearance: none; appearance: none; height: 28px; background: transparent; }
+#count::-webkit-slider-runnable-track { height: 6px; border-radius: 999px; background: linear-gradient(90deg, #c9a469 var(--fill, 0%), rgba(66, 48, 36, .14) var(--fill, 0%)); }
+#count::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 50%; border: 2px solid #fff; background: var(--champ); box-shadow: 0 2px 8px rgba(120, 84, 32, .45); }
+#count::-moz-range-track { height: 6px; border-radius: 999px; background: rgba(66, 48, 36, .14); }
+#count::-moz-range-progress { height: 6px; border-radius: 999px; background: #c9a469; }
+#count::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; background: #d9bb82; box-shadow: 0 2px 8px rgba(120, 84, 32, .45); }
+/* the four games: compact tiles, two by two */
+.gp-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.gp-tile { grid-template-columns: auto minmax(0, 1fr); justify-items: start; align-items: center; text-align: left; gap: 6px; padding: 8px 12px 8px 6px; border-radius: 18px; border-width: 1px; }
+.gp-text { justify-items: start; gap: 2px; }
+.gp-name { font-size: clamp(18px, 2vw, 21px); }
+.gp-tag { font-size: 12.5px; }
+.gp-art { transform: scale(.86); margin: -4px -2px; }
+.gp-check { top: 7px; right: 7px; width: 18px; height: 18px; }
+.gp-tile[aria-pressed="true"] { color: var(--ink); border-color: #c9a469; background: linear-gradient(160deg, rgba(255, 251, 240, .94), rgba(246, 230, 196, .88)); box-shadow: 0 0 0 4px rgba(201, 164, 105, .22), 0 20px 36px -22px rgba(150, 108, 48, .8); }
+.gp-tile[aria-pressed="true"] .gp-tag { color: var(--muted); }
+.gp-tile[aria-pressed="true"] .gp-check { background: var(--champ); border-color: transparent; }
+@media (max-width: 460px) { .gp-tag { display: none; } .gp-tile[aria-pressed="false"] .gp-check { display: none; } .gp-name { font-size: 18px; } }
+@media (max-width: 350px) { .gp-name { font-size: 16px; } .gp-art { transform: scale(.74); margin: -8px -8px; } }
+.pz-mini { background: linear-gradient(160deg, #fffaf0, #f3e3c0); color: #b8914e; box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .55), 0 10px 20px -14px rgba(150, 108, 48, .8); }
+.stop.treasure .medal { color: #fffaf0; }
+@media (prefers-reduced-motion: reduce) { .hb-slide.on img, .mh-1, .btn.primary::after { animation: none; } }
 .pz-hero canvas { display: block; width: 100%; height: auto; aspect-ratio: 360 / 290; }
 .pz-mini { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: var(--wine); color: var(--gold-soft); flex: none; }
 .pz-mini svg { width: 38px; height: 38px; fill: currentColor; }
@@ -898,10 +1004,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
 /* ---------- Ultima carta: cards ---------- */
 :root {
-  --felt: #efe2dc; --felt-ink: rgba(110, 17, 41, .10);
+  --felt: #efe7dc; --felt-ink: rgba(122, 90, 46, .1);
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --felt: #1d0d15; --felt-ink: rgba(235, 200, 119, .07); } }
-:root[data-theme="dark"] { --felt: #1d0d15; --felt-ink: rgba(235, 200, 119, .07); }
 .uc-card {
   --s: var(--uc-rubino); --s-hi: var(--uc-rubino-hi); --s-lo: var(--uc-rubino-lo); --ol: var(--s-lo);
   position: relative; display: block; width: var(--cw, 90px); aspect-ratio: 5 / 7; flex: none; padding: 0; margin: 0;
@@ -1110,14 +1214,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 /* ---------- keyframes ---------- */
 /* ---------- Puzzle ---------- */
 .pzs {
-  --pz-slot: rgba(110, 17, 41, .2);
+  --pz-slot: rgba(122, 90, 46, .2);
   display: flex; flex-direction: column; overflow: hidden;
   padding-top: max(8px, env(safe-area-inset-top, 0px));
   background: radial-gradient(ellipse 90% 45% at 50% 0%, var(--bg-glow), transparent 70%), var(--bg);
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pzs { --pz-slot: rgba(235, 200, 119, .17); } }
-:root[data-theme="dark"] .pzs { --pz-slot: rgba(235, 200, 119, .17); }
 .pz-head { display: flex; align-items: center; gap: 12px; padding: 0 clamp(14px, 3vw, 30px); min-height: 48px; flex: none; }
 .pz-head .uc-titles { flex: 1 1 auto; }
 .pz-stats { display: flex; gap: clamp(14px, 3vw, 28px); flex: none; }
@@ -1272,14 +1374,97 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .uc-hand .uc-card, .uc-arrow { transition-duration: .01ms !important; }
   .banner { animation: none; opacity: 1; }
 }
+/* ---------- Bowling ---------- */
+.gp-art > .bw-art { position: absolute; inset: 0; width: 64px; height: 62px; display: block; }
+.bw-mini { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; flex: none;
+  background: linear-gradient(160deg, #fffaf0, #f3e3c0); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .55), 0 10px 20px -14px rgba(150, 108, 48, .8); }
+.bw-mini svg { width: 54px; height: 52px; display: block; }
+.bws { overflow: hidden; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; background: #efe5d5; }
+.bw-stage { position: absolute; inset: 0; outline: none; }
+.bw-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.bw-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 70% at 50% 45%, rgba(74, 54, 38, 0) 58%, rgba(74, 54, 38, .13)); }
+.bw-poster { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: hidden; border-radius: 4px; background: #fffaf2; pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(167, 128, 63, .9), 0 0 0 6px #fffaf2, 0 0 0 7px rgba(201, 164, 105, .75), 0 30px 60px -22px rgba(74, 54, 38, .6);
+  transition: opacity .25s ease; }
+.bw-poster.out { opacity: 0; }
+.bw-poster img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 18%; display: block;
+  filter: blur(var(--blur, 9px)) saturate(var(--sat, .55)); transform: scale(1.08); }
+.bw-poster .veil { position: absolute; inset: 0; background: rgba(255, 250, 242, var(--veil, .38)); }
+.bw-poster .count { position: absolute; left: 50%; bottom: 8%; transform: translateX(-50%); padding: 4px 11px; border-radius: 999px; white-space: nowrap;
+  background: rgba(255, 253, 249, .82); font: 600 11px var(--font-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.bw-head { position: absolute; z-index: 3; top: 0; left: 0; right: 0; max-width: 620px; margin-inline: auto;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 10px;
+  padding: max(10px, env(safe-area-inset-top, 0px)) 12px 6px; }
+.bw-head .uc-title { font-size: 25px; }
+.bw-head .uc-sub { overflow: hidden; text-overflow: ellipsis; }
+.bw-total { display: grid; justify-items: end; gap: 1px; padding: 5px 12px 6px; border-radius: 14px; line-height: 1;
+  background: rgba(255, 253, 249, .74); border: 1px solid rgba(255, 255, 255, .85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: 0 8px 18px -12px rgba(74, 54, 38, .6); }
+.bw-total span { font: 600 9.5px var(--font-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.bw-total b { font: italic 700 21px var(--font-display); color: var(--ink); }
+.bw-card { position: absolute; z-index: 3; left: 12px; right: 12px; max-width: 560px; margin-inline: auto; top: calc(max(10px, env(safe-area-inset-top, 0px)) + 54px);
+  display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)) minmax(0, 1.45fr); border-radius: 14px; overflow: hidden;
+  background: rgba(255, 253, 249, .76); border: 1px solid rgba(255, 255, 255, .85);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 14px 30px -20px rgba(74, 54, 38, .6); }
+.bw-f { border-left: 1px solid var(--line); text-align: center; min-width: 0; }
+.bw-f:first-child { border-left: 0; }
+.bw-f .n { font: 600 9px var(--font-ui); letter-spacing: .08em; color: var(--muted); padding: 3px 0 2px; border-bottom: 1px solid var(--line); }
+.bw-f .r { display: flex; justify-content: flex-end; height: 17px; }
+.bw-f .r i { flex: 0 0 50%; font: 500 11px/17px var(--font-num); font-style: normal; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink); }
+.bw-f:last-child .r i { flex-basis: 33.34%; }
+.bw-f .r i:first-child { border-left: 0; }
+.bw-f .r i.x { background: var(--champ); font-weight: 600; color: #2a211e; }
+.bw-f .r i.sp { background: linear-gradient(135deg, transparent 47%, rgba(167, 128, 63, .9) 49%, rgba(167, 128, 63, .9) 53%, transparent 55%); color: transparent; }
+.bw-f .tt { font: 600 13px/19px var(--font-num); height: 20px; }
+.bw-f.cur { background: rgba(230, 205, 152, .32); }
+.bw-f.cur .n { color: var(--accent-ink); }
+.bw-players { position: absolute; z-index: 3; left: 12px; right: 12px; max-width: 560px; margin-inline: auto; top: calc(max(10px, env(safe-area-inset-top, 0px)) + 120px);
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; pointer-events: none; }
+.bw-pl { display: inline-flex; align-items: center; gap: 6px; max-width: 46%; padding: 3px 10px 3px 4px; border-radius: 999px;
+  background: rgba(255, 253, 249, .76); border: 1px solid rgba(255, 255, 255, .85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  font: 500 13px var(--font-ui); color: var(--ink); box-shadow: 0 6px 14px -10px rgba(74, 54, 38, .6); }
+.bw-pl .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.bw-pl b { font: 600 13px var(--font-num); }
+.bw-pl .av { width: 22px; height: 22px; flex: none; }
+.bw-pl .dot { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; flex: none; font: 600 11px var(--font-num); font-style: normal; background: rgba(66, 48, 36, .08); color: var(--muted); }
+.bw-pl.cur { border-color: #c9a469; box-shadow: 0 0 0 3px rgba(201, 164, 105, .25), 0 6px 14px -10px rgba(74, 54, 38, .6); }
+.bw-pl.cur .dot { background: var(--champ); color: #2a211e; }
+.bw-pl.off { opacity: .55; }
+.bw-hint { position: absolute; z-index: 3; left: 16px; right: 16px; bottom: max(16px, env(safe-area-inset-bottom, 0px)); margin: 0; text-align: center; pointer-events: none;
+  font-size: 15px; color: var(--ink); text-shadow: 0 0 12px rgba(255, 250, 242, .95), 0 0 3px rgba(255, 250, 242, .9); }
+.bw-hint b { display: block; font: italic 700 19px var(--font-display); margin-bottom: 2px; }
+.bw-hint span:empty { display: none; }
+.bw-banner { position: absolute; z-index: 4; left: 0; right: 0; top: 60%; text-align: center; pointer-events: none; opacity: 0; transform: scale(.7);
+  transition: opacity .25s, transform .45s cubic-bezier(.2, 1.6, .4, 1); }
+.bw-banner.on { opacity: 1; transform: none; }
+.bw-banner b { display: inline-block; font: italic 800 68px/1 var(--font-display); letter-spacing: -.01em; padding: 0 .1em;
+  background: linear-gradient(176deg, #fff7e2 8%, #e7c987 46%, #b88a3f 78%, #f0d79b 96%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 6px 18px rgba(120, 84, 32, .45)) drop-shadow(0 0 2px rgba(255, 255, 255, .9)); }
+.bw-banner.plain b { font-size: 44px; background: none; color: #4a3a2c; filter: drop-shadow(0 0 10px rgba(255, 250, 242, .95)) drop-shadow(0 0 3px rgba(255, 250, 242, .9)); }
+.bw-banner span { display: block; margin-top: 6px; font: 600 12px var(--font-ui); letter-spacing: .3em; text-transform: uppercase; color: #6f5328; text-shadow: 0 0 10px #fffaf2; }
+.bw-banner span:empty { display: none; }
+.bw-power { position: absolute; z-index: 3; left: 50%; bottom: calc(max(16px, env(safe-area-inset-bottom, 0px)) + 58px); width: 180px; height: 8px; margin-left: -90px;
+  border-radius: 999px; background: rgba(66, 48, 36, .14); overflow: hidden; box-shadow: 0 0 0 3px rgba(255, 253, 249, .7); }
+.bw-power i { display: block; height: 100%; width: 0; background: var(--champ); }
+@media (min-width: 700px) { .bw-hint { font-size: 16px; } .bw-banner b { font-size: 84px; } .bw-banner.plain b { font-size: 52px; } }
+@media (prefers-reduced-motion: reduce) { .bw-banner { transition: opacity .2s; transform: none; } }
+/* the photos of the game under the result */
+.res-strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin: 2px 0 14px; }
+.res-strip span { position: relative; aspect-ratio: 3 / 4; border-radius: 7px; overflow: hidden; box-shadow: 0 0 0 1px rgba(201, 164, 105, .55); }
+.res-strip img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.res-strip span.no img { filter: blur(5px) saturate(.4); transform: scale(1.15); }
+.res-strip span.no::after { content: ""; position: absolute; inset: 0; background: rgba(255, 250, 242, .45); }
 </style>
 </head>
 <body>
 <div id="app">
   <section id="home" class="screen home" data-i18n-attr="aria-label:menuLabel">
+    <div class="home-bg" id="home-bg" aria-hidden="true"><div class="hb-shade"></div></div>
     <div class="home-inner">
       <div class="cover">
-        <h1 class="masthead"><span class="mh-1">Handemiyy</span><span class="sr-only" id="mh-game"></span></h1>
+        <h1 class="masthead"><span class="mh-1">Handemiyy</span><span class="sr-only" id="mh-game"></span><svg class="mh-swash" viewBox="0 0 210 26" aria-hidden="true"><defs><linearGradient id="mh-gg" x1="0" x2="1"><stop offset="0" stop-color="#b8914e" stop-opacity="0"/><stop offset=".2" stop-color="#b8914e"/><stop offset=".8" stop-color="#d9b56c"/><stop offset="1" stop-color="#b8914e" stop-opacity="0"/></linearGradient></defs><path d="M6 15 C 50 4, 95 22, 130 12 S 186 6, 204 14" fill="none" stroke="url(#mh-gg)" stroke-width="1.4" stroke-linecap="round"/><path d="M98 13 l4 -4 4 4 -4 4z" fill="#c39a55"/></svg></h1>
+        <p class="mh-kicker" data-i18n="mhKicker"></p>
         <div class="game-pick" role="group" aria-labelledby="gp-label">
           <p class="gp-label" id="gp-label" data-i18n="gameSwitch"></p>
           <div class="gp-tiles">
@@ -1296,6 +1481,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile" data-game="pz" aria-pressed="false">
               <span class="gp-art" id="gp-art-pz" aria-hidden="true"><canvas></canvas></span>
               <span class="gp-text"><span class="gp-name" data-i18n="gamePz"></span><span class="gp-tag" data-i18n="gpPzTag"></span></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile" data-game="bw" aria-pressed="false">
+              <span class="gp-art" aria-hidden="true"><svg class="bw-art" viewBox="0 0 64 62" aria-hidden="true"><defs><linearGradient id="bwa-pin" x1="0" x2="1"><stop offset="0" stop-color="#d8cab8"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#e2d6c6"/></linearGradient><radialGradient id="bwa-ball" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fffaf0"/><stop offset=".4" stop-color="#f0dcae"/><stop offset=".8" stop-color="#c9a05e"/><stop offset="1" stop-color="#8f6a34"/></radialGradient></defs><path d="M21 4c3 0 4 3 3.6 6-.4 2.6-1.6 4.4-1.4 6.6.3 3.6 5.8 8.6 5.8 17.4 0 9-3.4 18-4 24h-8c-.6-6-4-15-4-24 0-8.8 5.5-13.8 5.8-17.4.2-2.2-1-4-1.4-6.6C17 7 18 4 21 4z" fill="url(#bwa-pin)" stroke="rgba(110,86,60,.4)" stroke-width=".8"/><rect x="17" y="14.4" width="8" height="1.6" fill="#c9a469"/><rect x="17" y="17" width="8" height="1.6" fill="#c9a469"/><circle cx="43" cy="44" r="13" fill="url(#bwa-ball)"/><text x="43" y="48.5" text-anchor="middle" font-family="Bodoni Moda, Didot, Times New Roman, serif" font-style="italic" font-weight="700" font-size="13" fill="#6e4f24">H</text></svg></span>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameBw"></span><span class="gp-tag" data-i18n="gpBwTag"></span></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
           </div>
@@ -1432,6 +1622,25 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           <p class="record-line" id="pz-record"></p>
         </div>
 
+        <div class="setup-part" id="setup-bw" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini" aria-hidden="true"><svg class="bw-mini-art" viewBox="0 0 64 62" aria-hidden="true"><defs><linearGradient id="bwm-pin" x1="0" x2="1"><stop offset="0" stop-color="#d8cab8"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#e2d6c6"/></linearGradient><radialGradient id="bwm-ball" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fffaf0"/><stop offset=".4" stop-color="#f0dcae"/><stop offset=".8" stop-color="#c9a05e"/><stop offset="1" stop-color="#8f6a34"/></radialGradient></defs><path d="M21 4c3 0 4 3 3.6 6-.4 2.6-1.6 4.4-1.4 6.6.3 3.6 5.8 8.6 5.8 17.4 0 9-3.4 18-4 24h-8c-.6-6-4-15-4-24 0-8.8 5.5-13.8 5.8-17.4.2-2.2-1-4-1.4-6.6C17 7 18 4 21 4z" fill="url(#bwm-pin)" stroke="rgba(110,86,60,.4)" stroke-width=".8"/><rect x="17" y="14.4" width="8" height="1.6" fill="#c9a469"/><rect x="17" y="17" width="8" height="1.6" fill="#c9a469"/><circle cx="43" cy="44" r="13" fill="url(#bwm-ball)"/><text x="43" y="48.5" text-anchor="middle" font-family="Bodoni Moda, Didot, Times New Roman, serif" font-style="italic" font-weight="700" font-size="13" fill="#6e4f24">H</text></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameBw"></span><span class="hunt-sub" data-i18n="bwIntro"></span></span>
+          </div>
+          <div class="seg" role="group" data-i18n-attr="aria-label:modeLabel">
+            <button type="button" data-mode="solo" aria-pressed="true" data-i18n="solo"></button>
+            <button type="button" data-mode="duo" aria-pressed="false" data-i18n="duo"></button>
+          </div>
+          <div class="duo-setup" id="bw-duo" hidden>
+            <div class="field"><label for="bw-p1" data-i18n="player1"></label><input id="bw-p1" maxlength="14" autocomplete="off" data-i18n-attr="placeholder:namePh"></div>
+            <div class="field"><label for="bw-p2" data-i18n="player2"></label><input id="bw-p2" maxlength="14" autocomplete="off" data-i18n-attr="placeholder:namePh"></div>
+            <p class="hint" data-i18n="bwDuoHint"></p>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-bw-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="bw" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
+          <p class="record-line" id="bw-record"></p>
+        </div>
+
         <div class="home-foot">
           <div class="foot-left">
             <button type="button" class="pill-toggle" id="sfx-home" aria-pressed="true"></button>
@@ -1541,6 +1750,25 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     </div>
   </section>
 
+  <section id="bw" class="screen bws" hidden data-i18n-attr="aria-label:bwLabel">
+    <div class="bw-stage" id="bw-stage" role="application" tabindex="0">
+      <canvas id="bw-room"></canvas>
+      <div class="bw-poster" id="bw-poster"><img id="bw-photo" alt="" draggable="false"><div class="veil"></div><span class="count" id="bw-count" data-i18n="bwDiscover"></span></div>
+      <canvas id="bw-cv"></canvas>
+    </div>
+    <header class="bw-head">
+      <button type="button" class="icon-btn" id="bw-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameBw"></h2><span class="uc-sub" id="bw-sub"></span></div>
+      <div class="bw-total"><span data-i18n="bwPoints"></span><b id="bw-total-n">0</b></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-bw" aria-pressed="true"></button>
+    </header>
+    <div class="bw-card" id="bw-card" aria-hidden="true"></div>
+    <div class="bw-players" id="bw-players" hidden></div>
+    <div class="bw-banner" id="bw-banner" aria-hidden="true"><b></b><span></span></div>
+    <p class="bw-hint" id="bw-hint" aria-live="polite"></p>
+    <div class="bw-power" id="bw-power" hidden aria-hidden="true"><i></i></div>
+  </section>
+
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
     <div class="onl-inner">
       <header class="onl-head">
@@ -1628,6 +1856,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     <p class="res-score" id="res-score-wrap"><span id="res-score">0</span><span class="res-unit" data-i18n="unit"></span></p>
     <p class="res-record" id="res-record" hidden data-i18n="newRecord"></p>
     <dl class="res-stats" id="res-stats"></dl>
+    <div class="res-strip" id="res-strip" hidden aria-hidden="true"></div>
     <div class="res-actions">
       <button type="button" class="btn primary" id="btn-again"></button>
       <button type="button" class="btn" id="btn-photos" data-i18n="photos"></button>
@@ -1915,11 +2144,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       pzAgain: 'Un altro puzzle', pzSeePhoto: 'Guarda la foto',
       aPzStart: 'Puzzle da {n} pezzi: trascina i pezzi sulla foto.', aPzPlaced: 'Pezzo al suo posto: {m} su {n}.',
       // ---- card models ----
+      mhKicker: 'Fan game',
       deckLabel: 'Le carte', deckChange: 'Cambia', deckRowLabel: 'Le carte: {name}. Cambia modello',
       deckPickTitle: 'Scegli le carte', deckPickSub: 'Valgono per Memory e Ultima carta.', deckDone: 'Fatto',
       deckLocked: 'Trova il tesoro per sbloccarle', aDeck: 'Carte {name}',
-      deckNames: { classico: 'Classico', polaroid: 'Polaroid', cipria: 'Cipria', notte: 'Notte', nazar: 'Nazar', oro: 'Oro' },
-      deckDescs: { classico: 'Vino e oro', polaroid: 'Si sviluppano quando le giri', cipria: 'Rosa con i fiocchi', notte: 'Blu notte e stelle', nazar: "L'occhio portafortuna", oro: 'Il premio del tesoro' },
+      deckNames: { avorio: 'Avorio', classico: 'Classico', polaroid: 'Polaroid', cipria: 'Cipria', notte: 'Notte', nazar: 'Nazar', oro: 'Oro' },
+      deckDescs: { avorio: 'Avorio e oro chiaro', classico: 'Vino e oro', polaroid: 'Si sviluppano quando le giri', cipria: 'Rosa con i fiocchi', notte: 'Blu notte e stelle', nazar: "L'occhio portafortuna", oro: 'Il premio del tesoro' },
       // ---- online ----
       netPlayOnline: 'Gioca online con gli amici', netLabel: 'Gioca online', netTitle: 'Gioca online',
       netLeadCreate: 'Crea una stanza per {game} e manda il link agli amici: potete giocare da 2 a 4, ognuno sul suo telefono.',
@@ -1943,6 +2173,22 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       netCfTitle: 'Uscire dalla stanza?', netCfTextHost: 'La stanza si chiude anche per gli altri giocatori.', netCfText: 'Gli altri continuano senza di te.',
       netWaitAgain: 'Aspetta la rivincita di {name}…', netAgain: 'Rivincita', netYouWin: 'Hai vinto!', netKicker: 'Online · {game}',
       netLeft: '{name} è uscito', netAway: 'Gioca il computer per {name}',
+      // ---- Bowling ----
+      gameBw: 'Bowling', gpBwTag: 'Butta giù i birilli', bwLabel: 'Bowling',
+      ledeBw: 'Dieci turni sulla pista dorata: ogni birillo che cade scopre un po\' della foto di Hande in fondo alla sala.',
+      bwIntro: 'Trascina la palla e lanciala verso i birilli. Con uno strike o uno spare la foto si scopre tutta.',
+      bwDuoHint: 'Giocate a turno sullo stesso telefono: dieci turni a testa.',
+      bwRecordNone: 'Nessuna partita finita', bwRecord: 'Record: {n} punti · {p} partite', bwRecord1: 'Record: {n} punti · 1 partita',
+      bwPoints: 'Punti', bwDiscover: 'Scopri la foto', bwSub: 'Turno {f}/10 · {r}', bwSubOver: 'Partita finita',
+      bwBall1: 'primo tiro', bwBall2: 'secondo tiro', bwBall3: 'tiro bonus',
+      bwYourTurn: 'Tocca a te', bwTurnOf: 'Tocca a {name}', bwHow: 'Trascina la palla verso i birilli e lasciala andare',
+      bwHowKeys: 'Trascina la palla verso i birilli, oppure usa le frecce e la barra spaziatrice', bwSoft: 'Un po\' più forte!',
+      bwStrike: 'Strike!', bwSpare: 'Spare!', bwPhotoFound: 'Foto scoperta', bwGutter: 'Canaletta', bwMiss: 'Nessun birillo',
+      bwPins: '{n} birilli', bwPin1: '1 birillo', bwStageAria: 'Pista da bowling: {n} birilli in piedi',
+      aBwStart: 'Bowling: trascina la palla verso i birilli e lasciala andare.', aBwPins: '{n} birilli abbattuti, {left} in piedi.',
+      bwKicker: 'Bowling · 10 turni', bwKickerDuo: 'Bowling in due', bwTitle1: 'Bella partita!', bwTitle2: 'Ottima partita!', bwTitle3: 'Partita da campione!',
+      bwRowStrikes: 'Strike', bwRowSpares: 'Spare', bwRowPhotos: 'Foto scoperte', bwPhotosOf: '{d} di {t}', bwRowBest: 'Record da battere', bwRowWins: 'Partite vinte da te',
+      bwAgain: 'Gioca ancora', bwSeePhotos: 'Guarda le foto',
     },
     tr: {
       menuLabel: 'Oyun menüsü', fanLabel: 'Önizleme fotoğraflarını karıştır',
@@ -2085,11 +2331,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       pzAgain: 'Başka bir yapboz', pzSeePhoto: 'Fotoğrafa bak',
       aPzStart: '{n} parçalık yapboz: parçaları fotoğrafın üstüne sürükle.', aPzPlaced: 'Parça yerinde: {n} parçadan {m}.',
       // ---- kart modelleri ----
+      mhKicker: 'Hayran oyunu',
       deckLabel: 'Kartlar', deckChange: 'Değiştir', deckRowLabel: 'Kartlar: {name}. Modeli değiştir',
       deckPickTitle: 'Kartlarını seç', deckPickSub: 'Memory ve Son Kart için geçerli.', deckDone: 'Tamam',
       deckLocked: 'Açmak için hazineyi bul', aDeck: '{name} kartlar',
-      deckNames: { classico: 'Klasik', polaroid: 'Polaroid', cipria: 'Pudra', notte: 'Gece', nazar: 'Nazar', oro: 'Altın' },
-      deckDescs: { classico: 'Bordo ve altın', polaroid: 'Çevirince fotoğraf belirir', cipria: 'Fiyonklu pembe', notte: 'Gece mavisi ve yıldızlar', nazar: 'Uğur getiren göz', oro: 'Hazinenin ödülü' },
+      deckNames: { avorio: 'Fildişi', classico: 'Klasik', polaroid: 'Polaroid', cipria: 'Pudra', notte: 'Gece', nazar: 'Nazar', oro: 'Altın' },
+      deckDescs: { avorio: 'Fildişi ve açık altın', classico: 'Bordo ve altın', polaroid: 'Çevirince fotoğraf belirir', cipria: 'Fiyonklu pembe', notte: 'Gece mavisi ve yıldızlar', nazar: 'Uğur getiren göz', oro: 'Hazinenin ödülü' },
       // ---- çevrimiçi ----
       netPlayOnline: 'Arkadaşlarınla çevrimiçi oyna', netLabel: 'Çevrimiçi oyna', netTitle: 'Çevrimiçi oyna',
       netLeadCreate: '{game} için bir oda kur ve bağlantıyı arkadaşlarına gönder: 2 ile 4 kişi, herkes kendi telefonunda oynayabilir.',
@@ -2113,6 +2360,22 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       netCfTitle: 'Odadan çıkılsın mı?', netCfTextHost: 'Oda diğer oyuncular için de kapanacak.', netCfText: 'Diğerleri sensiz devam eder.',
       netWaitAgain: '{name} rövanşı başlatacak…', netAgain: 'Rövanş', netYouWin: 'Kazandın!', netKicker: 'Çevrimiçi · {game}',
       netLeft: '{name} çıktı', netAway: '{name} yerine bilgisayar oynuyor',
+      // ---- Bowling ----
+      gameBw: 'Bowling', gpBwTag: 'Lobutları devir', bwLabel: 'Bowling',
+      ledeBw: 'Altın pistte on tur: devrilen her lobut, salonun sonundaki Hande fotoğrafını biraz daha açar.',
+      bwIntro: 'Topu sürükle ve lobutlara doğru bırak. Strike ya da spare yaparsan fotoğraf tamamen açılır.',
+      bwDuoHint: 'Aynı telefonda sırayla oynayın: her birinize on tur.',
+      bwRecordNone: 'Henüz biten oyun yok', bwRecord: 'Rekor: {n} puan · {p} oyun', bwRecord1: 'Rekor: {n} puan · 1 oyun',
+      bwPoints: 'Puan', bwDiscover: 'Fotoğrafı aç', bwSub: 'Tur {f}/10 · {r}', bwSubOver: 'Oyun bitti',
+      bwBall1: 'ilk atış', bwBall2: 'ikinci atış', bwBall3: 'bonus atış',
+      bwYourTurn: 'Sıra sende', bwTurnOf: 'Sıra: {name}', bwHow: 'Topu lobutlara doğru sürükle ve bırak',
+      bwHowKeys: 'Topu lobutlara doğru sürükle ya da ok tuşlarını ve boşluk tuşunu kullan', bwSoft: 'Biraz daha güçlü!',
+      bwStrike: 'Strike!', bwSpare: 'Spare!', bwPhotoFound: 'Fotoğraf açıldı', bwGutter: 'Oluk', bwMiss: 'Hiç lobut yok',
+      bwPins: '{n} lobut', bwPin1: '1 lobut', bwStageAria: 'Bowling pisti: {n} lobut ayakta',
+      aBwStart: 'Bowling: topu lobutlara doğru sürükle ve bırak.', aBwPins: '{n} lobut devrildi, {left} ayakta.',
+      bwKicker: 'Bowling · 10 tur', bwKickerDuo: 'İki kişilik bowling', bwTitle1: 'Güzel oyun!', bwTitle2: 'Harika oyun!', bwTitle3: 'Şampiyon oyunu!',
+      bwRowStrikes: 'Strike', bwRowSpares: 'Spare', bwRowPhotos: 'Açılan fotoğraflar', bwPhotosOf: '{t} içinde {d}', bwRowBest: 'Geçilecek rekor', bwRowWins: 'Kazandığın oyunlar',
+      bwAgain: 'Yeniden oyna', bwSeePhotos: 'Fotoğraflara bak',
     },
   };
   const store = {
@@ -2307,6 +2570,20 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       turn() { tone(740, { type: 'sine', dur: .1, vol: .08 }); tone(988, { type: 'sine', dur: .14, vol: .08, at: .08 }); },
       snap() { noise({ dur: .045, vol: .34, freq: 1500, q: 1.2 }); tone(587.33, { type: 'triangle', dur: .11, vol: .12, at: .012 }); tone(880, { type: 'sine', dur: .2, vol: .06, at: .03, verb: .25 }); },
       lift() { noise({ dur: .03, vol: .1, freq: 3400, q: .9 }); },
+      bwRoll(dur) { // the ball rumbling down the lane
+        const c = ac(); if (!c) return;
+        const tt = c.currentTime, s = c.createBufferSource(); s.buffer = AudioCore.noise(); s.loop = true;
+        const f = c.createBiquadFilter(); f.type = 'lowpass'; f.Q.value = .7; f.frequency.setValueAtTime(240, tt); f.frequency.linearRampToValueAtTime(150, tt + dur);
+        const g = c.createGain(); g.gain.setValueAtTime(.0001, tt); g.gain.exponentialRampToValueAtTime(.55, tt + .14); g.gain.setValueAtTime(.55, tt + dur * .82); g.gain.exponentialRampToValueAtTime(.0001, tt + dur);
+        s.connect(f); f.connect(g); g.connect(bus); s.start(tt); s.stop(tt + dur + .05);
+      },
+      bwCrash(k) { // the ball meeting the pins
+        noise({ dur: .2, vol: .28 + k * .3, freq: 850, q: .6 });
+        noise({ dur: .38, vol: .12 + k * .2, freq: 2400, q: .8, at: .04 });
+        for (let i = 0, n = 3 + Math.round(k * 6); i < n; i++) tone(1300 + Math.random() * 1700, { type: 'triangle', dur: .05, vol: .05 + k * .05, at: i * .035 + Math.random() * .03 });
+      },
+      bwClack() { tone(1600 + Math.random() * 1400, { type: 'triangle', dur: .04, vol: .05 }); noise({ dur: .03, vol: .08, freq: 3000, q: 1 }); },
+      bwGutter() { noise({ dur: .45, vol: .22, freq: 220, to: 90, q: .8, type: 'lowpass' }); },
     };
   })();
 
@@ -2579,9 +2856,10 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
+    if (BG) bwRenderHud(BG);
     if (!mapEl.hidden) renderMap(false);
     if (N && N.view) netRenderRoom();
     if (!onlineEl.hidden && !$('#onl-intro').hidden) netRenderIntro();
@@ -2602,10 +2880,35 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     renderAudio();
   }
 
+  /* ---------- photos of Hande behind the home: a few portraits that slowly take turns ---------- */
+  const HB_PHOTOS = [['133', '37%'], ['054', '50%'], ['126', '63%'], ['001', '29%'], ['150', '50%']];
+  let hbAt = -1, hbTimer = 0;
+  function hbNext() {
+    const box = $('#home-bg');
+    if (!box || (hbAt >= 0 && (home.hidden || document.hidden))) return;
+    const k = hbAt < 0 ? Math.floor(Math.random() * HB_PHOTOS.length) : (hbAt + 1) % HB_PHOTOS.length;
+    const [id, x] = HB_PHOTOS[k];
+    let el = box.querySelector('.hb-slide[data-id="' + id + '"]');
+    if (!el) {
+      el = document.createElement('div'); el.className = 'hb-slide'; el.dataset.id = id; el.style.setProperty('--x', x);
+      el.innerHTML = '<img alt="" decoding="async">';
+      box.insertBefore(el, box.querySelector('.hb-shade'));
+    }
+    const img = $('img', el), show = () => {
+      $$('.hb-slide', box).forEach((s) => { if (s !== el) s.classList.remove('on'); });
+      el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+      hbAt = k;
+    };
+    if (img.complete && img.naturalWidth) show();
+    else { img.onload = show; img.src = fullSrc(PHOTO_BY_ID_HB.get(id) || PHOTOS[0]); }
+  }
+  const PHOTO_BY_ID_HB = new Map(PHOTOS.map((p) => [p.id, p]));
+  function hbStart() { hbNext(); clearInterval(hbTimer); hbTimer = setInterval(hbNext, reduceMotion.matches ? 14000 : 7000); }
+
   /* ---------- card models ----------
      Every look is a set of CSS variables on [data-deck]: the page carries the player's choice (saved on this device), each
      preview in the chooser carries its own. "oro" is the treasure-hunt prize and stays closed until the hunt is done. */
-  const DECKS = ['classico', 'polaroid', 'cipria', 'notte', 'nazar', 'oro'];
+  const DECKS = ['avorio', 'classico', 'polaroid', 'cipria', 'notte', 'nazar', 'oro'];
   const I_CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>';
   const I_LOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>';
   const deckOpen = (k) => k !== 'oro' || !!store.get('hm-goldback', false);
@@ -2614,7 +2917,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     const d = store.get('hm-deck', null);
     if (DECKS.includes(d) && deckOpen(d)) return d;
     // players who had the gold backs switched on keep them
-    return store.get('hm-goldback', false) && store.get('hm-goldback-on', true) !== false ? 'oro' : 'classico';
+    return store.get('hm-goldback', false) && store.get('hm-goldback-on', true) !== false ? 'oro' : 'avorio';
   })();
   let deckFrom = null;
   function applyDeck() {
@@ -2683,7 +2986,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine();
+    renderRecordLine(); bwRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -2691,6 +2994,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     cards = Math.min(cards, max);
     const range = $('#count');
     range.max = String(max); range.value = String(cards);
+    range.style.setProperty('--fill', ((cards - MIN_CARDS) / Math.max(1, max - MIN_CARDS) * 100).toFixed(1) + '%');
     range.setAttribute('aria-valuetext', cards + ' ' + t('cardsUnit'));
     $('#count-num').textContent = cards;
     $('#count-unit').textContent = t('cardsUnit');
@@ -2729,6 +3033,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     return out;
   }
   function fillFan(animate) {
+    if (!$('#fan').offsetParent) return;
     const fc = $$('#fan .fan-card[data-photo]');
     const picks = pickDistinct(fc.length);
     fc.forEach((card, i) => {
@@ -2871,7 +3176,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -2973,7 +3278,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -3435,6 +3740,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     const dl = $('#res-stats'); dl.textContent = '';
     o.rows.forEach(([k, v]) => { const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd); });
     $('#btn-photos').hidden = !o.photos;
+    const strip = $('#res-strip'); strip.textContent = ''; strip.hidden = !o.strip;
+    if (o.strip) o.strip.forEach((x) => { const sp = document.createElement('span'); if (!x.open) sp.className = 'no'; const im = document.createElement('img'); im.alt = ''; im.src = cardSrc(PHOTO_BY_ID.get(x.id) || PHOTOS[0]); sp.appendChild(im); strip.appendChild(sp); });
     $('#btn-photos').textContent = o.photosLabel || t('photos');
     $('#result').classList.toggle('pz', o.action === 'pz');
     $('#btn-again').hidden = !o.again; $('#btn-again').disabled = !!o.againOff; if (o.again) $('#btn-again').textContent = o.again;
@@ -3471,7 +3778,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -3971,7 +4278,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -4067,12 +4374,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-memory').hidden = gs !== 'memory';
     $('#setup-uc').hidden = gs !== 'uc';
     $('#setup-pz').hidden = gs !== 'pz';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : 'lede';
+    $('#setup-bw').hidden = gs !== 'bw';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -4089,7 +4397,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -4239,7 +4547,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     });
   }
   async function pzRenderHero() {
-    if (gameSel !== 'pz') return;
+    if (gameSel !== 'pz' || !$('#pz-hero-wrap').offsetParent) return;
     const tok = ++pzHeroToken, photo = pzSel && pzSel !== 'surprise' ? PHOTOS.find((p) => p.id === pzSel) : null;
     const src = photo ? await pzLoadImg(cardSrc(photo)) : pzMystery();
     if (tok !== pzHeroToken || !src) return;
@@ -4367,7 +4675,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -4831,7 +5139,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const netOk = () => /^https?:$/.test(location.protocol) && !/(^|\.)(claude\.ai|claudeusercontent\.com|anthropic\.com|claude\.site)$/i.test(location.hostname);
   const netRand = (n, chars) => Array.from({ length: n }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
   const netClean = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u2028-\u202e\u2060-\u206f]/g, '').trim().slice(0, 14);
-  const netGameName = (g) => t(g === 'uc' ? 'gameUc' : 'gameMemory');
+  const netGameName = (g) => t(GAME_NAME[g] || 'gameMemory');
   let N = null;             // the room this device is in
   let netLib = null;
   let netPrep = { game: 'memory', code: null, b: null, mode: 'create' };
@@ -4911,7 +5219,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear();
+    closeOverlays(); FX.clear(); bwStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -5096,6 +5404,10 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, totals: N.players.map(() => 0), wins: N.players.map(() => 0) };
       N.ses.round++;
       N.eng = unNew(N.players.length, N.ses);
+    } else if (N.game === 'bw') {
+      if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, wins: N.players.map(() => 0) };
+      N.ses.round++;
+      N.eng = bwNew(N.players.length, N.ses);
     } else N.eng = mnNew(N.players.length, N.opts.cards, N.round);
     N.phase = 'play';
     netPublishAll();
@@ -5126,17 +5438,17 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden) { S = null; ucStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden) { S = null; ucStop(); bwStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
     b.players.forEach((p, i) => {
       const o = a.players[i];
-      if (o && o.on && !p.on && i !== b.you) FX.float(t(b.game === 'uc' ? 'netAway' : 'netLeft', { name: p.name }), window.innerWidth / 2, 90, '');
+      if (o && o.on && !p.on && i !== b.you) FX.float(t(b.game === 'memory' ? 'netLeft' : 'netAway', { name: p.name }), window.innerWidth / 2, 90, '');
     });
   }
   function netRenderLink() {
@@ -5168,7 +5480,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       ul.appendChild(li);
     }
     $('#onl-count').textContent = t('netCountOf', { n: v.players.length });
-    const memOpts = v.game !== 'uc';
+    const memOpts = !v.game || v.game === 'memory';
     $('#onl-opts').hidden = !memOpts || v.phase !== 'lobby';
     if (memOpts) {
       const box = $('#onl-cards'); box.textContent = '';
@@ -5274,7 +5586,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -5547,7 +5859,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -5717,6 +6029,1177 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (w === me) celebrate(); else Sound.lose();
   }
 
+  /* ---------- Bowling: ten frames on a gold lane, in a gallery of Hande's photos ----------
+     The physics work in centimetres with a fixed step and only + − × ÷ and square roots (the few sines come from short
+     polynomials), so every device computes exactly the same roll from the same throw. In an online room the player
+     sends the throw, the room's device scores it and everybody watches the same roll. Each frame has a photo at the
+     end of the lane: it comes into focus as the pins fall, and a strike or a spare uncovers it. */
+  const BW = {
+    LANE: 105, GUT: 22, CAP: 70, PIN_Y: 1240, ROW: 26.4, SP: 30.48, PR: 6.05, BR: 10.85, PH: 38,
+    Y_NEAR: -60, HOOK_FROM: .5, BALL_M: 6.8, PIN_M: 1.55, KICK: .5, E_BP: .72, E_PP: .6,
+    V_FALL: 38, V_FALL_PP: 24, PUSH: 17, REACH: .47, HOOK: 230,
+    DT: 1 / 120, K_FRIC: 0.9591894571091382, K_FRIC_DOWN: 0.9785663694822792, // exp(-5 DT) and exp(-2.6 DT), written out
+    HW: 300, BAY: 200, TOP: .47,
+  };
+  BW.Y_DECK = BW.PIN_Y + 3 * BW.ROW + 34;
+  BW.Y_PIT = BW.Y_DECK + 26;
+  BW.Y_BACK = BW.Y_PIT + 34; // the back wall, where the photo hangs
+  BW.XW = BW.LANE / 2 + BW.GUT + BW.CAP; // the side walls
+  BW.X_MAX = BW.LANE / 2 - BW.BR;
+  const BW_RACK = [[0, 0], [-.5, 1], [.5, 1], [-1, 2], [0, 2], [1, 2], [-1.5, 3], [-.5, 3], [.5, 3], [1.5, 3]];
+  const BW_ALL = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const BW_HALF_PI = Math.PI / 2;
+  const bwSin = (x) => { const q = x * x; return x * (1 - q / 6 * (1 - q / 20 * (1 - q / 42 * (1 - q / 72)))); };
+  const bwCos = (x) => { const q = x * x; return 1 - q / 2 * (1 - q / 12 * (1 - q / 30 * (1 - q / 56 * (1 - q / 90)))); };
+  const bwRng = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let x = Math.imul(a ^ (a >>> 15), 1 | a); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  const bwClamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+  function bwRack(standing) {
+    return BW_RACK.map(([c, r], i) => ({ n: i + 1, x: c * BW.SP, y: BW.PIN_Y + r * BW.ROW, vx: 0, vy: 0, tilt: 0, w: 0, dx: 0, dy: 1, down: false, gone: false, fade: 1, lift: 0 }))
+      .filter((p) => !standing || standing.includes(p.n));
+  }
+  // where a pin's weight is while it falls: the body leans along its direction
+  const bwReach = (p) => { const k = bwSin(p.tilt) * BW.PH * BW.REACH; return [p.x + p.dx * k, p.y + p.dy * k, p.tilt > .25 ? 7.2 : BW.PR]; };
+  function bwHit(a, ax, ay, ar, am, b, bx, by, br, bm, e, rnd, jitter) {
+    const dx = bx - ax, dy = by - ay, d2 = dx * dx + dy * dy, min = ar + br;
+    if (d2 >= min * min || d2 === 0) return false;
+    const d = Math.sqrt(d2), nx = dx / d, ny = dy / d, over = min - d, tot = am + bm;
+    a.x -= nx * over * bm / tot; a.y -= ny * over * bm / tot; b.x += nx * over * am / tot; b.y += ny * over * am / tot;
+    const rv = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
+    if (rv >= 0) return true;
+    const j = -(1 + e) * rv / (1 / am + 1 / bm);
+    a.vx -= j * nx / am; a.vy -= j * ny / am; b.vx += j * nx / bm; b.vy += j * ny / bm;
+    if (jitter) { // a pin never flies exactly the same way twice
+      const t = (rnd() - .5) * jitter, c = bwCos(t), s = bwSin(t), vx = b.vx;
+      b.vx = vx * c - b.vy * s; b.vy = vx * s + b.vy * c;
+    }
+    return true;
+  }
+  function bwFall(p, rnd) {
+    if (p.down) return;
+    p.down = true;
+    const t = (rnd() - .5) * .5, c = bwCos(t), s = bwSin(t), v2 = p.vx * p.vx + p.vy * p.vy;
+    let ux = 0, uy = 1;
+    if (v2 > 1e-9) { const v = Math.sqrt(v2); ux = p.vx / v; uy = p.vy / v; }
+    p.dx = ux * c - uy * s; p.dy = ux * s + uy * c; p.w = 5 + rnd() * 3;
+  }
+  // a throw as it travels between devices: where the ball starts across the lane, its velocity (cm/s), the hook, a seed
+  function bwClampThrow(a) {
+    const n = (v, lo, hi, d) => (typeof v === 'number' && isFinite(v) ? bwClamp(v, lo, hi) : d);
+    return { x0: n(a.x0, -BW.X_MAX, BW.X_MAX, 0), vx: n(a.vx, -130, 130, 0), vy: n(a.vy, 420, 1250, 800), spin: n(a.spin, -1, 1, 0), seed: (Math.abs(a.seed | 0) % 2147483646) || 1 };
+  }
+  function bwRoll(pins, a) {
+    return {
+      pins: pins.map((p) => Object.assign({}, p, { lift: 0, fade: 1 })), rnd: bwRng(a.seed), t: 0, settle: 0, done: false, hits: 0, clacks: 0,
+      ball: { x: a.x0, y: 0, vx: a.vx, vy: a.vy, spin: a.spin, rot: 0, gutter: false, gone: false, fade: 1 },
+    };
+  }
+  function bwStep(R) {
+    const dt = BW.DT, b = R.ball, rnd = R.rnd, L = BW.LANE / 2;
+    R.t += dt;
+    if (!b.gone) {
+      if (!b.gutter && b.y > BW.PIN_Y * BW.HOOK_FROM && b.y < BW.Y_DECK) b.vx += b.spin * BW.HOOK * dt;
+      b.x += b.vx * dt; b.y += b.vy * dt;
+      b.rot += Math.sqrt(b.vx * b.vx + b.vy * b.vy) * dt / BW.BR;
+      if (!b.gutter && Math.abs(b.x) > L + 1 && b.y < BW.PIN_Y - BW.PR) { b.gutter = true; b.vx = 0; }
+      if (b.gutter) b.x += (Math.sign(b.x) * (L + BW.GUT / 2) - b.x) * Math.min(1, dt * 14);
+      if (b.y > BW.PIN_Y && Math.abs(b.x) > L + BW.GUT - BW.BR) { b.x = Math.sign(b.x) * (L + BW.GUT - BW.BR); b.vx = -b.vx * .3; }
+      if (b.y > BW.Y_PIT) b.gone = true;
+    } else b.fade = Math.max(0, b.fade - dt * 4);
+    for (const p of R.pins) {
+      if (p.gone) { p.fade = Math.max(0, p.fade - dt * 3.5); continue; }
+      if (!b.gone && !b.gutter) {
+        const [px, py, pr] = bwReach(p);
+        const q = { x: px, y: py, vx: p.vx, vy: p.vy };
+        if (bwHit(b, b.x, b.y, BW.BR, BW.BALL_M, q, px, py, pr, BW.PIN_M, BW.E_BP, rnd, .18)) {
+          p.x += q.x - px; p.y += q.y - py; p.vx = q.vx; p.vy = q.vy; R.hits++;
+          if (p.vx * p.vx + p.vy * p.vy > BW.V_FALL * BW.V_FALL) bwFall(p, rnd);
+        }
+      }
+    }
+    const live = R.pins.filter((p) => !p.gone);
+    for (let i = 0; i < live.length; i++) for (let j = i + 1; j < live.length; j++) {
+      const a = live[i], c = live[j];
+      const [ax, ay, ar] = bwReach(a), [cx, cy, cr] = bwReach(c);
+      const qa = { x: ax, y: ay, vx: a.vx, vy: a.vy }, qc = { x: cx, y: cy, vx: c.vx, vy: c.vy };
+      // a falling pin pushes the one it lands on even when it barely moves along the lane
+      if (a.down && a.tilt < 1.5) { qa.vx += a.dx * a.w * BW.PUSH; qa.vy += a.dy * a.w * BW.PUSH; }
+      if (c.down && c.tilt < 1.5) { qc.vx += c.dx * c.w * BW.PUSH; qc.vy += c.dy * c.w * BW.PUSH; }
+      const va = [qa.vx, qa.vy], vc = [qc.vx, qc.vy];
+      if (bwHit(qa, ax, ay, ar, BW.PIN_M, qc, cx, cy, cr, BW.PIN_M, BW.E_PP, rnd, .3)) {
+        a.x += qa.x - ax; a.y += qa.y - ay; c.x += qc.x - cx; c.y += qc.y - cy;
+        a.vx += qa.vx - va[0]; a.vy += qa.vy - va[1]; c.vx += qc.vx - vc[0]; c.vy += qc.vy - vc[1];
+        const f2 = BW.V_FALL_PP * BW.V_FALL_PP;
+        if (!a.down || !c.down) R.clacks++;
+        if (a.vx * a.vx + a.vy * a.vy > f2) bwFall(a, rnd);
+        if (c.vx * c.vx + c.vy * c.vy > f2) bwFall(c, rnd);
+      }
+    }
+    const K = L + BW.GUT - BW.PR;
+    for (const p of live) {
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      const k = p.down ? BW.K_FRIC_DOWN : BW.K_FRIC; p.vx *= k; p.vy *= k;
+      if (p.down && p.tilt < BW_HALF_PI) { p.w += 26 * dt; p.tilt = Math.min(BW_HALF_PI, p.tilt + p.w * dt); }
+      // the kickbacks at the sides of the deck send pins back in; in front of the deck they drop into the gutter
+      if (p.y > BW.PIN_Y - 45 && Math.abs(p.x) > K) { p.x = Math.sign(p.x) * K; p.vx = -p.vx * BW.KICK; bwFall(p, rnd); }
+      else if (p.y <= BW.PIN_Y - 45 && Math.abs(p.x) > L + 3) { p.gone = true; p.down = true; }
+      if (p.y > BW.Y_DECK + 6) { p.gone = true; p.down = true; }
+    }
+    const moving = live.some((p) => p.vx * p.vx + p.vy * p.vy > 16 || (p.down && p.tilt < BW_HALF_PI));
+    if ((b.gone || b.y > BW.Y_DECK) && !moving) R.settle += dt; else R.settle = 0;
+    if (R.settle > .55 || R.t > 7) R.done = true;
+  }
+  const bwStanding = (R) => R.pins.filter((p) => !p.down && !p.gone).map((p) => p.n);
+  function bwSimulate(standing, a) { const R = bwRoll(bwRack(standing), a); while (!R.done) bwStep(R); return R; }
+
+  /* scoring: the rolls of one player, as the number of pins each ball knocked down */
+  function bwFrames(rolls) {
+    const out = []; let i = 0, total = 0;
+    for (let f = 0; f < 10; f++) {
+      if (i >= rolls.length) { out.push({ r: [], t: null }); continue; }
+      if (f < 9) {
+        const a = rolls[i];
+        if (a === 10) { const b = rolls[i + 1], c = rolls[i + 2]; out.push({ r: [10], t: b != null && c != null ? (total += 10 + b + c) : null }); i += 1; continue; }
+        const b = rolls[i + 1];
+        if (b == null) { out.push({ r: [a], t: null }); i += 1; continue; }
+        if (a + b === 10) { const c = rolls[i + 2]; out.push({ r: [a, b], t: c != null ? (total += 10 + c) : null }); }
+        else out.push({ r: [a, b], t: (total += a + b) });
+        i += 2;
+      } else {
+        const r = rolls.slice(i, i + 3), done = r.length === 3 || (r.length === 2 && r[0] + r[1] < 10);
+        out.push({ r, t: done ? (total += r.reduce((x, y) => x + y, 0)) : null });
+        i += r.length;
+      }
+    }
+    return out;
+  }
+  const bwTotal = (rolls) => bwFrames(rolls).reduce((m, f) => (f.t != null ? f.t : m), 0);
+  function bwMarks(r, tenth) {
+    if (!tenth) return r[0] === 10 ? ['X'] : r.map((v, k) => (k === 1 && r[0] + v === 10 ? '/' : v === 0 ? '-' : String(v)));
+    const m = [];
+    for (let k = 0; k < r.length; k++) {
+      const v = r[k], fresh = k === 0 || m[k - 1] === 'X' || m[k - 1] === '/';
+      if (v === 10 && fresh) m.push('X');
+      else if (!fresh && r[k - 1] + v === 10) m.push('/');
+      else m.push(v === 0 ? '-' : String(v));
+    }
+    return m;
+  }
+  // how far the photo of a frame is uncovered: all of it after a strike or a spare
+  function bwFrameReveal(fr) {
+    const r = fr.r; if (!r.length) return 0;
+    if (r[0] === 10 || r[0] + (r[1] || 0) >= 10) return 1;
+    return (r[0] + (r[1] || 0)) / 10;
+  }
+  function bwCounts(rolls) {
+    let strikes = 0, spares = 0;
+    bwFrames(rolls).forEach((f, i) => { const m = bwMarks(f.r, i === 9); m.forEach((x) => { if (x === 'X') strikes++; else if (x === '/') spares++; }); });
+    return { strikes, spares };
+  }
+  // one player's game: the next ball after one that knocked `down` pins and left `after` standing
+  const bwNewState = () => ({ rolls: [], fr: [], f: 0, standing: BW_ALL.slice() });
+  function bwAdvance(st, down, after) {
+    st.rolls.push(down); st.fr.push(down);
+    const r = st.fr;
+    let frameDone = false, reset = false;
+    if (st.f < 9) frameDone = (r.length === 1 && down === 10) || r.length === 2;
+    else if (r.length === 1) reset = down === 10;
+    else if (r.length === 2) { if (r[0] === 10) reset = down === 10; else if (r[0] + r[1] === 10) reset = true; else frameDone = true; }
+    else frameDone = true;
+    if (frameDone) { st.f++; st.fr = []; st.standing = BW_ALL.slice(); }
+    else st.standing = reset ? BW_ALL.slice() : after.slice();
+    return { frameDone, reset, over: st.f >= 10 };
+  }
+
+  /* ---------- drawing ---------- */
+  function bwCamera(W, H, cz) {
+    // calibrated at cz = 0: the approach at the bottom of the screen, the pin deck at TOP of the height;
+    // on screens wider than a phone the lane keeps a phone's proportions and the room fills the sides
+    const D0 = 620, dn = D0 + BW.Y_NEAR, dd = D0 + BW.Y_DECK, Wf = Math.min(W, H * .462);
+    const F = 1.18 * Wf * dn / (BW.LANE + 2 * BW.GUT);
+    const yn = H * .955, yd = H * BW.TOP;
+    const CH = (yn - yd) / (F * (1 / dn - 1 / dd)), hy = yn - CH * F / dn;
+    return { F, D0, CH, hy, cx: W / 2, cz, W, H };
+  }
+  const bwP = (c, x, y, z) => { const d = Math.max(30, y - c.cz + c.D0), s = c.F / d; return [c.cx + x * s, c.hy + (c.CH - (z || 0)) * s, s]; };
+  function bwPinSprite() {
+    const w = 128, h = 400, cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+    const g = cv.getContext('2d');
+    // radius along the height (0 = base), as a share of the belly
+    const prof = [[0, .43], [.05, .62], [.16, .9], [.3, 1], [.45, .9], [.58, .58], [.67, .38], [.74, .41], [.83, .53], [.92, .45], [.98, .2], [1, 0]];
+    const pt = (v, side) => { let r = 0; for (let i = 1; i < prof.length; i++) if (v <= prof[i][0]) { const [v0, r0] = prof[i - 1], [v1, r1] = prof[i]; const k = (v - v0) / (v1 - v0); r = r0 + (r1 - r0) * (.5 - Math.cos(Math.PI * k) / 2); break; } return [w / 2 + side * r * (w / 2 - 4), h - 4 - v * (h - 8)]; };
+    g.beginPath();
+    for (let v = 0; v <= 1.0001; v += .01) { const [x, y] = pt(Math.min(v, 1), -1); if (v === 0) g.moveTo(x, y); else g.lineTo(x, y); }
+    for (let v = 1; v >= -.0001; v -= .01) { const [x, y] = pt(Math.max(v, 0), 1); g.lineTo(x, y); }
+    g.closePath();
+    const body = g.createLinearGradient(0, 0, w, 0);
+    body.addColorStop(0, '#cdbfae'); body.addColorStop(.22, '#f4ede4'); body.addColorStop(.5, '#ffffff'); body.addColorStop(.72, '#fbf7f1'); body.addColorStop(1, '#d9ccbb');
+    g.fillStyle = body; g.fill();
+    g.save(); g.clip();
+    const shade = g.createLinearGradient(0, h, 0, 0); shade.addColorStop(0, 'rgba(120,96,70,.28)'); shade.addColorStop(.25, 'rgba(120,96,70,0)'); shade.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = shade; g.fillRect(0, 0, w, h);
+    // champagne neck stripes
+    const band = (v0, v1) => { const y0 = h - 4 - v1 * (h - 8), y1 = h - 4 - v0 * (h - 8); const gr = g.createLinearGradient(0, 0, w, 0); gr.addColorStop(0, '#8a6630'); gr.addColorStop(.45, '#e9cf96'); gr.addColorStop(1, '#9c7638'); g.fillStyle = gr; g.fillRect(0, y0, w, y1 - y0); };
+    band(.655, .685); band(.71, .74);
+    const hl = g.createLinearGradient(w * .55, 0, w * .8, 0); hl.addColorStop(0, 'rgba(255,255,255,0)'); hl.addColorStop(.5, 'rgba(255,255,255,.8)'); hl.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = hl; g.fillRect(w * .55, h * .08, w * .25, h * .8);
+    g.restore();
+    g.strokeStyle = 'rgba(110,86,60,.35)'; g.lineWidth = 2; g.stroke();
+    return cv;
+  }
+  const bwPath = (g, pts) => { g.beginPath(); pts.forEach((p, i) => (i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]))); g.closePath(); };
+  function bwDrawLane(g, c, photo, pk) {
+    const L = BW.LANE / 2, G = L + BW.GUT, C = BW.XW, y0 = BW.Y_NEAR - 400, y1 = BW.Y_DECK, YB = BW.Y_BACK;
+    const quad = (xa, xb, ya, yb, fill) => { bwPath(g, [bwP(c, xa, ya), bwP(c, xb, ya), bwP(c, xb, yb), bwP(c, xa, yb)]); g.fillStyle = fill; g.fill(); };
+    const [, yFar] = bwP(c, 0, y1), [, yNear] = bwP(c, 0, y0), [, yPit] = bwP(c, 0, BW.Y_PIT + 60);
+    // the pit behind the deck
+    const pit = g.createLinearGradient(0, yPit - 40 * c.F / (BW.Y_PIT + c.D0 - c.cz), 0, yFar);
+    pit.addColorStop(0, 'rgba(58,44,34,.1)'); pit.addColorStop(1, 'rgba(58,44,34,.34)');
+    quad(-C, C, y1, YB, pit);
+    // the floor beside the lane: polished stone that mirrors the boiserie, with fine joints
+    const cap = g.createLinearGradient(0, yFar, 0, yNear); cap.addColorStop(0, '#e6dccd'); cap.addColorStop(1, '#f6efe5');
+    quad(-C, -G, y0, y1, cap); quad(G, C, y0, y1, cap);
+    const yA = Math.max(y0, c.cz - c.D0 + 40);
+    for (const sgn of [-1, 1]) {
+      const mir = (za, zb, fill) => { bwPath(g, [bwP(c, sgn * C, yA, -za), bwP(c, sgn * C, YB, -za), bwP(c, sgn * C, YB, -zb), bwP(c, sgn * C, yA, -zb)]); g.fillStyle = fill; g.fill(); };
+      g.save(); bwPath(g, [bwP(c, sgn * G, y0), bwP(c, sgn * C, y0), bwP(c, sgn * C, YB), bwP(c, sgn * G, YB)]); g.clip();
+      mir(0, 98, 'rgba(214,195,165,.32)'); mir(0, 13, 'rgba(190,160,120,.18)'); mir(90, 98, 'rgba(201,164,105,.3)');
+      g.restore();
+      quad(sgn * (C - 5), sgn * C, y0, YB, 'rgba(110,80,40,.07)');
+      g.strokeStyle = 'rgba(150,118,76,.1)';
+      for (let ty = Math.ceil(y0 / 70) * 70; ty < y1; ty += 70) {
+        const a = bwP(c, sgn * G, ty), b = bwP(c, sgn * C, ty); g.lineWidth = Math.max(.5, Math.min(1.6, a[2] * .9));
+        g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+      }
+      const m0 = bwP(c, sgn * (G + BW.CAP / 2), y0), m1 = bwP(c, sgn * (G + BW.CAP / 2), y1);
+      g.lineWidth = 1; g.beginPath(); g.moveTo(m0[0], m0[1]); g.lineTo(m1[0], m1[1]); g.stroke();
+    }
+    // gutters, rounded
+    for (const sgn of [-1, 1]) {
+      const a = bwP(c, sgn * L, y0), b = bwP(c, sgn * G, y0), d = bwP(c, sgn * G, y1), e = bwP(c, sgn * L, y1);
+      const gr = g.createLinearGradient(a[0], 0, b[0] + .01, 0);
+      gr.addColorStop(0, '#cdbfa9'); gr.addColorStop(.45, '#ece3d4'); gr.addColorStop(1, '#c2b29a');
+      bwPath(g, [a, b, d, e]); g.fillStyle = gr; g.fill();
+      g.strokeStyle = 'rgba(201,164,105,.85)'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(b[0], b[1]); g.lineTo(d[0], d[1]); g.stroke();
+    }
+    // the lane: light maple boards
+    const wood = g.createLinearGradient(0, yFar, 0, yNear); wood.addColorStop(0, '#dcbd8c'); wood.addColorStop(.55, '#e9cfa2'); wood.addColorStop(1, '#f0dbb4');
+    quad(-L, L, y0, y1, wood);
+    const N = 39, bw = BW.LANE / N;
+    for (let i = 0; i < N; i++) {
+      const tone = (i * 7919 % 13) / 13;
+      quad(-L + i * bw, -L + (i + 1) * bw, y0, BW.PIN_Y - 40, 'rgba(' + (i % 2 ? '110,70,20' : '255,240,210') + ',' + (.03 + tone * .045).toFixed(3) + ')');
+    }
+    g.strokeStyle = 'rgba(120,84,40,.12)'; g.lineWidth = .6;
+    for (let i = 1; i < N; i++) { const a = bwP(c, -L + i * bw, y0), b = bwP(c, -L + i * bw, BW.PIN_Y - 40); g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke(); }
+    quad(-L, L, BW.PIN_Y - 40, y1, 'rgba(250,236,206,.55)');
+    // varnish: the lights of the room glide on the lane
+    const gl = bwP(c, 0, 0), gl2 = bwP(c, 0, BW.PIN_Y);
+    const sheen = g.createLinearGradient(0, gl2[1], 0, gl[1] + .01); sheen.addColorStop(0, 'rgba(255,255,255,.35)'); sheen.addColorStop(.35, 'rgba(255,255,255,0)'); sheen.addColorStop(.7, 'rgba(255,255,255,.18)'); sheen.addColorStop(1, 'rgba(255,255,255,0)');
+    quad(-L * .55, L * .55, y0, y1, sheen);
+    // the photo, faintly mirrored in the varnish near the pins
+    if (photo && photo.complete && photo.naturalWidth && pk > .02) {
+      const a = bwP(c, -L, BW.PIN_Y - 260), b = bwP(c, L, y1);
+      g.save();
+      bwPath(g, [bwP(c, -L, y0), bwP(c, L, y0), bwP(c, L, y1), bwP(c, -L, y1)]); g.clip();
+      g.globalAlpha = .1 * pk; g.translate(0, b[1]); g.scale(1, -1);
+      const wImg = b[0] - a[0], hImg = (a[1] - b[1]) * 1.2;
+      g.drawImage(photo, a[0], -hImg * .05, wImg, hImg);
+      g.restore();
+    }
+    // foul line, approach dots, arrows, pin spots
+    const f1 = bwP(c, -L, 0), f2 = bwP(c, L, 0);
+    g.strokeStyle = 'rgba(70,52,38,.75)'; g.lineWidth = Math.max(1, 2.2 * f1[2]); g.beginPath(); g.moveTo(f1[0], f1[1]); g.lineTo(f2[0], f2[1]); g.stroke();
+    for (const bx of [-30, -15, 0, 15, 30]) { const [x, y, s] = bwP(c, bx, -38); g.fillStyle = 'rgba(122,90,46,.55)'; g.beginPath(); g.ellipse(x, y, 1.6 * s, .8 * s, 0, 0, 7); g.fill(); }
+    const ay = BW.PIN_Y * .27;
+    for (let k = 1; k <= 7; k++) {
+      const bx = -L + k * 5 * bw - bw / 2, back = ay - Math.abs(k - 4) * 9;
+      const tp = bwP(c, bx, back + 22), l = bwP(c, bx - 2.2, back), r = bwP(c, bx + 2.2, back);
+      g.fillStyle = 'rgba(167,128,63,.85)'; bwPath(g, [tp, l, r]); g.fill();
+    }
+    for (const [cx0, r0] of BW_RACK) { const [x, y, s] = bwP(c, cx0 * BW.SP, BW.PIN_Y + r0 * BW.ROW); g.fillStyle = 'rgba(122,90,46,.28)'; g.beginPath(); g.ellipse(x, y, 2.2 * s, 1.1 * s, 0, 0, 7); g.fill(); }
+    // warm light on the pin deck
+    const dk = bwP(c, 0, BW.PIN_Y + 40), dr = 120 * dk[2];
+    const pool = g.createRadialGradient(dk[0], dk[1], 0, dk[0], dk[1], dr);
+    pool.addColorStop(0, 'rgba(255,246,224,.42)'); pool.addColorStop(1, 'rgba(255,246,224,0)');
+    g.save(); g.translate(dk[0], dk[1]); g.scale(1, .32); g.translate(-dk[0], -dk[1]);
+    g.fillStyle = pool; g.beginPath(); g.arc(dk[0], dk[1], dr, 0, 7); g.fill(); g.restore();
+    // the kickbacks: ivory side boards with a gold top that send the pins back onto the deck
+    const yk = BW.PIN_Y - 45, ze = 62, th = 7;
+    for (const sgn of [-1, 1]) {
+      const x = sgn * G, xo = sgn * (G + th);
+      const n0 = bwP(c, x, yk, 0), n1 = bwP(c, x, yk, ze), f0 = bwP(c, x, YB, 0), fz = bwP(c, x, YB, ze);
+      const face = g.createLinearGradient(n0[0], 0, f0[0] + .01, 0);
+      face.addColorStop(0, '#f7efe3'); face.addColorStop(1, '#e3d5c1');
+      bwPath(g, [n0, f0, fz, n1]); g.fillStyle = face; g.fill();
+      bwPath(g, [bwP(c, x, yk + 12, 12), bwP(c, x, YB - 10, 12), bwP(c, x, YB - 10, ze - 12), bwP(c, x, yk + 12, ze - 12)]);
+      g.strokeStyle = 'rgba(184,145,78,.75)'; g.lineWidth = Math.max(.6, n0[2] * .8); g.stroke();
+      bwPath(g, [n0, bwP(c, xo, yk, 0), bwP(c, xo, yk, ze), n1]); g.fillStyle = '#ece0cf'; g.fill();
+      const top = g.createLinearGradient(n1[0], n1[1], fz[0] + .01, fz[1] + .01);
+      top.addColorStop(0, '#e2c68c'); top.addColorStop(1, '#b8914e');
+      bwPath(g, [n1, bwP(c, xo, yk, ze), bwP(c, xo, YB, ze), fz]); g.fillStyle = top; g.fill();
+    }
+  }
+
+  /* the room: ivory walls with champagne boiserie, framed photos of Hande, sconces and a coffered ceiling. It has its own
+     canvas behind the photo at the end of the lane; the lane, the pins and the ball are drawn in front of the photo. */
+  function bwDrawRoom(g, c, photos) {
+    const XW = BW.XW, HW = BW.HW, YB = BW.Y_BACK, G = BW.LANE / 2 + BW.GUT, BAY = BW.BAY, yN = c.cz - c.D0 + 40;
+    const fill = (a, f) => { bwPath(g, a); g.fillStyle = f; g.fill(); };
+    const side = (x, ya, yb, za, zb) => [bwP(c, x, ya, za), bwP(c, x, yb, za), bwP(c, x, yb, zb), bwP(c, x, ya, zb)];
+    const roof = (xa, xb, ya, yb) => [bwP(c, xa, ya, HW), bwP(c, xb, ya, HW), bwP(c, xb, yb, HW), bwP(c, xa, yb, HW)];
+    const seg = (a, b, col, w) => { g.strokeStyle = col; g.lineWidth = w; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke(); };
+    const lw = (s, k) => Math.max(.5, Math.min(2.4, s * k));
+    // a glow on a wall: an ellipse of light, rx and ry in pixels
+    const glow = (x, y, rx, ry, a) => {
+      if (rx < .5 || ry < .5) return;
+      g.save(); g.translate(x, y); g.scale(rx / ry, 1);
+      const gr = g.createRadialGradient(0, 0, 0, 0, 0, ry);
+      gr.addColorStop(0, 'rgba(255,247,226,' + a + ')'); gr.addColorStop(.35, 'rgba(255,238,200,' + (a * .55).toFixed(3) + ')'); gr.addColorStop(1, 'rgba(255,238,200,0)');
+      g.fillStyle = gr; g.beginPath(); g.arc(0, 0, ry, 0, 7); g.fill(); g.restore();
+    };
+    g.clearRect(0, 0, c.W, c.H);
+    // ceiling: ivory coffers with a row of downlights over the lane
+    const cf = bwP(c, 0, YB, HW);
+    if (cf[1] > 0) {
+      const cg = g.createLinearGradient(0, cf[1], 0, 0);
+      cg.addColorStop(0, '#f6efe3'); cg.addColorStop(1, '#e9dfcf');
+      fill(roof(-XW, XW, yN, YB), cg);
+      for (const bx of [-XW / 3, XW / 3]) {
+        fill(roof(bx - 7, bx + 7, yN, YB), 'rgba(255,252,246,.45)');
+        seg(bwP(c, bx - 7, yN, HW), bwP(c, bx - 7, YB, HW), 'rgba(140,105,60,.1)', 1);
+        seg(bwP(c, bx + 7, yN, HW), bwP(c, bx + 7, YB, HW), 'rgba(140,105,60,.1)', 1);
+      }
+      for (let y1 = YB; y1 > yN; y1 -= BAY) {
+        const y0 = Math.max(yN, y1 - BAY), yb = Math.min(YB, y1 + 8);
+        fill(roof(-XW, XW, Math.max(yN, y1 - 8), yb), 'rgba(255,252,246,.5)');
+        seg(bwP(c, -XW, yb, HW), bwP(c, XW, yb, HW), 'rgba(140,105,60,.12)', 1);
+        const yc = (y0 + y1) / 2; if (yc < yN + 30) continue;
+        const [lx, ly, s] = bwP(c, 0, yc, HW), dy = Math.abs(bwP(c, 0, yc + 9, HW)[1] - bwP(c, 0, yc - 9, HW)[1]) / 2;
+        if (ly < -40) continue;
+        glow(lx, ly, 46 * s, Math.max(1, dy * 46 / 9), .55);
+        g.fillStyle = '#fffdf6'; g.beginPath(); g.ellipse(lx, ly, 9 * s, Math.max(.6, dy), 0, 0, 7); g.fill();
+        g.strokeStyle = 'rgba(184,145,78,.6)'; g.lineWidth = lw(s, .6); g.stroke();
+      }
+    }
+    // side walls
+    for (const sg of [-1, 1]) {
+      const x = sg * XW, edge = sg > 0 ? c.W : 0, far = bwP(c, x, YB, 0);
+      if (sg > 0 ? far[0] >= c.W : far[0] <= 0) continue;
+      const off = (p) => (sg > 0 ? p[0] > c.W + 2 : p[0] < -2);
+      const wg = g.createLinearGradient(far[0], 0, edge + sg * .01, 0);
+      wg.addColorStop(0, '#f5eee3'); wg.addColorStop(1, '#ebdfcc');
+      fill(side(x, yN, YB, 98, HW), wg);
+      const bg = g.createLinearGradient(far[0], 0, edge + sg * .01, 0);
+      bg.addColorStop(0, '#e7d9c3'); bg.addColorStop(1, '#d9c6a8');
+      fill(side(x, yN, YB, 0, 98), bg);
+      fill(side(x, yN, YB, 0, 13), '#ccb593');
+      fill(side(x, yN, YB, 90, 98), '#dcc189');
+      seg(bwP(c, x, yN, 97.5), bwP(c, x, YB, 97.5), 'rgba(255,248,228,.9)', 1);
+      seg(bwP(c, x, yN, 90), bwP(c, x, YB, 90), 'rgba(120,86,40,.35)', 1);
+      seg(bwP(c, x, yN, 13), bwP(c, x, YB, 13), 'rgba(201,164,105,.9)', 1);
+      fill(side(x, yN, YB, HW - 16, HW), '#faf5ed');
+      seg(bwP(c, x, yN, HW - 16), bwP(c, x, YB, HW - 16), 'rgba(184,145,78,.6)', 1);
+      // the corner with the back wall is a little in shadow
+      const ca = bwP(c, x, YB - 70, 150), cs = g.createLinearGradient(ca[0], 0, far[0] + .01, 0);
+      cs.addColorStop(0, 'rgba(120,90,50,0)'); cs.addColorStop(1, 'rgba(120,90,50,.1)');
+      fill(side(x, YB - 70, YB, 0, HW), cs);
+      // bays from the far end towards the camera: panels, a framed photo, a pilaster with a sconce
+      for (let k = 0; ; k++) {
+        const y1 = YB - k * BAY, y0 = y1 - BAY;
+        if (y1 <= yN + 20 || off(bwP(c, x, y1, 150))) break;
+        const s1 = bwP(c, x, y1, 150)[2], sMid = bwP(c, x, Math.max(yN + 10, (y0 + y1) / 2), 150)[2];
+        for (const [a, b] of [[y0 + 14, (y0 + y1) / 2 - 7], [(y0 + y1) / 2 + 7, y1 - 14]]) {
+          if (b < yN + 10) continue;
+          const aa = Math.max(a, yN + 10);
+          bwPath(g, side(x, aa, b, 24, 76)); g.strokeStyle = 'rgba(130,95,50,.3)'; g.lineWidth = lw(sMid, .9); g.stroke();
+          bwPath(g, side(x, aa, b, 25.5, 77.5)); g.strokeStyle = 'rgba(255,250,240,.55)'; g.lineWidth = lw(sMid, .7); g.stroke();
+        }
+        if (y1 - 30 > yN + 10) { bwPath(g, side(x, Math.max(y0 + 30, yN + 10), y1 - 30, 118, HW - 40)); g.strokeStyle = 'rgba(184,145,78,.5)'; g.lineWidth = lw(sMid, .9); g.stroke(); }
+        const yc = (y0 + y1) / 2, fa = yc - 38, fb = yc + 38;
+        if (fa > yN + 10) {
+          const fr = side(x, fa, fb, 140, 244), fp = bwP(c, x, yc, 240);
+          const gold = g.createLinearGradient(0, fr[3][1], 0, fr[0][1] + .01);
+          gold.addColorStop(0, '#f1dca8'); gold.addColorStop(.5, '#c9a469'); gold.addColorStop(1, '#9c7638');
+          fill(fr, gold);
+          fill(side(x, fa + 5, fb - 5, 145, 239), '#fffaf2');
+          const img = photos && photos.length ? photos[(k * 2 + (sg > 0 ? 1 : 0)) % photos.length] : null;
+          if (img && img.complete && img.naturalWidth) bwWallImage(g, c, img, x, sg, fa + 11, fb - 11, 151, 233);
+          else fill(side(x, fa + 11, fb - 11, 151, 233), '#eadfce');
+          fill(side(x, yc - 20, yc + 20, 250, 254), '#c49f60');
+          glow(fp[0], fp[1] - 6 * fp[2], Math.abs(bwP(c, x, yc - 44, 0)[0] - bwP(c, x, yc + 44, 0)[0]) / 2, 34 * fp[2], .5);
+        }
+        if (y0 > yN + 20) {
+          const pa = y0 - 11, pb = y0 + 11;
+          fill(side(x, pa, pb, 98, HW - 16), '#f8f2e8');
+          seg(bwP(c, x, pa, 98), bwP(c, x, pa, HW - 16), 'rgba(184,145,78,.45)', lw(s1, .8));
+          seg(bwP(c, x, pb, 98), bwP(c, x, pb, HW - 16), 'rgba(184,145,78,.45)', lw(s1, .8));
+          const sp = bwP(c, x, y0, 205), sx = Math.abs(bwP(c, x, y0 - 70, 205)[0] - bwP(c, x, y0 + 70, 205)[0]) / 2;
+          glow(sp[0], sp[1], Math.max(1, sx), 95 * sp[2], .7);
+          const sh = bwP(c, x - sg * 10, y0, 205), k2 = sh[2];
+          g.fillStyle = '#b8914e'; g.fillRect(sp[0] - 1.5 * sp[2], sp[1] - 9 * sp[2], 3 * sp[2], 18 * sp[2]);
+          seg(bwP(c, x, y0, 198), [sh[0], sh[1] + 7 * k2], '#b8914e', lw(k2, 1.6));
+          const cup = g.createLinearGradient(0, sh[1] - 10 * k2, 0, sh[1] + 7 * k2 + .01);
+          cup.addColorStop(0, 'rgba(255,253,246,.95)'); cup.addColorStop(1, 'rgba(241,220,172,.95)');
+          g.fillStyle = cup; bwPath(g, [[sh[0] - 6 * k2, sh[1] - 10 * k2], [sh[0] + 6 * k2, sh[1] - 10 * k2], [sh[0] + 4 * k2, sh[1] + 7 * k2], [sh[0] - 4 * k2, sh[1] + 7 * k2]]); g.fill();
+          g.strokeStyle = 'rgba(184,145,78,.8)'; g.lineWidth = lw(k2, .7); g.stroke();
+          g.fillStyle = '#c39a55'; g.fillRect(sh[0] - 4.5 * k2, sh[1] + 7 * k2, 9 * k2, 2 * k2);
+        }
+      }
+    }
+    // the back wall faces the camera: drawn in world units (x to the right, z up)
+    const b0 = bwP(c, 0, YB, 0), s = b0[2], PIT = G + 10;
+    g.save(); g.translate(b0[0], b0[1]); g.scale(s, -s);
+    g.fillStyle = '#efe5d5'; g.fillRect(-XW, 0, 2 * XW, HW);
+    const wash = g.createRadialGradient(0, 150, 0, 0, 150, 230);
+    wash.addColorStop(0, 'rgba(255,251,240,.95)'); wash.addColorStop(.55, 'rgba(255,248,232,.5)'); wash.addColorStop(1, 'rgba(255,248,232,0)');
+    g.fillStyle = wash; g.fillRect(-XW, 0, 2 * XW, HW);
+    for (const sg of [-1, 1]) {
+      const xa = sg > 0 ? PIT : -XW, w = XW - PIT;
+      g.fillStyle = '#e3d3ba'; g.fillRect(xa, 0, w, 98);
+      g.fillStyle = '#ccb593'; g.fillRect(xa, 0, w, 13);
+      g.fillStyle = '#dcc189'; g.fillRect(xa, 90, w, 8);
+      g.strokeStyle = 'rgba(130,95,50,.3)'; g.lineWidth = 1.1; g.strokeRect(xa + 10, 24, w - 20, 52);
+      g.strokeStyle = 'rgba(255,250,240,.6)'; g.strokeRect(xa + 11.5, 25.5, w - 20, 52);
+      g.strokeStyle = 'rgba(184,145,78,.5)'; g.lineWidth = 1.2; g.strokeRect(xa + 12, 118, w - 24, HW - 160);
+      g.save(); g.translate(sg * (PIT + w / 2), 205); g.scale(1, -1);
+      const gl = g.createRadialGradient(0, 0, 0, 0, 0, 95);
+      gl.addColorStop(0, 'rgba(255,247,226,.8)'); gl.addColorStop(.35, 'rgba(255,238,200,.42)'); gl.addColorStop(1, 'rgba(255,238,200,0)');
+      g.fillStyle = gl; g.beginPath(); g.ellipse(0, 0, 60, 95, 0, 0, 7); g.fill();
+      g.fillStyle = '#b8914e'; g.fillRect(-4, -12, 8, 24);
+      const cup = g.createLinearGradient(0, -14, 0, 12); cup.addColorStop(0, '#fffdf6'); cup.addColorStop(1, '#f1dcac');
+      g.fillStyle = cup; bwPath(g, [[-8, -13], [8, -13], [5.5, 10], [-5.5, 10]]); g.fill();
+      g.strokeStyle = 'rgba(184,145,78,.85)'; g.lineWidth = 1; g.stroke();
+      g.restore();
+    }
+    g.fillStyle = '#faf5ed'; g.fillRect(-XW, HW - 16, 2 * XW, 16);
+    g.fillStyle = 'rgba(184,145,78,.6)'; g.fillRect(-XW, HW - 16, 2 * XW, 1.2);
+    // the pit: a soft champagne curtain under a brass rail
+    const cur = g.createLinearGradient(0, 40, 0, 0); cur.addColorStop(0, '#cdbba2'); cur.addColorStop(1, '#a8937a');
+    g.fillStyle = cur; g.fillRect(-PIT, 0, 2 * PIT, 40);
+    for (let fx = -PIT; fx < PIT; fx += 12) {
+      const fg = g.createLinearGradient(fx, 0, fx + 12, 0);
+      fg.addColorStop(0, 'rgba(70,50,30,.1)'); fg.addColorStop(.5, 'rgba(255,248,236,.12)'); fg.addColorStop(1, 'rgba(70,50,30,.1)');
+      g.fillStyle = fg; g.fillRect(fx, 0, 12, 40);
+    }
+    const lip = g.createLinearGradient(0, 40, 0, 30); lip.addColorStop(0, 'rgba(60,42,26,.28)'); lip.addColorStop(1, 'rgba(60,42,26,0)');
+    g.fillStyle = lip; g.fillRect(-PIT, 30, 2 * PIT, 10);
+    const rail = g.createLinearGradient(0, 45, 0, 40); rail.addColorStop(0, '#f0dcab'); rail.addColorStop(1, '#a7803f');
+    g.fillStyle = rail; g.fillRect(-PIT, 40, 2 * PIT, 4.5);
+    // a picture light over the photo and a gold swash above it
+    g.fillStyle = '#b8914e'; g.fillRect(-1.5, 252, 3, 10); g.fillRect(-42, 251, 84, 4);
+    g.strokeStyle = '#c39a55'; g.lineWidth = 1.6; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(-64, 270); g.bezierCurveTo(-40, 282, -14, 262, 0, 272); g.bezierCurveTo(14, 282, 40, 262, 64, 272); g.stroke();
+    g.fillStyle = '#c39a55'; bwPath(g, [[0, 278], [4, 272], [0, 266], [-4, 272]]); g.fill();
+    g.restore();
+  }
+  // a photo on a side wall, drawn in thin vertical strips so it follows the perspective
+  function bwWallImage(g, c, img, x, sg, ya, yb, za, zb) {
+    const iw = img.naturalWidth, ih = img.naturalHeight, ar = (yb - ya) / (zb - za);
+    let sw = iw, sh = iw / ar; if (sh > ih) { sh = ih; sw = ih * ar; }
+    const sx0 = (iw - sw) / 2, sy0 = (ih - sh) * .25;
+    const pa = bwP(c, x, ya, za), pb = bwP(c, x, yb, za), n = Math.max(2, Math.min(18, Math.round(Math.abs(pa[0] - pb[0]) / 2.5)));
+    for (let i = 0; i < n; i++) {
+      // across the photo from its left edge as seen from the lane: the far end on the right wall, the near end on the left one
+      const u0 = i / n, u1 = (i + 1) / n;
+      const yA = sg > 0 ? yb - (yb - ya) * u0 : ya + (yb - ya) * u0, yB = sg > 0 ? yb - (yb - ya) * u1 : ya + (yb - ya) * u1;
+      const tA = bwP(c, x, yA, zb), bA = bwP(c, x, yA, za), tB = bwP(c, x, yB, zb), bB = bwP(c, x, yB, za);
+      const h = ((bA[1] - tA[1]) + (bB[1] - tB[1])) / 2;
+      const ext = i === n - 1 ? 1 : 1 + 1.2 / Math.max(.5, Math.abs(tB[0] - tA[0]));
+      g.save(); g.transform(tB[0] - tA[0], tB[1] - tA[1], 0, h, tA[0], tA[1]);
+      g.drawImage(img, sx0 + sw * u0, sy0, sw * (u1 - u0) * ext, sh, 0, 0, ext, 1);
+      g.restore();
+    }
+  }
+  function bwDrawPin(g, c, p, spr, mirror, alpha) {
+    const st = Math.sin(p.tilt), ax = st * p.dx, ay = st * p.dy, az = Math.cos(p.tilt), lift = p.lift || 0;
+    const b = bwP(c, p.x, p.y, mirror ? -lift : lift), tp = bwP(c, p.x + ax * BW.PH, p.y + ay * BW.PH, (az * BW.PH + lift) * (mirror ? -1 : 1));
+    const len = Math.hypot(tp[0] - b[0], tp[1] - b[1]), ang = Math.atan2(tp[0] - b[0], -(tp[1] - b[1]));
+    const wid = BW.PR * 2 * b[2] * 1.05;
+    g.save(); g.globalAlpha = (mirror ? .16 : 1) * p.fade * (alpha == null ? 1 : alpha);
+    g.translate(b[0], b[1]); g.rotate(ang);
+    // when the pin points at the camera the sprite would be too thin: keep its width, squash its length
+    g.drawImage(spr, -wid / 2, -Math.max(len, wid * .9), wid, Math.max(len, wid * .9));
+    g.restore();
+  }
+  function bwDrawShadow(g, c, x, y, r, a) {
+    if (a <= .005) return;
+    const [sx, sy, s] = bwP(c, x, y, 0);
+    const gr = g.createRadialGradient(sx, sy, 0, sx, sy, r * s * 1.4);
+    gr.addColorStop(0, 'rgba(70,48,28,' + a.toFixed(3) + ')'); gr.addColorStop(1, 'rgba(70,48,28,0)');
+    g.fillStyle = gr; g.beginPath(); g.ellipse(sx, sy, r * s * 1.4, r * s * .55, 0, 0, 7); g.fill();
+  }
+  function bwDrawBall(g, c, b, mirror) {
+    const [sx, sy, s] = bwP(c, b.x, b.y, mirror ? -BW.BR : BW.BR), r = BW.BR * s;
+    g.save(); g.globalAlpha = (mirror ? .18 : 1) * b.fade;
+    const gr = g.createRadialGradient(sx - r * .35, sy - r * .4, r * .1, sx, sy, r);
+    gr.addColorStop(0, '#fffaf0'); gr.addColorStop(.35, '#f1dfb6'); gr.addColorStop(.75, '#cfa865'); gr.addColorStop(1, '#8f6a34');
+    g.fillStyle = gr; g.beginPath(); g.arc(sx, sy, r, 0, 7); g.fill();
+    g.save(); g.beginPath(); g.arc(sx, sy, r, 0, 7); g.clip();
+    g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = r * .08;
+    for (let k = 0; k < 3; k++) { g.beginPath(); g.arc(sx + r * (.3 - k * .3), sy + r * (k * .25 - .2), r * (.5 + k * .15), .3 + k, 2.2 + k); g.stroke(); }
+    // the finger holes and the H roll forward with the ball
+    const feat = (pitch, fn) => { const a = pitch - b.rot % (2 * Math.PI); const k = Math.cos(a); if (k <= .05) return; fn(sx, sy - r * Math.sin(a) * .92, k); };
+    feat(-.55, (x, y, k) => { g.fillStyle = 'rgba(60,40,18,.75)'; for (const [dx, dy, rr] of [[-.2, 0, .1], [.2, 0, .1], [0, .34, .12]]) { g.beginPath(); g.ellipse(x + dx * r, y + dy * r * k, rr * r, rr * r * k, 0, 0, 7); g.fill(); } });
+    feat(.35, (x, y, k) => { g.save(); g.translate(x, y); g.scale(1, k); g.fillStyle = 'rgba(110,79,36,.85)'; g.font = 'italic 700 ' + (r * .9).toFixed(1) + 'px "Bodoni Moda", Didot, "Times New Roman", serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('H', 0, 0); g.restore(); });
+    g.restore();
+    const hl = g.createRadialGradient(sx - r * .4, sy - r * .45, 0, sx - r * .4, sy - r * .45, r * .55);
+    hl.addColorStop(0, 'rgba(255,255,255,.85)'); hl.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = hl; g.beginPath(); g.arc(sx, sy, r, 0, 7); g.fill();
+    g.restore();
+  }
+  function bwDrawAim(g, c, aim) {
+    // dotted path the ball would follow without hook
+    g.save();
+    for (let k = 1; k <= 26; k++) {
+      const y = k * 44, x = aim.x0 + Math.tan(aim.angle) * y;
+      if (Math.abs(x) > BW.LANE / 2) break;
+      const [sx, sy, s] = bwP(c, x, y, 0);
+      g.globalAlpha = .9 - k * .03; g.fillStyle = '#b8914e';
+      g.beginPath(); g.arc(sx, sy, Math.max(1.2, 2.3 * s), 0, 7); g.fill();
+    }
+    g.restore();
+  }
+  function bwDraw(g, c, view, spr, photo, aim, sweep, pk) {
+    g.clearRect(0, 0, c.W, c.H);
+    bwDrawLane(g, c, photo, pk);
+    const L = BW.LANE / 2, pins = view.pins, ball = view.ball;
+    const alphaOf = (p) => (p.down && sweep != null ? sweep : 1);
+    // reflections in the varnish, clipped to the lane
+    g.save();
+    bwPath(g, [bwP(c, -L, BW.Y_NEAR - 400), bwP(c, L, BW.Y_NEAR - 400), bwP(c, L, BW.Y_DECK), bwP(c, -L, BW.Y_DECK)]); g.clip();
+    for (const p of pins) if (!p.gone && p.tilt < .8) bwDrawPin(g, c, p, spr, true, alphaOf(p));
+    if (ball && !ball.gutter && ball.fade > 0) bwDrawBall(g, c, ball, true);
+    g.restore();
+    for (const p of pins) if (!p.gone) bwDrawShadow(g, c, p.x, p.y, BW.PR * (p.down ? 1.8 : 1.1), .3 * p.fade * alphaOf(p) * (1 - Math.min(1, (p.lift || 0) / 60)));
+    if (ball && ball.fade > 0) bwDrawShadow(g, c, ball.x, ball.y, BW.BR, .4 * ball.fade);
+    if (aim) bwDrawAim(g, c, aim);
+    const things = pins.filter((p) => p.fade > 0).map((p) => ({ y: p.y, f: () => bwDrawPin(g, c, p, spr, false, alphaOf(p)) }));
+    if (ball && ball.fade > 0) things.push({ y: ball.y, f: () => bwDrawBall(g, c, ball, false) });
+    things.sort((u, v) => v.y - u.y).forEach((o) => o.f());
+  }
+
+  /* ---------- the bowling screen ---------- */
+  const bwEl = $('#bw'), bwStage = $('#bw-stage'), bwCv = $('#bw-cv'), bwRoomCv = $('#bw-room'), bwPoster = $('#bw-poster');
+  const bwPhotoEl = $('#bw-photo'), bwCtx = bwCv.getContext('2d'), bwRoomCtx = bwRoomCv.getContext('2d');
+  const BW_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  let BG = null, bwSpr = null, bwSpeed = 1; // bwSpeed: only the tests change it
+  const bwSparks = [];
+
+  function bwPickPhotos(n, avoid) {
+    const skip = new Set(avoid || []), bySet = new Map();
+    shuffle(BW_PHOTOS.filter((p) => !skip.has(p.id))).forEach((p) => { if (!bySet.has(p.set)) bySet.set(p.set, []); bySet.get(p.set).push(p); });
+    const lists = shuffle(Array.from(bySet.values())), out = [];
+    for (let i = 0; out.length < n && lists.some((l) => l.length); i++) { const l = lists[i % lists.length]; if (l.length) out.push(l.pop()); }
+    while (out.length < n) out.push(pickOne(BW_PHOTOS));
+    return out;
+  }
+  function bwStats() {
+    const st = store.get('hm-bw', null);
+    return st && typeof st === 'object' ? Object.assign({ played: 0, best: 0, strikes: 0, found: [] }, st) : { played: 0, best: 0, strikes: 0, found: [] };
+  }
+  // a fresh game on this device: online is set when the room plays it
+  function bwMake(o) {
+    const g = {
+      online: !!o.online, cfg: o.cfg || null, gid: o.gid || null, players: o.players, cur: 0, standing: BW_ALL.slice(), pins: bwRack(),
+      phase: 'idle', R: null, before: null, acc: 0, cz: 0, roomCz: null, cam: null, dpr: 1, W: 0, H: 0,
+      aim: { x0: 0, angle: 0, show: false }, drag: null, power: null, keyAim: false,
+      target: 0, shown: 0, photoId: null, sweep: null, resetT: 0, next: null, onDone: null, onReset: null, ballIn: 1,
+      started: false, raf: 0, lastT: 0, dirty: true, timers: [], heard: 0, clackAt: 0, clacks: 0, banner: null,
+      wall: bwPickPhotos(12, o.avoid).map((p) => { const im = new Image(); im.decoding = 'async'; im.onload = () => { if (BG === g) { g.roomCz = null; g.dirty = true; } }; im.src = cardSrc(p); return im; }),
+      en: 0, mine: null, sceneKey: null, myTurn: false, overShown: false, me: o.me || 0, mismatch: 0,
+    };
+    return g;
+  }
+  function bwShow(g) {
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = false;
+    bwEl.classList.toggle('many', g.players.length > 1);
+    if (!bwSpr) bwSpr = bwPinSprite();
+    bwBanner(g, null); bwSparks.length = 0;
+    bwResize(); bwRenderHud(g);
+    cancelAnimationFrame(g.raf); g.lastT = 0; g.raf = requestAnimationFrame(bwLoop);
+    bwStage.focus({ preventScroll: true }); // the keys work at once
+  }
+  function bwStart(cfg) {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop();
+    const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
+    const photos = bwPickPhotos(10 * names.length);
+    const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
+    const g = BG = bwMake({ cfg, players, avoid: photos.map((p) => p.id) });
+    bwShow(g);
+    bwSetPhoto(g, players[0].photos[0], 0, true);
+    preload(players[0].photos.slice(0, 2).map((id) => fullSrc(PHOTO_BY_ID.get(id))), 6000);
+    bwBeginAim(g);
+    announce(t('aBwStart'));
+  }
+  function bwStop() {
+    const g = BG; BG = null;
+    if (g) { cancelAnimationFrame(g.raf); g.timers.forEach(clearTimeout); clearInterval(g.resendT); if (g.onDone) g.onDone(null); if (g.onReset) g.onReset(); }
+    bwSparks.length = 0;
+    bwEl.hidden = true;
+  }
+  function bwLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (BG === g) fn(); }, ms); g.timers.push(id); }
+  function bwRequestExit() {
+    const g = BG;
+    if (g && g.online) { openConfirm(true); return; }
+    if (g && g.started && g.phase !== 'over') openConfirm(false);
+    else goHome();
+  }
+  function bwResize() {
+    const g = BG; if (!g) return;
+    const r = bwStage.getBoundingClientRect(), W = Math.max(1, r.width), H = Math.max(1, r.height), dpr = Math.min(2, window.devicePixelRatio || 1);
+    g.W = W; g.H = H; g.dpr = dpr;
+    // the room behind is drawn a little softer: it is busy to draw and sits far away
+    for (const [cv, ctx, k] of [[bwCv, bwCtx, dpr], [bwRoomCv, bwRoomCtx, Math.min(dpr, 1.5)]]) { cv.width = Math.round(W * k); cv.height = Math.round(H * k); ctx.setTransform(k, 0, 0, k, 0, 0); }
+    g.roomCz = null; g.dirty = true;
+  }
+
+  /* the poster: the photo of the frame at the end of the lane */
+  function bwSetPhoto(g, id, level, now) {
+    const p = PHOTO_BY_ID.get(id) || BW_PHOTOS[0];
+    g.target = level || 0;
+    if (g.photoId === p.id) return;
+    g.photoId = p.id;
+    const swap = () => {
+      if (BG !== g || g.photoId !== p.id) return;
+      bwPhotoEl.src = fullSrc(p); g.shown = g.target; bwApplyReveal(g, true); g.dirty = true;
+      // the new photo fades in once it has arrived
+      const show = () => { if (BG === g && g.photoId === p.id) { bwPoster.classList.remove('out'); g.dirty = true; } };
+      if (bwPhotoEl.complete && bwPhotoEl.naturalWidth) show();
+      else { bwPhotoEl.onload = show; bwLater(g, 2500, show); }
+    };
+    if (now) { swap(); return; }
+    bwPoster.classList.add('out');
+    bwLater(g, reduceMotion.matches ? 0 : 260, swap);
+  }
+  function bwApplyReveal(g, force) {
+    const k = Math.min(1, g.shown), full = g.shown > .995, rest = Math.max(0, 1 - k);
+    const ease = Math.min(1, rest * 25); // the last bit melts away instead of jumping
+    const blur = full ? 0 : (3 + 11 * Math.pow(rest, .7)) * ease, sat = full ? 1.05 : .5 + .35 * k + .2 * (1 - ease), veil = full ? 0 : (.14 + .28 * Math.pow(rest, .6)) * ease;
+    if (!force && g.revealSet && Math.abs(g.revealSet - k) < .004) return;
+    g.revealSet = k || .0001;
+    bwPoster.style.setProperty('--blur', blur.toFixed(2) + 'px');
+    bwPoster.style.setProperty('--sat', sat.toFixed(3));
+    bwPoster.style.setProperty('--veil', veil.toFixed(3));
+    $('#bw-count').hidden = g.target > 0;
+  }
+  function bwPlacePoster(g, c) {
+    const yb = BW.Y_BACK - 4, PWc = 150, PHc = 200, Z0 = 46;
+    const a = bwP(c, -PWc / 2, yb, Z0 + PHc), b = bwP(c, PWc / 2, yb, Z0);
+    const key = a[0].toFixed(1) + ',' + a[1].toFixed(1) + ',' + (b[0] - a[0]).toFixed(1);
+    if (g.posterKey === key) return;
+    g.posterKey = key;
+    Object.assign(bwPoster.style, { left: a[0] + 'px', top: a[1] + 'px', width: (b[0] - a[0]) + 'px', height: (b[1] - a[1]) + 'px' });
+  }
+
+  /* the loop: physics with a fixed step, the camera, the reveal of the photo, the drawing */
+  function bwLoop(now) {
+    const g = BG; if (!g) return;
+    g.raf = requestAnimationFrame(bwLoop);
+    const dt = (g.lastT ? Math.min(.1, (now - g.lastT) / 1000) : 0) * bwSpeed; g.lastT = now;
+    bwUpdate(g, dt);
+    bwRender(g, dt);
+  }
+  function bwUpdate(g, dt) {
+    if (g.phase === 'roll' && g.R) {
+      g.acc += dt;
+      while (g.acc >= BW.DT && !g.R.done) { bwStep(g.R); g.acc -= BW.DT; }
+      bwHearPins(g);
+      if (g.R.done) bwRollEnded(g);
+      g.dirty = true;
+    }
+    let want = 0;
+    if ((g.phase === 'roll' || g.phase === 'show') && g.R) want = bwClamp((Math.min(g.R.ball.gone ? BW.PIN_Y : g.R.ball.y, BW.PIN_Y) - 220) * .8, 0, 860);
+    if (g.phase === 'show' && g.R) want = Math.max(want, g.cz);
+    const cz = g.cz + (want - g.cz) * Math.min(1, dt * (g.phase === 'reset' ? 4.2 : 3.2));
+    if (Math.abs(cz - g.cz) > .01) { g.cz = Math.abs(cz - want) < .05 ? want : cz; g.dirty = true; }
+    if (Math.abs(g.target - g.shown) > .001) { g.shown += (g.target - g.shown) * Math.min(1, dt * 2.6); if (Math.abs(g.target - g.shown) < .002) g.shown = g.target; bwApplyReveal(g); g.dirty = true; }
+    if (g.phase === 'reset') bwResetStep(g, dt);
+    if (g.power) { g.power.t += dt; g.dirty = true; const p = (1 - Math.cos(g.power.t * Math.PI * 2 / 1.5)) / 2; g.power.v = p; $('#bw-power i').style.width = (p * 100).toFixed(1) + '%'; }
+    if (bwSparks.length) g.dirty = true;
+  }
+  function bwRender(g, dt) {
+    if (!g.dirty || !g.W) return;
+    g.dirty = false;
+    const c = g.cam = bwCamera(g.W, g.H, g.cz);
+    bwPlacePoster(g, c);
+    if (g.roomCz == null || Math.abs(g.roomCz - g.cz) > .05) { bwDrawRoom(bwRoomCtx, c, g.wall); g.roomCz = g.cz; }
+    let view, sweep = null;
+    if ((g.phase === 'roll' || g.phase === 'show') && g.R) view = { pins: g.R.pins, ball: g.R.ball };
+    else if (g.phase === 'reset' && g.sweep != null && g.R) { view = { pins: g.R.pins, ball: null }; sweep = g.sweep; }
+    else view = { pins: g.pins, ball: g.phase === 'over' ? null : { x: g.aim.x0, y: 0, vx: 0, vy: 1, rot: .35, fade: g.ballIn, gutter: false } };
+    const aim = g.aim.show && g.phase === 'aim' ? g.aim : null;
+    bwDraw(bwCtx, c, view, bwSpr, bwPhotoEl, aim, sweep, g.shown);
+    // sparks of gold over the photo after a strike or a spare
+    if (bwSparks.length) {
+      for (const p of bwSparks) {
+        p.vy += 520 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt * .7;
+        bwCtx.globalAlpha = Math.max(0, p.life); bwCtx.fillStyle = p.hue; bwCtx.beginPath(); bwCtx.arc(p.x, p.y, p.s, 0, 7); bwCtx.fill();
+      }
+      bwCtx.globalAlpha = 1;
+      for (let i = bwSparks.length - 1; i >= 0; i--) if (bwSparks[i].life <= 0) bwSparks.splice(i, 1);
+    }
+  }
+  function bwBurst(k) {
+    if (reduceMotion.matches) return;
+    const r = bwPoster.getBoundingClientRect(), s = bwStage.getBoundingClientRect(), x = r.left - s.left + r.width / 2, y = r.top - s.top + r.height * .55;
+    for (let i = 0; i < 70 * k; i++) {
+      const a = Math.random() * Math.PI * 2, v = 120 + Math.random() * 360;
+      bwSparks.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 160, life: 1, s: 1.5 + Math.random() * 2.8, hue: Math.random() < .5 ? '#e9cf96' : (Math.random() < .5 ? '#fff6dc' : '#c49f60') });
+    }
+  }
+  function bwHearPins(g) {
+    const R = g.R;
+    if (R.hits > 0 && !g.heard) { g.heard = 1; const v = Math.sqrt(R.ball.vx * R.ball.vx + R.ball.vy * R.ball.vy); Sound.bwCrash(bwClamp((v - 500) / 600, .15, 1)); buzz(12); }
+    if (R.clacks > g.clacks) {
+      const now = performance.now();
+      if (now - g.clackAt > 55 && g.clacks < 40) { Sound.bwClack(); g.clackAt = now; }
+      g.clacks = R.clacks;
+    }
+  }
+
+  /* a throw on screen: the roll, then the result for a moment; resolves with what happened */
+  function bwAnimate(g, a, before) {
+    return new Promise((resolve) => {
+      g.R = bwRoll(bwRack(before), a); g.before = before.slice(); g.acc = 0; g.heard = 0; g.clacks = 0;
+      g.phase = 'roll'; g.onDone = resolve; g.aim.show = false; g.power = null; $('#bw-power').hidden = true;
+      bwHint(g, '');
+      Sound.bwRoll(Math.min(2.8, (BW.PIN_Y + 60) / a.vy + .1));
+      g.dirty = true;
+    });
+  }
+  function bwRollEnded(g) {
+    const R = g.R, after = bwStanding(R), down = g.before.length - after.length;
+    const strike = g.before.length === 10 && !after.length, spare = g.before.length < 10 && !after.length;
+    const was = g.target;
+    if (g.photoRack) g.target = Math.max(g.target, (10 - after.length) / 10);
+    const found = g.target >= 1 && was < 1;
+    if (strike) { bwBanner(g, t('bwStrike'), found ? t('bwPhotoFound') : '', true); Sound.golden(); bwLater(g, 260, () => Sound.sparkle()); bwBurst(1); buzz([20, 30, 40]); }
+    else if (spare) { bwBanner(g, t('bwSpare'), found ? t('bwPhotoFound') : '', true); Sound.correct(); bwBurst(.6); buzz(20); }
+    else if (!down) { bwBanner(g, t(R.ball.gutter ? 'bwGutter' : 'bwMiss'), '', false); if (R.ball.gutter) Sound.bwGutter(); else Sound.miss(); }
+    else bwBanner(g, down === 1 ? t('bwPin1') : t('bwPins', { n: down }), '', false);
+    announce(strike ? t('bwStrike') : spare ? t('bwSpare') : t('aBwPins', { n: down, left: after.length }));
+    g.phase = 'show'; g.dirty = true;
+    const hold = (reduceMotion.matches ? 600 : strike ? 1900 : spare ? 1600 : 1150) / bwSpeed;
+    bwLater(g, hold, () => {
+      bwBanner(g, null);
+      const cb = g.onDone; g.onDone = null;
+      if (cb) cb({ after, down, strike, spare, gutter: R.ball.gutter });
+    });
+  }
+  /* the pinsetter: the fallen pins are swept, the standing ones set again (or a fresh rack drops in), the ball comes back */
+  function bwReset(g, next) {
+    return new Promise((resolve) => {
+      g.phase = 'reset'; g.resetT = 0; g.sweep = g.R ? 1 : null; g.next = next; g.onReset = resolve; g.ballIn = 0; g.dirty = true;
+      if (next.photo && next.photo !== g.photoId) bwSetPhoto(g, next.photo, next.reveal || 0);
+      else if (next.reveal != null) g.target = next.reveal;
+    });
+  }
+  function bwResetStep(g, dt) {
+    g.resetT += dt; g.dirty = true;
+    const fast = reduceMotion.matches ? 3 : 1;
+    if (g.sweep != null) {
+      g.sweep = Math.max(0, 1 - g.resetT * fast / .35);
+      if (g.next.newRack && g.R) g.R.pins.forEach((p) => { if (!p.down) p.fade = g.sweep; });
+      if (g.sweep > 0) return;
+      g.sweep = null;
+    }
+    if (!g.next.placed) {
+      g.next.placed = true; g.R = null;
+      g.pins = bwRack(g.next.standing);
+      if (g.next.newRack && !reduceMotion.matches) g.pins.forEach((p) => { p.lift = 46; });
+      g.standing = g.next.standing.slice();
+      g.dropT = 0;
+    }
+    g.dropT += dt;
+    const k = Math.min(1, g.dropT * fast / .45), e = 1 - Math.pow(1 - k, 3);
+    g.pins.forEach((p) => { if (p.lift) p.lift = 46 * (1 - e); });
+    if (k >= 1 && !g.next.knock) { g.next.knock = true; if (g.next.newRack) Sound.bwClack(); }
+    g.ballIn = Math.min(1, g.dropT * fast / .4);
+    if (k >= 1 && g.ballIn >= 1 && g.cz < 4) {
+      g.cz = 0; g.phase = 'idle';
+      const cb = g.onReset; g.onReset = null; g.next = null;
+      if (cb) cb();
+    }
+  }
+
+  /* the head of the screen: whose turn, the score card of that player, everybody's points */
+  function bwPlayerTotal(p) { return bwTotal(p.st ? p.st.rolls : p.rolls); }
+  function bwRenderHud(g) {
+    if (!g) return;
+    const pl = g.players[g.cur] || g.players[0], st = pl.st || { rolls: pl.rolls || [], f: pl.f || 0, fr: pl.fr || [] };
+    const f = Math.min(9, st.f), k = st.fr.length;
+    const ball = t(k === 0 ? 'bwBall1' : k === 1 ? 'bwBall2' : 'bwBall3');
+    let sub = t('bwSub', { f: f + 1, r: ball });
+    if (g.phase === 'over') sub = t('bwSubOver');
+    if (g.players.length > 1 && g.phase !== 'over') sub = (g.online && g.cur === g.me ? t('ucYou') : pl.name) + ' · ' + sub;
+    $('#bw-sub').textContent = sub;
+    $('#bw-total-n').textContent = fmtNum(bwPlayerTotal(pl));
+    // the score card of the player on the lane
+    const card = $('#bw-card'), frames = bwFrames(st.rolls);
+    if (card.children.length !== 10) { card.textContent = ''; for (let i = 0; i < 10; i++) { const d = document.createElement('div'); d.className = 'bw-f'; d.innerHTML = '<div class="n">' + (i + 1) + '</div><div class="r">' + '<i></i>'.repeat(i === 9 ? 3 : 2) + '</div><div class="tt"></div>'; card.appendChild(d); } }
+    frames.forEach((fr, i) => {
+      const d = card.children[i], marks = bwMarks(fr.r, i === 9), cells = d.querySelectorAll('.r i');
+      cells.forEach((cell, j) => { const m = marks[j]; cell.textContent = m === '/' ? '/' : m || ''; cell.className = m === 'X' ? 'x' : m === '/' ? 'sp' : ''; });
+      $('.tt', d).textContent = fr.t == null ? '' : fmtNum(fr.t);
+      d.classList.toggle('cur', i === st.f && g.phase !== 'over');
+    });
+    // everybody's points when more than one plays
+    const box = $('#bw-players');
+    box.hidden = g.players.length < 2;
+    if (g.players.length > 1) {
+      box.textContent = '';
+      g.players.forEach((p, i) => {
+        const s = document.createElement('span');
+        s.className = 'bw-pl' + (i === g.cur && g.phase !== 'over' ? ' cur' : '') + (p.on === false ? ' off' : '');
+        s.innerHTML = (g.online ? svgUse('av-' + NET_AV[i], 'av', '0 0 40 40') : '<i class="dot">' + (i + 1) + '</i>') + '<span class="nm"></span><b></b>';
+        $('.nm', s).textContent = g.online && i === g.me ? t('ucYou') : p.name;
+        $('b', s).textContent = fmtNum(bwPlayerTotal(p));
+        box.appendChild(s);
+      });
+    }
+    bwStage.setAttribute('aria-label', t('bwStageAria', { n: g.standing.length }));
+  }
+  function bwHint(g, title, text) {
+    const h = $('#bw-hint');
+    h.hidden = !title && !text; if (h.hidden) return;
+    h.innerHTML = '<b></b><span></span>';
+    $('b', h).textContent = title || ''; $('span', h).textContent = text || '';
+  }
+  function bwBanner(g, title, sub, gold) {
+    const el = $('#bw-banner');
+    if (!title) { el.classList.remove('on'); return; }
+    $('b', el).textContent = title; $('span', el).textContent = sub || '';
+    el.classList.toggle('gold', !!gold); el.classList.toggle('plain', !gold);
+    el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+  }
+  const bwFine = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function bwBeginAim(g) {
+    const pl = g.players[g.cur], st = pl.st;
+    g.phase = 'aim'; g.aim = { x0: 0, angle: 0, show: false }; g.ballIn = 1; g.power = null; g.dirty = true;
+    g.photoRack = st.f < 9 ? true : st.fr.length === 0 || (st.fr[0] !== 10 && st.fr.length === 1);
+    $('#bw-power').hidden = true;
+    const name = g.players.length > 1 ? pl.name : '';
+    bwHint(g, name ? t('bwTurnOf', { name }) : t('bwYourTurn'), t(bwFine() ? 'bwHowKeys' : 'bwHow'));
+    bwRenderHud(g);
+    if (name) Sound.turn();
+  }
+
+  /* input: drag the ball across, then push it towards the pins and let go */
+  function bwPoint(e) { const r = bwStage.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  function bwFloor(c, sx, sy) {
+    const s = (sy - c.hy) / c.CH; if (s <= .02) return null;
+    return [(sx - c.cx) / s, c.F / s - c.D0 + c.cz];
+  }
+  const bwCanAim = (g) => g && g.phase === 'aim' && (!g.online || g.myTurn) && !bwEl.hidden && $('#confirm').hidden && $('#result').hidden;
+  function bwSetBallX(g, sx) { const c = g.cam || bwCamera(g.W, g.H, g.cz), s = bwP(c, 0, 0, 0)[2]; g.aim.x0 = bwClamp((sx - c.cx) / s, -BW.X_MAX, BW.X_MAX); g.dirty = true; }
+  function bwSwipeAngle(g, x1, y1, x2, y2) {
+    const c = g.cam, a = bwFloor(c, x1, Math.max(y1, c.hy + 30)), b = bwFloor(c, x2, Math.max(y2, c.hy + 30));
+    if (!a || !b || b[1] - a[1] < 1) return g.aim.angle;
+    return bwClamp(Math.atan2(b[0] - a[0], b[1] - a[1]), -.085, .085);
+  }
+  function bwPointerDown(e) {
+    const g = BG;
+    if (!bwCanAim(g) || g.drag || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    const [x, y] = bwPoint(e);
+    if (y < g.H * .3) return;
+    g.drag = { id: e.pointerId, sy: y, pts: [[x, y, e.timeStamp || performance.now()]], mode: 'move', lx: x, ly: y };
+    g.keyAim = false; g.power = null; $('#bw-power').hidden = true;
+    bwSetBallX(g, x);
+    try { bwStage.setPointerCapture(e.pointerId); } catch (err) { /* not captured */ }
+    e.preventDefault();
+  }
+  function bwPointerMove(e) {
+    const g = BG, d = g && g.drag; if (!d || e.pointerId !== d.id) return;
+    const [x, y] = bwPoint(e);
+    d.pts.push([x, y, e.timeStamp || performance.now()]); if (d.pts.length > 40) d.pts.shift();
+    if (d.mode === 'move') {
+      if (d.sy - y > 22) { d.mode = 'throw'; d.lx = x; d.ly = y; }
+      else { bwSetBallX(g, x); return; }
+    }
+    g.aim.angle = bwSwipeAngle(g, d.lx, d.ly, x, y); g.aim.show = true; g.dirty = true;
+  }
+  function bwPointerUp(e) {
+    const g = BG, d = g && g.drag; if (!d || e.pointerId !== d.id) return;
+    g.drag = null;
+    if (d.mode !== 'throw' || !bwCanAim(g)) { g.aim.show = false; g.dirty = true; return; }
+    const pts = d.pts, p1 = pts[pts.length - 1], tEnd = p1[2];
+    let i = pts.length - 1; while (i > 0 && tEnd - pts[i - 1][2] < 100) i--;
+    const p0 = pts[Math.max(0, i - (i === pts.length - 1 ? 1 : 0))], ms = Math.max(16, p1[2] - p0[2]);
+    const vUp = (p0[1] - p1[1]) / ms * 1000;
+    if (vUp < 200 || e.type === 'pointercancel') { g.aim.show = false; g.dirty = true; bwHint(g, t('bwSoft'), t(bwFine() ? 'bwHowKeys' : 'bwHow')); return; }
+    const speed = bwClamp(560 + vUp / g.H * 250, 560, 1150), angle = bwSwipeAngle(g, d.lx, d.ly, p1[0], p1[1]);
+    // a curve at the end of the push puts spin on the ball
+    const all = Math.atan2(p1[0] - d.lx, d.ly - p1[1]), end = Math.atan2(p1[0] - p0[0], p0[1] - p1[1]);
+    const spin = bwClamp((end - all) * 1.6, -.6, .6);
+    bwThrow(g, { x0: g.aim.x0, vx: Math.sin(angle) * speed, vy: Math.cos(angle) * speed, spin, seed: 1 + Math.floor(Math.random() * 2147483645) });
+  }
+  function bwKey(e) {
+    const g = BG;
+    if (!g || bwEl.hidden || !$('#result').hidden || !$('#confirm').hidden) return false;
+    if (!bwCanAim(g)) return false;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const dir = e.key === 'ArrowLeft' ? -1 : 1;
+      if (e.shiftKey) g.aim.angle = bwClamp(g.aim.angle + dir * .004, -.085, .085);
+      else g.aim.x0 = bwClamp(g.aim.x0 + dir * 2.5, -BW.X_MAX, BW.X_MAX);
+      g.aim.show = true; g.keyAim = true; g.dirty = true;
+      return true;
+    }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { g.aim.angle = bwClamp(g.aim.angle + (e.key === 'ArrowUp' ? -.004 : .004), -.085, .085); g.aim.show = true; g.dirty = true; return true; }
+    if (e.key === ' ' || e.key === 'Enter') {
+      if (e.repeat) return true;
+      if (!g.power) { g.power = { t: 0, v: 0 }; $('#bw-power').hidden = false; g.aim.show = true; g.dirty = true; return true; }
+      const v = g.power.v, speed = 640 + v * 480;
+      bwThrow(g, { x0: g.aim.x0, vx: Math.sin(g.aim.angle) * speed, vy: Math.cos(g.aim.angle) * speed, spin: 0, seed: 1 + Math.floor(Math.random() * 2147483645) });
+      return true;
+    }
+    return false;
+  }
+
+  /* a throw from this device */
+  function bwThrow(g, raw) {
+    const a = bwClampThrow(raw);
+    g.started = true;
+    if (g.online) {
+      const before = g.standing.slice();
+      g.mine = { seed: a.seed, a, tries: 0, done: bwAnimate(g, a, before) };
+      netAct(Object.assign({ t: 'roll' }, a));
+      // the room has not answered yet: send it again (it ignores a throw it already has)
+      clearInterval(g.resendT);
+      g.resendT = setInterval(() => { if (BG !== g || !g.mine || g.mine.seed !== a.seed || ++g.mine.tries > 4) { clearInterval(g.resendT); return; } netAct(Object.assign({ t: 'roll' }, a)); }, 6000);
+      return;
+    }
+    bwLocalTurn(g, a);
+  }
+  async function bwLocalTurn(g, a) {
+    const pl = g.players[g.cur], f = pl.st.f;
+    const res = await bwAnimate(g, a, g.standing);
+    if (BG !== g || !res) return;
+    const adv = bwAdvance(pl.st, res.down, res.after);
+    pl.level[f] = Math.max(pl.level[f], g.target);
+    bwRenderHud(g);
+    if (adv.frameDone) {
+      if (g.players.every((p) => p.st.f >= 10)) { await bwReset(g, { standing: BW_ALL.slice(), newRack: true }); if (BG === g) bwLocalOver(g); return; }
+      g.cur = (g.cur + 1) % g.players.length;
+      const np = g.players[g.cur];
+      preload([np.photos[Math.min(9, np.st.f + 1)]].map((id) => fullSrc(PHOTO_BY_ID.get(id))), 6000);
+      await bwReset(g, { standing: np.st.standing.slice(), newRack: true, photo: np.photos[np.st.f], reveal: 0 });
+    } else await bwReset(g, { standing: pl.st.standing.slice(), newRack: adv.reset });
+    if (BG !== g) return;
+    bwBeginAim(g);
+  }
+  function bwLocalOver(g) {
+    g.phase = 'over'; g.dirty = true;
+    bwHint(g, ''); bwRenderHud(g);
+    const scores = g.players.map(bwPlayerTotal);
+    const found = [];
+    g.players.forEach((p) => p.level.forEach((lv, i) => { if (lv >= 1) found.push(p.photos[i]); }));
+    g.found = found.map((id) => PHOTO_BY_ID.get(id)).filter(Boolean);
+    if (g.players.length === 1) {
+      const p = g.players[0], sc = scores[0], st = bwStats(), prev = st.best, record = sc > prev, cnt = bwCounts(p.st.rolls);
+      st.played++; st.best = Math.max(prev, sc); st.strikes += cnt.strikes;
+      st.found = Array.from(new Set(st.found.concat(found))).slice(-200);
+      store.set('hm-bw', st);
+      const stars = sc >= 160 ? 3 : sc >= 100 ? 2 : 1;
+      const rows = [[t('bwRowStrikes'), String(cnt.strikes)], [t('bwRowSpares'), String(cnt.spares)], [t('bwRowPhotos'), t('bwPhotosOf', { d: found.length, t: 10 })]];
+      if (!record && prev) rows.push([t('bwRowBest'), ptsText(prev)]);
+      showResult({
+        kicker: t('bwKicker'), title: t('bwTitle' + stars), stars, score: sc, record, photos: found.length > 0, photosLabel: t('bwSeePhotos'),
+        again: t('bwAgain'), action: 'bw', rows, strip: p.photos.map((id, i) => ({ id, open: p.level[i] >= 1 })),
+      });
+      if (stars >= 2 || record) celebrate(); else Sound.win();
+      return;
+    }
+    const best = Math.max(...scores), win = scores.map((x, i) => (x === best ? i : -1)).filter((i) => i >= 0), tie = win.length > 1;
+    const rows = g.players.map((p, i) => [p.name, ptsText(scores[i])]);
+    rows.push([t('bwRowPhotos'), t('bwPhotosOf', { d: found.length, t: 10 * g.players.length })]);
+    showResult({ kicker: t('bwKickerDuo'), title: tie ? t('tie') : t('wins', { name: g.players[win[0]].name }), stars: null, score: null, record: false,
+      photos: found.length > 0, photosLabel: t('bwSeePhotos'), again: t('bwAgain'), action: 'bw', rows });
+    celebrate();
+  }
+
+  /* home */
+  function bwRenderSetup() {
+    const st = bwStats();
+    $('#bw-record').textContent = st.played ? t(st.played === 1 ? 'bwRecord1' : 'bwRecord', { n: fmtNum(st.best), p: st.played }) : t('bwRecordNone');
+    $('#bw-duo').hidden = mode !== 'duo';
+  }
+
+  /* ---------- Bowling online: the room's device keeps the score ----------
+     A throw arrives as numbers (start, velocity, spin, seed). The room's device rolls it with the same physics, scores
+     it and sends the throw to everybody, who roll it again on their own screen: the same numbers give the same roll.
+     When a player has gone, the computer bowls for them after everybody has watched the last ball. */
+  function bwBotThrow(standing) {
+    const pins = bwRack(standing), side = Math.random() < .5 ? -1 : 1;
+    const mid = pins.reduce((m, p) => m + p.x, 0) / Math.max(1, pins.length);
+    const target = standing.length === 10 ? side * rand(4, 11) : mid + rand(-5, 5);
+    const spin = standing.length === 10 ? side * rand(.08, .32) : rand(-.08, .08), x0 = bwClamp(rand(-14, 14) - spin * 30, -BW.X_MAX + 4, BW.X_MAX - 4);
+    const speed = rand(760, 980), th = BW.PIN_Y * (1 - BW.HOOK_FROM) / speed, drift = .5 * BW.HOOK * spin * th * th;
+    const angle = bwClamp((target - drift - x0) / BW.PIN_Y + rand(-.005, .005), -.08, .08);
+    return { x0, vx: Math.sin(angle) * speed, vy: Math.cos(angle) * speed, spin, seed: 1 + Math.floor(Math.random() * 2147483645) };
+  }
+  function bwNew(n, ses) {
+    const photos = bwPickPhotos(10 * n);
+    const E = {
+      gid: netRand(6, NET_CODE), n, round: ses.round, photos: Array.from({ length: n }, (_, s) => photos.slice(s * 10, s * 10 + 10).map((p) => p.id)),
+      st: Array.from({ length: n }, () => bwNewState()), turn: (ses.round - 1) % n, over: false, ev: [], en: 0, seen: [], botAt: Date.now() + 3500, ses,
+    };
+    const roll = (seat, a) => {
+      const s = E.st[seat], before = s.standing.slice(), f = s.f, R = bwSimulate(before, a), after = bwStanding(R);
+      // how much of the frame's photo shows before this ball, and whether this ball can uncover more of it
+      const fr0 = bwFrames(s.rolls)[f], lv = fr0 ? bwFrameReveal(fr0) : 0;
+      const pr = f < 9 || s.fr.length === 0 || (s.fr[0] !== 10 && s.fr.length === 1);
+      const adv = bwAdvance(s, before.length - after.length, after);
+      E.ev.push({ n: ++E.en, p: seat, f, a, before, after, lv, pr }); if (E.ev.length > 12) E.ev.shift();
+      E.seen.push(a.seed); if (E.seen.length > 40) E.seen.shift();
+      if (adv.frameDone) {
+        if (E.st.every((x) => x.f >= 10)) {
+          E.over = true; N.phase = 'over';
+          const tot = E.st.map((x) => bwTotal(x.rolls)), best = Math.max(...tot);
+          tot.forEach((x, i) => { if (x === best) ses.wins[i]++; });
+        } else E.turn = (seat + 1) % n;
+      }
+      // a computer player waits until everybody has seen this ball
+      E.botAt = Date.now() + (R.t + 4.2) * 1000 / bwSpeed;
+    };
+    E.view = () => ({
+      gid: E.gid, n, round: E.round, photos: E.photos, rolls: E.st.map((x) => x.rolls), turn: E.turn, f: E.st[E.turn].f, k: E.st[E.turn].fr.length,
+      standing: E.st[E.turn].standing, over: E.over, ev: E.ev.slice(), en: E.en, wins: ses.wins.slice(),
+    });
+    E.act = (seat, a) => {
+      if (!a || a.t !== 'roll' || E.over || seat !== E.turn) return;
+      const th = bwClampThrow(a);
+      if (E.seen.includes(th.seed)) return;
+      roll(seat, th);
+    };
+    E.tick = () => {
+      if (E.over || (N.players[E.turn] && N.players[E.turn].on) || Date.now() < E.botAt) return false;
+      roll(E.turn, bwBotThrow(E.st[E.turn].standing));
+      return true;
+    };
+    return E;
+  }
+  let bwChain = Promise.resolve();
+  function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
+  function bwnSetup(v) {
+    const gv = v.g;
+    ucStop(); pzStop(); bwStop();
+    S = null; board.textContent = '';
+    const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
+    const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
+    g.en = gv.en;
+    bwnState(g, v);
+    g.standing = gv.standing.slice(); g.pins = bwRack(g.standing); g.sceneKey = bwnKey(gv);
+    bwShow(g);
+    bwSetPhoto(g, gv.photos[gv.turn][Math.min(9, gv.f)], bwnReveal(gv), true);
+    preload(gv.photos[v.you].slice(0, 2).map((id) => fullSrc(PHOTO_BY_ID.get(id) || BW_PHOTOS[0])), 6000);
+    return g;
+  }
+  const bwnKey = (gv) => [gv.gid, gv.turn, gv.f, gv.k, gv.standing.join('.'), gv.over ? 1 : 0].join('|');
+  function bwnReveal(gv) { const fr = bwFrames(gv.rolls[gv.turn] || [])[Math.min(9, gv.f)]; return fr ? bwFrameReveal(fr) : 0; }
+  // where one player is in the game: the frame being played and its balls so far
+  function bwSplit(rolls) {
+    let i = 0;
+    for (let f = 0; f < 10; f++) {
+      const r = rolls.slice(i, i + 3);
+      const need = f < 9 ? (r[0] === 10 ? 1 : 2) : (r[0] === 10 || (r.length >= 2 && r[0] + r[1] >= 10) ? 3 : 2);
+      if (r.length < need) return { f, fr: rolls.slice(i) };
+      i += need;
+    }
+    return { f: 10, fr: [] };
+  }
+  // the players and their score cards as the room has them
+  function bwnState(g, v) {
+    const gv = v.g;
+    g.players.forEach((p, s) => {
+      const rolls = gv.rolls[s] || [], sp = bwSplit(rolls);
+      p.name = v.players[s] ? v.players[s].name : p.name; p.on = v.players[s] ? v.players[s].on : false;
+      p.rolls = rolls; p.st = { rolls, f: sp.f, fr: sp.fr };
+      p.level = bwFrames(rolls).map(bwFrameReveal); p.photos = gv.photos[s] || p.photos;
+    });
+    g.cur = gv.turn; g.me = v.you;
+    g.myTurn = !gv.over && gv.turn === v.you;
+  }
+  async function bwnProcess(v) {
+    if (!N || !v.g) return;
+    const gv = v.g;
+    if (!BG || !BG.online || BG.gid !== gv.gid) bwnSetup(v);
+    const g = BG;
+    // the balls thrown since the last update, one after the other
+    for (const e of gv.ev.filter((x) => x.n > g.en)) {
+      if (BG !== g) return;
+      if (g.mine) {
+        // this device's own ball is already rolling on screen
+        const m = g.mine, res = await m.done; if (BG !== g) return;
+        if (e.p === v.you) {
+          g.mine = null; clearInterval(g.resendT);
+          if (e.a.seed === m.seed) { if (res && res.after.join('.') !== e.after.join('.')) g.mismatch++; g.en = e.n; continue; }
+        }
+      }
+      // a ball thrown on another device: the lane as it was, then the ball
+      const photo = gv.photos[e.p][Math.min(9, e.f)];
+      g.cur = e.p;
+      if (g.photoId !== photo || g.standing.join('.') !== e.before.join('.') || g.phase === 'show') {
+        await bwReset(g, { standing: e.before.slice(), newRack: e.before.length === 10, photo, reveal: e.lv });
+        if (BG !== g) return;
+      } else g.target = e.lv;
+      g.photoRack = e.pr;
+      const who = v.players[e.p];
+      bwHint(g, t('netTurnOf', { name: who ? who.name : '' }), '');
+      const res = await bwAnimate(g, e.a, e.before);
+      if (BG !== g) return;
+      if (res && res.after.join('.') !== e.after.join('.')) g.mismatch++; // the same numbers always give the same roll
+      g.standing = e.after.slice();
+      g.en = e.n;
+    }
+    g.en = Math.max(g.en, gv.en);
+    bwnState(g, v);
+    if (g.mine) { bwRenderHud(g); return; } // the room has not counted this device's ball yet
+    // then the lane as the room has it
+    const key = bwnKey(gv);
+    if (!gv.over && (key !== g.sceneKey || g.phase === 'show')) {
+      g.sceneKey = key;
+      await bwReset(g, { standing: gv.standing.slice(), newRack: gv.k === 0 || gv.standing.length === 10, photo: gv.photos[gv.turn][Math.min(9, gv.f)], reveal: bwnReveal(gv) });
+      if (BG !== g) return;
+      g.standing = gv.standing.slice();
+    }
+    bwRenderHud(g);
+    if (gv.over) {
+      g.phase = 'over'; g.dirty = true; bwHint(g, ''); bwRenderHud(g);
+      if (!g.overShown) { g.overShown = true; bwLater(g, 900, () => { if (N && N.view) bwnResult(N.view); }); }
+      return;
+    }
+    const pl = v.players[gv.turn];
+    if (gv.turn === v.you) {
+      if (g.phase !== 'aim') { bwBeginAim(g); bwHint(g, t('netYourTurn'), t(bwFine() ? 'bwHowKeys' : 'bwHow')); buzz(15); announce(t('netYourTurn')); }
+    } else {
+      if (g.phase === 'aim') g.drag = null;
+      g.phase = 'wait'; g.aim.show = false; g.power = null; $('#bw-power').hidden = true; g.dirty = true;
+      bwHint(g, t('netTurnOf', { name: pl ? pl.name : '' }), pl && !pl.on ? t('netAway', { name: pl.name }) : '');
+    }
+  }
+  function bwnResult(v) {
+    const gv = v.g, me = v.you, tot = gv.rolls.map((r) => bwTotal(r)), best = Math.max(...tot);
+    const win = tot.map((x, i) => (x === best ? i : -1)).filter((i) => i >= 0), tie = win.length > 1;
+    const g = BG;
+    if (g) {
+      const p = g.players[me];
+      g.found = p ? p.level.map((lv, i) => (lv >= 1 ? PHOTO_BY_ID.get(p.photos[i]) : null)).filter(Boolean) : [];
+    }
+    const rows = v.players.map((p, i) => [p.name + (i === me ? ' (' + t('netYou') + ')' : ''), ptsText(tot[i])]);
+    if (gv.round > 1) rows.push([t('bwRowWins'), t('ucWinsOf', { w: gv.wins[me] || 0, n: gv.round })]);
+    const host = N && N.host, hostName = v.players[0] ? v.players[0].name : '';
+    showResult({
+      kicker: t('netKicker', { game: t('gameBw') }), title: tie ? t('tie') : win[0] === me ? t('netYouWin') : t('wins', { name: v.players[win[0]].name }),
+      stars: null, score: tot[me], record: false, photos: !!(g && g.found && g.found.length), photosLabel: t('bwSeePhotos'),
+      again: host ? t('netAgain') : t('netWaitAgain', { name: hostName }), againOff: !host, action: 'net', rows, menuLabel: t('netLeave'),
+      strip: g && g.players[me] ? g.players[me].photos.map((id, i) => ({ id, open: g.players[me].level[i] >= 1 })) : null,
+    });
+    if (!tie && win[0] === me) celebrate(); else if (!tie) Sound.lose(); else celebrate();
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -5727,13 +7210,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -5749,7 +7232,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -5792,6 +7275,9 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-hunt').addEventListener('click', () => { AudioCore.get(); Sound.flip(); if (!hunt || hunt.done) newHunt(); showMap(); });
   const savedNames = store.get('hm-names', ['', '']);
   $('#p1').value = savedNames[0] || ''; $('#p2').value = savedNames[1] || '';
+  $('#bw-p1').value = savedNames[0] || ''; $('#bw-p2').value = savedNames[1] || '';
+  ['#bw-p1', '#bw-p2'].forEach((id) => $(id).addEventListener('input', () => { const v = [$('#bw-p1').value, $('#bw-p2').value]; store.set('hm-names', v); $('#p1').value = v[0]; $('#p2').value = v[1]; }));
+  ['#p1', '#p2'].forEach((id) => $(id).addEventListener('input', () => { $('#bw-p1').value = $('#p1').value; $('#bw-p2').value = $('#p2').value; }));
   ['#p1', '#p2'].forEach((id) => $(id).addEventListener('input', () => store.set('hm-names', [$('#p1').value, $('#p2').value])));
   $('#fan').addEventListener('click', () => { Sound.flip(); fillFan(true); });
   $('#sfx-home').addEventListener('click', () => { Sound.setOn(!Sound.on); renderAudio(); });
@@ -5805,6 +7291,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'net') { if (N && N.host) netStartGame(); return; }
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
+    if (resultAction === 'bw') { bwStart(BG && BG.cfg ? BG.cfg : { duo: mode === 'duo', names: [$('#bw-p1').value, $('#bw-p2').value] }); return; }
     if (resultAction === 'map') { showMap(); return; }
     if (S) startGame(S.cfg);
   });
@@ -5824,6 +7311,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $$('.uc-opp-pick button').forEach((b) => b.addEventListener('click', () => { ucOpp = +b.dataset.opp; store.set('hm-uc-opp', ucOpp); ucRenderSetup(); Sound.tick2(); }));
   $('#btn-uc-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); ucStart(true); });
   $('#uc-exit').addEventListener('click', ucRequestExit);
+  $('#btn-bw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); bwStart({ duo: mode === 'duo', names: [$('#bw-p1').value, $('#bw-p2').value] }); });
+  $('#bw-exit').addEventListener('click', bwRequestExit);
+  bwStage.addEventListener('pointerdown', bwPointerDown);
+  bwStage.addEventListener('pointermove', bwPointerMove);
+  bwStage.addEventListener('pointerup', bwPointerUp);
+  bwStage.addEventListener('pointercancel', bwPointerUp);
+  bwEl.addEventListener('contextmenu', (e) => e.preventDefault());
+  document.addEventListener('keydown', (e) => { if (bwKey(e)) e.preventDefault(); });
   $('#btn-pz-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); pzStart(pzSel === 'surprise' ? pzSurprise() : PHOTOS.find((p) => p.id === pzSel)); });
   $('#pz-more').addEventListener('click', () => { pzChoices = pzPickChoices(pzChoices ? pzChoices.map((p) => p.id) : []); if (pzSel !== 'surprise') pzSel = pzChoices[0].id; pzRenderSetup(); Sound.flip(); });
   $('#pz-exit').addEventListener('click', pzRequestExit);
@@ -5865,7 +7360,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     else if (!$('#confirm').hidden) $('#cf-stay').click();
   });
   let rsz = 0;
-  window.addEventListener('resize', () => { clearTimeout(rsz); rsz = setTimeout(() => { layoutBoard(); ucLayout(); if (!pzEl.hidden) pzLayout(); if (!home.hidden) { renderCount(); pzRenderSetup(); } }, 80); });
+  window.addEventListener('resize', () => { clearTimeout(rsz); rsz = setTimeout(() => { layoutBoard(); ucLayout(); if (BG) bwResize(); if (!pzEl.hidden) pzLayout(); if (!home.hidden) { renderCount(); pzRenderSetup(); } }, 80); });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) AudioCore.suspend(); else AudioCore.resume();
     if (P && P.phase === 'play') {
@@ -5891,6 +7386,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* ---------- boot ---------- */
   buildMap();
   applyDeck();
+  hbStart();
   applyLang();
   setMode(mode);
   setGameSel(gameSel);
