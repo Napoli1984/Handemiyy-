@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle e Bowling con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling e Ruota della fortuna con le foto di Hande. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle e Bowling con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling e Ruota della fortuna con le foto di Hande. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle e Bowling con le foto di Hande. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling e Ruota della fortuna con le foto di Hande. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1848,6 +1848,216 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 @keyframes trophyIn { from { opacity: 0; transform: translateY(26px) scale(.6); } to { opacity: 1; transform: none; } }
 @media (max-height: 940px) { .res-trophy { height: 70px; margin: -10px auto -6px; } }
 @media (prefers-reduced-motion: reduce) { .pb-silk, .pb-spark, .pb-spark2, .home .play-btn, .finale.open .chest-img, .finale.open .chest-glint, .res-trophy { animation: none; } }
+/* ---------- Ruota della fortuna ---------- */
+.rws {
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
+  grid-template-areas: "head" "players" "board" "host" "wheel" "actions";
+  overflow: hidden; background: #fbf8f4; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 12px max(10px, env(safe-area-inset-bottom, 0px));
+}
+.rw-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: url(a/studio-tall.jpg) 50% 100% / cover no-repeat; }
+.rw-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(251, 248, 244, .9) 0%, rgba(251, 248, 244, .78) 34%, rgba(251, 248, 244, .25) 62%, rgba(251, 248, 244, .05) 80%, rgba(251, 248, 244, .45) 100%); }
+.rws > :is(.rw-head, .rw-players, .rw-boardbox, .rw-host, .rw-wheelbox, .rw-actions) { position: relative; z-index: 1; }
+.rw-head { grid-area: head; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; }
+.rw-head .uc-title { font-size: 23px; }
+
+/* the players */
+.rw-players { grid-area: players; display: flex; justify-content: center; gap: 8px; margin: 6px 0 4px; container-type: inline-size; }
+.rw-pl {
+  position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto auto; align-items: center; column-gap: 7px;
+  min-width: 0; flex: 1 1 0; max-width: 150px; padding: 6px 9px 6px 6px; border-radius: 16px;
+  border: 1px solid var(--hairline, rgba(201, 164, 105, .45)); background: var(--pearl-panel, rgba(255, 255, 255, .8));
+  box-shadow: var(--pearl-shadow, 0 10px 20px -16px rgba(72, 52, 84, .5)); transition: transform .3s, box-shadow .3s, border-color .3s, opacity .3s;
+}
+.rw-pl .av { grid-row: 1 / 4; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 35% 30%, #fff, #efe6f6 60%, #d9c8ec); box-shadow: inset 0 0 0 1.5px #d6b46f; font: 700 14px var(--font-caps); color: #8a6738; }
+.rw-pl .av svg { width: 30px; height: 30px; }
+.rw-pl .nm { grid-column: 2; min-width: 0; font: 600 14px/1.1 var(--font-display); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* name, points of this round, total: one under the other, so a big score never squeezes the total */
+.rw-pl .pts { display: contents; }
+.rw-pl .rp { grid-column: 2; }
+.rw-pl .tp { grid-column: 2; line-height: 1.2; }
+.rw-pl .rp { font: 700 16px/1.05 var(--font-caps); color: var(--ink); font-variant-numeric: tabular-nums; }
+.rw-pl .tp { font: 500 11px var(--font-ui); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rw-pl .jk { position: absolute; top: -7px; right: -5px; display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--champ); color: #2e2438; font: 700 10px var(--font-caps); box-shadow: 0 0 0 2px #fffaf2, 0 3px 8px rgba(150, 108, 48, .45); }
+.rw-pl.on { border-color: #d6b46f; transform: translateY(-1px); box-shadow: 0 0 0 1.5px #d9b673, 0 0 0 4px rgba(236, 212, 160, .32), 0 0 22px 2px rgba(238, 204, 136, .5); }
+.rw-pl.off { opacity: .55; }
+.rw-pl.bump .rp { animation: rwBump .5s cubic-bezier(.3, 1.6, .5, 1); }
+.rw-pl.lose { animation: rwShake .5s ease; }
+/* on a phone the faces get smaller, and with four players in a room they make room for the points */
+@container (max-width: 380px) {
+  .rw-pl { column-gap: 5px; padding: 6px 7px 6px 5px; }
+  .rw-pl .av { width: 30px; height: 30px; font-size: 12px; }
+  .rw-pl .av svg { width: 26px; height: 26px; }
+  .rw-pl .tp { font-size: 10px; }
+}
+@container (max-width: 520px) {
+  .rw-players[data-n="4"] { gap: 6px; }
+  .rw-players[data-n="4"] .rw-pl { column-gap: 0; padding: 6px 7px; }
+  .rw-players[data-n="4"] .av { display: none; }
+  .rw-players[data-n="4"] .rw-pl :is(.nm, .rp, .tp) { grid-column: 1 / -1; }
+  .rw-players[data-n="4"] .rp { font-size: 15px; }
+  .rw-players[data-n="4"] .tp { font-size: 10px; }
+}
+@keyframes rwBump { 40% { transform: scale(1.3); color: #a77a35; } }
+@keyframes rwShake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+
+/* the board */
+.rw-boardbox { grid-area: board; display: grid; justify-items: center; gap: 4px; }
+.rw-cat { display: flex; align-items: center; justify-content: center; gap: 8px; max-width: 100%; font: 700 12px/1.2 var(--font-caps); letter-spacing: .22em; text-transform: uppercase; color: #8a6738; text-align: center; }
+.rw-cat::before, .rw-cat::after { content: ""; width: 26px; height: 1px; flex: none; background: linear-gradient(90deg, rgba(201, 164, 105, 0), #c9a469); }
+.rw-cat::after { transform: scaleX(-1); }
+.rw-board {
+  width: min(100%, 560px); container-type: inline-size; display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 3px; padding: 7px; border-radius: 14px;
+  background: linear-gradient(140deg, #f7e9c9, #c9a469 22%, #fff5dc 46%, #b98f4f 72%, #efd8a8);
+  box-shadow: 0 16px 30px -18px rgba(72, 52, 84, .55), inset 0 0 0 1px rgba(255, 255, 255, .5);
+}
+.rw-board .t {
+  position: relative; aspect-ratio: 3 / 4; border-radius: 3px; display: grid; place-items: center;
+  background: linear-gradient(140deg, #d8c7f1, #bfe3d2 52%, #f1cbb8);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .35), inset 0 -3px 6px rgba(72, 52, 84, .12);
+}
+.rw-board .t.L { background: linear-gradient(180deg, #ffffff, #f7f2ec); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .55), inset 0 -2px 0 rgba(120, 90, 60, .12), 0 1px 3px rgba(72, 52, 84, .25); }
+.rw-board .t b { font: 700 6.1cqw/1 var(--font-caps); color: var(--ink); opacity: 0; transform: scale(.6); transition: opacity .25s, transform .3s cubic-bezier(.3, 1.6, .5, 1); }
+.rw-board .t.o b, .rw-board .t.typed b { opacity: 1; transform: none; }
+.rw-board .t.typed b { color: #8b6bb8; }
+.rw-board .t.lit { background: radial-gradient(circle at 50% 40%, #fffaf0, #f3d995 60%, #d9b56c); box-shadow: 0 0 0 1px #c9a469, 0 0 12px 2px rgba(238, 204, 136, .9); animation: rwLit .45s ease; }
+.rw-board .t.flip { animation: rwFlip .45s ease; }
+.rw-board .t.cur { box-shadow: 0 0 0 2px #b08ad8, 0 0 10px rgba(176, 138, 216, .7); animation: rwCur 1s ease-in-out infinite; }
+@keyframes rwLit { from { transform: scale(.85); } 60% { transform: scale(1.08); } }
+@keyframes rwFlip { from { transform: rotateY(90deg); } to { transform: none; } }
+@keyframes rwCur { 50% { box-shadow: 0 0 0 2px rgba(176, 138, 216, .4), 0 0 4px rgba(176, 138, 216, .3); } }
+.rw-host {
+  grid-area: host; justify-self: center; max-width: 100%; margin: 6px 0 0; padding: 5px 14px; border-radius: 999px; min-height: 1.4em;
+  font: italic 600 18px/1.25 var(--font-display); color: var(--ink); text-align: center;
+  background: rgba(255, 253, 249, .78); box-shadow: 0 0 0 1px rgba(201, 164, 105, .35), 0 8px 18px -14px rgba(72, 52, 84, .5);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: opacity .2s;
+}
+.rw-host:empty { visibility: hidden; }
+.rw-host.good { color: #6f4e1f; background: linear-gradient(100deg, #fff5dc, #fbe7c4); }
+.rw-host.bad { color: #6b2b3a; }
+.rw-host.swap { opacity: 0; }
+
+/* the wheel on the stage */
+.rw-wheelbox { grid-area: wheel; position: relative; display: grid; place-items: center; min-height: 0; container-type: size; }
+.rw-wheel { position: relative; width: min(100cqw, 100cqh, 520px); aspect-ratio: 1; touch-action: none; cursor: grab; }
+.rw-wheel.can { cursor: grab; }
+.rw-wheel canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; filter: drop-shadow(0 18px 24px rgba(72, 52, 84, .35)); }
+.rw-bulb { position: absolute; width: 2.3%; aspect-ratio: 1; margin: -1.15% 0 0 -1.15%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, #fff3d6 45%, #f2cf86); box-shadow: 0 0 6px 2px rgba(255, 226, 160, .85); animation: rwBulb 1.6s ease-in-out infinite alternate; }
+.rw-bulb:nth-child(even) { animation-delay: -.8s; }
+.rw-wheel.spin .rw-bulb { animation-duration: .35s; }
+@keyframes rwBulb { from { opacity: .45; box-shadow: 0 0 2px 1px rgba(255, 226, 160, .5); } to { opacity: 1; } }
+.rw-pointer { position: absolute; left: 50%; top: -3.5%; width: 11%; height: auto; transform-origin: 50% 22%; transform: translateX(-50%); filter: drop-shadow(0 4px 4px rgba(72, 52, 84, .35)); pointer-events: none; z-index: 2; }
+.rw-pop {
+  position: absolute; left: 50%; top: 50%; z-index: 3; transform: translate(-50%, -50%) scale(.6); opacity: 0; pointer-events: none; white-space: nowrap;
+  padding: 10px 20px; border-radius: 999px; font: 700 26px/1 var(--font-caps); letter-spacing: .06em; color: #2e2438;
+  background: radial-gradient(circle at 50% 30%, #fffaf0, #f3d995 70%, #d9b56c); box-shadow: 0 0 0 2px #fffaf2, 0 12px 30px -10px rgba(120, 84, 32, .7);
+  transition: opacity .25s, transform .35s cubic-bezier(.3, 1.6, .5, 1);
+}
+.rw-pop.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.rw-pop.dark { color: #f6e3b0; background: radial-gradient(circle at 50% 30%, #5a4766, #2e2438 70%); box-shadow: 0 0 0 2px #d9b56c, 0 12px 30px -10px rgba(46, 36, 56, .8); }
+.rw-pop.white { background: #fff; }
+.rw-spin-hint { position: absolute; left: 50%; bottom: 2%; transform: translateX(-50%); z-index: 3; font: italic 600 15px var(--font-display); color: #5c4f66; background: rgba(255, 253, 249, .85); padding: 3px 12px; border-radius: 999px; white-space: nowrap; pointer-events: none; box-shadow: 0 0 0 1px rgba(201, 164, 105, .35); }
+
+/* what the player can do */
+.rw-actions { grid-area: actions; display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 8px; padding-top: 6px; }
+.rw-actions[hidden] { display: none !important; }
+.rw-actions .btn { min-height: 52px; padding: 8px 8px; font-size: 13px; letter-spacing: .08em; line-height: 1.15; }
+.rw-actions .btn small { display: block; font: 600 11px var(--font-ui); letter-spacing: .02em; text-transform: none; opacity: .75; }
+.rw-actions .btn:disabled { opacity: .45; filter: saturate(.4); cursor: default; }
+.rw-actions .btn.primary { font-size: 14px; }
+
+/* the letters */
+.rw-keys {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; padding: 10px 12px max(12px, env(safe-area-inset-bottom, 0px));
+  border-radius: 22px 22px 0 0; background: rgba(255, 253, 250, .94); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  box-shadow: 0 -1px 0 rgba(201, 164, 105, .5), 0 -18px 40px -24px rgba(72, 52, 84, .55); animation: rwKeysIn .28s cubic-bezier(.2, .9, .3, 1);
+}
+@keyframes rwKeysIn { from { transform: translateY(40%); opacity: 0; } }
+.rw-keys-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.rw-keys-title { font: italic 700 19px/1.2 var(--font-display); color: var(--ink); }
+.rw-keys-close { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--hairline, rgba(201, 164, 105, .45)); background: #fff; color: var(--ink); font-size: 18px; line-height: 1; cursor: pointer; }
+.rw-keys-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.rw-keys-grid.v5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.rw-keys-grid.v4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.rw-k {
+  min-height: 44px; border-radius: 10px; border: 1px solid rgba(201, 164, 105, .5); background: linear-gradient(180deg, #fffefb, #f5eee6); color: var(--ink);
+  font: 700 18px var(--font-caps); cursor: pointer; box-shadow: 0 2px 0 rgba(150, 118, 76, .25); transition: transform .1s, background-color .2s;
+}
+.rw-k:active { transform: translateY(1px) scale(.97); }
+.rw-k:disabled { opacity: .28; cursor: default; box-shadow: none; }
+.rw-k.vow { background: linear-gradient(180deg, #fbf4ff, #ede2f8); }
+.rw-k.sel { background: var(--champ); border-color: #c9a469; box-shadow: 0 0 0 2px rgba(201, 164, 105, .35); }
+.rw-keys-foot { display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px; margin-top: 8px; }
+.rw-keys-foot[hidden] { display: none; }
+.rw-keys-foot .btn { min-height: 48px; }
+.rw-timer { height: 7px; margin: -2px 0 8px; border-radius: 999px; background: rgba(46, 36, 56, .1); overflow: hidden; }
+.rw-timer i { display: block; height: 100%; width: 100%; border-radius: inherit; background: linear-gradient(90deg, #c39a55, #e9d09f 60%, #dba792); transform-origin: 0 50%; }
+
+/* a photo of Hande as the prize */
+.rw-prize { position: absolute; inset: 0; z-index: 8; display: grid; place-items: center; align-content: center; gap: 14px; background: rgba(46, 36, 56, .35); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); cursor: pointer; }
+.rw-prize[hidden] { display: none; }
+.rw-prize-card { position: relative; width: min(62vw, 250px); aspect-ratio: 3 / 4; perspective: 900px; container-type: inline-size; }
+.rw-prize-in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.3, 1.3, .5, 1); }
+.rw-prize.open .rw-prize-in { transform: rotateY(180deg); }
+.rw-prize-card .face { position: absolute; inset: 0; border-radius: 7cqw; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: grid; place-items: center; box-shadow: 0 0 0 3px #e3c88f, 0 0 0 7px #fffdf9, 0 30px 50px -20px rgba(46, 36, 56, .7); }
+.rw-prize-card .face.front { transform: rotateY(180deg); background: #f5efe9; }
+.rw-prize-card .face.front img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rw-prize-rays { position: absolute; left: 50%; top: 50%; width: 180%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(255, 236, 190, .7) 0 7deg, rgba(255, 236, 190, 0) 7deg 20deg); -webkit-mask: radial-gradient(circle, #000 20%, transparent 68%); mask: radial-gradient(circle, #000 20%, transparent 68%); animation: spin 16s linear infinite; pointer-events: none; }
+.rw-prize-t { margin: 0; padding: 6px 16px; border-radius: 999px; font: italic 700 22px/1.2 var(--font-display); color: #2e2438; background: rgba(255, 253, 249, .92); box-shadow: 0 0 0 1px rgba(201, 164, 105, .5); text-align: center; max-width: 90%; }
+
+/* the banner between the rounds */
+.rw-banner { position: absolute; left: 50%; top: 42%; z-index: 7; transform: translate(-50%, -50%) scale(.8); opacity: 0; pointer-events: none; display: grid; justify-items: center; gap: 4px; padding: 16px 28px 18px; border-radius: 24px; background: rgba(255, 253, 249, .94); box-shadow: 0 0 0 1px rgba(201, 164, 105, .5), 0 30px 60px -24px rgba(72, 52, 84, .6); text-align: center; transition: opacity .3s, transform .45s cubic-bezier(.3, 1.5, .5, 1); }
+.rw-banner.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.rw-banner b { font: 400 50px/1.1 var(--font-script, cursive); color: #b48a48; padding: 0 .2em; }
+.rw-banner span { font: 700 12px var(--font-caps); letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+
+/* the card on the home and the setup */
+.home .gp-tile.gp-wide { grid-column: 1 / -1; grid-template-columns: auto minmax(0, 1fr); justify-items: start; text-align: left; gap: 12px; padding: 8px 14px 8px 12px; }
+.home .gp-tile.gp-wide .gp-text { justify-items: start; }
+.home .gp-tile.gp-wide .gp-ic { height: 60px; }
+.home .gp-tile.gp-wide .gp-tag { display: block; font-size: 13px; color: var(--muted); }
+.gp-new { position: absolute; top: 8px; right: 12px; padding: 3px 9px; border-radius: 999px; background: var(--rose, linear-gradient(100deg, #f1dcb4, #e5b6a0)); color: #34233a; font: 700 10px var(--font-caps); letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 0 1px rgba(255, 255, 255, .7), 0 4px 10px -4px rgba(170, 100, 80, .6); }
+.home .gp-tile.gp-wide[aria-pressed="true"] .gp-new { display: none; }
+.rw-hall { position: relative; display: block; aspect-ratio: 16 / 8; border-radius: 16px; overflow: hidden; box-shadow: 0 0 0 1px rgba(201, 164, 105, .6), 0 12px 24px -16px rgba(72, 52, 84, .6); }
+.rw-hall img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rw-hall .rw-mini-wheel { position: absolute; left: 50%; bottom: 4%; height: 74%; width: auto; transform: translateX(-50%); filter: drop-shadow(0 10px 12px rgba(72, 52, 84, .35)); }
+#setup-rw .uc-intro { grid-template-columns: minmax(0, 1fr); padding: 10px 10px 16px; gap: 12px; }
+#setup-rw .uc-intro .hunt-text { padding-inline: 8px; }
+
+/* computer: the board and the buttons on the left, the wheel on the right */
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .rws {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto auto auto minmax(0, 1fr);
+    grid-template-areas: "head head" ". wheel" "players wheel" "board wheel" "host wheel" "actions wheel" ". wheel"; column-gap: clamp(16px, 3vw, 48px); padding-inline: clamp(16px, 3vw, 40px);
+  }
+  .rw-bg { background-image: url(a/studio-wide.jpg); background-position: 50% 70%; }
+  .rw-bg::after { background: linear-gradient(90deg, rgba(251, 248, 244, .92) 0%, rgba(251, 248, 244, .78) 42%, rgba(251, 248, 244, .1) 62%, rgba(251, 248, 244, 0) 100%); }
+  .rw-players { align-self: end; }
+  .rw-board { width: min(100%, 640px); gap: 4px; padding: 9px; }
+  .rw-actions { align-self: start; max-width: 640px; width: 100%; justify-self: center; margin-top: 10px; }
+  .rw-actions .btn { min-height: 58px; font-size: 14px; }
+  .rw-wheelbox { padding: 4% 0; }
+  /* on a computer the letters take the place of the wheel, which is not needed while choosing: the board stays in full view */
+  .rw-keys { grid-column: 2; grid-row: 2 / -1; left: 50%; right: auto; top: 50%; bottom: auto; translate: -50% -50%; width: min(100%, 560px); max-height: 100%; overflow: auto; border-radius: 24px; padding: 16px 18px 18px; box-shadow: 0 0 0 1px rgba(201, 164, 105, .45), 0 30px 60px -30px rgba(72, 52, 84, .55); }
+  .rw-k { min-height: 52px; font-size: 20px; }
+  .rw-pl { max-width: 190px; padding: 8px 12px 8px 8px; }
+  .rw-pl .av { width: 40px; height: 40px; }
+  .rw-spin-hint { bottom: auto; top: calc(50% + min(50cqw, 50cqh, 260px) + 10px); }
+  .rw-pl .nm { font-size: 16px; }
+  .rw-pl .rp { font-size: 19px; }
+  .rw-host { font-size: 21px; }
+}
+@media (max-height: 700px) and (max-width: 899px) {
+  .rw-players { margin: 2px 0; }
+  .rw-pl { padding: 4px 8px 4px 4px; }
+  .rw-pl .av { width: 28px; height: 28px; }
+  .rw-pl .nm { font-size: 13px; }
+  .rw-pl .rp { font-size: 14.5px; }
+  .rw-pl .tp { font-size: 10px; }
+  .rw-host { font-size: 16px; margin-top: 3px; }
+  .rw-actions .btn { min-height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) { .rw-bulb, .rw-prize-rays, .rw-board .t.cur { animation: none; } }
 </style>
 </head>
 <body>
@@ -1881,6 +2091,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile" data-game="bw" aria-pressed="false">
               <img class="gp-ic" src="a/ic-bowling.webp" alt="" width="150" height="163" decoding="async">
               <span class="gp-text"><span class="gp-name" data-i18n="gameBw"></span><span class="gp-tag" data-i18n="gpBwTag"></span></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="rw" aria-pressed="false">
+              <img class="gp-ic" src="a/ic-ruota.webp" alt="" width="169" height="220" decoding="async">
+              <span class="gp-text"><span class="gp-name" data-i18n="gameRw"></span><span class="gp-tag" data-i18n="gpRwTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
           </div>
@@ -2034,6 +2250,25 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           <p class="record-line" id="bw-record"></p>
         </div>
 
+        <div class="setup-part" id="setup-rw" hidden>
+          <div class="uc-intro">
+            <span class="rw-hall" aria-hidden="true"><img src="a/studio-banner.jpg" alt="" width="800" height="400" decoding="async"><img class="rw-mini-wheel" src="a/ic-ruota.webp" alt="" width="169" height="220" decoding="async"></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameRw"></span><span class="hunt-sub" data-i18n="rwIntro"></span></span>
+          </div>
+          <div class="seg" role="group" data-i18n-attr="aria-label:modeLabel">
+            <button type="button" data-mode="solo" aria-pressed="true" data-i18n="rwSolo"></button>
+            <button type="button" data-mode="duo" aria-pressed="false" data-i18n="duo"></button>
+          </div>
+          <div class="duo-setup" id="rw-duo" hidden>
+            <div class="field"><label for="rw-p1" data-i18n="player1"></label><input id="rw-p1" maxlength="14" autocomplete="off" data-i18n-attr="placeholder:namePh"></div>
+            <div class="field"><label for="rw-p2" data-i18n="player2"></label><input id="rw-p2" maxlength="14" autocomplete="off" data-i18n-attr="placeholder:namePh"></div>
+            <p class="hint" data-i18n="rwDuoHint"></p>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-rw-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="rw" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
+          <p class="record-line" id="rw-record"></p>
+        </div>
+
         <div class="home-foot">
           <div class="foot-left">
             <button type="button" class="pill-toggle" id="sfx-home" aria-pressed="true"></button>
@@ -2160,6 +2395,36 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     <div class="bw-banner" id="bw-banner" aria-hidden="true"><b></b><span></span></div>
     <p class="bw-hint" id="bw-hint" aria-live="polite"></p>
     <div class="bw-power" id="bw-power" hidden aria-hidden="true"><i></i></div>
+  </section>
+
+  <section id="rw" class="screen rws" hidden data-i18n-attr="aria-label:rwLabel">
+    <div class="rw-bg" aria-hidden="true"></div>
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="rw-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameRw"></h2><span class="uc-sub" id="rw-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-rw" aria-pressed="true"></button>
+    </header>
+    <div class="rw-players" id="rw-players"></div>
+    <div class="rw-boardbox"><div class="rw-cat" id="rw-cat"></div><div class="rw-board" id="rw-board" role="img"></div></div>
+    <p class="rw-host" id="rw-host"></p>
+    <div class="rw-wheelbox">
+      <div class="rw-wheel" id="rw-wheel-wrap"><canvas id="rw-wheel" aria-hidden="true"></canvas><svg class="rw-pointer" id="rw-pointer" viewBox="0 0 40 56" aria-hidden="true"><defs><linearGradient id="rwp-g" x1="0" x2="1"><stop offset="0" stop-color="#a77a35"/><stop offset=".45" stop-color="#f6e2ad"/><stop offset="1" stop-color="#b48a48"/></linearGradient><radialGradient id="rwp-p" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f4eef0"/><stop offset="1" stop-color="#cfc3db"/></radialGradient></defs><path d="M20 55C14 42 4 30 4 19a16 16 0 0 1 32 0c0 11-10 23-16 36z" fill="url(#rwp-g)" stroke="#8f6a34" stroke-width="1"/><circle cx="20" cy="19" r="9" fill="url(#rwp-p)" stroke="#c9a469" stroke-width="1.5"/></svg></div>
+      <div class="rw-pop" id="rw-pop" aria-hidden="true"></div>
+      <p class="rw-spin-hint" id="rw-spin-hint" hidden></p>
+    </div>
+    <div class="rw-actions" id="rw-actions">
+      <button type="button" class="btn primary" id="rw-spin" data-i18n="rwSpin" disabled></button>
+      <button type="button" class="btn" id="rw-vowel" disabled><span data-i18n="rwVowel"></span><small data-i18n="rwVowelCost"></small></button>
+      <button type="button" class="btn" id="rw-solve" data-i18n="rwSolve" disabled></button>
+    </div>
+    <div class="rw-keys" id="rw-keys" hidden role="group" aria-labelledby="rw-keys-title">
+      <div class="rw-timer" id="rw-timer" hidden><i></i></div>
+      <div class="rw-keys-head"><span class="rw-keys-title" id="rw-keys-title"></span><button type="button" class="rw-keys-close" id="rw-keys-close" data-i18n-attr="aria-label:close"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="rw-keys-grid" id="rw-keys-grid"></div>
+      <div class="rw-keys-foot" id="rw-keys-foot" hidden><button type="button" class="btn" id="rw-keys-back"></button><button type="button" class="btn primary" id="rw-keys-ok" data-i18n="rwConfirm"></button></div>
+    </div>
+    <div class="rw-prize" id="rw-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="rw-prize-t"></p></div>
+    <div class="rw-banner" id="rw-banner" aria-hidden="true"><b></b><span></span></div>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -2548,6 +2813,36 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       bwKicker: 'Bowling · 10 turni', bwKickerDuo: 'Bowling in due', bwTitle1: 'Bella partita!', bwTitle2: 'Ottima partita!', bwTitle3: 'Partita da campione!',
       bwRowStrikes: 'Strike', bwRowSpares: 'Spare', bwRowPhotos: 'Foto scoperte', bwPhotosOf: '{d} di {t}', bwRowBest: 'Record da battere', bwRowWins: 'Partite vinte da te',
       bwAgain: 'Gioca ancora', bwSeePhotos: 'Guarda le foto',
+      // ---- Ruota della fortuna ----
+      gameRw: 'Ruota della fortuna', gpRwTag: 'Gira, indovina, vinci', rwLabel: 'Ruota della fortuna', rwNew: 'Nuovo', rwSolo: 'Col computer',
+      ledeRw: 'Gira la ruota, scegli le lettere e indovina la frase: ogni frase indovinata ti regala una foto di Hande.',
+      rwIntro: 'Contro la Volpe e il Gatto, in due sullo stesso telefono oppure online. Tre manche e, per chi vince, il gran finale.',
+      rwDuoHint: 'Giocate a turno sullo stesso telefono: passatevelo quando cambia il turno.',
+      rwRecordNone: 'Nessuna partita finita', rwRecord: 'Record: {n} punti · {p} partite · {w} vinte', rwRecord1: 'Record: {n} punti · 1 partita',
+      rwSub: 'Manche {r} di {n}', rwSubFinal: 'Gran finale', rwSpin: 'Gira la ruota', rwVowel: 'Compra vocale', rwVowelCost: '−250 punti', rwSolve: 'Risolvi',
+      rwConfirm: 'Conferma', rwBack: 'Cancella', rwClear: 'Azzera',
+      rwBank: 'BANCAROTTA', rwPass: 'PASSA', rwJolly: 'JOLLY', rwFoto: 'FOTO', rwFotoPop: 'FOTO · {v}', rwJollyShort: 'J',
+      rwTot: 'Tot. {n}', rwPlAria: '{name}: {r} punti in questa manche, {n} in tutto', rwBoardAria: 'Tabellone, {cat}: {txt}', rwKeyAria: 'Lettera {l}',
+      rwPickCons: 'Scegli una consonante', rwPickVowel: 'Scegli una vocale', rwSolveTitle: 'Scrivi le lettere che mancano', rwFinalPick: 'Scegli 3 consonanti e 1 vocale',
+      rwFinalPickN: 'Consonanti {c}/3 · Vocale {v}/1', rwFinalSolve: 'Hai 15 secondi: scrivi la frase!',
+      rwSpinHint: 'Spingi la ruota col dito', rwSpinHintMouse: 'Trascina la ruota per girarla', rwPush: 'Più forte! Spingi la ruota',
+      rwRound: 'Manche {r}', rwFinal: 'Gran finale', rwFinalSubMe: 'Tutto per te', rwFinalSub: 'Tocca a {name}',
+      rwHCat: 'La categoria è: {cat}', rwHSpinMe: 'Gira, gira…', rwHSpin: '{name} gira la ruota', rwHValueMe: '{v} punti a lettera: scegli una consonante',
+      rwHFotoMe: 'Spicchio FOTO: indovina una consonante e vinci una foto di Hande!', rwHValue: '{name}: {v} punti a lettera',
+      rwHBank: 'Bancarotta! {name} perde i punti della manche', rwHPass: 'Passa! Il turno va avanti', rwHJolly: 'Jolly! {name} lo tiene per quando serve',
+      rwHSave: 'Il jolly salva il turno di {name}!', rwHCalls: '{name} chiama la {l}', rwHBuys: '{name} compra la {l}', rwHNone: 'Nessuna {l}…',
+      rwHOne: "C'è una {l}! +{g}", rwHMany: 'Ci sono {n} {l}! +{g}', rwHOneV: "C'è una {l}!", rwHManyV: 'Ci sono {n} {l}!',
+      rwHYourTurn: 'Tocca a te!', rwHTurnOf: 'Tocca a {name}: passa il telefono', rwHTurn: 'Tocca a {name}', rwHThinks: '{name} ci pensa…',
+      rwHWrong: 'Sbagliato! Peccato, {name}', rwHBoard: '{name} completa il tabellone!', rwHSolved: '{name} indovina la frase!', rwHRoundOf: '{name} vince la manche: +{g}',
+      rwHFinalOf: '{name} gioca il gran finale', rwHFinalGiven: 'Sul tabellone ci sono già {l}', rwHFinalPicked: 'Le lettere scelte: {l}', rwHFinalGo: 'Via! Hai 15 secondi',
+      rwHFinalWin: 'Fantastico! +{g} punti', rwHFinalLose: 'Il tempo è finito: ecco la frase',
+      rwFotoWin: 'Hai vinto una foto di Hande!', rwFotoWinOf: '{name} vince una foto di Hande!', rwPrizeMe: 'Frase indovinata! +{g} e una foto di Hande',
+      rwPrizeOf: '{name} vince la manche e una foto di Hande', rwFinalPrize: 'Gran finale vinto: la foto speciale!',
+      rwKicker: 'Ruota della fortuna · 3 manche', rwKickerDuo: 'Ruota della fortuna in due', rwWinMe: 'Hai vinto la Ruota!', rwWinOf: 'Vince {name}',
+      rwRowPhotos: 'Foto vinte', rwRowFinal: 'Gran finale', rwFinalYes: 'Vinto', rwFinalNo: 'Non riuscito', rwRowBest: 'Record da battere',
+      rwAgain: 'Gioca ancora', rwSeePhotos: 'Guarda le foto', aRwStart: 'Ruota della fortuna: gira la ruota, scegli le lettere e indovina la frase.',
+      rwCheers: ['Che fiuto!', 'Grande!', 'Perfetto!', 'Evviva!', 'Ottimo!'], rwSighs: ['Peccato!', 'Niente da fare…', 'Ahi!'],
+      rwCats: { hande: 'Il mondo di Hande', proverbio: 'Proverbio', mododire: 'Modo di dire', film: 'Film', canzone: 'Canzone', citta: 'Luoghi', turchia: 'Turchia', turco: 'Parole turche', atasozu: 'Proverbio turco', deyim: 'Modo di dire turco', sarki: 'Canzone', sehir: 'Luoghi', italya: 'Italia', italyanca: 'Parole italiane', cosa: 'Cosa', luogo: 'Luogo' },
     },
     tr: {
       menuLabel: 'Oyun menüsü', fanLabel: 'Önizleme fotoğraflarını karıştır',
@@ -2735,6 +3030,36 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       bwKicker: 'Bowling · 10 tur', bwKickerDuo: 'İki kişilik bowling', bwTitle1: 'Güzel oyun!', bwTitle2: 'Harika oyun!', bwTitle3: 'Şampiyon oyunu!',
       bwRowStrikes: 'Strike', bwRowSpares: 'Spare', bwRowPhotos: 'Açılan fotoğraflar', bwPhotosOf: '{t} içinde {d}', bwRowBest: 'Geçilecek rekor', bwRowWins: 'Kazandığın oyunlar',
       bwAgain: 'Yeniden oyna', bwSeePhotos: 'Fotoğraflara bak',
+      // ---- Çarkıfelek ----
+      gameRw: 'Çarkıfelek', gpRwTag: 'Çevir, bil, kazan', rwLabel: 'Çarkıfelek', rwNew: 'Yeni', rwSolo: 'Bilgisayarla',
+      ledeRw: 'Çarkı çevir, harfleri seç ve cümleyi bul: bildiğin her cümle sana bir Hande fotoğrafı kazandırır.',
+      rwIntro: "Tilki ve Kedi'ye karşı, aynı telefonda iki kişi ya da çevrimiçi. Üç tur ve kazanan için büyük final.",
+      rwDuoHint: 'Aynı telefonda sırayla oynayın: sıra değişince telefonu verin.',
+      rwRecordNone: 'Henüz biten oyun yok', rwRecord: 'Rekor: {n} puan · {p} oyun · {w} galibiyet', rwRecord1: 'Rekor: {n} puan · 1 oyun',
+      rwSub: 'Tur {r}/{n}', rwSubFinal: 'Büyük final', rwSpin: 'Çarkı çevir', rwVowel: 'Sesli harf al', rwVowelCost: '−250 puan', rwSolve: 'Tahmin et',
+      rwConfirm: 'Onayla', rwBack: 'Sil', rwClear: 'Temizle',
+      rwBank: 'İFLAS', rwPass: 'PAS', rwJolly: 'JOKER', rwFoto: 'FOTO', rwFotoPop: 'FOTO · {v}', rwJollyShort: 'J',
+      rwTot: 'Top. {n}', rwPlAria: '{name}: bu turda {r} puan, toplam {n}', rwBoardAria: 'Tablo, {cat}: {txt}', rwKeyAria: '{l} harfi',
+      rwPickCons: 'Bir sessiz harf seç', rwPickVowel: 'Bir sesli harf seç', rwSolveTitle: 'Eksik harfleri yaz', rwFinalPick: '3 sessiz ve 1 sesli harf seç',
+      rwFinalPickN: 'Sessiz {c}/3 · Sesli {v}/1', rwFinalSolve: '15 saniyen var: cümleyi yaz!',
+      rwSpinHint: 'Çarkı parmağınla it', rwSpinHintMouse: 'Çevirmek için çarkı sürükle', rwPush: 'Daha güçlü! Çarkı it',
+      rwRound: 'Tur {r}', rwFinal: 'Büyük final', rwFinalSubMe: 'Sıra sende', rwFinalSub: 'Sıra: {name}',
+      rwHCat: 'Kategori: {cat}', rwHSpinMe: 'Dönüyor, dönüyor…', rwHSpin: '{name} çarkı çeviriyor', rwHValueMe: 'Harf başına {v} puan: bir sessiz harf seç',
+      rwHFotoMe: 'FOTO dilimi: bir sessiz harf bil, bir Hande fotoğrafı kazan!', rwHValue: '{name}: harf başına {v} puan',
+      rwHBank: 'İflas! {name} bu turdaki puanlarını kaybetti', rwHPass: 'Pas! Sıra geçiyor', rwHJolly: 'Joker! {name} onu sonraya saklıyor',
+      rwHSave: 'Joker {name} için sırayı kurtardı!', rwHCalls: '{name}: {l} harfi', rwHBuys: '{name} {l} harfini alıyor', rwHNone: 'Hiç {l} yok…',
+      rwHOne: 'Bir tane {l} var! +{g}', rwHMany: '{n} tane {l} var! +{g}', rwHOneV: 'Bir tane {l} var!', rwHManyV: '{n} tane {l} var!',
+      rwHYourTurn: 'Sıra sende!', rwHTurnOf: 'Sıra: {name} — telefonu ver', rwHTurn: 'Sıra: {name}', rwHThinks: '{name} düşünüyor…',
+      rwHWrong: 'Yanlış! Yazık, {name}', rwHBoard: '{name} tabloyu tamamladı!', rwHSolved: '{name} cümleyi buldu!', rwHRoundOf: '{name} turu kazandı: +{g}',
+      rwHFinalOf: 'Büyük finali {name} oynuyor', rwHFinalGiven: 'Tabloda zaten {l} var', rwHFinalPicked: 'Seçilen harfler: {l}', rwHFinalGo: 'Başla! 15 saniyen var',
+      rwHFinalWin: 'Muhteşem! +{g} puan', rwHFinalLose: 'Süre bitti: işte cümle',
+      rwFotoWin: 'Bir Hande fotoğrafı kazandın!', rwFotoWinOf: '{name} bir Hande fotoğrafı kazandı!', rwPrizeMe: 'Cümleyi buldun! +{g} ve bir Hande fotoğrafı',
+      rwPrizeOf: '{name} turu ve bir Hande fotoğrafını kazandı', rwFinalPrize: 'Büyük final kazanıldı: özel fotoğraf!',
+      rwKicker: 'Çarkıfelek · 3 tur', rwKickerDuo: 'İki kişilik Çarkıfelek', rwWinMe: "Çarkıfelek'i kazandın!", rwWinOf: 'Kazanan: {name}',
+      rwRowPhotos: 'Kazanılan fotoğraflar', rwRowFinal: 'Büyük final', rwFinalYes: 'Kazanıldı', rwFinalNo: 'Olmadı', rwRowBest: 'Geçilecek rekor',
+      rwAgain: 'Yeniden oyna', rwSeePhotos: 'Fotoğraflara bak', aRwStart: 'Çarkıfelek: çarkı çevir, harfleri seç ve cümleyi bul.',
+      rwCheers: ['Harika!', 'Süper!', 'Mükemmel!', 'Bravo!', 'Yaşasın!'], rwSighs: ['Yazık!', 'Olmadı…', 'Ah!'],
+      rwCats: { hande: "Hande'nin dünyası", proverbio: 'İtalyan atasözü', mododire: 'İtalyan deyimi', film: 'Film', canzone: 'Şarkı', citta: 'Yerler', turchia: 'Türkiye', turco: 'Türkçe kelimeler', atasozu: 'Atasözü', deyim: 'Deyim', sarki: 'Şarkı', sehir: 'Yerler', italya: 'İtalya', italyanca: 'İtalyanca kelimeler', cosa: 'Nesne', luogo: 'Yer' },
     },
   };
   const store = {
@@ -2943,6 +3268,10 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       },
       bwClack() { tone(1600 + Math.random() * 1400, { type: 'triangle', dur: .04, vol: .05 }); noise({ dur: .03, vol: .08, freq: 3000, q: 1 }); },
       bwGutter() { noise({ dur: .45, vol: .22, freq: 220, to: 90, q: .8, type: 'lowpass' }); },
+      rwTick() { tone(2400, { type: 'square', dur: .012, vol: .022 }); noise({ dur: .02, vol: .1, freq: 3600, q: 2.5 }); },
+      rwDing(i) { const n = [0, 4, 7, 12, 7, 4][i % 6]; tone(semi(1318.51, n), { type: 'sine', dur: .55, vol: .11, verb: .4 }); tone(semi(2637.02, n), { type: 'sine', dur: .25, vol: .035 }); },
+      rwBuzz() { tone(98, { type: 'sawtooth', dur: .4, vol: .07 }); tone(104, { type: 'square', dur: .4, vol: .03 }); },
+      rwBank() { [0, -1, -2, -5].forEach((n, i) => tone(semi(392, n), { type: 'triangle', dur: i === 3 ? .75 : .26, vol: .15, at: i * .27, slide: i === 3 ? semi(392, -9) : 0 })); },
     };
   })();
 
@@ -3215,10 +3544,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
+    if (RG) rwRelang();
     if (!mapEl.hidden) renderMap(false);
     if (N && N.view) netRenderRoom();
     if (!onlineEl.hidden && !$('#onl-intro').hidden) netRenderIntro();
@@ -3345,7 +3675,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -3535,7 +3865,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -3637,7 +3967,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -4138,7 +4468,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -4638,7 +4968,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -4735,12 +5065,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-uc').hidden = gs !== 'uc';
     $('#setup-pz').hidden = gs !== 'pz';
     $('#setup-bw').hidden = gs !== 'bw';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : 'lede';
+    $('#setup-rw').hidden = gs !== 'rw';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -4757,7 +5088,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -5035,7 +5366,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -5579,7 +5910,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -5764,6 +6095,10 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, totals: N.players.map(() => 0), wins: N.players.map(() => 0) };
       N.ses.round++;
       N.eng = unNew(N.players.length, N.ses);
+    } else if (N.game === 'rw') {
+      if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, wins: N.players.map(() => 0) };
+      N.ses.round++; N.ses.counted = false;
+      N.eng = rwNet(N.players.length, N.ses);
     } else if (N.game === 'bw') {
       if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, wins: N.players.map(() => 0) };
       N.ses.round++;
@@ -5798,11 +6133,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden) { S = null; ucStop(); bwStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
@@ -5946,7 +6281,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -6219,7 +6554,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -7065,7 +7400,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop();
+    ucStop(); pzStop(); bwStop(); rwStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -7527,7 +7862,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop();
+    ucStop(); pzStop(); bwStop(); rwStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -7642,6 +7977,1127 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (!tie && win[0] === me) celebrate(); else if (!tie) Sound.lose(); else celebrate();
   }
 
+  /* ---------- Ruota della fortuna: the phrases to guess ----------
+     Each phrase is [category, text]. The groups follow what the player asked for: the world of Hande (her series and
+     the places of the photos in this game), sayings, films songs and places, Turkey (Italy in Turkish). Every word fits
+     a row of the board (13 tiles) and a phrase fits four rows. The final round uses short ones. */
+  const RW_PHRASES = {
+    it: [
+      ['hande', 'Sen Çal Kapımı'], ['hande', 'Eda e Serkan'], ['hande', 'Aşk Laftan Anlamaz'], ['hande', 'Hayat e Murat'],
+      ['hande', 'Güneşin Kızları'], ['hande', 'Bambaşka Biri'], ['hande', 'Un giro in barca sulla Senna'], ['hande', 'Parigi e la Torre Eiffel'],
+      ['hande', 'Il cappello di paglia'], ['hande', 'Gli occhiali da sole'], ['hande', 'Una giornata al maneggio'], ['hande', 'La torta di compleanno'],
+      ['hande', 'Il tailleur grigio'], ['hande', 'Il corsetto di pizzo bianco'], ['hande', 'Una serata a Mosca'], ['hande', 'I guanti rossi'],
+      ['hande', 'Il sorriso di Hande'], ['hande', 'Un pomeriggio in libreria'], ['hande', 'Il servizio per ELLE'], ['hande', 'Il tappeto rosso'],
+      ['hande', 'Un bacio volante per i fan'], ['hande', 'La suite bianca'], ['hande', 'Il corridoio dorato'], ['hande', 'La serata in nero'],
+      ['hande', 'Il set al mare'],
+      ['proverbio', 'Chi dorme non piglia pesci'], ['proverbio', "Tra il dire e il fare c'è di mezzo il mare"], ['proverbio', 'Chi va piano va sano e va lontano'],
+      ['proverbio', "L'appetito vien mangiando"], ['proverbio', 'Ride bene chi ride ultimo'], ['proverbio', "Non è tutto oro quel che luccica"],
+      ['proverbio', 'Meglio tardi che mai'], ['proverbio', 'Chi trova un amico trova un tesoro'], ['proverbio', "Il mattino ha l'oro in bocca"],
+      ['proverbio', 'Al cuor non si comanda'], ['proverbio', 'Occhio non vede cuore non duole'], ['proverbio', 'Chi la dura la vince'],
+      ['proverbio', 'Volere è potere'], ['proverbio', "L'abito non fa il monaco"], ['proverbio', 'Can che abbaia non morde'],
+      ['proverbio', 'Paese che vai usanza che trovi'], ['proverbio', 'Una mela al giorno toglie il medico di torno'], ['proverbio', 'Chi semina vento raccoglie tempesta'],
+      ['proverbio', "Non c'è rosa senza spine"],
+      ['mododire', 'In bocca al lupo'], ['mododire', 'Avere le farfalle nello stomaco'], ['mododire', 'Toccare il cielo con un dito'], ['mododire', 'Essere al settimo cielo'],
+      ['mododire', 'Un colpo di fulmine'], ['mododire', 'Acqua in bocca'], ['mododire', 'Fare castelli in aria'], ['mododire', 'Come il cacio sui maccheroni'],
+      ['mododire', 'Avere la testa fra le nuvole'], ['mododire', 'Cercare un ago in un pagliaio'],
+      ['film', 'La vita è bella'], ['film', 'Colazione da Tiffany'], ['film', 'Via col vento'], ['film', 'Il diavolo veste Prada'], ['film', 'Vacanze romane'],
+      ['film', 'Pretty Woman'], ['film', 'Notting Hill'], ['film', 'Titanic'], ['film', 'La dolce vita'], ['film', 'Il favoloso mondo di Amélie'],
+      ['film', 'Mangia prega ama'], ['film', 'Il grande Gatsby'], ['film', 'Nuovo Cinema Paradiso'], ['film', 'Mamma mia'], ['film', 'Cenerentola'],
+      ['canzone', 'Nel blu dipinto di blu'], ['canzone', 'Azzurro'], ['canzone', 'Con te partirò'], ['canzone', 'Il cielo in una stanza'], ['canzone', 'Felicità'],
+      ['canzone', 'Tintarella di luna'], ['canzone', "L'italiano"], ['canzone', 'La vie en rose'],
+      ['citta', 'Le gondole di Venezia'], ['citta', 'Il Colosseo di Roma'], ['citta', 'La Torre di Pisa'], ['citta', 'Il Duomo di Milano'],
+      ['citta', 'Il golfo di Napoli'], ['citta', 'Il Ponte Vecchio di Firenze'], ['citta', 'Le spiagge di Capri'], ['citta', 'Il Big Ben di Londra'],
+      ['citta', 'La Piazza Rossa di Mosca'],
+      ['turchia', 'Il Gran Bazar di Istanbul'], ['turchia', 'La Torre di Galata'], ['turchia', 'Il ponte sul Bosforo'], ['turchia', 'La Moschea Blu'],
+      ['turchia', 'Le mongolfiere della Cappadocia'], ['turchia', 'Il caffè turco'], ['turchia', 'Il tè nel bicchiere a tulipano'], ['turchia', 'Il baklava al pistacchio'],
+      ['turchia', 'Il simit al sesamo'], ['turchia', 'Le spiagge di Bodrum'], ['turchia', 'I lokum alla rosa'], ['turchia', 'La Torre della Fanciulla'],
+      ['turco', 'Merhaba vuol dire ciao'], ['turco', 'Seni seviyorum vuol dire ti amo'], ['turco', 'Günaydın vuol dire buongiorno'], ['turco', 'Teşekkürler vuol dire grazie'],
+      ['turco', 'Aşk vuol dire amore'], ['turco', 'Canım vuol dire tesoro mio'], ['turco', 'Güzel vuol dire bello'], ['turco', 'Hoş geldin vuol dire benvenuto'],
+      ['turco', 'İyi geceler vuol dire buonanotte'], ['turco', 'Çok güzel vuol dire bellissimo'],
+    ],
+    tr: [
+      ['hande', 'Sen Çal Kapımı'], ['hande', 'Eda ve Serkan'], ['hande', 'Aşk Laftan Anlamaz'], ['hande', 'Hayat ve Murat'],
+      ['hande', 'Güneşin Kızları'], ['hande', 'Bambaşka Biri'], ['hande', 'Seine nehrinde tekne gezisi'], ['hande', 'Paris ve Eyfel Kulesi'],
+      ['hande', 'Hasır şapka'], ['hande', 'Güneş gözlükleri'], ['hande', 'At çiftliğinde bir gün'], ['hande', 'Doğum günü pastası'],
+      ['hande', 'Gri takım elbise'], ['hande', 'Beyaz dantel korse'], ['hande', "Moskova'da bir akşam"], ['hande', 'Kırmızı eldivenler'],
+      ['hande', "Hande'nin gülüşü"], ['hande', 'Kitapçıda bir öğleden sonra'], ['hande', 'ELLE için çekim'], ['hande', 'Kırmızı halı'],
+      ['hande', 'Hayranlara bir öpücük'], ['hande', 'Beyaz süit'], ['hande', 'Altın koridor'], ['hande', 'Siyah gece'], ['hande', 'Deniz kenarı'],
+      ['atasozu', 'Damlaya damlaya göl olur'], ['atasozu', 'Ağaç yaşken eğilir'], ['atasozu', 'Sakla samanı gelir zamanı'], ['atasozu', 'Bugünün işini yarına bırakma'],
+      ['atasozu', 'Gülü seven dikenine katlanır'], ['atasozu', 'Tatlı dil yılanı deliğinden çıkarır'], ['atasozu', 'Dost kara günde belli olur'],
+      ['atasozu', 'Bir elin nesi var iki elin sesi var'], ['atasozu', 'Ayağını yorganına göre uzat'], ['atasozu', 'Sabreden derviş muradına ermiş'],
+      ['atasozu', 'Üzüm üzüme baka baka kararır'], ['atasozu', 'Az olsun öz olsun'], ['atasozu', 'Görünen köy kılavuz istemez'], ['atasozu', 'İşleyen demir ışıldar'],
+      ['atasozu', 'Dağ dağa kavuşmaz insan insana kavuşur'], ['atasozu', 'Her gecenin bir sabahı vardır'], ['atasozu', 'Bir fincan kahvenin kırk yıl hatırı vardır'],
+      ['atasozu', 'Söz gümüşse sükut altındır'], ['atasozu', 'Parlayan her şey altın değildir'], ['atasozu', 'Gözden ırak olan gönülden de ırak olur'],
+      ['deyim', 'Ağzı kulaklarına varmak'], ['deyim', 'Etekleri zil çalmak'], ['deyim', 'Kalbi küt küt atmak'], ['deyim', 'Yüreği ağzına gelmek'],
+      ['deyim', 'Pireyi deve yapmak'], ['deyim', 'Burnundan kıl aldırmamak'], ['deyim', 'Ayvayı yemek'], ['deyim', 'Dünyalar onun olmak'],
+      ['deyim', 'Gözünün nuru'], ['deyim', 'Havalarda uçmak'],
+      ['film', 'Hayat Güzeldir'], ['film', 'Rüzgar Gibi Geçti'], ['film', 'Şeytan Marka Giyer'], ['film', 'Titanik'], ['film', "Tiffany'de Kahvaltı"],
+      ['film', 'Aşk Tesadüfleri Sever'], ['film', 'Babam ve Oğlum'], ['film', 'Hababam Sınıfı'], ['film', 'Eşkıya'], ['film', 'Mamma Mia'],
+      ['film', 'Külkedisi'], ['film', 'Muhteşem Gatsby'], ['film', 'Roma Tatili'],
+      ['sarki', 'Şımarık'], ['sarki', 'Kuzu Kuzu'], ['sarki', 'Dudu'], ['sarki', 'Gülpembe'], ['sarki', 'Firuze'], ['sarki', 'Hadi Bakalım'],
+      ['sarki', 'Bir Derdim Var'], ['sarki', 'Senden Daha Güzel'],
+      ['sehir', "Paris'in ışıkları"], ['sehir', "Londra'da Big Ben"], ['sehir', 'Kapadokya balonları'], ['sehir', "Bodrum'da yaz tatili"],
+      ['sehir', "İzmir'in saat kulesi"], ['sehir', 'Antalya sahilleri'], ['sehir', 'Galata Kulesi'], ['sehir', 'Kız Kulesi'], ['sehir', 'Boğaziçi Köprüsü'],
+      ['sehir', 'Kapalıçarşı'], ['sehir', "Moskova'da Kızıl Meydan"],
+      ['italya', "Roma'da Kolezyum"], ['italya', 'Venedik gondolları'], ['italya', 'Pisa Kulesi'], ['italya', 'Napoli pizzası'], ['italya', "Milano'da moda haftası"],
+      ['italya', "Floransa'nın köprüleri"], ['italya', 'Capri adası'], ['italya', "Sicilya'da tatil"], ['italya', 'İtalyan dondurması'], ['italya', 'Spagetti ve makarna'],
+      ['italyanca', 'Ciao merhaba demek'], ['italyanca', 'Grazie teşekkürler demek'], ['italyanca', 'Amore aşk demek'], ['italyanca', 'Bella güzel demek'],
+      ['italyanca', 'Ti amo seni seviyorum demek'], ['italyanca', 'Buongiorno günaydın demek'], ['italyanca', 'Dolce vita tatlı hayat demek'],
+      ['italyanca', 'Arrivederci hoşça kal demek'], ['italyanca', 'Buonanotte iyi geceler demek'],
+    ],
+  };
+  const RW_FINALS = {
+    it: [
+      ['cosa', 'Colpo di fulmine'], ['cosa', 'Notte stellata'], ["cosa", "Sogno d'oro"], ['cosa', 'Cuore di panna'], ['cosa', 'Perla rara'],
+      ['cosa', 'Stella cadente'], ['cosa', 'Luna di miele'], ['cosa', 'Torta al cioccolato'], ['cosa', 'Anello di diamanti'], ['cosa', 'Rossetto rosso'],
+      ['cosa', 'Tazza di caffè'], ['cosa', 'Biglietto aereo'], ['cosa', 'Scarpe col tacco'], ['luogo', 'Spiaggia dorata'], ['luogo', 'Giardino fiorito'],
+      ['luogo', 'Mare cristallino'], ['luogo', 'Terrazza sul mare'], ['luogo', 'Isola deserta'],
+    ],
+    tr: [
+      ['cosa', 'Yıldızlı gece'], ['cosa', 'Altın kalp'], ['cosa', 'Aşk mektubu'], ['cosa', 'Sıcak çay'], ['cosa', 'Tatlı rüyalar'], ['cosa', 'Ay ışığı'],
+      ['cosa', 'Kırmızı ruj'], ['cosa', 'Sıcak simit'], ['cosa', 'Elmas yüzük'], ['cosa', 'Kar tanesi'], ['cosa', 'Çikolatalı pasta'], ['cosa', 'Papatya çayı'],
+      ['luogo', 'Gül bahçesi'], ['luogo', 'Mavi gökyüzü'], ['luogo', 'Deniz feneri'], ['luogo', 'Issız ada'], ['luogo', 'Altın kumsal'],
+    ],
+  };
+  /* ---------- Ruota della fortuna: the rules ----------
+     One engine plays a whole game: the same code runs a game on this phone and, in an online room, on the room's
+     device. Every action (spin, consonant, vowel, solve) becomes an event; the screen replays the events with its
+     animations, so a phone that follows a room shows exactly what happened. The wheel turns in "turns" (1 = a full
+     circle, clockwise) and slows down evenly, so from where it starts and how fast it is pushed anyone can tell where it
+     stops. The computer players know the phrase but play like people: they guess well, not always, and solve when
+     enough of the board is open. */
+  const RW = {
+    DEC: .55, V_MIN: 1.15, V_MAX: 2.6, VOWEL: 250, MIN_WIN: 1000, ROUNDS: 3, FINAL_PRIZE: 5000, FINAL_TIME: 15, COLS: 13, ROWS: 4,
+  };
+  // the wedges, clockwise from the top; c is the colour family used when drawing
+  const RW_WEDGES = [
+    { v: 500, c: 'peach' }, { v: 300, c: 'lilac' }, { v: 900, c: 'mint' }, { k: 'bank' }, { v: 400, c: 'ivory' },
+    { v: 650, c: 'rose' }, { v: 250, c: 'mint' }, { k: 'jolly' }, { v: 700, c: 'lilac' }, { v: 350, c: 'peach' },
+    { v: 1000, c: 'gold' }, { k: 'pass' }, { v: 450, c: 'mint' }, { v: 600, c: 'ivory' }, { k: 'foto', v: 500 },
+    { v: 200, c: 'lilac' }, { v: 800, c: 'peach' }, { k: 'bank' }, { v: 300, c: 'mint' }, { v: 550, c: 'ivory' },
+  ];
+  const RW_ALPHA = { it: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', tr: 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ' };
+  const RW_VOWELS = { it: 'AEIOU', tr: 'AEIİOÖUÜ' };
+  const RW_CONS = { it: 'NRTLSCDMPVGBFZHQJKWXY', tr: 'NRLKDMYTSBZŞÇGHĞVCPFJ' }; // consonants, the most common first
+  const RW_VFREQ = { it: 'EAIOU', tr: 'AEİIUOÜÖ' };
+  const RW_GIVEN = { it: 'RSTLNE', tr: 'RSTLNE' }; // the letters the final round starts with
+  // a tile counts as its plain letter: accents, and in Italian the Turkish letters too
+  const RW_FOLD = {
+    it: { À: 'A', Á: 'A', Â: 'A', È: 'E', É: 'E', Ê: 'E', Ì: 'I', Í: 'I', Î: 'I', Ò: 'O', Ó: 'O', Ô: 'O', Ù: 'U', Ú: 'U', Û: 'U', Ç: 'C', Ğ: 'G', İ: 'I', Ö: 'O', Ş: 'S', Ü: 'U' },
+    tr: { À: 'A', Á: 'A', Â: 'A', È: 'E', É: 'E', Ê: 'E', Î: 'İ', Ò: 'O', Ó: 'O', Ô: 'O', Ù: 'U', Ú: 'U', Û: 'U' },
+  };
+  const rwKey = (ch, lang) => { const k = RW_FOLD[lang][ch] || ch; return RW_ALPHA[lang].includes(k) ? k : null; };
+  const rwIsVowel = (l, lang) => RW_VOWELS[lang].includes(l);
+  // capitals as the language writes them; in an Italian phrase a Turkish word keeps its Turkish capitals
+  function rwUpper(text, lang) {
+    if (lang === 'tr') return text.toLocaleUpperCase('tr');
+    return text.split(' ').map((w) => w.toLocaleUpperCase(/[çğıöşüÇĞİÖŞÜ]/.test(w) ? 'tr' : 'it')).join(' ');
+  }
+  // the phrase on the board: rows of tile indexes, whole words, each row centred; null when it does not fit
+  function rwRows(chars, cols, rows) {
+    const words = []; let cur = [];
+    chars.forEach((ch, i) => { if (ch === ' ') { if (cur.length) words.push(cur); cur = []; } else cur.push(i); });
+    if (cur.length) words.push(cur);
+    const out = []; let line = [];
+    for (const w of words) {
+      if (w.length > cols) return null;
+      if (line.length && line.length + 1 + w.length > cols) { out.push(line); line = []; }
+      if (line.length) line.push(-1);
+      line.push(...w);
+    }
+    if (line.length) out.push(line);
+    return out.length <= rows ? out : null;
+  }
+  function rwPuzzle(cat, text, lang) {
+    const up = rwUpper(text, lang), chars = Array.from(up), keys = chars.map((ch) => rwKey(ch, lang));
+    return { cat, chars, keys, open: keys.map((k) => k === null), rows: rwRows(chars, RW.COLS, RW.ROWS) };
+  }
+  const rwWedgeAt = (angle) => { const a = -angle - Math.floor(-angle); return Math.min(RW_WEDGES.length - 1, Math.floor(a * RW_WEDGES.length)); };
+  const rwStopAt = (from, v) => from + v * v / (2 * RW.DEC);
+
+  /* cfg: { lang, players: [{ name, bot, av }], phrases: [[cat, text] x rounds], finalPhrase, photos: [ids], first, final, gid, think } */
+  function rwNew(cfg) {
+    const E = {
+      gid: cfg.gid || '', lang: cfg.lang, rounds: cfg.phrases.length, r: -1, turn: cfg.first || 0, phase: 'turn', wedge: null, angle: 0,
+      players: cfg.players.map((p) => ({ name: p.name, bot: p.bot || null, av: p.av || null, round: 0, total: 0, jolly: 0, won: [] })),
+      called: [], pz: null, ev: [], en: 0, over: false, winner: -1, photos: (cfg.photos || []).slice(), pi: 0, botAt: 0, think: cfg.think == null ? 1 : cfg.think,
+      finalOn: !!cfg.final, finalPhrase: cfg.finalPhrase || null, fin: null, lastSeen: [],
+    };
+    const n = E.players.length, lang = E.lang;
+    const emit = (e, secs) => {
+      e.n = ++E.en; E.ev.push(e); if (E.ev.length > 24) E.ev.shift();
+      E.botAt = Math.max(E.botAt, Date.now()) + (secs || 1.2) * 1000 * E.think;
+      return e;
+    };
+    const photo = () => (E.pi < E.photos.length ? E.photos[E.pi++] : null);
+    const hidden = (pred) => E.pz.keys.some((k, i) => k && !E.pz.open[i] && pred(k));
+    E.consLeft = () => hidden((k) => !rwIsVowel(k, lang) && !E.called.includes(k));
+    E.vowelsLeft = () => hidden((k) => rwIsVowel(k, lang) && !E.called.includes(k));
+    E.openShare = () => { const ls = E.pz.keys.filter(Boolean).length, op = E.pz.keys.filter((k, i) => k && E.pz.open[i]).length; return ls ? op / ls : 1; };
+    E.can = (seat) => {
+      const p = E.players[seat];
+      const c = { spin: false, vowel: false, solve: false, cons: false };
+      if (E.over || seat !== E.turn) return c;
+      if (E.phase === 'turn') { c.spin = E.consLeft(); c.vowel = p.round >= RW.VOWEL && E.vowelsLeft(); c.solve = true; }
+      if (E.phase === 'cons') c.cons = true;
+      return c;
+    };
+    function startRound() {
+      E.r++;
+      const [cat, text] = cfg.phrases[E.r];
+      E.pz = rwPuzzle(cat, text, lang); E.called = []; E.phase = 'turn'; E.wedge = null;
+      E.players.forEach((p) => { p.round = 0; });
+      E.turn = (cfg.first || 0) + E.r; E.turn %= n;
+      emit({ k: 'round', r: E.r, cat, shape: E.shape(), rows: E.pz.rows, p: E.turn }, 3);
+    }
+    function nextTurn(why) {
+      const p = E.players[E.turn];
+      if (p.jolly > 0 && why !== 'solve') { p.jolly--; emit({ k: 'save', p: E.turn }, 1.6); E.phase = 'turn'; return; }
+      E.turn = (E.turn + 1) % n; E.phase = 'turn'; E.wedge = null;
+      emit({ k: 'turn', p: E.turn }, 1.2);
+    }
+    function reveal(l) {
+      const pos = [];
+      E.pz.keys.forEach((k, i) => { if (k === l && !E.pz.open[i]) { E.pz.open[i] = true; pos.push(i); } });
+      E.called.push(l);
+      return pos;
+    }
+    function winRound(seat, how) {
+      const p = E.players[seat], gain = Math.max(p.round, RW.MIN_WIN);
+      p.total += gain;
+      E.pz.open = E.pz.open.map(() => true);
+      const id = !p.bot ? photo() : null;
+      if (id) p.won.push(id);
+      emit({ k: 'solve', p: seat, ok: true, how, gain, chars: E.pz.chars.slice(), photo: id }, id ? 6.5 : 4.5);
+      E.players.forEach((x) => { x.round = 0; });
+      if (E.r + 1 < E.rounds) startRound();
+      else endGame();
+    }
+    function endGame() {
+      const best = Math.max(...E.players.map((p) => p.total));
+      const top = E.players.map((p, i) => (p.total === best ? i : -1)).filter((i) => i >= 0);
+      E.winner = top.length === 1 ? top[0] : -1;
+      const human = top.find((i) => !E.players[i].bot);
+      if (E.finalOn && E.finalPhrase && human != null) {
+        const [cat, text] = E.finalPhrase;
+        E.pz = rwPuzzle(cat, text, lang); E.called = [];
+        const given = Array.from(RW_GIVEN[lang]);
+        given.forEach((l) => { E.pz.keys.forEach((k, i) => { if (k === l) E.pz.open[i] = true; }); });
+        E.called = given.slice();
+        E.fin = { p: human, given, picked: null };
+        E.turn = human; E.phase = 'fpick'; E.r = E.rounds;
+        emit({ k: 'final', p: human, cat, shape: E.shape(), rows: E.pz.rows, given }, 3);
+        return;
+      }
+      E.over = true; E.phase = 'over';
+      emit({ k: 'over', winner: E.winner, totals: E.players.map((p) => p.total) }, 2);
+    }
+    E.shape = () => E.pz.chars.map((ch, i) => (E.pz.keys[i] === null || E.pz.open[i] ? ch : null));
+    E.act = (seat, a) => {
+      if (!a || typeof a !== 'object' || E.over || seat !== E.turn) return false;
+      const p = E.players[seat];
+      if (a.t === 'spin' && E.phase === 'turn') {
+        if (!E.consLeft()) return false;
+        const v = Math.min(RW.V_MAX, Math.max(RW.V_MIN, +a.v || RW.V_MIN));
+        // the wheel may have been pulled a little by hand before the push
+        const from = E.angle + Math.min(.5, Math.max(-.5, +a.d || 0)), to = rwStopAt(from, v), w = rwWedgeAt(to), wd = RW_WEDGES[w];
+        E.angle = to - Math.floor(to); E.wedge = w;
+        emit({ k: 'spin', p: seat, from, v, to, w }, v / RW.DEC + 1.4);
+        if (wd.k === 'bank') { const lost = p.round; p.round = 0; emit({ k: 'bank', p: seat, lost }, 2.2); nextTurn('bank'); }
+        else if (wd.k === 'pass') { emit({ k: 'pass', p: seat }, 1.8); nextTurn('pass'); }
+        else if (wd.k === 'jolly') { p.jolly++; emit({ k: 'jolly', p: seat }, 2); E.phase = 'turn'; }
+        else E.phase = 'cons';
+        return true;
+      }
+      if (a.t === 'cons' && E.phase === 'cons') {
+        const l = typeof a.l === 'string' ? a.l : '';
+        if (!RW_ALPHA[lang].includes(l) || rwIsVowel(l, lang) || E.called.includes(l)) return false;
+        const wd = RW_WEDGES[E.wedge], pos = reveal(l), gain = pos.length * (wd.v || 0);
+        p.round += gain;
+        const bonus = wd.k === 'foto' && pos.length && !p.bot ? photo() : null;
+        if (bonus) p.won.push(bonus);
+        emit({ k: 'letter', p: seat, l, pos, ch: pos.map((i) => E.pz.chars[i]), v: wd.v, gain, photo: bonus }, .55 * pos.length + (bonus ? 4.5 : 1.6));
+        E.phase = 'turn';
+        if (!pos.length) nextTurn('miss');
+        else if (!E.pz.open.includes(false)) winRound(seat, 'board');
+        return true;
+      }
+      if (a.t === 'vowel' && E.phase === 'turn') {
+        const l = typeof a.l === 'string' ? a.l : '';
+        if (!rwIsVowel(l, lang) || E.called.includes(l) || p.round < RW.VOWEL || !E.vowelsLeft()) return false;
+        p.round -= RW.VOWEL;
+        const pos = reveal(l);
+        emit({ k: 'vowel', p: seat, l, pos, ch: pos.map((i) => E.pz.chars[i]), cost: RW.VOWEL }, .55 * pos.length + 1.6);
+        if (!pos.length) nextTurn('miss');
+        else if (!E.pz.open.includes(false)) winRound(seat, 'board');
+        return true;
+      }
+      if (a.t === 'solve' && (E.phase === 'turn' || E.phase === 'fsolve')) {
+        const s = Array.from(typeof a.s === 'string' ? a.s : '');
+        const missing = E.pz.keys.map((k, i) => (k && !E.pz.open[i] ? i : -1)).filter((i) => i >= 0);
+        const ok = s.length === missing.length && missing.every((i, j) => rwKey(s[j], lang) === E.pz.keys[i]);
+        if (E.phase === 'fsolve') { finalEnd(ok); return true; }
+        if (ok) { winRound(seat, 'solve'); return true; }
+        emit({ k: 'solve', p: seat, ok: false, s: s.join('') }, 2.6);
+        nextTurn('solve');
+        return true;
+      }
+      if (a.t === 'fpick' && E.phase === 'fpick') {
+        const ls = Array.isArray(a.l) ? a.l.filter((l) => typeof l === 'string') : [];
+        const cons = ls.filter((l) => RW_ALPHA[lang].includes(l) && !rwIsVowel(l, lang) && !E.called.includes(l));
+        const vow = ls.filter((l) => rwIsVowel(l, lang) && !E.called.includes(l));
+        if (cons.length !== 3 || vow.length !== 1 || new Set(cons).size !== 3) return false;
+        const pos = [];
+        cons.concat(vow).forEach((l) => pos.push(...reveal(l)));
+        E.fin.picked = cons.concat(vow);
+        E.phase = 'fsolve';
+        emit({ k: 'fpick', p: seat, l: E.fin.picked, pos, ch: pos.map((i) => E.pz.chars[i]) }, 2.5);
+        if (!E.pz.open.includes(false)) finalEnd(true);
+        return true;
+      }
+      if (a.t === 'ftimeout' && E.phase === 'fsolve') { finalEnd(false); return true; }
+      return false;
+    };
+    function finalEnd(ok) {
+      const seat = E.fin.p, p = E.players[seat];
+      let id = null;
+      if (ok) { p.total += RW.FINAL_PRIZE; id = photo(); if (id) p.won.push(id); }
+      E.pz.open = E.pz.open.map(() => true);
+      emit({ k: 'fend', p: seat, ok, prize: ok ? RW.FINAL_PRIZE : 0, chars: E.pz.chars.slice(), photo: id }, 5);
+      E.over = true; E.phase = 'over';
+      emit({ k: 'over', winner: E.winner, totals: E.players.map((x) => x.total) }, 2);
+    }
+
+    /* the computer players: what a good, human-looking player would do now */
+    E.botMove = (seat, skill) => {
+      const p = E.players[seat], sk = skill == null ? (p.bot === 'gatto' ? .55 : p.bot === 'civetta' ? .8 : .68) : skill;
+      if (E.phase === 'cons') {
+        const left = Array.from(RW_CONS[lang]).filter((l) => !E.called.includes(l));
+        const inside = left.filter((l) => E.pz.keys.some((k, i) => k === l && !E.pz.open[i]));
+        const pool = inside.length && Math.random() < sk ? inside : left.slice(0, 7);
+        return { t: 'cons', l: pool[Math.floor(Math.pow(Math.random(), 1.6) * pool.length)] };
+      }
+      if (E.phase !== 'turn') return null;
+      const share = E.openShare(), cons = E.consLeft(), vows = E.vowelsLeft();
+      const missing = E.pz.keys.map((k, i) => (k && !E.pz.open[i] ? E.pz.chars[i] : null)).filter(Boolean);
+      const want = .52 + (1 - sk) * .3 + Math.random() * .12;
+      if (share >= want || (!cons && (!vows || p.round < RW.VOWEL)) || (missing.length <= 2 && Math.random() < .7)) {
+        // sometimes a hurried guess is wrong
+        if (share < .7 && Math.random() < .18 && missing.length > 1) {
+          const wrong = missing.slice(); const j = Math.floor(Math.random() * wrong.length);
+          wrong[j] = RW_CONS[lang][(RW_CONS[lang].indexOf(rwKey(wrong[j], lang)) + 1 + Math.floor(Math.random() * 5)) % RW_CONS[lang].length];
+          return { t: 'solve', s: wrong.join('') };
+        }
+        return { t: 'solve', s: missing.join('') };
+      }
+      if (vows && p.round >= RW.VOWEL && (!cons || Math.random() < (p.round >= 1500 ? .45 : .22))) {
+        const left = Array.from(RW_VFREQ[lang]).filter((l) => !E.called.includes(l));
+        const inside = left.filter((l) => E.pz.keys.some((k, i) => k === l && !E.pz.open[i]));
+        const pool = inside.length && Math.random() < sk + .15 ? inside : left;
+        return { t: 'vowel', l: pool[Math.floor(Math.pow(Math.random(), 1.5) * pool.length)] };
+      }
+      if (cons) return { t: 'spin', v: RW.V_MIN + Math.random() * (RW.V_MAX - RW.V_MIN) };
+      return { t: 'solve', s: missing.join('') };
+    };
+    // in a room: the computer plays for the players who are away, once everybody has watched the last move
+    E.tick = (away) => {
+      if (E.over || Date.now() < E.botAt) return false;
+      const p = E.players[E.turn];
+      if (!p.bot && !(away && away(E.turn))) return false;
+      if (E.phase === 'fpick' || E.phase === 'fsolve') return false;
+      return E.act(E.turn, E.botMove(E.turn));
+    };
+    E.view = () => ({
+      gid: E.gid, lang, r: E.r, rounds: E.rounds, cat: E.pz.cat, shape: E.shape(), rows: E.pz.rows, called: E.called.slice(), turn: E.turn, phase: E.phase,
+      wedge: E.wedge, angle: E.angle, over: E.over, winner: E.winner, en: E.en, ev: E.ev.slice(), cons: E.consLeft(), vows: E.vowelsLeft(),
+      players: E.players.map((p) => ({ round: p.round, total: p.total, jolly: p.jolly, won: p.won.slice() })), fin: E.fin ? { p: E.fin.p, given: E.fin.given } : null,
+    });
+    startRound();
+    return E;
+  }
+  // three phrases from different groups, not seen lately on this phone
+  function rwPickPhrases(lang, k, recent) {
+    const all = RW_PHRASES[lang], seen = new Set(recent || []);
+    const group = (cat) => ({ hande: 0, proverbio: 1, mododire: 1, atasozu: 1, deyim: 1, film: 2, canzone: 2, citta: 2, sarki: 2, sehir: 2 }[cat] ?? 3);
+    let pool = all.filter(([, txt]) => !seen.has(txt));
+    if (pool.length < k * 3) pool = all.slice();
+    const out = [], groups = new Set();
+    const order = pool.map((x) => [Math.random(), x]).sort((a, b) => a[0] - b[0]).map((x) => x[1]);
+    for (const x of order) { if (out.length === k) break; if (!groups.has(group(x[0]))) { groups.add(group(x[0])); out.push(x); } }
+    for (const x of order) { if (out.length === k) break; if (!out.includes(x)) out.push(x); }
+    return out;
+  }
+  /* ---------- Ruota della fortuna: the screen ----------
+     The engine plays; this part shows what happened, one event after the other: the wheel turning with its clicks, the
+     letters lighting up on the board, the points, the photo of Hande won with a phrase. On this phone the computer
+     players think a moment and then play; in a room the events come from the room's device. */
+  const rwEl = $('#rw'), rwCv = $('#rw-wheel'), rwCtx = rwCv.getContext('2d'), rwBoardEl = $('#rw-board'), rwWrap = $('#rw-wheel-wrap');
+  const RW_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  // wedge colours: light middle, edge, text
+  const RW_COL = {
+    lilac: ['#f4eefc', '#c9b3ea', '#5d417f'], mint: ['#f0faf5', '#acdcc4', '#2f6a4f'], peach: ['#fff4ec', '#efb994', '#87492a'],
+    ivory: ['#fffefa', '#e7d6b6', '#7a5a2e'], rose: ['#fff1f4', '#e8afbf', '#82384f'], gold: ['#fff4d6', '#d1a964', '#4d3410'],
+    bank: ['#5b4868', '#1d1525', '#f3d995'], pass: ['#ffffff', '#e6dfd6', '#2e2438'], jolly: ['#fff7dd', '#d6a457', '#45290b'], foto: ['#fdebe3', '#d38c77', '#45200f'],
+  };
+  let RG = null, rwChain = Promise.resolve(), rwSpeed = 1; // rwSpeed: only the tests change it
+
+  function rwStats() {
+    const st = store.get('hm-rw', null);
+    return Object.assign({ played: 0, best: 0, wins: 0, finals: 0, found: [] }, st && typeof st === 'object' ? st : {});
+  }
+  const rwRecent = (l) => { const r = store.get('hm-rw-seen-' + l, []); return Array.isArray(r) ? r : []; };
+  const rwRemember = (l, txts) => store.set('hm-rw-seen-' + l, rwRecent(l).concat(txts).slice(-45));
+  const rwCatName = (cat) => (t('rwCats') || {})[cat] || '';
+  const rwWait = (ms) => new Promise((res) => setTimeout(res, ms / rwSpeed));
+  const rwMine = (g, seat) => (g.online ? seat === g.me : !!g.players[seat] && !g.players[seat].bot);
+  const rwWedgeLabel = (w) => (w.k === 'bank' ? t('rwBank') : w.k === 'pass' ? t('rwPass') : w.k === 'jolly' ? t('rwJolly') : w.k === 'foto' ? t('rwFoto') : String(w.v));
+
+  function rwMake(o) {
+    return {
+      online: !!o.online, E: o.E || null, cfg: o.cfg || null, gid: o.gid || '', me: o.me == null ? -1 : o.me, lang: o.lang, players: o.players,
+      v: null, en: 0, busy: false, angle: 0, kick: 0, lastTick: 0, spinRaf: 0, timers: [], keys: null, solve: null, fpick: [], drag: null,
+      found: [], tile: new Map(), r: -2, pts: o.players.map(() => ({ round: 0, total: 0, jolly: 0 })), wheelImg: null, rimImg: null, wheelPx: 0,
+      finalT: 0, overShown: false, canSpin: false, finalOk: null,
+    };
+  }
+  function rwLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (RG === g) fn(); }, ms / rwSpeed); g.timers.push(id); }
+  function rwShow() {
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = false;
+    rwHideKeys(); $('#rw-prize').hidden = true; $('#rw-banner').classList.remove('show'); $('#rw-pop').className = 'rw-pop';
+    rwBoardEl.textContent = ''; $('#rw-cat').textContent = ''; $('#rw-sub').textContent = '';
+    $('#rw-host').textContent = ''; rwRenderPlayers(); rwActions(null);
+    if (!$('.rw-bulb', rwWrap)) rwBuildBulbs();
+    requestAnimationFrame(() => rwResize());
+  }
+  function rwStop() {
+    const g = RG; RG = null;
+    if (g) { cancelAnimationFrame(g.spinRaf); g.timers.forEach(clearTimeout); clearInterval(g.finalT); }
+    rwChain = Promise.resolve();
+    rwEl.hidden = true;
+  }
+  function rwRequestExit() {
+    const g = RG;
+    if (g && g.online) { openConfirm(true); return; }
+    if (g && g.v && !g.v.over) openConfirm(false);
+    else goHome();
+  }
+
+  /* the wheel: the wedges are drawn once and turned; the gold rim with its lights stays still */
+  function rwBuildBulbs() {
+    for (let k = 0; k < 20; k++) {
+      const a = (k + .5) / 20 * Math.PI * 2, r = 46.7;
+      const b = document.createElement('i'); b.className = 'rw-bulb';
+      b.style.left = (50 + Math.sin(a) * r).toFixed(2) + '%'; b.style.top = (50 - Math.cos(a) * r).toFixed(2) + '%';
+      rwWrap.insertBefore(b, $('#rw-pointer'));
+    }
+  }
+  function rwResize() {
+    const g = RG; if (!g || rwEl.hidden) return;
+    const r = rwWrap.getBoundingClientRect(), css = Math.max(60, Math.round(r.width));
+    const px = Math.round(css * Math.min(2, window.devicePixelRatio || 1));
+    if (rwCv.width !== px) { rwCv.width = px; rwCv.height = px; }
+    if (g.wheelPx !== px || g.wheelLang !== lang) { g.wheelImg = rwWheelImage(px); g.rimImg = rwRimImage(px); g.wheelPx = px; g.wheelLang = lang; }
+    rwDrawWheel(g);
+  }
+  function rwWheelImage(px) {
+    const cv = document.createElement('canvas'); cv.width = cv.height = px;
+    const g = cv.getContext('2d'), c = px / 2, R = c * .875, W = RW_WEDGES.length, step = Math.PI * 2 / W;
+    g.translate(c, c);
+    RW_WEDGES.forEach((w, i) => {
+      const a0 = -Math.PI / 2 + i * step, a1 = a0 + step, col = RW_COL[w.k || w.c] || RW_COL.ivory;
+      const gr = g.createRadialGradient(0, 0, R * .16, 0, 0, R);
+      gr.addColorStop(0, col[0]); gr.addColorStop(.5, col[0]); gr.addColorStop(1, col[1]);
+      g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, R, a0, a1); g.closePath(); g.fillStyle = gr; g.fill();
+      // a soft light along one side of each wedge, like glazed porcelain
+      g.save(); g.clip();
+      const am = a0 + step * .3, sh = g.createLinearGradient(0, 0, Math.cos(am) * R, Math.sin(am) * R);
+      sh.addColorStop(0, 'rgba(255,255,255,0)'); sh.addColorStop(.7, 'rgba(255,255,255,.28)'); sh.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = sh; g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, R, a0, a0 + step * .45); g.closePath(); g.fill();
+      g.restore();
+      // the label: letters stacked from the rim towards the centre, upright when the wedge is under the pointer
+      const chars = Array.from(rwWedgeLabel(w)), n = chars.length;
+      const fs = R * (n <= 3 ? .112 : n <= 4 ? .096 : n <= 5 ? .084 : n <= 6 ? .076 : n <= 8 ? .066 : .056);
+      g.save(); g.rotate(a0 + step / 2 + Math.PI / 2);
+      g.fillStyle = col[2]; g.textAlign = 'center'; g.textBaseline = 'middle';
+      g.font = '700 ' + fs.toFixed(1) + 'px Cinzel, "Trajan Pro", Optima, "Times New Roman", serif';
+      g.shadowColor = w.k === 'bank' ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.75)'; g.shadowOffsetY = fs * .05; g.shadowBlur = fs * .1;
+      const top = R * .9 - fs * .55;
+      chars.forEach((ch, k) => g.fillText(ch, 0, -(top - k * fs * .97)));
+      g.shadowColor = 'transparent';
+      const yi = -(top - n * fs * .97) + fs * .15;
+      if (w.k === 'jolly' || w.k === 'foto' || (w.v || 0) >= 1000) rwGlyph(g, w.k === 'foto' ? 'camera' : 'star', 0, yi - fs * .1, fs * .8, col[2]);
+      g.restore();
+    });
+    // gold spokes, pegs and the pearl in the middle
+    for (let i = 0; i < W; i++) {
+      const a = -Math.PI / 2 + i * step, x = Math.cos(a), y = Math.sin(a);
+      g.strokeStyle = '#c9a469'; g.lineWidth = R * .014; g.beginPath(); g.moveTo(x * R * .16, y * R * .16); g.lineTo(x * R, y * R); g.stroke();
+      g.strokeStyle = 'rgba(255,248,226,.8)'; g.lineWidth = R * .004; g.beginPath(); g.moveTo(x * R * .17, y * R * .17); g.lineTo(x * R * .99, y * R * .99); g.stroke();
+      const pr = R * .022, px0 = x * R * .955, py0 = y * R * .955, pg = g.createRadialGradient(px0 - pr * .3, py0 - pr * .3, 0, px0, py0, pr);
+      pg.addColorStop(0, '#fff6dc'); pg.addColorStop(.5, '#d9b56c'); pg.addColorStop(1, '#8f6a34');
+      g.fillStyle = pg; g.beginPath(); g.arc(px0, py0, pr, 0, 7); g.fill();
+    }
+    const hub = R * .17, hg = g.createRadialGradient(-hub * .35, -hub * .4, hub * .1, 0, 0, hub);
+    hg.addColorStop(0, '#ffffff'); hg.addColorStop(.55, '#f4eef0'); hg.addColorStop(1, '#d6cbe0');
+    g.fillStyle = hg; g.beginPath(); g.arc(0, 0, hub, 0, 7); g.fill();
+    g.strokeStyle = '#c9a469'; g.lineWidth = R * .03; g.beginPath(); g.arc(0, 0, hub, 0, 7); g.stroke();
+    g.fillStyle = '#b48a48'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = 'italic 700 ' + (hub * 1.05).toFixed(1) + 'px "Cormorant Garamond", Garamond, "Times New Roman", serif';
+    g.fillText('H', 0, hub * .06);
+    g.strokeStyle = '#b48a48'; g.lineWidth = R * .012; g.beginPath(); g.arc(0, 0, R, 0, 7); g.stroke();
+    return cv;
+  }
+  function rwGlyph(g, kind, x, y, s, col) {
+    g.save(); g.translate(x, y); g.fillStyle = col; g.strokeStyle = col;
+    if (kind === 'star') {
+      g.beginPath();
+      for (let k = 0; k < 10; k++) { const r = k % 2 ? s * .22 : s * .5, a = -Math.PI / 2 + k * Math.PI / 5; g.lineTo(Math.cos(a) * r, Math.sin(a) * r); }
+      g.closePath(); g.fill();
+    } else {
+      g.lineWidth = s * .09; g.beginPath(); g.roundRect ? g.roundRect(-s * .48, -s * .3, s * .96, s * .66, s * .12) : g.rect(-s * .48, -s * .3, s * .96, s * .66); g.stroke();
+      g.beginPath(); g.arc(0, s * .03, s * .19, 0, 7); g.stroke();
+      g.fillRect(-s * .16, -s * .42, s * .32, s * .12);
+    }
+    g.restore();
+  }
+  function rwRimImage(px) {
+    const cv = document.createElement('canvas'); cv.width = cv.height = px;
+    const g = cv.getContext('2d'), c = px / 2, R = c * .875, O = c * .995, TAU = Math.PI * 2;
+    g.translate(c, c);
+    const gr = g.createLinearGradient(-O, -O, O, O);
+    gr.addColorStop(0, '#fff3cf'); gr.addColorStop(.25, '#dcb874'); gr.addColorStop(.5, '#f4dfa8'); gr.addColorStop(.75, '#b48a48'); gr.addColorStop(1, '#e9cf94');
+    // each ring is two whole circles, each its own outline, so nothing pokes out of the gold
+    const ring = (ro, ri) => { g.beginPath(); g.arc(0, 0, ro, 0, TAU); g.closePath(); g.moveTo(ri, 0); g.arc(0, 0, ri, 0, TAU); g.closePath(); };
+    ring(O, R); g.fillStyle = gr; g.fill('evenodd');
+    // a pearl band inside the gold
+    const pb = g.createRadialGradient(0, 0, R * 1.02, 0, 0, O * .985);
+    pb.addColorStop(0, 'rgba(255,255,255,0)'); pb.addColorStop(.5, 'rgba(255,252,244,.55)'); pb.addColorStop(1, 'rgba(255,255,255,0)');
+    ring(O * .97, R * 1.03); g.fillStyle = pb; g.fill('evenodd');
+    g.strokeStyle = 'rgba(255,250,236,.9)'; g.lineWidth = c * .008; g.beginPath(); g.arc(0, 0, R + c * .006, 0, TAU); g.stroke();
+    g.strokeStyle = 'rgba(120,84,32,.55)'; g.lineWidth = c * .006; g.beginPath(); g.arc(0, 0, O - c * .004, 0, TAU); g.stroke();
+    // sockets for the lights
+    for (let k = 0; k < 20; k++) {
+      const a = (k + .5) / 20 * Math.PI * 2, r = c * .934, x = Math.sin(a) * r, y = -Math.cos(a) * r;
+      g.fillStyle = 'rgba(120,84,32,.45)'; g.beginPath(); g.arc(x, y, c * .03, 0, 7); g.fill();
+    }
+    return cv;
+  }
+  function rwDrawWheel(g) {
+    if (!g || !g.wheelImg) return;
+    const px = rwCv.width, c = px / 2;
+    rwCtx.setTransform(1, 0, 0, 1, 0, 0); rwCtx.clearRect(0, 0, px, px);
+    rwCtx.translate(c, c); rwCtx.rotate(g.angle * Math.PI * 2); rwCtx.drawImage(g.wheelImg, -c, -c);
+    rwCtx.setTransform(1, 0, 0, 1, 0, 0); rwCtx.drawImage(g.rimImg, 0, 0);
+    $('#rw-pointer').style.transform = 'translateX(-50%) rotate(' + (-g.kick * 24).toFixed(1) + 'deg)';
+  }
+  // the wheel turns from where it was pushed and slows down evenly, clicking on every peg
+  function rwSpinTo(g, e) {
+    return new Promise((resolve) => {
+      const T = e.v / RW.DEC, W = RW_WEDGES.length, t0 = performance.now();
+      let last = Math.floor(e.from * W), kickAt = 0;
+      cancelAnimationFrame(g.spinRaf);
+      rwWrap.classList.add('spin');
+      const step = (now) => {
+        if (RG !== g) { resolve(); return; }
+        const t = Math.min(T, (now - t0) / 1000 * rwSpeed), th = e.from + e.v * t - .5 * RW.DEC * t * t;
+        g.angle = th;
+        const peg = Math.floor(th * W);
+        if (peg !== last) { last = peg; kickAt = now; if (now - g.lastTick > 34) { Sound.rwTick(); g.lastTick = now; } }
+        g.kick = Math.max(0, 1 - (now - kickAt) / 120);
+        rwDrawWheel(g);
+        if (t >= T) { g.angle = e.to; g.kick = 0; rwDrawWheel(g); rwWrap.classList.remove('spin'); resolve(); return; }
+        g.spinRaf = requestAnimationFrame(step);
+      };
+      g.spinRaf = requestAnimationFrame(step);
+    });
+  }
+  function rwSpringBack(g, to) {
+    const from = g.angle, t0 = performance.now();
+    const step = (now) => {
+      if (RG !== g || g.drag) return;
+      const k = Math.min(1, (now - t0) / 320), e = 1 - Math.pow(1 - k, 3);
+      g.angle = from + (to - from) * e; rwDrawWheel(g);
+      if (k < 1) g.spinRaf = requestAnimationFrame(step);
+    };
+    g.spinRaf = requestAnimationFrame(step);
+  }
+  // spin by hand: the wheel follows the finger, and a push makes it turn
+  function rwWheelDown(e) {
+    const g = RG; if (!g || !g.canSpin || g.busy) return;
+    const r = rwWrap.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    if (Math.hypot(e.clientX - cx, e.clientY - cy) < r.width * .12) return;
+    cancelAnimationFrame(g.spinRaf);
+    g.drag = { id: e.pointerId, cx, cy, a: Math.atan2(e.clientY - cy, e.clientX - cx), base: g.v ? g.v.angle : g.angle, acc: 0, samples: [[performance.now(), 0]] };
+    g.angle = g.drag.base;
+    try { rwWrap.setPointerCapture(e.pointerId); } catch (err) { /* already gone */ }
+    e.preventDefault();
+  }
+  function rwWheelMove(e) {
+    const g = RG; if (!g || !g.drag || e.pointerId !== g.drag.id) return;
+    const d = g.drag, a = Math.atan2(e.clientY - d.cy, e.clientX - d.cx);
+    let da = a - d.a; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+    d.acc += da; d.a = a;
+    const turns = d.acc / (2 * Math.PI);
+    g.angle = d.base + turns; d.samples.push([performance.now(), turns]); if (d.samples.length > 10) d.samples.shift();
+    rwDrawWheel(g);
+  }
+  function rwWheelUp(e) {
+    const g = RG; if (!g || !g.drag || e.pointerId !== g.drag.id) return;
+    const d = g.drag; g.drag = null;
+    const now = performance.now(), s = d.samples.filter((x) => now - x[0] < 150);
+    let v = 0;
+    if (s.length >= 2) { const a = s[0], b = s[s.length - 1]; v = (b[1] - a[1]) / Math.max(.016, (b[0] - a[0]) / 1000); }
+    if (Math.abs(v) < .4 || !g.canSpin) { rwSpringBack(g, d.base); if (g.canSpin) rwHint(t('rwPush')); return; }
+    rwAct({ t: 'spin', v: Math.min(RW.V_MAX, Math.max(RW.V_MIN, Math.abs(v) * 1.1)), d: Math.max(-.5, Math.min(.5, g.angle - d.base)) });
+  }
+  // with a mouse the wheel is dragged, on a phone it is pushed with a finger
+  const rwMouse = () => !!(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches);
+  function rwHint(txt) {
+    const h = $('#rw-spin-hint'); h.textContent = txt || ''; h.hidden = !txt;
+  }
+
+  /* the board: 4 rows of 13 tiles; each phrase sits in the middle, a word never broken */
+  function rwBuildBoard(g, shape, rows) {
+    rwBoardEl.textContent = ''; g.tile = new Map();
+    const C = RW.COLS, Rn = RW.ROWS, top = Math.max(0, Math.floor((Rn - rows.length) / 2)), cells = new Array(C * Rn).fill(-2);
+    rows.forEach((row, r) => { const off = Math.floor((C - row.length) / 2); row.forEach((idx, j) => { cells[(top + r) * C + off + j] = idx; }); });
+    cells.forEach((idx) => {
+      const el = document.createElement('i'); el.className = 't';
+      if (idx >= 0) {
+        el.classList.add('L'); const b = document.createElement('b'); el.appendChild(b); g.tile.set(idx, el);
+        if (shape[idx] != null) { b.textContent = shape[idx]; el.classList.add('o'); }
+      }
+      rwBoardEl.appendChild(el);
+    });
+    g.shape = shape.slice(); rwBoardAria(g);
+  }
+  function rwBoardAria(g) { rwBoardEl.setAttribute('aria-label', t('rwBoardAria', { cat: $('#rw-cat').textContent, txt: g.shape.map((ch) => (ch == null ? '_' : ch)).join('') })); }
+  function rwOpen(g, i, ch, flip) {
+    const el = g.tile.get(i); if (!el) return;
+    g.shape[i] = ch;
+    $('b', el).textContent = ch; el.classList.remove('lit', 'typed', 'cur'); el.classList.add('o');
+    if (flip) { el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+  }
+  async function rwLight(g, pos, chars) {
+    for (let k = 0; k < pos.length; k++) {
+      if (RG !== g) return;
+      const el = g.tile.get(pos[k]);
+      if (el) { el.classList.add('lit'); Sound.rwDing(k); buzz(8); }
+      await rwWait(430);
+    }
+    await rwWait(260);
+    if (RG !== g) return;
+    pos.forEach((i, k) => rwOpen(g, i, chars[k], true));
+    rwBoardAria(g);
+  }
+  async function rwOpenAll(g, chars) {
+    const hidden = Array.from(g.tile.keys()).filter((i) => g.shape[i] == null).sort((a, b) => a - b);
+    for (const i of hidden) { if (RG !== g) return; rwOpen(g, i, chars[i], true); Sound.tick2(); await rwWait(55); }
+    rwBoardAria(g);
+  }
+
+  /* the players and their points */
+  function rwRenderPlayers() {
+    const g = RG, box = $('#rw-players'); box.textContent = '';
+    if (!g) return;
+    box.dataset.n = g.players.length;
+    g.players.forEach((p, i) => {
+      const d = document.createElement('div'); d.className = 'rw-pl'; d.dataset.seat = i;
+      const av = document.createElement('span'); av.className = 'av';
+      if (p.av && p.av !== 'me') av.innerHTML = svgUse('av-' + p.av, '', '0 0 40 40');
+      else av.textContent = p.av === 'me' ? 'H' : (Array.from(p.name || '?')[0] || '?').toLocaleUpperCase(g.lang || lang);
+      const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = p.name;
+      const pts = document.createElement('span'); pts.className = 'pts';
+      pts.innerHTML = '<b class="rp"></b><span class="tp"></span>';
+      const jk = document.createElement('span'); jk.className = 'jk'; jk.textContent = t('rwJollyShort'); jk.hidden = true;
+      d.append(av, nm, pts, jk);
+      box.appendChild(d);
+    });
+    g.players.forEach((p, i) => rwPaintPts(g, i));
+  }
+  function rwPaintPts(g, i, how) {
+    const d = $('#rw-players .rw-pl[data-seat="' + i + '"]'); if (!d) return;
+    const s = g.pts[i];
+    $('.rp', d).textContent = fmtNum(s.round);
+    $('.tp', d).textContent = t('rwTot', { n: fmtNum(s.total) });
+    $('.jk', d).hidden = !s.jolly; $('.jk', d).textContent = s.jolly > 1 ? t('rwJollyShort') + '×' + s.jolly : t('rwJollyShort');
+    d.classList.toggle('off', g.players[i].on === false);
+    d.setAttribute('aria-label', t('rwPlAria', { name: g.players[i].name, r: fmtNum(s.round), n: fmtNum(s.total) }));
+    if (how) { d.classList.remove('bump', 'lose'); void d.offsetWidth; d.classList.add(how); }
+  }
+  function rwOn(g, seat) { $$('#rw-players .rw-pl').forEach((d) => d.classList.toggle('on', +d.dataset.seat === seat && !(g.v && g.v.over))); }
+
+  /* the host's comments */
+  function rwSay(txt, cls) {
+    const el = $('#rw-host');
+    el.classList.add('swap');
+    clearTimeout(rwSay.t);
+    rwSay.t = setTimeout(() => { el.textContent = txt || ''; el.className = 'rw-host' + (cls ? ' ' + cls : ''); }, 110);
+    if (txt) announce(txt);
+  }
+  async function rwBanner(title, sub) {
+    const b = $('#rw-banner');
+    $('b', b).textContent = title; $('span', b).textContent = sub || '';
+    b.classList.add('show'); Sound.go();
+    await rwWait(1500);
+    b.classList.remove('show');
+    await rwWait(300);
+  }
+  async function rwPop(w) {
+    const el = $('#rw-pop');
+    el.textContent = w.k === 'foto' ? t('rwFotoPop', { v: fmtNum(w.v) }) : w.k ? rwWedgeLabel(w) : fmtNum(w.v);
+    el.className = 'rw-pop show' + (w.k === 'bank' ? ' dark' : w.k === 'pass' ? ' white' : '');
+    if (w.k === 'foto' || (w.v || 0) >= 900) Sound.golden(); else if (!w.k) Sound.pickup();
+    await rwWait(1050);
+    el.classList.remove('show');
+  }
+  // a photo of Hande comes out of a card
+  function rwPrize(g, id, text) {
+    return new Promise((resolve) => {
+      const p = PHOTO_BY_ID.get(id), box = $('#rw-prize');
+      if (!p || RG !== g) { resolve(); return; }
+      $('img', box).src = cardSrc(p);
+      $('#rw-prize-t').textContent = text;
+      box.classList.remove('open'); box.hidden = false;
+      Sound.whoosh();
+      let done = false;
+      const finish = () => { if (done) return; done = true; box.hidden = true; box.onclick = null; resolve(); };
+      setTimeout(() => {
+        if (RG !== g) { finish(); return; }
+        box.classList.add('open'); Sound.sparkle(); buzz([10, 40, 10]);
+        const r = $('.rw-prize-card', box).getBoundingClientRect();
+        FX.burst(r.left + r.width / 2, r.top + r.height / 2, 60, true);
+      }, 420 / rwSpeed);
+      box.onclick = () => { if (box.classList.contains('open')) finish(); };
+      setTimeout(finish, 3400 / rwSpeed);
+    });
+  }
+
+  /* what the player can do now */
+  function rwActions(g, seat) {
+    const on = !!g && seat != null && g.v && !g.v.over && g.v.phase === 'turn' && rwMine(g, seat) && !g.busy;
+    const v = g && g.v, st = on ? v.players[seat] : null;
+    $('#rw-spin').disabled = !on || !v.cons;
+    $('#rw-vowel').disabled = !on || !v.vows || st.round < RW.VOWEL;
+    $('#rw-solve').disabled = !on;
+    if (g) g.canSpin = on && !!v.cons;
+    rwWrap.classList.toggle('can', !!(g && g.canSpin));
+    rwHint(g && g.canSpin ? t(rwMouse() ? 'rwSpinHintMouse' : 'rwSpinHint') : '');
+  }
+  function rwKeys(mode) {
+    const g = RG; if (!g || !g.v) return;
+    g.keys = mode;
+    const lg = g.v.lang, panel = $('#rw-keys'), grid = $('#rw-keys-grid'), called = g.v.called;
+    grid.textContent = ''; grid.className = 'rw-keys-grid';
+    let letters = Array.from(RW_ALPHA[lg]);
+    if (mode === 'cons') letters = letters.filter((l) => !rwIsVowel(l, lg));
+    if (mode === 'vowel') { letters = Array.from(RW_VOWELS[lg]); grid.classList.add(letters.length > 5 ? 'v4' : 'v5'); }
+    letters.forEach((l) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'rw-k' + (rwIsVowel(l, lg) ? ' vow' : ''); b.textContent = l; b.dataset.l = l;
+      b.setAttribute('aria-label', t('rwKeyAria', { l }));
+      if (mode !== 'solve' && called.includes(l)) b.disabled = true;
+      b.addEventListener('click', () => rwKeyPress(l));
+      grid.appendChild(b);
+    });
+    const fsolve = g.v.phase === 'fsolve';
+    $('#rw-keys-title').textContent = t(mode === 'cons' ? 'rwPickCons' : mode === 'vowel' ? 'rwPickVowel' : mode === 'fpick' ? 'rwFinalPick' : fsolve ? 'rwFinalSolve' : 'rwSolveTitle');
+    $('#rw-keys-close').hidden = mode === 'cons' || mode === 'fpick' || fsolve;
+    $('#rw-keys-foot').hidden = !(mode === 'solve' || mode === 'fpick');
+    $('#rw-timer').hidden = !(mode === 'solve' && fsolve);
+    $('#rw-keys-back').textContent = t(mode === 'fpick' ? 'rwClear' : 'rwBack');
+    panel.hidden = false;
+    rwActions(g, null);
+    if (mode === 'solve') rwSolveBegin(g);
+    if (mode === 'fpick') g.fpick = [];
+    rwKeysFoot();
+    const first = grid.querySelector('button:not(:disabled)');
+    if (first && !window.matchMedia('(pointer: coarse)').matches) first.focus({ preventScroll: true });
+  }
+  function rwHideKeys() {
+    $('#rw-keys').hidden = true;
+    const g = RG; if (!g) return;
+    g.keys = null; rwSolveEnd(g); clearInterval(g.finalT);
+  }
+  function rwKeysFoot() {
+    const g = RG; if (!g) return;
+    const ok = $('#rw-keys-ok');
+    if (g.keys === 'solve') ok.disabled = !g.solve || g.solve.buf.length !== g.solve.slots.length;
+    if (g.keys === 'fpick') {
+      const lg = g.v.lang, c = g.fpick.filter((l) => !rwIsVowel(l, lg)).length, v = g.fpick.length - c;
+      ok.disabled = !(c === 3 && v === 1);
+      $('#rw-keys-title').textContent = t('rwFinalPickN', { c, v });
+      $$('#rw-keys-grid .rw-k').forEach((b) => b.classList.toggle('sel', g.fpick.includes(b.dataset.l)));
+    }
+  }
+  function rwKeyPress(l) {
+    const g = RG; if (!g || !g.keys) return;
+    Sound.tick2();
+    if (g.keys === 'cons') { rwAct({ t: 'cons', l }); return; }
+    if (g.keys === 'vowel') { rwAct({ t: 'vowel', l }); return; }
+    if (g.keys === 'solve') { if (g.solve.buf.length < g.solve.slots.length) g.solve.buf.push(l); rwSolvePaint(g); rwKeysFoot(); return; }
+    if (g.keys === 'fpick') {
+      const lg = g.v.lang, i = g.fpick.indexOf(l);
+      if (i >= 0) g.fpick.splice(i, 1);
+      else {
+        const isV = rwIsVowel(l, lg), same = g.fpick.filter((x) => rwIsVowel(x, lg) === isV);
+        if (same.length >= (isV ? 1 : 3)) g.fpick.splice(g.fpick.indexOf(same[0]), 1);
+        g.fpick.push(l);
+      }
+      rwKeysFoot();
+    }
+  }
+  function rwKeysBack() {
+    const g = RG; if (!g) return;
+    if (g.keys === 'solve') { g.solve.buf.pop(); rwSolvePaint(g); }
+    if (g.keys === 'fpick') g.fpick = [];
+    rwKeysFoot();
+  }
+  function rwKeysOk() {
+    const g = RG; if (!g) return;
+    if (g.keys === 'solve' && g.solve && g.solve.buf.length === g.solve.slots.length) { const s = g.solve.buf.join(''); rwAct({ t: 'solve', s }); return; }
+    if (g.keys === 'fpick' && !$('#rw-keys-ok').disabled) rwAct({ t: 'fpick', l: g.fpick.slice() });
+  }
+  function rwKeysClose() {
+    const g = RG; if (!g || g.keys === 'cons' || g.keys === 'fpick') return;
+    rwHideKeys(); rwActions(g, g.v.turn);
+  }
+  // solving: the empty tiles fill in order as the letters are typed
+  function rwSolveBegin(g) {
+    g.solve = { slots: Array.from(g.tile.keys()).filter((i) => g.shape[i] == null).sort((a, b) => a - b), buf: [] };
+    rwSolvePaint(g);
+  }
+  function rwSolvePaint(g) {
+    if (!g.solve) return;
+    g.solve.slots.forEach((i, k) => {
+      const el = g.tile.get(i); if (!el) return;
+      el.classList.toggle('typed', k < g.solve.buf.length);
+      el.classList.toggle('cur', k === g.solve.buf.length);
+      $('b', el).textContent = k < g.solve.buf.length ? g.solve.buf[k] : '';
+    });
+  }
+  function rwSolveEnd(g) {
+    if (!g.solve) return;
+    g.solve.slots.forEach((i) => { const el = g.tile.get(i); if (!el || g.shape[i] != null) return; el.classList.remove('typed', 'cur'); $('b', el).textContent = ''; });
+    g.solve = null;
+  }
+
+  /* acting: on this phone the engine answers at once, in a room the action goes to the room's device */
+  function rwAct(a) {
+    const g = RG; if (!g || g.busy || !g.v || !rwMine(g, g.v.turn)) return;
+    if (a.t === 'spin' && !g.canSpin) return;
+    if (a.t === 'spin') AudioCore.get();
+    const keepWheel = a.t === 'spin';
+    rwHideKeys(); g.canSpin = false; rwActions(g, null);
+    if (!keepWheel) rwHint('');
+    if (g.online) { g.waiting = Date.now(); netAct(a); return; }
+    if (!g.E.act(g.E.turn, a)) { rwNext(g); return; }
+    rwPump(g);
+  }
+  function rwPump(g) { rwChain = rwChain.then(() => rwPlay(g, g.E.view())).catch((err) => { console.error(err); if (RG === g) { g.busy = false; rwNext(g); } }); }
+  async function rwPlay(g, v) {
+    if (RG !== g) return;
+    g.busy = true;
+    const evs = v.ev.filter((e) => e.n > g.en);
+    for (const e of evs) {
+      if (RG !== g) return;
+      await rwEvent(g, e, v);
+      if (RG !== g) return;
+      g.en = e.n;
+    }
+    g.en = Math.max(g.en, v.en);
+    g.v = v; g.busy = false;
+    rwSync(g, v);
+    rwNext(g);
+  }
+  // after the events, the state as the engine has it (it also repairs anything missed)
+  function rwSync(g, v) {
+    if (v.r !== g.r || !g.tile.size) {
+      g.r = v.r;
+      $('#rw-cat').textContent = rwCatName(v.cat);
+      rwBuildBoard(g, v.shape, v.rows);
+    } else v.shape.forEach((ch, i) => { if (ch != null && g.shape[i] == null) rwOpen(g, i, ch, false); });
+    $('#rw-sub').textContent = v.phase === 'fpick' || v.phase === 'fsolve' || v.r >= v.rounds ? t('rwSubFinal') : t('rwSub', { r: v.r + 1, n: v.rounds });
+    v.players.forEach((s, i) => { g.pts[i] = { round: s.round, total: s.total, jolly: s.jolly }; rwPaintPts(g, i); });
+    if (!g.drag) { g.angle = v.angle; rwDrawWheel(g); }
+    rwOn(g, v.turn);
+  }
+  function rwNext(g) {
+    const v = g.v; if (!v || RG !== g) return;
+    rwActions(g, null);
+    if (v.over) { if (!g.overShown) { g.overShown = true; rwLater(g, 900, () => rwOver(g)); } return; }
+    const mine = rwMine(g, v.turn), pl = g.players[v.turn];
+    if (v.phase === 'fpick') { if (mine) rwKeys('fpick'); else rwSay(t('rwHFinalOf', { name: pl.name })); return; }
+    if (v.phase === 'fsolve') { if (mine) rwFinalSolve(g); return; }
+    if (mine) {
+      if (v.phase === 'cons') { rwKeys('cons'); return; }
+      rwActions(g, v.turn);
+      return;
+    }
+    if (!g.online && pl.bot) {
+      rwLater(g, 650 + Math.random() * 550, () => {
+        if (g.busy || g.v !== v) return;
+        const a = g.E.botMove(g.E.turn);
+        if (a && a.t === 'cons') rwSay(t('rwHThinks', { name: pl.name }));
+        if (a && g.E.act(g.E.turn, a)) rwPump(g); else rwNext(g);
+      });
+      return;
+    }
+    rwSay(pl && pl.on === false ? t('netAway', { name: pl.name }) : t('rwHTurn', { name: pl ? pl.name : '' }));
+  }
+  // the final round: fifteen seconds to fill the phrase
+  function rwFinalSolve(g) {
+    rwKeys('solve');
+    const bar = $('#rw-timer i'), T = RW.FINAL_TIME * 1000, t0 = performance.now();
+    let lastSec = RW.FINAL_TIME;
+    clearInterval(g.finalT);
+    g.finalT = setInterval(() => {
+      if (RG !== g || g.keys !== 'solve') { clearInterval(g.finalT); return; }
+      const left = Math.max(0, T - (performance.now() - t0) * rwSpeed), sec = Math.ceil(left / 1000);
+      bar.style.transform = 'scaleX(' + (left / T).toFixed(3) + ')';
+      if (sec !== lastSec) { lastSec = sec; if (sec <= 5 && sec > 0) Sound.tick(true); }
+      if (left <= 0) { clearInterval(g.finalT); rwAct({ t: 'ftimeout' }); }
+    }, 50);
+  }
+
+  /* each event, shown */
+  async function rwEvent(g, e, v) {
+    const nm = (i) => (g.players[i] ? g.players[i].name : ''), mine = rwMine(g, e.p);
+    const pts = (i, round, total, how) => { const s = g.pts[i]; if (!s) return; if (round != null) s.round = round; if (total != null) s.total = total; rwPaintPts(g, i, how); };
+    switch (e.k) {
+      case 'round': {
+        g.r = e.r; g.pts.forEach((s, i) => pts(i, 0));
+        $('#rw-cat').textContent = rwCatName(e.cat);
+        $('#rw-sub').textContent = t('rwSub', { r: e.r + 1, n: v.rounds });
+        rwBuildBoard(g, e.shape, e.rows);
+        rwOn(g, e.p);
+        await rwBanner(t('rwRound', { r: e.r + 1 }), rwCatName(e.cat));
+        rwSay(t('rwHCat', { cat: rwCatName(e.cat) }));
+        await rwWait(500);
+        return;
+      }
+      case 'spin': {
+        rwOn(g, e.p);
+        rwSay(mine ? t('rwHSpinMe') : t('rwHSpin', { name: nm(e.p) }));
+        rwHint('');
+        await rwSpinTo(g, e);
+        if (RG !== g) return;
+        const w = RW_WEDGES[e.w];
+        await rwPop(w);
+        if (!w.k || w.k === 'foto') rwSay(mine ? t(w.k === 'foto' ? 'rwHFotoMe' : 'rwHValueMe', { v: fmtNum(w.v) }) : t('rwHValue', { name: nm(e.p), v: fmtNum(w.v) }), 'good');
+        return;
+      }
+      case 'bank': Sound.rwBank(); buzz([30, 60, 30]); pts(e.p, 0, null, 'lose'); rwSay(t('rwHBank', { name: nm(e.p) }), 'bad'); await rwWait(1500); return;
+      case 'pass': Sound.miss(); rwSay(t('rwHPass', { name: nm(e.p) }), 'bad'); await rwWait(1200); return;
+      case 'jolly': Sound.sparkle(); g.pts[e.p].jolly++; rwPaintPts(g, e.p, 'bump'); rwSay(t('rwHJolly', { name: nm(e.p) }), 'good'); await rwWait(1400); return;
+      case 'save': Sound.pickup(); g.pts[e.p].jolly = Math.max(0, g.pts[e.p].jolly - 1); rwPaintPts(g, e.p); rwSay(t('rwHSave', { name: nm(e.p) }), 'good'); await rwWait(1300); return;
+      case 'letter': case 'vowel': {
+        rwSay(t(e.k === 'vowel' ? 'rwHBuys' : 'rwHCalls', { name: nm(e.p), l: e.l }));
+        if (e.k === 'vowel') pts(e.p, Math.max(0, g.pts[e.p].round - e.cost));
+        await rwWait(700);
+        if (RG !== g) return;
+        if (!e.pos.length) { Sound.rwBuzz(); buzz(40); rwSay((mine ? pickOne(t('rwSighs')) + ' ' : '') + t('rwHNone', { l: e.l }), 'bad'); await rwWait(1100); return; }
+        await rwLight(g, e.pos, e.ch);
+        if (RG !== g) return;
+        const cheer = mine ? pickOne(t('rwCheers')) + ' ' : '';
+        if (e.k === 'letter') {
+          pts(e.p, g.pts[e.p].round + e.gain, null, 'bump');
+          rwSay(cheer + (e.pos.length === 1 ? t('rwHOne', { l: e.l, g: fmtNum(e.gain) }) : t('rwHMany', { n: e.pos.length, l: e.l, g: fmtNum(e.gain) })), 'good');
+          if (e.gain >= 1500) { const r = rwBoardEl.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height / 2, 46, true); Sound.golden(); }
+        } else rwSay(cheer + (e.pos.length === 1 ? t('rwHOneV', { l: e.l }) : t('rwHManyV', { n: e.pos.length, l: e.l })), 'good');
+        if (e.photo) {
+          await rwWait(700);
+          await rwPrize(g, e.photo, mine ? t('rwFotoWin') : t('rwFotoWinOf', { name: nm(e.p) }));
+          if (mine) rwKeep(g, e.photo);
+        }
+        await rwWait(550);
+        return;
+      }
+      case 'turn': rwOn(g, e.p); Sound.turn(); rwSay(mine ? (g.online || g.players.filter((p) => !p.bot).length < 2 ? t('rwHYourTurn') : t('rwHTurnOf', { name: nm(e.p) })) : t('rwHTurn', { name: nm(e.p) })); await rwWait(800); return;
+      case 'solve': {
+        if (!e.ok) { Sound.wrong(); buzz(40); rwSay(t('rwHWrong', { name: nm(e.p) }), 'bad'); await rwWait(1500); return; }
+        rwSay(t(e.how === 'board' ? 'rwHBoard' : 'rwHSolved', { name: nm(e.p) }), 'good');
+        await rwOpenAll(g, e.chars);
+        if (RG !== g) return;
+        g.pts.forEach((s, i) => { s.round = 0; });
+        pts(e.p, 0, g.pts[e.p].total + e.gain, 'bump');
+        g.pts.forEach((s, i) => { if (i !== e.p) rwPaintPts(g, i); });
+        Sound.correct();
+        const r = rwBoardEl.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height / 2, mine ? 80 : 30, mine);
+        await rwWait(1300);
+        if (e.photo) {
+          await rwPrize(g, e.photo, mine ? t('rwPrizeMe', { g: fmtNum(e.gain) }) : t('rwPrizeOf', { name: nm(e.p) }));
+          if (mine) rwKeep(g, e.photo);
+        } else { rwSay(t('rwHRoundOf', { name: nm(e.p), g: fmtNum(e.gain) })); await rwWait(1700); }
+        return;
+      }
+      case 'final': {
+        g.r = v.rounds; rwOn(g, e.p);
+        $('#rw-cat').textContent = rwCatName(e.cat);
+        $('#rw-sub').textContent = t('rwSubFinal');
+        rwBuildBoard(g, e.shape.map((ch, i) => ch), e.rows);
+        await rwBanner(t('rwFinal'), mine ? t('rwFinalSubMe') : t('rwFinalSub', { name: nm(e.p) }));
+        Music.duck(3);
+        rwSay(t('rwHFinalGiven', { l: e.given.join(' ') }), 'good');
+        await rwWait(900);
+        return;
+      }
+      case 'fpick': {
+        rwSay(t('rwHFinalPicked', { l: e.l.join(' ') }));
+        await rwLight(g, e.pos, e.ch);
+        await rwWait(400);
+        if (mine && RG === g) rwSay(t('rwHFinalGo'), 'good');
+        return;
+      }
+      case 'fend': {
+        rwHideKeys();
+        if (e.ok) {
+          rwSay(t('rwHFinalWin', { g: fmtNum(e.prize) }), 'good');
+          await rwOpenAll(g, e.chars);
+          pts(e.p, 0, g.pts[e.p].total + e.prize, 'bump');
+          g.finalOk = true;
+          celebrate();
+          await rwWait(1200);
+          if (e.photo) { await rwPrize(g, e.photo, t('rwFinalPrize')); if (mine) rwKeep(g, e.photo); }
+        } else {
+          g.finalOk = false;
+          Sound.lose();
+          rwSay(t('rwHFinalLose'), 'bad');
+          await rwWait(700);
+          await rwOpenAll(g, e.chars);
+          await rwWait(2200);
+        }
+        return;
+      }
+      default: return;
+    }
+  }
+  function rwKeep(g, id) { const p = PHOTO_BY_ID.get(id); if (p && !g.found.includes(p)) g.found.push(p); }
+
+  /* the end */
+  function rwOver(g) {
+    const v = g.v, tot = v.players.map((p) => p.total), best = Math.max(...tot);
+    const top = tot.map((x, i) => (x === best ? i : -1)).filter((i) => i >= 0), tie = top.length > 1;
+    const strip = g.found.map((p) => ({ id: p.id, open: true }));
+    const finalRow = g.finalOk == null ? null : [t('rwRowFinal'), t(g.finalOk ? 'rwFinalYes' : 'rwFinalNo')];
+    if (g.online) {
+      const me = g.me, host = N && N.host, hostName = N && N.view && N.view.players[0] ? N.view.players[0].name : '';
+      const rows = g.players.map((p, i) => [p.name + (i === me ? ' (' + t('netYou') + ')' : ''), ptsText(tot[i])]);
+      rows.push([t('rwRowPhotos'), String(g.found.length)]);
+      showResult({
+        kicker: t('netKicker', { game: t('gameRw') }), title: tie ? t('tie') : top[0] === me ? t('netYouWin') : t('wins', { name: g.players[top[0]].name }),
+        stars: null, score: tot[me], record: false, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'),
+        again: host ? t('netAgain') : t('netWaitAgain', { name: hostName }), againOff: !host, action: 'net', rows, menuLabel: t('netLeave'), strip: strip.length ? strip : null,
+      });
+      if (!tie && top[0] === me) celebrate(); else Sound.lose();
+      return;
+    }
+    const rows = g.players.map((p, i) => [p.name, ptsText(tot[i])]);
+    rows.push([t('rwRowPhotos'), String(g.found.length)]);
+    if (finalRow) rows.push(finalRow);
+    if (!g.cfg.duo) {
+      const me = tot[0], st = rwStats(), prev = st.best, won = !tie && top[0] === 0, record = me > prev;
+      st.played++; st.best = Math.max(prev, me); if (won) st.wins++; if (g.finalOk) st.finals++;
+      st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
+      store.set('hm-rw', st);
+      if (!record && prev) rows.push([t('rwRowBest'), ptsText(prev)]);
+      showResult({
+        kicker: t('rwKicker'), title: won ? t('rwWinMe') : tie ? t('tie') : t('rwWinOf', { name: g.players[top[0]].name }), stars: null, score: me, record,
+        photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'rw', rows, strip: strip.length ? strip : null,
+      });
+      if (won || record) celebrate(); else Sound.lose();
+      return;
+    }
+    showResult({
+      kicker: t('rwKickerDuo'), title: tie ? t('tie') : t('wins', { name: g.players[top[0]].name }), stars: null, score: null, record: false,
+      photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'rw', rows, strip: strip.length ? strip : null,
+    });
+    celebrate();
+  }
+
+  /* a game on this phone */
+  function rwStart(cfg) {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop();
+    const duo = !!cfg.duo, bots = t('ucBots');
+    const players = duo
+      ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
+      : [{ name: t('ucYou'), av: 'me' }, { name: bots.volpe, bot: 'volpe', av: 'fox' }, { name: bots.gatto, bot: 'gatto', av: 'cat' }];
+    const phrases = rwPickPhrases(lang, RW.ROUNDS, rwRecent(lang));
+    rwRemember(lang, phrases.map((x) => x[1]));
+    const seen = new Set(rwStats().found);
+    const photos = shuffle(RW_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 10).map((p) => p.id);
+    const E = rwNew({ lang, players, phrases, finalPhrase: pickOne(RW_FINALS[lang]), photos, final: true, first: 0 });
+    const g = RG = rwMake({ E, cfg, lang, players: players.map((p) => Object.assign({ on: true }, p)) });
+    g.v = null;
+    rwShow();
+    preload(photos.slice(0, 3).map((id) => cardSrc(PHOTO_BY_ID.get(id))), 6000);
+    announce(t('aRwStart'));
+    rwPump(g);
+  }
+  function rwRenderSetup() {
+    const st = rwStats();
+    $('#rw-record').textContent = st.played ? t(st.played === 1 ? 'rwRecord1' : 'rwRecord', { n: fmtNum(st.best), p: st.played, w: st.wins }) : t('rwRecordNone');
+    $('#rw-duo').hidden = mode !== 'duo';
+  }
+  function rwRelang() {
+    const g = RG; if (!g) return;
+    g.wheelPx = 0; rwResize(); rwRenderPlayers();
+    if (g.v) { $('#rw-cat').textContent = rwCatName(g.v.cat); $('#rw-sub').textContent = g.v.r >= g.v.rounds ? t('rwSubFinal') : t('rwSub', { r: g.v.r + 1, n: g.v.rounds }); rwOn(g, g.v.turn); }
+    if (g.keys) rwKeys(g.keys);
+  }
+  function rwKeydown(e) {
+    const g = RG; if (!g || rwEl.hidden || e.ctrlKey || e.metaKey || e.altKey || !$('#rw-prize').hidden) return false;
+    if (g.keys) {
+      if (e.key === 'Escape') { rwKeysClose(); return true; }
+      if (e.key === 'Backspace') { rwKeysBack(); return true; }
+      if (e.key === 'Enter') { rwKeysOk(); return true; }
+      const l = e.key.length === 1 ? e.key.toLocaleUpperCase(g.v.lang === 'tr' ? 'tr' : 'it') : '';
+      const b = l && $('#rw-keys-grid .rw-k[data-l="' + l + '"]');
+      if (b && !b.disabled) { rwKeyPress(l); return true; }
+      return false;
+    }
+    if ((e.key === ' ' || e.key === 'Enter') && g.canSpin && document.activeElement && !document.activeElement.closest('button')) { rwAct({ t: 'spin', v: RW.V_MIN + .4 + Math.random() * (RW.V_MAX - RW.V_MIN - .4) }); return true; }
+    return false;
+  }
+
+  /* ---------- Ruota della fortuna online: the room's device keeps the game ----------
+     The phrases are in the language of the phone that made the room. A player who has gone is played by the computer. */
+  function rwNet(n, ses) {
+    const phrases = rwPickPhrases(lang, RW.ROUNDS, ses.seen || []);
+    ses.seen = (ses.seen || []).concat(phrases.map((x) => x[1])).slice(-45);
+    const photos = shuffle(RW_PHOTOS.slice()).slice(0, 12).map((p) => p.id);
+    const E = rwNew({ lang, players: N.players.map((p) => ({ name: p.name })), phrases, photos, first: (ses.round - 1) % n, final: false, gid: netRand(6, NET_CODE) });
+    return {
+      act: (seat, a) => { const ok = E.act(seat, a); if (ok && E.over && !ses.counted) { ses.counted = true; const tot = E.players.map((p) => p.total), best = Math.max(...tot); tot.forEach((x, i) => { if (x === best) ses.wins[i]++; }); N.phase = 'over'; } return ok; },
+      tick: () => { const ch = E.tick((s) => !!N.players[s] && !N.players[s].on); if (ch && E.over && !ses.counted) { ses.counted = true; N.phase = 'over'; } return ch; },
+      view: () => E.view(), E,
+    };
+  }
+  function rwnApply(v) { rwChain = rwChain.then(() => rwnProcess(v)).catch((err) => { console.error(err); }); }
+  async function rwnProcess(v) {
+    if (!N || !v.g) return;
+    const gv = v.g;
+    if (!RG || !RG.online || RG.gid !== gv.gid) rwnSetup(v);
+    const g = RG;
+    g.me = v.you;
+    g.players.forEach((p, i) => { if (v.players[i]) { p.name = v.players[i].name; p.on = v.players[i].on; } });
+    g.players.forEach((p, i) => rwPaintPts(g, i));
+    await rwPlay(g, gv);
+  }
+  function rwnSetup(v) {
+    const gv = v.g;
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop();
+    board.textContent = '';
+    const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
+    const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
+    rwShow();
+    // a phone that comes back in the middle of a game starts from the board as it is now
+    g.en = gv.en > 3 ? gv.en : 0;
+    return g;
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -7652,13 +9108,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -7674,7 +9130,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -7718,6 +9174,9 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const savedNames = store.get('hm-names', ['', '']);
   $('#p1').value = savedNames[0] || ''; $('#p2').value = savedNames[1] || '';
   $('#bw-p1').value = savedNames[0] || ''; $('#bw-p2').value = savedNames[1] || '';
+  $('#rw-p1').value = savedNames[0] || ''; $('#rw-p2').value = savedNames[1] || '';
+  ['#rw-p1', '#rw-p2'].forEach((id) => $(id).addEventListener('input', () => { const v = [$('#rw-p1').value, $('#rw-p2').value]; store.set('hm-names', v); $('#p1').value = $('#bw-p1').value = v[0]; $('#p2').value = $('#bw-p2').value = v[1]; }));
+  ['#p1', '#p2', '#bw-p1', '#bw-p2'].forEach((id) => $(id).addEventListener('input', () => setTimeout(() => { $('#rw-p1').value = $('#p1').value; $('#rw-p2').value = $('#p2').value; }, 0)));
   ['#bw-p1', '#bw-p2'].forEach((id) => $(id).addEventListener('input', () => { const v = [$('#bw-p1').value, $('#bw-p2').value]; store.set('hm-names', v); $('#p1').value = v[0]; $('#p2').value = v[1]; }));
   ['#p1', '#p2'].forEach((id) => $(id).addEventListener('input', () => { $('#bw-p1').value = $('#p1').value; $('#bw-p2').value = $('#p2').value; }));
   ['#p1', '#p2'].forEach((id) => $(id).addEventListener('input', () => store.set('hm-names', [$('#p1').value, $('#p2').value])));
@@ -7733,6 +9192,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'net') { if (N && N.host) netStartGame(); return; }
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
+    if (resultAction === 'rw') { rwStart(RG && RG.cfg ? RG.cfg : { duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); return; }
     if (resultAction === 'bw') { bwStart(BG && BG.cfg ? BG.cfg : { duo: mode === 'duo', names: [$('#bw-p1').value, $('#bw-p2').value] }); return; }
     if (resultAction === 'map') { showMap(); return; }
     if (S) startGame(S.cfg);
@@ -7755,6 +9215,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#uc-exit').addEventListener('click', ucRequestExit);
   $('#btn-bw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); bwStart({ duo: mode === 'duo', names: [$('#bw-p1').value, $('#bw-p2').value] }); });
   $('#bw-exit').addEventListener('click', bwRequestExit);
+  $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
+  $('#rw-exit').addEventListener('click', rwRequestExit);
+  $('#rw-spin').addEventListener('click', () => rwAct({ t: 'spin', v: RW.V_MIN + .4 + Math.random() * (RW.V_MAX - RW.V_MIN - .4) }));
+  $('#rw-vowel').addEventListener('click', () => { if (RG && !$('#rw-vowel').disabled) rwKeys('vowel'); });
+  $('#rw-solve').addEventListener('click', () => { if (RG && !$('#rw-solve').disabled) rwKeys('solve'); });
+  $('#rw-keys-close').addEventListener('click', rwKeysClose);
+  $('#rw-keys-back').addEventListener('click', rwKeysBack);
+  $('#rw-keys-ok').addEventListener('click', rwKeysOk);
+  rwWrap.addEventListener('pointerdown', rwWheelDown);
+  rwWrap.addEventListener('pointermove', rwWheelMove);
+  rwWrap.addEventListener('pointerup', rwWheelUp);
+  rwWrap.addEventListener('pointercancel', rwWheelUp);
+  document.addEventListener('keydown', (e) => { if (rwKeydown(e)) e.preventDefault(); });
   bwStage.addEventListener('pointerdown', bwPointerDown);
   bwStage.addEventListener('pointermove', bwPointerMove);
   bwStage.addEventListener('pointerup', bwPointerUp);
@@ -7802,7 +9275,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     else if (!$('#confirm').hidden) $('#cf-stay').click();
   });
   let rsz = 0;
-  window.addEventListener('resize', () => { clearTimeout(rsz); rsz = setTimeout(() => { layoutBoard(); ucLayout(); if (BG) bwResize(); if (!pzEl.hidden) pzLayout(); if (!home.hidden) { renderCount(); pzRenderSetup(); } }, 80); });
+  window.addEventListener('resize', () => { clearTimeout(rsz); rsz = setTimeout(() => { layoutBoard(); ucLayout(); if (BG) bwResize(); if (RG) rwResize(); if (!pzEl.hidden) pzLayout(); if (!home.hidden) { renderCount(); pzRenderSetup(); } }, 80); });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) AudioCore.suspend(); else AudioCore.resume();
     if (P && P.phase === 'play') {
