@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna e Tombola con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola e Quiz del milione con le foto di Hande. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna e Tombola con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola e Quiz del milione con le foto di Hande. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna e Tombola con le foto di Hande. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola e Quiz del milione con le foto di Hande. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2152,6 +2152,111 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .home .gp-tile.gp-wide .gp-new { top: 5px; right: 7px; padding: 2px 7px; font-size: 9px; }
 }
 .tb-mini svg { width: 58px; height: auto; display: block; }
+/* ---------- Quiz del milione ---------- */
+.mqs {
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto minmax(0, 1fr) auto auto; gap: 10px;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 38% at 50% 0%, rgba(236, 224, 250, .95), rgba(236, 224, 250, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(255, 236, 196, .8), rgba(255, 236, 196, 0) 70%),
+    conic-gradient(from 200deg at 50% -10%, rgba(255, 255, 255, 0), rgba(255, 246, 222, .5) 8%, rgba(255, 255, 255, 0) 16%, rgba(255, 246, 222, .45) 30%, rgba(255, 255, 255, 0) 38%), #fbf8f4;
+}
+.mqs > * { min-width: 0; }
+.mqs > .rw-head { grid-area: auto; grid-column: 1 / -1; }
+.mq-prize { display: flex; align-items: baseline; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--hairline, rgba(201, 164, 105, .45));
+  background: rgba(255, 253, 249, .85); font: 600 13px var(--font-ui); color: var(--muted); cursor: pointer; }
+.mq-prize b { font: 700 20px/1 var(--font-caps); color: #6e4f24; letter-spacing: .02em; }
+.mq-prize small { font-size: 12px; }
+.mq-helps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.mq-helps button { position: relative; height: 46px; border-radius: 999px; border: 1px solid #d6b46f; background: radial-gradient(circle at 40% 30%, #fffdf8, #f4ead8); color: #6e4f24;
+  font: 700 14px var(--font-caps); letter-spacing: .04em; cursor: pointer; display: grid; place-items: center; box-shadow: 0 6px 14px -10px rgba(120, 84, 32, .6); }
+.mq-helps button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.mq-helps button.used { opacity: .35; filter: grayscale(.6); }
+.mq-helps button.used::after { content: ""; position: absolute; left: 18%; right: 18%; top: 50%; height: 2px; background: #b48a48; transform: rotate(-20deg); }
+.mq-helps button:disabled { cursor: default; }
+
+/* the question and the four answers, in golden lozenges */
+.mq-stage { display: grid; align-content: center; gap: 12px; min-height: 0; position: relative; }
+.mq-stage::before { content: ""; position: absolute; left: -12px; right: -12px; top: 50%; height: 1px; background: linear-gradient(90deg, rgba(201, 164, 105, 0), #c9a469 20%, #c9a469 80%, rgba(201, 164, 105, 0)); }
+.mq-lz { --cut: 16px; position: relative; clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%, calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%);
+  background: linear-gradient(120deg, #f7e9c9, #c9a469 25%, #fff5dc 50%, #b98f4f 75%, #efd8a8); }
+.mq-lz::before { content: ""; position: absolute; inset: 2px; clip-path: inherit; background: linear-gradient(180deg, #fffefb, #f6efe6); }
+.mq-lz > * { position: relative; }
+.mq-q { min-height: 108px; display: grid; place-items: center; padding: 14px 34px; --cut: 26px; }
+.mq-q p { margin: 0; text-align: center; font: 600 clamp(18px, 5vw, 23px)/1.25 var(--font-display); color: var(--ink); }
+.mq-q.in { animation: mqIn .45s ease both; }
+.mq-ans { display: grid; gap: 9px; }
+.mq-a { min-height: 50px; padding: 8px 26px 8px 22px; border: 0; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; text-align: left; color: var(--ink); font: 600 16px/1.2 var(--font-ui); }
+.mq-a i { font: normal 700 15px var(--font-caps); color: #b48a48; }
+.mq-a span { overflow-wrap: anywhere; }
+.mq-a.in { animation: mqIn .4s ease both; }
+.mq-a.gone { visibility: hidden; }
+.mq-a.sel::before { background: radial-gradient(120% 140% at 50% 0%, #fff6dc, #f3d995 60%, #e2bf7a); }
+.mq-a.sel { animation: mqPulse .8s ease-in-out infinite alternate; }
+.mq-a.right::before { background: linear-gradient(180deg, #effaf3, #bfe6cf); }
+.mq-a.right { animation: mqFlash .5s ease 3; }
+.mq-a.right i { color: #2f6a4f; }
+.mq-a.wrong::before { background: linear-gradient(180deg, #fbeef2, #ecc6d1); }
+.mq-a:disabled { cursor: default; }
+@keyframes mqIn { from { opacity: 0; transform: translateY(8px); } }
+@keyframes mqPulse { to { filter: brightness(1.06) drop-shadow(0 0 6px rgba(226, 191, 122, .9)); } }
+@keyframes mqFlash { 50% { filter: brightness(1.12) drop-shadow(0 0 10px rgba(140, 210, 170, .9)); } }
+
+.mq-bar { display: grid; gap: 8px; }
+.mq-bar .mq-yes, .mq-bar .mq-no, .mq-bar .mq-ask { display: none; }
+.mq-bar.confirm { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.mq-bar.confirm .mq-ask { display: block; grid-column: 1 / -1; margin: 0; text-align: center; font: italic 700 19px var(--font-display); color: var(--ink); }
+.mq-bar.confirm .mq-yes, .mq-bar.confirm .mq-no { display: block; }
+.mq-bar.confirm #mq-quit { display: none; }
+.mq-bar .btn { min-height: 50px; }
+
+/* the ladder: over the game on a phone, at the side on a computer */
+.mq-ladder { display: none; margin: 0; padding: 10px; list-style: none; flex-direction: column-reverse; gap: 2px; border-radius: 20px; background: rgba(255, 253, 249, .96); box-shadow: 0 0 0 1px rgba(201, 164, 105, .5), 0 24px 50px -26px rgba(46, 36, 56, .55); }
+.mq-ladder li { display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; padding: 4px 12px; border-radius: 999px; font: 600 14px var(--font-ui); color: #7d7086; }
+.mq-ladder li i { font: normal 700 12px var(--font-caps); color: #b6a7c2; }
+.mq-ladder li b { justify-self: end; font: 700 15px var(--font-caps); }
+.mq-ladder li.safe b { color: #a77a35; }
+.mq-ladder li.done { color: #b6a7c2; }
+.mq-ladder li.on { background: linear-gradient(100deg, #f7e7c4, #e9c88a); color: #3e2a10; }
+.mq-ladder li.on i { color: #6e4f24; }
+.mqs.ladder-open .mq-ladder { display: flex; position: absolute; z-index: 8; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(84vw, 320px); }
+.mqs.ladder-open::after { content: ""; position: absolute; inset: 0; z-index: 7; background: rgba(46, 36, 56, .3); }
+
+/* the audience and the phone call */
+.mq-pop { position: absolute; z-index: 6; left: 12px; right: 12px; top: 33%; padding: 12px 14px; border-radius: 20px; background: rgba(255, 253, 249, .97); box-shadow: 0 0 0 1px rgba(201, 164, 105, .55), 0 24px 50px -26px rgba(46, 36, 56, .6); animation: mqIn .3s ease both; }
+.mq-pop[hidden] { display: none; }
+.mq-pop-t { margin: 0 0 6px; text-align: center; font: italic 700 18px var(--font-display); color: var(--ink); }
+.mq-bars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; height: 140px; align-items: end; }
+.mq-bar-c { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; justify-items: center; height: 100%; }
+.mq-bar-c .v { font: 700 13px var(--font-ui); color: #6e4f24; }
+.mq-bar-c i { align-self: end; width: 70%; height: var(--h); min-height: 2px; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, #f3d995, #c9a469); animation: mqGrow .8s cubic-bezier(.2, .9, .3, 1) both; transform-origin: bottom; }
+.mq-bar-c b { font: 700 14px var(--font-caps); color: #8a6738; }
+@keyframes mqGrow { from { transform: scaleY(0); } }
+.mq-call { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: center; }
+.mq-call .av { width: 54px; height: 54px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, #fff, #efe6f6 60%, #d9c8ec); box-shadow: inset 0 0 0 1.5px #d6b46f; }
+.mq-call .av svg { width: 48px; height: 48px; }
+.mq-call p { margin: 0; font: 600 16px/1.35 var(--font-ui); color: var(--ink); }
+.mq-call p b { display: block; font: italic 700 18px var(--font-display); color: #8a6738; }
+
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .mqs { grid-template-columns: minmax(0, 1fr) 300px; grid-template-rows: auto auto minmax(0, 1fr) auto; column-gap: clamp(20px, 4vw, 60px); padding-inline: clamp(20px, 4vw, 60px); }
+  .mq-prize { display: none; }
+  .mq-helps { grid-column: 1; grid-row: 2; max-width: 560px; justify-self: center; width: 100%; }
+  .mq-stage { grid-column: 1; grid-row: 3; }
+  .mq-bar { grid-column: 1; grid-row: 4; max-width: 560px; justify-self: center; width: 100%; }
+  .mq-ladder { display: flex; grid-column: 2; grid-row: 2 / -1; align-self: center; }
+  .mq-ans { grid-template-columns: 1fr 1fr; column-gap: 18px; }
+  .mq-q { min-height: 130px; }
+  .mq-pop { left: 50%; right: auto; width: 420px; transform: translateX(-60%); }
+}
+/* the home: on a computer the new games share one row */
+@media (min-width: 920px) {
+  .home .gp-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .home .gp-tiles > .gp-tile { grid-column: span 3; }
+  .home .gp-tiles > .gp-tile.gp-wide { grid-column: span 2; padding: 8px 8px; gap: 6px; }
+  .home .gp-tile.gp-wide .gp-tag { display: none; }
+  .home .gp-tile.gp-wide .gp-name { font-size: 17px; }
+  .home .gp-tile.gp-wide .gp-ic, .home .gp-tile.gp-wide .gp-ic-svg { width: auto; height: 44px; }
+}
 </style>
 </head>
 <body>
@@ -2196,6 +2301,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="tb" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="tbic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3e8d6"/></linearGradient><radialGradient id="tbim" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fffaf0"/><stop offset=".6" stop-color="#f3d995"/><stop offset="1" stop-color="#d9b56c"/></radialGradient><radialGradient id="tbib" cx=".34" cy=".28" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#f8f2f6"/><stop offset=".85" stop-color="#e2d4ec"/><stop offset="1" stop-color="#cdbbe0"/></radialGradient><linearGradient id="tbig" x1="0" x2="1"><stop offset="0" stop-color="#b48a48"/><stop offset=".5" stop-color="#f6e2ad"/><stop offset="1" stop-color="#a77a35"/></linearGradient></defs><g transform="rotate(-7 30 30)"><rect x="5" y="9" width="51" height="38" rx="5" fill="url(#tbic)" stroke="url(#tbig)" stroke-width="1.6"/><text x="9" y="14.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.2" letter-spacing=".6" fill="#b08d55">TOMBOLA</text><rect x="9.0" y="17.0" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="11.7" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">4</text><rect x="15.2" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="21.4" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#fff" stroke="#d8bd86" stroke-width=".5"/><text x="24.1" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">27</text><rect x="27.6" y="17.0" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="30.3" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">35</text><rect x="33.8" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="40.0" y="17.0" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="42.7" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">61</text><rect x="46.2" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="9.0" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="15.2" y="25.6" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="17.9" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">18</text><rect x="21.4" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#fff" stroke="#d8bd86" stroke-width=".5"/><text x="24.1" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">29</text><rect x="27.6" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="33.8" y="25.6" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="36.5" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">52</text><rect x="40.0" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="46.2" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#fff" stroke="#d8bd86" stroke-width=".5"/><text x="48.9" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">83</text></g><circle cx="57" cy="42" r="15.5" fill="#000" opacity=".08"/><circle cx="56" cy="40.5" r="15" fill="url(#tbib)" stroke="url(#tbig)" stroke-width="2"/><circle cx="56" cy="40.5" r="11" fill="none" stroke="#d6b46f" stroke-width=".6" opacity=".8"/><text x="56" y="45.2" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="13" fill="#4a3314">90</text></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameTb"></span><span class="gp-tag" data-i18n="gpTbTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="mq" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 72 62" aria-hidden="true"><defs><linearGradient id="mqig" x1="0" x2="1"><stop offset="0" stop-color="#b48a48"/><stop offset=".5" stop-color="#f6e2ad"/><stop offset="1" stop-color="#a77a35"/></linearGradient><linearGradient id="mqiw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffefb"/><stop offset="1" stop-color="#f3e9da"/></linearGradient><radialGradient id="mqib" cx=".34" cy=".28" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#f8f2f6"/><stop offset=".85" stop-color="#e2d4ec"/><stop offset="1" stop-color="#cdbbe0"/></radialGradient></defs><path d="M14 36h44l5 6-5 6H14l-5-6z" fill="url(#mqiw)" stroke="url(#mqig)" stroke-width="1.4"/><text x="17" y="44.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="7" fill="#b48a48">A</text><rect x="26" y="40.8" width="24" height="2.6" rx="1.3" fill="#d9c8b0"/><path d="M14 49h44l5 6-5 6H14l-5-6z" fill="url(#mqiw)" stroke="url(#mqig)" stroke-width="1.4"/><text x="17" y="57.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="7" fill="#b48a48">B</text><rect x="26" y="53.8" width="18" height="2.6" rx="1.3" fill="#d9c8b0"/><circle cx="36" cy="18" r="15.5" fill="url(#mqib)" stroke="url(#mqig)" stroke-width="2.2"/><circle cx="36" cy="18" r="11.5" fill="none" stroke="#d6b46f" stroke-width=".6"/><text x="36" y="24.5" text-anchor="middle" font-family="Cormorant Garamond, Times New Roman, serif" font-style="italic" font-weight="700" font-size="19" fill="#8a6738">?</text></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameMq"></span><span class="gp-tag" data-i18n="gpMqTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -2383,6 +2494,15 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           <p class="record-line" id="tb-record"></p>
         </div>
 
+        <div class="setup-part" id="setup-mq" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 72 62" aria-hidden="true"><defs><linearGradient id="mqmg" x1="0" x2="1"><stop offset="0" stop-color="#b48a48"/><stop offset=".5" stop-color="#f6e2ad"/><stop offset="1" stop-color="#a77a35"/></linearGradient><linearGradient id="mqmw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffefb"/><stop offset="1" stop-color="#f3e9da"/></linearGradient><radialGradient id="mqmb" cx=".34" cy=".28" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#f8f2f6"/><stop offset=".85" stop-color="#e2d4ec"/><stop offset="1" stop-color="#cdbbe0"/></radialGradient></defs><path d="M14 36h44l5 6-5 6H14l-5-6z" fill="url(#mqmw)" stroke="url(#mqmg)" stroke-width="1.4"/><text x="17" y="44.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="7" fill="#b48a48">A</text><rect x="26" y="40.8" width="24" height="2.6" rx="1.3" fill="#d9c8b0"/><path d="M14 49h44l5 6-5 6H14l-5-6z" fill="url(#mqmw)" stroke="url(#mqmg)" stroke-width="1.4"/><text x="17" y="57.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="7" fill="#b48a48">B</text><rect x="26" y="53.8" width="18" height="2.6" rx="1.3" fill="#d9c8b0"/><circle cx="36" cy="18" r="15.5" fill="url(#mqmb)" stroke="url(#mqmg)" stroke-width="2.2"/><circle cx="36" cy="18" r="11.5" fill="none" stroke="#d6b46f" stroke-width=".6"/><text x="36" y="24.5" text-anchor="middle" font-family="Cormorant Garamond, Times New Roman, serif" font-style="italic" font-weight="700" font-size="19" fill="#8a6738">?</text></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameMq"></span><span class="hunt-sub" data-i18n="mqIntro"></span></span>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-mq-play" data-i18n="play"></button>
+          <p class="record-line" id="mq-record"></p>
+        </div>
+
         <div class="home-foot">
           <div class="foot-left">
             <button type="button" class="pill-toggle" id="sfx-home" aria-pressed="true"></button>
@@ -2561,6 +2681,26 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     <div class="tb-board" id="tb-board" hidden><div class="tb-board-in"><div class="tb-board-h"><span data-i18n="tbBoard"></span><button type="button" class="rw-keys-close" id="tb-board-close" data-i18n-attr="aria-label:close"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="tb-board-grid" id="tb-board-grid"></div></div></div>
     <div class="rw-prize" id="tb-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="tb-prize-t"></p></div>
     <div class="rw-banner" id="tb-banner" aria-hidden="true"><b></b><span></span></div>
+  </section>
+
+  <section id="mq" class="screen mqs" hidden data-i18n-attr="aria-label:gameMq">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="mq-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameMq"></h2><span class="uc-sub" id="mq-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-mq" aria-pressed="true"></button>
+    </header>
+    <button type="button" class="mq-prize" id="mq-prize-btn" data-i18n-attr="aria-label:mqLadder"><span data-i18n="mqFor"></span><b id="mq-now"></b><small id="mq-safe"></small></button>
+    <div class="mq-helps" id="mq-helps">
+      <button type="button" data-help="50" data-i18n-attr="aria-label:mqHelp50">50:50</button>
+      <button type="button" data-help="pub" data-i18n-attr="aria-label:mqHelpPub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12M10 20V7M15 20v-9M20 20V4"/></svg></button>
+      <button type="button" data-help="tel" data-i18n-attr="aria-label:mqHelpTel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h3l1.5 4-2 1.3a10 10 0 0 0 5.7 5.7l1.3-2 4 1.5v3c0 1.4-1.1 2.5-2.5 2.5A15.5 15.5 0 0 1 4.5 6c0-1.4 1.1-2.5 2.5-2.5z"/></svg></button>
+      <button type="button" data-help="swap" data-i18n-attr="aria-label:mqHelpSwap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button>
+    </div>
+    <div class="mq-stage"><div class="mq-q mq-lz" id="mq-q"><p id="mq-text" aria-live="polite"></p></div><div class="mq-ans" id="mq-ans"><button type="button" class="mq-a mq-lz" data-i="0"><i>A</i><span></span></button><button type="button" class="mq-a mq-lz" data-i="1"><i>B</i><span></span></button><button type="button" class="mq-a mq-lz" data-i="2"><i>C</i><span></span></button><button type="button" class="mq-a mq-lz" data-i="3"><i>D</i><span></span></button></div></div>
+    <div class="mq-bar" id="mq-bar"><p class="mq-ask" id="mq-ask-t"></p><button type="button" class="btn mq-no" id="mq-no" data-i18n="mqNo"></button><button type="button" class="btn primary mq-yes" id="mq-yes" data-i18n="mqYes"></button><button type="button" class="btn" id="mq-quit"></button></div>
+    <ol class="mq-ladder" id="mq-ladder" data-i18n-attr="aria-label:mqLadder"></ol>
+    <div class="mq-pop" id="mq-pop" hidden></div>
+    <div class="rw-prize" id="mq-photo" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="mq-photo-t"></p></div>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -2986,7 +3126,16 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       tbAmbo: 'Ambo', tbTerno: 'Terno', tbQuaterna: 'Quaterna', tbCinquina: 'Cinquina', tbTombola: 'Tombola', tbRowAria: '{n} numeri nella riga migliore',
       tbPrizeMe: '{prize}! Hai vinto una foto di Hande', tbPrizeTombola: 'Tombola! La foto più bella è tua', tbWinOf: '{name} fa {prize}', tbWinMany: '{name} fanno {prize}',
       tbKicker: 'Tombola · {n} numeri estratti', tbWinMe: 'Tombola! Hai vinto', tbWinOf2: 'Tombola di {name}', tbRowPhotos: 'Foto vinte',
-      aTbStart: 'Tombola: premi Estrai per tirare fuori i numeri.', aTbNum: 'È uscito il {n}.', aTbMine: 'Ce l’hai!',
+      aTbStart: 'Tombola: premi Estrai per tirare fuori i numeri.',
+      // ---- Quiz del milione ----
+      gameMq: 'Quiz del milione', gpMqTag: 'Rispondi, sali, vinci', ledeMq: 'Quindici domande sempre nuove per arrivare al milione: ai traguardi vinci le foto di Hande.',
+      mqIntro: 'Domande facili, poi medie, poi difficili. Hai quattro aiuti: 50:50, il pubblico, la telefonata alla Volpe e il cambio di domanda.',
+      mqRecord: 'Partite: {p} · vincita più alta: {m}', mqMoney: '{n} €', mqSub: 'Domanda {n} di 15', mqFor: 'In palio', mqSafe: 'Al sicuro: {m}', mqQuit: 'Mi ritiro con {m}',
+      mqSure: 'Confermi la risposta {l}?', mqYes: 'Sì, confermo', mqNo: 'Ci ripenso', mqHelp50: 'Aiuto 50:50', mqHelpPub: 'Aiuto del pubblico', mqHelpTel: 'Telefona alla Volpe', mqHelpSwap: 'Cambia domanda',
+      mqPubT: 'Il pubblico ha votato', mqTelSure: '«Facile! È la {l}: {a}. Ne sono sicura.»', mqTelThink: '«Mmm… direi la {l}: {a}. Ma non ci giurerei.»', mqTelGuess: '«Difficile… forse la {l}: {a}? Tiro a indovinare.»',
+      mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
+      mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
+      aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}', aTbNum: 'È uscito il {n}.', aTbMine: 'Ce l’hai!',
       rwCats: { hande: 'Il mondo di Hande', proverbio: 'Proverbio', mododire: 'Modo di dire', film: 'Film', canzone: 'Canzone', citta: 'Luoghi', turchia: 'Turchia', turco: 'Parole turche', atasozu: 'Proverbio turco', deyim: 'Modo di dire turco', sarki: 'Canzone', sehir: 'Luoghi', italya: 'Italia', italyanca: 'Parole italiane', cosa: 'Cosa', luogo: 'Luogo' },
     },
     tr: {
@@ -3212,7 +3361,16 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       tbAmbo: 'İkili', tbTerno: 'Üçlü', tbQuaterna: 'Dörtlü', tbCinquina: 'Çinko', tbTombola: 'Tombala', tbRowAria: 'En iyi sırada {n} numara',
       tbPrizeMe: '{prize}! Bir Hande fotoğrafı kazandın', tbPrizeTombola: 'Tombala! En güzel fotoğraf senin', tbWinOf: '{name}: {prize}', tbWinMany: '{name}: {prize}',
       tbKicker: 'Tombala · {n} numara çekildi', tbWinMe: 'Tombala! Kazandın', tbWinOf2: '{name} tombala yaptı', tbRowPhotos: 'Kazanılan fotoğraflar',
-      aTbStart: 'Tombala: numaraları çekmek için Çek düğmesine bas.', aTbNum: '{n} çıktı.', aTbMine: 'Sende var!',
+      aTbStart: 'Tombala: numaraları çekmek için Çek düğmesine bas.',
+      // ---- Milyon Yarışması ----
+      gameMq: 'Milyon Yarışması', gpMqTag: 'Cevapla, yüksel, kazan', ledeMq: 'Milyona ulaşmak için her seferinde yeni on beş soru: barajlarda Hande fotoğrafları kazanırsın.',
+      mqIntro: "Önce kolay, sonra orta, sonra zor sorular. Dört jokerin var: yarı yarıya, seyirci, Tilki'ye telefon ve soru değiştirme.",
+      mqRecord: 'Oyun: {p} · en yüksek ödül: {m}', mqMoney: '{n} TL', mqSub: 'Soru {n}/15', mqFor: 'Ödül', mqSafe: 'Garanti: {m}', mqQuit: '{m} ile çekil',
+      mqSure: '{l} şıkkı son kararın mı?', mqYes: 'Evet, eminim', mqNo: 'Vazgeç', mqHelp50: 'Yarı yarıya joker', mqHelpPub: 'Seyirci jokeri', mqHelpTel: "Tilki'yi ara", mqHelpSwap: 'Soruyu değiştir',
+      mqPubT: 'Seyircinin oyu', mqTelSure: '«Kolay! {l} şıkkı: {a}. Eminim.»', mqTelThink: '«Hmm… {l} şıkkı derim: {a}. Ama yemin edemem.»', mqTelGuess: '«Zor… belki {l}: {a}? Tahmin ediyorum.»',
+      mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
+      mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
+      aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}', aTbNum: '{n} çıktı.', aTbMine: 'Sende var!',
       rwCats: { hande: "Hande'nin dünyası", proverbio: 'İtalyan atasözü', mododire: 'İtalyan deyimi', film: 'Film', canzone: 'Şarkı', citta: 'Yerler', turchia: 'Türkiye', turco: 'Türkçe kelimeler', atasozu: 'Atasözü', deyim: 'Deyim', sarki: 'Şarkı', sehir: 'Yerler', italya: 'İtalya', italyanca: 'İtalyanca kelimeler', cosa: 'Nesne', luogo: 'Yer' },
     },
   };
@@ -3698,12 +3856,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
+    mqBuildLadder(); if (MG) mqRender();
     if (!mapEl.hidden) renderMap(false);
     if (N && N.view) netRenderRoom();
     if (!onlineEl.hidden && !$('#onl-intro').hidden) netRenderIntro();
@@ -3830,7 +3989,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -4020,7 +4179,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -4122,7 +4281,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -4623,7 +4782,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -5123,7 +5282,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -5222,12 +5381,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-bw').hidden = gs !== 'bw';
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : 'lede';
+    $('#setup-mq').hidden = gs !== 'mq';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -5244,7 +5404,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -5522,7 +5682,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -6066,7 +6226,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -6289,7 +6449,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -6437,7 +6597,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -6710,7 +6870,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -7556,7 +7716,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -8018,7 +8178,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -9174,7 +9334,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -9244,7 +9404,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -9309,7 +9469,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -9454,6 +9614,494 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#tb-record').textContent = st.played ? t('tbRecord', { p: st.played, w: st.wins, z: st.prizes }) : t('rwRecordNone');
   }
 
+  /* ---------- Quiz del milione: the questions ----------
+     [difficulty 1–3, topic, Italian question, Italian answers, Turkish question, Turkish answers (if they differ)].
+     The right answer is always the first: the game shuffles them. New questions go at the end, never in the middle,
+     because the phones remember the ones already asked by their place in this list. */
+  const MQ_BANK = [
+    [1, 'geo', "Qual è la capitale della Turchia?", ["Ankara", "Istanbul", "Smirne", "Antalya"], "Türkiye'nin başkenti neresidir?", ["Ankara", "İstanbul", "İzmir", "Antalya"]],
+    [1, 'geo', "Quale fiume attraversa Roma?", ["Tevere", "Arno", "Po", "Adige"], "Roma'dan hangi nehir geçer?", ["Tiber", "Arno", "Po", "Adige"]],
+    [1, 'geo', "Quale stretto attraversa Istanbul?", ["Bosforo", "Dardanelli", "Gibilterra", "Messina"], "İstanbul'dan hangi boğaz geçer?", ["İstanbul Boğazı", "Çanakkale Boğazı", "Cebelitarık Boğazı", "Messina Boğazı"]],
+    [1, 'cibo', "Quale di questi è un formaggio italiano?", ["Parmigiano", "Feta", "Cheddar", "Brie"], "Hangisi bir İtalyan peyniridir?", ["Parmesan", "Feta", "Cheddar", "Brie"]],
+    [1, 'vari', "Quanti giorni ha una settimana?", ["7", "5", "6", "8"], "Bir haftada kaç gün vardır?"],
+    [1, 'vari', "Nelle favole, quale animale è il re della foresta?", ["Il leone", "La tigre", "L'orso", "Il lupo"], "Masallarda ormanların kralı hangi hayvandır?", ["Aslan", "Kaplan", "Ayı", "Kurt"]],
+    [1, 'scienza', "Quale pianeta è chiamato «il pianeta rosso»?", ["Marte", "Venere", "Giove", "Saturno"], "«Kızıl gezegen» olarak bilinen gezegen hangisidir?", ["Mars", "Venüs", "Jüpiter", "Satürn"]],
+    [1, 'vari', "Quanti minuti ci sono in un'ora?", ["60", "100", "30", "90"], "Bir saatte kaç dakika vardır?"],
+    [1, 'geo', "In quale città si trova la Torre Eiffel?", ["Parigi", "Londra", "Roma", "Madrid"], "Eyfel Kulesi hangi şehirdedir?", ["Paris", "Londra", "Roma", "Madrid"]],
+    [1, 'geo', "In quale città si trova il Colosseo?", ["Roma", "Atene", "Napoli", "Milano"], "Kolezyum hangi şehirdedir?", ["Roma", "Atina", "Napoli", "Milano"]],
+    [1, 'geo', "In quale città si trova la Torre di Galata?", ["Istanbul", "Ankara", "Smirne", "Bursa"], "Galata Kulesi hangi şehirdedir?", ["İstanbul", "Ankara", "İzmir", "Bursa"]],
+    [1, 'geo', "Quale vulcano domina il golfo di Napoli?", ["Vesuvio", "Etna", "Stromboli", "Vulcano"], "Napoli Körfezi'ne hangi yanardağ hâkimdir?", ["Vezüv", "Etna", "Stromboli", "Vulcano"]],
+    [1, 'turchia', "Quale bevanda turca si serve nei bicchierini a forma di tulipano?", ["Il tè", "Il caffè", "L'ayran", "La boza"], "İnce belli bardakta hangi içecek servis edilir?", ["Çay", "Kahve", "Ayran", "Boza"]],
+    [1, 'cibo', "Quale di questi è un dolce tipico turco?", ["Baklava", "Tiramisù", "Cannolo", "Strudel"], "Hangisi geleneksel bir Türk tatlısıdır?", ["Baklava", "Tiramisu", "Cannoli", "Strudel"]],
+    [1, 'cibo', "Quale di questi è un dolce tipico italiano?", ["Tiramisù", "Baklava", "Künefe", "Lokum"], "Hangisi bir İtalyan tatlısıdır?", ["Tiramisu", "Baklava", "Künefe", "Lokum"]],
+    [1, 'vari', "Quanti colori ha la bandiera italiana?", ["3", "2", "4", "5"], "İtalya bayrağında kaç renk vardır?"],
+    [1, 'turchia', "Di che colore sono la mezzaluna e la stella della bandiera turca?", ["Bianche", "Gialle", "Rosse", "Blu"], "Türk bayrağındaki ay ve yıldız ne renktir?", ["Beyaz", "Sarı", "Kırmızı", "Mavi"]],
+    [1, 'scienza', "Quante zampe ha un ragno?", ["8", "6", "10", "4"], "Bir örümceğin kaç bacağı vardır?"],
+    [1, 'lingua', "Qual è il contrario di «caldo»?", ["Freddo", "Tiepido", "Bollente", "Umido"], "«Sıcak» kelimesinin zıttı nedir?", ["Soğuk", "Ilık", "Kaynar", "Nemli"]],
+    [1, 'scienza', "Che cosa producono le api?", ["Il miele", "Il latte", "La seta", "La lana"], "Arılar ne üretir?", ["Bal", "Süt", "İpek", "Yün"]],
+    [1, 'sport', "Quanti giocatori ha in campo una squadra di calcio?", ["11", "9", "10", "12"], "Bir futbol takımı sahada kaç oyuncuyla oynar?"],
+    [1, 'scienza', "Qual è la formula chimica dell'acqua?", ["H₂O", "CO₂", "O₂", "NaCl"], "Suyun kimyasal formülü nedir?"],
+    [1, 'turchia', "A che cosa serve, per tradizione, il nazar boncuğu (l'occhio blu)?", ["A proteggere dal malocchio", "A far piovere", "A portare soldi", "A trovare la strada"], "Nazar boncuğu geleneksel olarak ne işe yarar?", ["Nazardan korur", "Yağmur yağdırır", "Para getirir", "Yol gösterir"]],
+    [1, 'cibo', "Quale pasta ripiena è tipica di Bologna?", ["Tortellini", "Spaghetti", "Penne", "Fusilli"], "Bologna'nın meşhur dolgulu makarnası hangisidir?", ["Tortellini", "Spagetti", "Penne", "Fusilli"]],
+    [1, 'geo', "Quale città italiana è famosa per i canali e le gondole?", ["Venezia", "Firenze", "Torino", "Bari"], "Kanalları ve gondollarıyla ünlü İtalyan şehri hangisidir?", ["Venedik", "Floransa", "Torino", "Bari"]],
+    [1, 'turchia', "Quale regione turca è famosa per le mongolfiere e i camini delle fate?", ["Cappadocia", "Trebisonda", "Bodrum", "Edirne"], "Sıcak hava balonları ve peri bacalarıyla ünlü bölge hangisidir?", ["Kapadokya", "Trabzon", "Bodrum", "Edirne"]],
+    [1, 'hande', "Di quale paese è l'attrice Hande Erçel?", ["Turchia", "Grecia", "Italia", "Spagna"], "Hande Erçel hangi ülkenin oyuncusudur?", ["Türkiye", "Yunanistan", "İtalya", "İspanya"]],
+    [1, 'hande', "In «Sen Çal Kapımı» come si chiama il personaggio di Hande Erçel?", ["Eda Yıldız", "Hayat Uzun", "Selin Yılmaz", "Leyla"], "«Sen Çal Kapımı»nda Hande Erçel'in canlandırdığı karakterin adı nedir?"],
+    [1, 'hande', "Con quale attore Hande Erçel ha recitato in «Sen Çal Kapımı»?", ["Kerem Bürsin", "Burak Deniz", "Barış Arduç", "Çağatay Ulusoy"], "«Sen Çal Kapımı»nda Hande Erçel hangi oyuncuyla rol aldı?"],
+    [1, 'arte', "Chi ha dipinto la Gioconda?", ["Leonardo da Vinci", "Michelangelo", "Raffaello", "Caravaggio"], "Mona Lisa tablosunu kim yaptı?"],
+    [1, 'geo', "Quale città italiana è famosa per la torre pendente?", ["Pisa", "Siena", "Lucca", "Bologna"], "Eğik kulesiyle ünlü İtalyan şehri hangisidir?", ["Pisa", "Siena", "Lucca", "Bologna"]],
+    [1, 'musica', "In quale città si svolge il Festival della canzone italiana?", ["Sanremo", "Milano", "Roma", "Napoli"], "İtalyan Şarkı Festivali hangi şehirde yapılır?"],
+    [1, 'scienza', "Qual è il pianeta più grande del Sistema Solare?", ["Giove", "Saturno", "Nettuno", "Terra"], "Güneş Sistemi'nin en büyük gezegeni hangisidir?", ["Jüpiter", "Satürn", "Neptün", "Dünya"]],
+    [1, 'scienza', "Chi ha formulato la teoria della relatività?", ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Nikola Tesla"], "İzafiyet teorisini kim ortaya koydu?"],
+    [1, 'storia', "Chi è stato il primo uomo a camminare sulla Luna?", ["Neil Armstrong", "Buzz Aldrin", "Jurij Gagarin", "Michael Collins"], "Ay'da yürüyen ilk insan kimdir?", ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"]],
+    [1, 'storia', "Chi è stato il primo presidente della Repubblica di Turchia?", ["Mustafa Kemal Atatürk", "İsmet İnönü", "Celal Bayar", "Adnan Menderes"], "Türkiye Cumhuriyeti'nin ilk cumhurbaşkanı kimdir?"],
+    [1, 'turchia', "Qual è la moneta della Turchia?", ["La lira turca", "L'euro", "Il dinaro", "La dracma"], "Türkiye'nin para birimi nedir?", ["Türk lirası", "Euro", "Dinar", "Drahmi"]],
+    [1, 'cibo', "Il pesto alla genovese è fatto soprattutto con...", ["Basilico", "Prezzemolo", "Rucola", "Spinaci"], "Ceneviz usulü pesto sos esas olarak neyle yapılır?", ["Fesleğen", "Maydanoz", "Roka", "Ispanak"]],
+    [1, 'cibo', "Qual è la città natale della pizza Margherita?", ["Napoli", "Roma", "Genova", "Bari"], "Margherita pizzanın memleketi hangi şehirdir?"],
+    [1, 'cibo', "Quale formaggio si mette sulla pizza Margherita?", ["Mozzarella", "Gorgonzola", "Pecorino", "Ricotta"], "Margherita pizzaya hangi peynir konur?"],
+    [1, 'turchia', "Che cos'è il simit?", ["Un pane ad anello con sesamo", "Un dolce al miele", "Una zuppa", "Un formaggio"], "Simidin üzerinde genellikle ne bulunur?", ["Susam", "Haşhaş", "Pudra şekeri", "İri tuz"]],
+    [1, 'sport', "Ogni quanti anni si svolgono le Olimpiadi estive?", ["4", "2", "3", "5"], "Yaz Olimpiyatları kaç yılda bir yapılır?"],
+    [1, 'geo', "Qual è l'oceano più grande?", ["Pacifico", "Atlantico", "Indiano", "Artico"], "En büyük okyanus hangisidir?", ["Büyük Okyanus (Pasifik)", "Atlas Okyanusu", "Hint Okyanusu", "Arktik Okyanusu"]],
+    [1, 'geo', "In quale continente si trova l'Egitto?", ["Africa", "Asia", "Europa", "Oceania"], "Mısır hangi kıtadadır?", ["Afrika", "Asya", "Avrupa", "Okyanusya"]],
+    [1, 'geo', "Qual è l'isola più grande d'Italia?", ["Sicilia", "Sardegna", "Elba", "Capri"], "İtalya'nın en büyük adası hangisidir?", ["Sicilya", "Sardinya", "Elba", "Capri"]],
+    [1, 'geo', "Su quale isola si trova l'Etna?", ["Sicilia", "Sardegna", "Ischia", "Capri"], "Etna Yanardağı hangi adadadır?", ["Sicilya", "Sardinya", "Ischia", "Capri"]],
+    [1, 'geo', "Qual è la città più popolosa della Turchia?", ["Istanbul", "Ankara", "Smirne", "Bursa"], "Türkiye'nin en kalabalık şehri hangisidir?", ["İstanbul", "Ankara", "İzmir", "Bursa"]],
+    [1, 'sport', "Con quale parte del corpo non si può toccare la palla nel calcio (tranne il portiere)?", ["Le mani", "La testa", "I piedi", "Il petto"], "Futbolda (kaleci hariç) topa vücudun hangi kısmıyla dokunulmaz?", ["Eller", "Baş", "Ayaklar", "Göğüs"]],
+
+    [2, 'hande', "In «Aşk Laftan Anlamaz» come si chiama il personaggio di Hande Erçel?", ["Hayat", "Eda", "Selin", "Leyla"], "«Aşk Laftan Anlamaz»da Hande Erçel'in karakterinin adı nedir?"],
+    [2, 'hande', "Chi interpreta Murat Sarsılmaz in «Aşk Laftan Anlamaz»?", ["Burak Deniz", "Kerem Bürsin", "Can Yaman", "Kıvanç Tatlıtuğ"], "«Aşk Laftan Anlamaz»da Murat Sarsılmaz'ı kim canlandırır?"],
+    [2, 'hande', "In quale città è nata Hande Erçel?", ["Bandırma", "Istanbul", "Ankara", "Smirne"], "Hande Erçel hangi şehirde doğdu?", ["Bandırma", "İstanbul", "Ankara", "İzmir"]],
+    [2, 'hande', "Come si chiama la sorella di Hande Erçel?", ["Gamze", "Hazal", "Merve", "Elif"], "Hande Erçel'in ablasının adı nedir?"],
+    [2, 'hande', "In quale film Netflix Hande Erçel recita con Barış Arduç?", ["Aşk Taktiği", "Kardeşim Benim", "Bir Aşk İki Hayat", "Romantik Komedi"], "Hande Erçel'in Barış Arduç ile oynadığı Netflix filmi hangisidir?"],
+    [2, 'hande', "Con chi recita di nuovo Hande Erçel in «Bambaşka Biri»?", ["Burak Deniz", "Kerem Bürsin", "Barış Arduç", "Engin Akyürek"], "Hande Erçel «Bambaşka Biri»nde yeniden kiminle rol aldı?"],
+    [2, 'hande', "In «Güneşin Kızları» come si chiama il personaggio di Hande Erçel?", ["Selin", "Eda", "Hayat", "Leyla"], "«Güneşin Kızları»nda Hande Erçel'in karakterinin adı nedir?"],
+    [2, 'hande', "Che lavoro fa Serkan Bolat in «Sen Çal Kapımı»?", ["L'architetto", "Il medico", "L'avvocato", "Il cuoco"], "«Sen Çal Kapımı»nda Serkan Bolat'ın mesleği nedir?", ["Mimar", "Doktor", "Avukat", "Aşçı"]],
+    [2, 'hande', "Che lavoro fa Eda all'inizio di «Sen Çal Kapımı»?", ["La fiorista", "L'architetta", "La giornalista", "La cuoca"], "«Sen Çal Kapımı»nın başında Eda ne iş yapar?", ["Çiçekçi", "Mimar", "Gazeteci", "Aşçı"]],
+    [2, 'storia', "Quale città si chiamava Costantinopoli?", ["Istanbul", "Ankara", "Smirne", "Bursa"], "Konstantinopolis bugün hangi şehrin adıdır?", ["İstanbul", "Ankara", "İzmir", "Bursa"]],
+    [2, 'storia', "In che anno è nata la Repubblica di Turchia?", ["1923", "1919", "1938", "1908"], "Türkiye Cumhuriyeti hangi yıl ilan edildi?"],
+    [2, 'storia', "In che anno è nata la Repubblica Italiana?", ["1946", "1861", "1918", "1960"], "İtalya Cumhuriyeti hangi yıl kuruldu?"],
+    [2, 'storia', "In che anno è nato il Regno d'Italia, con l'unità del paese?", ["1861", "1848", "1815", "1915"], "İtalya Krallığı (İtalyan birliği) hangi yıl kuruldu?"],
+    [2, 'arte', "Chi ha scritto la Divina Commedia?", ["Dante Alighieri", "Francesco Petrarca", "Giovanni Boccaccio", "Alessandro Manzoni"], "İlahi Komedya'yı kim yazdı?"],
+    [2, 'arte', "Chi ha scritto «I promessi sposi»?", ["Alessandro Manzoni", "Giovanni Verga", "Italo Calvino", "Luigi Pirandello"], "«Nişanlılar» (I promessi sposi) romanını kim yazdı?"],
+    [2, 'arte', "Quale scrittore turco ha vinto il premio Nobel per la letteratura nel 2006?", ["Orhan Pamuk", "Yaşar Kemal", "Elif Şafak", "Ahmet Ümit"], "2006'da Nobel Edebiyat Ödülü'nü kazanan Türk yazar kimdir?"],
+    [2, 'geo', "Qual è il fiume più lungo d'Italia?", ["Po", "Tevere", "Adige", "Arno"], "İtalya'nın en uzun nehri hangisidir?"],
+    [2, 'geo', "Qual è il lago più grande d'Italia?", ["Lago di Garda", "Lago Maggiore", "Lago di Como", "Lago Trasimeno"], "İtalya'nın en büyük gölü hangisidir?", ["Garda Gölü", "Maggiore Gölü", "Como Gölü", "Trasimeno Gölü"]],
+    [2, 'geo', "Qual è il lago più grande della Turchia?", ["Lago di Van", "Lago Salato (Tuz)", "Lago di Eğirdir", "Lago di Beyşehir"], "Türkiye'nin en büyük gölü hangisidir?", ["Van Gölü", "Tuz Gölü", "Eğirdir Gölü", "Beyşehir Gölü"]],
+    [2, 'geo', "Qual è la montagna più alta della Turchia?", ["Monte Ararat (Ağrı)", "Erciyes", "Uludağ", "Palandöken"], "Türkiye'nin en yüksek dağı hangisidir?", ["Ağrı Dağı", "Erciyes Dağı", "Uludağ", "Palandöken"]],
+    [2, 'geo', "Qual è la montagna più alta delle Alpi?", ["Monte Bianco", "Cervino", "Monte Rosa", "Gran Paradiso"], "Alpler'in en yüksek dağı hangisidir?", ["Mont Blanc", "Matterhorn", "Monte Rosa", "Gran Paradiso"]],
+    [2, 'geo', "Quante regioni ha l'Italia?", ["20", "18", "22", "15"], "İtalya'da kaç bölge vardır?"],
+    [2, 'geo', "Quante province (il) ha la Turchia?", ["81", "67", "75", "90"], "Türkiye'de kaç il vardır?"],
+    [2, 'sport', "Con quale squadra Maradona ha vinto lo scudetto in Italia?", ["Napoli", "Juventus", "Inter", "Roma"], "Maradona İtalya'da hangi takımla şampiyon oldu?"],
+    [2, 'sport', "Quale squadra turca ha vinto la Coppa UEFA nel 2000?", ["Galatasaray", "Fenerbahçe", "Beşiktaş", "Trabzonspor"], "2000 yılında UEFA Kupası'nı kazanan Türk takımı hangisidir?"],
+    [2, 'sport', "Quante volte l'Italia ha vinto i Mondiali di calcio?", ["4", "3", "2", "5"], "İtalya Dünya Kupası'nı kaç kez kazandı?"],
+    [2, 'sport', "In che anno l'Italia ha vinto il suo ultimo Mondiale di calcio?", ["2006", "1982", "1994", "2010"], "İtalya son Dünya Kupası'nı hangi yıl kazandı?"],
+    [2, 'arte', "Chi ha creato Pinocchio?", ["Carlo Collodi", "Gianni Rodari", "Italo Calvino", "Edmondo De Amicis"], "Pinokyo'yu kim yazdı?"],
+    [2, 'musica', "Chi ha composto «Le quattro stagioni»?", ["Antonio Vivaldi", "Giuseppe Verdi", "Wolfgang Amadeus Mozart", "Giacomo Puccini"], "«Dört Mevsim»i kim besteledi?"],
+    [2, 'musica', "Chi ha composto l'opera «La traviata»?", ["Giuseppe Verdi", "Giacomo Puccini", "Gioachino Rossini", "Vincenzo Bellini"], "«La Traviata» operasını kim besteledi?"],
+    [2, 'scienza', "Qual è il pianeta più vicino al Sole?", ["Mercurio", "Venere", "Marte", "Terra"], "Güneş'e en yakın gezegen hangisidir?", ["Merkür", "Venüs", "Mars", "Dünya"]],
+    [2, 'scienza', "Qual è il simbolo chimico dell'oro?", ["Au", "Ag", "Fe", "Or"], "Altının kimyasal sembolü nedir?"],
+    [2, 'scienza', "Qual è l'organo più grande del corpo umano?", ["La pelle", "Il fegato", "Il cuore", "Il cervello"], "İnsan vücudunun en büyük organı hangisidir?", ["Deri", "Karaciğer", "Kalp", "Beyin"]],
+    [2, 'scienza', "Qual è l'animale terrestre più veloce?", ["Il ghepardo", "Il leone", "La gazzella", "Il cavallo"], "Karadaki en hızlı hayvan hangisidir?", ["Çita", "Aslan", "Ceylan", "At"]],
+    [2, 'scienza', "Qual è il mammifero più grande?", ["La balenottera azzurra", "L'elefante africano", "L'orca", "La giraffa"], "En büyük memeli hangisidir?", ["Mavi balina", "Afrika fili", "Katil balina", "Zürafa"]],
+    [2, 'scienza', "Quale scienziato italiano è considerato un pioniere della radio?", ["Guglielmo Marconi", "Alessandro Volta", "Enrico Fermi", "Galileo Galilei"], "Radyonun öncüsü sayılan İtalyan bilim insanı kimdir?"],
+    [2, 'scienza', "Da quale scienziato prende il nome il volt?", ["Alessandro Volta", "André-Marie Ampère", "Georg Ohm", "James Watt"], "Volt birimi hangi bilim insanının adını taşır?"],
+    [2, 'storia', "In che anno l'uomo è arrivato sulla Luna?", ["1969", "1965", "1972", "1961"], "İnsan Ay'a hangi yıl ayak bastı?"],
+    [2, 'storia', "In che anno è caduto il Muro di Berlino?", ["1989", "1991", "1985", "1975"], "Berlin Duvarı hangi yıl yıkıldı?"],
+    [2, 'storia', "In che anno Cristoforo Colombo arrivò in America?", ["1492", "1500", "1453", "1519"], "Kristof Kolomb Amerika'ya hangi yıl ulaştı?"],
+    [2, 'storia', "In che anno gli Ottomani conquistarono Costantinopoli?", ["1453", "1492", "1299", "1517"], "İstanbul hangi yıl fethedildi?"],
+    [2, 'storia', "Quale sultano conquistò Costantinopoli?", ["Mehmet II, il Conquistatore", "Solimano il Magnifico", "Selim I", "Osman I"], "İstanbul'u hangi padişah fethetti?", ["Fatih Sultan Mehmet", "Kanuni Sultan Süleyman", "Yavuz Sultan Selim", "Osman Gazi"]],
+    [2, 'storia', "Quale imperatore romano diede il suo nome a Costantinopoli?", ["Costantino", "Augusto", "Nerone", "Traiano"], "Konstantinopolis adını hangi Roma imparatorundan alır?", ["Konstantin", "Augustus", "Neron", "Trajan"]],
+    [2, 'storia', "Quale antica città si trova vicino a Çanakkale?", ["Troia", "Efeso", "Pergamo", "Mileto"], "Çanakkale yakınlarındaki antik kent hangisidir?", ["Truva", "Efes", "Bergama", "Milet"]],
+    [2, 'arte', "In quale città si trova la Galleria degli Uffizi?", ["Firenze", "Roma", "Milano", "Venezia"], "Uffizi Galerisi hangi şehirdedir?", ["Floransa", "Roma", "Milano", "Venedik"]],
+    [2, 'arte', "In quale città si trova il Cenacolo di Leonardo?", ["Milano", "Firenze", "Roma", "Venezia"], "Leonardo'nun «Son Akşam Yemeği» freski hangi şehirdedir?", ["Milano", "Floransa", "Roma", "Venedik"]],
+    [2, 'arte', "Chi ha affrescato la volta della Cappella Sistina?", ["Michelangelo", "Raffaello", "Leonardo da Vinci", "Sandro Botticelli"], "Sistina Şapeli'nin tavan fresklerini kim yaptı?"],
+    [2, 'turchia', "Con quale nome è conosciuta nel mondo la Moschea del Sultano Ahmed?", ["Moschea Blu", "Moschea Verde", "Moschea d'Oro", "Moschea Bianca"], "Sultanahmet Camii dünyada hangi adla bilinir?", ["Mavi Cami", "Yeşil Cami", "Altın Cami", "Beyaz Cami"]],
+    [2, 'turchia', "Come si chiama il grande mercato coperto di Istanbul?", ["Gran Bazar (Kapalıçarşı)", "Mercato di Rialto", "Covent Garden", "Grand-Place"], "İstanbul'daki ünlü kapalı çarşının adı nedir?", ["Kapalıçarşı", "Rialto Pazarı", "Covent Garden", "Grand-Place"]],
+    [2, 'geo', "Qual è la piazza principale di Venezia?", ["Piazza San Marco", "Piazza Navona", "Piazza del Campo", "Piazza della Signoria"], "Venedik'in ana meydanı hangisidir?", ["San Marco Meydanı", "Navona Meydanı", "Campo Meydanı", "Signoria Meydanı"]],
+    [2, 'cinema', "Chi ha diretto «La vita è bella»?", ["Roberto Benigni", "Federico Fellini", "Giuseppe Tornatore", "Paolo Sorrentino"], "«Hayat Güzeldir» filmini kim yönetti?"],
+    [2, 'cinema', "Chi ha diretto «La dolce vita»?", ["Federico Fellini", "Luchino Visconti", "Michelangelo Antonioni", "Vittorio De Sica"], "«Tatlı Hayat» (La dolce vita) filmini kim yönetti?"],
+    [2, 'cinema', "In quale festival del cinema si vince il Leone d'oro?", ["Venezia", "Roma", "Cannes", "Berlino"], "Altın Aslan ödülü hangi film festivalinde verilir?", ["Venedik", "Roma", "Cannes", "Berlin"]],
+    [2, 'musica', "Quale cantante turco è chiamato «Megastar»?", ["Tarkan", "Mustafa Sandal", "Kenan Doğulu", "Murat Boz"], "«Megastar» lakaplı Türk şarkıcı kimdir?"],
+    [2, 'musica', "Chi ha vinto l'Eurovision 2003 per la Turchia?", ["Sertab Erener", "Hadise", "Tarkan", "Ajda Pekkan"], "2003'te Eurovision'u Türkiye adına kim kazandı?"],
+    [2, 'musica', "Quale gruppo italiano ha vinto l'Eurovision 2021?", ["Måneskin", "Il Volo", "Pooh", "Modà"], "2021'de Eurovision'u kazanan İtalyan grup hangisidir?"],
+    [2, 'cibo', "Quale gelato turco si allunga e si mangia anche con coltello e forchetta?", ["Il dondurma di Maraş", "La granita", "Il sorbetto", "Lo spumone"], "Uzayan meşhur dondurma hangi şehrin adıyla anılır?", ["Maraş", "Bursa", "Adana", "Rize"]],
+    [2, 'cibo', "Di quale città è tipico l'İskender kebap?", ["Bursa", "Adana", "Konya", "Edirne"], "İskender kebap hangi şehrin meşhur yemeğidir?"],
+    [2, 'cibo', "In onore di chi fu chiamata la pizza Margherita?", ["Della regina Margherita", "Di una pizzaiola", "Di una santa", "Di un fiore"], "Margherita pizza adını kimden alır?", ["Kraliçe Margherita'dan", "Bir pizzacı kadından", "Bir azizeden", "Bir çiçekten"]],
+    [2, 'cibo', "Quale bevanda turca si fa con yogurt, acqua e sale?", ["Ayran", "Şalgam", "Boza", "Sahlep"], "Yoğurt, su ve tuzla yapılan içecek hangisidir?"],
+    [2, 'cibo', "Che cosa rende giallo il risotto alla milanese?", ["Lo zafferano", "La curcuma", "L'uovo", "Il mais"], "Milano usulü risottoya sarı rengini ne verir?", ["Safran", "Zerdeçal", "Yumurta", "Mısır"]],
+    [2, 'sport', "Quale tennista italiano ha vinto gli Australian Open nel 2024?", ["Jannik Sinner", "Matteo Berrettini", "Lorenzo Musetti", "Fabio Fognini"], "2024 Avustralya Açık'ı kazanan İtalyan tenisçi kimdir?"],
+    [2, 'turchia', "Quale sport tradizionale turco si pratica cosparsi d'olio d'oliva?", ["La lotta (yağlı güreş)", "Il tiro con l'arco", "La corsa a cavallo", "Il nuoto"], "Hangi geleneksel Türk sporu zeytinyağıyla yapılır?", ["Yağlı güreş", "Okçuluk", "Cirit", "Yüzme"]],
+    [2, 'geo', "Qual è il paese più grande del mondo?", ["Russia", "Canada", "Cina", "Stati Uniti"], "Yüzölçümü en büyük ülke hangisidir?", ["Rusya", "Kanada", "Çin", "ABD"]],
+    [2, 'geo', "Quale mare si trova tra la Turchia e la Grecia?", ["Mar Egeo", "Mar Nero", "Mar Rosso", "Mar Caspio"], "Türkiye ile Yunanistan arasındaki deniz hangisidir?", ["Ege Denizi", "Karadeniz", "Kızıldeniz", "Hazar Denizi"]],
+    [2, 'geo', "Quale mare bagna Trebisonda (Trabzon)?", ["Mar Nero", "Mar Egeo", "Mar Mediterraneo", "Mar di Marmara"], "Trabzon hangi denizin kıyısındadır?", ["Karadeniz", "Ege Denizi", "Akdeniz", "Marmara Denizi"]],
+    [2, 'geo', "Quale mare bagna Antalya?", ["Mar Mediterraneo", "Mar Nero", "Mar di Marmara", "Mar Egeo"], "Antalya hangi denizin kıyısındadır?", ["Akdeniz", "Karadeniz", "Marmara Denizi", "Ege Denizi"]],
+    [2, 'geo', "Quale stretto separa la Sicilia dalla Calabria?", ["Stretto di Messina", "Bosforo", "Stretto di Gibilterra", "Canale d'Otranto"], "Sicilya'yı Calabria'dan ayıran boğaz hangisidir?", ["Messina Boğazı", "İstanbul Boğazı", "Cebelitarık Boğazı", "Otranto Boğazı"]],
+    [2, 'geo', "Quale città turca si chiamava anticamente Smirne?", ["İzmir", "İzmit", "Edirne", "Bursa"], "Antik çağda adı Smyrna olan şehir hangisidir?"],
+    [2, 'turchia', "In quale città si trova il mausoleo di Mevlana (Rumi)?", ["Konya", "Bursa", "Kayseri", "Sivas"], "Mevlana Türbesi hangi şehirdedir?"],
+    [2, 'turchia', "Quale danza è legata a Mevlana?", ["Il sema dei dervisci rotanti", "Il sirtaki", "Il flamenco", "La tarantella"], "Mevlana ile özdeşleşen dans hangisidir?", ["Semazenlerin sema töreni", "Sirtaki", "Flamenko", "Tarantella"]],
+    [2, 'arte', "Chi ha scritto «Il nome della rosa»?", ["Umberto Eco", "Italo Calvino", "Alberto Moravia", "Elsa Morante"], "«Gülün Adı» romanını kim yazdı?"],
+    [2, 'arte', "Chi ha scritto «L'amica geniale»?", ["Elena Ferrante", "Dacia Maraini", "Natalia Ginzburg", "Oriana Fallaci"], "«Benim Parlak Arkadaşım» (L'amica geniale) romanını kim yazdı?"],
+    [2, 'arte', "Quale scrittrice turca ha scritto «Le quaranta porte» (Aşk)?", ["Elif Şafak", "Ayşe Kulin", "Buket Uzuner", "Adalet Ağaoğlu"], "«Aşk» romanının yazarı kimdir?"],
+    [2, 'tv', "Chi interpreta Can Divit in «Erkenci Kuş»?", ["Can Yaman", "Kerem Bürsin", "Burak Deniz", "Çağatay Ulusoy"], "«Erkenci Kuş»ta Can Divit'i kim canlandırır?"],
+    [2, 'tv', "Chi interpreta Sanem in «Erkenci Kuş»?", ["Demet Özdemir", "Hande Erçel", "Özge Gürel", "Neslihan Atagül"], "«Erkenci Kuş»ta Sanem'i kim canlandırır?"],
+    [2, 'tv', "Quale serie turca racconta la vita del sultano Solimano?", ["Muhteşem Yüzyıl", "Diriliş: Ertuğrul", "Payitaht: Abdülhamid", "Kuruluş: Osman"], "Kanuni Sultan Süleyman'ın hayatını anlatan dizi hangisidir?"],
+    [2, 'tv', "Chi interpreta Kemal in «Kara Sevda»?", ["Burak Özçivit", "Kıvanç Tatlıtuğ", "Çağatay Ulusoy", "Engin Akyürek"], "«Kara Sevda»da Kemal'i kim canlandırır?"],
+    [2, 'scienza', "Quanti lati ha un ettagono?", ["7", "6", "8", "9"], "Bir yedigenin kaç kenarı vardır?"],
+    [2, 'scienza', "Chi ha scoperto la penicillina?", ["Alexander Fleming", "Louis Pasteur", "Marie Curie", "Robert Koch"], "Penisilini kim keşfetti?"],
+    [2, 'scienza', "Quale scienziata ha vinto due premi Nobel in due scienze diverse?", ["Marie Curie", "Rosalind Franklin", "Rita Levi-Montalcini", "Lise Meitner"], "İki farklı bilim dalında Nobel kazanan bilim insanı kimdir?"],
+    [2, 'scienza', "Qual è il simbolo chimico del ferro?", ["Fe", "Fr", "Ir", "F"], "Demirin kimyasal sembolü nedir?"],
+    [2, 'vari', "Quante stelle ci sono sulla bandiera dell'Unione Europea?", ["12", "15", "27", "10"], "Avrupa Birliği bayrağında kaç yıldız vardır?"],
+    [2, 'storia', "Chi guidò la spedizione dei Mille?", ["Giuseppe Garibaldi", "Camillo Cavour", "Giuseppe Mazzini", "Vittorio Emanuele II"], "Binler Seferi'ni kim yönetti?"],
+    [2, 'musica', "Quale strumento suonava Niccolò Paganini?", ["Il violino", "Il pianoforte", "Il flauto", "La chitarra"], "Niccolò Paganini hangi çalgıyı çalardı?", ["Keman", "Piyano", "Flüt", "Gitar"]],
+    [2, 'musica', "Quale strumento a corde è tipico della musica popolare turca?", ["Il bağlama (saz)", "Il mandolino", "Il banjo", "L'arpa"], "Türk halk müziğinin simgesi olan telli çalgı hangisidir?", ["Bağlama", "Mandolin", "Banjo", "Arp"]],
+    [2, 'musica', "Chi ha composto «Il barbiere di Siviglia»?", ["Gioachino Rossini", "Giuseppe Verdi", "Giacomo Puccini", "Vincenzo Bellini"], "«Sevil Berberi» operasını kim besteledi?"],
+
+    [3, 'hande', "In che anno è iniziata la serie «Sen Çal Kapımı»?", ["2020", "2018", "2022", "2016"], "«Sen Çal Kapımı» dizisi hangi yıl başladı?"],
+    [3, 'hande', "In «Bambaşka Biri» come si chiama il personaggio di Hande Erçel?", ["Leyla", "Eda", "Hayat", "Asya"], "«Bambaşka Biri»nde Hande Erçel'in karakterinin adı nedir?"],
+    [3, 'hande', "Nel film «Aşk Taktiği» come si chiama il personaggio di Hande Erçel?", ["Asya", "Eda", "Leyla", "Selin"], "«Aşk Taktiği» filminde Hande Erçel'in karakterinin adı nedir?"],
+    [3, 'arte', "Quale poeta turco ha scritto «Paesaggi umani dal mio paese»?", ["Nazım Hikmet", "Orhan Veli", "Yunus Emre", "Mehmet Akif Ersoy"], "«Memleketimden İnsan Manzaraları»nı kim yazdı?"],
+    [3, 'musica', "Chi ha composto «Madama Butterfly»?", ["Giacomo Puccini", "Giuseppe Verdi", "Gioachino Rossini", "Gaetano Donizetti"], "«Madama Butterfly» operasını kim besteledi?"],
+    [3, 'scienza', "Quante ossa ha il corpo di un adulto?", ["206", "186", "226", "300"], "Yetişkin bir insanın vücudunda kaç kemik vardır?"],
+    [3, 'scienza', "Qual è il gas più abbondante nell'aria?", ["Azoto", "Ossigeno", "Anidride carbonica", "Argon"], "Havada en çok bulunan gaz hangisidir?", ["Azot", "Oksijen", "Karbondioksit", "Argon"]],
+    [3, 'scienza', "Quanti cuori ha un polpo?", ["3", "1", "2", "8"], "Bir ahtapotun kaç kalbi vardır?"],
+    [3, 'scienza', "Qual è, più o meno, la velocità della luce nel vuoto?", ["300.000 km al secondo", "30.000 km al secondo", "3.000 km al secondo", "1 milione di km al secondo"], "Işığın boşluktaki hızı yaklaşık ne kadardır?", ["Saniyede 300.000 km", "Saniyede 30.000 km", "Saniyede 3.000 km", "Saniyede 1 milyon km"]],
+    [3, 'storia', "Quale presidente della Repubblica Italiana è stato il primo?", ["Enrico De Nicola", "Luigi Einaudi", "Sandro Pertini", "Giovanni Gronchi"], "İtalya Cumhuriyeti'nin ilk cumhurbaşkanı kimdir?"],
+    [3, 'storia', "Quale meraviglia del mondo antico si trovava ad Alicarnasso, l'odierna Bodrum?", ["Il Mausoleo", "Il Colosso", "Il Faro", "I Giardini pensili"], "Antik dünyanın yedi harikasından hangisi Halikarnas'taydı (Bodrum)?", ["Mozole", "Rodos Heykeli", "İskenderiye Feneri", "Babil'in Asma Bahçeleri"]],
+    [3, 'storia', "Quale meraviglia del mondo antico si trovava a Efeso?", ["Il Tempio di Artemide", "Il Mausoleo", "Il Colosso di Rodi", "Il Faro di Alessandria"], "Antik dünyanın yedi harikasından hangisi Efes'teydi?", ["Artemis Tapınağı", "Halikarnas Mozolesi", "Rodos Heykeli", "İskenderiye Feneri"]],
+    [3, 'storia', "In quale provincia turca si trova l'antica Efeso?", ["İzmir", "Antalya", "Muğla", "Aydın"], "Antik Efes kenti hangi ildedir?"],
+    [3, 'arte', "Chi ha dipinto «La nascita di Venere»?", ["Sandro Botticelli", "Tiziano", "Caravaggio", "Raffaello"], "«Venüs'ün Doğuşu» tablosunu kim yaptı?"],
+    [3, 'turchia', "Quale architetto ottomano progettò la Moschea di Solimano (Süleymaniye)?", ["Mimar Sinan", "Mimar Kemaleddin", "Sedefkâr Mehmed Ağa", "Davud Ağa"], "Süleymaniye Camii'nin mimarı kimdir?"],
+    [3, 'geo', "In quale città si corre il Palio in Piazza del Campo?", ["Siena", "Firenze", "Pisa", "Arezzo"], "Palio at yarışı Campo Meydanı'nda hangi şehirde yapılır?"],
+    [3, 'cinema', "Quale film di Paolo Sorrentino ha vinto l'Oscar nel 2014?", ["La grande bellezza", "Il divo", "Youth", "È stata la mano di Dio"], "Paolo Sorrentino'nun 2014'te Oscar kazanan filmi hangisidir?"],
+    [3, 'cinema', "Quale regista turco ha vinto la Palma d'oro nel 2014 con «Il regno d'inverno» (Kış Uykusu)?", ["Nuri Bilge Ceylan", "Fatih Akın", "Ferzan Özpetek", "Yılmaz Güney"], "2014'te «Kış Uykusu» ile Altın Palmiye'yi kazanan yönetmen kimdir?"],
+    [3, 'cinema', "Quale regista, nato a Istanbul, ha diretto «Le fate ignoranti»?", ["Ferzan Özpetek", "Nuri Bilge Ceylan", "Fatih Akın", "Gabriele Muccino"], "İstanbul doğumlu hangi yönetmen «Le fate ignoranti» filmini çekti?"],
+    [3, 'cinema', "Quale film italiano ha vinto l'Oscar come miglior film straniero nel 1999?", ["La vita è bella", "Nuovo Cinema Paradiso", "Mediterraneo", "Il postino"], "1999'da En İyi Yabancı Film Oscar'ını kazanan İtalyan filmi hangisidir?"],
+    [3, 'cinema', "Quale film di Giuseppe Tornatore ha vinto l'Oscar nel 1990?", ["Nuovo Cinema Paradiso", "La leggenda del pianista sull'oceano", "Malèna", "Baarìa"], "Giuseppe Tornatore'nin 1990'da Oscar kazanan filmi hangisidir?"],
+    [3, 'cinema', "Quale attrice italiana ha vinto l'Oscar per «La ciociara»?", ["Sophia Loren", "Anna Magnani", "Gina Lollobrigida", "Claudia Cardinale"], "«İki Kadın» (La ciociara) filmiyle Oscar kazanan İtalyan oyuncu kimdir?"],
+    [3, 'tv', "Quale serie turca ha vinto l'International Emmy come miglior telenovela nel 2017?", ["Kara Sevda", "Muhteşem Yüzyıl", "Fatmagül'ün Suçu Ne?", "Aşk-ı Memnu"], "2017'de Uluslararası Emmy'de en iyi telenovela ödülünü kazanan Türk dizisi hangisidir?"],
+    [3, 'tv', "In quale serie Can Yaman e Özge Gürel hanno recitato insieme nel 2017?", ["Dolunay", "Bay Yanlış", "Erkenci Kuş", "Yasak Elma"], "Can Yaman ve Özge Gürel 2017'de hangi dizide birlikte oynadı?"],
+    [3, 'musica', "Quale cantante turca è soprannominata «Minik Serçe» (piccolo passero)?", ["Sezen Aksu", "Ajda Pekkan", "Sertab Erener", "Hadise"], "«Minik Serçe» lakaplı şarkıcı kimdir?"],
+    [3, 'musica', "Che cos'è il «ney» nella musica turca?", ["Un flauto di canna", "Un tamburo", "Uno strumento a corde", "Una danza"], "Türk müziğinde «ney» nedir?", ["Kamıştan bir üflemeli çalgı", "Bir davul", "Telli bir çalgı", "Bir dans"]],
+    [3, 'arte', "Chi ha scritto «Il Gattopardo»?", ["Giuseppe Tomasi di Lampedusa", "Leonardo Sciascia", "Luigi Pirandello", "Giovanni Verga"], "«Leopar» (Il Gattopardo) romanını kim yazdı?"],
+    [3, 'arte', "Quale scrittore italiano ha vinto il premio Nobel nel 1934?", ["Luigi Pirandello", "Grazia Deledda", "Eugenio Montale", "Salvatore Quasimodo"], "1934'te Nobel Edebiyat Ödülü'nü kazanan İtalyan yazar kimdir?"],
+    [3, 'arte', "Chi ha scritto «Il mio nome è Rosso»?", ["Orhan Pamuk", "Elif Şafak", "Yaşar Kemal", "Ahmet Ümit"], "«Benim Adım Kırmızı» romanını kim yazdı?"],
+    [3, 'arte', "Chi ha scritto «Memed il falco» (İnce Memed)?", ["Yaşar Kemal", "Orhan Pamuk", "Sabahattin Ali", "Nazım Hikmet"], "«İnce Memed» romanını kim yazdı?"],
+    [3, 'arte', "Chi ha scritto «Madonna in pelliccia» (Kürk Mantolu Madonna)?", ["Sabahattin Ali", "Orhan Pamuk", "Yaşar Kemal", "Peyami Safa"], "«Kürk Mantolu Madonna»yı kim yazdı?"],
+    [3, 'storia', "Quale città fu capitale ottomana prima di Edirne?", ["Bursa", "Konya", "Ankara", "İznik"], "Edirne'den önce Osmanlı başkenti hangi şehirdi?"],
+    [3, 'storia', "Quale città fu la capitale dei Selgiuchidi di Rum?", ["Konya", "Bursa", "Kayseri", "Erzurum"], "Anadolu Selçuklu Devleti'nin başkenti hangi şehirdi?"],
+    [3, 'storia', "In che anno fu firmato il Trattato di Losanna?", ["1923", "1920", "1918", "1930"], "Lozan Antlaşması hangi yıl imzalandı?"],
+    [3, 'storia', "In che anno furono firmati i Trattati di Roma, che crearono la Comunità Economica Europea?", ["1957", "1951", "1965", "1973"], "Avrupa Ekonomik Topluluğu'nu kuran Roma Antlaşması hangi yıl imzalandı?"],
+    [3, 'scienza', "Quale fisico italiano costruì il primo reattore nucleare nel 1942?", ["Enrico Fermi", "Ettore Majorana", "Guglielmo Marconi", "Alessandro Volta"], "1942'de ilk nükleer reaktörü kuran İtalyan fizikçi kimdir?"],
+    [3, 'geo', "Quale stretto collega il Mar di Marmara al Mar Egeo?", ["Dardanelli", "Bosforo", "Canale d'Otranto", "Stretto di Kerč"], "Marmara Denizi'ni Ege Denizi'ne bağlayan boğaz hangisidir?", ["Çanakkale Boğazı", "İstanbul Boğazı", "Otranto Boğazı", "Kerç Boğazı"]],
+    [3, 'scienza', "Quale scienziata italiana ha vinto il Nobel per la medicina nel 1986?", ["Rita Levi-Montalcini", "Maria Montessori", "Margherita Hack", "Fabiola Gianotti"], "1986'da Nobel Tıp Ödülü'nü kazanan İtalyan bilim insanı kimdir?"],
+    [3, 'scienza', "Quale scienziato turco ha vinto il Nobel per la chimica nel 2015?", ["Aziz Sancar", "Cahit Arf", "Gazi Yaşargil", "Feza Gürsey"], "2015'te Nobel Kimya Ödülü'nü kazanan Türk bilim insanı kimdir?"],
+    [3, 'scienza', "Chi è stato il primo astronauta turco nello spazio, nel 2024?", ["Alper Gezeravcı", "Tuva Cihangir Atasever", "Aziz Sancar", "Cahit Arf"], "2024'te uzaya giden ilk Türk astronot kimdir?"],
+    [3, 'scienza', "Quale astronauta italiana è stata la prima donna europea a comandare la Stazione Spaziale?", ["Samantha Cristoforetti", "Margherita Hack", "Fabiola Gianotti", "Rita Levi-Montalcini"], "Uluslararası Uzay İstasyonu'na komutanlık eden ilk Avrupalı kadın kimdir?"],
+    [3, 'geo', "Quale città italiana è chiamata «la Superba»?", ["Genova", "Torino", "Venezia", "Bologna"], "«La Superba» lakaplı İtalyan şehri hangisidir?", ["Cenova", "Torino", "Venedik", "Bologna"]],
+    [3, 'geo', "Quale città italiana è chiamata «la Dotta»?", ["Bologna", "Padova", "Pavia", "Perugia"], "«La Dotta» (Bilgin) lakaplı İtalyan şehri hangisidir?"],
+    [3, 'geo', "Quante sono le isole Eolie principali?", ["7", "5", "9", "12"], "Eolie (Lipari) Adaları'nın başlıca kaç adası vardır?"],
+    [3, 'geo', "In quale provincia turca si trovano le terrazze bianche di Pamukkale?", ["Denizli", "Antalya", "Muğla", "Konya"], "Pamukkale travertenleri hangi ildedir?"],
+    [3, 'turchia', "In quale città si svolge il torneo di lotta all'olio di Kırkpınar?", ["Edirne", "Bursa", "Konya", "Sivas"], "Kırkpınar Yağlı Güreşleri hangi şehirde yapılır?"],
+    [3, 'sport', "In quale città si sono svolte le Olimpiadi invernali del 2006?", ["Torino", "Cortina d'Ampezzo", "Milano", "Innsbruck"], "2006 Kış Olimpiyatları hangi şehirde yapıldı?"],
+    [3, 'sport', "In quale anno la Turchia è arrivata terza ai Mondiali di calcio?", ["2002", "1998", "2006", "1994"], "Türkiye Dünya Kupası'nda hangi yıl üçüncü oldu?"],
+    [3, 'turchia', "Con quale soprannome è conosciuto in Occidente il sultano Solimano?", ["Il Magnifico", "Il Conquistatore", "Il Severo", "Il Saggio"], "Kanuni Sultan Süleyman Batı'da hangi lakapla bilinir?", ["Muhteşem", "Fatih", "Yavuz", "Bilge"]],
+  ];
+
+  /* capitals: [Italian «of the country», capital, Turkish «of the country», capital, difficulty] */
+  const MQ_CAPS = [
+    ["della Francia", "Parigi", "Fransa'nın", "Paris", 1], ["della Spagna", "Madrid", "İspanya'nın", "Madrid", 1], ["della Germania", "Berlino", "Almanya'nın", "Berlin", 1],
+    ["del Regno Unito", "Londra", "Birleşik Krallık'ın", "Londra", 1], ["della Grecia", "Atene", "Yunanistan'ın", "Atina", 1], ["del Giappone", "Tokyo", "Japonya'nın", "Tokyo", 1],
+    ["della Russia", "Mosca", "Rusya'nın", "Moskova", 1], ["dell'Egitto", "Il Cairo", "Mısır'ın", "Kahire", 1], ["del Portogallo", "Lisbona", "Portekiz'in", "Lizbon", 1],
+    ["dell'Austria", "Vienna", "Avusturya'nın", "Viyana", 1],
+    ["della Polonia", "Varsavia", "Polonya'nın", "Varşova", 2], ["dell'Ungheria", "Budapest", "Macaristan'ın", "Budapeşte", 2], ["della Repubblica Ceca", "Praga", "Çekya'nın", "Prag", 2],
+    ["dei Paesi Bassi", "Amsterdam", "Hollanda'nın", "Amsterdam", 2], ["del Belgio", "Bruxelles", "Belçika'nın", "Brüksel", 2], ["della Svezia", "Stoccolma", "İsveç'in", "Stokholm", 2],
+    ["della Norvegia", "Oslo", "Norveç'in", "Oslo", 2], ["della Danimarca", "Copenaghen", "Danimarka'nın", "Kopenhag", 2], ["dell'Irlanda", "Dublino", "İrlanda'nın", "Dublin", 2],
+    ["della Svizzera", "Berna", "İsviçre'nin", "Bern", 2], ["della Cina", "Pechino", "Çin'in", "Pekin", 2], ["della Corea del Sud", "Seul", "Güney Kore'nin", "Seul", 2],
+    ["dell'India", "Nuova Delhi", "Hindistan'ın", "Yeni Delhi", 2], ["dell'Argentina", "Buenos Aires", "Arjantin'in", "Buenos Aires", 2], ["del Messico", "Città del Messico", "Meksika'nın", "Meksiko", 2],
+    ["degli Stati Uniti", "Washington", "Amerika Birleşik Devletleri'nin", "Washington", 2], ["dell'Azerbaigian", "Baku", "Azerbaycan'ın", "Bakü", 2], ["della Georgia", "Tbilisi", "Gürcistan'ın", "Tiflis", 2],
+    ["dell'Iran", "Teheran", "İran'ın", "Tahran", 2], ["del Marocco", "Rabat", "Fas'ın", "Rabat", 2], ["della Tunisia", "Tunisi", "Tunus'un", "Tunus", 2],
+    ["della Croazia", "Zagabria", "Hırvatistan'ın", "Zagreb", 2], ["della Serbia", "Belgrado", "Sırbistan'ın", "Belgrad", 2], ["della Romania", "Bucarest", "Romanya'nın", "Bükreş", 2],
+    ["della Bulgaria", "Sofia", "Bulgaristan'ın", "Sofya", 2], ["della Finlandia", "Helsinki", "Finlandiya'nın", "Helsinki", 2], ["della Thailandia", "Bangkok", "Tayland'ın", "Bangkok", 2],
+    ["del Canada", "Ottawa", "Kanada'nın", "Ottava", 3], ["dell'Australia", "Canberra", "Avustralya'nın", "Kanberra", 3], ["del Brasile", "Brasilia", "Brezilya'nın", "Brasilia", 3],
+    ["della Nuova Zelanda", "Wellington", "Yeni Zelanda'nın", "Wellington", 3], ["del Kazakistan", "Astana", "Kazakistan'ın", "Astana", 3], ["dell'Uzbekistan", "Tashkent", "Özbekistan'ın", "Taşkent", 3],
+    ["dell'Albania", "Tirana", "Arnavutluk'un", "Tiran", 3], ["della Macedonia del Nord", "Skopje", "Kuzey Makedonya'nın", "Üsküp", 3], ["della Bosnia ed Erzegovina", "Sarajevo", "Bosna-Hersek'in", "Saraybosna", 3],
+    ["della Slovenia", "Lubiana", "Slovenya'nın", "Ljubljana", 3], ["della Slovacchia", "Bratislava", "Slovakya'nın", "Bratislava", 3], ["dell'Islanda", "Reykjavík", "İzlanda'nın", "Reykjavik", 3],
+    ["della Nigeria", "Abuja", "Nijerya'nın", "Abuja", 3], ["del Pakistan", "Islamabad", "Pakistan'ın", "İslamabad", 3], ["del Vietnam", "Hanoi", "Vietnam'ın", "Hanoi", 3],
+    ["dell'Indonesia", "Giacarta", "Endonezya'nın", "Cakarta", 3], ["del Cile", "Santiago", "Şili'nin", "Santiago", 3], ["della Colombia", "Bogotà", "Kolombiya'nın", "Bogota", 3],
+    ["del Perù", "Lima", "Peru'nun", "Lima", 3], ["di Cuba", "L'Avana", "Küba'nın", "Havana", 3], ["del Libano", "Beirut", "Lübnan'ın", "Beyrut", 3],
+    ["della Giordania", "Amman", "Ürdün'ün", "Amman", 3], ["dell'Arabia Saudita", "Riad", "Suudi Arabistan'ın", "Riyad", 3], ["di Malta", "La Valletta", "Malta'nın", "Valletta", 3],
+  ];
+
+  /* words: [Italian, Turkish, difficulty] — «how do you say … in Turkish / in Italian?» */
+  const MQ_WORDS = [
+    ["amore", "aşk", 1], ["casa", "ev", 1], ["acqua", "su", 1], ["pane", "ekmek", 1], ["mare", "deniz", 1], ["sole", "güneş", 1], ["notte", "gece", 1], ["bello", "güzel", 1],
+    ["cuore", "kalp", 1], ["fiore", "çiçek", 1], ["gatto", "kedi", 1], ["cane", "köpek", 1], ["libro", "kitap", 1], ["scuola", "okul", 1], ["amico", "arkadaş", 1], ["famiglia", "aile", 1],
+    ["mamma", "anne", 1], ["papà", "baba", 1], ["bambino", "çocuk", 1], ["città", "şehir", 1], ["mela", "elma", 1], ["latte", "süt", 1], ["formaggio", "peynir", 1], ["uovo", "yumurta", 1],
+    ["caffè", "kahve", 1], ["zucchero", "şeker", 1], ["sale", "tuz", 1], ["bianco", "beyaz", 1], ["nero", "siyah", 1], ["verde", "yeşil", 1], ["giallo", "sarı", 1], ["oggi", "bugün", 1],
+    ["domani", "yarın", 1], ["ieri", "dün", 1], ["sì", "evet", 1], ["grazie", "teşekkürler", 1], ["ciao", "merhaba", 1], ["buongiorno", "günaydın", 1], ["buonanotte", "iyi geceler", 1], ["per favore", "lütfen", 1],
+    ["mano", "el", 2], ["occhio", "göz", 2], ["capelli", "saç", 2], ["vestito", "elbise", 2], ["scarpe", "ayakkabı", 2], ["finestra", "pencere", 2], ["porta", "kapı", 2], ["tavolo", "masa", 2],
+    ["sedia", "sandalye", 2], ["letto", "yatak", 2], ["cucina", "mutfak", 2], ["albero", "ağaç", 2], ["montagna", "dağ", 2], ["fiume", "nehir", 2], ["lago", "göl", 2], ["isola", "ada", 2],
+    ["stella", "yıldız", 2], ["pioggia", "yağmur", 2], ["neve", "kar", 2], ["vento", "rüzgâr", 2], ["fuoco", "ateş", 2], ["estate", "yaz", 2], ["inverno", "kış", 2], ["primavera", "ilkbahar", 2],
+    ["autunno", "sonbahar", 2], ["lunedì", "pazartesi", 2], ["venerdì", "cuma", 2], ["sabato", "cumartesi", 2], ["soldi", "para", 2], ["lavoro", "iş", 2], ["felice", "mutlu", 2], ["triste", "üzgün", 2],
+    ["grande", "büyük", 2], ["piccolo", "küçük", 2], ["nuovo", "yeni", 2], ["veloce", "hızlı", 2], ["lento", "yavaş", 2], ["facile", "kolay", 2], ["difficile", "zor", 2], ["bacio", "öpücük", 2],
+    ["sogno", "rüya", 2], ["vita", "hayat", 2], ["mondo", "dünya", 2], ["regalo", "hediye", 2], ["aereo", "uçak", 2], ["nave", "gemi", 2], ["macchina", "araba", 2], ["chiave", "anahtar", 2],
+    ["specchio", "ayna", 2], ["anello", "yüzük", 2], ["perla", "inci", 2], ["oro", "altın", 2], ["argento", "gümüş", 2], ["rosa", "gül", 2], ["farfalla", "kelebek", 2], ["uccello", "kuş", 2],
+    ["pesce", "balık", 2], ["cavallo", "at", 2], ["regina", "kraliçe", 2], ["re", "kral", 2], ["canzone", "şarkı", 2], ["ponte", "köprü", 2], ["torre", "kule", 2], ["giardino", "bahçe", 2],
+    ["sorriso", "gülümseme", 3], ["coraggio", "cesaret", 3], ["paura", "korku", 3], ["speranza", "umut", 3], ["pazienza", "sabır", 3], ["fortuna", "şans", 3], ["destino", "kader", 3], ["nostalgia", "özlem", 3],
+    ["anima", "ruh", 3], ["luce", "ışık", 3], ["ombra", "gölge", 3], ["verità", "gerçek", 3], ["bugia", "yalan", 3], ["pace", "barış", 3], ["silenzio", "sessizlik", 3], ["ricordo", "anı", 3],
+    ["gelosia", "kıskançlık", 3], ["promessa", "söz", 3], ["abbraccio", "sarılma", 3], ["matrimonio", "düğün", 3], ["sposa", "gelin", 3], ["fidanzato", "sevgili", 3], ["tramonto", "gün batımı", 3],
+    ["alba", "şafak", 3], ["odore", "koku", 3], ["miele", "bal", 3], ["ciliegia", "kiraz", 3], ["uva", "üzüm", 3], ["melograno", "nar", 3], ["pistacchio", "Antep fıstığı", 3], ["nocciola", "fındık", 3],
+  ];
+  /* ---------- Quiz del milione: fifteen questions, the ladder of prizes, four helps ----------
+     Easy questions first, then medium, then hard. The phone remembers every question already asked and does not ask it
+     again until all the questions of that level have been seen. At 1.000 and 32.000 the prize is safe; the steps 5, 10
+     and 15 also give a photo of Hande. */
+  const MQ_LADDER = [100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000];
+  const MQ_SAFE = [4, 9];
+  const MQ_PHOTO_AT = [4, 9, 14];
+  const mqEl = $('#mq');
+  const MQ_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  let MG = null, mqSpeed = 1; // mqSpeed: only the tests change it
+
+  const mqMoney = (n) => t('mqMoney', { n: fmtNum(n) });
+  function mqSeen() { const a = store.get('hm-mq-seen', []); return Array.isArray(a) ? a : []; }
+  function mqStats() { const st = store.get('hm-mq', null); return Object.assign({ played: 0, best: 0, millions: 0, found: [] }, st && typeof st === 'object' ? st : {}); }
+  function mqPool(d) {
+    const out = [];
+    MQ_BANK.forEach((q, i) => { if (q[0] === d) out.push({ id: 'b' + i, cat: q[1], w: 3 }); });
+    MQ_CAPS.forEach((c, i) => { if (c[4] === d) out.push({ id: 'c' + i, cat: 'cap', w: 1 }); });
+    MQ_WORDS.forEach((x, i) => { if (x[2] === d) out.push({ id: 'w' + i, cat: 'word', w: 1 }); });
+    return out;
+  }
+  // a little sum, different every time
+  function mqMath(d) {
+    const r = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+    let a, b, res, it, tr;
+    if (d === 1) { a = r(3, 9); b = r(3, 9); res = a * b; it = 'Quanto fa ' + a + ' × ' + b + '?'; tr = a + ' × ' + b + ' kaç eder?'; }
+    else if (d === 2) { a = r(12, 19); b = r(3, 9); res = a * b; it = 'Quanto fa ' + a + ' × ' + b + '?'; tr = a + ' × ' + b + ' kaç eder?'; }
+    else { b = [10, 20, 25, 40, 50, 75][r(0, 5)]; a = r(2, 12) * 20; res = a * b / 100; it = 'Quanto fa il ' + b + '% di ' + a + '?'; tr = a + ' sayısının %' + b + "'i kaçtır?"; }
+    const wrong = new Set();
+    const steps = d === 3 ? [5, 10, -5, 15, -10, 20] : [a, -a, b, -b, 1, -1, 10, -10];
+    shuffle(steps).forEach((s) => { const v = res + s; if (wrong.size < 3 && v > 0 && v !== res) wrong.add(v); });
+    return { id: 'm' + a + '-' + b + '-' + d, cat: 'math', answers: [String(res)].concat(Array.from(wrong).map(String)), text: lang === 'tr' ? tr : it };
+  }
+  // the question in the language of the game, with its four answers shuffled
+  function mqBuild(id, cat) {
+    const k = id[0], i = +id.slice(1);
+    let text, answers;
+    if (k === 'b') { const q = MQ_BANK[i]; text = lang === 'tr' ? q[4] : q[2]; answers = lang === 'tr' && q[5] ? q[5] : q[3]; }
+    else if (k === 'c') {
+      const c = MQ_CAPS[i], ci = lang === 'tr' ? 3 : 1;
+      text = lang === 'tr' ? c[2] + ' başkenti neresidir?' : 'Qual è la capitale ' + c[0] + '?';
+      answers = [c[ci]].concat(shuffle(MQ_CAPS.filter((o, j) => j !== i && o[ci] !== c[ci])).slice(0, 3).map((o) => o[ci]));
+    } else {
+      const x = MQ_WORDS[i], dst = lang === 'tr' ? 0 : 1;
+      text = lang === 'tr' ? '«' + x[1] + '» İtalyancada nasıl söylenir?' : 'Come si dice «' + x[0] + '» in turco?';
+      answers = [x[dst]].concat(shuffle(MQ_WORDS.filter((o, j) => j !== i && o[dst] !== x[dst])).slice(0, 3).map((o) => o[dst]));
+    }
+    return { id, cat, text, answers };
+  }
+  function mqShuffle(q) { const o = shuffle([0, 1, 2, 3]); return Object.assign(q, { answers: o.map((j) => q.answers[j]), right: o.indexOf(0) }); }
+  function mqPick(g) {
+    const d = g.level < 5 ? 1 : g.level < 10 ? 2 : 3;
+    if (!g.math && g.level > 0 && Math.random() < .09) { g.math = true; return mqShuffle(mqMath(d)); }
+    const all = mqPool(d), used = new Set(g.asked);
+    let seen = new Set(mqSeen()), pool = all.filter((q) => !seen.has(q.id) && !used.has(q.id));
+    if (!pool.length) {
+      // every question of this level was asked: they start again
+      const ids = new Set(all.map((q) => q.id));
+      store.set('hm-mq-seen', mqSeen().filter((x) => !ids.has(x)));
+      pool = all.filter((q) => !used.has(q.id));
+    }
+    const count = (c) => g.cats.filter((x) => x === c).length, recent = g.cats.slice(-2);
+    let cand = pool.filter((q) => !recent.includes(q.cat) && !((q.cat === 'cap' || q.cat === 'word' || q.cat === 'hande') && count(q.cat) >= 2));
+    if (!cand.length) cand = pool;
+    let r = Math.random() * cand.reduce((m, q) => m + q.w, 0);
+    const pick = cand.find((q) => (r -= q.w) < 0) || cand[cand.length - 1];
+    return mqShuffle(mqBuild(pick.id, pick.cat));
+  }
+
+  function mqStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    const st = mqStats(), seen = new Set(st.found);
+    const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
+    MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = false;
+    $('#mq-pop').hidden = true; $('#mq-photo').hidden = true; mqEl.classList.remove('ladder-open');
+    preload(photos.slice(0, 1).map((id) => cardSrc(PHOTO_BY_ID.get(id))), 4000);
+    announce(t('aMqStart'));
+    mqAsk(MG);
+  }
+  function mqStop() {
+    const g = MG; MG = null;
+    if (g) g.timers.forEach(clearTimeout);
+    mqEl.hidden = true;
+  }
+  function mqLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (MG === g) fn(); }, ms / mqSpeed); g.timers.push(id); }
+  function mqRequestExit() {
+    if (MG && (MG.level > 0 || MG.state !== 'ask') && MG.state !== 'over') openConfirm(false);
+    else goHome();
+  }
+
+  function mqAsk(g) {
+    g.q = mqPick(g); g.sel = null; g.gone = []; g.state = 'ask';
+    g.asked.push(g.q.id); g.cats.push(g.q.cat);
+    if (g.q.cat !== 'math') store.set('hm-mq-seen', mqSeen().concat([g.q.id]).slice(-4000));
+    $('#mq-pop').hidden = true;
+    mqRender(true);
+    Sound.whoosh();
+    announce(t('aMqQ', { n: g.level + 1, q: g.q.text }));
+  }
+  function mqRender(fresh) {
+    const g = MG; if (!g) return;
+    $('#mq-sub').textContent = t('mqSub', { n: g.level + 1 });
+    $('#mq-now').textContent = mqMoney(MQ_LADDER[g.level]);
+    const safe = MQ_SAFE.filter((i) => i < g.level).pop();
+    $('#mq-safe').textContent = t('mqSafe', { m: mqMoney(safe != null ? MQ_LADDER[safe] : 0) });
+    $('#mq-text').textContent = g.q.text;
+    $$('#mq-ans .mq-a').forEach((b, i) => {
+      $('span', b).textContent = g.q.answers[i];
+      b.classList.toggle('gone', g.gone.includes(i));
+      b.classList.toggle('sel', g.sel === i && (g.state === 'sel' || g.state === 'lock'));
+      b.classList.toggle('right', (g.state === 'right' || g.state === 'wrong' || g.state === 'over') && i === g.q.right);
+      b.classList.toggle('wrong', g.state === 'wrong' && i === g.sel && i !== g.q.right);
+      b.disabled = g.state !== 'ask' && g.state !== 'sel' || g.gone.includes(i);
+      if (fresh) { b.classList.remove('in'); void b.offsetWidth; b.style.animationDelay = (.15 + i * .12) / mqSpeed + 's'; b.classList.add('in'); }
+    });
+    if (fresh) { const q = $('#mq-q'); q.classList.remove('in'); void q.offsetWidth; q.classList.add('in'); }
+    $$('#mq-helps button').forEach((b) => { b.disabled = !!g.used[b.dataset.help] || g.state !== 'ask'; b.classList.toggle('used', !!g.used[b.dataset.help]); });
+    $$('#mq-ladder li').forEach((li, i) => { li.classList.toggle('on', i === g.level); li.classList.toggle('done', i < g.level); });
+    const bar = $('#mq-bar');
+    bar.classList.toggle('confirm', g.state === 'sel');
+    $('#mq-ask-t').textContent = g.state === 'sel' ? t('mqSure', { l: 'ABCD'[g.sel] }) : '';
+    $('#mq-quit').textContent = t('mqQuit', { m: mqMoney(g.level ? MQ_LADDER[g.level - 1] : 0) });
+    $('#mq-quit').disabled = g.state !== 'ask' || g.level === 0;
+  }
+  function mqChoose(i) {
+    const g = MG; if (!g || (g.state !== 'ask' && g.state !== 'sel') || g.gone.includes(i)) return;
+    g.sel = i; g.state = 'sel'; Sound.flip(); buzz(6);
+    mqRender();
+  }
+  function mqConfirm() {
+    const g = MG; if (!g || g.state !== 'sel') return;
+    g.state = 'lock'; mqRender();
+    // a moment of suspense, then the answer
+    let k = 0;
+    const tick = () => { if (MG !== g || g.state !== 'lock') return; Sound.rwTick(); if (++k < 9) mqLater(g, 190, tick); };
+    tick();
+    mqLater(g, 1900, () => mqReveal(g));
+  }
+  function mqUnsure() { const g = MG; if (!g || g.state !== 'sel') return; g.sel = null; g.state = 'ask'; mqRender(); }
+  async function mqReveal(g) {
+    const ok = g.sel === g.q.right;
+    g.state = ok ? 'right' : 'wrong';
+    mqRender();
+    if (!ok) {
+      Sound.rwBuzz(); buzz([30, 60, 30]);
+      const safe = MQ_SAFE.filter((i) => i < g.level).pop();
+      mqLater(g, 2300, () => mqOver(g, safe != null ? MQ_LADDER[safe] : 0, false));
+      return;
+    }
+    g.right++;
+    Sound.rwDing(g.level); Sound.sparkle(); buzz(10);
+    const r = $('#mq-ans .mq-a.right').getBoundingClientRect();
+    FX.burst(r.left + r.width / 2, r.top + r.height / 2, g.level === 14 ? 90 : 28, true);
+    const won = MQ_LADDER[g.level], at = g.level;
+    await new Promise((res) => mqLater(g, 1300, res));
+    if (MQ_PHOTO_AT.includes(at)) {
+      const id = g.photos[MQ_PHOTO_AT.indexOf(at)];
+      if (id) g.found.push(PHOTO_BY_ID.get(id));
+      await mqPhoto(g, id, t(at === 14 ? 'mqPhotoMillion' : 'mqPhotoSafe', { m: mqMoney(won) }));
+      if (MG !== g) return;
+    }
+    if (at === 14) { mqOver(g, won, true); return; }
+    g.level++;
+    mqAsk(g);
+  }
+  function mqPhoto(g, id, text) {
+    return new Promise((resolve) => {
+      const p = PHOTO_BY_ID.get(id), box = $('#mq-photo');
+      if (!p || MG !== g) { resolve(); return; }
+      $('img', box).src = cardSrc(p);
+      $('#mq-photo-t').textContent = text;
+      box.classList.remove('open'); box.hidden = false;
+      Sound.whoosh();
+      let done = false;
+      const finish = () => { if (done) return; done = true; box.hidden = true; box.onclick = null; resolve(); };
+      mqLater(g, 420, () => {
+        box.classList.add('open'); Sound.sparkle(); buzz([10, 40, 10]);
+        const r = $('.rw-prize-card', box).getBoundingClientRect();
+        FX.burst(r.left + r.width / 2, r.top + r.height / 2, 60, true);
+      });
+      box.onclick = () => { if (box.classList.contains('open')) finish(); };
+      mqLater(g, 3400, finish);
+      setTimeout(() => { if (MG !== g) finish(); }, 3600);
+    });
+  }
+  function mqQuit() {
+    const g = MG; if (!g || g.state !== 'ask' || !g.level) return;
+    g.state = 'over'; g.quit = true; mqRender();
+    mqLater(g, 1600, () => mqOver(g, MQ_LADDER[g.level - 1], false));
+  }
+
+  /* the four helps */
+  function mqHelp(k) {
+    const g = MG; if (!g || g.state !== 'ask' || g.used[k]) return;
+    g.used[k] = true; Sound.go();
+    const d = g.level < 5 ? 1 : g.level < 10 ? 2 : 3, R = g.q.right, live = [0, 1, 2, 3].filter((i) => !g.gone.includes(i));
+    const pop = $('#mq-pop');
+    if (k === '50') {
+      g.gone = shuffle(live.filter((i) => i !== R)).slice(0, live.length - 2);
+      pop.hidden = true;
+    } else if (k === 'pub') {
+      // the audience knows the easy ones better
+      const pr = Math.min(.92, (d === 1 ? .62 : d === 2 ? .47 : .34) + Math.random() * .2 + (live.length === 2 ? .15 : 0));
+      const rest = live.filter((i) => i !== R), w = rest.map(() => .3 + Math.random());
+      const ws = w.reduce((a, b) => a + b, 0), pc = [0, 0, 0, 0];
+      pc[R] = Math.round(pr * 100);
+      rest.forEach((i, j) => { pc[i] = Math.round((1 - pr) * 100 * w[j] / ws); });
+      pc[R] += 100 - pc.reduce((a, b) => a + b, 0);
+      pop.innerHTML = '<p class="mq-pop-t">' + t('mqPubT') + '</p><div class="mq-bars">' + [0, 1, 2, 3].map((i) =>
+        '<div class="mq-bar-c"><span class="v">' + (g.gone.includes(i) ? '' : pc[i] + '%') + '</span><i style="--h:' + (g.gone.includes(i) ? 0 : pc[i]) + '%"></i><b>' + 'ABCD'[i] + '</b></div>').join('') + '</div>';
+      pop.hidden = false;
+    } else if (k === 'tel') {
+      const ok = Math.random() < (d === 1 ? .93 : d === 2 ? .76 : .56), others = live.filter((i) => i !== R);
+      const pick = ok || !others.length ? R : pickOne(others), sure = ok && d === 1 ? 'mqTelSure' : d === 3 ? 'mqTelGuess' : 'mqTelThink';
+      pop.innerHTML = '<div class="mq-call"><span class="av">' + svgUse('av-fox', '', '0 0 40 40') + '</span><p><b>' + t('ucBots').volpe + '</b>' + t(sure, { l: 'ABCD'[pick], a: g.q.answers[pick] }) + '</p></div>';
+      pop.hidden = false;
+    } else if (k === 'swap') {
+      g.asked.pop(); g.cats.pop();
+      mqAsk(g);
+      return;
+    }
+    mqRender();
+  }
+
+  function mqOver(g, money, million) {
+    if (MG !== g) return;
+    g.state = 'over';
+    const st = mqStats(), record = money > st.best;
+    st.played++; st.best = Math.max(st.best, money); if (million) st.millions++;
+    st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
+    store.set('hm-mq', st);
+    const rows = [[t('mqRowRight'), String(g.right) + ' / 15'], [t('mqRowPrize'), mqMoney(money)], [t('mqRowHelps'), String(Object.keys(g.used).length) + ' / 4'], [t('rwRowPhotos'), String(g.found.length)]];
+    if (!record && st.best) rows.push([t('rwRowBest'), mqMoney(st.best)]);
+    showResult({
+      kicker: t('mqKicker'), title: million ? t('mqMillion') : money ? t('mqWon', { m: mqMoney(money) }) : t('mqZero'), stars: null, score: null, record,
+      photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'mq', rows, strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null,
+    });
+    if (million || record) celebrate(); else if (!money) Sound.lose();
+  }
+  function mqRenderSetup() {
+    const st = mqStats();
+    $('#mq-record').textContent = st.played ? t('mqRecord', { p: st.played, m: mqMoney(st.best) }) : t('rwRecordNone');
+  }
+  function mqBuildLadder() {
+    $('#mq-ladder').innerHTML = MQ_LADDER.map((n, i) => '<li class="' + (MQ_SAFE.includes(i) || i === 14 ? 'safe' : '') + '"><i>' + (i + 1) + '</i><b>' + mqMoney(n) + '</b></li>').join('');
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -9464,13 +10112,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -9486,7 +10134,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -9548,6 +10196,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'net') { if (N && N.host) netStartGame(); return; }
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
+    if (resultAction === 'mq') { mqStart(); return; }
     if (resultAction === 'tb') { tbStart({ n: TG ? TG.cfg.n : store.get('hm-tb-n', 2) }); return; }
     if (resultAction === 'rw') { rwStart(RG && RG.cfg ? RG.cfg : { duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); return; }
     if (resultAction === 'bw') { bwStart(BG && BG.cfg ? BG.cfg : { duo: mode === 'duo', names: [$('#bw-p1').value, $('#bw-p2').value] }); return; }
@@ -9575,8 +10224,23 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
+  $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
+  $('#mq-exit').addEventListener('click', mqRequestExit);
+  $$('#mq-ans .mq-a').forEach((b) => b.addEventListener('click', () => mqChoose(+b.dataset.i)));
+  $('#mq-yes').addEventListener('click', mqConfirm);
+  $('#mq-no').addEventListener('click', mqUnsure);
+  $('#mq-quit').addEventListener('click', mqQuit);
+  $$('#mq-helps button').forEach((b) => b.addEventListener('click', () => mqHelp(b.dataset.help)));
+  $('#mq-pop').addEventListener('click', () => { $('#mq-pop').hidden = true; });
+  $('#mq-prize-btn').addEventListener('click', (e) => { e.stopPropagation(); mqEl.classList.toggle('ladder-open'); });
+  mqEl.addEventListener('click', (e) => { if (mqEl.classList.contains('ladder-open') && !e.target.closest('#mq-prize-btn')) mqEl.classList.remove('ladder-open'); });
+  document.addEventListener('keydown', (e) => {
+    if (!MG || mqEl.hidden || !$('#confirm').hidden || !$('#result').hidden) return;
+    const k = e.key.toUpperCase(), i = 'ABCD'.indexOf(k) >= 0 ? 'ABCD'.indexOf(k) : '1234'.indexOf(k);
+    if (i >= 0 && k.length === 1) { e.preventDefault(); mqChoose(i); } else if (e.key === 'Enter' && MG.state === 'sel' && e.target.tagName !== 'BUTTON') { e.preventDefault(); mqConfirm(); } else if (e.key === 'Escape' && MG.state === 'sel') mqUnsure();
+  });
   $('#tb-draw').addEventListener('click', () => { AudioCore.get(); tbNext(); });
   $('#tb-auto').addEventListener('click', () => { const g = TG; if (!g) return; g.auto = !g.auto; store.set('hm-tb-auto', g.auto); Sound.flip(); tbRender(); if (g.auto && !g.busy) tbNext(); });
   $('#tb-open-board').addEventListener('click', () => { $('#tb-board').hidden = false; Sound.flip(); });

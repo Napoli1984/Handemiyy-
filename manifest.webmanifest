@@ -1,7 +1,7 @@
 {
   "name": "Handemiyy",
   "short_name": "Handemiyy",
-  "description": "Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna e Tombola con le foto di Hande.",
+  "description": "Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola e Quiz del milione con le foto di Hande.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

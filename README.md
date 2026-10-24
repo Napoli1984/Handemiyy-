@@ -1,6 +1,6 @@
 # Handemiyy
 
-Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna** e **Tombola**. In italiano e in turco.
+Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna**, **Tombola** e **Quiz del milione**. In italiano e in turco.
 
 Gioca qui: https://napoli1984.github.io/Handemiyy-/
 
