@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola e Quiz del milione con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione e Pioggia di perle con le foto di Hande. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola e Quiz del milione con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione e Pioggia di perle con le foto di Hande. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola e Quiz del milione con le foto di Hande. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione e Pioggia di perle con le foto di Hande. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2257,6 +2257,54 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .home .gp-tile.gp-wide .gp-name { font-size: 17px; }
   .home .gp-tile.gp-wide .gp-ic, .home .gp-tile.gp-wide .gp-ic-svg { width: auto; height: 44px; }
 }
+/* ---------- the home with many games: three in a row on a phone, four on a computer ---------- */
+.home .gp-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.home .gp-tiles > .gp-tile, .home .gp-tiles > .gp-tile.gp-wide { grid-column: auto; grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 4px; padding: 10px 4px 9px; }
+.home .gp-tiles > .gp-tile .gp-text { justify-items: center; }
+.home .gp-tiles > .gp-tile .gp-tag { display: none; }
+.home .gp-tiles > .gp-tile .gp-name { font-size: 17px; line-height: 1.05; }
+.home .gp-tiles > .gp-tile .gp-ic, .home .gp-tiles > .gp-tile .gp-ic-svg { width: auto; height: 46px; }
+.home .gp-tiles > .gp-tile .gp-new { top: 4px; right: 4px; padding: 2px 6px; font-size: 8.5px; letter-spacing: .08em; }
+@media (min-width: 920px) {
+  .home .gp-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .home .gp-tiles > .gp-tile, .home .gp-tiles > .gp-tile.gp-wide { grid-column: auto; grid-template-columns: auto minmax(0, 1fr); justify-items: start; text-align: left; gap: 7px; padding: 7px 8px; }
+  .home .gp-tiles > .gp-tile .gp-text { justify-items: start; }
+  .home .gp-tiles > .gp-tile .gp-name { font-size: 16px; }
+  .home .gp-tiles > .gp-tile .gp-ic, .home .gp-tiles > .gp-tile .gp-ic-svg { height: 38px; max-width: 46px; }
+  /* the badge hangs on the top edge, so it never covers the name */
+  .home .gp-tiles > .gp-tile .gp-new { top: -8px; right: 10px; }
+}
+/* ---------- Pioggia di perle ---------- */
+.pps { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; gap: 8px; overflow: hidden; -webkit-user-select: none; user-select: none; touch-action: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 12px max(10px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 40% at 50% 0%, rgba(236, 224, 250, .9), rgba(236, 224, 250, 0) 72%), radial-gradient(60% 34% at 50% 100%, rgba(214, 241, 231, .8), rgba(214, 241, 231, 0) 70%), #fbf8f4; }
+.pps > * { min-width: 0; }
+.pps > .rw-head { grid-area: auto; grid-template-columns: auto minmax(0, 1fr) auto auto; }
+.pp-hud { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 6px; }
+.pp-stat, .pp-next { display: grid; justify-items: center; align-content: center; padding: 4px 6px; border-radius: 14px; border: 1px solid var(--hairline, rgba(201, 164, 105, .45)); background: rgba(255, 253, 249, .85); }
+.pp-stat span, .pp-next span { font: 600 10px var(--font-caps); letter-spacing: .12em; text-transform: uppercase; color: #a78a5a; }
+.pp-stat b { font: 700 19px/1.1 var(--font-caps); color: var(--ink); font-variant-numeric: tabular-nums; }
+.pp-stage { position: relative; display: grid; place-items: center; min-height: 0; }
+.pp-stage > * { grid-area: 1 / 1; }
+.pp-stage canvas { display: block; border-radius: 12px; box-shadow: 0 0 0 2px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 6px rgba(201, 164, 105, .45), 0 20px 40px -24px rgba(72, 52, 84, .55); touch-action: none; }
+.pp-pause { position: relative; display: grid; place-content: center; gap: 12px; text-align: center; border-radius: 12px; background: rgba(251, 248, 244, .8); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); z-index: 3; }
+.pp-pause[hidden] { display: none; }
+.pp-pause p { margin: 0; font: italic 700 26px var(--font-display); color: var(--ink); }
+.pp-pad { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.pp-pad button { height: 58px; border-radius: 18px; border: 1px solid #d6b46f; background: radial-gradient(circle at 40% 30%, #fffdf8, #f4ead8); color: #6e4f24; display: grid; place-items: center; touch-action: none; box-shadow: 0 8px 16px -12px rgba(120, 84, 32, .6); }
+.pp-pad button svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.pp-pad button:active { background: radial-gradient(circle at 40% 30%, #fff6dc, #f3d995); }
+.pp-pad button[data-a="X"] { background: radial-gradient(circle at 40% 30%, #fff3d8, #ecc98a 60%, #c39352); color: #4a3314; }
+.pp-keys { display: none; margin: 0; text-align: center; font: 500 12px var(--font-ui); color: var(--muted); }
+@media (hover: hover) and (pointer: fine) { .pp-pad { display: none; } .pp-keys { display: block; } }
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .pps { grid-template-columns: minmax(0, 1fr) 230px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; column-gap: 24px; }
+  .pps > .rw-head { grid-column: 1 / -1; }
+  .pp-stage { grid-column: 1 / 3; grid-row: 2; justify-items: end; }
+  .pp-hud { grid-column: 3; grid-row: 2; grid-template-columns: minmax(0, 200px); align-content: center; gap: 10px; }
+  .pp-keys { grid-column: 1 / -1; grid-row: 3; }
+  .pp-pad { display: none; }
+}
 </style>
 </head>
 <body>
@@ -2295,21 +2343,25 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="rw" aria-pressed="false">
               <img class="gp-ic" src="a/ic-ruota.webp" alt="" width="169" height="220" decoding="async">
               <span class="gp-text"><span class="gp-name" data-i18n="gameRw"></span><span class="gp-tag" data-i18n="gpRwTag"></span></span>
-              <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
             <button type="button" class="gp-tile gp-wide" data-game="tb" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="tbic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3e8d6"/></linearGradient><radialGradient id="tbim" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fffaf0"/><stop offset=".6" stop-color="#f3d995"/><stop offset="1" stop-color="#d9b56c"/></radialGradient><radialGradient id="tbib" cx=".34" cy=".28" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#f8f2f6"/><stop offset=".85" stop-color="#e2d4ec"/><stop offset="1" stop-color="#cdbbe0"/></radialGradient><linearGradient id="tbig" x1="0" x2="1"><stop offset="0" stop-color="#b48a48"/><stop offset=".5" stop-color="#f6e2ad"/><stop offset="1" stop-color="#a77a35"/></linearGradient></defs><g transform="rotate(-7 30 30)"><rect x="5" y="9" width="51" height="38" rx="5" fill="url(#tbic)" stroke="url(#tbig)" stroke-width="1.6"/><text x="9" y="14.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.2" letter-spacing=".6" fill="#b08d55">TOMBOLA</text><rect x="9.0" y="17.0" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="11.7" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">4</text><rect x="15.2" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="21.4" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#fff" stroke="#d8bd86" stroke-width=".5"/><text x="24.1" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">27</text><rect x="27.6" y="17.0" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="30.3" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">35</text><rect x="33.8" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="40.0" y="17.0" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="42.7" y="22.3" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">61</text><rect x="46.2" y="17.0" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="9.0" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="15.2" y="25.6" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="17.9" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">18</text><rect x="21.4" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#fff" stroke="#d8bd86" stroke-width=".5"/><text x="24.1" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">29</text><rect x="27.6" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="33.8" y="25.6" width="5.4" height="7.4" rx="1.4" fill="url(#tbim)" stroke="#d8bd86" stroke-width=".5"/><text x="36.5" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">52</text><rect x="40.0" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#efe9f5"/><rect x="46.2" y="25.6" width="5.4" height="7.4" rx="1.4" fill="#fff" stroke="#d8bd86" stroke-width=".5"/><text x="48.9" y="30.9" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="3.4" fill="#4a3314">83</text></g><circle cx="57" cy="42" r="15.5" fill="#000" opacity=".08"/><circle cx="56" cy="40.5" r="15" fill="url(#tbib)" stroke="url(#tbig)" stroke-width="2"/><circle cx="56" cy="40.5" r="11" fill="none" stroke="#d6b46f" stroke-width=".6" opacity=".8"/><text x="56" y="45.2" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="13" fill="#4a3314">90</text></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameTb"></span><span class="gp-tag" data-i18n="gpTbTag"></span></span>
-              <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
             <button type="button" class="gp-tile gp-wide" data-game="mq" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 72 62" aria-hidden="true"><defs><linearGradient id="mqig" x1="0" x2="1"><stop offset="0" stop-color="#b48a48"/><stop offset=".5" stop-color="#f6e2ad"/><stop offset="1" stop-color="#a77a35"/></linearGradient><linearGradient id="mqiw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffefb"/><stop offset="1" stop-color="#f3e9da"/></linearGradient><radialGradient id="mqib" cx=".34" cy=".28" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#f8f2f6"/><stop offset=".85" stop-color="#e2d4ec"/><stop offset="1" stop-color="#cdbbe0"/></radialGradient></defs><path d="M14 36h44l5 6-5 6H14l-5-6z" fill="url(#mqiw)" stroke="url(#mqig)" stroke-width="1.4"/><text x="17" y="44.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="7" fill="#b48a48">A</text><rect x="26" y="40.8" width="24" height="2.6" rx="1.3" fill="#d9c8b0"/><path d="M14 49h44l5 6-5 6H14l-5-6z" fill="url(#mqiw)" stroke="url(#mqig)" stroke-width="1.4"/><text x="17" y="57.6" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="7" fill="#b48a48">B</text><rect x="26" y="53.8" width="18" height="2.6" rx="1.3" fill="#d9c8b0"/><circle cx="36" cy="18" r="15.5" fill="url(#mqib)" stroke="url(#mqig)" stroke-width="2.2"/><circle cx="36" cy="18" r="11.5" fill="none" stroke="#d6b46f" stroke-width=".6"/><text x="36" y="24.5" text-anchor="middle" font-family="Cormorant Garamond, Times New Roman, serif" font-style="italic" font-weight="700" font-size="19" fill="#8a6738">?</text></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameMq"></span><span class="gp-tag" data-i18n="gpMqTag"></span></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="pp" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="ppi0" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppi1" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppi2" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppi3" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppi4" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#e4f7f0"/><stop offset="1" stop-color="#86cdb5"/></radialGradient><radialGradient id="ppi5" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fdf3d6"/><stop offset="1" stop-color="#dcb767"/></radialGradient><radialGradient id="ppi6" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fdf3d6"/><stop offset="1" stop-color="#dcb767"/></radialGradient><radialGradient id="ppi7" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fce7ec"/><stop offset="1" stop-color="#e59cb0"/></radialGradient><radialGradient id="ppi8" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fce7ec"/><stop offset="1" stop-color="#e59cb0"/></radialGradient><radialGradient id="ppi9" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#e4f7f0"/><stop offset="1" stop-color="#86cdb5"/></radialGradient><radialGradient id="ppi10" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fce7ec"/><stop offset="1" stop-color="#e59cb0"/></radialGradient><radialGradient id="ppi11" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#feeadb"/><stop offset="1" stop-color="#eba97f"/></radialGradient></defs><rect x="19.0" y="6.0" width="10" height="10" rx="3.4" fill="url(#ppi0)" stroke="#c9a469" stroke-width=".6"/><rect x="29.5" y="6.0" width="10" height="10" rx="3.4" fill="url(#ppi1)" stroke="#c9a469" stroke-width=".6"/><rect x="40.0" y="6.0" width="10" height="10" rx="3.4" fill="url(#ppi2)" stroke="#c9a469" stroke-width=".6"/><rect x="29.5" y="16.5" width="10" height="10" rx="3.4" fill="url(#ppi3)" stroke="#c9a469" stroke-width=".6"/><rect x="14.0" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppi4)" stroke="#c9a469" stroke-width=".6"/><rect x="24.5" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppi5)" stroke="#c9a469" stroke-width=".6"/><rect x="35.0" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppi6)" stroke="#c9a469" stroke-width=".6"/><rect x="45.5" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppi7)" stroke="#c9a469" stroke-width=".6"/><rect x="56.0" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppi8)" stroke="#c9a469" stroke-width=".6"/><rect x="14.0" y="35.0" width="10" height="10" rx="3.4" fill="url(#ppi9)" stroke="#c9a469" stroke-width=".6"/><rect x="45.5" y="35.0" width="10" height="10" rx="3.4" fill="url(#ppi10)" stroke="#c9a469" stroke-width=".6"/><rect x="56.0" y="35.0" width="10" height="10" rx="3.4" fill="url(#ppi11)" stroke="#c9a469" stroke-width=".6"/></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gamePp"></span><span class="gp-tag" data-i18n="gpPpTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
+            <!--more-tiles-->
           </div>
         </div>
         <button type="button" class="fan closed" id="fan" data-i18n-attr="aria-label:fanLabel">
@@ -2502,6 +2554,16 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           <button type="button" class="btn primary play-btn" id="btn-mq-play" data-i18n="play"></button>
           <p class="record-line" id="mq-record"></p>
         </div>
+        <div class="setup-part" id="setup-pp" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="ppm0" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppm1" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppm2" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppm3" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#f1e8fb"/><stop offset="1" stop-color="#b29bdb"/></radialGradient><radialGradient id="ppm4" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#e4f7f0"/><stop offset="1" stop-color="#86cdb5"/></radialGradient><radialGradient id="ppm5" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fdf3d6"/><stop offset="1" stop-color="#dcb767"/></radialGradient><radialGradient id="ppm6" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fdf3d6"/><stop offset="1" stop-color="#dcb767"/></radialGradient><radialGradient id="ppm7" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fce7ec"/><stop offset="1" stop-color="#e59cb0"/></radialGradient><radialGradient id="ppm8" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fce7ec"/><stop offset="1" stop-color="#e59cb0"/></radialGradient><radialGradient id="ppm9" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#e4f7f0"/><stop offset="1" stop-color="#86cdb5"/></radialGradient><radialGradient id="ppm10" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fce7ec"/><stop offset="1" stop-color="#e59cb0"/></radialGradient><radialGradient id="ppm11" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#feeadb"/><stop offset="1" stop-color="#eba97f"/></radialGradient></defs><rect x="19.0" y="6.0" width="10" height="10" rx="3.4" fill="url(#ppm0)" stroke="#c9a469" stroke-width=".6"/><rect x="29.5" y="6.0" width="10" height="10" rx="3.4" fill="url(#ppm1)" stroke="#c9a469" stroke-width=".6"/><rect x="40.0" y="6.0" width="10" height="10" rx="3.4" fill="url(#ppm2)" stroke="#c9a469" stroke-width=".6"/><rect x="29.5" y="16.5" width="10" height="10" rx="3.4" fill="url(#ppm3)" stroke="#c9a469" stroke-width=".6"/><rect x="14.0" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppm4)" stroke="#c9a469" stroke-width=".6"/><rect x="24.5" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppm5)" stroke="#c9a469" stroke-width=".6"/><rect x="35.0" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppm6)" stroke="#c9a469" stroke-width=".6"/><rect x="45.5" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppm7)" stroke="#c9a469" stroke-width=".6"/><rect x="56.0" y="45.5" width="10" height="10" rx="3.4" fill="url(#ppm8)" stroke="#c9a469" stroke-width=".6"/><rect x="14.0" y="35.0" width="10" height="10" rx="3.4" fill="url(#ppm9)" stroke="#c9a469" stroke-width=".6"/><rect x="45.5" y="35.0" width="10" height="10" rx="3.4" fill="url(#ppm10)" stroke="#c9a469" stroke-width=".6"/><rect x="56.0" y="35.0" width="10" height="10" rx="3.4" fill="url(#ppm11)" stroke="#c9a469" stroke-width=".6"/></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gamePp"></span><span class="hunt-sub" data-i18n="ppIntro"></span></span>
+          </div>
+          
+          <button type="button" class="btn primary play-btn" id="btn-pp-play" data-i18n="play"></button>
+          <p class="record-line" id="pp-record"></p>
+        </div>
+        <!--more-setups-->
 
         <div class="home-foot">
           <div class="foot-left">
@@ -2701,6 +2763,31 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     <ol class="mq-ladder" id="mq-ladder" data-i18n-attr="aria-label:mqLadder"></ol>
     <div class="mq-pop" id="mq-pop" hidden></div>
     <div class="rw-prize" id="mq-photo" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="mq-photo-t"></p></div>
+  </section>
+
+  <section id="pp" class="screen pps" hidden data-i18n-attr="aria-label:gamePp">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="pp-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gamePp"></h2><span class="uc-sub" id="pp-sub"></span></div>
+      <button type="button" class="icon-btn" id="pp-pause-btn" data-i18n-attr="aria-label:ppPause"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg></button>
+      <button type="button" class="icon-btn audio-btn" id="audio-pp" aria-pressed="true"></button>
+    </header>
+    <div class="pp-hud">
+      <div class="pp-stat"><span data-i18n="ppScore"></span><b id="pp-score">0</b></div>
+      <div class="pp-stat"><span data-i18n="ppLines"></span><b id="pp-lines">0</b></div>
+      <div class="pp-stat"><span data-i18n="ppPhotos"></span><b id="pp-photos">0</b></div>
+      <div class="pp-next"><span data-i18n="ppNext"></span><canvas id="pp-next" width="76" height="44"></canvas></div>
+    </div>
+    <div class="pp-stage" id="pp-stage"><canvas id="pp-cv"></canvas><div class="pp-pause" id="pp-pause" hidden><p data-i18n="ppPaused"></p><button type="button" class="btn primary" id="pp-resume" data-i18n="ppResume"></button></div></div>
+    <div class="pp-pad" id="pp-pad">
+      <button type="button" data-a="L" data-i18n-attr="aria-label:ppLeft"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button type="button" data-a="U" data-i18n-attr="aria-label:ppRotate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.1-5M19 4v4h-4"/></svg></button>
+      <button type="button" data-a="R" data-i18n-attr="aria-label:ppRight"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button type="button" data-a="D" data-i18n-attr="aria-label:ppDown"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <button type="button" data-a="X" data-i18n-attr="aria-label:ppDrop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l6 6 6-6M6 12l6 6 6-6"/></svg></button>
+    </div>
+    <p class="pp-keys" data-i18n="ppKeys"></p>
+    <div class="rw-banner" id="pp-banner" aria-hidden="true"><b></b><span></span></div>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -3135,7 +3222,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPubT: 'Il pubblico ha votato', mqTelSure: '«Facile! È la {l}: {a}. Ne sono sicura.»', mqTelThink: '«Mmm… direi la {l}: {a}. Ma non ci giurerei.»', mqTelGuess: '«Difficile… forse la {l}: {a}? Tiro a indovinare.»',
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
-      aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}', aTbNum: 'È uscito il {n}.', aTbMine: 'Ce l’hai!',
+      aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Pioggia di perle ----
+      gamePp: 'Pioggia di perle', gpPpTag: 'Incastra, completa, scopri', ledePp: 'Incastra le perle che cadono e completa le righe: ogni dieci righe si scopre una foto di Hande.',
+      ppIntro: 'Gira e sposta i pezzi prima che tocchino il fondo. Ogni riga completa scopre un pezzo della foto nascosta dietro le perle.',
+      ppRecord: 'Partite: {p} · record: {b} punti', ppScore: 'Punti', ppLines: 'Righe', ppNext: 'Prossimo', ppPhotos: 'Foto', ppPause: 'Pausa', ppResume: 'Riprendi', ppPaused: 'In pausa',
+      ppKeys: '← → sposta · ↑ gira · ↓ giù · spazio: fino in fondo · P pausa', ppLeft: 'Sinistra', ppRight: 'Destra', ppRotate: 'Gira', ppDown: 'Giù', ppDrop: 'Fino in fondo',
+      ppPhotoT: 'Foto scoperta!', ppLevelUp: 'Livello {n}: le perle cadono più veloci', ppLevelN: 'Livello {n}', ppPart: 'foto {n}/10', ppKicker: 'Pioggia di perle', ppOverT: 'Partita finita',
+      ppRowLines: 'Righe', ppRowLevel: 'Livello', aPpStart: 'Pioggia di perle: incastra i pezzi e completa le righe.', aPpLines: '{n} righe completate.', aPpPhoto: 'Hai scoperto una foto di Hande!', aTbNum: 'È uscito il {n}.', aTbMine: 'Ce l’hai!',
       rwCats: { hande: 'Il mondo di Hande', proverbio: 'Proverbio', mododire: 'Modo di dire', film: 'Film', canzone: 'Canzone', citta: 'Luoghi', turchia: 'Turchia', turco: 'Parole turche', atasozu: 'Proverbio turco', deyim: 'Modo di dire turco', sarki: 'Canzone', sehir: 'Luoghi', italya: 'Italia', italyanca: 'Parole italiane', cosa: 'Cosa', luogo: 'Luogo' },
     },
     tr: {
@@ -3370,7 +3464,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPubT: 'Seyircinin oyu', mqTelSure: '«Kolay! {l} şıkkı: {a}. Eminim.»', mqTelThink: '«Hmm… {l} şıkkı derim: {a}. Ama yemin edemem.»', mqTelGuess: '«Zor… belki {l}: {a}? Tahmin ediyorum.»',
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
-      aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}', aTbNum: '{n} çıktı.', aTbMine: 'Sende var!',
+      aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- İnci Yağmuru ----
+      gamePp: 'İnci Yağmuru', gpPpTag: 'Yerleştir, tamamla, keşfet', ledePp: 'Düşen incileri yerleştir ve sıraları tamamla: her on sırada bir Hande fotoğrafı ortaya çıkar.',
+      ppIntro: 'Parçalar dibe değmeden önce çevir ve kaydır. Tamamlanan her sıra, incilerin arkasındaki fotoğrafın bir parçasını açar.',
+      ppRecord: 'Oyun: {p} · rekor: {b} puan', ppScore: 'Puan', ppLines: 'Sıra', ppNext: 'Sıradaki', ppPhotos: 'Fotoğraf', ppPause: 'Duraklat', ppResume: 'Devam et', ppPaused: 'Duraklatıldı',
+      ppKeys: '← → kaydır · ↑ çevir · ↓ indir · boşluk: dibe bırak · P duraklat', ppLeft: 'Sol', ppRight: 'Sağ', ppRotate: 'Çevir', ppDown: 'İndir', ppDrop: 'Dibe bırak',
+      ppPhotoT: 'Fotoğraf açıldı!', ppLevelUp: 'Seviye {n}: inciler daha hızlı düşüyor', ppLevelN: 'Seviye {n}', ppPart: 'fotoğraf {n}/10', ppKicker: 'İnci Yağmuru', ppOverT: 'Oyun bitti',
+      ppRowLines: 'Sıra', ppRowLevel: 'Seviye', aPpStart: 'İnci Yağmuru: parçaları yerleştir ve sıraları tamamla.', aPpLines: '{n} sıra tamamlandı.', aPpPhoto: 'Bir Hande fotoğrafı açtın!', aTbNum: '{n} çıktı.', aTbMine: 'Sende var!',
       rwCats: { hande: "Hande'nin dünyası", proverbio: 'İtalyan atasözü', mododire: 'İtalyan deyimi', film: 'Film', canzone: 'Şarkı', citta: 'Yerler', turchia: 'Türkiye', turco: 'Türkçe kelimeler', atasozu: 'Atasözü', deyim: 'Deyim', sarki: 'Şarkı', sehir: 'Yerler', italya: 'İtalya', italyanca: 'İtalyanca kelimeler', cosa: 'Nesne', luogo: 'Yer' },
     },
   };
@@ -3854,13 +3955,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    ppRelang();
     if (!mapEl.hidden) renderMap(false);
     if (N && N.view) netRenderRoom();
     if (!onlineEl.hidden && !$('#onl-intro').hidden) netRenderIntro();
@@ -3987,7 +4089,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -4177,7 +4279,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -4279,7 +4381,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -4780,7 +4882,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -5280,7 +5382,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -5380,12 +5482,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : 'lede';
+    $('#setup-pp').hidden = gs !== 'pp';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -5402,7 +5505,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -5680,7 +5783,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -6224,7 +6327,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -6447,7 +6550,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -6595,7 +6698,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -6868,7 +6971,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -7714,7 +7817,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -8176,7 +8279,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -9332,7 +9435,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -9402,7 +9505,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -9467,7 +9570,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -9921,7 +10024,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -10100,6 +10203,299 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#mq-ladder').innerHTML = MQ_LADDER.map((n, i) => '<li class="' + (MQ_SAFE.includes(i) || i === 14 ? 'safe' : '') + '"><i>' + (i + 1) + '</i><b>' + mqMoney(n) + '</b></li>').join('');
   }
 
+  /* ---------- Pioggia di perle: blocks of pearls that fall ----------
+     Ten columns, eighteen rows. A full row disappears; behind the pearls hides a photo of Hande and every row
+     uncovers a tenth of it: ten rows and the photo is yours, and the pearls fall faster. */
+  if (!CanvasRenderingContext2D.prototype.roundRect) CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h) { this.rect(x, y, w, h); };
+  const PP_W = 10, PP_H = 18;
+  const PP_SHAPES = {
+    I: { n: 4, c: [[0, 1], [1, 1], [2, 1], [3, 1]] }, O: { n: 2, c: [[0, 0], [1, 0], [0, 1], [1, 1]] }, T: { n: 3, c: [[1, 0], [0, 1], [1, 1], [2, 1]] },
+    S: { n: 3, c: [[1, 0], [2, 0], [0, 1], [1, 1]] }, Z: { n: 3, c: [[0, 0], [1, 0], [1, 1], [2, 1]] }, J: { n: 3, c: [[0, 0], [0, 1], [1, 1], [2, 1]] }, L: { n: 3, c: [[2, 0], [0, 1], [1, 1], [2, 1]] },
+  };
+  const PP_COL = { I: ['#e4f7f0', '#86cdb5'], O: ['#fdf3d6', '#dcb767'], T: ['#f1e8fb', '#b29bdb'], S: ['#e9f4e0', '#9cc77f'], Z: ['#fce7ec', '#e59cb0'], J: ['#e6edfc', '#8fa8e3'], L: ['#feeadb', '#eba97f'] };
+  const ppEl = $('#pp');
+  const PP_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  let PP = null;
+
+  function ppStats() { const st = store.get('hm-pp', null); return Object.assign({ played: 0, best: 0, found: [] }, st && typeof st === 'object' ? st : {}); }
+  function ppBag(g) { if (!g.bag.length) g.bag = shuffle(Object.keys(PP_SHAPES)); return g.bag.pop(); }
+  function ppPiece(k) { const sh = PP_SHAPES[k]; return { k, n: sh.n, c: sh.c.map((p) => p.slice()), x: Math.floor((PP_W - sh.n) / 2), y: k === 'I' ? -1 : 0 }; }
+  const ppCells = (p) => p.c.map(([x, y]) => [p.x + x, p.y + y]);
+  function ppFits(g, p) { return ppCells(p).every(([x, y]) => x >= 0 && x < PP_W && y < PP_H && (y < 0 || !g.grid[y][x])); }
+  function ppNextPhoto(g) {
+    const seen = new Set(ppStats().found.concat(g.found.map((p) => p.id)));
+    const pool = PP_PHOTOS.filter((p) => !seen.has(p.id));
+    g.photo = pickOne(pool.length ? pool : PP_PHOTOS);
+    g.img = new Image(); g.img.src = fullSrc(g.photo);
+    g.img.onload = () => { if (PP === g) ppDraw(); };
+  }
+
+  function ppStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop();
+    PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
+      t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
+    PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
+    ppNextPhoto(PP);
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; ppEl.hidden = false;
+    $('#pp-pause').hidden = true;
+    ppResize(); ppHud();
+    announce(t('aPpStart'));
+    PP.last = performance.now();
+    PP.raf = requestAnimationFrame(ppLoop);
+  }
+  function ppStop() {
+    const g = PP; PP = null;
+    if (g) { cancelAnimationFrame(g.raf); clearInterval(g.rep); }
+    ppEl.hidden = true;
+  }
+  function ppSpeed(g) { return Math.max(70, 800 * Math.pow(.84, g.level - 1)); }
+
+  function ppLoop(now) {
+    const g = PP; if (!g) return;
+    g.raf = requestAnimationFrame(ppLoop);
+    const dt = Math.min(100, now - g.last); g.last = now;
+    if (g.paused || g.over) return;
+    g.t += dt;
+    if (g.clearing) {
+      g.clearing.t += dt;
+      if (g.clearing.t > 260) ppClearDone(g);
+      ppDraw(); return;
+    }
+    const iv = g.soft ? Math.max(30, ppSpeed(g) / 12) : ppSpeed(g);
+    g.fall += dt;
+    while (g.fall >= iv && !g.clearing && !g.over) {
+      g.fall -= iv;
+      if (!ppMove(g, 0, 1)) break;
+      if (g.soft) g.score += 1;
+    }
+    // resting on something: a moment to slide, then it stays
+    const below = Object.assign({}, g.cur, { y: g.cur.y + 1 });
+    if (!ppFits(g, below)) { g.lockT += dt; if (g.lockT > 480) ppLock(g); } else g.lockT = 0;
+    ppDraw();
+  }
+  function ppMove(g, dx, dy) {
+    const p = Object.assign({}, g.cur, { x: g.cur.x + dx, y: g.cur.y + dy });
+    if (!ppFits(g, p)) return false;
+    g.cur = p;
+    if (dy === 0 && g.lockT > 0 && g.lockMoves++ < 15) g.lockT = 0;
+    return true;
+  }
+  function ppRotate(g, dir) {
+    if (g.cur.k === 'O') return;
+    const n = g.cur.n, c = g.cur.c.map(([x, y]) => (dir > 0 ? [n - 1 - y, x] : [y, n - 1 - x]));
+    for (const [kx, ky] of [[0, 0], [-1, 0], [1, 0], [0, -1], [-2, 0], [2, 0], [0, -2]]) {
+      const p = Object.assign({}, g.cur, { c, x: g.cur.x + kx, y: g.cur.y + ky });
+      if (ppFits(g, p)) { g.cur = p; if (g.lockT > 0 && g.lockMoves++ < 15) g.lockT = 0; Sound.flip(); return; }
+    }
+  }
+  function ppHard(g) {
+    let d = 0;
+    while (ppMove(g, 0, 1)) d++;
+    g.score += d * 2;
+    ppLock(g);
+  }
+  function ppGhostY(g) { let y = g.cur.y; while (ppFits(g, Object.assign({}, g.cur, { y: y + 1 }))) y++; return y; }
+  function ppLock(g) {
+    const cells = ppCells(g.cur);
+    if (cells.some(([, y]) => y < 0)) { ppOver(g); return; }
+    cells.forEach(([x, y]) => { g.grid[y][x] = g.cur.k; });
+    Sound.snap(); buzz(6);
+    g.lockT = 0; g.lockMoves = 0; g.fall = 0;
+    const full = [];
+    for (let y = 0; y < PP_H; y++) if (g.grid[y].every((v) => v)) full.push(y);
+    if (full.length) { g.clearing = { rows: full, t: 0 }; (full.length === 4 ? Sound.golden : Sound.correct)(); buzz(full.length === 4 ? [20, 40, 20] : 14); return; }
+    ppSpawn(g);
+  }
+  function ppClearDone(g) {
+    const rows = g.clearing.rows; g.clearing = null;
+    g.grid = g.grid.filter((_, y) => !rows.includes(y));
+    while (g.grid.length < PP_H) g.grid.unshift(new Array(PP_W).fill(0));
+    g.score += [0, 100, 300, 500, 800][rows.length] * g.level;
+    g.lines += rows.length;
+    const was = g.part;
+    g.part = Math.min(10, g.part + rows.length);
+    announce(t('aPpLines', { n: rows.length }));
+    const r = $('#pp-cv').getBoundingClientRect();
+    FX.burst(r.left + r.width / 2, r.top + r.height * ((rows[0] + .5) / PP_H), 10 + rows.length * 8, true);
+    if (g.part >= 10 && was < 10) ppPhotoDone(g);
+    ppSpawn(g); ppHud();
+  }
+  function ppPhotoDone(g) {
+    g.found.push(g.photo);
+    Sound.sparkle(); Sound.win(); buzz([10, 40, 10]);
+    const b = $('#pp-banner'); $('b', b).textContent = t('ppPhotoT'); $('span', b).textContent = t('ppLevelUp', { n: g.level + 1 });
+    // over the middle of the board, also on a computer where the board is not in the middle of the screen
+    const cr = $('#pp-cv').getBoundingClientRect(), sr = ppEl.getBoundingClientRect();
+    b.style.left = (cr.left - sr.left + cr.width / 2) + 'px'; b.style.top = (cr.top - sr.top + cr.height * .42) + 'px'; b.style.maxWidth = Math.max(220, cr.width - 12) + 'px';
+    b.classList.add('show'); setTimeout(() => b.classList.remove('show'), 1600);
+    announce(t('aPpPhoto'));
+    // the photo stays uncovered a moment, then a new one hides behind the pearls
+    const done = g.photo;
+    setTimeout(() => { if (PP === g && g.photo === done) { g.level++; g.part = 0; ppNextPhoto(g); ppHud(); } }, 1700);
+  }
+  function ppSpawn(g) {
+    g.cur = ppPiece(g.next); g.next = ppBag(g);
+    if (!ppFits(g, g.cur)) { ppOver(g); return; }
+    ppHud();
+  }
+  function ppOver(g) {
+    if (g.over) return;
+    g.over = true; g.soft = false; clearInterval(g.rep);
+    ppDraw();
+    const st = ppStats(), record = g.score > st.best;
+    st.played++; st.best = Math.max(st.best, g.score);
+    st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
+    store.set('hm-pp', st);
+    setTimeout(() => {
+      if (PP !== g) return;
+      const rows = [[t('ppRowLines'), String(g.lines)], [t('ppRowLevel'), String(g.level)], [t('rwRowPhotos'), String(g.found.length)]];
+      if (!record && st.best) rows.push([t('rwRowBest'), fmtNum(st.best)]);
+      showResult({ kicker: t('ppKicker'), title: t('ppOverT'), stars: null, score: g.score, record, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'pp', rows,
+        strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
+      if (record || g.found.length) celebrate(); else Sound.lose();
+    }, 700);
+  }
+
+  /* drawing: the photo behind, the pearl curtain over the part still hidden, then the pearls */
+  function ppResize() {
+    const g = PP; if (!g) return;
+    const st = $('#pp-stage'), cv = $('#pp-cv'), r = st.getBoundingClientRect();
+    const s = Math.max(10, Math.min(44, Math.floor(Math.min(r.width / PP_W, r.height / PP_H))));
+    const dpr = Math.min(3, window.devicePixelRatio || 1);
+    g.s = s; cv.style.width = s * PP_W + 'px'; cv.style.height = s * PP_H + 'px';
+    const pz = $('#pp-pause'); pz.style.width = cv.style.width; pz.style.height = cv.style.height;
+    cv.width = Math.round(s * PP_W * dpr); cv.height = Math.round(s * PP_H * dpr);
+    g.dpr = dpr;
+    ppDraw(); ppHud();
+  }
+  function ppBead(x, y, s, k, a) {
+    const c = PP_COL[k], cx = x + s / 2, cy = y + s / 2, r = s * .5 - 1;
+    const gr = this.createRadialGradient(cx - s * .18, cy - s * .2, s * .05, cx, cy, r * 1.15);
+    gr.addColorStop(0, '#ffffff'); gr.addColorStop(.38, c[0]); gr.addColorStop(1, c[1]);
+    this.globalAlpha = a == null ? 1 : a;
+    this.fillStyle = gr; this.beginPath(); this.roundRect(x + 1, y + 1, s - 2, s - 2, s * .32); this.fill();
+    this.strokeStyle = 'rgba(176,138,72,.55)'; this.lineWidth = Math.max(1, s * .04); this.stroke();
+    this.fillStyle = 'rgba(255,255,255,.75)'; this.beginPath(); this.ellipse(cx - s * .16, cy - s * .2, s * .14, s * .08, -.5, 0, Math.PI * 2); this.fill();
+    this.globalAlpha = 1;
+  }
+  function ppDraw() {
+    const g = PP; if (!g || !g.s) return;
+    const cv = $('#pp-cv'), c = cv.getContext('2d'), s = g.s, W = s * PP_W, H = s * PP_H;
+    c.setTransform(g.dpr, 0, 0, g.dpr, 0, 0);
+    c.clearRect(0, 0, W, H);
+    // the photo, covered from the top: each row cleared lifts the curtain a little
+    const shown = g.part / 10, cut = Math.round(H * (1 - shown));
+    if (g.img && g.img.complete && g.img.naturalWidth && shown > 0) {
+      const iw = g.img.naturalWidth, ih = g.img.naturalHeight, k = Math.max(W / iw, H / ih);
+      c.save(); c.beginPath(); c.rect(0, cut, W, H - cut); c.clip();
+      c.drawImage(g.img, (W - iw * k) / 2, (H - ih * k) * .3, iw * k, ih * k);
+      c.fillStyle = 'rgba(255,253,249,.18)'; c.fillRect(0, cut, W, H - cut);
+      c.restore();
+    }
+    const cur = c.createLinearGradient(0, 0, W, H);
+    cur.addColorStop(0, '#fffdf9'); cur.addColorStop(.5, '#f6eff8'); cur.addColorStop(1, '#f3ebe0');
+    c.fillStyle = cur; c.fillRect(0, 0, W, cut);
+    if (cut > 0 && cut < H) { c.fillStyle = 'rgba(201,164,105,.9)'; c.fillRect(0, cut - 1.5, W, 3); }
+    // a faint grid
+    c.strokeStyle = 'rgba(201,164,105,.13)'; c.lineWidth = 1;
+    for (let x = 1; x < PP_W; x++) { c.beginPath(); c.moveTo(x * s + .5, 0); c.lineTo(x * s + .5, cut); c.stroke(); }
+    for (let y = 1; y < PP_H; y++) { if (y * s > cut) break; c.beginPath(); c.moveTo(0, y * s + .5); c.lineTo(W, y * s + .5); c.stroke(); }
+    const bead = ppBead.bind(c);
+    for (let y = 0; y < PP_H; y++) for (let x = 0; x < PP_W; x++) if (g.grid[y][x]) bead(x * s, y * s, s, g.grid[y][x]);
+    if (g.clearing) {
+      const a = .55 + .45 * Math.sin(g.clearing.t / 40);
+      g.clearing.rows.forEach((y) => { c.fillStyle = 'rgba(255,248,226,' + a.toFixed(2) + ')'; c.fillRect(0, y * s, W, s); });
+    } else if (!g.over) {
+      // where it will land, and the piece itself
+      const gy = ppGhostY(g);
+      c.strokeStyle = 'rgba(176,138,72,.55)'; c.lineWidth = 1.5; c.setLineDash([4, 3]);
+      g.cur.c.forEach(([x, y]) => { const yy = gy + y; if (yy >= 0) { c.beginPath(); c.roundRect((g.cur.x + x) * s + 3, yy * s + 3, s - 6, s - 6, s * .28); c.stroke(); } });
+      c.setLineDash([]);
+      ppCells(g.cur).forEach(([x, y]) => { if (y >= 0) bead(x * s, y * s, s, g.cur.k); });
+    }
+    if (g.over) { c.fillStyle = 'rgba(251,248,244,.55)'; c.fillRect(0, 0, W, H); }
+  }
+  function ppHud() {
+    const g = PP; if (!g) return;
+    $('#pp-score').textContent = fmtNum(g.score); $('#pp-lines').textContent = String(g.lines); $('#pp-photos').textContent = String(g.found.length);
+    $('#pp-sub').textContent = t('ppLevelN', { n: g.level }) + ' · ' + t('ppPart', { n: g.part });
+    const nc = $('#pp-next'), c = nc.getContext('2d'), dpr = Math.min(3, window.devicePixelRatio || 1), w = 76, h = 44;
+    nc.width = w * dpr; nc.height = h * dpr; nc.style.width = w + 'px'; nc.style.height = h + 'px';
+    c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
+    const sh = PP_SHAPES[g.next], xs = sh.c.map((p) => p[0]), ys = sh.c.map((p) => p[1]);
+    const cw = Math.max(...xs) - Math.min(...xs) + 1, ch = Math.max(...ys) - Math.min(...ys) + 1, s = Math.min(16, Math.floor(Math.min(w / cw, h / ch)));
+    const ox = (w - cw * s) / 2 - Math.min(...xs) * s, oy = (h - ch * s) / 2 - Math.min(...ys) * s;
+    sh.c.forEach(([x, y]) => ppBead.call(c, ox + x * s, oy + y * s, s, g.next));
+  }
+  function ppPause(on) {
+    const g = PP; if (!g || g.over) return;
+    g.paused = on == null ? !g.paused : on; g.soft = false; clearInterval(g.rep);
+    $('#pp-pause').hidden = !g.paused;
+    g.last = performance.now();
+  }
+  function ppAct(a) {
+    const g = PP; if (!g || g.paused || g.over || g.clearing) return;
+    if (a === 'L') ppMove(g, -1, 0); else if (a === 'R') ppMove(g, 1, 0); else if (a === 'U') ppRotate(g, 1); else if (a === 'Z') ppRotate(g, -1);
+    else if (a === 'D') { if (ppMove(g, 0, 1)) { g.score += 1; g.fall = 0; } } else if (a === 'X') ppHard(g);
+    ppDraw();
+  }
+  function ppRenderSetup() {
+    const st = ppStats();
+    $('#pp-record').textContent = st.played ? t('ppRecord', { p: st.played, b: fmtNum(st.best) }) : t('rwRecordNone');
+  }
+  function ppRelang() { if (PP) ppHud(); }
+  function ppFound() { return PP ? PP.found : null; }
+  function ppAgain() { ppStart(); }
+  function ppRequestExit() { if (PP && !PP.over && (PP.score || PP.lines)) { ppPause(true); openConfirm(false); } else goHome(); }
+  function ppWire() {
+    $('#btn-pp-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); ppStart(); });
+    $('#pp-exit').addEventListener('click', ppRequestExit);
+    $('#pp-pause-btn').addEventListener('click', () => ppPause());
+    $('#pp-resume').addEventListener('click', () => ppPause(false));
+    // the buttons: hold left or right to keep moving, hold down to fall faster
+    $$('#pp-pad button').forEach((b) => {
+      const a = b.dataset.a;
+      b.addEventListener('pointerdown', (e) => {
+        e.preventDefault(); const g = PP; if (!g) return;
+        AudioCore.get(); ppAct(a === 'D' ? 'D' : a);
+        clearInterval(g.rep);
+        if (a === 'L' || a === 'R') { let n = 0; g.rep = setInterval(() => { if (++n > 3) ppAct(a); }, 55); }
+        if (a === 'D') { g.soft = true; }
+      });
+      const up = () => { const g = PP; if (!g) return; clearInterval(g.rep); if (a === 'D') g.soft = false; };
+      b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('pointerleave', up);
+    });
+    // on the board: drag sideways to move, tap to turn, a quick flick down drops
+    const cv = $('#pp-cv');
+    let st = null;
+    cv.addEventListener('pointerdown', (e) => { if (!PP) return; st = { x: e.clientX, y: e.clientY, t: performance.now(), mx: 0, my: 0 }; cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', (e) => {
+      const g = PP; if (!st || !g) return;
+      const dx = e.clientX - st.x, dy = e.clientY - st.y, s = g.s * .9;
+      while (dx - st.mx * s > s) { st.mx++; ppAct('R'); }
+      while (dx - st.mx * s < -s) { st.mx--; ppAct('L'); }
+      while (dy - st.my * s > s * 1.2 && Math.abs(dy) > Math.abs(dx)) { st.my++; ppAct('D'); }
+    });
+    cv.addEventListener('pointerup', (e) => {
+      if (!st) return;
+      const dx = e.clientX - st.x, dy = e.clientY - st.y, dt = performance.now() - st.t;
+      if (dy > 60 && dt < 260 && Math.abs(dy) > Math.abs(dx) * 1.5) ppAct('X');
+      else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && dt < 300) ppAct('U');
+      st = null;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!PP || ppEl.hidden || !$('#confirm').hidden || !$('#result').hidden) return;
+      const k = e.key;
+      if (k === 'p' || k === 'P' || k === 'Escape') { e.preventDefault(); ppPause(); return; }
+      const map = { ArrowLeft: 'L', ArrowRight: 'R', ArrowUp: 'U', x: 'U', X: 'U', z: 'Z', Z: 'Z', ArrowDown: 'D', ' ': 'X' };
+      if (map[k]) { e.preventDefault(); ppAct(map[k]); }
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && PP) ppPause(true); });
+    window.addEventListener('resize', () => { if (PP) ppResize(); });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -10110,13 +10506,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -10132,7 +10528,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -10195,6 +10591,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'pp') { ppAgain(); return; }
     if (resultAction === 'tb') { tbStart({ n: TG ? TG.cfg.n : store.get('hm-tb-n', 2) }); return; }
     if (resultAction === 'rw') { rwStart(RG && RG.cfg ? RG.cfg : { duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); return; }
     if (resultAction === 'bw') { bwStart(BG && BG.cfg ? BG.cfg : { duo: mode === 'duo', names: [$('#bw-p1').value, $('#bw-p2').value] }); return; }
@@ -10222,10 +10619,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  ppWire();
   $$('#mq-ans .mq-a').forEach((b) => b.addEventListener('click', () => mqChoose(+b.dataset.i)));
   $('#mq-yes').addEventListener('click', mqConfirm);
   $('#mq-no').addEventListener('click', mqUnsure);
