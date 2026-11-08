@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle e Poker con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker e Scacchi con le foto di Hande. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle e Poker con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker e Scacchi con le foto di Hande. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle e Poker con le foto di Hande. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker e Scacchi con le foto di Hande. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2432,6 +2432,111 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .pk-board { width: min(100%, 460px); gap: 9px; }
   .pk-me .pk-card { width: 72px; }
 }
+/* ---------- Scacchi ---------- */
+.scs {
+  /* the board as big as the phone is wide, but leaving room for the rest on a short screen */
+  --bd: min(100vw - 24px, 560px, 100dvh - 318px);
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto auto auto auto auto minmax(0, 1fr); gap: 8px;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 12px max(10px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 34% at 50% 0%, rgba(238, 226, 248, .9), rgba(238, 226, 248, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(255, 238, 222, .85), rgba(255, 238, 222, 0) 70%), #fbf8f4;
+}
+.scs > * { min-width: 0; }
+.scs > .rw-head { grid-area: auto; grid-row: 1; }
+/* on a phone the side panel melts into the column, in the middle of the screen: the opponent above the board, you below */
+.sc-side { display: contents; }
+.sc-opp { grid-row: 3; }
+.sc-wrap { grid-row: 4; }
+.sc-you { grid-row: 5; }
+.sc-msg { grid-row: 6; }
+.sc-moves { grid-row: 7; }
+.sc-ctrl { grid-row: 8; }
+.sc-bar, .sc-msg, .sc-moves, .sc-ctrl { width: min(100%, 560px); justify-self: center; }
+.sc-bar { position: relative; display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 5px 10px 5px 6px; border-radius: 16px;
+  border: 1px solid var(--hairline, rgba(201, 164, 105, .45)); background: rgba(255, 253, 249, .9); transition: box-shadow .25s; }
+.sc-bar.turn { box-shadow: 0 0 0 2px #e2c27e, 0 0 16px rgba(226, 194, 126, .6); }
+.sc-av { width: 32px; height: 32px; flex: none; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(circle at 35% 30%, #fff, #efe6f6 60%, #d9c8ec); box-shadow: inset 0 0 0 1.5px #d6b46f; font: 700 13px var(--font-caps); color: #8a6738; }
+.sc-av svg { width: 28px; height: 28px; }
+.sc-who { display: grid; min-width: 0; }
+.sc-who .nm { font: 600 16px/1.1 var(--font-display); color: var(--ink); white-space: nowrap; }
+.sc-who .lv { font: 600 10px/1.3 var(--font-caps); letter-spacing: .12em; text-transform: uppercase; color: #a78a5a; }
+.sc-cap { margin-left: auto; display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 0 1px; min-width: 0; font: 19px/1 'Segoe UI Symbol', 'Apple Symbols', 'DejaVu Sans', 'Noto Sans Symbols 2', serif; }
+.sc-cap i { font-style: normal; }
+.sc-cap i.w { color: #fffdf8; -webkit-text-stroke: .8px #5a4a62; }
+.sc-cap i.b { color: #3b2b45; }
+.sc-cap b { margin-left: 5px; font: 700 12px var(--font-caps); color: #6e4f24; }
+.sc-dots { display: none; gap: 4px; margin-left: 4px; }
+.sc-opp.think .sc-dots { display: inline-flex; }
+.sc-dots i { width: 6px; height: 6px; border-radius: 50%; background: #c9a469; animation: scDot 1s ease-in-out infinite; }
+.sc-dots i:nth-child(2) { animation-delay: .15s; }
+.sc-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes scDot { 0%, 100% { opacity: .25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+/* the board: ivory and lilac squares in a gold frame */
+.sc-wrap { position: relative; width: var(--bd); height: var(--bd); justify-self: center; }
+.sc-board { width: 100%; height: 100%; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(8, minmax(0, 1fr));
+  border-radius: 10px; overflow: hidden; container-type: inline-size;
+  box-shadow: 0 0 0 2.5px #e3c88f, 0 0 0 6px #fffaf0, 0 0 0 7px rgba(201, 164, 105, .45), 0 22px 40px -24px rgba(72, 52, 84, .55); }
+.sc-board .sq { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: #fdf8f0; color: inherit; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.sc-board .sq.d { background: linear-gradient(135deg, #e7d8f0, #dcc8e8); }
+.sc-board .sq::before { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.sc-board .sq.last::before { background: rgba(236, 204, 128, .5); }
+.sc-board .sq.sel::before { background: rgba(236, 204, 128, .62); box-shadow: inset 0 0 0 calc(100cqw / 8 * .06) #c9a469; }
+.sc-board .sq.chk::before { background: radial-gradient(circle, rgba(232, 118, 150, .9) 0, rgba(232, 118, 150, .45) 45%, rgba(232, 118, 150, 0) 72%); }
+.sc-board .sq.hint::before { box-shadow: inset 0 0 0 calc(100cqw / 8 * .07) #d9a441; background: rgba(255, 232, 170, .45); animation: scHint .8s ease-in-out infinite alternate; }
+@keyframes scHint { to { background: rgba(255, 232, 170, .05); } }
+.sc-board .sq::after { content: ""; position: absolute; pointer-events: none; z-index: 3; }
+.sc-board .sq.dot::after { width: 28%; height: 28%; border-radius: 50%; background: rgba(110, 79, 36, .3); }
+.sc-board .sq.capt::after { inset: 5%; border-radius: 50%; box-shadow: inset 0 0 0 calc(100cqw / 8 * .075) rgba(110, 79, 36, .32); }
+.sc-board .sq i { position: absolute; z-index: 1; font: 700 calc(100cqw / 8 * .19)/1 var(--font-caps); font-style: normal; color: rgba(110, 79, 36, .5); pointer-events: none; }
+.sc-board .sq .cr { left: 5%; top: 4%; }
+.sc-board .sq .cf { right: 6%; bottom: 3%; }
+.sc-board .pc, .sc-promo .pc { position: relative; z-index: 2; display: block; line-height: 1; pointer-events: none;
+  font-family: 'Segoe UI Symbol', 'Apple Symbols', 'DejaVu Sans', 'Noto Sans Symbols 2', serif; font-style: normal; }
+.sc-board .pc { font-size: calc(100cqw / 8 * .8); }
+.pc.w { color: #fffdf8; -webkit-text-stroke: 1.2px #4f3f58; paint-order: stroke fill; text-shadow: 0 2px 3px rgba(72, 52, 84, .35); }
+.pc.b { color: #3b2b45; -webkit-text-stroke: .6px #3b2b45; text-shadow: 0 1px 0 rgba(255, 255, 255, .4), 0 2px 3px rgba(72, 52, 84, .4); }
+.sc-promo { position: absolute; inset: 0; z-index: 6; display: grid; place-items: center; background: rgba(251, 248, 244, .6); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+.sc-promo[hidden] { display: none; }
+.sc-promo-card { display: grid; gap: 10px; justify-items: center; padding: 14px 16px 16px; border-radius: 22px; background: rgba(255, 253, 249, .97); box-shadow: 0 0 0 1px rgba(201, 164, 105, .5), 0 30px 60px -24px rgba(72, 52, 84, .6); }
+.sc-promo-card p { margin: 0; font: italic 600 17px var(--font-display); color: var(--ink); }
+.sc-promo-row { display: flex; gap: 8px; }
+.sc-promo-row button { width: 58px; height: 58px; display: grid; place-items: center; border-radius: 14px; border: 1px solid #d6b46f; background: radial-gradient(circle at 40% 30%, #fffdf8, #f1e6f6); cursor: pointer; }
+.sc-promo-row .pc { font-size: 42px; }
+
+.sc-msg { margin: 0; min-height: 1.3em; text-align: center; font: italic 600 17px/1.3 var(--font-display); color: #5c4f66; }
+.sc-msg.chk { color: #b4506e; }
+.sc-moves { display: flex; gap: 12px; align-items: center; min-height: 26px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; padding: 2px 4px;
+  font: 600 14px/1.4 var(--font-ui); color: #4a3d52; -webkit-mask-image: linear-gradient(90deg, transparent, #000 18px); mask-image: linear-gradient(90deg, transparent, #000 18px); }
+.sc-moves::-webkit-scrollbar { display: none; }
+.sc-moves span { flex: none; }
+.sc-moves i { font-style: normal; color: #a78a5a; }
+.sc-moves em { margin: 0 auto; font: italic 500 14px var(--font-display); color: var(--muted); }
+.sc-ctrl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sc-ctrl .btn { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 10px; }
+.sc-ctrl .btn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sc-ctrl .btn:disabled { opacity: .45; cursor: default; }
+
+/* a computer: the board on the left as big as it fits, the players and the moves at its side */
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .scs { --bd: min(100dvh - 92px, 100vw - 470px); grid-template-columns: minmax(0, 1fr) var(--bd) minmax(280px, 340px) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); column-gap: 28px; }
+  .scs > .rw-head { grid-column: 1 / -1; }
+  .sc-wrap { grid-column: 2; grid-row: 2; align-self: center; }
+  /* the opponent level with the top of the board, you level with the bottom, the moves between */
+  .sc-side { grid-column: 3; grid-row: 2; align-self: center; height: var(--bd); display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+  .sc-opp { order: 1; } .sc-msg { order: 2; } .sc-moves { order: 3; } .sc-ctrl { order: 4; } .sc-you { order: 5; }
+  .sc-bar, .sc-msg, .sc-moves, .sc-ctrl { width: auto; }
+  .sc-msg { margin-top: 6px; }
+  .sc-moves { flex: 1 1 auto; flex-wrap: wrap; white-space: normal; gap: 4px 14px; overflow-y: auto; align-content: flex-start; padding: 10px 12px; border-radius: 16px;
+    background: rgba(255, 253, 249, .6); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .3); -webkit-mask-image: none; mask-image: none; }
+}
+@media (max-height: 700px) {
+  .scs { gap: 6px; --bd: min(100vw - 24px, 560px, 100dvh - 290px); }
+  .sc-bar { min-height: 38px; padding: 3px 8px 3px 5px; }
+  .sc-av { width: 28px; height: 28px; }
+  .sc-ctrl .btn { min-height: 42px; }
+}
 </style>
 </head>
 <body>
@@ -2491,6 +2596,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="pk" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="pkic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffefa"/><stop offset="1" stop-color="#f3e6d2"/></linearGradient><radialGradient id="pkik" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff6dc"/><stop offset=".55" stop-color="#e6c88a"/><stop offset="1" stop-color="#b48a48"/></radialGradient></defs><g transform="rotate(-11 26 46)"><rect x="12" y="7" width="28" height="40" rx="4.5" fill="url(#pkic)" stroke="#c9a469" stroke-width="1.2"/><path d="M16.6 18.6l2.9-8 2.9 8M17.6 15.9h3.8" fill="none" stroke="#3b2b45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0-5C-1.5-3.4-5-1.2-5 1.2-5 3-3.6 4-2.4 4-1.4 4-.6 3.5-.2 2.9L-1 5.6H1L.2 2.9C.6 3.5 1.4 4 2.4 4 3.6 4 5 3 5 1.2 5-1.2 1.5-3.4 0-5Z" fill="#3b2b45" transform="translate(28.5 32) scale(1.45)"/></g><g transform="rotate(10 46 46)"><rect x="32" y="7" width="28" height="40" rx="4.5" fill="url(#pkic)" stroke="#c9a469" stroke-width="1.2"/><path d="M36.6 18.6l2.9-8 2.9 8M37.6 15.9h3.8" fill="none" stroke="#cc6a88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 4C-1.5 2.6-5 .2-5-2.2-5-4-3.6-5-2.4-5-1.3-5-.4-4.3 0-3.4.4-4.3 1.3-5 2.4-5 3.6-5 5-4 5-2.2 5 .2 1.5 2.6 0 4Z" fill="#cc6a88" transform="translate(48.5 32) scale(1.45)"/></g><circle cx="57" cy="48" r="10.5" fill="url(#pkik)" stroke="#a67c3d" stroke-width="1"/><circle cx="57" cy="48" r="7.2" fill="none" stroke="#fffaf0" stroke-width="2" stroke-dasharray="3.2 2.45"/><circle cx="57" cy="48" r="3.4" fill="#fffaf0" stroke="#c9a469" stroke-width=".8"/></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gamePk"></span><span class="gp-tag" data-i18n="gpPkTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="sc" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="scig" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#fff3d2"/><stop offset=".5" stop-color="#e2c07c"/><stop offset="1" stop-color="#a87a3a"/></radialGradient><radialGradient id="sciw" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f7efe3"/><stop offset="1" stop-color="#dcc8a4"/></radialGradient></defs><g><rect x="10" y="40" width="14" height="9" fill="#fffaf2"/><rect x="24" y="40" width="14" height="9" fill="#e3d3ee"/><rect x="38" y="40" width="14" height="9" fill="#fffaf2"/><rect x="52" y="40" width="14" height="9" fill="#e3d3ee"/><rect x="10" y="49" width="14" height="9" fill="#e3d3ee"/><rect x="24" y="49" width="14" height="9" fill="#fffaf2"/><rect x="38" y="49" width="14" height="9" fill="#e3d3ee"/><rect x="52" y="49" width="14" height="9" fill="#fffaf2"/><rect x="10" y="40" width="56" height="18" fill="none" stroke="#c9a469" stroke-width="1.4" rx="1.5"/></g><path d="M6 20C7 17 8 15.5 9.5 13.8 8 14 6.5 13.6 5.2 12.8 4.3 12.2 4 11.2 4.6 10.3L7.4 6.6C8.2 5.5 9.4 4.8 10.6 4.5L11.6 2.2 13 4.4C16.6 5.4 18.6 8.6 18.6 12.6V20ZM4 20.2H20.6V23.4H4Z" transform="translate(13 3) scale(1.62)" fill="url(#scig)" stroke="#8a6230" stroke-width=".7" stroke-linejoin="round"/><circle cx="31.5" cy="15.6" r="1.25" fill="#fffaf0"/><path d="M0-10A3.2 3.2 0 1 1 0-3.6 3.2 3.2 0 1 1 0-10ZM-3.6-2.6H3.6L2.6-1C3.9 1.2 5 3.3 5.6 6H-5.6C-5 3.3-3.9 1.2-2.6-1ZM-6 6.4H6V9H-6Z" transform="translate(54 34) scale(1.25)" fill="url(#sciw)" stroke="#b48a48" stroke-width=".9" stroke-linejoin="round"/></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameSc"></span><span class="gp-tag" data-i18n="gpScTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -2708,6 +2819,24 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           </div>
           <button type="button" class="btn primary play-btn" id="btn-pk-play" data-i18n="play"></button>
           <p class="record-line" id="pk-record"></p>
+        </div>
+        <div class="setup-part" id="setup-sc" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="scmg" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#fff3d2"/><stop offset=".5" stop-color="#e2c07c"/><stop offset="1" stop-color="#a87a3a"/></radialGradient><radialGradient id="scmw" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f7efe3"/><stop offset="1" stop-color="#dcc8a4"/></radialGradient></defs><g><rect x="10" y="40" width="14" height="9" fill="#fffaf2"/><rect x="24" y="40" width="14" height="9" fill="#e3d3ee"/><rect x="38" y="40" width="14" height="9" fill="#fffaf2"/><rect x="52" y="40" width="14" height="9" fill="#e3d3ee"/><rect x="10" y="49" width="14" height="9" fill="#e3d3ee"/><rect x="24" y="49" width="14" height="9" fill="#fffaf2"/><rect x="38" y="49" width="14" height="9" fill="#e3d3ee"/><rect x="52" y="49" width="14" height="9" fill="#fffaf2"/><rect x="10" y="40" width="56" height="18" fill="none" stroke="#c9a469" stroke-width="1.4" rx="1.5"/></g><path d="M6 20C7 17 8 15.5 9.5 13.8 8 14 6.5 13.6 5.2 12.8 4.3 12.2 4 11.2 4.6 10.3L7.4 6.6C8.2 5.5 9.4 4.8 10.6 4.5L11.6 2.2 13 4.4C16.6 5.4 18.6 8.6 18.6 12.6V20ZM4 20.2H20.6V23.4H4Z" transform="translate(13 3) scale(1.62)" fill="url(#scmg)" stroke="#8a6230" stroke-width=".7" stroke-linejoin="round"/><circle cx="31.5" cy="15.6" r="1.25" fill="#fffaf0"/><path d="M0-10A3.2 3.2 0 1 1 0-3.6 3.2 3.2 0 1 1 0-10ZM-3.6-2.6H3.6L2.6-1C3.9 1.2 5 3.3 5.6 6H-5.6C-5 3.3-3.9 1.2-2.6-1ZM-6 6.4H6V9H-6Z" transform="translate(54 34) scale(1.25)" fill="url(#scmw)" stroke="#b48a48" stroke-width=".9" stroke-linejoin="round"/></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameSc"></span><span class="hunt-sub" data-i18n="scIntro"></span></span>
+          </div>
+          <div class="seg tb-seg sc-seg" role="group" data-i18n-attr="aria-label:scLvlLabel">
+            <button type="button" data-scl="0" aria-pressed="false" data-i18n="scL0"></button>
+            <button type="button" data-scl="1" aria-pressed="true" data-i18n="scL1"></button>
+            <button type="button" data-scl="2" aria-pressed="false" data-i18n="scL2"></button>
+          </div>
+          <div class="seg tb-seg sc-seg" role="group" data-i18n-attr="aria-label:scColLabel">
+            <button type="button" data-scc="w" aria-pressed="true" data-i18n="scCW"></button>
+            <button type="button" data-scc="b" aria-pressed="false" data-i18n="scCB"></button>
+            <button type="button" data-scc="r" aria-pressed="false" data-i18n="scCR"></button>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-sc-play" data-i18n="play"></button>
+          <p class="record-line" id="sc-record"></p>
         </div>
         <!--more-setups-->
 
@@ -2976,6 +3105,26 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     </div>
     <div class="rw-prize" id="pk-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="pk-prize-t"></p></div>
     <div class="rw-banner" id="pk-banner" aria-hidden="true"><b></b><span></span></div>
+  </section>
+
+  <section id="sc" class="screen scs" hidden data-i18n-attr="aria-label:gameSc">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="sc-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameSc"></h2><span class="uc-sub" id="sc-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-sc" aria-pressed="true"></button>
+    </header>
+    <div class="sc-wrap">
+      <div class="sc-board" id="sc-board" role="group" data-i18n-attr="aria-label:gameSc"></div>
+      <div class="sc-promo" id="sc-promo" hidden><div class="sc-promo-card"><p data-i18n="scPromoT"></p><div class="sc-promo-row"><button type="button" data-pr="5"><span class="pc"></span></button><button type="button" data-pr="4"><span class="pc"></span></button><button type="button" data-pr="3"><span class="pc"></span></button><button type="button" data-pr="2"><span class="pc"></span></button></div></div></div>
+    </div>
+    <div class="sc-side">
+      <div class="sc-bar sc-opp" id="sc-opp"><span class="sc-av" id="sc-opp-av"></span><span class="sc-who"><span class="nm" id="sc-opp-nm"></span><span class="lv" id="sc-opp-lv"></span></span><span class="sc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="sc-cap" id="sc-opp-cap"></span></div>
+      <p class="sc-msg" id="sc-msg" aria-live="polite"></p>
+      <div class="sc-moves" id="sc-moves"></div>
+      <div class="sc-ctrl"><button type="button" class="btn" id="sc-undo"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg><span data-i18n="scUndo"></span></button><button type="button" class="btn" id="sc-hint"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg><span data-i18n="scHint"></span></button></div>
+      <div class="sc-bar sc-you" id="sc-you"><span class="sc-av">H</span><span class="sc-who"><span class="nm" data-i18n="ucYou"></span></span><span class="sc-cap" id="sc-you-cap"></span></div>
+    </div>
+    <div class="rw-prize" id="sc-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="sc-prize-t"></p></div>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -3411,6 +3560,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Scacchi ----
+      gameSc: 'Scacchi', gpScTag: 'Scacco matto alla Civetta', ledeSc: 'Gli scacchi contro il Gatto, la Volpe o la Civetta: prendi la Donna o dai scacco matto per vincere le foto di Hande.',
+      scIntro: 'Tocca un tuo pezzo e poi la casa dove spostarlo. Facile contro il Gatto, Medio contro la Volpe, Difficile contro la Civetta. Prendere la Donna avversaria vale una foto di Hande, vincere un\'altra.',
+      scLvlLabel: 'Livello', scL0: 'Facile', scL1: 'Medio', scL2: 'Difficile', scColLabel: 'Colore', scCW: 'Bianco', scCB: 'Nero', scCR: 'A caso',
+      scRecord: 'Partite: {p} · vinte: {w} · patte: {d}', scSubW: '{lvl} · giochi con il bianco', scSubB: '{lvl} · giochi con il nero',
+      scYourTurn: 'Tocca a te', scYouCheck: 'Scacco! Il tuo Re è sotto attacco', scThinking: '{name} pensa…', scHintMsg: 'Prova questa mossa', scNoMoves: 'Nessuna mossa ancora',
+      scUndo: 'Annulla', scHint: 'Aiuto', scPromoT: 'Il pedone diventa…', scQueenPrize: 'Hai preso la Donna: ecco una foto di Hande',
+      scWinT: 'Scacco matto! Hai vinto', scLoseT: 'Scacco matto: vince {name}', scDrawT: 'Patta',
+      scEndMate: 'Scacco matto', scEndStale: 'Stallo', scEndFifty: 'Cinquanta mosse senza catture', scEndRep: 'Tre volte la stessa posizione', scEndMat: 'Troppo pochi pezzi per dare matto',
+      scKicker: 'Scacchi', scRowEnd: 'Finale', scRowMoves: 'Mosse', scRowLevel: 'Avversario',
+      scPieceW: ['', 'pedone bianco', 'cavallo bianco', 'alfiere bianco', 'torre bianca', 'donna bianca', 're bianco'], scPieceB: ['', 'pedone nero', 'cavallo nero', 'alfiere nero', 'torre nera', 'donna nera', 're nero'],
+      scLetters: { N: 'C', B: 'A', R: 'T', Q: 'D', K: 'R' },
+      aScStart: 'Scacchi: tocca un tuo pezzo e poi la casa dove spostarlo.',
       // ---- Poker ----
       gamePk: 'Poker', gpPkTag: 'Bluff, gettoni e foto', ledePk: 'Texas Hold\'em con i gettoni: elimina gli avversari uno alla volta e vinci le foto di Hande.',
       pkIntro: 'Due carte a te, cinque in tavola: vince la combinazione migliore. Ognuno parte con 1.000 gettoni e i bui salgono ogni cinque mani. Ogni avversario che elimini ti regala una foto di Hande.',
@@ -3672,6 +3834,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- Satranç ----
+      gameSc: 'Satranç', gpScTag: 'Baykuş\'a şah mat', ledeSc: 'Kedi, Tilki ya da Baykuş\'a karşı satranç: veziri al ya da şah mat yap, Hande fotoğraflarını kazan.',
+      scIntro: 'Önce kendi taşına, sonra gideceği kareye dokun. Kolayda Kedi, ortada Tilki, zorda Baykuş oynar. Rakibin vezirini almak bir Hande fotoğrafı, kazanmak bir tane daha kazandırır.',
+      scLvlLabel: 'Seviye', scL0: 'Kolay', scL1: 'Orta', scL2: 'Zor', scColLabel: 'Renk', scCW: 'Beyaz', scCB: 'Siyah', scCR: 'Rastgele',
+      scRecord: 'Oyun: {p} · kazanılan: {w} · berabere: {d}', scSubW: '{lvl} · beyazla oynuyorsun', scSubB: '{lvl} · siyahla oynuyorsun',
+      scYourTurn: 'Sıra sende', scYouCheck: 'Şah! Şahın tehdit altında', scThinking: '{name} düşünüyor…', scHintMsg: 'Bu hamleyi dene', scNoMoves: 'Henüz hamle yok',
+      scUndo: 'Geri al', scHint: 'İpucu', scPromoT: 'Piyon şuna dönüşsün…', scQueenPrize: 'Veziri aldın: işte bir Hande fotoğrafı',
+      scWinT: 'Şah mat! Kazandın', scLoseT: 'Şah mat: {name} kazandı', scDrawT: 'Berabere',
+      scEndMate: 'Şah mat', scEndStale: 'Pat', scEndFifty: 'Elli hamle boyunca taş alınmadı', scEndRep: 'Aynı konum üç kez', scEndMat: 'Mat için yeterli taş yok',
+      scKicker: 'Satranç', scRowEnd: 'Sonuç', scRowMoves: 'Hamleler', scRowLevel: 'Rakip',
+      scPieceW: ['', 'beyaz piyon', 'beyaz at', 'beyaz fil', 'beyaz kale', 'beyaz vezir', 'beyaz şah'], scPieceB: ['', 'siyah piyon', 'siyah at', 'siyah fil', 'siyah kale', 'siyah vezir', 'siyah şah'],
+      scLetters: { N: 'A', B: 'F', R: 'K', Q: 'V', K: 'Ş' },
+      aScStart: 'Satranç: önce kendi taşına, sonra gideceği kareye dokun.',
       // ---- Poker ----
       gamePk: 'Poker', gpPkTag: 'Blöf, fiş ve fotoğraf', ledePk: 'Fişlerle Texas Hold\'em: rakipleri tek tek ele ve Hande fotoğraflarını kazan.',
       pkIntro: 'Sana iki kart, masada beş kart: en iyi el kazanır. Herkes 1.000 fişle başlar ve kör bahisler her beş elde bir artar. Elediğin her rakip sana bir Hande fotoğrafı kazandırır.',
@@ -4181,13 +4356,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    scRelang();
     pkRelang();
     ppRelang();
     if (!mapEl.hidden) renderMap(false);
@@ -4316,7 +4492,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -4506,7 +4682,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -4608,7 +4784,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -5109,7 +5285,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -5609,7 +5785,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -5709,14 +5885,15 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -5733,7 +5910,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -6011,7 +6188,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -6555,7 +6732,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -6778,7 +6955,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -6926,7 +7103,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -7199,7 +7376,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -8045,7 +8222,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -8507,7 +8684,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -9663,7 +9840,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -9733,7 +9910,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -9798,7 +9975,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -10252,7 +10429,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -10460,7 +10637,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -10846,7 +11023,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -11281,6 +11458,638 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     });
   }
 
+  /* ---------- Scacchi: chess against the cat, the fox or the owl ----------
+     The board is 0x88: square = rank * 16 + file (a1 = 0, h8 = 119). A piece is its kind (1 pawn, 2 knight, 3 bishop,
+     4 rook, 5 queen, 6 king), plus 8 when black. A move is one number: from | to << 7 | promotion << 14 | flags << 17
+     (flags: 1 capture, 2 double pawn step, 4 en passant, 8 castling). The computer looks ahead with alpha-beta;
+     the cat barely looks, the owl looks deepest. Taking the queen is a photo of Hande, winning one more. */
+  const scEl = $('#sc');
+  const SC_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  const SC_GLYPH = ['', '♟︎', '♞︎', '♝︎', '♜︎', '♛︎', '♚︎'];
+  const SC_VAL = [0, 100, 320, 330, 500, 900, 0], SC_ORD = [0, 1, 3, 3, 5, 9, 12];
+  const SC_N = [33, 31, 18, 14, -33, -31, -18, -14], SC_K = [1, -1, 16, -16, 17, 15, -17, -15], SC_BD = [17, 15, -17, -15], SC_RD = [1, -1, 16, -16];
+  // flat: every move of the turn gets its own score (with noise); deep: deeper and deeper while there is time
+  const SC_LEVELS = [{ bot: 'gatto', av: 'cat', flat: true, depth: 1, ms: 400, noise: 70, rnd: .18 }, { bot: 'volpe', av: 'fox', flat: true, depth: 3, ms: 900, noise: 18, rnd: 0 }, { bot: 'civetta', av: 'owl', flat: false, depth: 8, ms: 1700, noise: 0, rnd: 0 }];
+  const SC_HELP = { flat: false, depth: 5, ms: 700, noise: 0, rnd: 0 };
+  const SC_START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+  // where each piece likes to stand, seen from white with a8 first
+  const SC_PST = [null,
+    [0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 50, 50, 50, 50, 50, 50, 10, 10, 20, 30, 30, 20, 10, 10, 5, 5, 10, 25, 25, 10, 5, 5, 0, 0, 0, 20, 20, 0, 0, 0, 5, -5, -10, 0, 0, -10, -5, 5, 5, 10, 10, -20, -20, 10, 10, 5, 0, 0, 0, 0, 0, 0, 0, 0],
+    [-50, -40, -30, -30, -30, -30, -40, -50, -40, -20, 0, 0, 0, 0, -20, -40, -30, 0, 10, 15, 15, 10, 0, -30, -30, 5, 15, 20, 20, 15, 5, -30, -30, 0, 15, 20, 20, 15, 0, -30, -30, 5, 10, 15, 15, 10, 5, -30, -40, -20, 0, 5, 5, 0, -20, -40, -50, -40, -30, -30, -30, -30, -40, -50],
+    [-20, -10, -10, -10, -10, -10, -10, -20, -10, 0, 0, 0, 0, 0, 0, -10, -10, 0, 5, 10, 10, 5, 0, -10, -10, 5, 5, 10, 10, 5, 5, -10, -10, 0, 10, 10, 10, 10, 0, -10, -10, 10, 10, 10, 10, 10, 10, -10, -10, 5, 0, 0, 0, 0, 5, -10, -20, -10, -10, -10, -10, -10, -10, -20],
+    [0, 0, 0, 0, 0, 0, 0, 0, 5, 10, 10, 10, 10, 10, 10, 5, -5, 0, 0, 0, 0, 0, 0, -5, -5, 0, 0, 0, 0, 0, 0, -5, -5, 0, 0, 0, 0, 0, 0, -5, -5, 0, 0, 0, 0, 0, 0, -5, -5, 0, 0, 0, 0, 0, 0, -5, 0, 0, 0, 5, 5, 0, 0, 0],
+    [-20, -10, -10, -5, -5, -10, -10, -20, -10, 0, 0, 0, 0, 0, 0, -10, -10, 0, 5, 5, 5, 5, 0, -10, -5, 0, 5, 5, 5, 5, 0, -5, 0, 0, 5, 5, 5, 5, 0, -5, -10, 5, 5, 5, 5, 5, 0, -10, -10, 0, 5, 0, 0, 0, 0, -10, -20, -10, -10, -5, -5, -10, -10, -20],
+    [-30, -40, -40, -50, -50, -40, -40, -30, -30, -40, -40, -50, -50, -40, -40, -30, -30, -40, -40, -50, -50, -40, -40, -30, -30, -40, -40, -50, -50, -40, -40, -30, -20, -30, -30, -40, -40, -30, -30, -20, -10, -20, -20, -20, -20, -20, -20, -10, 20, 20, 0, 0, 0, 0, 20, 20, 20, 30, 10, 0, 0, 10, 30, 20]];
+  const SC_KEND = [-50, -40, -30, -20, -20, -30, -40, -50, -30, -20, -10, 0, 0, -10, -20, -30, -30, -10, 20, 30, 30, 20, -10, -30, -30, -10, 30, 40, 40, 30, -10, -30, -30, -10, 30, 40, 40, 30, -10, -30, -30, -10, 20, 30, 30, 20, -10, -30, -30, -30, 0, 0, 0, 0, -30, -30, -50, -30, -30, -30, -30, -30, -30, -50];
+  // what each square takes away from the castling rights when a piece leaves it or is taken there
+  const SC_CR = (() => { const a = new Array(128).fill(15); a[0] = 13; a[7] = 14; a[4] = 12; a[112] = 7; a[119] = 11; a[116] = 3; return a; })();
+  // random keys for each piece on each square, to recognise a position again (two 32-bit halves)
+  const SC_Z = (() => {
+    let s = 0x2545f491;
+    const r = () => { s = (s + 0x6d2b79f5) | 0; let x = Math.imul(s ^ (s >>> 15), 1 | s); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return (x ^ (x >>> 14)) >>> 0; };
+    const fill = (n) => { const a = [new Uint32Array(n), new Uint32Array(n)]; for (let i = 0; i < n; i++) { a[0][i] = r(); a[1][i] = r(); } return a; };
+    return { p: fill(15 * 128), c: fill(16), ep: fill(128), side: [r(), r()] };
+  })();
+  let SG = null, scSpeed = 1; // scSpeed: only the tests change it
+
+  /* ---- the position ---- */
+  function scPV(p, sq) {
+    const t = p & 7, w = !(p & 8), idx = w ? (7 - (sq >> 4)) * 8 + (sq & 7) : (sq >> 4) * 8 + (sq & 7), v = SC_VAL[t] + SC_PST[t][idx];
+    return w ? v : -v;
+  }
+  function scFromFEN(fen) {
+    const S = { b: new Array(128).fill(0), side: 0, castle: 0, ep: -1, half: 0, full: 1, k: [4, 116], h1: 0, h2: 0, score: 0, npm: 0, stack: [], hist: [] };
+    const [pos, side, cas, ep, half, full] = fen.trim().split(/\s+/);
+    pos.split('/').forEach((row, i) => {
+      let f = 0;
+      for (const ch of row) {
+        if (/\d/.test(ch)) { f += +ch; continue; }
+        const t = 'pnbrqk'.indexOf(ch.toLowerCase()) + 1;
+        S.b[(7 - i) * 16 + f] = t | (ch === ch.toLowerCase() ? 8 : 0); f++;
+      }
+    });
+    S.side = side === 'b' ? 8 : 0;
+    S.castle = (cas.includes('K') ? 1 : 0) | (cas.includes('Q') ? 2 : 0) | (cas.includes('k') ? 4 : 0) | (cas.includes('q') ? 8 : 0);
+    S.ep = ep && ep !== '-' ? (+ep[1] - 1) * 16 + (ep.charCodeAt(0) - 97) : -1;
+    S.half = +half || 0; S.full = +full || 1;
+    scRehash(S);
+    S.hist.push(scKey(S));
+    return S;
+  }
+  function scRehash(S) {
+    let h1 = 0, h2 = 0, score = 0, npm = 0;
+    for (let sq = 0; sq < 128; sq++) {
+      const p = S.b[sq]; if ((sq & 0x88) || !p) continue;
+      h1 ^= SC_Z.p[0][p * 128 + sq]; h2 ^= SC_Z.p[1][p * 128 + sq];
+      const t = p & 7;
+      if (t === 6) S.k[p & 8 ? 1 : 0] = sq; else score += scPV(p, sq);
+      if (t >= 2 && t <= 5) npm += SC_VAL[t];
+    }
+    h1 ^= SC_Z.c[0][S.castle]; h2 ^= SC_Z.c[1][S.castle];
+    if (S.ep >= 0) { h1 ^= SC_Z.ep[0][S.ep]; h2 ^= SC_Z.ep[1][S.ep]; }
+    if (S.side) { h1 ^= SC_Z.side[0]; h2 ^= SC_Z.side[1]; }
+    S.h1 = h1; S.h2 = h2; S.score = score; S.npm = npm;
+  }
+  const scKey = (S) => (S.h1 >>> 0) * 2097152 + (S.h2 >>> 11);
+  function scAttacked(S, sq, by) {
+    const b = S.b;
+    if (by) { if ((!((sq + 15) & 0x88) && b[sq + 15] === 9) || (!((sq + 17) & 0x88) && b[sq + 17] === 9)) return true; }
+    else if ((!((sq - 15) & 0x88) && b[sq - 15] === 1) || (!((sq - 17) & 0x88) && b[sq - 17] === 1)) return true;
+    const kn = 2 | by, kg = 6 | by, bi = 3 | by, ro = 4 | by, qu = 5 | by;
+    for (let i = 0; i < 8; i++) { const s = sq + SC_N[i]; if (!(s & 0x88) && b[s] === kn) return true; }
+    for (let i = 0; i < 8; i++) { const s = sq + SC_K[i]; if (!(s & 0x88) && b[s] === kg) return true; }
+    for (let i = 0; i < 4; i++) {
+      const d = SC_BD[i];
+      for (let s = sq + d; !(s & 0x88); s += d) { const q = b[s]; if (q) { if (q === bi || q === qu) return true; break; } }
+    }
+    for (let i = 0; i < 4; i++) {
+      const d = SC_RD[i];
+      for (let s = sq + d; !(s & 0x88); s += d) { const q = b[s]; if (q) { if (q === ro || q === qu) return true; break; } }
+    }
+    return false;
+  }
+  const scInCheck = (S, col) => scAttacked(S, S.k[col ? 1 : 0], col ^ 8);
+  // every move by the side to play, without asking yet whether its king stays safe
+  function scGen(S, capsOnly) {
+    const out = [], b = S.b, me = S.side, op = me ^ 8;
+    const add = (f, t, pr, fl) => { out.push(f | (t << 7) | (pr << 14) | (fl << 17)); };
+    for (let sq = 0; sq < 128; sq++) {
+      if (sq & 0x88) { sq += 7; continue; }
+      const p = b[sq];
+      if (!p || (p & 8) !== me) continue;
+      const t = p & 7;
+      if (t === 1) {
+        const dir = me ? -16 : 16, last = me ? 0 : 7, one = sq + dir;
+        if (!(one & 0x88) && !b[one]) {
+          if ((one >> 4) === last) { add(sq, one, 5, 0); add(sq, one, 4, 0); add(sq, one, 3, 0); add(sq, one, 2, 0); }
+          else if (!capsOnly) { add(sq, one, 0, 0); const two = one + dir; if ((sq >> 4) === (me ? 6 : 1) && !b[two]) add(sq, two, 0, 2); }
+        }
+        for (let k = 0; k < 2; k++) {
+          const to = sq + dir + (k ? 1 : -1);
+          if (to & 0x88) continue;
+          const q = b[to];
+          if (q && (q & 8) === op) {
+            if ((to >> 4) === last) { add(sq, to, 5, 1); add(sq, to, 4, 1); add(sq, to, 3, 1); add(sq, to, 2, 1); } else add(sq, to, 0, 1);
+          } else if (to === S.ep) add(sq, to, 0, 5);
+        }
+      } else if (t === 2 || t === 6) {
+        const ds = t === 2 ? SC_N : SC_K;
+        for (let i = 0; i < 8; i++) {
+          const to = sq + ds[i]; if (to & 0x88) continue;
+          const q = b[to];
+          if (!q) { if (!capsOnly) add(sq, to, 0, 0); } else if ((q & 8) === op) add(sq, to, 0, 1);
+        }
+        if (t === 6 && !capsOnly) {
+          const c = S.castle, home = me ? 116 : 4, rook = 4 | me;
+          if (sq === home && !scAttacked(S, home, op)) {
+            if ((c & (me ? 4 : 1)) && b[home + 3] === rook && !b[home + 1] && !b[home + 2] && !scAttacked(S, home + 1, op) && !scAttacked(S, home + 2, op)) add(home, home + 2, 0, 8);
+            if ((c & (me ? 8 : 2)) && b[home - 4] === rook && !b[home - 1] && !b[home - 2] && !b[home - 3] && !scAttacked(S, home - 1, op) && !scAttacked(S, home - 2, op)) add(home, home - 2, 0, 8);
+          }
+        }
+      } else {
+        const ds = t === 3 ? SC_BD : t === 4 ? SC_RD : SC_K;
+        for (let i = 0; i < ds.length; i++) {
+          const d = ds[i];
+          for (let to = sq + d; !(to & 0x88); to += d) {
+            const q = b[to];
+            if (!q) { if (!capsOnly) add(sq, to, 0, 0); continue; }
+            if ((q & 8) === op) add(sq, to, 0, 1);
+            break;
+          }
+        }
+      }
+    }
+    return out;
+  }
+  function scMake(S, m) {
+    const from = m & 127, to = (m >> 7) & 127, promo = (m >> 14) & 7, fl = m >> 17, b = S.b, z0 = SC_Z.p[0], z1 = SC_Z.p[1];
+    const p = b[from], col = p & 8, cap = fl & 4 ? 0 : b[to];
+    S.stack.push(m, cap, S.castle, S.ep, S.half, S.h1, S.h2, S.score, S.npm);
+    let h1 = S.h1 ^ z0[p * 128 + from], h2 = S.h2 ^ z1[p * 128 + from], score = S.score;
+    if ((p & 7) !== 6) score -= scPV(p, from);
+    if (cap) {
+      h1 ^= z0[cap * 128 + to]; h2 ^= z1[cap * 128 + to]; score -= scPV(cap, to);
+      const ct = cap & 7; if (ct >= 2 && ct <= 5) S.npm -= SC_VAL[ct];
+    }
+    const np = promo ? promo | col : p;
+    b[from] = 0; b[to] = np;
+    h1 ^= z0[np * 128 + to]; h2 ^= z1[np * 128 + to];
+    if ((np & 7) !== 6) score += scPV(np, to);
+    if (promo) S.npm += SC_VAL[promo];
+    if (fl & 4) { const cs = to + (col ? 16 : -16), cp = b[cs]; b[cs] = 0; h1 ^= z0[cp * 128 + cs]; h2 ^= z1[cp * 128 + cs]; score -= scPV(cp, cs); }
+    if (fl & 8) {
+      const kside = (to & 7) === 6, rf = kside ? from + 3 : from - 4, rt = kside ? from + 1 : from - 1, r = b[rf];
+      b[rf] = 0; b[rt] = r;
+      h1 ^= z0[r * 128 + rf] ^ z0[r * 128 + rt]; h2 ^= z1[r * 128 + rf] ^ z1[r * 128 + rt];
+      score += scPV(r, rt) - scPV(r, rf);
+    }
+    if ((p & 7) === 6) S.k[col ? 1 : 0] = to;
+    const nc = S.castle & SC_CR[from] & SC_CR[to];
+    h1 ^= SC_Z.c[0][S.castle] ^ SC_Z.c[0][nc]; h2 ^= SC_Z.c[1][S.castle] ^ SC_Z.c[1][nc];
+    S.castle = nc;
+    if (S.ep >= 0) { h1 ^= SC_Z.ep[0][S.ep]; h2 ^= SC_Z.ep[1][S.ep]; }
+    S.ep = fl & 2 ? (from + to) >> 1 : -1;
+    if (S.ep >= 0) { h1 ^= SC_Z.ep[0][S.ep]; h2 ^= SC_Z.ep[1][S.ep]; }
+    S.half = (p & 7) === 1 || cap || (fl & 4) ? 0 : S.half + 1;
+    S.side ^= 8; h1 ^= SC_Z.side[0]; h2 ^= SC_Z.side[1];
+    S.h1 = h1; S.h2 = h2; S.score = score;
+    S.hist.push(scKey(S));
+  }
+  function scUnmake(S) {
+    const st = S.stack, n = st.length - 9, m = st[n], cap = st[n + 1];
+    S.castle = st[n + 2]; S.ep = st[n + 3]; S.half = st[n + 4]; S.h1 = st[n + 5]; S.h2 = st[n + 6]; S.score = st[n + 7]; S.npm = st[n + 8];
+    st.length = n; S.hist.pop();
+    const from = m & 127, to = (m >> 7) & 127, promo = (m >> 14) & 7, fl = m >> 17, b = S.b;
+    S.side ^= 8;
+    const col = S.side, p = promo ? 1 | col : b[to];
+    b[from] = p; b[to] = cap;
+    if (fl & 4) b[to + (col ? 16 : -16)] = 1 | (col ^ 8);
+    if (fl & 8) { const kside = (to & 7) === 6, rf = kside ? from + 3 : from - 4, rt = kside ? from + 1 : from - 1; b[rf] = b[rt]; b[rt] = 0; }
+    if ((p & 7) === 6) S.k[col ? 1 : 0] = from;
+  }
+  function scLegal(S) { return scGen(S, false).filter((m) => { scMake(S, m); const ok = !scInCheck(S, S.side ^ 8); scUnmake(S); return ok; }); }
+  function scPerft(S, d) {
+    if (!d) return 1;
+    let n = 0;
+    for (const m of scGen(S, false)) { scMake(S, m); if (!scInCheck(S, S.side ^ 8)) n += d === 1 ? 1 : scPerft(S, d - 1); scUnmake(S); }
+    return n;
+  }
+  // the same position for the third time since the last pawn move or capture
+  function scRepeats(S, need) {
+    const h = S.hist, key = h[h.length - 1];
+    let c = 1;
+    for (let i = h.length - 3; i >= 0 && i >= h.length - 1 - S.half; i -= 2) if (h[i] === key && ++c >= need) return true;
+    return false;
+  }
+  function scInsufficient(S) {
+    const rest = [];
+    for (let sq = 0; sq < 128; sq++) { const p = S.b[sq]; if (!(sq & 0x88) && p && (p & 7) !== 6) rest.push([p & 7, ((sq >> 4) + (sq & 7)) & 1]); }
+    if (!rest.length) return true;
+    if (rest.length === 1 && (rest[0][0] === 2 || rest[0][0] === 3)) return true;
+    return rest.every((x) => x[0] === 3) && rest.every((x) => x[1] === rest[0][1]);
+  }
+
+  /* ---- the computer's thinking ---- */
+  const SC_INF = 1e9, SC_MATE = 100000;
+  let scNodes = 0, scStopAt = 0, scHalt = false, scTT = new Map(), scKill = [];
+  const scHistT = new Int32Array(15 * 128);
+  function scEval(S) {
+    const wk = S.k[0], bk = S.k[1], end = S.npm <= 1300, kt = end ? SC_KEND : SC_PST[6];
+    let s = S.score + kt[(7 - (wk >> 4)) * 8 + (wk & 7)] - kt[(bk >> 4) * 8 + (bk & 7)];
+    // a won ending: chase the lone king to the edge and bring the own king close
+    if (end && Math.abs(S.score) > 380) {
+      const lose = S.score > 0 ? bk : wk, cd = Math.max(3 - (lose >> 4), (lose >> 4) - 4) + Math.max(3 - (lose & 7), (lose & 7) - 4);
+      const kd = Math.abs((wk >> 4) - (bk >> 4)) + Math.abs((wk & 7) - (bk & 7));
+      s += (S.score > 0 ? 1 : -1) * (cd * 12 + (14 - kd) * 5);
+    }
+    return S.side ? -s : s;
+  }
+  function scScoreMoves(S, ms, ttm, ply) {
+    const sc = new Array(ms.length), k = scKill[ply] || [];
+    for (let i = 0; i < ms.length; i++) {
+      const m = ms[i], fl = m >> 17, to = (m >> 7) & 127, pr = (m >> 14) & 7, p = S.b[m & 127];
+      sc[i] = m === ttm ? 1e8 : fl & 1 ? 1e7 + SC_ORD[fl & 4 ? 1 : S.b[to] & 7] * 100 - SC_ORD[p & 7] : pr ? 9e6 + pr : m === k[0] ? 8e6 : m === k[1] ? 7e6 : scHistT[p * 128 + to];
+    }
+    return sc;
+  }
+  function scPick(ms, sc, i) {
+    let bi = i;
+    for (let j = i + 1; j < ms.length; j++) if (sc[j] > sc[bi]) bi = j;
+    if (bi !== i) { let x = ms[i]; ms[i] = ms[bi]; ms[bi] = x; x = sc[i]; sc[i] = sc[bi]; sc[bi] = x; }
+    return ms[i];
+  }
+  function scQ(S, alpha, beta, ply) {
+    if ((++scNodes & 1023) === 0 && performance.now() > scStopAt) scHalt = true;
+    if (scHalt) return 0;
+    const stand = scEval(S);
+    if (stand >= beta || ply > 60) return stand;
+    if (stand > alpha) alpha = stand;
+    const ms = scGen(S, true), sc = scScoreMoves(S, ms, 0, ply);
+    for (let i = 0; i < ms.length; i++) {
+      const m = scPick(ms, sc, i);
+      scMake(S, m);
+      if (scInCheck(S, S.side ^ 8)) { scUnmake(S); continue; }
+      const v = -scQ(S, -beta, -alpha, ply + 1);
+      scUnmake(S);
+      if (scHalt) return 0;
+      if (v >= beta) return v;
+      if (v > alpha) alpha = v;
+    }
+    return alpha;
+  }
+  function scAB(S, depth, alpha, beta, ply) {
+    if ((++scNodes & 1023) === 0 && performance.now() > scStopAt) scHalt = true;
+    if (scHalt) return 0;
+    if (S.half >= 100 || scRepeats(S, 2)) return 0;
+    const chk = scInCheck(S, S.side);
+    if (chk) depth++;
+    if (depth <= 0) return scQ(S, alpha, beta, ply);
+    const key = scKey(S), tt = scTT.get(key);
+    let ttm = 0;
+    if (tt) {
+      ttm = tt.m;
+      if (tt.d >= depth && (tt.f === 0 || (tt.f === 1 && tt.s >= beta) || (tt.f === 2 && tt.s <= alpha))) return tt.s;
+    }
+    const ms = scGen(S, false), sc = scScoreMoves(S, ms, ttm, ply), a0 = alpha;
+    let best = -SC_INF, bm = 0, legal = 0;
+    for (let i = 0; i < ms.length; i++) {
+      const m = scPick(ms, sc, i);
+      scMake(S, m);
+      if (scInCheck(S, S.side ^ 8)) { scUnmake(S); continue; }
+      legal++;
+      let v;
+      if (legal === 1) v = -scAB(S, depth - 1, -beta, -alpha, ply + 1);
+      else {
+        v = -scAB(S, depth - 1, -alpha - 1, -alpha, ply + 1);
+        if (v > alpha && v < beta) v = -scAB(S, depth - 1, -beta, -alpha, ply + 1);
+      }
+      scUnmake(S);
+      if (scHalt) return 0;
+      if (v > best) { best = v; bm = m; }
+      if (v > alpha) alpha = v;
+      if (alpha >= beta) {
+        if (!((m >> 17) & 1)) {
+          const k = scKill[ply] || (scKill[ply] = [0, 0]);
+          if (k[0] !== m) { k[1] = k[0]; k[0] = m; }
+          scHistT[S.b[m & 127] * 128 + ((m >> 7) & 127)] += depth * depth;
+        }
+        break;
+      }
+    }
+    if (!legal) return chk ? -SC_MATE + ply : 0;
+    if (scTT.size > 300000) scTT.clear();
+    scTT.set(key, { d: depth, s: best, f: best <= a0 ? 2 : best >= beta ? 1 : 0, m: bm });
+    return best;
+  }
+  function scThink(S, L) {
+    const root = scLegal(S);
+    if (root.length < 2) return root[0] || 0;
+    scHalt = false; scNodes = 0; scStopAt = performance.now() + L.ms; scTT.clear(); scKill = []; scHistT.fill(0);
+    if (L.rnd && Math.random() < L.rnd) return pickOne(root);
+    // shuffled first, so that among equally good moves a different one comes up each game
+    shuffle(root);
+    const sc = scScoreMoves(S, root, 0, 0), pre = new Map(root.map((m, i) => [m, sc[i]]));
+    root.sort((a, b) => pre.get(b) - pre.get(a));
+    if (L.flat) {
+      // the cat and the fox: every move gets a score, with some noise, and the best is played
+      let best = -SC_INF, bm = root[0];
+      for (const m of root) {
+        scMake(S, m);
+        const v = -scAB(S, L.depth - 1, -SC_INF, SC_INF, 1);
+        scUnmake(S);
+        if (scHalt) break;
+        const n = v + (Math.random() * 2 - 1) * L.noise;
+        if (n > best) { best = n; bm = m; }
+      }
+      return bm;
+    }
+    // the owl: deeper and deeper while there is time, the best move of the last depth first.
+    // Only the first move gets an exact score, the others are only compared with it: no noise here.
+    let bm = root[0];
+    for (let d = 1; d <= L.depth; d++) {
+      const order = [bm].concat(root.filter((m) => m !== bm));
+      let best = -SC_INF, cur = 0, alpha = -SC_INF;
+      for (const m of order) {
+        scMake(S, m);
+        let v = -scAB(S, d - 1, -SC_INF, -alpha, 1);
+        scUnmake(S);
+        if (scHalt) break;
+        if (v > best) { best = v; cur = m; }
+        if (v > alpha) alpha = v;
+      }
+      if (cur) bm = cur;
+      if (scHalt || best > SC_MATE - 200 || performance.now() > scStopAt - L.ms * .5) break;
+    }
+    return bm;
+  }
+
+  /* ---- the names of the moves: e4, Cf3, Axe5+, O-O (the letters follow the language) ---- */
+  const scSqName = (sq) => 'abcdefgh'[sq & 7] + ((sq >> 4) + 1);
+  function scSAN(S, m, legal) {
+    const from = m & 127, to = (m >> 7) & 127, pr = (m >> 14) & 7, fl = m >> 17, p = S.b[from], t = p & 7;
+    let s;
+    if (fl & 8) s = (to & 7) === 6 ? 'O-O' : 'O-O-O';
+    else {
+      s = t === 1 ? '' : ' NBRQK'[t - 1];
+      if (t !== 1) {
+        const oth = legal.filter((x) => x !== m && ((x >> 7) & 127) === to && S.b[x & 127] === p);
+        if (oth.length) {
+          const f = oth.some((x) => ((x & 127) & 7) === (from & 7)), r = oth.some((x) => ((x & 127) >> 4) === (from >> 4));
+          s += !f ? scSqName(from)[0] : !r ? scSqName(from)[1] : scSqName(from);
+        }
+      }
+      if (fl & 1) s += (t === 1 ? scSqName(from)[0] : '') + 'x';
+      s += scSqName(to) + (pr ? '=' + ' NBRQ'[pr - 1] : '');
+    }
+    scMake(S, m);
+    if (scInCheck(S, S.side)) s += scLegal(S).length ? '+' : '#';
+    scUnmake(S);
+    return s;
+  }
+  const scLocal = (san) => { const L = t('scLetters'); return san.replace(/[NBRQK]/g, (c) => L[c] || c); };
+
+  /* ---- the game ---- */
+  function scStats() { const st = store.get('hm-sc', null); return Object.assign({ played: 0, wins: 0, draws: 0, found: [] }, st && typeof st === 'object' ? st : {}); }
+  function scPickPhotos(n) {
+    const seen = new Set(scStats().found);
+    return shuffle(SC_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, n).map((p) => p.id);
+  }
+  const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
+  function scStart(cfg) {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); ppStop(); pkStop();
+    const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
+    const c = cfg && cfg.col ? cfg.col : 'w';
+    SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
+      found: [], photos: scPickPhotos(3), queen: false, hint: 0, promo: null, timers: [], anim: null };
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; scEl.hidden = false;
+    $('#sc-prize').hidden = true; $('#sc-promo').hidden = true;
+    scBuild();
+    scRender();
+    preload(SG.photos.slice(0, 2).map((id) => cardSrc(PHOTO_BY_ID.get(id))), 4000);
+    announce(t('aScStart'));
+    if (SG.you) scBotTurn(SG, 700);
+  }
+  function scStop() {
+    const g = SG; SG = null;
+    if (g) g.timers.forEach(clearTimeout);
+    scEl.hidden = true;
+  }
+  function scLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (SG === g) fn(); }, ms / scSpeed); g.timers.push(id); }
+  function scRequestExit() {
+    if (SG && !SG.over && SG.moves.length) openConfirm(false);
+    else goHome();
+  }
+  // the 64 squares, with your pieces at the bottom
+  function scXY(g, sq) { const f = sq & 7, r = sq >> 4; return g.you ? [7 - f, r] : [f, 7 - r]; }
+  function scBuild() {
+    const g = SG, box = $('#sc-board'), sqs = [];
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const f = g.you ? 7 - col : col, r = g.you ? row : 7 - row, sq = r * 16 + f;
+        sqs.push('<button type="button" class="sq' + ((f + r) & 1 ? ' l' : ' d') + '" data-sq="' + sq + '">' + (col === 0 ? '<i class="cr">' + (r + 1) + '</i>' : '') + (row === 7 ? '<i class="cf">' + 'abcdefgh'[f] + '</i>' : '') + '<span class="pc"></span></button>');
+      }
+    }
+    box.innerHTML = sqs.join('');
+  }
+  function scCaptured(P, col) {
+    // what is missing from the starting army of this colour (a promoted pawn counts as the new piece)
+    const have = [0, 0, 0, 0, 0, 0, 0], start = [0, 8, 2, 2, 2, 1, 1];
+    for (let sq = 0; sq < 128; sq++) { const p = P.b[sq]; if (!(sq & 0x88) && p && (p & 8) === col) have[p & 7]++; }
+    const out = [];
+    for (let t = 5; t >= 1; t--) for (let k = have[t]; k < start[t]; k++) out.push(t);
+    return out;
+  }
+  function scRender() {
+    const g = SG; if (!g) return;
+    const P = g.P, myTurn = !g.over && !g.busy && P.side === g.you, chk = scInCheck(P, P.side);
+    const lf = g.last ? g.last & 127 : -1, lt = g.last ? (g.last >> 7) & 127 : -1;
+    const tg = new Map(g.targets.map((m) => [(m >> 7) & 127, m]));
+    const hf = g.hint ? g.hint & 127 : -1, ht = g.hint ? (g.hint >> 7) & 127 : -1;
+    $$('#sc-board .sq').forEach((el) => {
+      const sq = +el.dataset.sq, p = P.b[sq], pc = el.lastElementChild;
+      pc.textContent = p ? SC_GLYPH[p & 7] : '';
+      pc.className = 'pc' + (p ? (p & 8 ? ' b' : ' w') : '');
+      el.classList.toggle('last', sq === lf || sq === lt);
+      el.classList.toggle('sel', sq === g.sel);
+      el.classList.toggle('dot', tg.has(sq) && !p && !((tg.get(sq) >> 17) & 4));
+      el.classList.toggle('capt', tg.has(sq) && (!!p || !!((tg.get(sq) >> 17) & 4)));
+      el.classList.toggle('chk', chk && sq === P.k[P.side ? 1 : 0]);
+      el.classList.toggle('hint', sq === hf || sq === ht);
+      el.setAttribute('aria-label', scSqName(sq) + (p ? ': ' + t(p & 8 ? 'scPieceB' : 'scPieceW')[p & 7] : ''));
+    });
+    const L = SC_LEVELS[g.lv], lvName = t('scL' + g.lv);
+    $('#sc-sub').textContent = t(g.you ? 'scSubB' : 'scSubW', { lvl: lvName });
+    const capRow = (col) => { const c = scCaptured(P, col); return c.map((x) => '<i class="' + (col ? 'b' : 'w') + '">' + SC_GLYPH[x] + '</i>').join(''); };
+    let lead = 0; // the material lead, in pawns
+    for (let sq = 0; sq < 128; sq++) { const p = P.b[sq]; if (!(sq & 0x88) && p) lead += (p & 8 ? -1 : 1) * [0, 1, 3, 3, 5, 9, 0][p & 7]; }
+    const mine = g.you ? -lead : lead;
+    $('#sc-opp').className = 'sc-bar sc-opp' + (!g.over && P.side !== g.you ? ' turn' : '') + (g.busy ? ' think' : '');
+    $('#sc-opp-av').innerHTML = svgUse('av-' + L.av, '', '0 0 40 40');
+    $('#sc-opp-nm').textContent = scBot(g);
+    $('#sc-opp-lv').textContent = lvName;
+    $('#sc-opp-cap').innerHTML = capRow(g.you) + (mine < 0 ? '<b>+' + (-mine) + '</b>' : '');
+    $('#sc-you').className = 'sc-bar sc-you' + (myTurn ? ' turn' : '');
+    $('#sc-you-cap').innerHTML = capRow(g.you ^ 8) + (mine > 0 ? '<b>+' + mine + '</b>' : '');
+    let msg;
+    if (g.over) msg = g.endMsg;
+    else if (g.busy) msg = t('scThinking', { name: scBot(g) });
+    else if (P.side === g.you) msg = g.hint ? t('scHintMsg') : chk ? t('scYouCheck') : t('scYourTurn');
+    else msg = '';
+    $('#sc-msg').textContent = msg;
+    $('#sc-msg').classList.toggle('chk', !g.over && chk && P.side === g.you);
+    const list = $('#sc-moves');
+    list.innerHTML = g.moves.length ? g.moves.reduce((a, mv, i) => {
+      if (i % 2 === 0) a.push('<span><i>' + (i / 2 + 1) + '.</i> ' + scLocal(mv.san));
+      else a[a.length - 1] += ' ' + scLocal(mv.san);
+      if (i === g.moves.length - 1 || i % 2 === 1) a[a.length - 1] += '</span>';
+      return a;
+    }, []).join('') : '<em>' + t('scNoMoves') + '</em>';
+    list.scrollLeft = list.scrollWidth;
+    const youMoved = g.moves.some((mv, i) => (i % 2 === 0) === !g.you);
+    $('#sc-undo').disabled = !myTurn || !youMoved;
+    $('#sc-hint').disabled = !myTurn;
+  }
+  // a piece glides from its old square to the new one
+  function scAnim(g, m) {
+    const box = $('#sc-board'), size = box.getBoundingClientRect().width / 8;
+    const glide = (from, to) => {
+      const el = $('[data-sq="' + to + '"] .pc', box); if (!el) return;
+      const a = scXY(g, from), b = scXY(g, to);
+      el.style.transition = 'none'; el.style.transform = 'translate(' + (a[0] - b[0]) * size + 'px,' + (a[1] - b[1]) * size + 'px)';
+      el.getBoundingClientRect();
+      el.style.transition = 'transform ' + (.24 / scSpeed) + 's cubic-bezier(.3, .7, .4, 1)'; el.style.transform = '';
+    };
+    const from = m & 127, to = (m >> 7) & 127;
+    glide(from, to);
+    if ((m >> 17) & 8) { const ks = (to & 7) === 6; glide(ks ? from + 3 : from - 4, ks ? from + 1 : from - 1); }
+  }
+  async function scPlay(g, m) {
+    const P = g.P, mover = P.side, legal = scLegal(P), san = scSAN(P, m, legal);
+    const to = (m >> 7) & 127, fl = m >> 17, taken = fl & 4 ? 1 | (mover ^ 8) : P.b[to];
+    scMake(P, m);
+    g.moves.push({ m, san }); g.last = m; g.sel = -1; g.targets = []; g.hint = 0;
+    scRender(); scAnim(g, m);
+    const chk = scInCheck(P, P.side);
+    if (chk) Sound.go(); else if (taken) Sound.bwClack(); else Sound.tick();
+    if (mover === g.you) buzz(8);
+    announce((mover === g.you ? t('ucYou') : scBot(g)) + ': ' + scLocal(san));
+    // the end?
+    const end = scEnd(P);
+    if (end) { scFinish(g, end, mover); return; }
+    // you took the queen: a photo of Hande
+    if (mover === g.you && (taken & 7) === 5 && !g.queen) {
+      g.queen = true;
+      const ph = PHOTO_BY_ID.get(g.photos[0]);
+      if (ph) { g.found.push(ph); g.busy = true; await scPrize(g, ph.id, t('scQueenPrize')); if (SG !== g) return; g.busy = false; scRender(); }
+    }
+    if (P.side !== g.you) scBotTurn(g, 420);
+  }
+  function scEnd(P) {
+    if (!scLegal(P).length) return scInCheck(P, P.side) ? 'mate' : 'stale';
+    if (P.half >= 100) return 'fifty';
+    if (scRepeats(P, 3)) return 'rep';
+    if (scInsufficient(P)) return 'mat';
+    return '';
+  }
+  function scBotTurn(g, wait) {
+    g.busy = true; scRender();
+    scLater(g, wait + Math.random() * 250, () => {
+      // let the "thinking" show before the search holds the page for a moment
+      requestAnimationFrame(() => setTimeout(() => {
+        if (SG !== g) return;
+        const m = scThink(g.P, SC_LEVELS[g.lv]);
+        if (SG !== g) return;
+        g.busy = false;
+        if (m) scPlay(g, m);
+      }, 30));
+    });
+  }
+  // your taps: a piece of yours, then one of the lit squares
+  function scTap(sq) {
+    const g = SG; if (!g || g.over || g.busy || g.promo || g.P.side !== g.you) return;
+    AudioCore.get();
+    const P = g.P, p = P.b[sq];
+    const mv = g.targets.filter((m) => ((m >> 7) & 127) === sq);
+    if (mv.length) {
+      if (mv.length > 1) { scAskPromo(g, mv); return; }
+      scPlay(g, mv[0]); return;
+    }
+    if (p && (p & 8) === g.you && sq !== g.sel) {
+      g.sel = sq; g.targets = scLegal(P).filter((m) => (m & 127) === sq); g.hint = 0;
+      Sound.flip(); scRender(); return;
+    }
+    g.sel = -1; g.targets = []; scRender();
+  }
+  function scAskPromo(g, mv) {
+    g.promo = mv;
+    const box = $('#sc-promo');
+    $$('#sc-promo [data-pr]').forEach((b) => { b.firstElementChild.textContent = SC_GLYPH[+b.dataset.pr]; b.firstElementChild.className = 'pc ' + (g.you ? 'b' : 'w'); });
+    box.hidden = false;
+    $('#sc-promo [data-pr="5"]').focus();
+  }
+  function scPromoPick(pr) {
+    const g = SG; if (!g || !g.promo) return;
+    const m = g.promo.find((x) => ((x >> 14) & 7) === pr);
+    g.promo = null; $('#sc-promo').hidden = true;
+    if (m) scPlay(g, m);
+  }
+  function scUndo() {
+    const g = SG; if (!g || g.busy || g.over || g.P.side !== g.you) return;
+    // back to your previous turn: the computer's answer and your move
+    let k = 0;
+    while (g.moves.length && (k === 0 || g.P.side !== g.you)) { scUnmake(g.P); g.moves.pop(); k++; if (g.P.side === g.you) break; }
+    g.last = g.moves.length ? g.moves[g.moves.length - 1].m : 0; g.sel = -1; g.targets = []; g.hint = 0;
+    Sound.whoosh(); scRender();
+  }
+  function scHint() {
+    const g = SG; if (!g || g.busy || g.over || g.P.side !== g.you) return;
+    const m = scThink(g.P, SC_HELP);
+    g.hint = m; g.sel = -1; g.targets = [];
+    Sound.sparkle(); scRender();
+    scLater(g, 2600, () => { if (g.hint === m) { g.hint = 0; scRender(); } });
+  }
+  function scPrize(g, id, text) {
+    return new Promise((resolve) => {
+      const p = PHOTO_BY_ID.get(id), box = $('#sc-prize');
+      if (!p || SG !== g) { resolve(); return; }
+      $('img', box).src = cardSrc(p);
+      $('#sc-prize-t').textContent = text;
+      box.classList.remove('open'); box.hidden = false;
+      Sound.whoosh();
+      let done = false;
+      const finish = () => { if (done) return; done = true; box.hidden = true; box.onclick = null; resolve(); };
+      scLater(g, 420, () => {
+        box.classList.add('open'); Sound.sparkle(); buzz([10, 40, 10]);
+        const r = $('.rw-prize-card', box).getBoundingClientRect();
+        FX.burst(r.left + r.width / 2, r.top + r.height / 2, 60, true);
+      });
+      box.onclick = () => { if (box.classList.contains('open')) finish(); };
+      scLater(g, 3600, finish);
+      setTimeout(() => { if (SG !== g) finish(); }, 3800);
+    });
+  }
+  function scFinish(g, end, mover) {
+    g.over = end; g.busy = false;
+    const won = end === 'mate' && mover === g.you, lost = end === 'mate' && mover !== g.you;
+    g.winner = won ? 1 : lost ? 0 : -1;
+    if (won) for (let k = 0; k < (g.lv === 2 ? 2 : 1); k++) { const ph = PHOTO_BY_ID.get(g.photos[g.found.length]); if (ph) g.found.push(ph); }
+    const why = t({ mate: 'scEndMate', stale: 'scEndStale', fifty: 'scEndFifty', rep: 'scEndRep', mat: 'scEndMat' }[end]);
+    g.endMsg = won ? t('scWinT') : lost ? t('scLoseT', { name: scBot(g) }) : t('scDrawT') + ': ' + why.toLowerCase();
+    const st = scStats();
+    st.played++; if (won) st.wins++; if (!won && !lost) st.draws++;
+    st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
+    store.set('hm-sc', st);
+    scRender();
+    if (won) Sound.win(); else if (lost) Sound.lose(); else Sound.count();
+    scLater(g, 1500, () => {
+      const rows = [[t('scRowEnd'), why], [t('scRowMoves'), String(Math.ceil(g.moves.length / 2))], [t('scRowLevel'), t('scL' + g.lv) + ' · ' + scBot(g)], [t('rwRowPhotos'), String(g.found.length)]];
+      showResult({ kicker: t('scKicker'), title: won ? t('scWinT') : lost ? t('scLoseT', { name: scBot(g) }) : t('scDrawT'), stars: null, score: null, record: false, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'sc', rows,
+        strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
+      if (won) celebrate();
+    });
+  }
+  function scRenderSetup() {
+    const st = scStats(), lv = store.get('hm-sc-lv', 1), col = store.get('hm-sc-col', 'w');
+    $$('#setup-sc [data-scl]').forEach((b) => b.setAttribute('aria-pressed', +b.dataset.scl === lv ? 'true' : 'false'));
+    $$('#setup-sc [data-scc]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.scc === col ? 'true' : 'false'));
+    $('#sc-record').textContent = st.played ? t('scRecord', { p: st.played, w: st.wins, d: st.draws }) : t('rwRecordNone');
+  }
+  function scRelang() { if (SG) scRender(); }
+  function scFound() { return SG ? SG.found : null; }
+  function scAgain() { scStart(SG ? { lv: SG.lv, col: SG.col } : { lv: store.get('hm-sc-lv', 1), col: store.get('hm-sc-col', 'w') }); }
+  function scWire() {
+    $('#btn-sc-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); scStart({ lv: store.get('hm-sc-lv', 1), col: store.get('hm-sc-col', 'w') }); });
+    $$('#setup-sc [data-scl]').forEach((b) => b.addEventListener('click', () => { store.set('hm-sc-lv', +b.dataset.scl); Sound.flip(); scRenderSetup(); }));
+    $$('#setup-sc [data-scc]').forEach((b) => b.addEventListener('click', () => { store.set('hm-sc-col', b.dataset.scc); Sound.flip(); scRenderSetup(); }));
+    $('#sc-exit').addEventListener('click', scRequestExit);
+    $('#sc-board').addEventListener('click', (e) => { const b = e.target.closest('.sq'); if (b) scTap(+b.dataset.sq); });
+    $('#sc-undo').addEventListener('click', scUndo);
+    $('#sc-hint').addEventListener('click', scHint);
+    $$('#sc-promo [data-pr]').forEach((b) => b.addEventListener('click', () => scPromoPick(+b.dataset.pr)));
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -11291,13 +12100,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -11313,7 +12122,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -11376,6 +12185,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'sc') { scAgain(); return; }
     if (resultAction === 'pk') { pkAgain(); return; }
     if (resultAction === 'pp') { ppAgain(); return; }
     if (resultAction === 'tb') { tbStart({ n: TG ? TG.cfg.n : store.get('hm-tb-n', 2) }); return; }
@@ -11405,10 +12215,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  scWire();
   pkWire();
   ppWire();
   $$('#mq-ans .mq-a').forEach((b) => b.addEventListener('click', () => mqChoose(+b.dataset.i)));
