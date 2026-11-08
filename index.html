@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker e Scacchi con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi e Gran Bazar con le foto di Hande. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker e Scacchi con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi e Gran Bazar con le foto di Hande. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker e Scacchi con le foto di Hande. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi e Gran Bazar con le foto di Hande. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2537,6 +2537,142 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .sc-av { width: 28px; height: 28px; }
   .sc-ctrl .btn { min-height: 42px; }
 }
+/* ---------- Gran Bazar ---------- */
+.gbs {
+  --bd: min(100vw - 20px, 560px, 100dvh - 250px); --cell: calc(var(--bd) / 7.5);
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto minmax(0, 1fr); gap: 10px;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 10px max(10px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 34% at 50% 0%, rgba(255, 238, 222, .9), rgba(255, 238, 222, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(214, 241, 231, .8), rgba(214, 241, 231, 0) 70%), #fbf8f4;
+}
+.gbs > * { min-width: 0; }
+.gbs > .rw-head { grid-area: auto; grid-row: 1; }
+.gb-wrap { grid-row: 3; width: var(--bd); height: var(--bd); justify-self: center; }
+.gb-side { display: contents; }
+.gb-players { grid-row: 4; }
+.gb-acts { grid-row: 5; align-self: start; }
+.gb-log { display: none; }
+.gb-players, .gb-acts { width: min(100%, 560px); justify-self: center; }
+
+/* the board: ivory squares, a coloured band on each place, the corners a little bigger */
+.gb-board { position: relative; width: 100%; height: 100%; display: grid; grid-template-columns: 1.25fr repeat(5, 1fr) 1.25fr; grid-template-rows: 1.25fr repeat(5, 1fr) 1.25fr;
+  border-radius: 12px; overflow: hidden; background: #fffaf2;
+  box-shadow: 0 0 0 2.5px #e3c88f, 0 0 0 6px #fffaf0, 0 0 0 7px rgba(201, 164, 105, .45), 0 22px 40px -24px rgba(72, 52, 84, .55); }
+.gb-cell { position: relative; display: grid; grid-template-rows: auto 1fr auto; justify-items: center; align-items: start; min-width: 0; min-height: 0; margin: 0; padding: 0 1px calc(var(--cell) * .06);
+  border: 0; border-radius: 0; box-shadow: inset 0 0 0 .5px rgba(201, 164, 105, .55); background: #fffaf2; color: var(--ink); font: inherit; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.gb-cell .band { display: block; width: 100%; height: calc(var(--cell) * .17); }
+.gb-cell .nm { display: block; padding: calc(var(--cell) * .05) 1px 0; text-align: center; font: 600 calc(var(--cell) * .175)/1.08 var(--font-ui); letter-spacing: -.01em; hyphens: manual; overflow-wrap: break-word; color: #3f3247; }
+/* the bottom line of a place: its price while it is free, then the owner and the stars */
+.gb-cell .foot { align-self: end; display: flex; align-items: center; justify-content: center; gap: 1px; min-height: calc(var(--cell) * .26); }
+.gb-cell .pr { font: 700 calc(var(--cell) * .17)/1 var(--font-caps); color: #8a6738; }
+.gb-cell .pr:empty, .gb-cell .st:empty, .gb-cell .ow:empty { display: none; }
+.gb-cell .st { font-size: calc(var(--cell) * .19); line-height: 1; color: #d39a2c; letter-spacing: -.08em; }
+.gb-cell .ow i { width: calc(var(--cell) * .27); height: calc(var(--cell) * .27); border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(circle at 35% 30%, #fff, #efe6f6 60%, #d9c8ec); box-shadow: 0 0 0 1px #b48a48; font: normal 700 calc(var(--cell) * .14)/1 var(--font-caps); color: #8a6738; }
+.gb-cell .ow i svg { width: 92%; height: 92%; }
+.gb-cell.mine { background: linear-gradient(180deg, #fffaf2, #fbefd6); box-shadow: inset 0 0 0 1.5px #d6b46f; }
+.gb-cell.taken { background: linear-gradient(180deg, #fffaf2, #f3ecf7); }
+.gb-cell .ic { display: grid; place-items: center; margin-top: calc(var(--cell) * .12); width: calc(var(--cell) * .46); height: calc(var(--cell) * .46); color: #a07a3c; }
+.gb-cell .ic svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.gb-cell .ic .q { width: 100%; height: 100%; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6dc, #e6c88a 60%, #c39352); color: #4a3314; font: 700 calc(var(--cell) * .3)/1 var(--font-display); }
+.gb-cell.corner .ic { width: calc(var(--cell) * .55); height: calc(var(--cell) * .55); margin-top: calc(var(--cell) * .16); }
+.gb-cell.corner .nm { font-size: calc(var(--cell) * .17); }
+.gb-cell.cops .ic { color: #b4506e; }
+.gb-cell.go { background: linear-gradient(135deg, #fff6e2, #f6e4bc); }
+.gb-cell .tk { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); display: flex; flex-wrap: wrap; justify-content: center; gap: 1px; z-index: 2; pointer-events: none; }
+.gb-cell .tok { width: calc(var(--cell) * .36); height: calc(var(--cell) * .36); border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(circle at 35% 30%, #fff, #efe6f6 60%, #d9c8ec); box-shadow: 0 0 0 1.5px #b48a48, 0 2px 4px rgba(72, 52, 84, .35); font: normal 700 calc(var(--cell) * .19)/1 var(--font-caps); color: #8a6738; }
+.gb-cell .tok svg { width: 94%; height: 94%; }
+.gb-cell .tok.cur { box-shadow: 0 0 0 2px #e2a85f, 0 0 8px rgba(226, 168, 95, .9); }
+
+/* the middle: the dice, what just happened, and the cards that ask you */
+.gb-mid { grid-area: 2 / 2 / 7 / 7; position: relative; display: grid; align-content: center; justify-items: center; gap: calc(var(--cell) * .2); padding: 8px;
+  background: radial-gradient(90% 80% at 50% 45%, #fffdf8, #f6eefa 70%, #efe4f6); box-shadow: inset 0 0 0 .5px rgba(201, 164, 105, .55); }
+.gb-logo { position: absolute; left: 0; right: 0; top: 7%; text-align: center; font: 400 calc(var(--cell) * .72)/1 var(--font-script, cursive); color: rgba(176, 138, 72, .26); pointer-events: none; }
+.gb-dice { display: flex; gap: calc(var(--cell) * .22); margin-top: calc(var(--cell) * .55); }
+.gb-dice .die { width: calc(var(--cell) * .92); height: calc(var(--cell) * .92); display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr); padding: 13%; border-radius: 22%;
+  background: radial-gradient(circle at 35% 30%, #fff, #f8f1e6 70%, #ead9b8); box-shadow: inset 0 0 0 1px rgba(180, 138, 72, .6), 0 6px 12px -6px rgba(72, 52, 84, .5); }
+.gb-dice .die i { width: 72%; height: 72%; place-self: center; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #7a5f8a, #3b2b45); }
+.gb-dice .die.roll { animation: gbRoll .16s linear infinite; }
+@keyframes gbRoll { 0% { transform: rotate(-14deg) translateY(-2px); } 50% { transform: rotate(12deg) translateY(1px); } 100% { transform: rotate(-14deg) translateY(-2px); } }
+.die[data-v="1"] i:nth-child(1), .die[data-v="3"] i:nth-child(2), .die[data-v="5"] i:nth-child(3) { grid-area: 2 / 2; }
+.die[data-v="2"] i:nth-child(1), .die[data-v="3"] i:nth-child(1), .die[data-v="4"] i:nth-child(1), .die[data-v="5"] i:nth-child(1), .die[data-v="6"] i:nth-child(1) { grid-area: 1 / 1; }
+.die[data-v="2"] i:nth-child(2), .die[data-v="3"] i:nth-child(3), .die[data-v="4"] i:nth-child(4), .die[data-v="5"] i:nth-child(5), .die[data-v="6"] i:nth-child(6) { grid-area: 3 / 3; }
+.die[data-v="4"] i:nth-child(2), .die[data-v="5"] i:nth-child(2), .die[data-v="6"] i:nth-child(2) { grid-area: 1 / 3; }
+.die[data-v="4"] i:nth-child(3), .die[data-v="5"] i:nth-child(4), .die[data-v="6"] i:nth-child(5) { grid-area: 3 / 1; }
+.die[data-v="6"] i:nth-child(3) { grid-area: 2 / 1; }
+.die[data-v="6"] i:nth-child(4) { grid-area: 2 / 3; }
+.gb-msg { margin: 0; max-width: 100%; min-height: 2.6em; text-align: center; font: italic 600 calc(var(--cell) * .3)/1.25 var(--font-display); color: #4a3d52; text-wrap: balance; }
+.gb-dlg { position: absolute; inset: 5px; z-index: 4; display: grid; align-content: center; gap: 8px; padding: 10px; border-radius: 14px; overflow-y: auto;
+  background: rgba(255, 253, 249, .97); box-shadow: 0 0 0 1px rgba(201, 164, 105, .55), 0 18px 34px -18px rgba(72, 52, 84, .55); animation: gbIn .25s ease-out; }
+.gb-dlg[hidden] { display: none; }
+@keyframes gbIn { from { opacity: 0; transform: scale(.94); } }
+.gb-deed { display: grid; justify-items: center; gap: 2px; }
+.gb-deed .band { width: 100%; height: 10px; border-radius: 6px; }
+.gb-deed h3 { margin: 4px 0 0; font: italic 700 calc(var(--cell) * .4)/1.1 var(--font-display); color: var(--ink); text-align: center; }
+.gb-deed .city { margin: 0; font: 700 10px var(--font-caps); letter-spacing: .14em; text-transform: uppercase; color: #a78a5a; }
+.gb-deed dl { display: grid; grid-template-columns: auto auto; gap: 1px 14px; margin: 6px 0 0; font: 500 calc(var(--cell) * .22)/1.3 var(--font-ui); color: #4a3d52; }
+.gb-deed dt { color: #8a7e93; }
+.gb-deed dd { margin: 0; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.gb-dlg .own { margin: 0; text-align: center; font: italic 600 14px var(--font-display); color: #6e4f24; }
+.gb-card { display: grid; gap: 6px; justify-items: center; text-align: center; }
+.gb-card .kick { margin: 0; font: 700 11px var(--font-caps); letter-spacing: .18em; text-transform: uppercase; color: #a78a5a; }
+.gb-card .txt { margin: 0; font: italic 600 calc(var(--cell) * .34)/1.3 var(--font-display); color: var(--ink); }
+.gb-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.gb-btns.col { flex-direction: column; align-items: stretch; }
+.gb-btns .btn { min-height: 40px; padding: 6px 14px; font-size: 14px; letter-spacing: .06em; }
+.gb-btns .btn.primary { font-size: 13px; }
+.gb-build { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; width: 100%; }
+.gb-build li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 7px; font: 600 13px var(--font-ui); color: var(--ink); text-align: left; }
+.gb-build .dot { width: 10px; height: 10px; border-radius: 3px; }
+.gb-build em { font-style: normal; color: #d39a2c; letter-spacing: -.05em; }
+.gb-build em s { text-decoration: none; color: rgba(201, 164, 105, .35); }
+.gb-build .btn { min-height: 32px; padding: 2px 10px; font-size: 12px; }
+
+/* the players and your buttons */
+.gb-players { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 6px; }
+.gb-pl { position: relative; display: flex; align-items: center; gap: 5px; min-width: 0; padding: 5px 5px 5px 4px; border-radius: 14px; border: 1px solid var(--hairline, rgba(201, 164, 105, .45)); background: rgba(255, 253, 249, .9); transition: box-shadow .25s, opacity .3s; }
+.gb-pl.cur { box-shadow: 0 0 0 2px #e2c27e, 0 0 14px rgba(226, 194, 126, .6); }
+.gb-pl.out { opacity: .45; filter: grayscale(.7); }
+.gb-pl.me { border-color: #d6b46f; }
+.gb-av { width: 25px; height: 25px; flex: none; border-radius: 50%; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 35% 30%, #fff, #efe6f6 60%, #d9c8ec); box-shadow: inset 0 0 0 1.5px #d6b46f; font: 700 12px var(--font-caps); color: #8a6738; }
+.gb-av svg { width: 22px; height: 22px; }
+.gb-pl .who { display: grid; min-width: 0; }
+.gb-pl .nm { font: 600 13.5px/1.1 var(--font-display); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gb-pl .ch { font: 700 12.5px/1.3 var(--font-caps); color: #6e4f24; font-variant-numeric: tabular-nums; }
+.gb-pl .jl { position: absolute; top: -7px; right: -4px; width: 18px; height: 18px; padding: 2px; border-radius: 50%; background: #fffaf0; box-shadow: 0 0 0 1px #b4506e; color: #b4506e; }
+.gb-pl .jl svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; }
+.gb-pl .ps { position: absolute; bottom: -6px; right: -4px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; display: grid; place-items: center; background: var(--champ, #f1dcb4); font: 700 9px var(--font-caps); color: #2e2438; }
+.gb-acts { display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 8px; }
+.gb-acts .btn { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 6px 8px; font-size: 14px; white-space: nowrap; }
+.gb-acts .btn.primary { font-size: 13px; letter-spacing: .12em; }
+.gb-acts .btn svg { width: 19px; height: 19px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.gb-acts .btn:disabled { opacity: .45; cursor: default; }
+.gb-acts #gb-stars[aria-pressed="true"] { background: var(--champ, #f1dcb4); border-color: #c9a469; }
+
+@media (max-height: 700px) {
+  .gbs { gap: 7px; --bd: min(100vw - 20px, 560px, 100dvh - 222px); }
+  .gb-acts .btn { min-height: 44px; }
+}
+/* a computer: the board on the left, the players, the buttons and what happened at its side */
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .gbs { --bd: min(100dvh - 92px, 100vw - 480px); grid-template-columns: minmax(0, 1fr) var(--bd) minmax(280px, 340px) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); column-gap: 28px; }
+  .gbs > .rw-head { grid-column: 1 / -1; }
+  .gb-wrap { grid-column: 2; grid-row: 2; align-self: center; }
+  .gb-side { grid-column: 3; grid-row: 2; align-self: center; height: var(--bd); display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+  .gb-players, .gb-acts { width: auto; }
+  .gb-players { grid-auto-flow: row; grid-auto-columns: auto; }
+  .gb-pl { padding: 8px 12px 8px 8px; }
+  .gb-pl .nm { font-size: 16px; }
+  .gb-pl .ch { margin-left: auto; }
+  .gb-pl .who { flex: 1; grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  .gb-acts { grid-template-columns: 1fr 1fr; align-self: stretch; }
+  .gb-acts #gb-roll { grid-column: 1 / -1; order: -1; }
+  .gb-log { display: block; flex: 1 1 auto; overflow-y: auto; margin: 0; padding: 10px 14px; list-style: none; border-radius: 16px; background: rgba(255, 253, 249, .6); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .3);
+    font: 500 13.5px/1.45 var(--font-ui); color: #5c4f66; }
+  .gb-log li + li { margin-top: 4px; }
+  .gb-log li:first-child { color: var(--ink); font-weight: 600; }
+}
 </style>
 </head>
 <body>
@@ -2602,6 +2738,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="sc" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="scig" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#fff3d2"/><stop offset=".5" stop-color="#e2c07c"/><stop offset="1" stop-color="#a87a3a"/></radialGradient><radialGradient id="sciw" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f7efe3"/><stop offset="1" stop-color="#dcc8a4"/></radialGradient></defs><g><rect x="10" y="40" width="14" height="9" fill="#fffaf2"/><rect x="24" y="40" width="14" height="9" fill="#e3d3ee"/><rect x="38" y="40" width="14" height="9" fill="#fffaf2"/><rect x="52" y="40" width="14" height="9" fill="#e3d3ee"/><rect x="10" y="49" width="14" height="9" fill="#e3d3ee"/><rect x="24" y="49" width="14" height="9" fill="#fffaf2"/><rect x="38" y="49" width="14" height="9" fill="#e3d3ee"/><rect x="52" y="49" width="14" height="9" fill="#fffaf2"/><rect x="10" y="40" width="56" height="18" fill="none" stroke="#c9a469" stroke-width="1.4" rx="1.5"/></g><path d="M6 20C7 17 8 15.5 9.5 13.8 8 14 6.5 13.6 5.2 12.8 4.3 12.2 4 11.2 4.6 10.3L7.4 6.6C8.2 5.5 9.4 4.8 10.6 4.5L11.6 2.2 13 4.4C16.6 5.4 18.6 8.6 18.6 12.6V20ZM4 20.2H20.6V23.4H4Z" transform="translate(13 3) scale(1.62)" fill="url(#scig)" stroke="#8a6230" stroke-width=".7" stroke-linejoin="round"/><circle cx="31.5" cy="15.6" r="1.25" fill="#fffaf0"/><path d="M0-10A3.2 3.2 0 1 1 0-3.6 3.2 3.2 0 1 1 0-10ZM-3.6-2.6H3.6L2.6-1C3.9 1.2 5 3.3 5.6 6H-5.6C-5 3.3-3.9 1.2-2.6-1ZM-6 6.4H6V9H-6Z" transform="translate(54 34) scale(1.25)" fill="url(#sciw)" stroke="#b48a48" stroke-width=".9" stroke-linejoin="round"/></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameSc"></span><span class="gp-tag" data-i18n="gpScTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="gb" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="gbib" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#efe3f5"/></linearGradient><radialGradient id="gbid" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f8f1e6"/><stop offset="1" stop-color="#e4d2b0"/></radialGradient></defs><rect x="6.5" y="3.5" width="45" height="45" rx="3" fill="url(#gbib)" stroke="#c9a469" stroke-width="1.2"/><rect x="8" y="5" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="15" y="5" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="22" y="5" width="7" height="7" fill="#f3d28c" stroke="#c9a469" stroke-width=".5"/><rect x="29" y="5" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><rect x="36" y="5" width="7" height="7" fill="#a8c5ea" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="5" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="12" width="7" height="7" fill="#9fd6b8" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="19" width="7" height="7" fill="#f2b58e" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="26" width="7" height="7" fill="#f2b3c3" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="33" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="40" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="36" y="40" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><rect x="29" y="40" width="7" height="7" fill="#a8c5ea" stroke="#c9a469" stroke-width=".5"/><rect x="22" y="40" width="7" height="7" fill="#c8b2e8" stroke="#c9a469" stroke-width=".5"/><rect x="15" y="40" width="7" height="7" fill="#9fd6b8" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="40" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="33" width="7" height="7" fill="#f2b3c3" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="26" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="19" width="7" height="7" fill="#f3d28c" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="12" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><path d="M29 19.5l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#e2c07c" stroke="#b48a48" stroke-width=".6"/><g transform="rotate(-12 51 38)"><rect x="43" y="30" width="16" height="16" rx="3.6" fill="url(#gbid)" stroke="#b48a48" stroke-width=".9"/><circle cx="47.5" cy="34.5" r="1.55" fill="#4a3557"/><circle cx="51" cy="38" r="1.55" fill="#4a3557"/><circle cx="54.5" cy="41.5" r="1.55" fill="#4a3557"/></g><g transform="rotate(9 64 46)"><rect x="56" y="38" width="16" height="16" rx="3.6" fill="url(#gbid)" stroke="#b48a48" stroke-width=".9"/><circle cx="60.5" cy="42.5" r="1.55" fill="#4a3557"/><circle cx="67.5" cy="42.5" r="1.55" fill="#4a3557"/><circle cx="60.5" cy="49.5" r="1.55" fill="#4a3557"/><circle cx="67.5" cy="49.5" r="1.55" fill="#4a3557"/></g></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameGb"></span><span class="gp-tag" data-i18n="gpGbTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -2837,6 +2979,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           </div>
           <button type="button" class="btn primary play-btn" id="btn-sc-play" data-i18n="play"></button>
           <p class="record-line" id="sc-record"></p>
+        </div>
+        <div class="setup-part" id="setup-gb" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="gbmb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#efe3f5"/></linearGradient><radialGradient id="gbmd" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f8f1e6"/><stop offset="1" stop-color="#e4d2b0"/></radialGradient></defs><rect x="6.5" y="3.5" width="45" height="45" rx="3" fill="url(#gbmb)" stroke="#c9a469" stroke-width="1.2"/><rect x="8" y="5" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="15" y="5" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="22" y="5" width="7" height="7" fill="#f3d28c" stroke="#c9a469" stroke-width=".5"/><rect x="29" y="5" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><rect x="36" y="5" width="7" height="7" fill="#a8c5ea" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="5" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="12" width="7" height="7" fill="#9fd6b8" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="19" width="7" height="7" fill="#f2b58e" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="26" width="7" height="7" fill="#f2b3c3" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="33" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="40" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="36" y="40" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><rect x="29" y="40" width="7" height="7" fill="#a8c5ea" stroke="#c9a469" stroke-width=".5"/><rect x="22" y="40" width="7" height="7" fill="#c8b2e8" stroke="#c9a469" stroke-width=".5"/><rect x="15" y="40" width="7" height="7" fill="#9fd6b8" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="40" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="33" width="7" height="7" fill="#f2b3c3" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="26" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="19" width="7" height="7" fill="#f3d28c" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="12" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><path d="M29 19.5l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#e2c07c" stroke="#b48a48" stroke-width=".6"/><g transform="rotate(-12 51 38)"><rect x="43" y="30" width="16" height="16" rx="3.6" fill="url(#gbmd)" stroke="#b48a48" stroke-width=".9"/><circle cx="47.5" cy="34.5" r="1.55" fill="#4a3557"/><circle cx="51" cy="38" r="1.55" fill="#4a3557"/><circle cx="54.5" cy="41.5" r="1.55" fill="#4a3557"/></g><g transform="rotate(9 64 46)"><rect x="56" y="38" width="16" height="16" rx="3.6" fill="url(#gbmd)" stroke="#b48a48" stroke-width=".9"/><circle cx="60.5" cy="42.5" r="1.55" fill="#4a3557"/><circle cx="67.5" cy="42.5" r="1.55" fill="#4a3557"/><circle cx="60.5" cy="49.5" r="1.55" fill="#4a3557"/><circle cx="67.5" cy="49.5" r="1.55" fill="#4a3557"/></g></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameGb"></span><span class="hunt-sub" data-i18n="gbIntro"></span></span>
+          </div>
+          <div class="seg tb-seg gb-seg" role="group" data-i18n-attr="aria-label:gbOppLabel">
+            <button type="button" data-gbn="1" aria-pressed="false" data-i18n="gbN1"></button>
+            <button type="button" data-gbn="2" aria-pressed="false" data-i18n="gbN2"></button>
+            <button type="button" data-gbn="3" aria-pressed="true" data-i18n="gbN3"></button>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-gb-play" data-i18n="play"></button>
+          <p class="record-line" id="gb-record"></p>
         </div>
         <!--more-setups-->
 
@@ -3125,6 +3280,25 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       <div class="sc-bar sc-you" id="sc-you"><span class="sc-av">H</span><span class="sc-who"><span class="nm" data-i18n="ucYou"></span></span><span class="sc-cap" id="sc-you-cap"></span></div>
     </div>
     <div class="rw-prize" id="sc-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="sc-prize-t"></p></div>
+  </section>
+
+  <section id="gb" class="screen gbs" hidden data-i18n-attr="aria-label:gameGb">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="gb-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameGb"></h2><span class="uc-sub" id="gb-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-gb" aria-pressed="true"></button>
+    </header>
+    <div class="gb-wrap"><div class="gb-board" id="gb-board"></div></div>
+    <div class="gb-side">
+      <div class="gb-players" id="gb-players"></div>
+      <div class="gb-acts">
+        <button type="button" class="btn" id="gb-stars" aria-pressed="false" disabled><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg><span data-i18n="gbStarsBtn"></span></button>
+        <button type="button" class="btn primary" id="gb-roll" disabled><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="12" cy="12" r="1.2"/></svg><span data-i18n="gbRoll"></span></button>
+        <button type="button" class="btn" id="gb-end" disabled><span data-i18n="gbEnd"></span></button>
+      </div>
+      <ul class="gb-log" id="gb-log" aria-hidden="true"></ul>
+    </div>
+    <div class="rw-prize" id="gb-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="gb-prize-t"></p></div>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -3560,6 +3734,35 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Gran Bazar ----
+      gameGb: 'Gran Bazar', gpGbTag: 'Compra, affitta, vinci', ledeGb: 'Il gioco da tavolo dei luoghi di Hande: da Istanbul a Napoli, compra, metti le stelle e fai pagare l\'affitto.',
+      gbIntro: 'Tira i dadi, compra i luoghi del mondo di Hande e fai pagare l\'affitto. Con un gruppo di colore completo l\'affitto raddoppia e puoi aggiungere le stelle. Si gioca venti giri o fino alla prima bancarotta: vince chi è più ricco. Ogni gruppo completo è una foto di Hande.',
+      gbOppLabel: 'Avversari', gbN1: '1 avversario', gbN2: '2 avversari', gbN3: '3 avversari', gbRecord: 'Partite: {p} · vinte: {w}', gbSub: 'Giro {r} di {n}',
+      gbRoll: 'Tira i dadi', gbEnd: 'Fine turno', gbStarsBtn: 'Stelle', gbBuy: 'Compra · {n}', gbNo: 'No, grazie', gbOk: 'Ok', gbClose: 'Chiudi',
+      gbSurprise: 'Sorpresa!', gbSurpriseOf: 'Sorpresa per {name}', gbJailAsk: 'Per uscire paga {n} oppure prova a fare un doppio con i dadi.', gbUsePass: 'Usa il pass', gbPayFine: 'Paga {n}', gbTryDouble: 'Prova il doppio',
+      gbStarsT: 'Le tue stelle', gbStarsNone: 'Completa un gruppo di colore per mettere le stelle: con le stelle l\'affitto sale.',
+      gbRent: 'Affitto', gbRentGroup: 'Con tutto il gruppo', gbStarCost: 'Ogni stella costa', gbFree: 'Libero: costa {n}', gbOwner: 'Di {name}',
+      gbPlaces: ['', 'Galata', 'Bosforo', '', 'Bodrum', 'Kaş', '', 'Trucco', 'Set', '', 'Red carpet', 'Sfilata', '', 'Notting Hill', 'Big Ben', '', 'Mont\u00ADmartre', 'Tour Eiffel', '', 'Brera', 'Monte\u00ADnapoleone', '', 'Spacca\u00ADnapoli', 'Lungo\u00ADmare'],
+      gbGroups: ['Istanbul', 'Mare d\'estate', 'Il set', 'Red carpet', 'Londra', 'Parigi', 'Milano', 'Napoli'],
+      gbSpots: { go: 'Partenza', card: 'Sorpresa', tax: 'Shopping', bonus: 'Like dei fan', jail: 'Backstage', free: 'Pausa caffè', cops: 'Paparazzi!' },
+      gbCards: ['Hande mette like al tuo post: ricevi 100.', 'Servizio fotografico a Parigi: vai alla Tour Eiffel.', 'Intervista in TV: ricevi 150.', 'Torna alla Partenza e ricevi 200.',
+        'Biglietti per la prima del film: paga 50.', 'Il fan club ti festeggia: ogni giocatore ti dà 20.', 'Offri il caffè a tutti: paga 20 a ogni giocatore.', 'Paparazzi in agguato: vai nel Backstage.',
+        'Pass per il Backstage: tienilo, ti fa uscire gratis.', 'Corri avanti di 3 caselle.', 'Lucidi le tue stelle: paga 25 per ogni stella.', 'Volo per Napoli: vai al Lungomare.', 'Selfie con Hande! Ricevi 50.'],
+      gbHello: 'Tocca a te: tira i dadi.', gbLastRound: 'Ultimo giro!',
+      gbPassYou: 'Usi il pass ed esci dal Backstage.', gbPassOf: '{name} usa il pass ed esce dal Backstage.', gbFineYou: 'Paghi {n} ed esci dal Backstage.', gbFineOf: '{name} paga {n} ed esce dal Backstage.',
+      gbOutYou: 'Doppio! Esci dal Backstage.', gbOutOf: 'Doppio! {name} esce dal Backstage.', gbStayYou: 'Niente doppio: resti nel Backstage.', gbStayOf: '{name} resta nel Backstage.',
+      gbAgainYou: 'Doppio! Tira ancora.', gbAgainOf: 'Doppio! {name} tira ancora.', gbGoYou: 'Passi dalla Partenza: +{n}.', gbGoOf: '{name} passa dalla Partenza: +{n}.',
+      gbThree: 'Tre doppi di fila!', gbCops: 'Arrivano i paparazzi!', gbCardCops: 'Paparazzi in agguato!', gbJailYou: 'Ti nascondi nel Backstage.', gbJailOf: '{name} si nasconde nel Backstage.',
+      gbPoorYou: 'Non hai abbastanza per {place}.', gbPoorOf: '{name} non ha abbastanza per {place}.', gbSkipYou: 'Lasci {place} alla banca.', gbSkipOf: '{name} non compra {place}.',
+      gbRentYou: 'Paghi {n} a {name} per {place}.', gbRentToYou: '{name} ti paga {n} per {place}.', gbRentOf: '{name} paga {n} a {to}.',
+      gbHomeYou: 'Sei a casa: {place} è tuo.', gbHomeOf: '{name} è a casa sua.', gbTaxYou: 'Shopping sfrenato: paghi {n}.', gbTaxOf: 'Shopping sfrenato: {name} paga {n}.',
+      gbBonusYou: 'I fan ti adorano: +{n}.', gbBonusOf: 'I fan adorano {name}: +{n}.', gbVisitYou: 'Solo in visita al Backstage.', gbVisitOf: '{name} è in visita al Backstage.',
+      gbCoffeeYou: 'Pausa caffè: ti riposi.', gbCoffeeOf: 'Pausa caffè per {name}.', gbBuyYou: 'Compri {place} per {n}.', gbBuyOf: '{name} compra {place} per {n}.',
+      gbGroupPrize: 'Gruppo completo: ecco una foto di Hande!', gbBrokeYou: 'Sei in bancarotta!', gbBrokeOf: '{name} è in bancarotta!',
+      gbSellStarYou: 'Vendi una stella di {place}: +{n}.', gbSellStarOf: '{name} vende una stella di {place}.', gbSellYou: 'Vendi {place} alla banca: +{n}.', gbSellOf: '{name} vende {place} alla banca.',
+      gbStarOf: '{name} mette una stella su {place}.', gbStarYou: 'Una stella su {place}: −{n}.',
+      gbWinT: 'Hai vinto il Gran Bazar!', gbWinOf: 'Vince {name}', gbBroke: 'bancarotta', gbRowRounds: 'Giri giocati', gbKicker: 'Gran Bazar', gbEndBroke: 'bancarotta', gbEndRounds: 'fine dei giri',
+      aGbStart: 'Gran Bazar: tira i dadi con il pulsante in basso.',
       // ---- Scacchi ----
       gameSc: 'Scacchi', gpScTag: 'Scacco matto alla Civetta', ledeSc: 'Gli scacchi contro il Gatto, la Volpe o la Civetta: prendi la Donna o dai scacco matto per vincere le foto di Hande.',
       scIntro: 'Tocca un tuo pezzo e poi la casa dove spostarlo. Facile contro il Gatto, Medio contro la Volpe, Difficile contro la Civetta. Prendere la Donna avversaria vale una foto di Hande, vincere un\'altra.',
@@ -3834,6 +4037,35 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- Gran Bazar ----
+      gameGb: 'Gran Bazar', gpGbTag: 'Al, kirala, kazan', ledeGb: 'Hande\'nin yerlerinin masa oyunu: İstanbul\'dan Napoli\'ye, satın al, yıldız koy ve kira topla.',
+      gbIntro: 'Zarları at, Hande\'nin dünyasındaki yerleri satın al ve kira topla. Bir renk grubunu tamamlayınca kira ikiye katlanır ve yıldız ekleyebilirsin. Oyun yirmi tur ya da ilk iflasa kadar sürer: en zengin kazanır. Tamamlanan her grup bir Hande fotoğrafı.',
+      gbOppLabel: 'Rakipler', gbN1: '1 rakip', gbN2: '2 rakip', gbN3: '3 rakip', gbRecord: 'Oyun: {p} · kazanılan: {w}', gbSub: 'Tur {r}/{n}',
+      gbRoll: 'Zarları at', gbEnd: 'Turu bitir', gbStarsBtn: 'Yıldızlar', gbBuy: 'Satın al · {n}', gbNo: 'Hayır', gbOk: 'Tamam', gbClose: 'Kapat',
+      gbSurprise: 'Sürpriz!', gbSurpriseOf: '{name} için sürpriz', gbJailAsk: 'Çıkmak için {n} öde ya da zarla çift atmayı dene.', gbUsePass: 'Kartı kullan', gbPayFine: '{n} öde', gbTryDouble: 'Çift dene',
+      gbStarsT: 'Yıldızların', gbStarsNone: 'Yıldız koymak için bir renk grubunu tamamla: yıldızlar kirayı artırır.',
+      gbRent: 'Kira', gbRentGroup: 'Tüm grupla', gbStarCost: 'Yıldız başına', gbFree: 'Boş: {n}', gbOwner: 'Sahibi: {name}',
+      gbPlaces: ['', 'Galata', 'Boğaz', '', 'Bodrum', 'Kaş', '', 'Makyaj', 'Set', '', 'Kırmızı halı', 'Defile', '', 'Notting Hill', 'Big Ben', '', 'Mont\u00ADmartre', 'Eyfel Kulesi', '', 'Brera', 'Monte\u00ADnapoleone', '', 'Spacca\u00ADnapoli', 'Napoli sahili'],
+      gbGroups: ['İstanbul', 'Yaz denizi', 'Set', 'Kırmızı halı', 'Londra', 'Paris', 'Milano', 'Napoli'],
+      gbSpots: { go: 'Başlangıç', card: 'Sürpriz', tax: 'Alışveriş', bonus: 'Hayran beğenisi', jail: 'Kulis', free: 'Kahve molası', cops: 'Paparaziler!' },
+      gbCards: ['Hande gönderini beğendi: 100 al.', 'Paris\'te fotoğraf çekimi: Eyfel Kulesi\'ne git.', 'Televizyon röportajı: 150 al.', 'Başlangıca dön ve 200 al.',
+        'Film galası biletleri: 50 öde.', 'Hayran kulübü seni kutluyor: her oyuncu sana 20 verir.', 'Herkese kahve ısmarla: her oyuncuya 20 öde.', 'Paparaziler pusuda: kulise git.',
+        'Kulis kartı: sakla, seni ücretsiz çıkarır.', '3 kare ileri git.', 'Yıldızlarını parlat: her yıldız için 25 öde.', 'Napoli uçuşu: Napoli sahiline git.', 'Hande ile selfie! 50 al.'],
+      gbHello: 'Sıra sende: zarları at.', gbLastRound: 'Son tur!',
+      gbPassYou: 'Kartı kullandın ve kulisten çıktın.', gbPassOf: '{name} kartı kullandı ve kulisten çıktı.', gbFineYou: '{n} ödedin ve kulisten çıktın.', gbFineOf: '{name} {n} ödedi ve kulisten çıktı.',
+      gbOutYou: 'Çift! Kulisten çıktın.', gbOutOf: 'Çift! {name} kulisten çıktı.', gbStayYou: 'Çift gelmedi: kuliste kaldın.', gbStayOf: '{name} kuliste kaldı.',
+      gbAgainYou: 'Çift! Bir daha at.', gbAgainOf: 'Çift! {name} bir daha atıyor.', gbGoYou: 'Başlangıçtan geçtin: +{n}.', gbGoOf: '{name} başlangıçtan geçti: +{n}.',
+      gbThree: 'Üst üste üç çift!', gbCops: 'Paparaziler geldi!', gbCardCops: 'Paparaziler pusuda!', gbJailYou: 'Kulise saklandın.', gbJailOf: '{name} kulise saklandı.',
+      gbPoorYou: '{place} için paran yetmiyor.', gbPoorOf: '{name}: {place} için para yetmiyor.', gbSkipYou: '{place} bankada kaldı.', gbSkipOf: '{name} {place} almadı.',
+      gbRentYou: '{place} kirası: {name} oyuncusuna {n} ödedin.', gbRentToYou: '{name} {place} kirası olarak sana {n} ödedi.', gbRentOf: '{name}, {to} oyuncusuna {n} ödedi.',
+      gbHomeYou: 'Evindesin: {place} senin.', gbHomeOf: '{name} kendi yerinde.', gbTaxYou: 'Çılgın alışveriş: {n} ödedin.', gbTaxOf: 'Çılgın alışveriş: {name} {n} ödedi.',
+      gbBonusYou: 'Hayranlar seni seviyor: +{n}.', gbBonusOf: 'Hayranlar {name} oyuncusunu seviyor: +{n}.', gbVisitYou: 'Kulise sadece ziyaretesin.', gbVisitOf: '{name} kulise ziyarette.',
+      gbCoffeeYou: 'Kahve molası: dinleniyorsun.', gbCoffeeOf: '{name} kahve molasında.', gbBuyYou: '{place} senin oldu: {n}.', gbBuyOf: '{name} {place} aldı: {n}.',
+      gbGroupPrize: 'Grup tamam: işte bir Hande fotoğrafı!', gbBrokeYou: 'İflas ettin!', gbBrokeOf: '{name} iflas etti!',
+      gbSellStarYou: '{place} yıldızını sattın: +{n}.', gbSellStarOf: '{name} {place} yıldızını sattı.', gbSellYou: '{place} bankaya satıldı: +{n}.', gbSellOf: '{name} {place} bankaya sattı.',
+      gbStarOf: '{name} {place} üzerine yıldız koydu.', gbStarYou: '{place} üzerine yıldız: −{n}.',
+      gbWinT: 'Gran Bazar\'ı kazandın!', gbWinOf: '{name} kazandı', gbBroke: 'iflas', gbRowRounds: 'Oynanan turlar', gbKicker: 'Gran Bazar', gbEndBroke: 'iflas', gbEndRounds: 'turlar bitti',
+      aGbStart: 'Gran Bazar: alttaki düğmeyle zarları at.',
       // ---- Satranç ----
       gameSc: 'Satranç', gpScTag: 'Baykuş\'a şah mat', ledeSc: 'Kedi, Tilki ya da Baykuş\'a karşı satranç: veziri al ya da şah mat yap, Hande fotoğraflarını kazan.',
       scIntro: 'Önce kendi taşına, sonra gideceği kareye dokun. Kolayda Kedi, ortada Tilki, zorda Baykuş oynar. Rakibin vezirini almak bir Hande fotoğrafı, kazanmak bir tane daha kazandırır.',
@@ -4356,13 +4588,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    gbRelang();
     scRelang();
     pkRelang();
     ppRelang();
@@ -4492,7 +4725,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -4682,7 +4915,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -4784,7 +5017,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -5285,7 +5518,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -5785,7 +6018,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -5885,15 +6118,16 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-gb').hidden = gs !== 'gb';
     $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -5910,7 +6144,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -6188,7 +6422,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -6732,7 +6966,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -6955,7 +7189,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -7103,7 +7337,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -7376,7 +7610,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -8222,7 +8456,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -8684,7 +8918,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -9840,7 +10074,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -9910,7 +10144,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -9975,7 +10209,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -10429,7 +10663,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -10637,7 +10871,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -11023,7 +11257,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -11837,7 +12071,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); ppStop(); pkStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); ppStop(); pkStop();
     const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
     const c = cfg && cfg.col ? cfg.col : 'w';
     SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
@@ -12090,6 +12324,460 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('#sc-promo [data-pr]').forEach((b) => b.addEventListener('click', () => scPromoPick(+b.dataset.pr)));
   }
 
+  /* ---------- Gran Bazar: buy the places of Hande's world ----------
+     24 squares around a 7x7 board, two dice, 1.500 to start and 200 every time you pass the start. Two places make a
+     colour group: with the whole group the rent doubles and you can add up to three stars to each place. The paparazzi
+     send you to the backstage. The game ends at the first bankruptcy or after twenty rounds: the richest wins.
+     Every colour group you complete is a photo of Hande, winning one more. */
+  const gbEl = $('#gb');
+  const GB_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  const GB_CASH = 1500, GB_GO = 200, GB_ROUNDS = 20, GB_JAIL = 6, GB_FINE = 50;
+  const GB_STAR = [50, 50, 100, 100, 150, 150, 200, 200], GB_MULT = [1, 5, 12, 25];
+  const GB_COL = ['#f2b3c3', '#9fd5e3', '#f3d28c', '#e7a9bd', '#a8c5ea', '#c8b2e8', '#9fd6b8', '#f2b58e'];
+  // k: p place, go start, card surprise, tax, bonus, jail backstage, free coffee, cops paparazzi
+  const GB_SP = [
+    { k: 'go' }, { k: 'p', g: 0, price: 60, rent: 4 }, { k: 'p', g: 0, price: 70, rent: 6 }, { k: 'card' }, { k: 'p', g: 1, price: 100, rent: 8 }, { k: 'p', g: 1, price: 120, rent: 10 },
+    { k: 'jail' }, { k: 'p', g: 2, price: 140, rent: 12 }, { k: 'p', g: 2, price: 160, rent: 14 }, { k: 'tax', amt: 100 }, { k: 'p', g: 3, price: 180, rent: 16 }, { k: 'p', g: 3, price: 200, rent: 18 },
+    { k: 'free' }, { k: 'p', g: 4, price: 220, rent: 20 }, { k: 'p', g: 4, price: 240, rent: 22 }, { k: 'card' }, { k: 'p', g: 5, price: 260, rent: 24 }, { k: 'p', g: 5, price: 280, rent: 26 },
+    { k: 'cops' }, { k: 'p', g: 6, price: 300, rent: 28 }, { k: 'p', g: 6, price: 320, rent: 30 }, { k: 'bonus', amt: 100 }, { k: 'p', g: 7, price: 350, rent: 35 }, { k: 'p', g: 7, price: 400, rent: 50 }];
+  // the surprise cards: what they do
+  const GB_CARDS = [{ a: 'cash', v: 100 }, { a: 'goto', v: 17 }, { a: 'cash', v: 150 }, { a: 'goto', v: 0 }, { a: 'cash', v: -50 }, { a: 'each', v: 20 }, { a: 'each', v: -20 },
+    { a: 'jail' }, { a: 'pass' }, { a: 'fwd', v: 3 }, { a: 'stars', v: 25 }, { a: 'goto', v: 23 }, { a: 'cash', v: 50 }];
+  // the opponents: how much cash they keep aside, and how careful they are with stars
+  const GB_BOTS = [{ key: 'volpe', av: 'fox', keep: 60, build: 1.2 }, { key: 'gatto', av: 'cat', keep: 220, build: 2 }, { key: 'civetta', av: 'owl', keep: 130, build: 1.5 }];
+  let GB = null, gbSpeed = 1; // gbSpeed: only the tests change it
+
+  const gbGroup = (gr) => GB_SP.map((s, k) => (s.k === 'p' && s.g === gr ? k : -1)).filter((k) => k >= 0);
+  const gbFull = (g, o, gr) => o >= 0 && gbGroup(gr).every((k) => g.own[k] === o);
+  const gbName = (p) => (p.key === 'me' ? t('ucYou') : t('ucBots')[p.key]);
+  const gbPlace = (k) => t('gbPlaces')[k].replace(/­/g, '');
+  function gbRent(g, k) {
+    const sp = GB_SP[k], s = g.stars[k];
+    return s ? sp.rent * GB_MULT[s] : gbFull(g, g.own[k], sp.g) ? sp.rent * 2 : sp.rent;
+  }
+  function gbWorth(g, i) {
+    const p = g.players[i];
+    if (p.out) return 0;
+    return p.cash + g.own.reduce((a, o, k) => a + (o === i ? GB_SP[k].price + g.stars[k] * GB_STAR[GB_SP[k].g] : 0), 0);
+  }
+  function gbStats() { const st = store.get('hm-gb', null); return Object.assign({ played: 0, wins: 0, found: [] }, st && typeof st === 'object' ? st : {}); }
+  function gbPickPhotos(n) {
+    const seen = new Set(gbStats().found);
+    return shuffle(GB_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, n).map((p) => p.id);
+  }
+
+  function gbStart(cfg) {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); ppStop(); pkStop(); scStop();
+    const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
+    const players = [{ key: 'me', av: 'me', keep: 0, build: 1 }].concat(GB_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
+      .map((p) => Object.assign(p, { cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
+    GB = { n, players, own: new Array(24).fill(-1), stars: new Array(24).fill(0), turn: 0, round: 1, dice: [5, 2], rolling: false, deck: shuffle(GB_CARDS.map((_, k) => k)),
+      ask: null, show: null, build: false, msg: '', log: [], found: [], done: new Set(), photos: gbPickPhotos(9), timers: [], over: false };
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gbEl.hidden = false;
+    $('#gb-prize').hidden = true;
+    gbBuildBoard();
+    gbSay(GB, t('gbHello'));
+    gbRender();
+    preload(GB.photos.slice(0, 2).map((id) => cardSrc(PHOTO_BY_ID.get(id))), 4000);
+    announce(t('aGbStart'));
+    const g = GB;
+    gbLater(g, 400, () => gbLoop(g));
+  }
+  function gbStop() {
+    const g = GB; GB = null;
+    if (g) { g.timers.forEach(clearTimeout); g.over = true; }
+    gbEl.hidden = true;
+  }
+  function gbLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (GB === g) fn(); }, ms / gbSpeed); g.timers.push(id); }
+  const gbWait = (g, ms) => new Promise((res) => gbLater(g, ms, res));
+  function gbRequestExit() {
+    if (GB && !GB.over && (GB.round > 1 || GB.turn > 0 || GB.own.some((o) => o >= 0))) openConfirm(false);
+    else goHome();
+  }
+  function gbSay(g, txt) { g.msg = txt; g.log.push(txt); if (g.log.length > 40) g.log.shift(); announce(txt); }
+  // the buttons and the boxes in the middle of the board wait for your answer
+  function gbAsk(g, kind, opt) { return new Promise((resolve) => { g.ask = { kind, opt: opt || {}, resolve }; if (kind === 'roll' || kind === 'jail') Sound.turn(); gbRender(); }); }
+  function gbAnswer(v) {
+    const g = GB; if (!g || !g.ask) return false;
+    const a = g.ask; g.ask = null; g.build = false;
+    AudioCore.get();
+    a.resolve(v); gbRender();
+    return true;
+  }
+
+  /* the turns, one after the other */
+  async function gbLoop(g) {
+    while (GB === g && !g.over) {
+      await gbTurn(g, g.turn);
+      if (GB !== g || g.over) return;
+      let nx = g.turn;
+      do { nx = (nx + 1) % g.players.length; } while (g.players[nx].out);
+      if (nx <= g.turn) {
+        g.round++;
+        if (g.round > GB_ROUNDS) { gbOver(g, 'rounds'); return; }
+        if (g.round === GB_ROUNDS) gbSay(g, t('gbLastRound'));
+      }
+      g.turn = nx; gbRender();
+    }
+  }
+  async function gbTurn(g, i) {
+    const p = g.players[i], me = i === 0;
+    let doubles = 0;
+    for (;;) {
+      if (GB !== g || p.out || g.over) return;
+      let jailRoll = false;
+      if (p.jail) {
+        const how = me ? await gbAsk(g, 'jail') : p.pass ? 'card' : p.cash > 400 && g.round < 12 ? 'pay' : 'roll';
+        if (GB !== g) return;
+        if (how === 'card' && p.pass) { p.pass--; g.deck.push(8); p.jail = 0; gbSay(g, t(me ? 'gbPassYou' : 'gbPassOf', { name: gbName(p) })); Sound.paper(); }
+        else if (how === 'pay') { if (!(await gbPay(g, i, GB_FINE, -1))) return; p.jail = 0; gbSay(g, t(me ? 'gbFineYou' : 'gbFineOf', { name: gbName(p), n: fmtNum(GB_FINE) })); }
+        else jailRoll = true;
+        gbRender();
+        if (!jailRoll && me) { await gbAsk(g, 'roll'); if (GB !== g) return; }
+        else if (!jailRoll) await gbWait(g, 500);
+      } else if (me) { await gbAsk(g, 'roll'); if (GB !== g) return; }
+      else await gbWait(g, 700);
+      const [a, b] = await gbRoll(g);
+      if (GB !== g) return;
+      const dbl = a === b;
+      if (jailRoll) {
+        if (dbl) { p.jail = 0; gbSay(g, t(me ? 'gbOutYou' : 'gbOutOf', { name: gbName(p) })); }
+        else if (++p.jail > 3) { if (!(await gbPay(g, i, GB_FINE, -1))) return; p.jail = 0; gbSay(g, t(me ? 'gbFineYou' : 'gbFineOf', { name: gbName(p), n: fmtNum(GB_FINE) })); }
+        else { gbSay(g, t(me ? 'gbStayYou' : 'gbStayOf', { name: gbName(p) })); gbRender(); await gbWait(g, 900); break; }
+        gbRender(); await gbWait(g, 500);
+        await gbMove(g, i, a + b);
+        await gbLand(g, i);
+        break;
+      }
+      if (dbl && ++doubles === 3) { await gbToJail(g, i, 'gbThree'); break; }
+      await gbMove(g, i, a + b);
+      if (GB !== g) return;
+      await gbLand(g, i);
+      if (GB !== g || p.out || g.over || p.jail || !dbl) break;
+      gbSay(g, t(me ? 'gbAgainYou' : 'gbAgainOf', { name: gbName(p) })); gbRender();
+    }
+    if (GB !== g || p.out || g.over) return;
+    if (me) await gbAsk(g, 'end');
+    else { gbBotBuild(g, i); gbRender(); await gbWait(g, 600); }
+  }
+  // two dice that tumble for a moment
+  async function gbRoll(g) {
+    const a = 1 + Math.floor(Math.random() * 6), b = 1 + Math.floor(Math.random() * 6);
+    g.rolling = true; Sound.bwRoll(.5);
+    for (let k = 0; k < 6; k++) { g.dice = [1 + Math.floor(Math.random() * 6), 1 + Math.floor(Math.random() * 6)]; gbRenderDice(); await gbWait(g, 70); if (GB !== g) return [a, b]; }
+    g.dice = [a, b]; g.rolling = false; gbRenderDice(); Sound.bwClack();
+    await gbWait(g, 350);
+    return [a, b];
+  }
+  // a token hops square by square; passing the start pays 200
+  async function gbMove(g, i, steps) {
+    const p = g.players[i];
+    for (let s = 0; s < steps; s++) {
+      p.pos = (p.pos + 1) % 24;
+      if (p.pos === 0) { p.cash += GB_GO; gbSay(g, t(i ? 'gbGoOf' : 'gbGoYou', { name: gbName(p), n: fmtNum(GB_GO) })); Sound.rwBank(); }
+      Sound.tick(); gbRenderTokens(); gbRenderPlayers();
+      await gbWait(g, 140);
+      if (GB !== g) return;
+    }
+  }
+  async function gbMoveTo(g, i, to) { const p = g.players[i]; await gbMove(g, i, (to - p.pos + 24) % 24); }
+  async function gbToJail(g, i, why) {
+    const p = g.players[i];
+    p.pos = GB_JAIL; p.jail = 1;
+    gbSay(g, t(why, { name: gbName(p) }) + ' ' + t(i ? 'gbJailOf' : 'gbJailYou', { name: gbName(p) }));
+    Sound.shutter(); buzz([20, 40, 20]); gbRender();
+    await gbWait(g, 1100);
+  }
+  // what happens on the square where the token stops
+  async function gbLand(g, i) {
+    const p = g.players[i], k = p.pos, sp = GB_SP[k], me = i === 0, name = gbName(p);
+    if (sp.k === 'p') {
+      const o = g.own[k];
+      if (o < 0) {
+        if (p.cash < sp.price) { gbSay(g, t(me ? 'gbPoorYou' : 'gbPoorOf', { name, place: gbPlace(k) })); gbRender(); await gbWait(g, 800); return; }
+        const yes = me ? await gbAsk(g, 'buy', { k }) : gbBotBuy(g, i, k);
+        if (GB !== g) return;
+        if (yes) await gbBuy(g, i, k);
+        else { gbSay(g, t(me ? 'gbSkipYou' : 'gbSkipOf', { name, place: gbPlace(k) })); gbRender(); if (!me) await gbWait(g, 700); }
+      } else if (o !== i) {
+        const rent = gbRent(g, k), owner = g.players[o];
+        gbSay(g, me ? t('gbRentYou', { name: gbName(owner), n: fmtNum(rent), place: gbPlace(k) }) : o === 0 ? t('gbRentToYou', { name, n: fmtNum(rent), place: gbPlace(k) }) : t('gbRentOf', { name, to: gbName(owner), n: fmtNum(rent) }));
+        await gbPay(g, i, rent, o);
+        if (o === 0) Sound.rwBank(); else if (me) Sound.miss();
+        gbRender(); await gbWait(g, 900);
+      } else { gbSay(g, t(me ? 'gbHomeYou' : 'gbHomeOf', { name, place: gbPlace(k) })); gbRender(); await gbWait(g, 500); }
+    } else if (sp.k === 'card') await gbCard(g, i);
+    else if (sp.k === 'tax') { gbSay(g, t(me ? 'gbTaxYou' : 'gbTaxOf', { name, n: fmtNum(sp.amt) })); await gbPay(g, i, sp.amt, -1); gbRender(); await gbWait(g, 900); }
+    else if (sp.k === 'bonus') { p.cash += sp.amt; gbSay(g, t(me ? 'gbBonusYou' : 'gbBonusOf', { name, n: fmtNum(sp.amt) })); Sound.rwBank(); gbRender(); await gbWait(g, 900); }
+    else if (sp.k === 'cops') await gbToJail(g, i, 'gbCops');
+    else if (sp.k === 'jail') { gbSay(g, t(me ? 'gbVisitYou' : 'gbVisitOf', { name })); gbRender(); await gbWait(g, 500); }
+    else if (sp.k === 'free') { gbSay(g, t(me ? 'gbCoffeeYou' : 'gbCoffeeOf', { name })); gbRender(); await gbWait(g, 500); }
+  }
+  async function gbBuy(g, i, k) {
+    const p = g.players[i], sp = GB_SP[k];
+    p.cash -= sp.price; g.own[k] = i;
+    gbSay(g, t(i ? 'gbBuyOf' : 'gbBuyYou', { name: gbName(p), place: gbPlace(k), n: fmtNum(sp.price) }));
+    Sound.chest(); gbRender();
+    // the whole colour group: a photo of Hande
+    if (!i && gbFull(g, 0, sp.g) && !g.done.has(sp.g)) {
+      g.done.add(sp.g);
+      const ph = PHOTO_BY_ID.get(g.photos[g.found.length]);
+      if (ph) { g.found.push(ph); await gbPrize(g, ph.id, t('gbGroupPrize')); }
+    } else await gbWait(g, i ? 700 : 300);
+  }
+  // paying: when the cash is not enough, stars and then places go back to the bank for half their price
+  async function gbPay(g, i, amt, to) {
+    const p = g.players[i];
+    if (p.cash < amt) gbRaise(g, i, amt);
+    if (p.cash < amt) {
+      if (to >= 0) g.players[to].cash += p.cash;
+      p.cash = 0; p.out = true;
+      g.own.forEach((o, k) => { if (o === i) { g.own[k] = -1; g.stars[k] = 0; } });
+      gbSay(g, t(i ? 'gbBrokeOf' : 'gbBrokeYou', { name: gbName(p) }));
+      Sound.lose(); gbRender();
+      await gbWait(g, 1500);
+      gbOver(g, 'broke');
+      return false;
+    }
+    p.cash -= amt; if (to >= 0) g.players[to].cash += amt;
+    gbRender();
+    return true;
+  }
+  function gbRaise(g, i, amt) {
+    const p = g.players[i];
+    while (p.cash < amt) {
+      const st = g.own.map((o, k) => (o === i && g.stars[k] ? k : -1)).filter((k) => k >= 0).sort((a, b) => GB_STAR[GB_SP[a].g] - GB_STAR[GB_SP[b].g]);
+      if (st.length) { const k = st[0], v = GB_STAR[GB_SP[k].g] / 2; g.stars[k]--; p.cash += v; gbSay(g, t(i ? 'gbSellStarOf' : 'gbSellStarYou', { name: gbName(p), place: gbPlace(k), n: fmtNum(v) })); continue; }
+      const pl = g.own.map((o, k) => (o === i ? k : -1)).filter((k) => k >= 0).sort((a, b) => GB_SP[a].price - GB_SP[b].price);
+      if (!pl.length) return;
+      const k = pl[0], v = GB_SP[k].price / 2;
+      g.own[k] = -1; p.cash += v;
+      gbSay(g, t(i ? 'gbSellOf' : 'gbSellYou', { name: gbName(p), place: gbPlace(k), n: fmtNum(v) }));
+    }
+  }
+  async function gbCard(g, i) {
+    const p = g.players[i], me = i === 0, id = g.deck.shift(), c = GB_CARDS[id];
+    Sound.paper();
+    if (me) await gbAsk(g, 'card', { id });
+    else { g.show = { kind: 'card', id, name: gbName(p) }; gbRender(); await gbWait(g, 2000); g.show = null; }
+    if (GB !== g) return;
+    if (c.a !== 'pass') g.deck.push(id);
+    gbSay(g, gbName(p) + ': ' + t('gbCards')[id]);
+    if (c.a === 'cash') { if (c.v > 0) { p.cash += c.v; Sound.rwBank(); } else await gbPay(g, i, -c.v, -1); }
+    else if (c.a === 'goto') { await gbMoveTo(g, i, c.v); if (GB === g && c.v) await gbLand(g, i); }
+    else if (c.a === 'each') {
+      for (let j = 0; j < g.players.length && !g.over; j++) {
+        if (j === i || g.players[j].out) continue;
+        if (c.v > 0) await gbPay(g, j, c.v, i); else await gbPay(g, i, -c.v, j);
+      }
+    } else if (c.a === 'jail') await gbToJail(g, i, 'gbCardCops');
+    else if (c.a === 'pass') p.pass++;
+    else if (c.a === 'fwd') { await gbMove(g, i, c.v); if (GB === g) await gbLand(g, i); }
+    else if (c.a === 'stars') { const n = g.own.reduce((a, o, k) => a + (o === i ? g.stars[k] : 0), 0); if (n) await gbPay(g, i, n * c.v, -1); }
+    gbRender();
+  }
+  // the opponents: they buy if enough cash stays aside, always when it completes a group
+  function gbBotBuy(g, i, k) {
+    const p = g.players[i], sp = GB_SP[k], completes = gbGroup(sp.g).every((x) => x === k || g.own[x] === i);
+    return p.cash - sp.price >= (completes ? 20 : p.keep + (g.round > 15 ? 120 : 0));
+  }
+  function gbBotBuild(g, i) {
+    const p = g.players[i];
+    for (let gr = 7; gr >= 0; gr--) {
+      if (!gbFull(g, i, gr)) continue;
+      for (;;) {
+        const ks = gbGroup(gr).filter((k) => g.stars[k] < 3).sort((a, b) => g.stars[a] - g.stars[b]);
+        if (!ks.length || p.cash - GB_STAR[gr] < p.keep * p.build) break;
+        g.stars[ks[0]]++; p.cash -= GB_STAR[gr];
+        gbSay(g, t('gbStarOf', { name: gbName(p), place: gbPlace(ks[0]) })); Sound.star(g.stars[ks[0]]);
+      }
+    }
+  }
+  // your stars: on a whole colour group, during your turn
+  function gbAddStar(k) {
+    const g = GB; if (!g || !g.ask || (g.ask.kind !== 'roll' && g.ask.kind !== 'end') || g.turn !== 0) return false;
+    const sp = GB_SP[k], me = g.players[0], cost = GB_STAR[sp.g];
+    if (g.own[k] !== 0 || !gbFull(g, 0, sp.g) || g.stars[k] >= 3 || me.cash < cost) return false;
+    g.stars[k]++; me.cash -= cost;
+    gbSay(g, t('gbStarYou', { place: gbPlace(k), n: fmtNum(cost) })); Sound.star(g.stars[k]); buzz(8);
+    gbRender();
+    return true;
+  }
+  function gbPrize(g, id, text) {
+    return new Promise((resolve) => {
+      const p = PHOTO_BY_ID.get(id), box = $('#gb-prize');
+      if (!p || GB !== g) { resolve(); return; }
+      $('img', box).src = cardSrc(p);
+      $('#gb-prize-t').textContent = text;
+      box.classList.remove('open'); box.hidden = false;
+      Sound.whoosh();
+      let done = false;
+      const finish = () => { if (done) return; done = true; box.hidden = true; box.onclick = null; resolve(); };
+      gbLater(g, 420, () => {
+        box.classList.add('open'); Sound.sparkle(); buzz([10, 40, 10]);
+        const r = $('.rw-prize-card', box).getBoundingClientRect();
+        FX.burst(r.left + r.width / 2, r.top + r.height / 2, 60, true);
+      });
+      box.onclick = () => { if (box.classList.contains('open')) finish(); };
+      gbLater(g, 3600, finish);
+      setTimeout(() => { if (GB !== g) finish(); }, 3800);
+    });
+  }
+  function gbOver(g, why) {
+    if (g.over) return;
+    g.over = true; g.ask = null; g.show = null;
+    const worth = g.players.map((_, i) => gbWorth(g, i)), best = Math.max(...worth), win = worth[0] === best && !g.players[0].out;
+    const rank = worth.map((w, i) => [w, i]).sort((a, b) => b[0] - a[0]);
+    if (win) { const ph = PHOTO_BY_ID.get(g.photos[g.found.length]); if (ph) g.found.push(ph); }
+    const st = gbStats();
+    st.played++; if (win) st.wins++;
+    st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
+    store.set('hm-gb', st);
+    const top = g.players[rank[0][1]];
+    gbSay(g, win ? t('gbWinT') : t('gbWinOf', { name: gbName(top) }));
+    gbRender();
+    gbLater(g, 900, () => {
+      const rows = rank.map(([w, i]) => [gbName(g.players[i]) + (g.players[i].out ? ' · ' + t('gbBroke') : ''), fmtNum(w)]);
+      rows.push([t('gbRowRounds'), String(Math.min(g.round, GB_ROUNDS))], [t('rwRowPhotos'), String(g.found.length)]);
+      showResult({ kicker: t('gbKicker') + ' · ' + t(why === 'broke' ? 'gbEndBroke' : 'gbEndRounds'), title: win ? t('gbWinT') : t('gbWinOf', { name: gbName(top) }), stars: null, score: null, record: false,
+        photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'gb', rows, strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
+      if (win) celebrate(); else if (g.found.length) Sound.sparkle(); else Sound.lose();
+    });
+  }
+
+  /* drawing the board */
+  function gbXY(k) {
+    if (k <= 6) return [7, 7 - k];
+    if (k <= 12) return [7 - (k - 6), 1];
+    if (k <= 18) return [1, 1 + (k - 12)];
+    return [1 + (k - 18), 7];
+  }
+  const GB_ICON = {
+    go: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5m5-6l-6 6 6 6"/></svg>',
+    card: '<b class="q">?</b>',
+    tax: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+    bonus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+    jail: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 21V4.2c0-.7.5-1.2 1.2-1.2h8.6c.7 0 1.2.5 1.2 1.2V21M4 21h16"/><path d="M12 6.4l1.1 2.2 2.4.3-1.8 1.7.5 2.4-2.2-1.2-2.2 1.2.5-2.4-1.8-1.7 2.4-.3z"/><path d="M14.6 15.4h.1"/></svg>',
+    free: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5V9z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3v3M11 3v3"/></svg>',
+    cops: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  };
+  function gbBuildBoard() {
+    const cells = GB_SP.map((sp, k) => {
+      const [r, c] = gbXY(k), corner = k % 6 === 0;
+      const inner = sp.k === 'p'
+        ? '<b class="band" style="background:' + GB_COL[sp.g] + '"></b><span class="nm" lang="' + document.documentElement.lang + '">' + t('gbPlaces')[k] + '</span><span class="foot"><span class="pr"></span><span class="ow"></span><span class="st"></span></span>'
+        : '<span class="ic">' + GB_ICON[sp.k] + '</span><span class="nm">' + t('gbSpots')[sp.k] + '</span>';
+      return '<button type="button" class="gb-cell ' + sp.k + (corner ? ' corner' : '') + '" data-k="' + k + '" style="grid-area:' + r + ' / ' + c + '">' + inner + '<span class="tk"></span></button>';
+    }).join('');
+    $('#gb-board').innerHTML = cells + '<div class="gb-mid" id="gb-mid"><div class="gb-logo" aria-hidden="true">Gran Bazar</div><div class="gb-dice" id="gb-dice"><i class="die"></i><i class="die"></i></div><p class="gb-msg" id="gb-msg" aria-live="polite"></p><div class="gb-dlg" id="gb-dlg" hidden></div></div>';
+  }
+  const gbAv = (p) => (p.av === 'me' ? '<span class="gb-av me">H</span>' : '<span class="gb-av">' + svgUse('av-' + p.av, '', '0 0 40 40') + '</span>');
+  function gbRenderDice() {
+    const g = GB; if (!g) return;
+    $$('#gb-dice .die').forEach((d, j) => { d.dataset.v = g.dice[j]; d.innerHTML = '<i></i>'.repeat(g.dice[j]); d.classList.toggle('roll', g.rolling); });
+  }
+  function gbRenderTokens() {
+    const g = GB; if (!g) return;
+    $$('#gb-board .gb-cell').forEach((el) => {
+      const k = +el.dataset.k, here = g.players.filter((p) => !p.out && p.pos === k);
+      $('.tk', el).innerHTML = here.map((p) => '<i class="tok' + (p === g.players[g.turn] ? ' cur' : '') + '">' + (p.av === 'me' ? 'H' : svgUse('av-' + p.av, '', '0 0 40 40')) + '</i>').join('');
+    });
+  }
+  function gbRenderPlayers() {
+    const g = GB; if (!g) return;
+    $('#gb-players').innerHTML = g.players.map((p, i) => '<div class="gb-pl' + (i === g.turn && !g.over ? ' cur' : '') + (p.out ? ' out' : '') + (i ? '' : ' me') + '">' + gbAv(p) +
+      '<span class="who"><span class="nm">' + gbName(p) + '</span><span class="ch">' + fmtNum(p.cash) + '</span></span>' + (p.jail ? '<span class="jl" title="' + t('gbSpots').jail + '">' + GB_ICON.jail + '</span>' : '') + (p.pass ? '<span class="ps">' + p.pass + '</span>' : '') + '</div>').join('');
+  }
+  function gbDialog(g) {
+    const box = $('#gb-dlg'), a = g.ask, s = g.show;
+    const prop = (k) => {
+      const sp = GB_SP[k], rents = [sp.rent, sp.rent * 2].concat([1, 2, 3].map((x) => sp.rent * GB_MULT[x]));
+      return '<div class="gb-deed"><b class="band" style="background:' + GB_COL[sp.g] + '"></b><h3>' + gbPlace(k) + '</h3><p class="city">' + t('gbGroups')[sp.g] + '</p>' +
+        '<dl><dt>' + t('gbRent') + '</dt><dd>' + fmtNum(rents[0]) + '</dd><dt>' + t('gbRentGroup') + '</dt><dd>' + fmtNum(rents[1]) + '</dd>' +
+        [1, 2, 3].map((x) => '<dt>' + '★'.repeat(x) + '</dt><dd>' + fmtNum(rents[x + 1]) + '</dd>').join('') + '<dt>' + t('gbStarCost') + '</dt><dd>' + fmtNum(GB_STAR[sp.g]) + '</dd></dl></div>';
+    };
+    let html = '';
+    if (a && a.kind === 'buy') html = prop(a.opt.k) + '<div class="gb-btns"><button type="button" class="btn" data-ans="0">' + t('gbNo') + '</button><button type="button" class="btn primary" data-ans="1">' + t('gbBuy', { n: fmtNum(GB_SP[a.opt.k].price) }) + '</button></div>';
+    else if ((a && a.kind === 'card') || (s && s.kind === 'card')) {
+      const id = a ? a.opt.id : s.id;
+      html = '<div class="gb-card"><p class="kick">' + (a ? t('gbSurprise') : t('gbSurpriseOf', { name: s.name })) + '</p><p class="txt">' + t('gbCards')[id] + '</p></div>' + (a ? '<div class="gb-btns"><button type="button" class="btn primary" data-ans="1">' + t('gbOk') + '</button></div>' : '');
+    } else if (a && a.kind === 'jail') {
+      const me = g.players[0];
+      html = '<div class="gb-card"><p class="kick">' + t('gbSpots').jail + '</p><p class="txt">' + t('gbJailAsk', { n: fmtNum(GB_FINE) }) + '</p></div><div class="gb-btns col">' +
+        (me.pass ? '<button type="button" class="btn" data-ans="card">' + t('gbUsePass') + '</button>' : '') +
+        '<button type="button" class="btn" data-ans="pay"' + (me.cash < GB_FINE ? ' disabled' : '') + '>' + t('gbPayFine', { n: fmtNum(GB_FINE) }) + '</button><button type="button" class="btn primary" data-ans="roll">' + t('gbTryDouble') + '</button></div>';
+    } else if (g.build) {
+      const mine = GB_SP.map((sp, k) => (sp.k === 'p' && g.own[k] === 0 && gbFull(g, 0, sp.g) ? k : -1)).filter((k) => k >= 0);
+      html = '<div class="gb-card"><p class="kick">' + t('gbStarsT') + '</p>' + (mine.length ? '<ul class="gb-build">' + mine.map((k) => '<li><b class="dot" style="background:' + GB_COL[GB_SP[k].g] + '"></b><span>' + gbPlace(k) + '</span><em>' + '★'.repeat(g.stars[k]) + '<s>' + '★'.repeat(3 - g.stars[k]) + '</s></em>' +
+        '<button type="button" class="btn" data-star="' + k + '"' + (g.stars[k] >= 3 || g.players[0].cash < GB_STAR[GB_SP[k].g] ? ' disabled' : '') + '>+ ' + fmtNum(GB_STAR[GB_SP[k].g]) + '</button></li>').join('') + '</ul>' : '<p class="txt">' + t('gbStarsNone') + '</p>') +
+        '</div><div class="gb-btns"><button type="button" class="btn" data-close>' + t('gbClose') + '</button></div>';
+    } else if (s && s.kind === 'info') {
+      const k = s.k, o = g.own[k];
+      html = prop(k) + '<p class="own">' + (o < 0 ? t('gbFree', { n: fmtNum(GB_SP[k].price) }) : t('gbOwner', { name: gbName(g.players[o]) }) + (g.stars[k] ? ' · ' + '★'.repeat(g.stars[k]) : '')) + '</p><div class="gb-btns"><button type="button" class="btn" data-close>' + t('gbClose') + '</button></div>';
+    }
+    box.hidden = !html;
+    box.innerHTML = html;
+  }
+  function gbRender() {
+    const g = GB; if (!g) return;
+    $('#gb-sub').textContent = t('gbSub', { r: Math.min(g.round, GB_ROUNDS), n: GB_ROUNDS });
+    $$('#gb-board .gb-cell').forEach((el) => {
+      const k = +el.dataset.k, sp = GB_SP[k];
+      if (sp.k !== 'p') return;
+      const o = g.own[k];
+      $('.pr', el).textContent = o < 0 ? fmtNum(sp.price) : '';
+      $('.st', el).textContent = '★'.repeat(g.stars[k]);
+      $('.ow', el).innerHTML = o < 0 ? '' : o === 0 ? '<i class="me">H</i>' : '<i>' + svgUse('av-' + g.players[o].av, '', '0 0 40 40') + '</i>';
+      el.classList.toggle('mine', o === 0);
+      el.classList.toggle('taken', o > 0);
+      el.setAttribute('aria-label', gbPlace(k) + ', ' + (o < 0 ? fmtNum(sp.price) : gbName(g.players[o])));
+    });
+    $('#gb-msg').textContent = g.msg;
+    gbRenderDice(); gbRenderTokens(); gbRenderPlayers(); gbDialog(g);
+    const a = g.ask, mine = !!a && g.turn === 0;
+    $('#gb-roll').disabled = !(mine && a.kind === 'roll');
+    $('#gb-end').disabled = !(mine && a.kind === 'end');
+    $('#gb-stars').disabled = !(mine && (a.kind === 'roll' || a.kind === 'end'));
+    $('#gb-stars').setAttribute('aria-pressed', g.build ? 'true' : 'false');
+    $('#gb-log').innerHTML = g.log.slice(-8).reverse().map((x) => '<li>' + x + '</li>').join('');
+  }
+
+  function gbRenderSetup() {
+    const st = gbStats(), n = store.get('hm-gb-n', 3);
+    $$('#setup-gb .gb-seg button').forEach((b) => b.setAttribute('aria-pressed', +b.dataset.gbn === n ? 'true' : 'false'));
+    $('#gb-record').textContent = st.played ? t('gbRecord', { p: st.played, w: st.wins }) : t('rwRecordNone');
+  }
+  function gbRelang() { if (GB) { gbBuildBoard(); gbRender(); } }
+  function gbFound() { return GB ? GB.found : null; }
+  function gbAgain() { gbStart({ n: GB ? GB.n : store.get('hm-gb-n', 3) }); }
+  function gbWire() {
+    $('#btn-gb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); gbStart({ n: store.get('hm-gb-n', 3) }); });
+    $$('#setup-gb .gb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-gb-n', +b.dataset.gbn); Sound.flip(); gbRenderSetup(); }));
+    $('#gb-exit').addEventListener('click', gbRequestExit);
+    $('#gb-roll').addEventListener('click', () => { const g = GB; if (g && g.ask && g.ask.kind === 'roll') gbAnswer(true); });
+    $('#gb-end').addEventListener('click', () => { const g = GB; if (g && g.ask && g.ask.kind === 'end') gbAnswer(true); });
+    $('#gb-stars').addEventListener('click', () => { const g = GB; if (!g || !g.ask || g.turn !== 0) return; g.build = !g.build; g.show = null; Sound.flip(); gbRender(); });
+    $('#gb-board').addEventListener('click', (e) => {
+      const g = GB; if (!g) return;
+      const ans = e.target.closest('[data-ans]');
+      if (ans) { const v = ans.dataset.ans; gbAnswer(v === '1' ? true : v === '0' ? false : v); return; }
+      const star = e.target.closest('[data-star]');
+      if (star) { gbAddStar(+star.dataset.star); return; }
+      if (e.target.closest('[data-close]')) { g.build = false; g.show = null; gbRender(); return; }
+      const cell = e.target.closest('.gb-cell');
+      // a tap on a place shows its card, when nothing else is open in the middle
+      if (cell && GB_SP[+cell.dataset.k].k === 'p' && !(g.ask && g.ask.kind !== 'roll' && g.ask.kind !== 'end') && !(g.show && g.show.kind === 'card')) {
+        g.build = false; g.show = { kind: 'info', k: +cell.dataset.k }; Sound.flip(); gbRender();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!GB || gbEl.hidden || !$('#confirm').hidden || !$('#result').hidden || e.target.closest('button, input')) return;
+      if ((e.key === ' ' || e.key === 'Enter') && GB.ask && (GB.ask.kind === 'roll' || GB.ask.kind === 'end')) { e.preventDefault(); gbAnswer(true); }
+    });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -12100,13 +12788,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -12122,7 +12810,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -12185,6 +12873,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'gb') { gbAgain(); return; }
     if (resultAction === 'sc') { scAgain(); return; }
     if (resultAction === 'pk') { pkAgain(); return; }
     if (resultAction === 'pp') { ppAgain(); return; }
@@ -12215,10 +12904,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  gbWire();
   scWire();
   pkWire();
   ppWire();

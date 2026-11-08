@@ -1,7 +1,7 @@
 {
   "name": "Handemiyy",
   "short_name": "Handemiyy",
-  "description": "Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker e Scacchi con le foto di Hande.",
+  "description": "Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi e Gran Bazar con le foto di Hande.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
