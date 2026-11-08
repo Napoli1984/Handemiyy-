@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri e Collana di perle con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle e Trova le differenze con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri e Collana di perle con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle e Trova le differenze con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri e Collana di perle con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle e Trova le differenze con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3021,6 +3021,59 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .cp-g, .cp-gs, .cp-vl { transition-duration: .01s !important; }
   .cp-g .cp-gs, .cps.low .cp-mv { animation: none !important; }
 }
+/* ---------- Trova le differenze ---------- */
+.tds {
+  --tw: min(100vw - 28px, (100dvh - 190px) / 2 * var(--ar, .75));
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto auto minmax(0, 1fr); gap: 8px; justify-items: center;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 14px max(10px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 34% at 50% 0%, rgba(255, 236, 214, .9), rgba(255, 236, 214, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(240, 226, 250, .85), rgba(240, 226, 250, 0) 70%), #fbf8f4;
+}
+.tds > * { min-width: 0; }
+.tds > .rw-head { grid-area: auto; grid-row: 1; justify-self: stretch; }
+.td-hud { grid-row: 3; width: min(100%, max(var(--tw), 340px)); display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 12px; }
+.td-time { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 9px; }
+.td-tbar { display: block; height: 8px; border-radius: 4px; overflow: hidden; background: rgba(201, 164, 105, .18); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .3); }
+.td-tbar i { display: block; width: 100%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #d4aa62, #f6e2ad 55%, #c99d5c); transition: width .25s linear; }
+.td-tv { min-width: 44px; font: italic 700 24px/1 var(--font-display); color: #8a6738; font-variant-numeric: lining-nums tabular-nums; }
+.tds.low .td-tv { color: #9c3f6c; animation: tdLow 1s ease-in-out infinite; }
+@keyframes tdLow { 50% { transform: scale(1.08); } }
+.tds.low .td-tbar i { background: linear-gradient(90deg, #c97aa0, #f0bfd5 55%, #b5628c); }
+.td-dots { margin: 0; display: flex; gap: 6px; }
+.td-dots i { width: 14px; height: 14px; border-radius: 50%; background: #f3ecf6; box-shadow: inset 0 0 0 1.5px rgba(201, 164, 105, .6); transition: background .3s, transform .3s; }
+.td-dots i.on { background: radial-gradient(circle at 35% 30%, #fff6dc, #e2bf7a 60%, #b48a48); transform: scale(1.12); }
+.td-hint { min-height: 38px; padding: 6px 15px; font-size: 14px; }
+.td-hint:disabled { opacity: .45; }
+.td-pics { grid-row: 4; display: grid; grid-template-columns: var(--tw); gap: 8px; }
+.td-pic { position: relative; width: var(--tw); aspect-ratio: var(--ar, .75); border-radius: 12px; overflow: hidden; cursor: crosshair; touch-action: manipulation; outline: none;
+  background: linear-gradient(135deg, #f6eef7, #efe3f3); box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 4px #fffaf0, 0 0 0 5px rgba(201, 164, 105, .45), 0 16px 30px -20px rgba(72, 52, 84, .6); }
+.td-pic:focus-visible { box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 4px #fffaf0, 0 0 0 6.5px #c9a469, 0 16px 30px -20px rgba(72, 52, 84, .6); }
+.td-pic canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity .4s; }
+.tds.ready .td-pic canvas { opacity: 1; }
+.td-marks { position: absolute; inset: 0; pointer-events: none; }
+.td-mark { position: absolute; left: calc(var(--x) * 100%); top: calc(var(--y) * 100%); width: calc(var(--d) * 128%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%;
+  border: 3px solid #e2bf7a; box-shadow: 0 0 0 2px rgba(255, 250, 240, .9), 0 0 14px rgba(226, 191, 122, .9), inset 0 0 0 1.5px rgba(255, 250, 240, .8); animation: tdMark .45s cubic-bezier(.2, 1.4, .4, 1); }
+.td-mark.hint { border: 3px dashed #fffaf0; box-shadow: 0 0 0 2px #b48a48, 0 0 18px rgba(255, 240, 200, .95); animation: tdPulse .8s ease-in-out infinite; }
+.td-mark.missed { border-color: #b97aa6; box-shadow: 0 0 0 2px rgba(255, 250, 240, .9), 0 0 14px rgba(185, 122, 166, .85); animation: tdPulse 1.1s ease-in-out infinite; }
+@keyframes tdMark { from { transform: translate(-50%, -50%) scale(1.8); opacity: 0; } }
+@keyframes tdPulse { 50% { transform: translate(-50%, -50%) scale(1.12); } }
+.td-miss { position: absolute; left: calc(var(--x) * 100%); top: calc(var(--y) * 100%); width: 28px; height: 28px; transform: translate(-50%, -50%); animation: tdMiss .9s ease-out forwards; }
+.td-miss::before, .td-miss::after { content: ""; position: absolute; left: 50%; top: 50%; width: 26px; height: 4px; border-radius: 2px; background: #9c4f7e; box-shadow: 0 0 0 1.5px rgba(255, 250, 240, .9); transform: translate(-50%, -50%) rotate(45deg); }
+.td-miss::after { transform: translate(-50%, -50%) rotate(-45deg); }
+@keyframes tdMiss { 0% { transform: translate(-50%, -50%) scale(.4); opacity: 0; } 20% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 100% { opacity: 0; } }
+.td-cur { position: absolute; left: calc(var(--x, .5) * 100%); top: calc(var(--y, .5) * 100%); width: 34px; height: 34px; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 0 2px #fffaf0, 0 0 0 4px #b48a48, inset 0 0 0 1.5px #b48a48; }
+.td-cur::before, .td-cur::after { content: ""; position: absolute; left: 50%; top: 50%; background: #b48a48; transform: translate(-50%, -50%); }
+.td-cur::before { width: 2px; height: 14px; }
+.td-cur::after { width: 14px; height: 2px; }
+.float.td-pen { font: 700 15px var(--font-num); color: #7b3d63; background: rgba(255, 246, 250, .95); box-shadow: 0 0 0 1px rgba(185, 122, 166, .55); }
+.td-msg { grid-row: 5; margin: 0; min-height: 1.3em; text-align: center; font: italic 600 18px/1.3 var(--font-display); color: #4a3d52; }
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .tds { --tw: min((100vw - 64px) / 2, (100dvh - 190px) * var(--ar, .75)); }
+  .td-pics { grid-template-columns: var(--tw) var(--tw); gap: 20px; }
+  .td-hud { width: min(100%, 640px); }
+}
+@media (prefers-reduced-motion: reduce) { .td-mark, .td-miss, .tds.low .td-tv { animation: none !important; } }
 </style>
 </head>
 <body>
@@ -3104,6 +3157,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="cp" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="cpi0" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f6f0f8"/><stop offset="1" stop-color="#c8b6d8"/></radialGradient><linearGradient id="cpi1" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffdbe7"/><stop offset=".5" stop-color="#f28fb3"/><stop offset="1" stop-color="#cf507d"/></linearGradient><linearGradient id="cpi2" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#f1e6ff"/><stop offset=".5" stop-color="#a983ea"/><stop offset="1" stop-color="#6a40b6"/></linearGradient><linearGradient id="cpi3" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#fff7cc"/><stop offset=".5" stop-color="#f4c94a"/><stop offset="1" stop-color="#d38f22"/></linearGradient><linearGradient id="cpi4" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#d2f7e4"/><stop offset=".5" stop-color="#4cc48b"/><stop offset="1" stop-color="#1f8154"/></linearGradient><linearGradient id="cpi5" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset=".5" stop-color="#6c9cf0"/><stop offset="1" stop-color="#2a58bd"/></linearGradient><linearGradient id="cpid" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#eef4fb"/><stop offset="1" stop-color="#b7cbe2"/></linearGradient></defs><path d="M10 7Q38 40 66 7" fill="none" stroke="#c9a469" stroke-width=".8"/><circle cx="10.0" cy="7.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="14.7" cy="12.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="19.3" cy="16.2" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="24.0" cy="19.4" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="28.7" cy="21.7" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="33.3" cy="23.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="38.0" cy="23.5" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="42.7" cy="23.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="47.3" cy="21.7" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="52.0" cy="19.4" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="56.7" cy="16.2" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="61.3" cy="12.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="66.0" cy="7.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><path d="M38 26v3" stroke="#c9a469" stroke-width="1"/><g transform="translate(29.6 27.6) scale(0.42)"><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" fill="url(#cpi1)" stroke="#a63f69" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 11.6V30.4M11 13.4l9 6 9-6" fill="none" stroke="#fff" stroke-width=".8" opacity=".45"/><ellipse cx="12.6" cy="13.4" rx="3.6" ry="2.3" transform="rotate(-30 12.6 13.4)" fill="#fff" opacity=".85"/></g><g transform="translate(13.2 43.2) scale(0.34)"><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" fill="url(#cpi2)" stroke="#53308e" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 3.6v15M20 18.6l-12 6M20 18.6l12 6M20 18.6v18.8" fill="none" stroke="#fff" stroke-width=".8" opacity=".4"/><ellipse cx="14.6" cy="24.6" rx="2.6" ry="4.2" fill="#fff" opacity=".6"/></g><g transform="translate(31.6 45.1) scale(0.32)"><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" fill="url(#cpi3)" stroke="#a46d16" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 5.5V21M20 21l14.7-4.8M20 21l9.1 12.5M20 21l-9.1 12.5M20 21L5.3 16.2" stroke="#fff" stroke-width=".8" opacity=".45"/><circle cx="16.6" cy="15.6" r="2.3" fill="#fff" opacity=".8"/></g><g transform="translate(50.0 44.0) scale(0.3)"><rect x="6" y="7.6" width="28" height="28" rx="6.5" fill="#2a1c34" opacity=".22"/><rect x="6" y="6" width="28" height="28" rx="6.5" fill="url(#cpi4)" stroke="#185f3d" stroke-width="1.1"/><rect x="12.4" y="12.4" width="15.2" height="15.2" rx="2.6" fill="#c8f5de" opacity=".42"/><path d="M8 8l4.6 4.6M32 8l-4.6 4.6M8 32l4.6-4.6M32 32l-4.6-4.6" stroke="#fff" stroke-width=".8" opacity=".5"/><ellipse cx="13" cy="11" rx="4" ry="1.8" fill="#fff" opacity=".7"/></g></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameCp"></span><span class="gp-tag" data-i18n="gpCpTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="td" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="tdis" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf1e4"/><stop offset="1" stop-color="#efe2f4"/></linearGradient><radialGradient id="tdig" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#e7eef8" stop-opacity=".6"/></radialGradient></defs><rect x="6" y="12" width="26" height="34" rx="3" fill="url(#tdis)" stroke="#c9a469" stroke-width="1.2"/><circle cx="19" cy="24" r="5" fill="#f3d9c9"/><path d="M9 46c0-7.5 4.6-12 10-12s10 4.5 10 12z" fill="#d9c1e8"/><path d="M12.4 19.5c1.4-3.6 4.2-5.2 7.6-5 3.6.2 5.8 2.6 6.4 6.4-1.8-1.6-4.4-2.5-7-2.4-2.8.1-5.4.6-7 1z" fill="#6b4a3a"/><rect x="38" y="12" width="26" height="34" rx="3" fill="url(#tdis)" stroke="#c9a469" stroke-width="1.2"/><circle cx="51" cy="24" r="5" fill="#f3d9c9"/><path d="M41 46c0-7.5 4.6-12 10-12s10 4.5 10 12z" fill="#d9c1e8"/><path d="M44.4 19.5c1.4-3.6 4.2-5.2 7.6-5 3.6.2 5.8 2.6 6.4 6.4-1.8-1.6-4.4-2.5-7-2.4-2.8.1-5.4.6-7 1z" fill="#6b4a3a"/><path d="M61 15.6l1.2 2.6 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#e9b949" stroke="#a8741c" stroke-width=".5"/><circle cx="57" cy="26" r="11" fill="url(#tdig)" stroke="#b48a48" stroke-width="2.4"/><circle cx="57" cy="26" r="8.4" fill="none" stroke="#fffaf0" stroke-width="1" opacity=".8"/><path d="M65 34.4l7 7.6" stroke="#b48a48" stroke-width="4.2" stroke-linecap="round"/><path d="M65 34.4l7 7.6" stroke="#f6e2ad" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameTd"></span><span class="gp-tag" data-i18n="gpTdTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -3398,6 +3457,22 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           </div>
           <button type="button" class="btn primary play-btn" id="btn-cp-play" data-i18n="play"></button>
           <p class="record-line" id="cp-record"></p>
+        </div>
+        <div class="setup-part" id="setup-td" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="tdms" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf1e4"/><stop offset="1" stop-color="#efe2f4"/></linearGradient><radialGradient id="tdmg" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#e7eef8" stop-opacity=".6"/></radialGradient></defs><rect x="6" y="12" width="26" height="34" rx="3" fill="url(#tdms)" stroke="#c9a469" stroke-width="1.2"/><circle cx="19" cy="24" r="5" fill="#f3d9c9"/><path d="M9 46c0-7.5 4.6-12 10-12s10 4.5 10 12z" fill="#d9c1e8"/><path d="M12.4 19.5c1.4-3.6 4.2-5.2 7.6-5 3.6.2 5.8 2.6 6.4 6.4-1.8-1.6-4.4-2.5-7-2.4-2.8.1-5.4.6-7 1z" fill="#6b4a3a"/><rect x="38" y="12" width="26" height="34" rx="3" fill="url(#tdms)" stroke="#c9a469" stroke-width="1.2"/><circle cx="51" cy="24" r="5" fill="#f3d9c9"/><path d="M41 46c0-7.5 4.6-12 10-12s10 4.5 10 12z" fill="#d9c1e8"/><path d="M44.4 19.5c1.4-3.6 4.2-5.2 7.6-5 3.6.2 5.8 2.6 6.4 6.4-1.8-1.6-4.4-2.5-7-2.4-2.8.1-5.4.6-7 1z" fill="#6b4a3a"/><path d="M61 15.6l1.2 2.6 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#e9b949" stroke="#a8741c" stroke-width=".5"/><circle cx="57" cy="26" r="11" fill="url(#tdmg)" stroke="#b48a48" stroke-width="2.4"/><circle cx="57" cy="26" r="8.4" fill="none" stroke="#fffaf0" stroke-width="1" opacity=".8"/><path d="M65 34.4l7 7.6" stroke="#b48a48" stroke-width="4.2" stroke-linecap="round"/><path d="M65 34.4l7 7.6" stroke="#f6e2ad" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameTd"></span><span class="hunt-sub" data-i18n="tdIntro"></span></span>
+          </div>
+          <div class="count-box">
+            <div class="count-head"><span class="count-label" id="td-lv-label" data-i18n="tdLevelL"></span><span class="count-tag" id="td-lv-tag"></span></div>
+            <div class="seg td-seg" role="group" aria-labelledby="td-lv-label">
+              <button type="button" data-td-lv="0" aria-pressed="false"></button>
+              <button type="button" data-td-lv="1" aria-pressed="true"></button>
+              <button type="button" data-td-lv="2" aria-pressed="false"></button>
+            </div>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-td-play" data-i18n="play"></button>
+          <p class="record-line" id="td-record"></p>
         </div>
         <!--more-setups-->
 
@@ -3807,6 +3882,24 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
         <button type="button" class="btn ghost" id="cp-ex-no" data-i18n="cpExtraNo"></button>
       </div>
     </div>
+  </section>
+
+  <section id="td" class="screen tds" hidden data-i18n-attr="aria-label:gameTd">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="td-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameTd"></h2><span class="uc-sub" id="td-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-td" aria-pressed="true"></button>
+    </header>
+    <div class="td-hud">
+      <p class="td-time"><span class="td-tbar"><i id="td-tfill"></i></span><span class="td-tv" id="td-tv"></span></p>
+      <p class="td-dots" id="td-dots" aria-live="polite"></p>
+      <button type="button" class="btn td-hint" id="td-hint" data-i18n="tdHint"></button>
+    </div>
+    <div class="td-pics" id="td-pics">
+      <div class="td-pic" id="td-a" tabindex="0" role="application" data-i18n-attr="aria-label:tdPhotoA"><canvas></canvas><div class="td-marks"></div><i class="td-cur" hidden></i></div>
+      <div class="td-pic" id="td-b" tabindex="0" role="application" data-i18n-attr="aria-label:tdPhotoB"><canvas></canvas><div class="td-marks"></div><i class="td-cur" hidden></i></div>
+    </div>
+    <p class="td-msg" id="td-msg" aria-live="polite"></p>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -4243,6 +4336,17 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Trova le differenze ----
+      gameTd: 'Trova le differenze', gpTdTag: 'Cinque differenze, poco tempo', ledeTd: 'Due foto di Hande quasi uguali: nella seconda ci sono cinque differenze. Trovale tutte prima che finisca il tempo.',
+      tdIntro: 'Tocca le differenze in una delle due foto. Ogni tocco sbagliato costa 5 secondi, un aiuto ne costa 10. Trovale tutte e la foto è tua.',
+      tdLevelL: 'Difficoltà', tdLevels: ['Facile', 'Normale', 'Difficile'], tdLevelTag: '{s} secondi',
+      tdSub: '{lv} · cinque differenze', tdHint: 'Aiuto', tdHintAria: 'Aiuto: mostra una differenza, costa 10 secondi', tdWrongF: '−5 s', tdHintF: '−10 s',
+      tdLoading: 'Preparo le foto…', tdStart: 'Tocca una differenza in una delle due foto.', tdNice: ['Trovata!', 'Ottimo occhio!', 'Ben visto!', 'Eccola!'], tdLast: 'Ne manca una!',
+      tdFoundAria: 'Differenze trovate: {n} su {t}', tdTimeUp: 'Tempo scaduto', tdWinT: 'Tutte trovate!', tdLoseT: 'Tempo scaduto', tdKicker: 'Trova le differenze · {lv}',
+      tdRowFound: 'Differenze trovate', tdRowTime: 'Tempo', tdRowHints: 'Aiuti', tdRowWrong: 'Tocchi sbagliati', tdAgain: 'Un\'altra foto',
+      tdRecord: 'Foto vinte: {n} · miglior tempo ({lv}): {t}', tdRecordWins: 'Foto vinte: {n}',
+      tdPhotoA: 'La foto com\'è: frecce per muovere il mirino, Invio per toccare', tdPhotoB: 'La foto con le differenze: frecce per muovere il mirino, Invio per toccare',
+      aTdStart: 'Trova le differenze: cinque differenze, {s} secondi. Tocca una differenza in una delle due foto.',
       // ---- Collana di perle ----
       gameCp: 'Collana di perle', gpCpTag: 'Allinea le gemme, scopri la foto', ledeCp: 'Scambia le gemme vicine e allineane tre uguali: sotto c\'è una foto di Hande coperta da un velo di perle. Scoprila tutta prima che finiscano le mosse.',
       cpIntro: 'Allinea tre gemme uguali e il velo di perle sotto di loro se ne va. Quattro in fila fanno un filo di perle, una L o una T una spilla, cinque un diamante. Scopri tutta la foto e la foto è tua.',
@@ -4589,6 +4693,17 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- Farkı bul ----
+      gameTd: 'Farkı bul', gpTdTag: 'Beş fark, az zaman', ledeTd: 'Neredeyse aynı iki Hande fotoğrafı: ikincisinde beş fark var. Süre bitmeden hepsini bul.',
+      tdIntro: 'Farklara iki fotoğraftan birinde dokun. Her yanlış dokunuş 5 saniye, her ipucu 10 saniye götürür. Hepsini bul, fotoğraf senin olsun.',
+      tdLevelL: 'Zorluk', tdLevels: ['Kolay', 'Normal', 'Zor'], tdLevelTag: '{s} saniye',
+      tdSub: '{lv} · beş fark', tdHint: 'İpucu', tdHintAria: 'İpucu: bir farkı gösterir, 10 saniye götürür', tdWrongF: '−5 sn', tdHintF: '−10 sn',
+      tdLoading: 'Fotoğraflar hazırlanıyor…', tdStart: 'Fotoğraflardan birinde bir farka dokun.', tdNice: ['Buldun!', 'Keskin göz!', 'İyi gördün!', 'İşte orada!'], tdLast: 'Bir tane kaldı!',
+      tdFoundAria: 'Bulunan farklar: {t} farktan {n} tanesi', tdTimeUp: 'Süre doldu', tdWinT: 'Hepsini buldun!', tdLoseT: 'Süre doldu', tdKicker: 'Farkı bul · {lv}',
+      tdRowFound: 'Bulunan farklar', tdRowTime: 'Süre', tdRowHints: 'İpuçları', tdRowWrong: 'Yanlış dokunuşlar', tdAgain: 'Başka bir fotoğraf',
+      tdRecord: 'Kazanılan fotoğraf: {n} · en iyi süre ({lv}): {t}', tdRecordWins: 'Kazanılan fotoğraf: {n}',
+      tdPhotoA: 'Fotoğrafın aslı: nişangâhı oklarla taşı, dokunmak için Enter', tdPhotoB: 'Farklı fotoğraf: nişangâhı oklarla taşı, dokunmak için Enter',
+      aTdStart: 'Farkı bul: beş fark, {s} saniye. Fotoğraflardan birinde bir farka dokun.',
       // ---- İnci kolye ----
       gameCp: 'İnci kolye', gpCpTag: 'Taşları diz, fotoğrafı aç', ledeCp: 'Yan yana iki taşın yerini değiştir, üç aynısını diz: altında inci bir örtüyle kaplı bir Hande fotoğrafı var. Hamlelerin bitmeden hepsini aç.',
       cpIntro: 'Üç aynı taşı diz, altlarındaki inci örtü kalksın. Yan yana dört taş bir inci dizisi, bir L ya da T bir broş, beş taş bir elmas yapar. Fotoğrafın hepsini aç, fotoğraf senin olsun.',
@@ -5183,13 +5298,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    tdRelang();
     cpRelang();
     alRelang();
     gvRelang();
@@ -5323,7 +5439,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -5513,7 +5629,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -5615,7 +5731,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -6117,7 +6233,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'cp', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'td', 'cp', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -6617,7 +6733,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -6717,6 +6833,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-td').hidden = gs !== 'td';
     $('#setup-cp').hidden = gs !== 'cp';
     $('#setup-al').hidden = gs !== 'al';
     $('#setup-gv').hidden = gs !== 'gv';
@@ -6724,12 +6841,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'cp' ? 'ledeCp' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'td' ? 'ledeTd' : gs === 'cp' ? 'ledeCp' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -6746,7 +6863,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', cp: 'gameCp', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', td: 'gameTd', cp: 'gameCp', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -7024,7 +7141,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -7568,7 +7685,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -7791,7 +7908,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -7939,7 +8056,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -8212,7 +8329,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -9058,7 +9175,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -9520,7 +9637,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -10676,7 +10793,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -10746,7 +10863,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -10811,7 +10928,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -11265,7 +11382,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -11473,7 +11590,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -11859,7 +11976,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -12673,7 +12790,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
     const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
     const c = cfg && cfg.col ? cfg.col : 'w';
     SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
@@ -12970,7 +13087,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function gbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me', keep: 0, build: 1 }].concat(GB_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
@@ -13402,7 +13519,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function gvStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
     GV = { photos: gvPick(GV_TICKETS), n: 0, wins: 0, res: [], found: [], ticket: null, timers: [], over: false, scratchT: 0 };
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gvEl.hidden = false;
@@ -13751,7 +13868,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* ---------- the album on screen ---------- */
   function alStart(openPack) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; alEl.hidden = false;
     const st = alStats();
@@ -14374,7 +14491,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function cpStart(n, photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop();
     const st = cpStats();
     if (n == null) n = st.sel;
     const lv = cpLevel(n), seen = new Set(st.found);
@@ -14734,6 +14851,397 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     board.addEventListener('blur', () => { cur.hidden = true; });
   }
 
+  /* ---------- Trova le differenze: the same photo twice, the second with five changes ----------
+     The changes are made here, on a canvas, from the photo itself: a patch in another colour, lighter or darker,
+     mirrored, copied from elsewhere, or a little ornament (a star, a heart, a pearl...). A quick look at the photo
+     (light, colour, detail) picks spots where the change shows, away from the edges and from the face. */
+  const tdEl = $('#td');
+  const TD_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  const TD_LV = [{ s: 120, r: .078, a: 1 }, { s: 90, r: .064, a: .85 }, { s: 60, r: .054, a: .72 }];
+  const TD_N = 5, TD_WRONG = 5000, TD_HELP = 10000;
+  const TD_HUES = [330, 180, 45, 270, 120, 210];
+  let DF = null, tdSpeed = 1; // DF: the game; tdSpeed: only the tests change it
+
+  function tdStats() {
+    const st = store.get('hm-td', null);
+    const o = Object.assign({ played: 0, wins: 0, lv: 1, best: [0, 0, 0], found: [] }, st && typeof st === 'object' ? st : {});
+    if (!Array.isArray(o.found)) o.found = [];
+    if (!Array.isArray(o.best) || o.best.length !== 3) o.best = [0, 0, 0];
+    o.lv = [0, 1, 2].includes(o.lv) ? o.lv : 1;
+    return o;
+  }
+  const tdLvName = (lv) => (t('tdLevels') || [])[lv] || '';
+  function tdLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (DF === g) fn(); }, ms / tdSpeed); g.timers.push(id); }
+  const tdNow = (g) => (g.pausedAt || performance.now());
+  const tdLeft = (g) => Math.max(0, g.limit - (tdNow(g) - g.t0) * tdSpeed - g.penalty);
+
+  function tdStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop();
+    const st = tdStats(), lv = TD_LV[st.lv], seen = new Set(st.found);
+    const photo = pickOne(TD_PHOTOS.filter((p) => !seen.has(p.id))) || pickOne(TD_PHOTOS);
+    DF = { lv: st.lv, conf: lv, photo, img: null, diffs: [], got: 0, t0: 0, limit: lv.s * 1000, penalty: 0, hints: 0, wrong: 0, over: false, won: false, ready: false,
+      timers: [], tick: 0, lock: 0, lastSec: -1, pausedAt: 0, cur: [.5, .5], found: [] };
+    closeOverlays(); FX.clear(); Music.setEnergy(true);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; tdEl.hidden = false;
+    $$('.td-marks', tdEl).forEach((m) => { m.textContent = ''; });
+    $$('.td-pic canvas', tdEl).forEach((c) => { c.width = 1; c.height = 1; });
+    tdEl.classList.remove('low', 'ready');
+    $('#td-msg').textContent = t('tdLoading');
+    tdRender();
+    const g = DF, img = new Image();
+    img.decoding = 'async';
+    img.onload = () => { if (DF === g) tdReady(g, img); };
+    img.onerror = () => { if (DF === g) { g.photo = pickOne(TD_PHOTOS); img.src = fullSrc(g.photo); } };
+    img.src = fullSrc(photo);
+  }
+  function tdReady(g, img) {
+    g.img = img;
+    g.diffs = tdMakeDiffs(img, g.conf);
+    tdEl.style.setProperty('--ar', img.naturalWidth / img.naturalHeight);
+    tdEl.classList.add('ready');
+    requestAnimationFrame(() => {
+      if (DF !== g) return;
+      tdPaint();
+      g.ready = true; g.t0 = performance.now();
+      g.tick = setInterval(() => tdTick(g), 200);
+      $('#td-msg').textContent = t('tdStart');
+      announce(t('aTdStart', { s: g.conf.s }));
+      tdRender();
+    });
+  }
+  function tdStop() {
+    const g = DF; DF = null;
+    if (g) { g.timers.forEach(clearTimeout); clearInterval(g.tick); }
+    tdEl.hidden = true;
+  }
+  function tdRequestExit() { if (DF && !DF.over && DF.ready && DF.got > 0) openConfirm(false); else goHome(); }
+
+  /* ---------- the changes ---------- */
+  // light, colour and detail of the photo on a coarse grid
+  function tdLook(img) {
+    const w = 48, h = Math.round(48 * img.naturalHeight / img.naturalWidth), c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const x = c.getContext('2d', { willReadFrequently: true });
+    x.drawImage(img, 0, 0, w, h);
+    const d = x.getImageData(0, 0, w, h).data, L = new Float32Array(w * h), Sa = new Float32Array(w * h), Sk = new Uint8Array(w * h);
+    let sat = 0;
+    for (let i = 0; i < w * h; i++) {
+      const R = d[i * 4], G = d[i * 4 + 1], B = d[i * 4 + 2], mx = Math.max(R, G, B), mn = Math.min(R, G, B);
+      L[i] = (.299 * R + .587 * G + .114 * B) / 255; Sa[i] = mx ? (mx - mn) / mx : 0; sat += Sa[i];
+      // skin, roughly (in YCbCr): the changes keep off Hande herself
+      const Y = .299 * R + .587 * G + .114 * B, Cb = 128 - .1687 * R - .3313 * G + .5 * B, Cr = 128 + .5 * R - .4187 * G - .0813 * B;
+      Sk[i] = Y > 40 && Cb > 77 && Cb < 127 && Cr > 133 && Cr < 173 ? 1 : 0;
+    }
+    return { w, h, L, Sa, Sk, d, sat: sat / (w * h) };
+  }
+  // mean light, mean colour and how much detail there is in a circle of the photo
+  function tdSpot(map, img, x, y, r) {
+    const k = map.w / img.naturalWidth, cx = x * k, cy = y * k, rr = Math.max(1, r * k);
+    let n = 0, sl = 0, ss = 0, sl2 = 0, sk = 0, sr = 0, sg = 0, sb = 0;
+    // a little wider than the spot, so a change never touches skin at its edge
+    const rw = rr + 1;
+    for (let yy = Math.floor(cy - rw); yy <= Math.ceil(cy + rw); yy++) {
+      for (let xx = Math.floor(cx - rw); xx <= Math.ceil(cx + rw); xx++) {
+        if (xx < 0 || yy < 0 || xx >= map.w || yy >= map.h || (xx - cx) ** 2 + (yy - cy) ** 2 > rw * rw) continue;
+        const i = yy * map.w + xx; n++; sl += map.L[i]; sl2 += map.L[i] * map.L[i]; ss += map.Sa[i]; sk += map.Sk[i];
+        sr += map.d[i * 4]; sg += map.d[i * 4 + 1]; sb += map.d[i * 4 + 2];
+      }
+    }
+    if (!n) return { L: .5, S: 0, D: 0, K: 0, hue: 0 };
+    const L = sl / n, mr = sr / n, mg = sg / n, mb = sb / n, mx = Math.max(mr, mg, mb), mn = Math.min(mr, mg, mb);
+    let hue = 0;
+    if (mx > mn) hue = mx === mr ? ((mg - mb) / (mx - mn) + 6) % 6 : mx === mg ? (mb - mr) / (mx - mn) + 2 : (mr - mg) / (mx - mn) + 4;
+    return { L, S: ss / n, D: Math.sqrt(Math.max(0, sl2 / n - L * L)), K: sk / n, hue: hue * 60 };
+  }
+  // a colour of another hue, far from the one there
+  function tdTint(hue) {
+    const far = TD_HUES.filter((h) => Math.min(Math.abs(h - hue), 360 - Math.abs(h - hue)) >= 100);
+    const h = pickOne(far.length ? far : TD_HUES) / 60, c = .7, x = c * (1 - Math.abs((h % 2) - 1)), m = .2;
+    const [r, g, b] = h < 1 ? [c, x, 0] : h < 2 ? [x, c, 0] : h < 3 ? [0, c, x] : h < 4 ? [0, x, c] : h < 5 ? [x, 0, c] : [c, 0, x];
+    return [r, g, b].map((v) => Math.round((v + m) * 255));
+  }
+  function tdMakeDiffs(img, conf) {
+    const W = img.naturalWidth, H = img.naturalHeight, R = conf.r * W;
+    let map = null;
+    try { map = tdLook(img); } catch (e) { map = null; } // a photo from elsewhere cannot be read: ornaments and light only
+    const inside = (x, y) => x > R * 1.25 && y > R * 1.25 && x < W - R * 1.25 && y < H - R * 1.25;
+    const face = (x, y) => { const a = (x / W - .5) / .25, b = (y / H - .3) / .2; return a * a + b * b < 1; };
+    const band = (x) => x / W > .3 && x / W < .7; // Hande is mostly in the middle of a portrait
+    const diffs = [];
+    const free = (x, y, gap) => diffs.every((d) => Math.hypot(d.x - x, d.y - y) > R * gap);
+    const kinds = map ? shuffle(['deco', 'color', 'flip', 'clone', 'zoom']) : shuffle(['deco', 'deco', 'light', 'deco', 'light']);
+    // strict: off the middle and off skin; then off skin anywhere; then only off the face
+    const pick = (kind, gap, tier) => {
+      for (let tries = 0; tries < 500; tries++) {
+        const x = R * 1.25 + Math.random() * (W - R * 2.5), y = R * 1.25 + Math.random() * (H - R * 2.5);
+        if (!inside(x, y) || face(x, y) || !free(x, y, gap) || (tier < 1 && band(x))) continue;
+        if (kind === 'zoom' && !inside(x, y)) continue;
+        const s = map ? tdSpot(map, img, x, y, R) : { L: .5, S: .3, D: .1, K: 0, hue: 0 };
+        if (tier < 2 && s.K > .03) continue;
+        const d = { x, y, r: R, kind };
+        if (kind === 'color') { if (s.S < .22 || s.L < .2 || s.L > .86) continue; d.tint = tdTint(s.hue); }
+        if (kind === 'light') { if (map && s.D < .06) continue; d.dark = s.L > .55; }
+        if ((kind === 'flip' || kind === 'zoom') && s.D < .09) continue;
+        if (kind === 'deco' && tier < 0 && s.D > .08) continue; // an ornament looks best on a plain background
+        if (kind === 'clone') {
+          if (s.D < .06) continue;
+          // copy a patch that looks different from here
+          let src = null;
+          for (let k = 0; k < 40 && !src; k++) {
+            const a = Math.random() * Math.PI * 2, dist = R * (2.4 + Math.random() * 2), sx = x + Math.cos(a) * dist, sy = y + Math.sin(a) * dist;
+            if (!inside(sx, sy) || face(sx, sy)) continue;
+            const o = tdSpot(map, img, sx, sy, R);
+            if (o.K > .03) continue;
+            if (Math.abs(o.L - s.L) > .14 || Math.abs(o.D - s.D) > .08) src = [sx, sy];
+          }
+          if (!src) continue;
+          [d.sx, d.sy] = src;
+        }
+        if (kind === 'deco') { d.shape = pickOne(['star', 'heart', 'pearl', 'sparkle', 'flower']); d.rot = (Math.random() - .5) * .9; }
+        return d;
+      }
+      return null;
+    };
+    const any = (kind, gap) => (kind === 'deco' && pick(kind, gap, -1)) || pick(kind, gap, 0) || pick(kind, gap, 1);
+    kinds.forEach((kind) => {
+      const d = any(kind, 2.6) || any('deco', 2.6) || any('deco', 2) || pick('deco', 1.6, 2);
+      if (d) diffs.push(d);
+    });
+    while (diffs.length < TD_N) { const d = pick('deco', 1.2, 2); if (!d) break; diffs.push(d); }
+    return diffs.map((d, i) => Object.assign(d, { i, found: false }));
+  }
+  // a patch of the photo with soft edges, mirrored or not
+  function tdPatch(img, sx, sy, r, flip, out, zoom) {
+    const c = document.createElement('canvas'), n = Math.max(2, Math.ceil(out * 2)), z = r / (zoom || 1);
+    c.width = n; c.height = n;
+    const x = c.getContext('2d');
+    x.save();
+    if (flip) { x.translate(n, 0); x.scale(-1, 1); }
+    x.drawImage(img, sx - z, sy - z, z * 2, z * 2, 0, 0, n, n);
+    x.restore();
+    x.globalCompositeOperation = 'destination-in';
+    const gr = x.createRadialGradient(n / 2, n / 2, n * .36, n / 2, n / 2, n / 2);
+    gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+    x.fillStyle = gr; x.fillRect(0, 0, n, n);
+    return c;
+  }
+  // a little ornament drawn on the photo
+  function tdDeco(x, d, cx, cy, r) {
+    const s = r * .78;
+    x.save();
+    x.translate(cx, cy); x.rotate(d.rot || 0);
+    x.shadowColor = 'rgba(40, 24, 48, .35)'; x.shadowBlur = s * .22; x.shadowOffsetY = s * .08;
+    const lin = (a, b) => { const g = x.createLinearGradient(-s, -s, s, s); g.addColorStop(0, a); g.addColorStop(1, b); return g; };
+    x.beginPath();
+    if (d.shape === 'star' || d.shape === 'sparkle') {
+      const n = d.shape === 'star' ? 5 : 4, inR = d.shape === 'star' ? .45 : .28;
+      for (let k = 0; k < n * 2; k++) { const a = -Math.PI / 2 + k * Math.PI / n, rr = s * (k % 2 ? inR : 1); x.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+      x.closePath();
+      x.fillStyle = d.shape === 'star' ? lin('#fff3c4', '#d9a23e') : lin('#ffffff', '#f3dca0');
+      x.fill(); x.shadowColor = 'transparent'; x.lineWidth = Math.max(1, s * .06); x.strokeStyle = d.shape === 'star' ? '#a8741c' : '#c9a469'; x.stroke();
+    } else if (d.shape === 'heart') {
+      x.moveTo(0, s * .85);
+      x.bezierCurveTo(-s * 1.1, s * .1, -s * .75, -s * .95, 0, -s * .38);
+      x.bezierCurveTo(s * .75, -s * .95, s * 1.1, s * .1, 0, s * .85);
+      x.fillStyle = lin('#ffd3e2', '#d4568a'); x.fill();
+      x.shadowColor = 'transparent'; x.lineWidth = Math.max(1, s * .06); x.strokeStyle = '#a63f69'; x.stroke();
+    } else if (d.shape === 'pearl') {
+      const g = x.createRadialGradient(-s * .3, -s * .3, s * .1, 0, 0, s * .8);
+      g.addColorStop(0, '#ffffff'); g.addColorStop(.6, '#f2ecf4'); g.addColorStop(1, '#bfaed2');
+      x.arc(0, 0, s * .72, 0, Math.PI * 2); x.fillStyle = g; x.fill();
+    } else {
+      x.fillStyle = lin('#ffe1ec', '#ee8fb4');
+      for (let k = 0; k < 5; k++) { const a = k * Math.PI * 2 / 5; x.beginPath(); x.ellipse(Math.cos(a) * s * .48, Math.sin(a) * s * .48, s * .42, s * .26, a, 0, Math.PI * 2); x.fill(); }
+      x.shadowColor = 'transparent'; x.beginPath(); x.arc(0, 0, s * .22, 0, Math.PI * 2); x.fillStyle = '#f4c64e'; x.fill();
+    }
+    x.restore();
+  }
+  function tdEdit(x, img, d, k, a) {
+    const cx = d.x * k, cy = d.y * k, r = d.r * k;
+    x.save();
+    if (d.kind === 'color' || d.kind === 'light') {
+      const [cr, cg, cb] = d.kind === 'color' ? d.tint : d.dark ? [0, 0, 0] : [255, 255, 255];
+      const gr = x.createRadialGradient(cx, cy, 0, cx, cy, r);
+      gr.addColorStop(0, `rgba(${cr},${cg},${cb},1)`); gr.addColorStop(.55, `rgba(${cr},${cg},${cb},1)`); gr.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
+      x.globalCompositeOperation = d.kind === 'color' ? 'hue' : d.dark ? 'multiply' : 'screen';
+      x.globalAlpha = (d.kind === 'color' ? .95 : .5) * a;
+      x.fillStyle = gr; x.beginPath(); x.arc(cx, cy, r, 0, Math.PI * 2); x.fill();
+    } else if (d.kind === 'flip') x.drawImage(tdPatch(img, d.x, d.y, d.r, true, r), cx - r, cy - r);
+    else if (d.kind === 'clone') x.drawImage(tdPatch(img, d.sx, d.sy, d.r, false, r), cx - r, cy - r);
+    else if (d.kind === 'zoom') x.drawImage(tdPatch(img, d.x, d.y, d.r, false, r, 1.4), cx - r, cy - r);
+    else tdDeco(x, d, cx, cy, r);
+    x.restore();
+  }
+  // both photos at the size they have on screen
+  function tdPaint() {
+    const g = DF;
+    if (!g || !g.img) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    ['#td-a', '#td-b'].forEach((sel, n) => {
+      const box = $(sel), cv = $('canvas', box), w = Math.max(1, Math.round(box.clientWidth * dpr)), h = Math.max(1, Math.round(box.clientHeight * dpr));
+      cv.width = w; cv.height = h;
+      const x = cv.getContext('2d'), k = w / g.img.naturalWidth;
+      x.drawImage(g.img, 0, 0, w, h);
+      if (n === 1) g.diffs.forEach((d) => tdEdit(x, g.img, d, k, g.conf.a));
+    });
+  }
+
+  /* ---------- playing ---------- */
+  function tdRender() {
+    const g = DF;
+    if (!g) return;
+    $('#td-sub').textContent = t('tdSub', { lv: tdLvName(g.lv) });
+    const left = g.ready ? tdLeft(g) : g.limit;
+    $('#td-tv').textContent = fmtTime(Math.ceil(left / 1000));
+    $('#td-tfill').style.width = (left / g.limit * 100) + '%';
+    const dots = $('#td-dots');
+    if (dots.children.length !== TD_N) { dots.textContent = ''; for (let i = 0; i < TD_N; i++) dots.appendChild(document.createElement('i')); }
+    Array.from(dots.children).forEach((d, i) => d.classList.toggle('on', i < g.got));
+    dots.setAttribute('aria-label', t('tdFoundAria', { n: g.got, t: TD_N }));
+    $('#td-hint').disabled = !g.ready || g.over;
+    $('#td-hint').setAttribute('aria-label', t('tdHintAria'));
+  }
+  function tdTick(g) {
+    if (DF !== g || g.over || !g.ready || g.pausedAt) return;
+    const left = tdLeft(g), sec = Math.ceil(left / 1000);
+    tdEl.classList.toggle('low', left <= 10000);
+    if (sec !== g.lastSec) { g.lastSec = sec; if (sec <= 10 && sec > 0) Sound.tick(sec <= 5); }
+    tdRender();
+    if (left <= 0) tdEnd(g, false);
+  }
+  function tdMark(d, cls) {
+    $$('.td-marks', tdEl).forEach((m) => {
+      const e = document.createElement('i'); e.className = 'td-mark ' + cls;
+      e.style.setProperty('--x', d.x / DF.img.naturalWidth); e.style.setProperty('--y', d.y / DF.img.naturalHeight); e.style.setProperty('--d', d.r * 2 / DF.img.naturalWidth);
+      e.dataset.i = d.i;
+      m.appendChild(e);
+    });
+  }
+  // a tap on one of the photos, in 0..1 of its width and height
+  function tdTap(u, v, box) {
+    const g = DF;
+    if (!g || !g.ready || g.over || performance.now() < g.lock) return;
+    const W = g.img.naturalWidth, H = g.img.naturalHeight, x = u * W, y = v * H;
+    const d = g.diffs.find((q) => !q.found && Math.hypot(q.x - x, q.y - y) <= q.r * 1.4);
+    if (!d && g.diffs.some((q) => q.found && Math.hypot(q.x - x, q.y - y) <= q.r * 1.4)) return; // one already found: nothing
+    if (d) {
+      d.found = true; g.got++;
+      tdMark(d, 'ok');
+      Sound.correct(); buzz(15);
+      const r = box.getBoundingClientRect();
+      FX.burst(r.left + u * r.width, r.top + v * r.height, 16, true);
+      $('#td-msg').textContent = g.got === TD_N - 1 ? t('tdLast') : pickOne(t('tdNice'));
+      tdRender();
+      if (g.got >= TD_N) tdEnd(g, true);
+      return;
+    }
+    // a wrong tap: a mark that fades and five seconds less
+    g.wrong++; g.penalty += TD_WRONG; g.lock = performance.now() + 450;
+    Sound.wrong(); buzz(40);
+    const m = $('.td-marks', box), e = document.createElement('i');
+    e.className = 'td-miss'; e.style.setProperty('--x', u); e.style.setProperty('--y', v);
+    m.appendChild(e); setTimeout(() => e.remove(), 900);
+    const r = box.getBoundingClientRect();
+    FX.float(t('tdWrongF'), r.left + u * r.width, r.top + v * r.height - 24, 'td-pen');
+    tdRender();
+    if (tdLeft(g) <= 0) tdEnd(g, false);
+  }
+  function tdHelp() {
+    const g = DF;
+    if (!g || !g.ready || g.over) return;
+    const d = g.diffs.find((q) => !q.found);
+    if (!d) return;
+    g.hints++; g.penalty += TD_HELP;
+    Sound.sparkle();
+    $$('.td-mark.hint', tdEl).forEach((e) => e.remove());
+    tdMark(d, 'hint');
+    tdLater(g, 2600, () => $$('.td-mark.hint', tdEl).forEach((e) => e.remove()));
+    const r = $('#td-hint').getBoundingClientRect();
+    FX.float(t('tdHintF'), r.left + r.width / 2, r.top - 10, 'td-pen');
+    tdRender();
+    if (tdLeft(g) <= 0) tdEnd(g, false);
+  }
+  function tdEnd(g, won) {
+    if (g.over) return;
+    g.over = true; g.won = won;
+    clearInterval(g.tick);
+    const used = Math.min(g.limit, (performance.now() - g.t0) * tdSpeed + g.penalty) / 1000, left = tdLeft(g);
+    tdEl.classList.remove('low');
+    $$('.td-mark.hint', tdEl).forEach((e) => e.remove());
+    if (won) {
+      $('#td-msg').textContent = t('tdWinT'); Sound.win();
+    } else {
+      $('#td-msg').textContent = t('tdTimeUp'); Sound.lose();
+      g.diffs.filter((d) => !d.found).forEach((d) => tdMark(d, 'missed'));
+    }
+    tdRender();
+    const st = tdStats(), prev = st.best[g.lv], record = won && (!prev || used < prev);
+    st.played++;
+    if (won) {
+      st.wins++;
+      if (record) st.best[g.lv] = Math.round(used * 10) / 10;
+      st.found = Array.from(new Set(st.found.concat([g.photo.id]))).slice(-200);
+      g.found = [g.photo];
+    }
+    store.set('hm-td', st);
+    tdLater(g, won ? 1400 : 2600, () => {
+      if (won) celebrate();
+      const stars = won ? (left >= g.limit * .5 ? 3 : left >= g.limit * .25 ? 2 : 1) : null;
+      showResult({ kicker: t('tdKicker', { lv: tdLvName(g.lv) }), title: won ? t('tdWinT') : t('tdLoseT'), stars, score: null, record, photos: won, photosLabel: t('rwSeePhotos'), again: t('tdAgain'), action: 'td',
+        rows: [[t('tdRowFound'), g.got + ' / ' + TD_N], [t('tdRowTime'), fmtTime(used)], [t('tdRowHints'), String(g.hints)], [t('tdRowWrong'), String(g.wrong)]],
+        strip: [{ id: g.photo.id, open: won }] });
+    });
+  }
+
+  /* ---------- the home ---------- */
+  function tdRenderSetup() {
+    const st = tdStats();
+    $$('[data-td-lv]').forEach((b) => { const lv = +b.dataset.tdLv; b.textContent = tdLvName(lv); b.setAttribute('aria-pressed', String(lv === st.lv)); });
+    $('#td-lv-tag').textContent = t('tdLevelTag', { s: TD_LV[st.lv].s });
+    const best = st.best[st.lv];
+    $('#td-record').textContent = !st.played ? t('rwRecordNone') : best ? t('tdRecord', { n: st.wins, lv: tdLvName(st.lv), t: fmtTime(best) }) : t('tdRecordWins', { n: st.wins });
+  }
+  function tdRelang() { if (DF) { tdRender(); if (DF.ready && !DF.over) $('#td-msg').textContent = t('tdStart'); } }
+  function tdFound() { return DF && DF.found.length ? DF.found : null; }
+  function tdAgain() { tdStart(); }
+  function tdWire() {
+    $('#btn-td-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tdStart(); });
+    $('#td-exit').addEventListener('click', tdRequestExit);
+    $('#td-hint').addEventListener('click', tdHelp);
+    $$('[data-td-lv]').forEach((b) => b.addEventListener('click', () => { const st = tdStats(); st.lv = +b.dataset.tdLv; store.set('hm-td', st); Sound.flip(); tdRenderSetup(); }));
+    ['#td-a', '#td-b'].forEach((sel) => {
+      const box = $(sel), cur = $('.td-cur', box);
+      box.addEventListener('pointerdown', (e) => {
+        if (e.button > 0) return;
+        const r = box.getBoundingClientRect();
+        cur.hidden = true;
+        tdTap((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height, box);
+      });
+      // the keys: a sight to move over the photo, Enter taps under it
+      box.addEventListener('keydown', (e) => {
+        const g = DF;
+        if (!g || !g.ready || g.over) return;
+        const mv = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+        if (mv) {
+          e.preventDefault();
+          g.cur = [Math.min(.98, Math.max(.02, g.cur[0] + mv[0] * .04)), Math.min(.98, Math.max(.02, g.cur[1] + mv[1] * .03))];
+        } else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tdTap(g.cur[0], g.cur[1], box); } else return;
+        $$('.td-cur', tdEl).forEach((c) => { c.hidden = false; c.style.setProperty('--x', g.cur[0]); c.style.setProperty('--y', g.cur[1]); });
+      });
+      box.addEventListener('blur', () => { cur.hidden = true; });
+    });
+    let rt = 0;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (DF && DF.img && !tdEl.hidden) tdPaint(); }, 150); });
+    // the clock stops while the page is hidden
+    document.addEventListener('visibilitychange', () => {
+      const g = DF;
+      if (!g || !g.ready || g.over) return;
+      if (document.hidden) g.pausedAt = performance.now();
+      else if (g.pausedAt) { g.t0 += performance.now() - g.pausedAt; g.pausedAt = 0; }
+    });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -14744,13 +15252,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'cp' ? '#btn-cp-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'td' ? '#btn-td-play' : gameSel === 'cp' ? '#btn-cp-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !cpEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !tdEl.hidden || !cpEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -14766,7 +15274,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !cpEl.hidden && cpFound() ? cpFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !cpEl.hidden && cpFound() ? cpFound() : !tdEl.hidden && tdFound() ? tdFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -14829,6 +15337,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'td') { tdAgain(); return; }
     if (resultAction === 'cp') { cpAgain(); return; }
     if (resultAction === 'al') { alAgain(); return; }
     if (resultAction === 'gv') { gvAgain(); return; }
@@ -14863,10 +15372,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  tdWire();
   cpWire();
   alWire();
   gvWire();

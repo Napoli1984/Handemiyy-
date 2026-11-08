@@ -1,7 +1,7 @@
 {
   "name": "Handemiyy",
   "short_name": "Handemiyy",
-  "description": "Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri e Collana di perle con le foto di Hande, e l'album delle figurine.",
+  "description": "Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle e Trova le differenze con le foto di Hande, e l'album delle figurine.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
