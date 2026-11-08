@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri e Collana di perle con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri e Collana di perle con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri e Collana di perle con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2721,6 +2721,20 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 .home .gp-tiles > .gp-tile.al-tile .gp-tag { display: block; font-size: 13px; }
 .home .gp-tiles > .gp-tile.al-tile .gp-ic-svg { height: 46px; max-width: none; }
 .home .gp-tiles > .gp-tile.al-tile .gp-new { top: -8px; right: 42px; }
+/* when it fits in one cell of the last row it looks like the other games */
+.home .gp-tiles > .gp-tile.al-tile.al-small { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 4px; padding: 10px 6px 9px; }
+.home .gp-tiles > .gp-tile.al-tile.al-small .gp-text { justify-items: center; }
+.home .gp-tiles > .gp-tile.al-tile.al-small .gp-tag { display: none; }
+.home .gp-tiles > .gp-tile.al-tile.al-small .gp-new { top: 4px; right: 4px; }
+.home .gp-tiles > .gp-tile.al-tile.al-small .al-tbar { width: 70%; }
+@media (min-width: 920px) {
+  .home .gp-tiles > .gp-tile.al-tile.al-small { grid-template-columns: auto minmax(0, 1fr); justify-items: start; text-align: left; padding: 7px 8px; }
+  .home .gp-tiles > .gp-tile.al-tile.al-small .gp-text { justify-items: start; }
+  .home .gp-tiles > .gp-tile.al-tile.al-small .gp-ic-svg { height: 38px; max-width: 46px; }
+  .home .gp-tiles > .gp-tile.al-tile.al-small .gp-new { top: -8px; right: 10px; }
+}
+/* a short computer screen: the photo frame on the home gives some room to the games */
+@media (min-width: 920px) and (max-height: 780px) { .hero-frame { min-height: 140px; } }
 .al-tbar, .al-bar { display: block; width: 100%; height: 6px; border-radius: 3px; overflow: hidden; background: rgba(201, 164, 105, .18); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .28); }
 .al-tbar { max-width: 340px; height: 5px; margin-top: 4px; }
 .al-tbar i, .al-bar i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #d4aa62, #f6e2ad 55%, #c99d5c); transition: width .7s cubic-bezier(.2, .8, .3, 1); }
@@ -2912,6 +2926,101 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .al-pk.in, .al-card, .al-st.stick, .al-page.turn-r, .al-page.turn-l, .al-tdot, .res-album, .res-album .ra-pack, .al-pk-shine { animation: none !important; }
   .al-ci, .al-pk-top, .al-pk-body { transition-duration: .01s !important; }
 }
+/* ---------- Collana di perle ---------- */
+.cps {
+  --cell: min((100vw - 28px) / 7, (100dvh - 238px) / 9, 70px);
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto auto minmax(0, 1fr); gap: 10px; justify-items: center;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 14px max(12px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 34% at 50% 0%, rgba(255, 236, 214, .9), rgba(255, 236, 214, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(240, 226, 250, .85), rgba(240, 226, 250, 0) 70%), #fbf8f4;
+}
+.cps > * { min-width: 0; }
+.cps > .rw-head { grid-area: auto; grid-row: 1; justify-self: stretch; }
+.cps > .cp-hud { grid-row: 3; }
+.cps > .cp-stage { grid-row: 4; }
+.cps > .cp-msg { grid-row: 5; }
+.cp-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.cp-hud { width: calc(var(--cell) * 7); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; }
+.cp-stat { margin: 0; min-width: 62px; display: grid; justify-items: center; gap: 1px; padding: 5px 10px 6px; border-radius: 14px; background: rgba(255, 253, 249, .88);
+  box-shadow: 0 0 0 1px rgba(201, 164, 105, .4), 0 8px 18px -14px rgba(72, 52, 84, .6); }
+.cp-v { font: italic 700 25px/1 var(--font-display); color: #8a6738; font-variant-numeric: lining-nums tabular-nums; }
+.cp-l { font: 600 9.5px/1.2 var(--font-caps); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cps.low .cp-mv { box-shadow: 0 0 0 1.5px #c97aa0, 0 0 14px rgba(201, 122, 160, .45); animation: cpLow 1.1s ease-in-out infinite; }
+.cps.low .cp-mv .cp-v { color: #9c3f6c; }
+@keyframes cpLow { 50% { transform: scale(1.06); } }
+.cp-goal { margin: 0; display: grid; gap: 5px; justify-items: center; }
+.cp-gbar { display: block; width: 100%; height: 8px; border-radius: 4px; overflow: hidden; background: rgba(201, 164, 105, .18); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .3); }
+.cp-gbar i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #d4aa62, #f6e2ad 55%, #c99d5c); transition: width .5s cubic-bezier(.2, .8, .3, 1); }
+.cp-stage { display: grid; place-items: center; min-height: 0; }
+.cp-board { position: relative; width: calc(var(--cell) * 7); height: calc(var(--cell) * 9); border-radius: 16px; overflow: hidden; touch-action: none; cursor: pointer; outline: none;
+  background: #efe6f3; box-shadow: 0 0 0 2px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 6px rgba(201, 164, 105, .5), 0 26px 46px -26px rgba(72, 52, 84, .6); transition: box-shadow .5s; }
+.cp-board:focus-visible { box-shadow: 0 0 0 2px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 7px #c9a469, 0 26px 46px -26px rgba(72, 52, 84, .6); }
+.cp-board.won { box-shadow: 0 0 0 2px #e2bf7a, 0 0 0 5px #fffaf0, 0 0 0 6px #e2bf7a, 0 0 40px rgba(226, 191, 122, .85), 0 26px 46px -26px rgba(72, 52, 84, .6); }
+.cp-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.cp-veils, .cp-gems, .cp-fx { position: absolute; inset: 0; pointer-events: none; }
+.cp-vl, .cp-g, .cp-cur { position: absolute; left: 0; top: 0; width: var(--cell); height: var(--cell); transform: translate(calc(var(--x) * var(--cell)), calc(var(--y) * var(--cell))); }
+/* the pearl veil over the photo: one layer, and a thicker one with a gold lattice */
+.cp-vl { transition: opacity .45s ease, background-color .3s; }
+.cp-vl.l1 { background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .7) 0 8%, transparent 9%) 0 0 / 50% 50%, linear-gradient(135deg, #faf5fa, #ebe0f0);
+  box-shadow: inset 0 0 0 .5px rgba(190, 160, 120, .45); }
+.cp-vl.l2 { background: linear-gradient(45deg, transparent 46%, rgba(201, 164, 105, .55) 47% 53%, transparent 54%) 0 0 / 50% 50%, linear-gradient(-45deg, transparent 46%, rgba(201, 164, 105, .55) 47% 53%, transparent 54%) 0 0 / 50% 50%, linear-gradient(135deg, #e7dcef, #d5c3e3);
+  box-shadow: inset 0 0 0 .5px rgba(160, 120, 70, .55); }
+.cp-vl.l0 { opacity: 0; }
+.cp-vl.hit { animation: cpVeil .45s ease-out; }
+@keyframes cpVeil { 0% { filter: brightness(1.5); } }
+.cp-board.won .cp-vl { opacity: 0; }
+.cp-gs { display: block; width: 86%; height: 86%; margin: 7%; overflow: visible; transition: transform .2s ease, filter .2s; }
+.cp-g { transition: transform .17s ease; }
+.cp-ov { position: absolute; inset: 3%; width: 94%; height: 94%; overflow: visible; pointer-events: none; }
+.cp-g[data-sp="v"] .cp-ov { transform: rotate(90deg); }
+.cp-g[data-sp="h"] .cp-gs, .cp-g[data-sp="v"] .cp-gs, .cp-g[data-sp="b"] .cp-gs { animation: cpGlow 1.6s ease-in-out infinite; }
+.cp-g[data-sp="d"] .cp-gs { animation: cpDia 2.4s ease-in-out infinite; }
+@keyframes cpGlow { 50% { filter: drop-shadow(0 0 5px rgba(255, 228, 160, .95)); } }
+@keyframes cpDia { 0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 255, 255, .9)) hue-rotate(0deg); } 50% { filter: drop-shadow(0 0 9px rgba(214, 236, 255, 1)) hue-rotate(40deg); } }
+.cp-g.sel .cp-gs { transform: scale(1.14); filter: drop-shadow(0 0 6px rgba(255, 232, 170, 1)); }
+.cp-g.sel::after { content: ""; position: absolute; inset: 4%; border-radius: 30%; box-shadow: 0 0 0 2.5px #c9a469, 0 0 0 4.5px #fffaf2; }
+.cp-g.hint .cp-gs { animation: cpHint .9s ease-in-out infinite; }
+@keyframes cpHint { 25% { transform: rotate(-9deg) scale(1.08); } 75% { transform: rotate(9deg) scale(1.08); } }
+.cp-g.pop .cp-gs { animation: cpPop .32s ease-in forwards; }
+@keyframes cpPop { 30% { transform: scale(1.28); filter: brightness(1.4) drop-shadow(0 0 8px #fff2c8); } 100% { transform: scale(0); opacity: 0; } }
+.cp-g.made .cp-gs { animation: cpMade .55s cubic-bezier(.2, 1.4, .4, 1); }
+@keyframes cpMade { 0% { transform: scale(.4) rotate(-30deg); filter: brightness(1.8) drop-shadow(0 0 12px #fff2c8); } }
+.cp-g.fly { opacity: 0; transition-property: transform, opacity; transition-timing-function: cubic-bezier(.5, 0, .9, .5); }
+/* the light of the special gems */
+.cp-beam { position: absolute; pointer-events: none; }
+.cp-beam.h { left: 0; right: 0; top: calc(var(--y) * var(--cell)); height: var(--cell); background: linear-gradient(180deg, transparent 18%, rgba(255, 242, 200, .9) 42%, #fff 50%, rgba(255, 242, 200, .9) 58%, transparent 82%); animation: cpBeamH .55s ease-out forwards; }
+.cp-beam.v { top: 0; bottom: 0; left: calc(var(--x) * var(--cell)); width: var(--cell); background: linear-gradient(90deg, transparent 18%, rgba(255, 242, 200, .9) 42%, #fff 50%, rgba(255, 242, 200, .9) 58%, transparent 82%); animation: cpBeamV .55s ease-out forwards; }
+@keyframes cpBeamH { 0% { transform: scaleX(0); opacity: 1; } 45% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes cpBeamV { 0% { transform: scaleY(0); opacity: 1; } 45% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+.cp-ring { position: absolute; left: calc((var(--x) + .5) * var(--cell)); top: calc((var(--y) + .5) * var(--cell)); width: calc(var(--r) * var(--cell)); height: calc(var(--r) * var(--cell));
+  border-radius: 50%; transform: translate(-50%, -50%); border: 3px solid rgba(255, 232, 170, .95); box-shadow: 0 0 20px rgba(255, 228, 160, .9), inset 0 0 22px rgba(255, 255, 255, .8); animation: cpRing .6s ease-out forwards; }
+.cp-ring.dia { border-color: rgba(220, 236, 255, .95); box-shadow: 0 0 26px rgba(200, 228, 255, .95), inset 0 0 26px rgba(255, 255, 255, .9); }
+@keyframes cpRing { 0% { transform: translate(-50%, -50%) scale(.2); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 0; } }
+.cp-cur { border-radius: 12px; box-shadow: inset 0 0 0 2.5px #b48a48, 0 0 0 2px #fffaf2; transition: transform .12s ease; pointer-events: none; }
+.float.cp-pts { font: italic 700 19px var(--font-display); color: #7a5520; background: rgba(255, 250, 238, .94); box-shadow: 0 0 0 1px rgba(201, 164, 105, .55), 0 8px 18px -8px rgba(150, 108, 48, .6); }
+.float.cp-pts.big { font-size: 22px; padding: 6px 16px; }
+.cp-msg { margin: 0; min-height: 1.3em; text-align: center; font: italic 600 18px/1.3 var(--font-display); color: #4a3d52; }
+.cp-extra { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 16px; background: rgba(251, 248, 244, .72); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); animation: fadeIn .25s ease; }
+.cp-ex-in { width: min(100%, 340px); display: grid; gap: 10px; padding: 22px 20px 16px; text-align: center; border-radius: 24px; background: linear-gradient(160deg, #fffdf8, #f7eedf);
+  box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 6px rgba(201, 164, 105, .45), 0 30px 50px -24px rgba(72, 52, 84, .6); }
+.cp-ex-t { margin: 0; font: italic 700 26px/1.15 var(--font-display); color: #8a6738; }
+.cp-ex-q { margin: 0 0 6px; color: var(--muted); }
+/* the level on the home: a little map of the veil */
+.cp-lvrow { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.cp-mini { display: grid; grid-template-columns: repeat(7, 6px); gap: 1.5px; padding: 4px; border-radius: 6px; background: #fbf6ee; box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .4); }
+.cp-mini i { width: 6px; height: 6px; border-radius: 1.5px; background: #f1ebf3; }
+.cp-mini i.l1 { background: #cdb8e0; }
+.cp-mini i.l2 { background: #9f7fc4; }
+.cp-lvmid { display: grid; gap: 2px; min-width: 0; }
+.cp-lvnum { font: italic 700 26px/1 var(--font-display); }
+.cp-lvname { font-size: 14px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .cps { --cell: min((100dvh - 232px) / 9, 70px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-g, .cp-gs, .cp-vl { transition-duration: .01s !important; }
+  .cp-g .cp-gs, .cps.low .cp-mv { animation: none !important; }
+}
 </style>
 </head>
 <body>
@@ -2989,6 +3098,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="gv" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="gvit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f1e4f6"/></linearGradient><linearGradient id="gvic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eee6f3"/><stop offset=".5" stop-color="#d8cce4"/><stop offset="1" stop-color="#f3edf7"/></linearGradient><radialGradient id="gvik" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff6dc"/><stop offset=".55" stop-color="#e6c88a"/><stop offset="1" stop-color="#b48a48"/></radialGradient></defs><g transform="rotate(-7 36 30)"><rect x="7" y="9" width="58" height="40" rx="6" fill="url(#gvit)" stroke="#c9a469" stroke-width="1.3"/><path d="M7 17h58" stroke="#e7d2a8" stroke-width="1"/><circle cx="21" cy="33" r="7.6" fill="#fffaf2" stroke="#e2c07c" stroke-width="1"/><path d="M0-5.2L1.5-1.8 5.1-1.4 2.4 1.1 3.1 4.7 0 2.9-3.1 4.7-2.4 1.1-5.1-1.4-1.5-1.8Z" transform="translate(21 33) scale(1.1)" fill="#e9b949" stroke="#b07c25" stroke-width=".5"/><circle cx="36" cy="33" r="7.6" fill="#fffaf2" stroke="#e2c07c" stroke-width="1"/><path d="M0 4C-1.5 2.6-5 .2-5-2.2-5-4-3.6-5-2.4-5-1.3-5-.4-4.3 0-3.4.4-4.3 1.3-5 2.4-5 3.6-5 5-4 5-2.2 5 .2 1.5 2.6 0 4Z" transform="translate(36 33.5) scale(1.1)" fill="#e58aa6" stroke="#b44f72" stroke-width=".5"/><circle cx="51" cy="33" r="7.6" fill="url(#gvic)" stroke="#c9a469" stroke-width="1" stroke-dasharray="2.4 2"/><path d="M48.6 31.2a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1 .9-1 1.6M51 37.4v.2" fill="none" stroke="#a07a3c" stroke-width="1.2" stroke-linecap="round"/></g><circle cx="62" cy="50" r="8.5" fill="url(#gvik)" stroke="#a67c3d" stroke-width="1"/><circle cx="62" cy="50" r="5.6" fill="none" stroke="#fffaf0" stroke-width="1.2" stroke-dasharray="2.6 2"/></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameGv"></span><span class="gp-tag" data-i18n="gpGvTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="cp" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="cpi0" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f6f0f8"/><stop offset="1" stop-color="#c8b6d8"/></radialGradient><linearGradient id="cpi1" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffdbe7"/><stop offset=".5" stop-color="#f28fb3"/><stop offset="1" stop-color="#cf507d"/></linearGradient><linearGradient id="cpi2" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#f1e6ff"/><stop offset=".5" stop-color="#a983ea"/><stop offset="1" stop-color="#6a40b6"/></linearGradient><linearGradient id="cpi3" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#fff7cc"/><stop offset=".5" stop-color="#f4c94a"/><stop offset="1" stop-color="#d38f22"/></linearGradient><linearGradient id="cpi4" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#d2f7e4"/><stop offset=".5" stop-color="#4cc48b"/><stop offset="1" stop-color="#1f8154"/></linearGradient><linearGradient id="cpi5" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset=".5" stop-color="#6c9cf0"/><stop offset="1" stop-color="#2a58bd"/></linearGradient><linearGradient id="cpid" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#eef4fb"/><stop offset="1" stop-color="#b7cbe2"/></linearGradient></defs><path d="M10 7Q38 40 66 7" fill="none" stroke="#c9a469" stroke-width=".8"/><circle cx="10.0" cy="7.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="14.7" cy="12.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="19.3" cy="16.2" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="24.0" cy="19.4" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="28.7" cy="21.7" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="33.3" cy="23.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="38.0" cy="23.5" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="42.7" cy="23.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="47.3" cy="21.7" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="52.0" cy="19.4" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="56.7" cy="16.2" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="61.3" cy="12.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><circle cx="66.0" cy="7.0" r="2.7" fill="url(#cpi0)" stroke="#a593b8" stroke-width=".5"/><path d="M38 26v3" stroke="#c9a469" stroke-width="1"/><g transform="translate(29.6 27.6) scale(0.42)"><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" fill="url(#cpi1)" stroke="#a63f69" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 11.6V30.4M11 13.4l9 6 9-6" fill="none" stroke="#fff" stroke-width=".8" opacity=".45"/><ellipse cx="12.6" cy="13.4" rx="3.6" ry="2.3" transform="rotate(-30 12.6 13.4)" fill="#fff" opacity=".85"/></g><g transform="translate(13.2 43.2) scale(0.34)"><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" fill="url(#cpi2)" stroke="#53308e" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 3.6v15M20 18.6l-12 6M20 18.6l12 6M20 18.6v18.8" fill="none" stroke="#fff" stroke-width=".8" opacity=".4"/><ellipse cx="14.6" cy="24.6" rx="2.6" ry="4.2" fill="#fff" opacity=".6"/></g><g transform="translate(31.6 45.1) scale(0.32)"><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" fill="url(#cpi3)" stroke="#a46d16" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 5.5V21M20 21l14.7-4.8M20 21l9.1 12.5M20 21l-9.1 12.5M20 21L5.3 16.2" stroke="#fff" stroke-width=".8" opacity=".45"/><circle cx="16.6" cy="15.6" r="2.3" fill="#fff" opacity=".8"/></g><g transform="translate(50.0 44.0) scale(0.3)"><rect x="6" y="7.6" width="28" height="28" rx="6.5" fill="#2a1c34" opacity=".22"/><rect x="6" y="6" width="28" height="28" rx="6.5" fill="url(#cpi4)" stroke="#185f3d" stroke-width="1.1"/><rect x="12.4" y="12.4" width="15.2" height="15.2" rx="2.6" fill="#c8f5de" opacity=".42"/><path d="M8 8l4.6 4.6M32 8l-4.6 4.6M8 32l4.6-4.6M32 32l-4.6-4.6" stroke="#fff" stroke-width=".8" opacity=".5"/><ellipse cx="13" cy="11" rx="4" ry="1.8" fill="#fff" opacity=".7"/></g></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameCp"></span><span class="gp-tag" data-i18n="gpCpTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -3266,6 +3381,23 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           </div>
           <button type="button" class="btn primary play-btn" id="btn-al-play" data-i18n="alOpenAlbum"></button>
           <p class="record-line" id="al-record"></p>
+        </div>
+        <div class="setup-part" id="setup-cp" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="cpm0" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f6f0f8"/><stop offset="1" stop-color="#c8b6d8"/></radialGradient><linearGradient id="cpm1" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffdbe7"/><stop offset=".5" stop-color="#f28fb3"/><stop offset="1" stop-color="#cf507d"/></linearGradient><linearGradient id="cpm2" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#f1e6ff"/><stop offset=".5" stop-color="#a983ea"/><stop offset="1" stop-color="#6a40b6"/></linearGradient><linearGradient id="cpm3" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#fff7cc"/><stop offset=".5" stop-color="#f4c94a"/><stop offset="1" stop-color="#d38f22"/></linearGradient><linearGradient id="cpm4" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#d2f7e4"/><stop offset=".5" stop-color="#4cc48b"/><stop offset="1" stop-color="#1f8154"/></linearGradient><linearGradient id="cpm5" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset=".5" stop-color="#6c9cf0"/><stop offset="1" stop-color="#2a58bd"/></linearGradient><linearGradient id="cpmd" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#eef4fb"/><stop offset="1" stop-color="#b7cbe2"/></linearGradient></defs><path d="M10 7Q38 40 66 7" fill="none" stroke="#c9a469" stroke-width=".8"/><circle cx="10.0" cy="7.0" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="14.7" cy="12.0" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="19.3" cy="16.2" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="24.0" cy="19.4" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="28.7" cy="21.7" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="33.3" cy="23.0" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="38.0" cy="23.5" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="42.7" cy="23.0" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="47.3" cy="21.7" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="52.0" cy="19.4" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="56.7" cy="16.2" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="61.3" cy="12.0" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><circle cx="66.0" cy="7.0" r="2.7" fill="url(#cpm0)" stroke="#a593b8" stroke-width=".5"/><path d="M38 26v3" stroke="#c9a469" stroke-width="1"/><g transform="translate(29.6 27.6) scale(0.42)"><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" fill="url(#cpm1)" stroke="#a63f69" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 11.6V30.4M11 13.4l9 6 9-6" fill="none" stroke="#fff" stroke-width=".8" opacity=".45"/><ellipse cx="12.6" cy="13.4" rx="3.6" ry="2.3" transform="rotate(-30 12.6 13.4)" fill="#fff" opacity=".85"/></g><g transform="translate(13.2 43.2) scale(0.34)"><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" fill="url(#cpm2)" stroke="#53308e" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 3.6v15M20 18.6l-12 6M20 18.6l12 6M20 18.6v18.8" fill="none" stroke="#fff" stroke-width=".8" opacity=".4"/><ellipse cx="14.6" cy="24.6" rx="2.6" ry="4.2" fill="#fff" opacity=".6"/></g><g transform="translate(31.6 45.1) scale(0.32)"><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" fill="url(#cpm3)" stroke="#a46d16" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 5.5V21M20 21l14.7-4.8M20 21l9.1 12.5M20 21l-9.1 12.5M20 21L5.3 16.2" stroke="#fff" stroke-width=".8" opacity=".45"/><circle cx="16.6" cy="15.6" r="2.3" fill="#fff" opacity=".8"/></g><g transform="translate(50.0 44.0) scale(0.3)"><rect x="6" y="7.6" width="28" height="28" rx="6.5" fill="#2a1c34" opacity=".22"/><rect x="6" y="6" width="28" height="28" rx="6.5" fill="url(#cpm4)" stroke="#185f3d" stroke-width="1.1"/><rect x="12.4" y="12.4" width="15.2" height="15.2" rx="2.6" fill="#c8f5de" opacity=".42"/><path d="M8 8l4.6 4.6M32 8l-4.6 4.6M8 32l4.6-4.6M32 32l-4.6-4.6" stroke="#fff" stroke-width=".8" opacity=".5"/><ellipse cx="13" cy="11" rx="4" ry="1.8" fill="#fff" opacity=".7"/></g></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameCp"></span><span class="hunt-sub" data-i18n="cpIntro"></span></span>
+          </div>
+          <div class="count-box cp-lvbox">
+            <div class="count-head"><span class="count-label" id="cp-lv-label" data-i18n="cpLevelL"></span><span class="count-tag" id="cp-lv-tag"></span></div>
+            <div class="cp-lvrow" role="group" aria-labelledby="cp-lv-label">
+              <button type="button" class="step" id="cp-lv-minus" data-i18n-attr="aria-label:cpLvPrev"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <span class="cp-mini" id="cp-mini" aria-hidden="true"></span>
+              <span class="cp-lvmid"><span class="cp-lvnum" id="cp-lv-num"></span><span class="cp-lvname" id="cp-lv-name"></span></span>
+              <button type="button" class="step" id="cp-lv-plus" data-i18n-attr="aria-label:cpLvNext"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-cp-play" data-i18n="play"></button>
+          <p class="record-line" id="cp-record"></p>
         </div>
         <!--more-setups-->
 
@@ -3641,6 +3773,38 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           <button type="button" class="btn primary" id="al-stick" data-i18n="alStick" hidden></button>
           <button type="button" class="btn" id="al-more" hidden></button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cp" class="screen cps" hidden data-i18n-attr="aria-label:gameCp">
+    <svg class="cp-sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs><radialGradient id="cpq0" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f6f0f8"/><stop offset="1" stop-color="#c8b6d8"/></radialGradient><linearGradient id="cpq1" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffdbe7"/><stop offset=".5" stop-color="#f28fb3"/><stop offset="1" stop-color="#cf507d"/></linearGradient><linearGradient id="cpq2" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#f1e6ff"/><stop offset=".5" stop-color="#a983ea"/><stop offset="1" stop-color="#6a40b6"/></linearGradient><linearGradient id="cpq3" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#fff7cc"/><stop offset=".5" stop-color="#f4c94a"/><stop offset="1" stop-color="#d38f22"/></linearGradient><linearGradient id="cpq4" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#d2f7e4"/><stop offset=".5" stop-color="#4cc48b"/><stop offset="1" stop-color="#1f8154"/></linearGradient><linearGradient id="cpq5" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset=".5" stop-color="#6c9cf0"/><stop offset="1" stop-color="#2a58bd"/></linearGradient><linearGradient id="cpqd" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#eef4fb"/><stop offset="1" stop-color="#b7cbe2"/></linearGradient></defs><symbol id="cpk0" viewBox="0 0 40 40"><circle cx="20" cy="21.6" r="15.2" fill="#2a1c34" opacity=".2"/><circle cx="20" cy="20" r="15.2" fill="url(#cpq0)" stroke="#9f8db3" stroke-width="1"/><ellipse cx="14.6" cy="13.6" rx="5.6" ry="3.6" transform="rotate(-32 14.6 13.6)" fill="#fff" opacity=".9"/><circle cx="25.5" cy="26" r="5.5" fill="#fff" opacity=".25"/></symbol><symbol id="cpk1" viewBox="0 0 40 40"><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 33.5C8 25.6 4.2 18.6 6 12.8 7.8 7.2 15.2 6 20 11.6 24.8 6 32.2 7.2 34 12.8 35.8 18.6 32 25.6 20 33.5Z" fill="url(#cpq1)" stroke="#a63f69" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 11.6V30.4M11 13.4l9 6 9-6" fill="none" stroke="#fff" stroke-width=".8" opacity=".45"/><ellipse cx="12.6" cy="13.4" rx="3.6" ry="2.3" transform="rotate(-30 12.6 13.4)" fill="#fff" opacity=".85"/></symbol><symbol id="cpk2" viewBox="0 0 40 40"><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 3.6C26.6 12.8 32.4 18.6 32.4 25A12.4 12.4 0 0 1 7.6 25C7.6 18.6 13.4 12.8 20 3.6Z" fill="url(#cpq2)" stroke="#53308e" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 3.6v15M20 18.6l-12 6M20 18.6l12 6M20 18.6v18.8" fill="none" stroke="#fff" stroke-width=".8" opacity=".4"/><ellipse cx="14.6" cy="24.6" rx="2.6" ry="4.2" fill="#fff" opacity=".6"/></symbol><symbol id="cpk3" viewBox="0 0 40 40"><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 5.5L24.35 15.01 34.74 16.21 27.04 23.29 29.11 33.54 20 28.4 10.89 33.54 12.96 23.29 5.26 16.21 15.65 15.01Z" fill="url(#cpq3)" stroke="#a46d16" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 5.5V21M20 21l14.7-4.8M20 21l9.1 12.5M20 21l-9.1 12.5M20 21L5.3 16.2" stroke="#fff" stroke-width=".8" opacity=".45"/><circle cx="16.6" cy="15.6" r="2.3" fill="#fff" opacity=".8"/></symbol><symbol id="cpk4" viewBox="0 0 40 40"><rect x="6" y="7.6" width="28" height="28" rx="6.5" fill="#2a1c34" opacity=".22"/><rect x="6" y="6" width="28" height="28" rx="6.5" fill="url(#cpq4)" stroke="#185f3d" stroke-width="1.1"/><rect x="12.4" y="12.4" width="15.2" height="15.2" rx="2.6" fill="#c8f5de" opacity=".42"/><path d="M8 8l4.6 4.6M32 8l-4.6 4.6M8 32l4.6-4.6M32 32l-4.6-4.6" stroke="#fff" stroke-width=".8" opacity=".5"/><ellipse cx="13" cy="11" rx="4" ry="1.8" fill="#fff" opacity=".7"/></symbol><symbol id="cpk5" viewBox="0 0 40 40"><path d="M20 3.2L36 20 20 36.8 4 20Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M20 3.2L36 20 20 36.8 4 20Z" fill="url(#cpq5)" stroke="#1d438e" stroke-width="1.1" stroke-linejoin="round"/><path d="M20 11.4L28 20 20 28.6 12 20Z" fill="#dce9ff" opacity=".35"/><path d="M20 3.2v8.2M36 20h-8M20 36.8v-8.2M4 20h8" stroke="#fff" stroke-width=".8" opacity=".45"/><ellipse cx="13.6" cy="15" rx="3.2" ry="1.6" transform="rotate(-45 13.6 15)" fill="#fff" opacity=".75"/></symbol><symbol id="cpkd" viewBox="0 0 40 40"><path d="M11 8h18l7 8.6L20 36 4 16.6Z" transform="translate(0 1.6)" fill="#2a1c34" opacity=".22"/><path d="M11 8h18l7 8.6L20 36 4 16.6Z" fill="url(#cpqd)" stroke="#7f9bbb" stroke-width="1.1" stroke-linejoin="round"/><path d="M4 16.6h32M11 8l3.4 8.6L20 8l5.6 8.6L29 8M14.4 16.6L20 36l5.6-19.4" fill="none" stroke="#8ea8c6" stroke-width=".8"/><path d="M14.4 16.6L20 8l5.6 8.6Z" fill="#fff" opacity=".7"/><path d="M4 16.6L11 8l3.4 8.6Z" fill="#ffd3e6" opacity=".7"/><path d="M36 16.6L29 8l-3.4 8.6Z" fill="#c9f3ec" opacity=".8"/><path d="M14.4 16.6L20 36 4 16.6Z" fill="#fff1c4" opacity=".45"/></symbol><symbol id="cpsh" viewBox="0 0 40 40"><path d="M.5 20h39" stroke="#b48a48" stroke-width="1.6"/><circle cx="3.2" cy="20" r="2.5" fill="#fffaf2" stroke="#b48a48" stroke-width=".8"/><circle cx="9.6" cy="20" r="2.5" fill="#fffaf2" stroke="#b48a48" stroke-width=".8"/><circle cx="30.4" cy="20" r="2.5" fill="#fffaf2" stroke="#b48a48" stroke-width=".8"/><circle cx="36.8" cy="20" r="2.5" fill="#fffaf2" stroke="#b48a48" stroke-width=".8"/></symbol><symbol id="cpsb" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#c9a469" stroke-width="2.2"/><circle cx="20" cy="20" r="15.6" fill="none" stroke="#fff6df" stroke-width=".9"/><circle cx="38.00" cy="20.00" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/><circle cx="32.73" cy="32.73" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/><circle cx="20.00" cy="38.00" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/><circle cx="7.27" cy="32.73" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/><circle cx="2.00" cy="20.00" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/><circle cx="7.27" cy="7.27" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/><circle cx="20.00" cy="2.00" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/><circle cx="32.73" cy="7.27" r="2" fill="#fffaf2" stroke="#b48a48" stroke-width=".7"/></symbol></svg>
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="cp-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameCp"></h2><span class="uc-sub" id="cp-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-cp" aria-pressed="true"></button>
+    </header>
+    <div class="cp-hud">
+      <p class="cp-stat cp-mv"><span class="cp-v" id="cp-moves"></span><span class="cp-l" data-i18n="cpMovesL"></span></p>
+      <p class="cp-goal"><span class="cp-gbar"><i id="cp-gfill"></i></span><span class="cp-l" id="cp-goal"></span></p>
+      <p class="cp-stat"><span class="cp-v" id="cp-score"></span><span class="cp-l" data-i18n="cpScoreL"></span></p>
+    </div>
+    <div class="cp-stage">
+      <div class="cp-board" id="cp-board" tabindex="0" role="application" data-i18n-attr="aria-label:cpBoardAria">
+        <img class="cp-photo" id="cp-photo" alt="" draggable="false">
+        <div class="cp-veils" id="cp-veils"></div>
+        <div class="cp-gems" id="cp-gems"></div>
+        <div class="cp-fx" id="cp-fx"></div>
+        <div class="cp-cur" id="cp-cur" hidden></div>
+      </div>
+    </div>
+    <p class="cp-msg" id="cp-msg" aria-live="polite"></p>
+    <div class="cp-extra" id="cp-extra" hidden role="dialog" aria-modal="true" aria-labelledby="cp-ex-t">
+      <div class="cp-ex-in">
+        <h3 class="cp-ex-t" id="cp-ex-t"></h3>
+        <p class="cp-ex-q" data-i18n="cpExtraQ"></p>
+        <button type="button" class="btn primary" id="cp-ex-yes" data-i18n="cpExtraYes"></button>
+        <button type="button" class="btn ghost" id="cp-ex-no" data-i18n="cpExtraNo"></button>
       </div>
     </div>
   </section>
@@ -4079,6 +4243,20 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Collana di perle ----
+      gameCp: 'Collana di perle', gpCpTag: 'Allinea le gemme, scopri la foto', ledeCp: 'Scambia le gemme vicine e allineane tre uguali: sotto c\'è una foto di Hande coperta da un velo di perle. Scoprila tutta prima che finiscano le mosse.',
+      cpIntro: 'Allinea tre gemme uguali e il velo di perle sotto di loro se ne va. Quattro in fila fanno un filo di perle, una L o una T una spilla, cinque un diamante. Scopri tutta la foto e la foto è tua.',
+      cpLevelL: 'Livello', cpLevelTag: '{moves} mosse', cpLevelN: 'Livello {n}', cpLvPrev: 'Livello precedente', cpLvNext: 'Livello successivo', cpSub: 'Livello {n} · {name}',
+      cpShapes: ['L\'ovale', 'Il riquadro', 'Il cuore', 'Il riquadro doppio', 'Il rombo', 'L\'incrocio', 'Il fiore', 'Le colonne', 'Tutta la foto', 'Il cuore doppio'],
+      cpMovesL: 'mosse', cpScoreL: 'punti', cpGoal: 'Foto scoperta: {p}%', cpStart: 'Scambia due gemme vicine: trascinale, oppure toccale una dopo l\'altra.',
+      cpNice: ['Bello!', 'Splendido!', 'Magnifico!', 'Favoloso!'], cpMadeH: 'Un filo di perle!', cpMadeB: 'Una spilla!', cpMadeD: 'Un diamante!',
+      cpNoMoves: 'Nessuna mossa possibile: le gemme si rimescolano', cpWinMsg: 'Foto scoperta!', cpBonus: 'Mosse rimaste: +{p} punti',
+      cpExtraT: 'Mancano solo {n} veli!', cpExtraT1: 'Manca solo un velo!', cpExtraQ: 'Vuoi altre 5 mosse?', cpExtraYes: 'Sì, altre 5 mosse', cpExtraNo: 'No, basta così',
+      cpKicker: 'Collana di perle · livello {n}', cpWinT: 'Foto scoperta!', cpLoseT: 'Mosse finite', cpRowMoves: 'Mosse usate', cpRowLeft: 'Veli rimasti', cpRowSpecial: 'Gemme speciali', cpRowChain: 'Catena più lunga',
+      cpNext: 'Livello successivo', cpRetry: 'Riprova', cpRecord: 'Livelli superati: {n} · record: {p} punti', cpRecordNone: 'Nessun livello superato',
+      cpGems: ['perla', 'cuore', 'goccia', 'stella', 'smeraldo', 'zaffiro'], cpSpNames: { h: 'filo di perle', v: 'filo di perle', b: 'spilla', d: 'diamante' },
+      cpBoardAria: 'Le gemme: frecce per spostarti, Invio per prendere una gemma, poi una freccia per scambiarla', cpCellAria: 'Riga {r}, colonna {c}: {gem}',
+      aCpStart: 'Collana di perle, livello {n}: {moves} mosse. Scambia due gemme vicine per allinearne tre uguali.',
       // ---- Album delle figurine ----
       gameAl: 'Album', gpAlTag: 'Le figurine di Hande', ledeAl: 'Ogni partita finita ti regala una bustina di figurine: aprila, incolla le foto di Hande nell\'album e completa tutte le pagine.',
       alIntro: 'Tutte le foto di Hande diventano figurine. Ogni partita finita, a qualsiasi gioco, ti regala una bustina da cinque; le foto che vinci nei giochi si incollano da sole.',
@@ -4411,6 +4589,20 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- İnci kolye ----
+      gameCp: 'İnci kolye', gpCpTag: 'Taşları diz, fotoğrafı aç', ledeCp: 'Yan yana iki taşın yerini değiştir, üç aynısını diz: altında inci bir örtüyle kaplı bir Hande fotoğrafı var. Hamlelerin bitmeden hepsini aç.',
+      cpIntro: 'Üç aynı taşı diz, altlarındaki inci örtü kalksın. Yan yana dört taş bir inci dizisi, bir L ya da T bir broş, beş taş bir elmas yapar. Fotoğrafın hepsini aç, fotoğraf senin olsun.',
+      cpLevelL: 'Seviye', cpLevelTag: '{moves} hamle', cpLevelN: 'Seviye {n}', cpLvPrev: 'Önceki seviye', cpLvNext: 'Sonraki seviye', cpSub: 'Seviye {n} · {name}',
+      cpShapes: ['Oval', 'Çerçeve', 'Kalp', 'Çift çerçeve', 'Baklava', 'Kavşak', 'Çiçek', 'Sütunlar', 'Bütün fotoğraf', 'Çift kalp'],
+      cpMovesL: 'hamle', cpScoreL: 'puan', cpGoal: 'Açılan fotoğraf: %{p}', cpStart: 'Yan yana iki taşın yerini değiştir: sürükle ya da sırayla dokun.',
+      cpNice: ['Güzel!', 'Harika!', 'Muhteşem!', 'Şahane!'], cpMadeH: 'Bir inci dizisi!', cpMadeB: 'Bir broş!', cpMadeD: 'Bir elmas!',
+      cpNoMoves: 'Yapılacak hamle yok: taşlar karışıyor', cpWinMsg: 'Fotoğraf açıldı!', cpBonus: 'Kalan hamleler: +{p} puan',
+      cpExtraT: 'Sadece {n} örtü kaldı!', cpExtraT1: 'Sadece bir örtü kaldı!', cpExtraQ: '5 hamle daha ister misin?', cpExtraYes: 'Evet, 5 hamle daha', cpExtraNo: 'Hayır, yeter',
+      cpKicker: 'İnci kolye · seviye {n}', cpWinT: 'Fotoğraf açıldı!', cpLoseT: 'Hamleler bitti', cpRowMoves: 'Kullanılan hamle', cpRowLeft: 'Kalan örtü', cpRowSpecial: 'Özel taşlar', cpRowChain: 'En uzun zincir',
+      cpNext: 'Sonraki seviye', cpRetry: 'Yeniden dene', cpRecord: 'Geçilen seviye: {n} · rekor: {p} puan', cpRecordNone: 'Henüz geçilen seviye yok',
+      cpGems: ['inci', 'kalp', 'damla', 'yıldız', 'zümrüt', 'safir'], cpSpNames: { h: 'inci dizisi', v: 'inci dizisi', b: 'broş', d: 'elmas' },
+      cpBoardAria: 'Taşlar: gezinmek için oklar, bir taşı seçmek için Enter, yerini değiştirmek için bir ok', cpCellAria: 'Satır {r}, sütun {c}: {gem}',
+      aCpStart: 'İnci kolye, seviye {n}: {moves} hamle. Üç aynı taşı dizmek için yan yana iki taşın yerini değiştir.',
       // ---- Çıkartma albümü ----
       gameAl: 'Albüm', gpAlTag: 'Hande çıkartmaları', ledeAl: 'Biten her oyun sana bir paket çıkartma kazandırır: paketi aç, Hande\'nin fotoğraflarını albüme yapıştır ve bütün sayfaları tamamla.',
       alIntro: 'Hande\'nin bütün fotoğrafları çıkartma oluyor. Hangi oyun olursa olsun, biten her oyun beşli bir paket kazandırır; oyunlarda kazandığın fotoğraflar albüme kendiliğinden yapışır.',
@@ -4991,13 +5183,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    cpRelang();
     alRelang();
     gvRelang();
     gbRelang();
@@ -5130,7 +5323,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -5320,7 +5513,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -5422,7 +5615,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -5924,7 +6117,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'cp', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -6424,7 +6617,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -6524,18 +6717,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-cp').hidden = gs !== 'cp';
     $('#setup-al').hidden = gs !== 'al';
     $('#setup-gv').hidden = gs !== 'gv';
     $('#setup-gb').hidden = gs !== 'gb';
     $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'cp' ? 'ledeCp' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -6552,7 +6746,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', cp: 'gameCp', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -6830,7 +7024,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -7374,7 +7568,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -7597,7 +7791,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -7745,7 +7939,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -8018,7 +8212,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -8864,7 +9058,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -9326,7 +9520,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -10482,7 +10676,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -10552,7 +10746,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -10617,7 +10811,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -11071,7 +11265,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -11279,7 +11473,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -11665,7 +11859,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -12479,7 +12673,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
     const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
     const c = cfg && cfg.col ? cfg.col : 'w';
     SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
@@ -12776,7 +12970,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function gbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me', keep: 0, build: 1 }].concat(GB_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
@@ -13208,7 +13402,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function gvStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
     GV = { photos: gvPick(GV_TICKETS), n: 0, wins: 0, res: [], found: [], ticket: null, timers: [], over: false, scratchT: 0 };
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gvEl.hidden = false;
@@ -13557,7 +13751,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* ---------- the album on screen ---------- */
   function alStart(openPack) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; alEl.hidden = false;
     const st = alStats();
@@ -13860,6 +14054,16 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#al-s-fill').style.width = pct;
     $('#al-s-packs').textContent = avail > 1 ? t('alPacksN', { n: avail }) : avail ? t('alPacks1') : t('alPacks0');
     $('#al-record').textContent = n ? t('alRecord', { d: alFullPages(st), t: AL_PAGES.length, n: alDups(st) }) : t('alRecordNone');
+    alFitTile();
+  }
+  // the album tile takes what is left of the last row of games, or a row of its own
+  function alFitTile() {
+    const tile = $('.gp-tile[data-game="al"]'), grid = tile && tile.parentElement;
+    if (!tile || home.hidden) return;
+    const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+    const n = $$('.gp-tile', grid).length - 1, r = n % cols, span = r ? cols - r : cols;
+    tile.style.gridColumn = 'span ' + span;
+    tile.classList.toggle('al-small', span === 1);
   }
   function alRelang() { if (AL && !AL.pack) alRender(); }
   function alFound() { return null; }
@@ -13877,6 +14081,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#al-more').addEventListener('click', () => alStick(true));
     $('#al-pk-close').addEventListener('click', alPackClose);
     $('#res-album').addEventListener('click', () => { if (N) return; AudioCore.get(); Sound.pickup(); goHome(); alStart(true); });
+    let fitT = 0;
+    window.addEventListener('resize', () => { clearTimeout(fitT); fitT = setTimeout(alFitTile, 120); });
     // a swipe on the page turns it
     const grid = $('#al-grid');
     let sw = null;
@@ -13907,6 +14113,627 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     });
   }
 
+  /* ---------- Collana di perle: the rules (no screen here, so the tests can play whole levels) ----------
+     A board of W x H gems over a photo of Hande; under each gem a pearl veil of 0, 1 or 2 layers.
+     Swap two neighbours to line up three or more of a kind: they go, the veil under them thins, the gems above fall
+     and new ones come from the top. Four in a line make a string of pearls (it clears its row or its column),
+     an L or a T makes a brooch (it clears the 3 x 3 around), five in a line make a diamond (swapped with a gem,
+     it takes every gem of that kind). The level is won when no veil is left. */
+  const CP_W = 7, CP_H = 9, CP_K = 6;
+  const cpRng = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let x = Math.imul(a ^ (a >>> 15), 1 | a); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  // the levels: one string per row, the digit is the number of veil layers; the moves let a good player uncover
+  // the photo about four times in five (measured by playing each level a few hundred times)
+  const CP_LEVELS = [
+    { moves: 24, map: ['0000000', '0011100', '0111110', '0111110', '0111110', '0111110', '0111110', '0011100', '0000000'] },
+    { moves: 23, map: ['0000000', '0111110', '0111110', '0111110', '0111110', '0111110', '0111110', '0111110', '0000000'] },
+    { moves: 26, map: ['0000000', '0110110', '1111111', '1111111', '0111110', '0111110', '0011100', '0001000', '0000000'] },
+    { moves: 25, map: ['0000000', '0111110', '0112110', '0112110', '0112110', '0112110', '0112110', '0111110', '0000000'] },
+    { moves: 27, map: ['0001000', '0011100', '0111110', '1111111', '1111111', '1111111', '0111110', '0011100', '0001000'] },
+    { moves: 30, map: ['0011100', '0011100', '0011100', '1111111', '1111111', '1111111', '0011100', '0011100', '0011100'] },
+    { moves: 31, map: ['0011100', '0111110', '1112111', '1122211', '1112111', '0111110', '0011100', '0001000', '0001000'] },
+    { moves: 34, map: ['0000000', '1101011', '1101011', '1101011', '1101011', '1101011', '1101011', '1101011', '0000000'] },
+    { moves: 38, map: ['0111110', '1111111', '1111111', '1111111', '1111111', '1111111', '1111111', '1111111', '0111110'] },
+    { moves: 36, map: ['0000000', '0220220', '2222222', '2222222', '0222220', '0222220', '0022200', '0002000', '0000000'] },
+  ];
+  // past the last level they come round again, with a move less each time
+  function cpLevel(n) {
+    const L = CP_LEVELS.length, base = CP_LEVELS[n % L], round = Math.floor(n / L);
+    return { moves: Math.max(18, base.moves - round), cover: base.map.join('').split('').map(Number) };
+  }
+
+  function cpNew(lv, rnd) {
+    const B = { W: CP_W, H: CP_H, K: CP_K, g: new Array(CP_W * CP_H).fill(null), cover: lv.cover.slice(), next: 1, rnd };
+    for (let tries = 0; tries < 100; tries++) {
+      for (let i = 0; i < B.g.length; i++) {
+        let k;
+        do { k = Math.floor(rnd() * B.K); } while (cpWouldRun(B, i, k));
+        B.g[i] = { id: B.next++, k, sp: '' };
+      }
+      if (cpMoves(B).length >= 3) break;
+    }
+    return B;
+  }
+  // filling the board from the top left: would kind k at i make three in a row with the cells already set
+  function cpWouldRun(B, i, k) {
+    const x = i % B.W, kAt = (j) => (B.g[j] ? B.g[j].k : -2);
+    if (x >= 2 && kAt(i - 1) === k && kAt(i - 2) === k) return true;
+    if (i >= 2 * B.W && kAt(i - B.W) === k && kAt(i - 2 * B.W) === k) return true;
+    return false;
+  }
+  const cpK = (B, i) => (B.g[i] ? B.g[i].k : -2);
+  // how long the line of the same gem through i is, across and down (a diamond never lines up)
+  function cpRunAt(B, i) {
+    const k = cpK(B, i);
+    if (k < 0) return [0, 0];
+    const x = i % B.W, y = Math.floor(i / B.W);
+    let a = x, b = x, c = y, d = y;
+    while (a > 0 && cpK(B, y * B.W + a - 1) === k) a--;
+    while (b < B.W - 1 && cpK(B, y * B.W + b + 1) === k) b++;
+    while (c > 0 && cpK(B, (c - 1) * B.W + x) === k) c--;
+    while (d < B.H - 1 && cpK(B, (d + 1) * B.W + x) === k) d++;
+    return [b - a + 1, d - c + 1];
+  }
+  const cpAdj = (B, a, b) => { if (a < 0 || b < 0 || a >= B.g.length || b >= B.g.length) return false; const ax = a % B.W, bx = b % B.W; return (Math.abs(a - b) === 1 && Math.floor(a / B.W) === Math.floor(b / B.W)) || (Math.abs(a - b) === B.W && ax === bx); };
+  // does swapping a and b do something: a line, a diamond, or two special gems together
+  function cpCanSwap(B, a, b) {
+    const pa = B.g[a], pb = B.g[b];
+    if (!pa || !pb || !cpAdj(B, a, b)) return false;
+    if (pa.sp === 'd' || pb.sp === 'd' || (pa.sp && pb.sp)) return true;
+    if (pa.k === pb.k) return false;
+    B.g[a] = pb; B.g[b] = pa;
+    const ra = cpRunAt(B, a), rb = cpRunAt(B, b);
+    B.g[a] = pa; B.g[b] = pb;
+    return Math.max(ra[0], ra[1], rb[0], rb[1]) >= 3;
+  }
+  function cpMoves(B) {
+    const out = [];
+    for (let i = 0; i < B.g.length; i++) {
+      if (i % B.W < B.W - 1 && cpCanSwap(B, i, i + 1)) out.push([i, i + 1]);
+      if (i + B.W < B.g.length && cpCanSwap(B, i, i + B.W)) out.push([i, i + B.W]);
+    }
+    return out;
+  }
+  // the lines on the board, joined when they share a gem (an L, a T, a cross)
+  function cpGroups(B) {
+    const runs = [];
+    for (let y = 0; y < B.H; y++) {
+      for (let x = 0; x < B.W;) {
+        const k = cpK(B, y * B.W + x); let e = x + 1;
+        while (e < B.W && cpK(B, y * B.W + e) === k) e++;
+        if (k >= 0 && e - x >= 3) runs.push({ dir: 'h', k, cells: Array.from({ length: e - x }, (_, j) => y * B.W + x + j) });
+        x = e;
+      }
+    }
+    for (let x = 0; x < B.W; x++) {
+      for (let y = 0; y < B.H;) {
+        const k = cpK(B, y * B.W + x); let e = y + 1;
+        while (e < B.H && cpK(B, e * B.W + x) === k) e++;
+        if (k >= 0 && e - y >= 3) runs.push({ dir: 'v', k, cells: Array.from({ length: e - y }, (_, j) => (y + j) * B.W + x) });
+        y = e;
+      }
+    }
+    const groups = [];
+    runs.forEach((r) => {
+      const hit = groups.filter((g) => r.cells.some((c) => g.cells.has(c)));
+      const g = hit.length ? hit[0] : { k: r.k, cells: new Set(), runs: [] };
+      if (!hit.length) groups.push(g);
+      hit.slice(1).forEach((o) => { o.cells.forEach((c) => g.cells.add(c)); g.runs.push(...o.runs); groups.splice(groups.indexOf(o), 1); });
+      r.cells.forEach((c) => g.cells.add(c)); g.runs.push(r);
+    });
+    return groups;
+  }
+  // what a cleared special gem takes with it
+  function cpArea(B, i, sp) {
+    const x = i % B.W, y = Math.floor(i / B.W), out = [];
+    const box = (r) => { for (let yy = y - r; yy <= y + r; yy++) for (let xx = x - r; xx <= x + r; xx++) if (xx >= 0 && xx < B.W && yy >= 0 && yy < B.H) out.push(yy * B.W + xx); };
+    if (sp === 'h' || sp === 'x') for (let xx = 0; xx < B.W; xx++) out.push(y * B.W + xx);
+    if (sp === 'v' || sp === 'x') for (let yy = 0; yy < B.H; yy++) out.push(yy * B.W + x);
+    if (sp === 'b') box(1);
+    if (sp === 'bb') box(2);
+    if (sp === 'hb') for (let d = -1; d <= 1; d++) { if (y + d >= 0 && y + d < B.H) for (let xx = 0; xx < B.W; xx++) out.push((y + d) * B.W + xx); if (x + d >= 0 && x + d < B.W) for (let yy = 0; yy < B.H; yy++) out.push(yy * B.W + x + d); }
+    if (sp === 'd') { // a diamond hit by a blast takes the gem there is most of
+      const n = new Array(B.K).fill(0);
+      B.g.forEach((p) => { if (p && p.k >= 0) n[p.k]++; });
+      const k = n.indexOf(Math.max(...n));
+      B.g.forEach((p, j) => { if (p && p.k === k) out.push(j); });
+    }
+    return out;
+  }
+  // one step: clear the cells (and whatever the special gems among them take), make the new special gems,
+  // thin the veils, let the gems fall and fill the top; returns what happened, for the screen
+  function cpStep(B, clear, create, chain, blast) {
+    const keep = new Set(create.map((c) => c.i)), gone = new Set(), hits = new Set(create.map((c) => c.i)), fx = blast ? [blast] : [];
+    const queue = [];
+    const take = (i) => {
+      if (keep.has(i) || gone.has(i) || !B.g[i]) return;
+      gone.add(i); hits.add(i);
+      if (B.g[i].sp) queue.push(i);
+    };
+    clear.forEach(take);
+    while (queue.length) {
+      const i = queue.shift(), sp = B.g[i].sp;
+      fx.push({ i, sp });
+      cpArea(B, i, sp).forEach(take);
+    }
+    const out = { chain, clear: [], create: [], covers: [], falls: [], spawns: [], fx, points: 0 };
+    gone.forEach((i) => { out.clear.push({ i, id: B.g[i].id, k: B.g[i].k, sp: B.g[i].sp }); B.g[i] = null; });
+    create.forEach((c) => { const p = B.g[c.i]; p.sp = c.sp; if (c.sp === 'd') p.k = -1; out.create.push({ i: c.i, id: p.id, k: p.k, sp: c.sp }); });
+    hits.forEach((i) => { if (B.cover[i] > 0) { B.cover[i]--; out.covers.push({ i, to: B.cover[i] }); } });
+    out.points = out.clear.length * 30 * chain + out.covers.length * 60 + out.create.length * 100;
+    // the gems fall, new ones come from the top
+    for (let x = 0; x < B.W; x++) {
+      let to = B.H - 1;
+      for (let y = B.H - 1; y >= 0; y--) {
+        const i = y * B.W + x, p = B.g[i];
+        if (!p) continue;
+        if (y !== to) { B.g[to * B.W + x] = p; B.g[i] = null; out.falls.push({ id: p.id, from: i, to: to * B.W + x }); }
+        to--;
+      }
+      for (let y = to, n = 1; y >= 0; y--, n++) {
+        const p = { id: B.next++, k: Math.floor(B.rnd() * B.K), sp: '' };
+        B.g[y * B.W + x] = p;
+        out.spawns.push({ id: p.id, k: p.k, to: y * B.W + x, from: -n * B.W + x });
+      }
+    }
+    return out;
+  }
+  // the lines on the board as one step; moved: where the player's gems landed (they get the new special gems)
+  function cpPlan(B, groups, moved) {
+    const clear = [], create = [];
+    groups.forEach((g) => {
+      const len = Math.max(...g.runs.map((r) => r.cells.length)), dirs = new Set(g.runs.map((r) => r.dir));
+      const sp = len >= 5 ? 'd' : dirs.size > 1 ? 'b' : len === 4 ? (g.runs[0].dir === 'h' ? 'h' : 'v') : '';
+      let at = -1;
+      if (sp) {
+        at = (moved || []).find((i) => g.cells.has(i));
+        if (at === undefined) {
+          if (sp === 'b') { const hs = g.runs.filter((r) => r.dir === 'h').flatMap((r) => r.cells); at = g.runs.filter((r) => r.dir === 'v').flatMap((r) => r.cells).find((c) => hs.includes(c)); }
+          if (at === undefined) { const r = g.runs.reduce((a, b) => (b.cells.length > a.cells.length ? b : a)); at = r.cells[Math.floor(r.cells.length / 2)]; }
+        }
+        // a special gem already there goes off, the new one goes next to it in the line
+        if (B.g[at] && B.g[at].sp) { const free = [...g.cells].find((c) => B.g[c] && !B.g[c].sp); at = free === undefined ? -1 : free; }
+        if (at >= 0) create.push({ i: at, sp, k: g.k });
+      }
+      g.cells.forEach((c) => { if (c !== at) clear.push(c); });
+    });
+    return { clear, create };
+  }
+  // the player's move: null if the swap does nothing, else the steps one after the other
+  function cpPlay(B, a, b) {
+    if (!cpCanSwap(B, a, b)) return null;
+    const pa = B.g[a], pb = B.g[b], steps = [];
+    B.g[a] = pb; B.g[b] = pa; // pa now at b, pb at a
+    let first;
+    if (pa.sp === 'd' || pb.sp === 'd') {
+      const other = pa.sp === 'd' ? pb : pa, dAt = pa.sp === 'd' ? b : a, oAt = pa.sp === 'd' ? a : b;
+      let cells;
+      if (other.sp === 'd') cells = B.g.map((_, i) => i);
+      else {
+        cells = [];
+        B.g.forEach((p, i) => { if (p && p.k === other.k && p !== other) { cells.push(i); if (other.sp && !p.sp) p.sp = other.sp === 'b' ? 'b' : (B.rnd() < .5 ? 'h' : 'v'); } });
+        cells.push(oAt);
+      }
+      B.g[dAt].sp = ''; // spent: it does not go off again when it is cleared
+      cells.push(dAt);
+      first = cpStep(B, cells, [], 1, { i: dAt, sp: 'dd', k: other.k });
+    } else if (pa.sp && pb.sp) {
+      const s = new Set([pa.sp, pb.sp]), combo = s.has('b') && s.size === 1 ? 'bb' : s.has('b') ? 'hb' : 'x';
+      pa.sp = ''; pb.sp = '';
+      first = cpStep(B, [a, b, ...cpArea(B, b, combo)], [], 1, { i: b, sp: combo });
+    } else {
+      const plan = cpPlan(B, cpGroups(B), [b, a]);
+      first = cpStep(B, plan.clear, plan.create, 1, null);
+    }
+    first.swap = [a, b];
+    steps.push(first);
+    for (let chain = 2; chain < 60; chain++) {
+      const groups = cpGroups(B);
+      if (!groups.length) break;
+      const plan = cpPlan(B, groups, null);
+      steps.push(cpStep(B, plan.clear, plan.create, chain, null));
+    }
+    return steps;
+  }
+  // no move left: the gems change places (the special ones too) until there is one
+  function cpShuffle(B) {
+    const cells = B.g.map((_, i) => i);
+    for (let t = 0; t < 300; t++) {
+      const ps = B.g.slice();
+      for (let i = ps.length - 1; i > 0; i--) { const j = Math.floor(B.rnd() * (i + 1)); [ps[i], ps[j]] = [ps[j], ps[i]]; }
+      B.g = ps;
+      if (!cpGroups(B).length && cpMoves(B).length) return true;
+    }
+    // very unlikely: new kinds for the plain gems
+    cells.forEach((i) => { if (!B.g[i].sp) B.g[i].k = -2; });
+    cells.forEach((i) => { if (B.g[i].k === -2) { let k; do { k = Math.floor(B.rnd() * B.K); } while (cpWouldRun(B, i, k)); B.g[i].k = k; } });
+    return cpMoves(B).length > 0;
+  }
+  const cpLeft = (B) => B.cover.reduce((a, b) => a + b, 0);
+  /* ---------- Collana di perle: the screen ----------
+     The rules play the whole move at once (cpPlay); the screen then shows it step by step: the swap, the gems that
+     go, the veils that thin, the gems that fall and the new ones from the top. */
+  const cpEl = $('#cp');
+  const CP_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  let CG = null, cpSpeed = 1; // CG: the level being played; cpSpeed: only the tests change it
+
+  function cpStats() {
+    const st = store.get('hm-cp', null);
+    const o = Object.assign({ played: 0, wins: 0, best: 0, level: 0, sel: 0, found: [] }, st && typeof st === 'object' ? st : {});
+    if (!Array.isArray(o.found)) o.found = [];
+    o.level = Math.max(0, Math.floor(+o.level || 0)); o.sel = Math.max(0, Math.min(o.level, Math.floor(+o.sel || 0)));
+    return o;
+  }
+  const cpShapeName = (n) => (t('cpShapes') || [])[n % CP_LEVELS.length] || '';
+  const cpXY = (i) => [((i % CP_W) + CP_W) % CP_W, Math.floor(i / CP_W)];
+  function cpWait(ms) {
+    const g = CG;
+    return new Promise((res) => {
+      const id = setTimeout(() => { if (g) g.timers = g.timers.filter((x) => x !== id); res(); }, ms / cpSpeed);
+      if (g) g.timers.push(id);
+    });
+  }
+  function cpStart(n, photo) {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop();
+    const st = cpStats();
+    if (n == null) n = st.sel;
+    const lv = cpLevel(n), seen = new Set(st.found);
+    if (!photo) photo = pickOne(CP_PHOTOS.filter((p) => !seen.has(p.id))) || pickOne(CP_PHOTOS);
+    const B = cpNew(lv, Math.random);
+    CG = { n, lv, B, moves: lv.moves, used: 0, score: 0, total: cpLeft(B), photo, busy: false, over: false, won: false, extra: false,
+      sel: -1, cur: -1, timers: [], idleT: 0, els: new Map(), specials: 0, chainMax: 0, found: [] };
+    closeOverlays(); FX.clear(); Music.setEnergy(true);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; cpEl.hidden = false;
+    $('#cp-extra').hidden = true;
+    $('#cp-board').classList.remove('won');
+    cpBuild(); cpRender();
+    cpMsg(t('cpStart'));
+    announce(t('aCpStart', { n: n + 1, moves: lv.moves }));
+    cpIdle();
+  }
+  function cpStop() {
+    const g = CG; CG = null;
+    if (g) { g.timers.forEach(clearTimeout); clearTimeout(g.idleT); }
+    cpEl.hidden = true; $('#cp-extra').hidden = true;
+  }
+  function cpRequestExit() { if (CG && !CG.over && CG.used > 0) openConfirm(false); else goHome(); }
+  function cpMsg(txt) { $('#cp-msg').textContent = txt; }
+
+  /* ---------- the board on screen ---------- */
+  function cpBuild() {
+    const g = CG, B = g.B;
+    $('#cp-photo').src = fullSrc(g.photo);
+    const vs = $('#cp-veils'); vs.textContent = '';
+    B.cover.forEach((c, i) => { const v = document.createElement('div'); v.className = 'cp-vl l' + c; cpPos(v, i); vs.appendChild(v); });
+    $('#cp-gems').textContent = ''; $('#cp-fx').textContent = '';
+    g.els.clear();
+    B.g.forEach((p, i) => cpGemEl(p, i));
+    $('#cp-cur').hidden = true;
+  }
+  function cpGemEl(p, i, from) {
+    const el = document.createElement('div');
+    el.className = 'cp-g';
+    el.innerHTML = '<svg class="cp-gs" viewBox="0 0 40 40" aria-hidden="true"><use/></svg>';
+    cpSetGem(el, p);
+    cpPos(el, from == null ? i : from);
+    $('#cp-gems').appendChild(el);
+    CG.els.set(p.id, el);
+    return el;
+  }
+  function cpSetGem(el, p) {
+    el.dataset.sp = p.sp || '';
+    $('use', el).setAttribute('href', '#cpk' + (p.sp === 'd' ? 'd' : p.k));
+    let ov = $('.cp-ov', el);
+    if (p.sp && p.sp !== 'd') {
+      if (!ov) { el.insertAdjacentHTML('beforeend', '<svg class="cp-ov" viewBox="0 0 40 40" aria-hidden="true"><use/></svg>'); ov = $('.cp-ov', el); }
+      $('use', ov).setAttribute('href', p.sp === 'b' ? '#cpsb' : '#cpsh');
+    } else if (ov) ov.remove();
+  }
+  function cpPos(el, i) { const [x, y] = cpXY(i); el.style.setProperty('--x', x); el.style.setProperty('--y', y); }
+  const cpElAt = (i) => { const p = CG && CG.B.g[i]; return p ? CG.els.get(p.id) : null; };
+  function cpRender() {
+    const g = CG;
+    if (!g) return;
+    $('#cp-sub').textContent = t('cpSub', { n: g.n + 1, name: cpShapeName(g.n) });
+    $('#cp-moves').textContent = g.moves;
+    $('#cp-score').textContent = fmtNum(g.score);
+    const pct = g.total ? Math.floor((1 - cpLeft(g.B) / g.total) * 100) : 100;
+    $('#cp-gfill').style.width = pct + '%';
+    $('#cp-goal').textContent = t('cpGoal', { p: pct });
+    cpEl.classList.toggle('low', !g.over && g.moves <= 5);
+  }
+  function cpSel(i) {
+    const g = CG;
+    if (!g) return;
+    const old = cpElAt(g.sel);
+    if (old) old.classList.remove('sel');
+    g.sel = i;
+    const el = cpElAt(i);
+    if (el) el.classList.add('sel');
+  }
+  function cpCenter(cells) {
+    const r = $('#cp-board').getBoundingClientRect(), c = r.width / CP_W;
+    let sx = 0, sy = 0;
+    cells.forEach((i) => { const [x, y] = cpXY(i); sx += x; sy += y; });
+    return [r.left + (sx / cells.length + .5) * c, r.top + (sy / cells.length + .5) * c];
+  }
+  // the light of a special gem going off
+  function cpBlast(f) {
+    const box = $('#cp-fx'), [x, y] = cpXY(f.i);
+    const add = (cls, vars) => {
+      const d = document.createElement('div'); d.className = cls;
+      Object.entries(vars).forEach(([k, v]) => d.style.setProperty(k, v));
+      box.appendChild(d); setTimeout(() => d.remove(), 700);
+    };
+    const rows = f.sp === 'hb' ? [y - 1, y, y + 1] : f.sp === 'h' || f.sp === 'x' ? [y] : [];
+    const cols = f.sp === 'hb' ? [x - 1, x, x + 1] : f.sp === 'v' || f.sp === 'x' ? [x] : [];
+    rows.forEach((r) => { if (r >= 0 && r < CP_H) add('cp-beam h', { '--y': r }); });
+    cols.forEach((c) => { if (c >= 0 && c < CP_W) add('cp-beam v', { '--x': c }); });
+    if (f.sp === 'b' || f.sp === 'bb') add('cp-ring', { '--x': x, '--y': y, '--r': f.sp === 'b' ? 3 : 5 });
+    if (f.sp === 'd' || f.sp === 'dd') add('cp-ring dia', { '--x': x, '--y': y, '--r': 7 });
+  }
+  const cpFallMs = (rows) => Math.min(520, 120 + 48 * rows);
+  // one step of a move, on screen
+  async function cpShow(g, s, k, swapIds) {
+    const gems = $('#cp-gems'), veils = $('#cp-veils').children;
+    if (s.swap) {
+      const [a, b] = s.swap, ea = g.els.get(swapIds[0]), eb = g.els.get(swapIds[1]);
+      if (ea) cpPos(ea, b);
+      if (eb) cpPos(eb, a);
+      await cpWait(180);
+      if (CG !== g) return;
+    }
+    s.fx.forEach(cpBlast);
+    if (s.fx.length) { if (s.fx.some((f) => f.sp === 'd' || f.sp === 'dd')) Sound.sparkle(); else Sound.whoosh(); buzz(18); }
+    if (s.clear.length) {
+      const [cx, cy] = cpCenter(s.clear.map((c) => c.i));
+      if (k > 0 || !s.fx.length) Sound.match(Math.min(k + 1, 8)); // higher at every step of a chain
+      FX.float('+' + fmtNum(s.points), cx, cy, 'cp-pts');
+    }
+    s.clear.forEach((c) => {
+      const el = g.els.get(c.id);
+      if (!el) return;
+      g.els.delete(c.id);
+      el.classList.add('pop');
+      setTimeout(() => el.remove(), 360 / cpSpeed);
+    });
+    s.create.forEach((c) => {
+      const el = g.els.get(c.id);
+      if (!el) return;
+      cpSetGem(el, c); el.classList.remove('made'); void el.offsetWidth; el.classList.add('made');
+      g.specials++;
+    });
+    if (s.create.length) {
+      const sp = s.create[s.create.length - 1].sp;
+      Sound.golden();
+      cpMsg(t(sp === 'd' ? 'cpMadeD' : sp === 'b' ? 'cpMadeB' : 'cpMadeH'));
+    } else if (k >= 2) cpMsg(t('cpNice')[Math.min(k - 2, 3)]);
+    s.covers.forEach((c) => { const v = veils[c.i]; if (v) { v.className = 'cp-vl l' + c.to + ' hit'; } });
+    g.score += s.points;
+    g.chainMax = Math.max(g.chainMax, k + 1);
+    cpRender();
+    await cpWait(240);
+    if (CG !== g) return;
+    // the gems fall and the new ones come in from the top
+    let longest = 0;
+    const moved = [];
+    s.falls.forEach((f) => {
+      const el = g.els.get(f.id);
+      if (!el) return;
+      const ms = cpFallMs(cpXY(f.to)[1] - cpXY(f.from)[1]);
+      el.style.transitionDuration = ms / cpSpeed + 'ms'; cpPos(el, f.to);
+      moved.push(el); longest = Math.max(longest, ms);
+    });
+    s.spawns.forEach((n) => {
+      const el = cpGemEl({ id: n.id, k: n.k, sp: '' }, n.to, n.from);
+      void el.offsetWidth;
+      const ms = cpFallMs(cpXY(n.to)[1] - cpXY(n.from)[1]);
+      el.style.transitionDuration = ms / cpSpeed + 'ms'; cpPos(el, n.to);
+      moved.push(el); longest = Math.max(longest, ms);
+    });
+    if (s.spawns.length) setTimeout(() => { if (CG === g) Sound.deal(); }, 90 / cpSpeed);
+    await cpWait(longest + 40);
+    moved.forEach((el) => { el.style.transitionDuration = ''; });
+    void gems;
+  }
+  // the player's move
+  async function cpTry(a, b) {
+    const g = CG;
+    if (!g || g.busy || g.over || !cpAdj(g.B, a, b) || !g.B.g[a] || !g.B.g[b]) return;
+    g.busy = true; cpSel(-1); cpHintOff(); clearTimeout(g.idleT);
+    const pa = g.B.g[a], pb = g.B.g[b];
+    const steps = cpPlay(g.B, a, b);
+    if (!steps) {
+      const ea = g.els.get(pa.id), eb = g.els.get(pb.id);
+      Sound.wrong(); buzz(30);
+      cpPos(ea, b); cpPos(eb, a);
+      await cpWait(160); if (CG !== g) return;
+      cpPos(ea, a); cpPos(eb, b);
+      await cpWait(170); if (CG !== g) return;
+      g.busy = false; cpIdle();
+      return;
+    }
+    g.moves--; g.used++;
+    Sound.flip();
+    cpRender();
+    for (let k = 0; k < steps.length; k++) {
+      await cpShow(g, steps[k], k, [pa.id, pb.id]);
+      if (CG !== g) return;
+    }
+    if (!cpLeft(g.B)) { cpWin(g); return; }
+    if (!cpMoves(g.B).length) { await cpReshuffle(g); if (CG !== g) return; }
+    if (g.moves <= 0) { cpOutOfMoves(g); return; }
+    g.busy = false; cpIdle();
+  }
+  async function cpReshuffle(g) {
+    cpMsg(t('cpNoMoves')); Sound.whoosh();
+    cpShuffle(g.B);
+    const moved = [];
+    g.B.g.forEach((p, i) => { const el = g.els.get(p.id); if (el) { cpSetGem(el, p); el.style.transitionDuration = 480 / cpSpeed + 'ms'; cpPos(el, i); moved.push(el); } });
+    await cpWait(540);
+    moved.forEach((el) => { el.style.transitionDuration = ''; });
+  }
+  // a hint after a while without a move: two gems to swap wiggle
+  function cpIdle() {
+    const g = CG;
+    if (!g) return;
+    clearTimeout(g.idleT); cpHintOff();
+    g.idleT = setTimeout(() => {
+      if (CG !== g || g.busy || g.over) return;
+      const ms = cpMoves(g.B);
+      if (!ms.length) return;
+      const m = ms.find((x) => g.B.cover[x[0]] || g.B.cover[x[1]]) || ms[0];
+      m.forEach((i) => { const el = cpElAt(i); if (el) el.classList.add('hint'); });
+    }, 7000 / cpSpeed);
+  }
+  function cpHintOff() { $$('.cp-g.hint', cpEl).forEach((e) => e.classList.remove('hint')); }
+
+  /* ---------- the end of a level ---------- */
+  function cpOutOfMoves(g) {
+    const left = cpLeft(g.B);
+    if (!g.extra && left <= Math.max(4, Math.round(g.total * .2))) {
+      g.busy = true;
+      $('#cp-ex-t').textContent = left === 1 ? t('cpExtraT1') : t('cpExtraT', { n: left });
+      $('#cp-extra').hidden = false;
+      Sound.pickup();
+      setTimeout(() => $('#cp-ex-yes').focus({ preventScroll: true }), 60);
+      return;
+    }
+    cpLose(g);
+  }
+  function cpExtra(yes) {
+    const g = CG;
+    if (!g || $('#cp-extra').hidden) return;
+    $('#cp-extra').hidden = true;
+    if (!yes) { cpLose(g); return; }
+    g.extra = true; g.moves += 5; g.busy = false;
+    Sound.golden(); cpRender(); cpIdle();
+    $('#cp-board').focus({ preventScroll: true });
+  }
+  async function cpWin(g) {
+    g.over = true; g.busy = true; g.won = true;
+    cpMsg(t('cpWinMsg')); Sound.golden();
+    const bonus = g.moves * 250;
+    if (bonus) {
+      g.score += bonus;
+      const r = $('#cp-board').getBoundingClientRect();
+      FX.float(t('cpBonus', { p: fmtNum(bonus) }), r.left + r.width / 2, r.top + r.height / 2, 'cp-pts big');
+    }
+    cpRender();
+    await cpWait(650); if (CG !== g) return;
+    // the gems fall away and the whole photo shows
+    $$('.cp-g', $('#cp-gems')).forEach((el) => {
+      const y = +el.style.getPropertyValue('--y'), x = +el.style.getPropertyValue('--x');
+      el.style.transitionDelay = ((CP_H - y) * 45 + x * 18) / cpSpeed + 'ms';
+      el.style.transitionDuration = 700 / cpSpeed + 'ms';
+      el.classList.add('fly'); el.style.setProperty('--y', y + CP_H + 2);
+    });
+    $('#cp-board').classList.add('won');
+    await cpWait(1250); if (CG !== g) return;
+    celebrate();
+    const st = cpStats(), record = g.score > st.best && st.played > 0;
+    st.played++; st.wins++; st.best = Math.max(st.best, g.score);
+    st.level = Math.max(st.level, g.n + 1); st.sel = g.n + 1;
+    st.found = Array.from(new Set(st.found.concat([g.photo.id]))).slice(-200);
+    store.set('hm-cp', st);
+    g.found = [g.photo];
+    await cpWait(1100); if (CG !== g) return;
+    const stars = g.extra ? 1 : g.moves >= g.lv.moves * .3 ? 3 : g.moves >= g.lv.moves * .12 ? 2 : 1;
+    showResult({ kicker: t('cpKicker', { n: g.n + 1 }), title: t('cpWinT'), stars, score: g.score, record, photos: true, photosLabel: t('rwSeePhotos'), again: t('cpNext'), action: 'cp',
+      rows: [[t('cpRowMoves'), g.used + ' / ' + (g.lv.moves + (g.extra ? 5 : 0))], [t('cpRowSpecial'), String(g.specials)], [t('cpRowChain'), String(g.chainMax)]], strip: [{ id: g.photo.id, open: true }] });
+  }
+  async function cpLose(g) {
+    g.over = true; g.busy = true;
+    cpMsg(t('cpLoseT')); Sound.lose(); cpRender();
+    const st = cpStats();
+    st.played++; st.best = Math.max(st.best, g.score); st.sel = g.n;
+    store.set('hm-cp', st);
+    await cpWait(1000); if (CG !== g) return;
+    showResult({ kicker: t('cpKicker', { n: g.n + 1 }), title: t('cpLoseT'), stars: null, score: g.score, record: false, photos: false, again: t('cpRetry'), action: 'cp',
+      rows: [[t('cpRowLeft'), String(cpLeft(g.B))], [t('cpRowMoves'), String(g.used)], [t('cpRowSpecial'), String(g.specials)]], strip: [{ id: g.photo.id, open: false }] });
+  }
+
+  /* ---------- the home ---------- */
+  function cpRenderSetup() {
+    const st = cpStats(), n = st.sel, lv = cpLevel(n);
+    $('#cp-lv-num').textContent = t('cpLevelN', { n: n + 1 });
+    $('#cp-lv-name').textContent = cpShapeName(n);
+    $('#cp-lv-tag').textContent = t('cpLevelTag', { moves: lv.moves });
+    $('#cp-lv-minus').disabled = n <= 0;
+    $('#cp-lv-plus').disabled = n >= st.level;
+    const mini = $('#cp-mini');
+    if (mini.children.length !== CP_W * CP_H) { mini.textContent = ''; for (let i = 0; i < CP_W * CP_H; i++) mini.appendChild(document.createElement('i')); }
+    lv.cover.forEach((c, i) => { mini.children[i].className = 'l' + c; });
+    $('#cp-record').textContent = st.level ? t('cpRecord', { n: st.level, p: fmtNum(st.best) }) : t('cpRecordNone');
+  }
+  function cpRelang() { if (CG) cpRender(); }
+  function cpFound() { return CG && CG.found.length ? CG.found : null; }
+  function cpAgain() { const g = CG; if (g && g.won) cpStart(g.n + 1); else if (g) cpStart(g.n, g.photo); else cpStart(); }
+  function cpWire() {
+    $('#btn-cp-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); cpStart(); });
+    $('#cp-exit').addEventListener('click', cpRequestExit);
+    const lvTo = (d) => { const st = cpStats(); st.sel = Math.max(0, Math.min(st.level, st.sel + d)); store.set('hm-cp', st); Sound.tick2(); cpRenderSetup(); };
+    $('#cp-lv-minus').addEventListener('click', () => lvTo(-1));
+    $('#cp-lv-plus').addEventListener('click', () => lvTo(1));
+    $('#cp-ex-yes').addEventListener('click', () => cpExtra(true));
+    $('#cp-ex-no').addEventListener('click', () => cpExtra(false));
+    const board = $('#cp-board');
+    let drag = null;
+    const cellAt = (e) => {
+      const r = board.getBoundingClientRect(), x = Math.floor((e.clientX - r.left) / (r.width / CP_W)), y = Math.floor((e.clientY - r.top) / (r.height / CP_H));
+      return x >= 0 && x < CP_W && y >= 0 && y < CP_H ? y * CP_W + x : -1;
+    };
+    board.addEventListener('pointerdown', (e) => {
+      const g = CG;
+      if (!g || g.over || e.button > 0) return;
+      const i = cellAt(e);
+      if (i < 0) return;
+      e.preventDefault();
+      $('#cp-cur').hidden = true;
+      drag = { i, x: e.clientX, y: e.clientY, done: false };
+      try { board.setPointerCapture(e.pointerId); } catch (err) { /* already released */ }
+      cpIdle();
+    });
+    board.addEventListener('pointermove', (e) => {
+      if (!drag || drag.done || !CG) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y, c = board.getBoundingClientRect().width / CP_W;
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < c * .38) return;
+      drag.done = true;
+      const j = drag.i + (Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 1 : -1) : (dy > 0 ? CP_W : -CP_W));
+      if (cpAdj(CG.B, drag.i, j) && j >= 0 && j < CP_W * CP_H) cpTry(drag.i, j);
+    });
+    const up = () => {
+      const d = drag; drag = null;
+      const g = CG;
+      if (!d || d.done || !g || g.busy || g.over) return;
+      if (g.sel >= 0 && g.sel !== d.i && cpAdj(g.B, g.sel, d.i)) cpTry(g.sel, d.i);
+      else { cpSel(g.sel === d.i ? -1 : d.i); if (g.sel >= 0) Sound.tick2(); }
+    };
+    board.addEventListener('pointerup', up);
+    board.addEventListener('pointercancel', () => { drag = null; });
+    // the keys: arrows move a frame over the gems, Enter takes one, then an arrow swaps it
+    const cur = $('#cp-cur');
+    const showCur = (g) => { cur.hidden = false; cpPos(cur, g.cur); const [x, y] = cpXY(g.cur), p = g.B.g[g.cur]; if (p) announce(t('cpCellAria', { r: y + 1, c: x + 1, gem: p.sp ? (t('cpSpNames') || {})[p.sp] : (t('cpGems') || [])[p.k] })); };
+    board.addEventListener('keydown', (e) => {
+      const g = CG;
+      if (!g || g.over || !$('#cp-extra').hidden) return;
+      const dir = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -CP_W, ArrowDown: CP_W }[e.key];
+      if (g.cur < 0) g.cur = Math.floor(CP_H / 2) * CP_W + Math.floor(CP_W / 2);
+      if (dir) {
+        e.preventDefault();
+        const j = g.cur + dir;
+        if (!cpAdj(g.B, g.cur, j)) return;
+        if (g.sel >= 0 && g.sel === g.cur) { cpTry(g.cur, j); g.cur = j; cur.hidden = false; cpPos(cur, j); return; }
+        g.cur = j; showCur(g); cpIdle();
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (g.busy) return;
+        cpSel(g.sel === g.cur ? -1 : g.cur); showCur(g);
+      } else if (e.key === 'Escape' && g.sel >= 0) { e.preventDefault(); cpSel(-1); }
+    });
+    board.addEventListener('blur', () => { cur.hidden = true; });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -13917,13 +14744,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'cp' ? '#btn-cp-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !cpEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -13939,7 +14766,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !cpEl.hidden && cpFound() ? cpFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -14002,6 +14829,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'cp') { cpAgain(); return; }
     if (resultAction === 'al') { alAgain(); return; }
     if (resultAction === 'gv') { gvAgain(); return; }
     if (resultAction === 'gb') { gbAgain(); return; }
@@ -14035,10 +14863,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  cpWire();
   alWire();
   gvWire();
   gbWire();

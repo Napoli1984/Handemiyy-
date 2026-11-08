@@ -1,6 +1,6 @@
 # Handemiyy
 
-Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna**, **Tombola**, **Quiz del milione**, **Pioggia di perle**, **Poker**, **Scacchi**, **Gran Bazar** e **Gratta e scopri**, più l'**Album delle figurine**: ogni partita regala una bustina. In italiano e in turco.
+Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna**, **Tombola**, **Quiz del milione**, **Pioggia di perle**, **Poker**, **Scacchi**, **Gran Bazar**, **Gratta e scopri** e **Collana di perle**, più l'**Album delle figurine**: ogni partita regala una bustina. In italiano e in turco.
 
 Gioca qui: https://napoli1984.github.io/Handemiyy-/
 
@@ -9,6 +9,8 @@ Nel **Bowling** si gioca dieci turni su una pista dorata, in una sala con le fot
 Per Memory e Ultima carta si può scegliere tra dieci **modelli di carte** (Avorio, Damasco, Art déco, Marmo, Classico, Polaroid, Cipria, Notte, Nazar e Oro, il premio della caccia al tesoro).
 
 Nella **Ruota della fortuna** si gira la ruota, si scelgono le consonanti, si comprano le vocali e si indovina la frase: le frasi parlano del mondo di Hande, di proverbi, film, canzoni, città e della Turchia. Ogni frase indovinata regala una foto di Hande, e chi vince gioca il gran finale. Si gioca contro la Volpe e il Gatto, in due sullo stesso telefono oppure online.
+
+Nella **Collana di perle** si scambiano le gemme vicine per allinearne tre uguali: sotto c'è una foto di Hande coperta da un velo di perle, e ogni gemma allineata ne toglie un pezzo. Quattro in fila fanno un filo di perle, una L o una T una spilla, cinque un diamante. Dieci livelli, e ogni foto scoperta è tua.
 
 Nell'**Album delle figurine** ogni foto di Hande è una figurina, in 21 pagine: ogni partita finita, a qualsiasi gioco, regala una bustina da cinque, ce n'è una in regalo ogni giorno, e le foto vinte nei giochi si incollano da sole. Con quattro doppie si prende una figurina che manca, e ogni pagina completa vale un'altra bustina.
 
