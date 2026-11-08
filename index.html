@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi e Gran Bazar con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi e Gran Bazar con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi e Gran Bazar con le foto di Hande. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2673,6 +2673,47 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .gb-log li + li { margin-top: 4px; }
   .gb-log li:first-child { color: var(--ink); font-weight: 600; }
 }
+/* ---------- Gratta e scopri ---------- */
+.gvs {
+  --cw: min(100vw - 28px, 400px, (100dvh - 236px) * .72);
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto auto minmax(0, 1fr); gap: 10px; justify-items: center;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 14px max(12px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 34% at 50% 0%, rgba(255, 236, 214, .9), rgba(255, 236, 214, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(240, 226, 250, .85), rgba(240, 226, 250, 0) 70%), #fbf8f4;
+}
+.gvs > * { min-width: 0; }
+.gvs > .rw-head { grid-area: auto; grid-row: 1; justify-self: stretch; }
+.gv-card { grid-row: 3; width: var(--cw); display: grid; gap: 8px; padding: 10px 10px 11px; border-radius: 22px;
+  background: linear-gradient(160deg, #fffdf8, #f5ebf8); box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 6px rgba(201, 164, 105, .45), 0 24px 44px -24px rgba(72, 52, 84, .55); transition: box-shadow .4s; }
+.gv-card.won { box-shadow: 0 0 0 2px #e2bf7a, 0 0 0 5px #fffaf0, 0 0 0 6px #e2bf7a, 0 0 34px rgba(226, 191, 122, .8), 0 24px 44px -24px rgba(72, 52, 84, .55); }
+.gv-top { display: flex; align-items: baseline; justify-content: space-between; padding: 0 4px; }
+.gv-name { font: 400 26px/1 var(--font-script, cursive); color: #a07a3c; }
+.gv-no { font: 700 10.5px var(--font-caps); letter-spacing: .16em; text-transform: uppercase; color: #a78a5a; }
+.gv-area { position: relative; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: #efe6f3; box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .5); }
+.gv-area img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.gv-grid { position: absolute; inset: 0; display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr); pointer-events: none; }
+.gv-cell { display: grid; place-items: center; }
+.gv-sym { width: 54%; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 253, 249, .9);
+  box-shadow: 0 6px 14px -6px rgba(72, 52, 84, .55), inset 0 0 0 1.5px rgba(201, 164, 105, .65); opacity: 0; transform: scale(.4); transition: transform .32s cubic-bezier(.3, 1.5, .5, 1), opacity .2s, box-shadow .3s; }
+.gv-sym svg { width: 68%; height: 68%; }
+.gv-cell.show .gv-sym { opacity: 1; transform: none; }
+.gv-cell.hit .gv-sym { box-shadow: 0 0 0 3px #e2bf7a, 0 0 20px rgba(226, 191, 122, .95); animation: gvHit .7s ease-in-out infinite alternate; }
+.gv-cell.miss .gv-sym { opacity: .5; transform: scale(.88); }
+@keyframes gvHit { to { transform: scale(1.1); } }
+.gv-coat { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; transition: opacity .45s; }
+.gv-coat.gone { opacity: 0; pointer-events: none; }
+.gv-wins { display: flex; justify-content: center; gap: 7px; }
+.gv-wins i { width: 22px; height: 13px; border-radius: 3px; background: #f3ecf6; box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .55); }
+.gv-wins i.cur { box-shadow: inset 0 0 0 1.5px #c9a469, 0 0 8px rgba(226, 194, 126, .7); }
+.gv-wins i.won { background: linear-gradient(135deg, #fff1c8, #e2bf7a); box-shadow: inset 0 0 0 1px #b48a48; }
+.gv-wins i.lost { background: #e8e1ec; opacity: .6; }
+.gv-msg { grid-row: 4; margin: 0; min-height: 1.3em; text-align: center; font: italic 600 18px/1.3 var(--font-display); color: #4a3d52; }
+.gv-ctrl { grid-row: 5; width: var(--cw); display: grid; }
+.gv-ctrl .btn { min-height: 50px; }
+.gv-ctrl [hidden] { display: none; }
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .gvs { --cw: min(420px, (100dvh - 230px) * .72); }
+}
 </style>
 </head>
 <body>
@@ -2744,6 +2785,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="gb" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="gbib" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#efe3f5"/></linearGradient><radialGradient id="gbid" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f8f1e6"/><stop offset="1" stop-color="#e4d2b0"/></radialGradient></defs><rect x="6.5" y="3.5" width="45" height="45" rx="3" fill="url(#gbib)" stroke="#c9a469" stroke-width="1.2"/><rect x="8" y="5" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="15" y="5" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="22" y="5" width="7" height="7" fill="#f3d28c" stroke="#c9a469" stroke-width=".5"/><rect x="29" y="5" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><rect x="36" y="5" width="7" height="7" fill="#a8c5ea" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="5" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="12" width="7" height="7" fill="#9fd6b8" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="19" width="7" height="7" fill="#f2b58e" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="26" width="7" height="7" fill="#f2b3c3" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="33" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="43" y="40" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="36" y="40" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><rect x="29" y="40" width="7" height="7" fill="#a8c5ea" stroke="#c9a469" stroke-width=".5"/><rect x="22" y="40" width="7" height="7" fill="#c8b2e8" stroke="#c9a469" stroke-width=".5"/><rect x="15" y="40" width="7" height="7" fill="#9fd6b8" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="40" width="7" height="7" fill="#fffaf2" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="33" width="7" height="7" fill="#f2b3c3" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="26" width="7" height="7" fill="#9fd5e3" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="19" width="7" height="7" fill="#f3d28c" stroke="#c9a469" stroke-width=".5"/><rect x="8" y="12" width="7" height="7" fill="#e7a9bd" stroke="#c9a469" stroke-width=".5"/><path d="M29 19.5l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#e2c07c" stroke="#b48a48" stroke-width=".6"/><g transform="rotate(-12 51 38)"><rect x="43" y="30" width="16" height="16" rx="3.6" fill="url(#gbid)" stroke="#b48a48" stroke-width=".9"/><circle cx="47.5" cy="34.5" r="1.55" fill="#4a3557"/><circle cx="51" cy="38" r="1.55" fill="#4a3557"/><circle cx="54.5" cy="41.5" r="1.55" fill="#4a3557"/></g><g transform="rotate(9 64 46)"><rect x="56" y="38" width="16" height="16" rx="3.6" fill="url(#gbid)" stroke="#b48a48" stroke-width=".9"/><circle cx="60.5" cy="42.5" r="1.55" fill="#4a3557"/><circle cx="67.5" cy="42.5" r="1.55" fill="#4a3557"/><circle cx="60.5" cy="49.5" r="1.55" fill="#4a3557"/><circle cx="67.5" cy="49.5" r="1.55" fill="#4a3557"/></g></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameGb"></span><span class="gp-tag" data-i18n="gpGbTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="gv" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="gvit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f1e4f6"/></linearGradient><linearGradient id="gvic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eee6f3"/><stop offset=".5" stop-color="#d8cce4"/><stop offset="1" stop-color="#f3edf7"/></linearGradient><radialGradient id="gvik" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff6dc"/><stop offset=".55" stop-color="#e6c88a"/><stop offset="1" stop-color="#b48a48"/></radialGradient></defs><g transform="rotate(-7 36 30)"><rect x="7" y="9" width="58" height="40" rx="6" fill="url(#gvit)" stroke="#c9a469" stroke-width="1.3"/><path d="M7 17h58" stroke="#e7d2a8" stroke-width="1"/><circle cx="21" cy="33" r="7.6" fill="#fffaf2" stroke="#e2c07c" stroke-width="1"/><path d="M0-5.2L1.5-1.8 5.1-1.4 2.4 1.1 3.1 4.7 0 2.9-3.1 4.7-2.4 1.1-5.1-1.4-1.5-1.8Z" transform="translate(21 33) scale(1.1)" fill="#e9b949" stroke="#b07c25" stroke-width=".5"/><circle cx="36" cy="33" r="7.6" fill="#fffaf2" stroke="#e2c07c" stroke-width="1"/><path d="M0 4C-1.5 2.6-5 .2-5-2.2-5-4-3.6-5-2.4-5-1.3-5-.4-4.3 0-3.4.4-4.3 1.3-5 2.4-5 3.6-5 5-4 5-2.2 5 .2 1.5 2.6 0 4Z" transform="translate(36 33.5) scale(1.1)" fill="#e58aa6" stroke="#b44f72" stroke-width=".5"/><circle cx="51" cy="33" r="7.6" fill="url(#gvic)" stroke="#c9a469" stroke-width="1" stroke-dasharray="2.4 2"/><path d="M48.6 31.2a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1 .9-1 1.6M51 37.4v.2" fill="none" stroke="#a07a3c" stroke-width="1.2" stroke-linecap="round"/></g><circle cx="62" cy="50" r="8.5" fill="url(#gvik)" stroke="#a67c3d" stroke-width="1"/><circle cx="62" cy="50" r="5.6" fill="none" stroke="#fffaf0" stroke-width="1.2" stroke-dasharray="2.6 2"/></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameGv"></span><span class="gp-tag" data-i18n="gpGvTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -2992,6 +3039,15 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           </div>
           <button type="button" class="btn primary play-btn" id="btn-gb-play" data-i18n="play"></button>
           <p class="record-line" id="gb-record"></p>
+        </div>
+        <div class="setup-part" id="setup-gv" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="gvmt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f1e4f6"/></linearGradient><linearGradient id="gvmc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eee6f3"/><stop offset=".5" stop-color="#d8cce4"/><stop offset="1" stop-color="#f3edf7"/></linearGradient><radialGradient id="gvmk" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff6dc"/><stop offset=".55" stop-color="#e6c88a"/><stop offset="1" stop-color="#b48a48"/></radialGradient></defs><g transform="rotate(-7 36 30)"><rect x="7" y="9" width="58" height="40" rx="6" fill="url(#gvmt)" stroke="#c9a469" stroke-width="1.3"/><path d="M7 17h58" stroke="#e7d2a8" stroke-width="1"/><circle cx="21" cy="33" r="7.6" fill="#fffaf2" stroke="#e2c07c" stroke-width="1"/><path d="M0-5.2L1.5-1.8 5.1-1.4 2.4 1.1 3.1 4.7 0 2.9-3.1 4.7-2.4 1.1-5.1-1.4-1.5-1.8Z" transform="translate(21 33) scale(1.1)" fill="#e9b949" stroke="#b07c25" stroke-width=".5"/><circle cx="36" cy="33" r="7.6" fill="#fffaf2" stroke="#e2c07c" stroke-width="1"/><path d="M0 4C-1.5 2.6-5 .2-5-2.2-5-4-3.6-5-2.4-5-1.3-5-.4-4.3 0-3.4.4-4.3 1.3-5 2.4-5 3.6-5 5-4 5-2.2 5 .2 1.5 2.6 0 4Z" transform="translate(36 33.5) scale(1.1)" fill="#e58aa6" stroke="#b44f72" stroke-width=".5"/><circle cx="51" cy="33" r="7.6" fill="url(#gvmc)" stroke="#c9a469" stroke-width="1" stroke-dasharray="2.4 2"/><path d="M48.6 31.2a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1 .9-1 1.6M51 37.4v.2" fill="none" stroke="#a07a3c" stroke-width="1.2" stroke-linecap="round"/></g><circle cx="62" cy="50" r="8.5" fill="url(#gvmk)" stroke="#a67c3d" stroke-width="1"/><circle cx="62" cy="50" r="5.6" fill="none" stroke="#fffaf0" stroke-width="1.2" stroke-dasharray="2.6 2"/></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameGv"></span><span class="hunt-sub" data-i18n="gvIntro"></span></span>
+          </div>
+          
+          <button type="button" class="btn primary play-btn" id="btn-gv-play" data-i18n="play"></button>
+          <p class="record-line" id="gv-record"></p>
         </div>
         <!--more-setups-->
 
@@ -3299,6 +3355,28 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       <ul class="gb-log" id="gb-log" aria-hidden="true"></ul>
     </div>
     <div class="rw-prize" id="gb-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="gb-prize-t"></p></div>
+  </section>
+
+  <section id="gv" class="screen gvs" hidden data-i18n-attr="aria-label:gameGv">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="gv-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameGv"></h2><span class="uc-sub" id="gv-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-gv" aria-pressed="true"></button>
+    </header>
+    <div class="gv-card" id="gv-card">
+      <div class="gv-top"><span class="gv-name" data-i18n="gameGv"></span><span class="gv-no" id="gv-no"></span></div>
+      <div class="gv-area">
+        <img id="gv-photo" alt="" draggable="false">
+        <div class="gv-grid" id="gv-grid"></div>
+        <canvas class="gv-coat" id="gv-coat" data-i18n-attr="aria-label:gvHint"></canvas>
+      </div>
+      <div class="gv-wins" id="gv-wins" aria-hidden="true"></div>
+    </div>
+    <p class="gv-msg" id="gv-msg" aria-live="polite"></p>
+    <div class="gv-ctrl">
+      <button type="button" class="btn" id="gv-all" data-i18n="gvScratchAll"></button>
+      <button type="button" class="btn primary" id="gv-next" hidden></button>
+    </div>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -3734,6 +3812,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Gratta e scopri ----
+      gameGv: 'Gratta e scopri', gpGvTag: 'Gratta e trova il tris', ledeGv: 'Gratta i biglietti col dito: sotto c\'è una foto di Hande. Trova tre simboli uguali e la foto è tua.',
+      gvIntro: 'Cinque biglietti a partita. Gratta col dito o col mouse: sotto ogni biglietto ci sono una foto di Hande e nove simboli. Con tre simboli uguali la foto è tua.',
+      gvSub: 'Biglietto {n} di {t}', gvScratchAll: 'Gratta tutto', gvNext: 'Prossimo biglietto', gvLast: 'Vedi il risultato', gvHint: 'Gratta qui',
+      gvWin: 'Tris di {sym}! La foto è tua', gvLose: 'Niente tris: ritenta col prossimo', gvSyms: ['cuori', 'stelle', 'diamanti', 'corone', 'fiori', 'lune'],
+      gvKicker: 'Gratta e scopri', gvWinT: 'Hai vinto {n} foto!', gvWinT1: 'Hai vinto una foto!', gvLoseT: 'Questa volta niente tris',
+      gvRowTickets: 'Biglietti grattati', gvRowWins: 'Tris trovati', gvRecord: 'Biglietti: {t} · tris: {w}',
+      aGvStart: 'Gratta e scopri: gratta il biglietto col dito oppure usa il pulsante Gratta tutto.',
       // ---- Gran Bazar ----
       gameGb: 'Gran Bazar', gpGbTag: 'Compra, affitta, vinci', ledeGb: 'Il gioco da tavolo dei luoghi di Hande: da Istanbul a Napoli, compra, metti le stelle e fai pagare l\'affitto.',
       gbIntro: 'Tira i dadi, compra i luoghi del mondo di Hande e fai pagare l\'affitto. Con un gruppo di colore completo l\'affitto raddoppia e puoi aggiungere le stelle. Si gioca venti giri o fino alla prima bancarotta: vince chi è più ricco. Ogni gruppo completo è una foto di Hande.',
@@ -4037,6 +4123,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- Kazı ve bul ----
+      gameGv: 'Kazı ve bul', gpGvTag: 'Kazı, üçlüyü bul', ledeGv: 'Biletleri parmağınla kazı: altında bir Hande fotoğrafı var. Üç aynı sembol bulursan fotoğraf senin.',
+      gvIntro: 'Her oyunda beş bilet. Parmağınla ya da fareyle kazı: her biletin altında bir Hande fotoğrafı ve dokuz sembol var. Üç aynı sembolde fotoğraf senin.',
+      gvSub: 'Bilet {n}/{t}', gvScratchAll: 'Hepsini kazı', gvNext: 'Sonraki bilet', gvLast: 'Sonucu gör', gvHint: 'Burayı kazı',
+      gvWin: 'Üç {sym}! Fotoğraf senin', gvLose: 'Üçlü yok: sonrakinde yine dene', gvSyms: ['kalp', 'yıldız', 'elmas', 'taç', 'çiçek', 'ay'],
+      gvKicker: 'Kazı ve bul', gvWinT: '{n} fotoğraf kazandın!', gvWinT1: 'Bir fotoğraf kazandın!', gvLoseT: 'Bu sefer üçlü yok',
+      gvRowTickets: 'Kazınan biletler', gvRowWins: 'Bulunan üçlüler', gvRecord: 'Bilet: {t} · üçlü: {w}',
+      aGvStart: 'Kazı ve bul: bileti parmağınla kazı ya da Hepsini kazı düğmesini kullan.',
       // ---- Gran Bazar ----
       gameGb: 'Gran Bazar', gpGbTag: 'Al, kirala, kazan', ledeGb: 'Hande\'nin yerlerinin masa oyunu: İstanbul\'dan Napoli\'ye, satın al, yıldız koy ve kira topla.',
       gbIntro: 'Zarları at, Hande\'nin dünyasındaki yerleri satın al ve kira topla. Bir renk grubunu tamamlayınca kira ikiye katlanır ve yıldız ekleyebilirsin. Oyun yirmi tur ya da ilk iflasa kadar sürer: en zengin kazanır. Tamamlanan her grup bir Hande fotoğrafı.',
@@ -4588,13 +4682,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    gvRelang();
     gbRelang();
     scRelang();
     pkRelang();
@@ -4725,7 +4820,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -4915,7 +5010,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -5017,7 +5112,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -5518,7 +5613,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -6018,7 +6113,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -6118,16 +6213,17 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-gv').hidden = gs !== 'gv';
     $('#setup-gb').hidden = gs !== 'gb';
     $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -6144,7 +6240,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -6422,7 +6518,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -6966,7 +7062,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -7189,7 +7285,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -7337,7 +7433,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -7610,7 +7706,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -8456,7 +8552,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -8918,7 +9014,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -10074,7 +10170,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -10144,7 +10240,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -10209,7 +10305,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -10663,7 +10759,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -10871,7 +10967,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -11257,7 +11353,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -12071,7 +12167,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); ppStop(); pkStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
     const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
     const c = cfg && cfg.col ? cfg.col : 'w';
     SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
@@ -12368,7 +12464,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function gbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); ppStop(); pkStop(); scStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me', keep: 0, build: 1 }].concat(GB_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
@@ -12778,6 +12874,219 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     });
   }
 
+  /* ---------- Gratta e scopri: scratch cards with a photo of Hande underneath ----------
+     Five tickets a game. Under the pearl coating there is a photo of Hande and nine symbols: three of a kind and
+     the photo is yours. A coarse grid under the coating measures how much of each spot is gone. */
+  const gvEl = $('#gv');
+  const GV_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  const GV_TICKETS = 5, GV_GX = 24, GV_GY = 32;
+  const GV_SYM = [
+    '<svg viewBox="0 0 24 24"><defs><linearGradient id="gvg0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8b9cb"/><stop offset="1" stop-color="#d4668b"/></linearGradient></defs><path d="M12 21s-7.5-4.6-9.3-9.5C1.4 7.8 3.9 4.5 7.3 4.5c2 0 3.6 1.1 4.7 2.7 1.1-1.6 2.7-2.7 4.7-2.7 3.4 0 5.9 3.3 4.6 7C19.5 16.4 12 21 12 21z" fill="url(#gvg0)" stroke="#b44f72" stroke-width=".6"/><path d="M7 8.2c-.9.4-1.5 1.3-1.5 2.3" stroke="#fff" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".75"/></svg>',
+    '<svg viewBox="0 0 24 24"><defs><linearGradient id="gvg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7a3"/><stop offset="1" stop-color="#d49a33"/></linearGradient></defs><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z" fill="url(#gvg1)" stroke="#a87322" stroke-width=".6" stroke-linejoin="round"/></svg>',
+    '<svg viewBox="0 0 24 24"><defs><linearGradient id="gvg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ece2ff"/><stop offset="1" stop-color="#9878d4"/></linearGradient></defs><path d="M6.5 3.5h11l4 5.5L12 21 2.5 9z" fill="url(#gvg2)" stroke="#6f55a6" stroke-width=".6" stroke-linejoin="round"/><path d="M2.5 9h19M9 3.5L7.5 9 12 21l4.5-12L15 3.5" fill="none" stroke="#fff" stroke-width=".7" opacity=".7"/></svg>',
+    '<svg viewBox="0 0 24 24"><defs><linearGradient id="gvg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="1" stop-color="#e0a843"/></linearGradient></defs><path d="M3 18.5h18l-1.4-10.2-4.6 4.2L12 5.2 9 12.5 4.4 8.3z" fill="url(#gvg3)" stroke="#a87322" stroke-width=".6" stroke-linejoin="round"/><rect x="3" y="18.5" width="18" height="2.5" rx=".8" fill="#d49a33"/><circle cx="12" cy="4.4" r="1.2" fill="#f8b9cb"/><circle cx="3.9" cy="7.6" r="1" fill="#f8b9cb"/><circle cx="20.1" cy="7.6" r="1" fill="#f8b9cb"/></svg>',
+    '<svg viewBox="0 0 24 24"><g fill="#f9c6d6" stroke="#d27a99" stroke-width=".6"><circle cx="12" cy="6.5" r="4"/><circle cx="17.2" cy="10.3" r="4"/><circle cx="15.2" cy="16.5" r="4"/><circle cx="8.8" cy="16.5" r="4"/><circle cx="6.8" cy="10.3" r="4"/></g><circle cx="12" cy="12" r="3.2" fill="#ffd77a" stroke="#c99436" stroke-width=".6"/></svg>',
+    '<svg viewBox="0 0 24 24"><defs><linearGradient id="gvg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d7ecfb"/><stop offset="1" stop-color="#6aa3d6"/></linearGradient></defs><path d="M15.5 2.8A9.4 9.4 0 1 0 21.2 18 8 8 0 0 1 15.5 2.8z" fill="url(#gvg5)" stroke="#4c82b5" stroke-width=".6"/><circle cx="18.5" cy="6" r=".9" fill="#ffe39a"/><circle cx="20.6" cy="10" r=".6" fill="#ffe39a"/></svg>'];
+  let GV = null, gvSpeed = 1; // gvSpeed: only the tests change it
+
+  function gvStats() { const st = store.get('hm-gv', null); return Object.assign({ played: 0, tickets: 0, wins: 0, found: [] }, st && typeof st === 'object' ? st : {}); }
+  function gvPick(n) {
+    const seen = new Set(gvStats().found);
+    return shuffle(GV_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, n).map((p) => p.id);
+  }
+  function gvStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
+    GV = { photos: gvPick(GV_TICKETS), n: 0, wins: 0, res: [], found: [], ticket: null, timers: [], over: false, scratchT: 0 };
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gvEl.hidden = false;
+    preload(GV.photos.map((id) => cardSrc(PHOTO_BY_ID.get(id))), 4000);
+    announce(t('aGvStart'));
+    gvDeal(GV);
+  }
+  function gvStop() {
+    const g = GV; GV = null;
+    if (g) g.timers.forEach(clearTimeout);
+    gvEl.hidden = true;
+  }
+  function gvLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (GV === g) fn(); }, ms / gvSpeed); g.timers.push(id); }
+  function gvRequestExit() { if (GV && !GV.over && (GV.n > 0 || (GV.ticket && GV.ticket.shown.some(Boolean)))) openConfirm(false); else goHome(); }
+  // a new ticket: a winning one has one symbol three times and no other more than twice, a losing one none three times
+  function gvDeal(g) {
+    const win = Math.random() < .42, syms = [], r6 = () => Math.floor(Math.random() * 6);
+    let w = -1;
+    if (win) { w = r6(); syms.push(w, w, w); }
+    while (syms.length < 9) { const s = r6(); if (s !== w && syms.filter((x) => x === s).length < 2) syms.push(s); }
+    g.ticket = { syms: shuffle(syms), win, sym: w, shown: new Array(9).fill(false), grid: new Uint8Array(GV_GX * GV_GY), done: false, photo: g.photos[g.n], last: null };
+    const p = PHOTO_BY_ID.get(g.ticket.photo);
+    $('#gv-photo').src = cardSrc(p);
+    $('#gv-grid').innerHTML = g.ticket.syms.map((s) => '<span class="gv-cell"><i class="gv-sym">' + GV_SYM[s] + '</i></span>').join('');
+    $('#gv-coat').classList.remove('gone');
+    $('#gv-card').classList.remove('won', 'lost');
+    $('#gv-msg').textContent = '';
+    gvRender();
+    requestAnimationFrame(() => gvPaint(g));
+  }
+  function gvRender() {
+    const g = GV; if (!g) return;
+    const k = Math.min(g.n + 1, GV_TICKETS);
+    $('#gv-sub').textContent = t('gvSub', { n: k, t: GV_TICKETS });
+    $('#gv-no').textContent = t('gvSub', { n: k, t: GV_TICKETS });
+    const tk = g.ticket, done = tk && tk.done;
+    $('#gv-all').hidden = !!done;
+    $('#gv-next').hidden = !done;
+    $('#gv-next').textContent = g.n + 1 >= GV_TICKETS ? t('gvLast') : t('gvNext');
+    // five little tickets: gold for the ones won, pale for the ones lost, a ring around the one in your hands
+    $('#gv-wins').innerHTML = Array.from({ length: GV_TICKETS }, (_, i) => '<i class="' + (i < g.res.length ? (g.res[i] ? 'won' : 'lost') : i === g.n ? 'cur' : '') + '"></i>').join('');
+  }
+  // the pearl coating, drawn again when the card changes size (what is already open stays open)
+  function gvPaint(g) {
+    const cv = $('#gv-coat'), r = cv.getBoundingClientRect();
+    if (!r.width || !g.ticket) return;
+    const dpr = Math.min(2.5, window.devicePixelRatio || 1), W = r.width, H = r.height, tk = g.ticket;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const c = cv.getContext('2d');
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.W = W; g.H = H; g.R = Math.max(13, W * .062);
+    const gr = c.createLinearGradient(0, 0, W, H);
+    gr.addColorStop(0, '#f4eef7'); gr.addColorStop(.42, '#ddd2e8'); gr.addColorStop(.5, '#f8f3fa'); gr.addColorStop(.58, '#dcd0e7'); gr.addColorStop(1, '#efe7f3');
+    c.fillStyle = gr; c.fillRect(0, 0, W, H);
+    for (let k = 0; k < 70; k++) { c.fillStyle = 'rgba(255,255,255,' + (.35 + Math.random() * .5).toFixed(2) + ')'; const s = .8 + Math.random() * 1.8; c.fillRect(Math.random() * W, Math.random() * H, s, s); }
+    const fam = getComputedStyle(document.body).getPropertyValue('--font-display') || 'serif';
+    for (let i = 0; i < 9; i++) {
+      const cx = ((i % 3) + .5) * W / 3, cy = (Math.floor(i / 3) + .5) * H / 3, rr = W * .1;
+      c.setLineDash([4, 4]); c.lineWidth = 1.4; c.strokeStyle = 'rgba(180,140,80,.55)';
+      c.beginPath(); c.arc(cx, cy, rr, 0, Math.PI * 2); c.stroke(); c.setLineDash([]);
+      c.fillStyle = 'rgba(160,122,60,.55)'; c.font = 'italic 600 ' + Math.round(W * .085) + 'px ' + fam; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillText('?', cx, cy + 1);
+    }
+    c.fillStyle = 'rgba(140,104,52,.5)'; c.font = '700 ' + Math.round(W * .036) + 'px ' + (getComputedStyle(document.body).getPropertyValue('--font-caps') || 'serif');
+    c.fillText(t('gvHint').toUpperCase().split('').join(' '), W / 2, H - W * .045);
+    // what was already uncovered stays uncovered; half-scratched spots start again
+    tk.grid.fill(0);
+    c.globalCompositeOperation = 'destination-out'; c.fillStyle = '#000';
+    tk.shown.forEach((s, i) => { if (s) { const b = gvBox(g, i); c.fillRect(b.x, b.y, b.w, b.h); gvMarkBox(tk, i); } });
+    c.globalCompositeOperation = 'source-over';
+    if (tk.done) $('#gv-coat').classList.add('gone');
+  }
+  const gvBox = (g, i) => ({ x: (i % 3) * g.W / 3, y: Math.floor(i / 3) * g.H / 3, w: g.W / 3, h: g.H / 3 });
+  function gvCellUnits(i) { const c = i % 3, r = Math.floor(i / 3); return [Math.floor(c * GV_GX / 3), Math.floor((c + 1) * GV_GX / 3), Math.floor(r * GV_GY / 3), Math.floor((r + 1) * GV_GY / 3)]; }
+  function gvMarkBox(tk, i) { const [x0, x1, y0, y1] = gvCellUnits(i); for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) tk.grid[y * GV_GX + x] = 1; }
+  // the finger (or the mouse) takes the coating away along its path
+  function gvScratch(x, y) {
+    const g = GV; if (!g || !g.ticket || g.ticket.done) return;
+    const tk = g.ticket, c = $('#gv-coat').getContext('2d'), R = g.R, from = tk.last || { x, y };
+    c.globalCompositeOperation = 'destination-out'; c.strokeStyle = '#000'; c.lineCap = 'round'; c.lineJoin = 'round'; c.lineWidth = R * 2;
+    c.beginPath(); c.moveTo(from.x, from.y); c.lineTo(x + .01, y); c.stroke();
+    c.globalCompositeOperation = 'source-over';
+    tk.last = { x, y };
+    const uw = g.W / GV_GX, uh = g.H / GV_GY, d = Math.hypot(x - from.x, y - from.y), steps = Math.max(1, Math.ceil(d / (R / 2)));
+    for (let s = 0; s <= steps; s++) {
+      const px = from.x + (x - from.x) * s / steps, py = from.y + (y - from.y) * s / steps;
+      for (let gy = Math.max(0, Math.floor((py - R) / uh)); gy <= Math.min(GV_GY - 1, Math.floor((py + R) / uh)); gy++) {
+        for (let gx = Math.max(0, Math.floor((px - R) / uw)); gx <= Math.min(GV_GX - 1, Math.floor((px + R) / uw)); gx++) {
+          if (Math.hypot((gx + .5) * uw - px, (gy + .5) * uh - py) <= R) tk.grid[gy * GV_GX + gx] = 1;
+        }
+      }
+    }
+    const now = performance.now();
+    if (now - g.scratchT > 200) { g.scratchT = now; Sound.paper(); }
+    for (let i = 0; i < 9; i++) {
+      if (tk.shown[i]) continue;
+      const [x0, x1, y0, y1] = gvCellUnits(i);
+      let n = 0;
+      for (let yy = y0; yy < y1; yy++) for (let xx = x0; xx < x1; xx++) n += tk.grid[yy * GV_GX + xx];
+      if (n >= (x1 - x0) * (y1 - y0) * .5) gvShow(g, i);
+    }
+  }
+  function gvShow(g, i) {
+    const tk = g.ticket; if (tk.shown[i]) return;
+    tk.shown[i] = true;
+    const c = $('#gv-coat').getContext('2d'), b = gvBox(g, i);
+    c.globalCompositeOperation = 'destination-out'; c.fillStyle = '#000'; c.fillRect(b.x, b.y, b.w, b.h); c.globalCompositeOperation = 'source-over';
+    gvMarkBox(tk, i);
+    $$('#gv-grid .gv-cell')[i].classList.add('show');
+    Sound.tick();
+    if (tk.shown.every(Boolean)) gvDone(g);
+  }
+  function gvAll() {
+    const g = GV; if (!g || !g.ticket || g.ticket.done || g.ticket.all) return;
+    AudioCore.get();
+    g.ticket.all = true;
+    const rest = g.ticket.shown.map((s, i) => (s ? -1 : i)).filter((i) => i >= 0);
+    rest.forEach((i, k) => gvLater(g, 120 * k, () => gvShow(g, i)));
+  }
+  function gvDone(g) {
+    const tk = g.ticket; if (tk.done) return;
+    tk.done = true; g.res.push(tk.win);
+    $('#gv-coat').classList.add('gone');
+    const cells = $$('#gv-grid .gv-cell');
+    gvLater(g, 380, () => {
+      if (tk.win) {
+        tk.syms.forEach((s, i) => cells[i].classList.add(s === tk.sym ? 'hit' : 'miss'));
+        const ph = PHOTO_BY_ID.get(tk.photo); if (ph) g.found.push(ph);
+        g.wins++;
+        $('#gv-card').classList.add('won');
+        $('#gv-msg').textContent = t('gvWin', { sym: t('gvSyms')[tk.sym] });
+        Sound.win(); buzz([10, 40, 10]);
+        const r = $('#gv-card').getBoundingClientRect();
+        FX.burst(r.left + r.width / 2, r.top + r.height / 2, 70, true);
+      } else {
+        cells.forEach((c) => c.classList.add('miss'));
+        $('#gv-card').classList.add('lost');
+        $('#gv-msg').textContent = t('gvLose');
+        Sound.miss();
+      }
+      announce($('#gv-msg').textContent);
+      gvRender();
+      $('#gv-next').focus({ preventScroll: true });
+    });
+  }
+  function gvNext() {
+    const g = GV; if (!g || !g.ticket || !g.ticket.done) return;
+    AudioCore.get(); Sound.whoosh();
+    g.n++;
+    if (g.n >= GV_TICKETS) { gvOver(g); return; }
+    gvDeal(g);
+  }
+  function gvOver(g) {
+    g.over = true;
+    const st = gvStats();
+    st.played++; st.tickets += GV_TICKETS; st.wins += g.wins;
+    st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
+    store.set('hm-gv', st);
+    const n = g.found.length;
+    showResult({ kicker: t('gvKicker'), title: n > 1 ? t('gvWinT', { n }) : n ? t('gvWinT1') : t('gvLoseT'), stars: null, score: null, record: false, photos: n > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'gv',
+      rows: [[t('gvRowTickets'), String(GV_TICKETS)], [t('gvRowWins'), String(g.wins)], [t('rwRowPhotos'), String(n)]], strip: n ? g.found.map((p) => ({ id: p.id, open: true })) : null });
+    if (n) celebrate(); else Sound.lose();
+  }
+  function gvRenderSetup() {
+    const st = gvStats();
+    $('#gv-record').textContent = st.tickets ? t('gvRecord', { t: st.tickets, w: st.wins }) : t('rwRecordNone');
+  }
+  function gvRelang() { if (GV) { gvRender(); if (GV.ticket && !GV.ticket.done) gvPaint(GV); } }
+  function gvFound() { return GV ? GV.found : null; }
+  function gvAgain() { gvStart(); }
+  function gvWire() {
+    $('#btn-gv-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); gvStart(); });
+    $('#gv-exit').addEventListener('click', gvRequestExit);
+    $('#gv-all').addEventListener('click', gvAll);
+    $('#gv-next').addEventListener('click', gvNext);
+    const cv = $('#gv-coat');
+    const at = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    cv.addEventListener('pointerdown', (e) => {
+      const g = GV; if (!g || !g.ticket || g.ticket.done) return;
+      AudioCore.get();
+      e.preventDefault(); cv.setPointerCapture(e.pointerId);
+      g.ticket.last = null; g.down = true;
+      gvScratch(...at(e));
+    });
+    cv.addEventListener('pointermove', (e) => { const g = GV; if (!g || !g.down) return; e.preventDefault(); gvScratch(...at(e)); });
+    const up = () => { const g = GV; if (g) { g.down = false; if (g.ticket) g.ticket.last = null; } };
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    window.addEventListener('resize', () => { const g = GV; if (g && !gvEl.hidden && g.ticket && !g.ticket.done) gvPaint(g); });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -12788,13 +13097,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -12810,7 +13119,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -12873,6 +13182,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'gv') { gvAgain(); return; }
     if (resultAction === 'gb') { gbAgain(); return; }
     if (resultAction === 'sc') { scAgain(); return; }
     if (resultAction === 'pk') { pkAgain(); return; }
@@ -12904,10 +13214,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  gvWire();
   gbWire();
   scWire();
   pkWire();
