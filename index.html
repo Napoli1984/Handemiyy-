@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle e Trova le differenze con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze e Scopa con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle e Trova le differenze con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze e Scopa con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle e Trova le differenze con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze e Scopa con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3074,6 +3074,128 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .td-hud { width: min(100%, 640px); }
 }
 @media (prefers-reduced-motion: reduce) { .td-mark, .td-miss, .tds.low .td-tv { animation: none !important; } }
+/* ---------- Scopa ---------- */
+.sos {
+  --tw: min(58px, (100vw - 64px) / 5.3);
+  --hw: min(92px, (100vw - 60px) / 3.5, (100dvh - 520px) / 1.6 + 40px);
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; gap: 8px;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 30% at 50% 0%, rgba(255, 236, 214, .9), rgba(255, 236, 214, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(240, 226, 250, .85), rgba(240, 226, 250, 0) 70%), #fbf8f4;
+}
+.sos > * { min-width: 0; }
+.sos > .rw-head { grid-area: auto; }
+.so-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* a Neapolitan card */
+.so-card { position: relative; display: block; flex: none; width: var(--tw); aspect-ratio: 5 / 8; padding: 0; border: 0; border-radius: 7px; container-type: inline-size;
+  color: #4a3557; font: inherit; background: linear-gradient(160deg, #fffefb, #fbf4e8);
+  box-shadow: inset 0 0 0 1.2px #d9be86, inset 0 0 0 3.4px #fffdf8, inset 0 0 0 4px rgba(201, 164, 105, .45), 0 6px 12px -7px rgba(72, 52, 84, .55); }
+.so-card.big { width: var(--hw); border-radius: 9px; }
+.so-ix { position: absolute; top: 5%; left: 8%; font: 700 21cqw/1 var(--font-display); }
+.so-ix.r { top: auto; left: auto; bottom: 5%; right: 8%; transform: rotate(180deg); }
+.so-card.s0 .so-ix { color: #a3741c; }
+.so-card.s1 .so-ix { color: #a14f78; }
+.so-card.s2 .so-ix { color: #3d5c86; }
+.so-card.s3 .so-ix { color: #4c7438; }
+.so-art { position: absolute; left: 17%; top: 15%; width: 66%; height: 70%; overflow: visible; }
+.so-fig { position: absolute; left: 14%; right: 14%; top: 15%; bottom: 19%; overflow: hidden; border-radius: 6cqw; background: #efe6f3;
+  box-shadow: 0 0 0 1px #c9a469, 0 0 0 2.5px #fffaf0, 0 0 0 3px rgba(201, 164, 105, .55); }
+.so-fig img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+.so-badge { position: absolute; top: 3.5%; right: 6%; width: 24%; height: auto; aspect-ratio: 1; filter: drop-shadow(0 1px 1px rgba(72, 52, 84, .35)); }
+.so-fn { position: absolute; left: 0; right: 0; bottom: 5.5%; text-align: center; font: 700 10.5cqw/1 var(--font-caps); letter-spacing: .06em; text-transform: uppercase; color: #8a6738; white-space: nowrap; }
+.so-card.fig .so-ix.r { display: none; }
+.so-card.back { background: radial-gradient(circle, rgba(201, 164, 105, .24) 1px, transparent 1.6px) 0 0 / 9px 9px, radial-gradient(circle at 50% 40%, #fffaf0, #f0e3f5 72%); }
+.so-card.back::after { content: "H"; position: absolute; inset: 0; display: grid; place-items: center; font: 700 34cqw/1 var(--font-caps); color: #c9a469; text-shadow: 0 1px 0 #fff; }
+.so-card.mini { width: 15px; border-radius: 3px; box-shadow: inset 0 0 0 1px #d9be86, 0 2px 4px -2px rgba(72, 52, 84, .5); }
+.so-card.mini::after { content: none; }
+.so-card.mini2 { width: 42px; border-radius: 5px; }
+.so-ghost { position: fixed; z-index: 45; pointer-events: none; margin: 0; }
+/* the others */
+.so-opps { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); gap: 8px; }
+.so-opps[data-n="1"] { --n: 1; justify-items: center; }
+.so-opps[data-n="2"] { --n: 2; }
+.so-opps[data-n="3"] { --n: 3; }
+.so-opp { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "av on" "backs backs" "pl pl"; align-items: center; gap: 3px 7px;
+  min-width: min(100%, 210px); padding: 6px 9px 5px; border-radius: 14px; background: rgba(255, 253, 249, .88); box-shadow: 0 0 0 1px rgba(201, 164, 105, .35), 0 8px 18px -14px rgba(72, 52, 84, .5); transition: box-shadow .3s, opacity .3s; }
+.so-opp.turn { box-shadow: 0 0 0 2px #c9a469, 0 0 16px rgba(226, 191, 122, .65); }
+.so-opp.mate { background: linear-gradient(135deg, #fffaf0, #f5ead4); }
+.so-opp.away { opacity: .5; }
+.so-av { grid-area: av; display: grid; }
+.so-av svg { width: 30px; height: 30px; }
+.so-on { grid-area: on; display: grid; min-width: 0; }
+.so-nm { font: italic 700 16px/1.1 var(--font-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.so-pt { font: 600 11px/1.2 var(--font-num); color: #8a6738; }
+.so-backs { grid-area: backs; display: flex; justify-content: center; min-height: 24px; }
+.so-backs .so-card + .so-card { margin-left: -5px; }
+.so-pl { grid-area: pl; min-height: 1.25em; font-size: 11.5px; color: var(--muted); text-align: center; white-space: nowrap; }
+/* the table */
+.so-felt { position: relative; display: grid; place-items: center; min-height: 0; overflow: auto; border-radius: 22px; padding: 16px 12px;
+  background: radial-gradient(120% 90% at 50% 40%, #f8f0de, #efe0c2 70%, #e5d1aa);
+  box-shadow: inset 0 0 0 1.5px rgba(201, 164, 105, .7), inset 0 0 0 6px rgba(255, 250, 238, .5), inset 0 0 0 7px rgba(201, 164, 105, .38), inset 0 12px 30px -14px rgba(120, 84, 32, .3), 0 18px 30px -24px rgba(72, 52, 84, .5); }
+.so-table { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 8px; max-width: calc(var(--tw) * 5 + 34px); }
+.so-deck { position: absolute; top: 9px; right: 10px; display: grid; justify-items: center; gap: 2px; }
+.so-deck .so-card { width: 30px; box-shadow: inset 0 0 0 1px #d9be86, 2px 2px 0 #f3e8d3, 3px 3px 0 #d9be86, 0 6px 10px -6px rgba(72, 52, 84, .5); }
+.so-deck b { font: 600 11px var(--font-num); color: #7a5520; }
+.so-msg { margin: 0; min-height: 2.6em; display: grid; place-items: center; text-align: center; font: italic 600 17px/1.3 var(--font-display); color: #4a3d52; }
+/* my cards */
+.so-me { display: grid; gap: 8px; justify-items: center; }
+.so-mine { display: flex; align-items: center; gap: 8px; padding: 3px 14px 3px 6px; border-radius: 999px; background: rgba(255, 253, 249, .88); box-shadow: 0 0 0 1px rgba(201, 164, 105, .35); transition: box-shadow .3s; }
+.so-mine.turn { box-shadow: 0 0 0 2px #c9a469, 0 0 14px rgba(226, 191, 122, .6); }
+.so-mine .so-av svg { width: 26px; height: 26px; }
+.so-mine .so-nm { font-size: 15px; }
+.so-mine .so-pl { font-size: 12px; }
+.so-hand { display: flex; justify-content: center; gap: 10px; min-height: calc(var(--hw) * 1.6); }
+.so-hand .so-card { cursor: pointer; transition: transform .18s ease, box-shadow .2s; }
+.so-hand .so-card:disabled { cursor: default; }
+@media (hover: hover) { .so-hand .so-card:not(:disabled):hover { transform: translateY(-7px); } }
+.so-hand .so-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.so-hand .so-card.can::after { content: ""; position: absolute; top: -6px; left: 50%; width: 11px; height: 11px; margin-left: -5.5px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff6dc, #e2bf7a 60%, #b48a48); box-shadow: 0 0 0 2px #fffaf2; }
+.so-hand .so-card.lift { transform: translateY(-14px); box-shadow: inset 0 0 0 1.2px #d9be86, inset 0 0 0 3.4px #fffdf8, inset 0 0 0 4px rgba(201, 164, 105, .45), 0 0 0 2.5px #c9a469, 0 14px 24px -10px rgba(150, 108, 48, .7); }
+/* choosing what to take */
+.so-pick { position: fixed; inset: 0; z-index: 40; display: grid; align-items: end; justify-items: center; padding: 16px 16px max(18px, env(safe-area-inset-bottom, 0px)); background: rgba(251, 248, 244, .55); animation: fadeIn .2s ease; }
+.so-pick-in { width: min(100%, 420px); display: grid; gap: 10px; padding: 16px 16px 10px; border-radius: 22px; text-align: center; background: linear-gradient(160deg, #fffdf8, #f7eedf);
+  box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 6px rgba(201, 164, 105, .45), 0 24px 44px -20px rgba(72, 52, 84, .6); }
+.so-pick-t { margin: 0; font: italic 700 22px/1.2 var(--font-display); color: #8a6738; }
+.so-pick-opts { display: grid; gap: 8px; }
+.so-opt { display: flex; justify-content: center; gap: 7px; padding: 9px; border-radius: 16px; cursor: pointer; border: 1px solid rgba(201, 164, 105, .5); background: #fffdf8; transition: transform .15s, box-shadow .2s; }
+.so-opt:hover, .so-opt:focus-visible { box-shadow: 0 0 0 2px #c9a469; outline: none; }
+.so-opt:active { transform: scale(.98); }
+/* the points of a hand */
+.so-round { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 16px; background: rgba(251, 248, 244, .72); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); animation: fadeIn .25s ease; }
+.so-round-in { width: min(100%, 440px); display: grid; gap: 10px; padding: 20px 16px 16px; border-radius: 24px; text-align: center; background: linear-gradient(160deg, #fffdf8, #f7eedf);
+  box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 6px rgba(201, 164, 105, .45), 0 30px 50px -24px rgba(72, 52, 84, .6); }
+.so-round-k { margin: 0; font: 700 11px var(--font-caps); letter-spacing: .18em; text-transform: uppercase; color: #a78a5a; }
+.so-round-t { margin: 0; font: italic 700 26px/1.15 var(--font-display); }
+.so-tab-wrap { overflow-x: auto; }
+.so-tab { width: 100%; border-collapse: collapse; font-size: 14px; }
+.so-tab th, .so-tab td { padding: 6px 7px; border-bottom: 1px solid rgba(201, 164, 105, .25); text-align: center; white-space: nowrap; }
+.so-tab tr:first-child th { font: italic 700 16px var(--font-display); color: var(--ink); }
+.so-tab th[scope="row"] { text-align: left; font-weight: 500; color: var(--muted); }
+.so-tab .me { background: rgba(246, 226, 173, .28); }
+.so-tab tr.sum td { font-weight: 600; color: #8a6738; }
+.so-tab tr.tot th, .so-tab tr.tot td { border-bottom: 0; }
+.so-tab tr.tot td { font: italic 700 22px/1 var(--font-display); color: #8a6738; }
+.so-round .btn:disabled { opacity: .6; }
+/* the home */
+.so-opp-pick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.so-opp-pick button { display: grid; justify-items: center; gap: 3px; padding: 10px 6px 8px; border-radius: 16px; cursor: pointer; color: var(--ink); background: var(--surface); border: 1px solid var(--hairline, var(--line-strong)); }
+.so-opp-pick button[aria-pressed="true"] { border-color: #c9a469; box-shadow: inset 0 0 0 1px #c9a469; background: linear-gradient(160deg, rgba(255, 251, 240, .94), rgba(246, 230, 196, .88)); }
+.so-opp-pick .avs { display: flex; justify-content: center; }
+.so-opp-pick .avs svg { width: 30px; height: 30px; padding: 2px; border-radius: 50%; background: var(--surface-2); border: 2px solid var(--surface); margin-left: -9px; }
+.so-opp-pick .avs svg:first-child { margin-left: 0; }
+.so-opp-pick .n { font: italic 700 24px/1 var(--font-display); }
+.so-opp-pick .l { font-size: 12px; color: var(--muted); }
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .sos { --tw: min(76px, (100dvh - 440px) / 3.4 / 1.6 + 16px); --hw: min(104px, (100dvh - 470px) / 1.6 + 20px); padding-inline: 28px; grid-template-columns: minmax(0, 980px); justify-content: center; }
+  .so-opps { justify-self: center; width: min(100%, 760px); }
+  .so-felt { padding: 20px 60px; }
+  .so-table { gap: 10px; max-width: calc(var(--tw) * 8 + 70px); }
+  .so-deck { top: 14px; right: 16px; }
+  .so-deck .so-card { width: 38px; }
+}
+@media (prefers-reduced-motion: reduce) { .so-hand .so-card { transition: none; } }
+.so-hand .so-card:disabled { opacity: 1; color: #4a3557; }
 </style>
 </head>
 <body>
@@ -3163,6 +3285,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="td" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="tdis" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf1e4"/><stop offset="1" stop-color="#efe2f4"/></linearGradient><radialGradient id="tdig" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#e7eef8" stop-opacity=".6"/></radialGradient></defs><rect x="6" y="12" width="26" height="34" rx="3" fill="url(#tdis)" stroke="#c9a469" stroke-width="1.2"/><circle cx="19" cy="24" r="5" fill="#f3d9c9"/><path d="M9 46c0-7.5 4.6-12 10-12s10 4.5 10 12z" fill="#d9c1e8"/><path d="M12.4 19.5c1.4-3.6 4.2-5.2 7.6-5 3.6.2 5.8 2.6 6.4 6.4-1.8-1.6-4.4-2.5-7-2.4-2.8.1-5.4.6-7 1z" fill="#6b4a3a"/><rect x="38" y="12" width="26" height="34" rx="3" fill="url(#tdis)" stroke="#c9a469" stroke-width="1.2"/><circle cx="51" cy="24" r="5" fill="#f3d9c9"/><path d="M41 46c0-7.5 4.6-12 10-12s10 4.5 10 12z" fill="#d9c1e8"/><path d="M44.4 19.5c1.4-3.6 4.2-5.2 7.6-5 3.6.2 5.8 2.6 6.4 6.4-1.8-1.6-4.4-2.5-7-2.4-2.8.1-5.4.6-7 1z" fill="#6b4a3a"/><path d="M61 15.6l1.2 2.6 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#e9b949" stroke="#a8741c" stroke-width=".5"/><circle cx="57" cy="26" r="11" fill="url(#tdig)" stroke="#b48a48" stroke-width="2.4"/><circle cx="57" cy="26" r="8.4" fill="none" stroke="#fffaf0" stroke-width="1" opacity=".8"/><path d="M65 34.4l7 7.6" stroke="#b48a48" stroke-width="4.2" stroke-linecap="round"/><path d="M65 34.4l7 7.6" stroke="#f6e2ad" stroke-width="1.6" stroke-linecap="round"/></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameTd"></span><span class="gp-tag" data-i18n="gpTdTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="so" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="soic" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff4cf"/><stop offset=".55" stop-color="#e8c272"/><stop offset="1" stop-color="#b8862e"/></radialGradient><linearGradient id="soip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9f0"/><stop offset=".5" stop-color="#e7a6bf"/><stop offset="1" stop-color="#b8648a"/></linearGradient><linearGradient id="sois" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8f0fa"/><stop offset=".5" stop-color="#a9bdd6"/><stop offset="1" stop-color="#6f88a8"/></linearGradient><linearGradient id="soiw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9b48a"/><stop offset=".5" stop-color="#a88b58"/><stop offset="1" stop-color="#7c6438"/></linearGradient></defs><g transform="translate(12 12) rotate(-12 14 21)"><rect x="0" y="0" width="28" height="42" rx="3.6" fill="#fffdf8" stroke="#c9a469" stroke-width="1.2"/><g transform="translate(5 11) scale(.9)"><path d="M3.6 3.4h12.8c0 4.6-2.2 7.6-5.1 8.4v2.6c1.6.3 3 1 3.6 2.4H5.1c.6-1.4 2-2.1 3.6-2.4v-2.6C5.8 11 3.6 8 3.6 3.4z" fill="url(#soip)" stroke="#8f4d6b" stroke-width=".9" stroke-linejoin="round"/><path d="M3.9 5.6h12.2" stroke="#fff4da" stroke-width=".9"/><circle cx="10" cy="7.9" r="1.5" fill="#d7c4f2" stroke="#7b5aa8" stroke-width=".5"/></g></g><g transform="translate(34 8) rotate(9 14 21)"><rect x="0" y="0" width="28" height="42" rx="3.6" fill="#fffdf8" stroke="#c9a469" stroke-width="1.2"/><g transform="translate(4.5 4.5) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 4.5) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(4.5 15.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 15.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(4.5 26.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 26.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(10.6 10) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g></g><path d="M14 54.5c6 2.6 14 3.2 22 1.6" stroke="#c9a469" stroke-width="1" fill="none" stroke-dasharray="2 2"/></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameSo"></span><span class="gp-tag" data-i18n="gpSoTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -3473,6 +3601,27 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           </div>
           <button type="button" class="btn primary play-btn" id="btn-td-play" data-i18n="play"></button>
           <p class="record-line" id="td-record"></p>
+        </div>
+        <div class="setup-part" id="setup-so" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="somc" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff4cf"/><stop offset=".55" stop-color="#e8c272"/><stop offset="1" stop-color="#b8862e"/></radialGradient><linearGradient id="somp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9f0"/><stop offset=".5" stop-color="#e7a6bf"/><stop offset="1" stop-color="#b8648a"/></linearGradient><linearGradient id="soms" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8f0fa"/><stop offset=".5" stop-color="#a9bdd6"/><stop offset="1" stop-color="#6f88a8"/></linearGradient><linearGradient id="somw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9b48a"/><stop offset=".5" stop-color="#a88b58"/><stop offset="1" stop-color="#7c6438"/></linearGradient></defs><g transform="translate(12 12) rotate(-12 14 21)"><rect x="0" y="0" width="28" height="42" rx="3.6" fill="#fffdf8" stroke="#c9a469" stroke-width="1.2"/><g transform="translate(5 11) scale(.9)"><path d="M3.6 3.4h12.8c0 4.6-2.2 7.6-5.1 8.4v2.6c1.6.3 3 1 3.6 2.4H5.1c.6-1.4 2-2.1 3.6-2.4v-2.6C5.8 11 3.6 8 3.6 3.4z" fill="url(#somp)" stroke="#8f4d6b" stroke-width=".9" stroke-linejoin="round"/><path d="M3.9 5.6h12.2" stroke="#fff4da" stroke-width=".9"/><circle cx="10" cy="7.9" r="1.5" fill="#d7c4f2" stroke="#7b5aa8" stroke-width=".5"/></g></g><g transform="translate(34 8) rotate(9 14 21)"><rect x="0" y="0" width="28" height="42" rx="3.6" fill="#fffdf8" stroke="#c9a469" stroke-width="1.2"/><g transform="translate(4.5 4.5) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#somc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 4.5) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#somc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(4.5 15.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#somc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 15.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#somc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(4.5 26.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#somc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 26.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#somc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(10.6 10) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#somc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g></g><path d="M14 54.5c6 2.6 14 3.2 22 1.6" stroke="#c9a469" stroke-width="1" fill="none" stroke-dasharray="2 2"/></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameSo"></span><span class="hunt-sub" data-i18n="soIntro"></span></span>
+          </div>
+          <div class="count-box">
+            <div class="count-head"><span class="count-label" id="so-opp-label" data-i18n="soOppLabel"></span><span class="count-tag" id="so-opp-tag"></span></div>
+            <div class="so-opp-pick" role="group" aria-labelledby="so-opp-label">
+              <button type="button" data-so-opp="1" aria-pressed="true"><span class="avs"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-fox"/></svg></span><span class="n">1</span><span class="l"></span></button>
+              <button type="button" data-so-opp="2" aria-pressed="false"><span class="avs"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-fox"/></svg><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-cat"/></svg></span><span class="n">2</span><span class="l"></span></button>
+              <button type="button" data-so-opp="3" aria-pressed="false"><span class="avs"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-fox"/></svg><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-cat"/></svg><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-owl"/></svg></span><span class="n">3</span><span class="l"></span></button>
+            </div>
+          </div>
+          <details class="uc-rules so-rules">
+            <summary data-i18n="soRulesTitle"></summary>
+            <ol id="so-rules-list"></ol>
+          </details>
+          <button type="button" class="btn primary play-btn" id="btn-so-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="so" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
+          <p class="record-line" id="so-record"></p>
         </div>
         <!--more-setups-->
 
@@ -3900,6 +4049,41 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       <div class="td-pic" id="td-b" tabindex="0" role="application" data-i18n-attr="aria-label:tdPhotoB"><canvas></canvas><div class="td-marks"></div><i class="td-cur" hidden></i></div>
     </div>
     <p class="td-msg" id="td-msg" aria-live="polite"></p>
+  </section>
+
+  <section id="so" class="screen sos" hidden data-i18n-attr="aria-label:gameSo">
+    <svg class="so-sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs><radialGradient id="sogc" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff4cf"/><stop offset=".55" stop-color="#e8c272"/><stop offset="1" stop-color="#b8862e"/></radialGradient><linearGradient id="sogp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9f0"/><stop offset=".5" stop-color="#e7a6bf"/><stop offset="1" stop-color="#b8648a"/></linearGradient><linearGradient id="sogs" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8f0fa"/><stop offset=".5" stop-color="#a9bdd6"/><stop offset="1" stop-color="#6f88a8"/></linearGradient><linearGradient id="sogw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9b48a"/><stop offset=".5" stop-color="#a88b58"/><stop offset="1" stop-color="#7c6438"/></linearGradient></defs><symbol id="sos0" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="url(#sogc)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></symbol><symbol id="sos1" viewBox="0 0 20 20"><path d="M3.6 3.4h12.8c0 4.6-2.2 7.6-5.1 8.4v2.6c1.6.3 3 1 3.6 2.4H5.1c.6-1.4 2-2.1 3.6-2.4v-2.6C5.8 11 3.6 8 3.6 3.4z" fill="url(#sogp)" stroke="#8f4d6b" stroke-width=".9" stroke-linejoin="round"/><path d="M3.9 5.6h12.2" stroke="#fff4da" stroke-width=".9"/><circle cx="10" cy="7.9" r="1.5" fill="#d7c4f2" stroke="#7b5aa8" stroke-width=".5"/></symbol><symbol id="sos2" viewBox="0 0 20 20"><path d="M10 1.2l1.6 2.2v9.9H8.4V3.4z" fill="url(#sogs)" stroke="#3e5677" stroke-width=".7" stroke-linejoin="round"/><path d="M10 2.4v10.6" stroke="#fff" stroke-width=".5" opacity=".8"/><path d="M5.2 13.4h9.6l-1 1.8H6.2z" fill="url(#sogc)" stroke="#9b6f22" stroke-width=".6" stroke-linejoin="round"/><rect x="9" y="15.2" width="2" height="2.6" fill="#8a6a3a"/><circle cx="10" cy="18.6" r="1.1" fill="url(#sogc)" stroke="#9b6f22" stroke-width=".4"/></symbol><symbol id="sos3" viewBox="0 0 20 20"><path d="M8.2 18.8c-.4-4 .2-9.2 1-13.2.5-2.4 2.8-4 4.4-3 1.4.9.9 3-.1 5.6-1.2 3.4-1.9 7.2-1.9 10.6z" fill="url(#sogw)" stroke="#4f6a35" stroke-width=".8" stroke-linejoin="round"/><path d="M9.3 9.8l2.8.7M9.6 6.4l2.9.8M8.9 13.6l2.8.4" stroke="#e8d39a" stroke-width="1.1" stroke-linecap="round"/><path d="M12.6 3.4c1.6-1.6 3.6-1.6 4.6-.6-1.4.2-2.6 1-3.4 2.2" fill="#9cc47f" stroke="#4f6a35" stroke-width=".5"/></symbol></svg>
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="so-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameSo"></h2><span class="uc-sub" id="so-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-so" aria-pressed="true"></button>
+    </header>
+    <div class="so-opps" id="so-opps"></div>
+    <div class="so-felt" id="so-felt">
+      <div class="so-deck" id="so-deck" aria-hidden="true"><span class="so-card back"></span><b id="so-deck-n"></b></div>
+      <div class="so-table" id="so-table" role="group" data-i18n-attr="aria-label:soTableAria"></div>
+    </div>
+    <p class="so-msg" id="so-msg" aria-live="polite"></p>
+    <div class="so-me">
+      <div class="so-mine" id="so-mine"></div>
+      <div class="so-hand" id="so-hand" role="group" data-i18n-attr="aria-label:soHandAria"></div>
+    </div>
+    <div class="so-pick" id="so-pick" hidden role="dialog" aria-modal="true" aria-labelledby="so-pick-t">
+      <div class="so-pick-in">
+        <p class="so-pick-t" id="so-pick-t" data-i18n="soPickT"></p>
+        <div class="so-pick-opts" id="so-pick-opts"></div>
+        <button type="button" class="btn ghost" id="so-pick-no" data-i18n="soPickNo"></button>
+      </div>
+    </div>
+    <div class="so-round" id="so-round" hidden role="dialog" aria-modal="true" aria-labelledby="so-round-t">
+      <div class="so-round-in">
+        <p class="so-round-k" id="so-round-k"></p>
+        <h3 class="so-round-t" id="so-round-t"></h3>
+        <div class="so-tab-wrap"><table class="so-tab" id="so-tab"></table></div>
+        <button type="button" class="btn primary" id="so-next"></button>
+      </div>
+    </div>
+    <div class="rw-prize" id="so-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="so-prize-t"></p></div>
   </section>
 
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
@@ -4336,6 +4520,20 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Scopa ----
+      gameSo: 'Scopa', gpSoTag: 'Le carte napoletane', ledeSo: 'La scopa con le carte napoletane: prendi le carte dal tavolo e fai scopa. Ogni scopa ti regala una foto di Hande; i Fanti, i Cavalli e i Re hanno il suo ritratto.',
+      soIntro: 'Prendi dal tavolo la carta dello stesso valore, o più carte che sommate fanno il suo valore. Ogni scopa vale un punto e una foto di Hande. Vince chi arriva per primo a 11.',
+      soOppLabel: 'Avversari', soOpp1: 'avversario', soOppN: 'avversari', soOppTag: ['', 'Uno contro uno', 'Tutti contro tutti', 'In coppia con la Civetta'],
+      soRulesTitle: 'Le regole', soRules: ['Ogni carta prende la carta dello stesso valore sul tavolo, oppure più carte che sommate fanno il suo valore. Se c\'è la carta uguale, si prende quella.', 'Il Fante vale 8, il Cavallo 9 e il Re 10.', 'Se prendi tutte le carte del tavolo fai scopa: un punto in più e una foto di Hande. L\'ultima carta della mano non fa scopa.', 'Quando le mani sono vuote si danno altre tre carte; a fine mazzo chi ha preso per ultimo si prende quelle rimaste.', 'A fine mano: un punto a chi ha più carte, più denari, il settebello (il 7 di denari) e la primiera migliore.', 'Vince chi arriva per primo a 11 punti. In quattro si gioca in coppia con chi sta di fronte.'],
+      soSuits: ['denari', 'coppe', 'spade', 'bastoni'], soFig: ['Fante', 'Cavallo', 'Re'], soCardName: '{v} di {s}', soAce: 'Asso',
+      soSub: 'Mano {r} · a {t} punti', soYou: 'Tu', soTeamUs: 'Noi', soTeamThem: 'Loro', soPts: '{n} pt', soPile: '{n} carte', soPile1: 'una carta', soDeckAria: 'Carte nel mazzo: {n}',
+      soTableAria: 'Il tavolo', soHandAria: 'Le tue carte', soTurnMe: 'Tocca a te: gioca una carta', soTurnOf: 'Tocca a {name}', soTurnWait: 'Aspetta…',
+      soTakes: '{name} prende {cards}', soPuts: '{name} cala {card}', soYouTake: 'Prendi {cards}', soYouPut: 'Cali {card}', soScopa: 'Scopa!', soScopaOf: 'Scopa di {name}!', soSweep: '{name} si prende le carte rimaste', soYouSweep: 'Ti prendi le carte rimaste', soTurnOfAd: 'Tocca ad {name}',
+      soPickT: 'Che cosa prendi?', soPickWith: 'Che cosa prendi con {card}?', soPickNo: 'Annulla', soPickAria: 'Prendi {cards}',
+      soRoundK: 'Fine della mano {r}', soRoundT: 'I punti della mano', soOverT: 'Fine della partita', soRowCards: 'Carte', soRowCoins: 'Denari', soRowSette: 'Settebello', soRowPrim: 'Primiera', soRowScope: 'Scope', soRowHand: 'Punti della mano', soRowTot: 'Totale',
+      soNext: 'Mano successiva', soSeeEnd: 'Vedi com\'è finita', soWaitNext: 'Aspetta {name}…', soPrize: 'Scopa! La foto è tua', soPrizeWin: 'Hai vinto! Un\'altra foto per te',
+      soKicker: 'Scopa · {n} mani', soWinT: 'Hai vinto!', soWinTeam: 'Avete vinto!', soLoseT: 'Vince {name}', soLoseTeam: 'Vincono {name}', soRowPhotos: 'Foto vinte', soRowScore: 'Punti', soAgain: 'Un\'altra partita',
+      soRecord: 'Partite vinte: {w} su {p} · scope: {s}', aSoStart: 'Scopa: {n} giocatori, si arriva a 11. Le tue carte sono in basso.',
       // ---- Trova le differenze ----
       gameTd: 'Trova le differenze', gpTdTag: 'Cinque differenze, poco tempo', ledeTd: 'Due foto di Hande quasi uguali: nella seconda ci sono cinque differenze. Trovale tutte prima che finisca il tempo.',
       tdIntro: 'Tocca le differenze in una delle due foto. Ogni tocco sbagliato costa 5 secondi, un aiuto ne costa 10. Trovale tutte e la foto è tua.',
@@ -4693,6 +4891,20 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- Scopa ----
+      gameSo: 'Scopa', gpSoTag: 'Napoli kartları', ledeSo: 'Napoli kartlarıyla scopa: masadaki kartları al ve masayı süpür. Her scopa sana bir Hande fotoğrafı kazandırır; uşakların, atlıların ve kralların üstünde onun portresi var.',
+      soIntro: 'Masadan aynı değerdeki kartı ya da toplamı kartının değerini tutan kartları al. Her scopa bir puan ve bir Hande fotoğrafı. 11 puana ilk ulaşan kazanır.',
+      soOppLabel: 'Rakipler', soOpp1: 'rakip', soOppN: 'rakip', soOppTag: ['', 'Bire bir', 'Herkes kendi için', 'Baykuşla eş olarak'],
+      soRulesTitle: 'Kurallar', soRules: ['Her kart masadaki aynı değerdeki kartı ya da toplamı onun değerini tutan kartları alır. Aynı değerde kart varsa o alınır.', 'Uşak 8, Atlı 9, Kral 10 değerindedir.', 'Masadaki bütün kartları alırsan scopa yaparsın: bir puan ve bir Hande fotoğrafı. Elin son kartı scopa yapmaz.', 'Eller boşalınca herkese üç kart daha dağıtılır; deste bitince son alan masada kalanları da alır.', 'El sonunda: en çok kart, en çok altın, settebello (altın 7) ve en iyi primiera birer puan.', '11 puana ilk ulaşan kazanır. Dört kişide karşıdakiyle eş olunur.'],
+      soSuits: ['altın', 'kupa', 'kılıç', 'sopa'], soFig: ['Uşak', 'Atlı', 'Kral'], soCardName: '{s} {v}', soAce: 'As',
+      soSub: 'El {r} · {t} puana', soYou: 'Sen', soTeamUs: 'Biz', soTeamThem: 'Onlar', soPts: '{n} puan', soPile: '{n} kart', soPile1: 'bir kart', soDeckAria: 'Destede kalan kart: {n}',
+      soTableAria: 'Masa', soHandAria: 'Kartların', soTurnMe: 'Sıra sende: bir kart oyna', soTurnOf: 'Sıra {name} oyuncusunda', soTurnWait: 'Bekle…',
+      soTakes: '{name} {cards} alıyor', soPuts: '{name} {card} atıyor', soYouTake: '{cards} alıyorsun', soYouPut: '{card} atıyorsun', soScopa: 'Scopa!', soScopaOf: '{name} scopa yaptı!', soSweep: '{name} kalan kartları alıyor', soYouSweep: 'Kalan kartları sen alıyorsun', soTurnOfAd: 'Sıra {name} oyuncusunda',
+      soPickT: 'Hangilerini alıyorsun?', soPickWith: '{card} ile hangilerini alıyorsun?', soPickNo: 'Vazgeç', soPickAria: '{cards} al',
+      soRoundK: '{r}. elin sonu', soRoundT: 'Elin puanları', soOverT: 'Oyunun sonu', soRowCards: 'Kartlar', soRowCoins: 'Altınlar', soRowSette: 'Settebello', soRowPrim: 'Primiera', soRowScope: 'Scopalar', soRowHand: 'El puanı', soRowTot: 'Toplam',
+      soNext: 'Sonraki el', soSeeEnd: 'Sonucu gör', soWaitNext: '{name} bekleniyor…', soPrize: 'Scopa! Fotoğraf senin', soPrizeWin: 'Kazandın! Bir fotoğraf daha senin',
+      soKicker: 'Scopa · {n} el', soWinT: 'Kazandın!', soWinTeam: 'Kazandınız!', soLoseT: '{name} kazandı', soLoseTeam: '{name} kazandı', soRowPhotos: 'Kazanılan fotoğraf', soRowScore: 'Puan', soAgain: 'Bir oyun daha',
+      soRecord: 'Kazanılan oyun: {p} oyunda {w} · scopa: {s}', aSoStart: 'Scopa: {n} oyuncu, 11 puana kadar. Kartların aşağıda.',
       // ---- Farkı bul ----
       gameTd: 'Farkı bul', gpTdTag: 'Beş fark, az zaman', ledeTd: 'Neredeyse aynı iki Hande fotoğrafı: ikincisinde beş fark var. Süre bitmeden hepsini bul.',
       tdIntro: 'Farklara iki fotoğraftan birinde dokun. Her yanlış dokunuş 5 saniye, her ipucu 10 saniye götürür. Hepsini bul, fotoğraf senin olsun.',
@@ -5298,13 +5510,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    soRelang();
     tdRelang();
     cpRelang();
     alRelang();
@@ -5439,7 +5652,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -5629,7 +5842,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -5731,7 +5944,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -6233,7 +6446,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'td', 'cp', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'so', 'td', 'cp', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -6733,7 +6946,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -6833,6 +7046,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-so').hidden = gs !== 'so';
     $('#setup-td').hidden = gs !== 'td';
     $('#setup-cp').hidden = gs !== 'cp';
     $('#setup-al').hidden = gs !== 'al';
@@ -6841,12 +7055,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'td' ? 'ledeTd' : gs === 'cp' ? 'ledeCp' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'so' ? 'ledeSo' : gs === 'td' ? 'ledeTd' : gs === 'cp' ? 'ledeCp' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -6863,7 +7077,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', td: 'gameTd', cp: 'gameCp', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', so: 'gameSo', td: 'gameTd', cp: 'gameCp', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -7141,7 +7355,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -7685,7 +7899,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -7874,6 +8088,9 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, wins: N.players.map(() => 0) };
       N.ses.round++; N.ses.counted = false;
       N.eng = rwNet(N.players.length, N.ses);
+    } else if (N.game === 'so') {
+      N.ses = { n: N.players.length, round: 1, dealer: Math.floor(Math.random() * N.players.length), score: null, target: SO_TARGET };
+      N.eng = soNet(N.players.length, N.ses);
     } else if (N.game === 'bw') {
       if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, wins: N.players.map(() => 0) };
       N.ses.round++;
@@ -7908,11 +8125,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
@@ -8056,7 +8273,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -8329,7 +8546,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -9175,7 +9392,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -9637,7 +9854,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -10793,7 +11010,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -10863,7 +11080,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -10928,7 +11145,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -11382,7 +11599,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -11590,7 +11807,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -11976,7 +12193,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -12790,7 +13007,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
     const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
     const c = cfg && cfg.col ? cfg.col : 'w';
     SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
@@ -13087,7 +13304,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function gbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me', keep: 0, build: 1 }].concat(GB_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
@@ -13519,7 +13736,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function gvStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
     GV = { photos: gvPick(GV_TICKETS), n: 0, wins: 0, res: [], found: [], ticket: null, timers: [], over: false, scratchT: 0 };
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gvEl.hidden = false;
@@ -13868,7 +14085,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* ---------- the album on screen ---------- */
   function alStart(openPack) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; alEl.hidden = false;
     const st = alStats();
@@ -14491,7 +14708,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function cpStart(n, photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop();
     const st = cpStats();
     if (n == null) n = st.sel;
     const lv = cpLevel(n), seen = new Set(st.found);
@@ -14877,7 +15094,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tdStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop();
     const st = tdStats(), lv = TD_LV[st.lv], seen = new Set(st.found);
     const photo = pickOne(TD_PHOTOS.filter((p) => !seen.has(p.id))) || pickOne(TD_PHOTOS);
     DF = { lv: st.lv, conf: lv, photo, img: null, diffs: [], got: 0, t0: 0, limit: lv.s * 1000, penalty: 0, hints: 0, wrong: 0, over: false, won: false, ready: false,
@@ -15242,6 +15459,595 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     });
   }
 
+  /* ---------- Scopa: the rules (the same on this device and in an online room) ----------
+     Forty Neapolitan cards: coins, cups, swords and clubs, from 1 to 7 and then Fante (8), Cavallo (9) and Re (10).
+     Four cards on the table, three to each player. A card takes a table card of the same value, or else cards that
+     add up to it; taking everything on the table is a scopa (not with the very last card). When the hands are empty
+     three more cards each, until the deck ends; then whoever took last takes what is left. A hand scores the most
+     cards, the most coins, the settebello (seven of coins), the best primiera and one point per scopa. First to 11.
+     With four players it is two against two (the players opposite each other). */
+  const SO_PRIME = [16, 12, 13, 14, 15, 18, 21, 10, 10, 10]; // primiera: what each value is worth
+  const SO_7D = 6; // the settebello
+  const SO_TARGET = 11;
+  const soSuit = (c) => Math.floor(c / 10), soVal = (c) => (c % 10) + 1;
+  const soTeamOf = (n, s) => (n === 4 ? s % 2 : s);
+  const soKey = (cards) => cards.slice().sort((a, b) => a - b).join(',');
+  // what a card of value v can take: the table cards of the same value (one of them), else the sets that add up to v
+  function soTakes(table, v) {
+    const same = table.filter((c) => soVal(c) === v);
+    if (same.length) return same.map((c) => [c]);
+    const out = [], n = table.length;
+    for (let m = 1; m < (1 << n); m++) {
+      let s = 0;
+      const set = [];
+      for (let i = 0; i < n && s <= v; i++) if (m & (1 << i)) { s += soVal(table[i]); set.push(table[i]); }
+      if (s === v && set.length > 1) out.push(set);
+    }
+    return out;
+  }
+  // the best card of each suit; a player without all four suits has no primiera
+  function soPrimiera(cards) {
+    const best = [0, 0, 0, 0];
+    cards.forEach((c) => { const p = SO_PRIME[soVal(c) - 1]; if (p > best[soSuit(c)]) best[soSuit(c)] = p; });
+    return best.every(Boolean) ? best.reduce((a, b) => a + b, 0) : 0;
+  }
+  // the points of a hand, side by side
+  function soCount(piles, scope) {
+    const cards = piles.map((p) => p.length), coins = piles.map((p) => p.filter((c) => soSuit(c) === 0).length), prim = piles.map(soPrimiera);
+    const top = (a) => { const m = Math.max(...a); return m > 0 && a.filter((x) => x === m).length === 1 ? a.indexOf(m) : -1; };
+    const win = { carte: top(cards), denari: top(coins), sette: piles.findIndex((p) => p.includes(SO_7D)), primiera: top(prim) };
+    const pts = scope.slice();
+    Object.values(win).forEach((w) => { if (w >= 0) pts[w]++; });
+    return { cards, coins, prim, win, scope: scope.slice(), pts };
+  }
+  function soShuffle(rnd) { const d = Array.from({ length: 40 }, (_, i) => i); for (let i = 39; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; } return d; }
+  // a game: o = { n, ses: { round, dealer, score, target }, rnd, away(seat), faces, gid }
+  function soNew(o) {
+    const n = o.n, T = n === 4 ? 2 : n, rnd = o.rnd || Math.random, ses = o.ses;
+    if (!Array.isArray(ses.score) || ses.score.length !== T) ses.score = new Array(T).fill(0);
+    if (!ses.target) ses.target = SO_TARGET;
+    const E = { n, T, ses, deck: [], hands: [], table: [], piles: [], scope: [], last: -1, turn: 0, phase: 'play', ev: [], en: 0, count: null, faces: o.faces || [], gid: o.gid || '', botAt: Date.now() + 1500 };
+    const push = (e) => { e.n = ++E.en; E.ev.push(e); if (E.ev.length > 16) E.ev.shift(); };
+    const dealHands = () => { for (let r = 0; r < 3; r++) for (let k = 1; k <= n; k++) E.hands[(ses.dealer + k) % n].push(E.deck.pop()); };
+    E.deal = () => {
+      let deck;
+      do { deck = soShuffle(rnd); } while (deck.slice(0, 4).filter((c) => soVal(c) === 10).length >= 3); // three kings on the table: deal again
+      E.table = deck.splice(0, 4); E.deck = deck;
+      E.hands = Array.from({ length: n }, () => []);
+      E.piles = Array.from({ length: T }, () => []); E.scope = new Array(T).fill(0); E.last = -1; E.count = null;
+      dealHands();
+      E.turn = (ses.dealer + 1) % n; E.phase = 'play';
+      push({ k: 'hand', round: ses.round, dealer: ses.dealer });
+    };
+    const endHand = () => {
+      if (E.table.length && E.last >= 0) { push({ k: 'sweep', p: E.last, cards: E.table.slice() }); E.piles[soTeamOf(n, E.last)].push(...E.table); E.table = []; }
+      E.count = soCount(E.piles, E.scope);
+      E.count.pts.forEach((p, i) => { ses.score[i] += p; });
+      const top = Math.max(...ses.score), leaders = ses.score.filter((x) => x === top).length;
+      E.phase = top >= ses.target && leaders === 1 ? 'over' : 'round';
+      ses.winner = E.phase === 'over' ? ses.score.indexOf(top) : -1;
+      push({ k: 'count' });
+    };
+    E.act = (seat, a) => {
+      if (!a || typeof a !== 'object') return false;
+      if (a.t === 'next') {
+        if (E.phase !== 'round' || seat !== 0) return false;
+        ses.round++; ses.dealer = (ses.dealer + 1) % n;
+        E.deal(); E.botAt = Date.now() + 2500;
+        return true;
+      }
+      if (a.t !== 'play' || E.phase !== 'play' || seat !== E.turn) return false;
+      const hand = E.hands[seat], c = a.card;
+      if (!hand.includes(c)) return false;
+      const opts = soTakes(E.table, soVal(c));
+      let take = null;
+      if (opts.length) { const want = Array.isArray(a.take) ? soKey(a.take) : ''; take = opts.find((x) => soKey(x) === want) || opts[0]; }
+      hand.splice(hand.indexOf(c), 1);
+      const team = soTeamOf(n, seat), lastPlay = !E.deck.length && E.hands.every((h) => !h.length);
+      let scopa = false;
+      if (take) {
+        E.table = E.table.filter((x) => !take.includes(x));
+        E.piles[team].push(c, ...take); E.last = seat;
+        if (!E.table.length && !lastPlay) { scopa = true; E.scope[team]++; }
+      } else E.table.push(c);
+      push({ k: 'play', p: seat, c, take: take || [], scopa });
+      E.botAt = Date.now() + 1600;
+      if (E.hands.every((h) => !h.length)) {
+        if (E.deck.length) { dealHands(); push({ k: 'deal' }); } else { endHand(); return true; }
+      }
+      E.turn = (seat + 1) % n;
+      return true;
+    };
+    E.view = (seat) => ({
+      gid: E.gid, n, T, me: seat, hand: (E.hands[seat] || []).slice(), counts: E.hands.map((h) => h.length), table: E.table.slice(), deck: E.deck.length,
+      piles: E.piles.map((p) => p.length), scope: E.scope.slice(), turn: E.turn, dealer: ses.dealer, last: E.last, round: ses.round, score: ses.score.slice(), target: ses.target,
+      phase: E.phase, count: E.count, ev: E.ev.slice(), en: E.en, faces: E.faces, winner: ses.winner == null ? -1 : ses.winner,
+    });
+    // an online player who has gone: the computer plays for them
+    E.tick = () => {
+      if (E.phase !== 'play' || !o.away || !o.away(E.turn) || Date.now() < E.botAt) return false;
+      return E.act(E.turn, soBot(E, E.turn, 1));
+    };
+    E.deal();
+    return E;
+  }
+  // the computer's card: what it takes (coins, sevens, the settebello, a scopa) against what it leaves to the next player
+  function soBot(E, seat, skill) {
+    const hand = E.hands[seat], table = E.table, noise = [5, 1.6, .4][skill] || 1;
+    const known = new Set(hand.concat(table, ...E.piles));
+    const unseen = [];
+    for (let c = 0; c < 40; c++) if (!known.has(c)) unseen.push(c);
+    const lastPlay = !E.deck.length && E.hands.every((h, s) => (s === seat ? h.length === 1 : !h.length));
+    const worth = (c) => 1 + (soSuit(c) === 0 ? 2.2 : 0) + (soVal(c) === 7 ? 2.6 : 0) + (c === SO_7D ? 9 : 0) + SO_PRIME[soVal(c) - 1] / 21;
+    // the chance that the next player sweeps a table that adds up to s
+    const risk = (s) => {
+      if (s < 1 || s > 10 || !unseen.length) return 0;
+      const k = unseen.filter((c) => soVal(c) === s).length, held = Math.min(3, E.hands[(seat + 1) % E.n].length || 3);
+      return 1 - Math.pow(1 - k / unseen.length, held);
+    };
+    // the cat plays a card at random now and then
+    if (skill === 0 && Math.random() < .35) { const c = hand[Math.floor(Math.random() * hand.length)], opts = soTakes(table, soVal(c)); return { t: 'play', card: c, take: opts.length ? opts[0] : null }; }
+    let best = null;
+    hand.forEach((c) => {
+      const opts = soTakes(table, soVal(c));
+      (opts.length ? opts : [null]).forEach((take) => {
+        const after = take ? table.filter((x) => !take.includes(x)) : table.concat([c]);
+        let sc = 0;
+        if (take) {
+          sc += [c].concat(take).reduce((s, x) => s + worth(x), 0);
+          if (!after.length && !lastPlay) sc += 14;
+          if (lastPlay) sc += after.length * .6; // taking last brings the table along
+        } else sc -= worth(c) * 1.1 + (soVal(c) <= 7 ? .4 : 0);
+        const sum = after.reduce((s, x) => s + soVal(x), 0);
+        if (after.length && !lastPlay) sc -= risk(sum) * (11 + after.reduce((s, x) => s + worth(x), 0));
+        sc += (Math.random() - .5) * noise;
+        if (!best || sc > best.sc) best = { sc, card: c, take };
+      });
+    });
+    return { t: 'play', card: best.card, take: best.take };
+  }
+  /* ---------- Scopa: the screen ----------
+     The same rules play here against the computer and in an online room (where the room's device keeps the game).
+     The screen draws what one seat may see and moves the cards from where they were to where they are now. */
+  const soEl = $('#so');
+  const SO_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  const SO_PIPS = [[[20, 30]], [[20, 14], [20, 46]], [[20, 9], [20, 30], [20, 51]], [[10.5, 14], [29.5, 14], [10.5, 46], [29.5, 46]], [[10.5, 12], [29.5, 12], [20, 30], [10.5, 48], [29.5, 48]],
+    [[10.5, 9], [29.5, 9], [10.5, 30], [29.5, 30], [10.5, 51], [29.5, 51]], [[10.5, 8], [29.5, 8], [20, 21.5], [10.5, 35], [29.5, 35], [10.5, 52], [29.5, 52]]];
+  let SO = null, soSpeed = 1, soChain = Promise.resolve(); // soSpeed: only the tests change it
+
+  function soStats() {
+    const st = store.get('hm-so', null);
+    const o = Object.assign({ played: 0, wins: 0, opp: 1, scope: 0, found: [] }, st && typeof st === 'object' ? st : {});
+    if (!Array.isArray(o.found)) o.found = [];
+    if (![1, 2, 3].includes(o.opp)) o.opp = 1;
+    return o;
+  }
+  function soWait(ms) {
+    const g = SO;
+    return new Promise((res) => { const id = setTimeout(() => { if (g) g.timers = g.timers.filter((x) => x !== id); res(); }, ms / soSpeed); if (g) g.timers.push(id); });
+  }
+  const soPickFaces = () => shuffle(SO_PHOTOS.slice()).slice(0, 12).map((p) => p.id);
+  function soName(c) {
+    const v = soVal(c), s = (t('soSuits') || [])[soSuit(c)] || '';
+    return t('soCardName', { v: v === 1 ? t('soAce') : v <= 7 ? String(v) : (t('soFig') || [])[v - 8], s });
+  }
+  const soNames = (cards) => cards.map(soName).join(', ');
+  const soTeam = (g, s) => soTeamOf(g.n, s);
+  function soPlayerName(g, s) { return g.online ? ((g.players[s] && g.players[s].name) || '') : g.names[s]; }
+  function soWho(g, s) { return s === g.me ? t('soYou') : soPlayerName(g, s); }
+
+  /* ---------- a card ---------- */
+  function soCardEl(c, faces, tag) {
+    const el = document.createElement(tag || 'div'), v = soVal(c), s = soSuit(c);
+    if (tag === 'button') el.type = 'button';
+    el.className = 'so-card s' + s + (v > 7 ? ' fig' : '');
+    el.dataset.c = c;
+    const ix = v <= 7 ? String(v) : ((t('soFig') || [])[v - 8] || '').charAt(0);
+    let art;
+    if (v <= 7) {
+      const sz = v === 1 ? 27 : 15;
+      art = '<svg class="so-art" viewBox="0 0 40 60" aria-hidden="true">' + SO_PIPS[v - 1].map(([x, y]) => `<use href="#sos${s}" x="${x - sz / 2}" y="${y - sz / 2}" width="${sz}" height="${sz}"/>`).join('') + '</svg>';
+    } else {
+      const id = (faces || [])[s * 3 + v - 8], p = PHOTO_BY_ID.get(id) || SO_PHOTOS[(s * 3 + v) % SO_PHOTOS.length];
+      art = '<span class="so-fig"><img alt="" draggable="false" loading="lazy" src="' + cardSrc(p) + '"></span><svg class="so-badge" viewBox="0 0 20 20" aria-hidden="true"><use href="#sos' + s + '"/></svg><span class="so-fn"></span>';
+    }
+    el.innerHTML = '<span class="so-ix">' + ix + '</span>' + art + '<span class="so-ix r">' + ix + '</span>';
+    const fn = $('.so-fn', el);
+    if (fn) fn.textContent = (t('soFig') || [])[v - 8] || '';
+    el.setAttribute('aria-label', soName(c));
+    return el;
+  }
+
+  /* ---------- the table on screen ---------- */
+  function soShowScreen() {
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; soEl.hidden = false;
+    $('#so-pick').hidden = true; $('#so-round').hidden = true; $('#so-prize').hidden = true;
+    $('#so-table').textContent = ''; $('#so-hand').textContent = ''; $('#so-opps').textContent = ''; $('#so-mine').textContent = '';
+  }
+  function soStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop(); tdStop();
+    const st = soStats(), n = st.opp + 1;
+    const bots = [[], ['fox'], ['fox', 'cat'], ['fox', 'owl', 'cat']][st.opp], botName = { fox: 'volpe', cat: 'gatto', owl: 'civetta' };
+    const ses = { round: 1, dealer: Math.floor(Math.random() * n), score: null, target: SO_TARGET };
+    SO = { online: false, E: soNew({ n, ses, faces: soPickFaces(), gid: 'local' }), me: 0, n, names: [t('soYou')].concat(bots.map((b) => (t('ucBots') || {})[botName[b]] || b)),
+      avs: ['bunny'].concat(bots), skills: [1].concat(bots.map((b) => ({ fox: 1, cat: 0, owl: 2 })[b])), v: null, en: 0, timers: [], busy: true, found: [], over: false, gid: 'local' + Date.now(), myScope: 0, hands: 1 };
+    soShowScreen();
+    announce(t('aSoStart', { n }));
+    soLoop();
+  }
+  function soStop() {
+    const g = SO; SO = null;
+    if (g) g.timers.forEach(clearTimeout);
+    soEl.hidden = true;
+    $('#so-pick').hidden = true; $('#so-round').hidden = true; $('#so-prize').hidden = true;
+    $$('.so-ghost').forEach((e) => e.remove());
+  }
+  function soRequestExit() {
+    const g = SO;
+    if (g && g.online) { openConfirm(true); return; }
+    if (g && !g.over && g.v && (g.v.round > 1 || g.v.en > 1)) openConfirm(false); else goHome();
+  }
+  // the opponents at the top, the table, my cards at the bottom
+  function soRender(g, v) {
+    $('#so-sub').textContent = t('soSub', { r: v.round, t: v.target });
+    const opps = $('#so-opps');
+    opps.textContent = '';
+    for (let k = 1; k < v.n; k++) {
+      const s = (g.me + k) % v.n, tm = soTeam(g, s), box = document.createElement('div');
+      box.className = 'so-opp' + (v.phase === 'play' && v.turn === s ? ' turn' : '') + (v.n === 4 && tm === soTeam(g, g.me) ? ' mate' : '') + (g.online && g.players[s] && !g.players[s].on ? ' away' : '');
+      box.dataset.s = s;
+      box.innerHTML = '<span class="so-av">' + svgUse('av-' + (g.avs[s] || 'fox'), '', '0 0 40 40') + '</span><span class="so-on"><b class="so-nm"></b><span class="so-pt"></span></span>'
+        + '<span class="so-backs"></span><span class="so-pl"></span>';
+      $('.so-nm', box).textContent = soPlayerName(g, s);
+      $('.so-pt', box).textContent = t('soPts', { n: v.score[tm] });
+      const backs = $('.so-backs', box);
+      for (let i = 0; i < v.counts[s]; i++) { const b = document.createElement('i'); b.className = 'so-card back mini'; backs.appendChild(b); }
+      $('.so-pl', box).textContent = (v.piles[tm] ? (v.piles[tm] === 1 ? t('soPile1') : t('soPile', { n: v.piles[tm] })) : '') + (v.scope[tm] ? ' ' + '★'.repeat(Math.min(6, v.scope[tm])) : '');
+      opps.appendChild(box);
+    }
+    opps.dataset.n = v.n - 1;
+    const table = $('#so-table');
+    table.textContent = '';
+    v.table.forEach((c) => { const el = soCardEl(c, v.faces); el.setAttribute('role', 'img'); table.appendChild(el); });
+    $('#so-deck').hidden = !v.deck;
+    $('#so-deck-n').textContent = v.deck;
+    $('#so-deck').setAttribute('aria-label', t('soDeckAria', { n: v.deck }));
+    const mine = $('#so-mine'), tm = soTeam(g, g.me);
+    mine.className = 'so-mine' + (v.phase === 'play' && v.turn === g.me ? ' turn' : '');
+    mine.innerHTML = '<span class="so-av">' + svgUse('av-' + (g.avs[g.me] || 'bunny'), '', '0 0 40 40') + '</span><b class="so-nm"></b><span class="so-pt"></span><span class="so-pl"></span>';
+    $('.so-nm', mine).textContent = v.n === 4 ? t('soTeamUs') : t('soYou');
+    $('.so-pt', mine).textContent = t('soPts', { n: v.score[tm] });
+    $('.so-pl', mine).textContent = (v.piles[tm] ? (v.piles[tm] === 1 ? t('soPile1') : t('soPile', { n: v.piles[tm] })) : '') + (v.scope[tm] ? ' ' + '★'.repeat(Math.min(6, v.scope[tm])) : '');
+    const hand = $('#so-hand'), mineTurn = v.phase === 'play' && v.turn === g.me;
+    hand.textContent = '';
+    v.hand.forEach((c) => {
+      const el = soCardEl(c, v.faces, 'button');
+      el.classList.add('big');
+      if (mineTurn && soTakes(v.table, soVal(c)).length) el.classList.add('can');
+      el.disabled = !mineTurn;
+      hand.appendChild(el);
+    });
+  }
+  function soRectOf(sel) { const e = typeof sel === 'string' ? $(sel) : sel; return e ? e.getBoundingClientRect() : null; }
+  function soSeatRect(g, s) { return s === g.me ? soRectOf('#so-mine') : soRectOf($('.so-opp[data-s="' + s + '"]', soEl)); }
+  function soFlip(el, r0, scale) {
+    const r1 = el.getBoundingClientRect();
+    if (!r1.width || !r0) return;
+    const dx = r0.left + r0.width / 2 - (r1.left + r1.width / 2), dy = r0.top + r0.height / 2 - (r1.top + r1.height / 2), s = scale || r0.width / r1.width;
+    if (Math.abs(dx) < 1 && Math.abs(dy) < 1 && Math.abs(s - 1) < .02) return;
+    el.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${s})`, opacity: scale ? .4 : 1 }, { transform: 'none', opacity: 1 }], { duration: 440 / soSpeed, easing: 'cubic-bezier(.2, .8, .3, 1)' });
+  }
+  // the cards taken: the played card lands on them, then they all go to the pile of who took them
+  async function soGhosts(g, gh, faces) {
+    const tr = $('#so-table .so-card') || $('#so-hand .so-card'), size = tr ? tr.getBoundingClientRect() : { width: 56, height: 90 };
+    const w = size.width || 56, h = size.height || 90, els = [];
+    gh.cards.forEach((c, i) => {
+      const r = gh.rects[i];
+      if (!r) return;
+      const el = soCardEl(c, faces);
+      el.classList.add('so-ghost');
+      el.style.width = w + 'px'; el.style.height = h + 'px';
+      el.style.left = (r.left + r.width / 2 - w / 2) + 'px'; el.style.top = (r.top + r.height / 2 - h / 2) + 'px';
+      document.body.appendChild(el);
+      els.push({ el, c, r });
+    });
+    if (!els.length) return;
+    const on = els.filter((x) => x.c !== gh.played);
+    const played = els.find((x) => x.c === gh.played);
+    if (played && on.length) {
+      const cx = on.reduce((s, x) => s + x.r.left + x.r.width / 2, 0) / on.length, cy = on.reduce((s, x) => s + x.r.top + x.r.height / 2, 0) / on.length;
+      const p0 = played.el.getBoundingClientRect();
+      const a = played.el.animate([{ transform: 'none' }, { transform: `translate(${cx - (p0.left + w / 2)}px, ${cy - (p0.top + h / 2) - 10}px) rotate(-6deg)` }], { duration: 360 / soSpeed, easing: 'cubic-bezier(.3, .8, .4, 1)', fill: 'forwards' });
+      await a.finished.catch(() => {});
+      await soWait(240);
+    }
+    const to = gh.to || { left: innerWidth / 2, top: 0, width: 0, height: 0 };
+    const anims = els.map(({ el }, i) => {
+      const r = el.getBoundingClientRect(), dx = to.left + to.width / 2 - (r.left + r.width / 2), dy = to.top + to.height / 2 - (r.top + r.height / 2);
+      return el.animate([{ transform: el.style.transform || 'none', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(.35) rotate(${i * 7 - 10}deg)`, opacity: 0 }],
+        { duration: 460 / soSpeed, delay: i * 40 / soSpeed, easing: 'cubic-bezier(.5, 0, .7, .4)', fill: 'forwards' });
+    });
+    await Promise.all(anims.map((a) => a.finished.catch(() => {})));
+    els.forEach(({ el }) => el.remove());
+  }
+  // a new view: draw it and move what moved; then say what happened
+  async function soShow(g, v) {
+    const before = new Map();
+    $$('#so-table .so-card, #so-hand .so-card').forEach((e) => before.set(+e.dataset.c, e.getBoundingClientRect()));
+    const news = v.ev.filter((e) => e.n > g.en), deckR = soRectOf('#so-deck');
+    const ghosts = [];
+    news.forEach((e) => {
+      if (e.k === 'play' && e.take.length) ghosts.push({ cards: [e.c].concat(e.take), rects: [before.get(e.c) || soSeatRect(g, e.p)].concat(e.take.map((c) => before.get(c))), to: null, p: e.p, played: e.c });
+      if (e.k === 'sweep') ghosts.push({ cards: e.cards.slice(), rects: e.cards.map((c) => before.get(c)), to: null, p: e.p });
+    });
+    g.en = v.en; g.v = v;
+    soRender(g, v);
+    ghosts.forEach((gh) => { gh.to = soSeatRect(g, gh.p); });
+    $$('#so-table .so-card, #so-hand .so-card').forEach((el) => {
+      const c = +el.dataset.c, r0 = before.get(c);
+      if (r0) { soFlip(el, r0); return; }
+      const pe = news.find((e) => e.k === 'play' && e.c === c);
+      if (pe) soFlip(el, soSeatRect(g, pe.p), .5);
+      else if (deckR && deckR.width) soFlip(el, deckR, .7);
+    });
+    if (news.some((e) => e.k === 'deal' || e.k === 'hand')) { Sound.deal(); setTimeout(() => Sound.deal(), 120 / soSpeed); }
+    for (const e of news) {
+      if (SO !== g) return;
+      if (e.k === 'play') {
+        const name = soWho(g, e.p);
+        if (e.take.length) {
+          $('#so-msg').textContent = e.p === g.me ? t('soYouTake', { cards: soNames(e.take) }) : t('soTakes', { name, cards: soNames(e.take) });
+          Sound.snap();
+          const gh = ghosts.find((x) => x.played === e.c);
+          if (gh) await soGhosts(g, gh, v.faces);
+          if (SO !== g) return;
+        } else {
+          $('#so-msg').textContent = e.p === g.me ? t('soYouPut', { card: soName(e.c) }) : t('soPuts', { name, card: soName(e.c) });
+          Sound.flip();
+        }
+        if (e.scopa) await soScopa(g, e);
+      } else if (e.k === 'sweep') {
+        await soWait(500); if (SO !== g) return;
+        $('#so-msg').textContent = e.p === g.me ? t('soYouSweep') : t('soSweep', { name: soWho(g, e.p) });
+        const gh = ghosts.find((x) => x.p === e.p && !x.played && x.cards.join() === e.cards.join());
+        if (gh) await soGhosts(g, gh, v.faces);
+      }
+      if (SO !== g) return;
+    }
+    if (news.some((e) => e.k === 'play')) await soWait(260);
+  }
+  async function soScopa(g, e) {
+    const r = soRectOf('#so-felt');
+    Sound.golden(); buzz([20, 40, 20]);
+    FX.banner(e.p === g.me ? t('soScopa') : t('soScopaOf', { name: soWho(g, e.p) }), '', '');
+    if (r) FX.burst(r.left + r.width / 2, r.top + r.height / 2, 40, true);
+    if (e.p !== g.me) { await soWait(900); return; }
+    g.myScope++;
+    const id = soAward(g);
+    await soWait(1300); // after the banner
+    if (id && SO === g) await soPrize(g, id, t('soPrize'));
+  }
+  // a photo of Hande: one for every scopa and one for winning
+  function soAward(g) {
+    const st = soStats(), have = new Set(st.found.concat(g.found.map((p) => p.id)));
+    const p = pickOne(SO_PHOTOS.filter((x) => !have.has(x.id))) || pickOne(SO_PHOTOS);
+    g.found.push(p);
+    st.found = Array.from(new Set(st.found.concat([p.id]))).slice(-200);
+    store.set('hm-so', st);
+    return p.id;
+  }
+  function soPrize(g, id, text) {
+    return new Promise((resolve) => {
+      const p = PHOTO_BY_ID.get(id), box = $('#so-prize');
+      if (!p || SO !== g) { resolve(); return; }
+      $('img', box).src = cardSrc(p);
+      $('#so-prize-t').textContent = text;
+      box.classList.remove('open'); box.hidden = false;
+      Sound.whoosh();
+      let done = false;
+      const finish = () => { if (done) return; done = true; box.hidden = true; box.onclick = null; resolve(); };
+      setTimeout(() => {
+        if (SO !== g) { finish(); return; }
+        box.classList.add('open'); Sound.sparkle();
+        const r = $('.rw-prize-card', box).getBoundingClientRect();
+        FX.burst(r.left + r.width / 2, r.top + r.height / 2, 50, true);
+      }, 420 / soSpeed);
+      box.onclick = () => { if (box.classList.contains('open')) finish(); };
+      setTimeout(finish, 3300 / soSpeed);
+    });
+  }
+  function soTurnText(g, v) {
+    if (v.phase !== 'play') return;
+    if (v.turn === g.me) { $('#so-msg').textContent = t('soTurnMe'); return; }
+    const name = soPlayerName(g, v.turn);
+    $('#so-msg').textContent = t(lang === 'it' && /^[aà]/i.test(name) ? 'soTurnOfAd' : 'soTurnOf', { name });
+  }
+
+  /* ---------- playing ---------- */
+  async function soLoop() {
+    const g = SO;
+    if (!g || g.online) return;
+    while (SO === g && !g.over) {
+      const E = g.E;
+      g.busy = true;
+      await soShow(g, E.view(0));
+      if (SO !== g) return;
+      if (E.phase === 'play') {
+        if (E.turn === 0) { g.busy = false; soTurnText(g, g.v); return; }
+        soTurnText(g, g.v);
+        await soWait(800 + Math.random() * 500);
+        if (SO !== g) return;
+        E.act(E.turn, soBot(E, E.turn, g.skills[E.turn]));
+        continue;
+      }
+      await soWait(700);
+      if (SO !== g) return;
+      soRoundPanel(g, g.v);
+      return;
+    }
+  }
+  // a card from my hand: when it can take in more than one way, I choose
+  function soTap(c) {
+    const g = SO, v = g && g.v;
+    if (!g || g.busy || !v || v.phase !== 'play' || v.turn !== g.me || !v.hand.includes(c)) return;
+    const opts = soTakes(v.table, soVal(c));
+    if (opts.length > 1) { soPickShow(g, c, opts); return; }
+    soPlay(g, c, opts[0] || null);
+  }
+  function soPickShow(g, c, opts) {
+    $('#so-pick-t').textContent = t('soPickWith', { card: soName(c) });
+    const box = $('#so-pick-opts');
+    box.textContent = '';
+    opts.forEach((o) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'so-opt';
+      o.forEach((x) => { const el = soCardEl(x, g.v.faces, 'span'); el.classList.add('mini2'); el.removeAttribute('aria-label'); b.appendChild(el); });
+      b.setAttribute('aria-label', t('soPickAria', { cards: soNames(o) }));
+      b.addEventListener('click', () => { $('#so-pick').hidden = true; soPlay(g, c, o); });
+      box.appendChild(b);
+    });
+    $$('#so-hand .so-card').forEach((e) => e.classList.toggle('lift', +e.dataset.c === c));
+    $('#so-pick').hidden = false;
+    Sound.tick2();
+    setTimeout(() => { const f = $('.so-opt', box); if (f) f.focus({ preventScroll: true }); }, 50);
+  }
+  function soPickClose() { $('#so-pick').hidden = true; $$('#so-hand .so-card.lift').forEach((e) => e.classList.remove('lift')); }
+  function soPlay(g, c, take) {
+    if (SO !== g || g.busy) return;
+    g.busy = true;
+    soPickClose();
+    $$('#so-hand .so-card').forEach((e) => { e.disabled = true; });
+    const a = { t: 'play', card: c, take: take || null };
+    if (g.online) { netAct(a); return; }
+    g.E.act(0, a);
+    soLoop();
+  }
+  // the points of a hand, side by side; then the next hand or the end
+  function soRoundPanel(g, v) {
+    const c = v.count;
+    if (!c) return;
+    const T = v.T, cols = [];
+    for (let k = 0; k < T; k++) {
+      const seats = [];
+      for (let s = 0; s < v.n; s++) if (soTeamOf(v.n, s) === k) seats.push(s);
+      cols.push(T === v.n ? soWho(g, seats[0]) : seats.includes(g.me) ? t('soTeamUs') : t('soTeamThem'));
+    }
+    const rows = [
+      [t('soRowCards'), (k) => c.cards[k] + (c.win.carte === k ? ' ✓' : '')],
+      [t('soRowCoins'), (k) => c.coins[k] + (c.win.denari === k ? ' ✓' : '')],
+      [t('soRowSette'), (k) => (c.win.sette === k ? '✓' : '')],
+      [t('soRowPrim'), (k) => (c.prim[k] ? String(c.prim[k]) : '—') + (c.win.primiera === k ? ' ✓' : '')],
+      [t('soRowScope'), (k) => String(c.scope[k] || 0)],
+      [t('soRowHand'), (k) => '+' + c.pts[k]],
+      [t('soRowTot'), (k) => String(v.score[k])],
+    ];
+    const tab = $('#so-tab');
+    tab.textContent = '';
+    const head = document.createElement('tr');
+    head.appendChild(document.createElement('th'));
+    cols.forEach((n, k) => { const th = document.createElement('th'); th.textContent = n; th.scope = 'col'; if (k === soTeam(g, g.me)) th.className = 'me'; head.appendChild(th); });
+    tab.appendChild(head);
+    rows.forEach(([label, f], i) => {
+      const tr = document.createElement('tr');
+      if (i >= rows.length - 2) tr.className = i === rows.length - 1 ? 'tot' : 'sum';
+      const th = document.createElement('th'); th.scope = 'row'; th.textContent = label; tr.appendChild(th);
+      for (let k = 0; k < T; k++) { const td = document.createElement('td'); td.textContent = f(k); if (k === soTeam(g, g.me)) td.className = 'me'; tr.appendChild(td); }
+      tab.appendChild(tr);
+    });
+    $('#so-round-k').textContent = t('soRoundK', { r: v.round });
+    $('#so-round-t').textContent = v.phase === 'over' ? t('soOverT') : t('soRoundT');
+    const next = $('#so-next'), host = !g.online || (N && N.host);
+    next.textContent = v.phase === 'over' ? t('soSeeEnd') : host ? t('soNext') : t('soWaitNext', { name: soPlayerName(g, 0) });
+    next.disabled = v.phase !== 'over' && !host;
+    $('#so-round').hidden = false;
+    Sound.count();
+    setTimeout(() => { if (!next.disabled) next.focus({ preventScroll: true }); }, 60);
+  }
+  function soNextHand() {
+    const g = SO, v = g && g.v;
+    if (!g || !v) return;
+    if (v.phase === 'over') { $('#so-round').hidden = true; soEnd(g); return; }
+    if (v.phase !== 'round') return;
+    $('#so-round').hidden = true;
+    if (g.online) { if (N && N.host) netAct({ t: 'next' }); return; }
+    g.E.act(0, { t: 'next' });
+    g.hands++;
+    soLoop();
+  }
+  async function soEnd(g) {
+    if (g.over) return;
+    g.over = true;
+    const v = g.v, myTeam = soTeam(g, g.me), won = v.winner === myTeam;
+    const st = soStats();
+    st.played++; if (won) st.wins++; st.scope += g.myScope;
+    store.set('hm-so', st);
+    if (won) {
+      const id = soAward(g);
+      celebrate();
+      await soPrize(g, id, t('soPrizeWin'));
+      if (SO !== g) return;
+    } else Sound.lose();
+    const T = v.T, names = [];
+    for (let k = 0; k < T; k++) {
+      const seats = [];
+      for (let s = 0; s < v.n; s++) if (soTeamOf(v.n, s) === k) seats.push(s);
+      names.push(seats.map((s) => soWho(g, s)).join(' · '));
+    }
+    const winName = names[v.winner] || '';
+    const title = won ? (v.n === 4 ? t('soWinTeam') : t('soWinT')) : (v.n === 4 ? t('soLoseTeam', { name: winName }) : t('soLoseT', { name: winName }));
+    const rows = names.map((n, k) => [n, String(v.score[k])]);
+    rows.push([t('soRowPhotos'), String(g.found.length)]);
+    const host = g.online && N && N.host, hostName = soPlayerName(g, 0);
+    showResult({ kicker: t('soKicker', { n: v.round }), title, stars: null, score: null, record: false, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'),
+      again: g.online ? (host ? t('netAgain') : t('netWaitAgain', { name: hostName })) : t('soAgain'), againOff: g.online && !host, action: g.online ? 'net' : 'so',
+      menuLabel: g.online ? t('netLeave') : undefined, rows, strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
+  }
+
+  /* ---------- online: the room's device keeps the game ---------- */
+  function soNet(n, ses) { return soNew({ n, ses, gid: netRand(6, NET_CODE), faces: soPickFaces(), away: (s) => !N || !N.players[s] || !N.players[s].on }); }
+  function soApply(v) { soChain = soChain.then(() => soOnline(v)).catch(() => { /* a broken animation must not stop the game */ }); }
+  async function soOnline(v) {
+    if (!N || !v.g) return;
+    let g = SO;
+    if (!g || !g.online || g.gid !== v.g.gid) {
+      soStop(); ucStop(); pzStop(); bwStop(); rwStop();
+      S = null; board.textContent = '';
+      g = SO = { online: true, gid: v.g.gid, me: v.you, n: v.g.n, players: v.players, avs: NET_AV.slice(), v: null, en: 0, timers: [], busy: true, found: [], over: false, myScope: 0 };
+      soShowScreen();
+    }
+    g.players = v.players; g.me = v.you;
+    g.busy = true;
+    await soShow(g, v.g);
+    if (SO !== g) return;
+    const gv = v.g;
+    if (gv.phase === 'play') { $('#so-round').hidden = true; g.busy = gv.turn !== g.me; soTurnText(g, gv); }
+    else if ($('#so-round').hidden && !g.over) { await soWait(600); if (SO === g) soRoundPanel(g, gv); }
+  }
+
+  /* ---------- the home ---------- */
+  function soRenderSetup() {
+    const st = soStats();
+    $$('[data-so-opp]').forEach((b) => { const n = +b.dataset.soOpp; b.setAttribute('aria-pressed', String(n === st.opp)); $('.l', b).textContent = n === 1 ? t('soOpp1') : t('soOppN'); });
+    $('#so-opp-tag').textContent = (t('soOppTag') || [])[st.opp] || '';
+    const ol = $('#so-rules-list'); ol.textContent = '';
+    (t('soRules') || []).forEach((r) => { const li = document.createElement('li'); li.textContent = r; ol.appendChild(li); });
+    $('#so-record').textContent = st.played ? t('soRecord', { w: st.wins, p: st.played, s: st.scope }) : t('rwRecordNone');
+  }
+  function soRelang() { const g = SO; if (g && g.v) { soRender(g, g.v); soTurnText(g, g.v); } }
+  function soFound() { return SO && SO.found.length ? SO.found : null; }
+  function soAgain() { soStart(); }
+  function soWire() {
+    $('#btn-so-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); soStart(); });
+    $('#so-exit').addEventListener('click', soRequestExit);
+    $$('[data-so-opp]').forEach((b) => b.addEventListener('click', () => { const st = soStats(); st.opp = +b.dataset.soOpp; store.set('hm-so', st); Sound.flip(); soRenderSetup(); }));
+    $('#so-hand').addEventListener('click', (e) => { const b = e.target.closest('.so-card'); if (b && !b.disabled) soTap(+b.dataset.c); });
+    $('#so-pick-no').addEventListener('click', () => { soPickClose(); Sound.flip(); });
+    $('#so-next').addEventListener('click', soNextHand);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !soEl.hidden && !$('#so-pick').hidden) { e.preventDefault(); soPickClose(); } });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -15252,13 +16058,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'td' ? '#btn-td-play' : gameSel === 'cp' ? '#btn-cp-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'so' ? '#btn-so-play' : gameSel === 'td' ? '#btn-td-play' : gameSel === 'cp' ? '#btn-cp-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !tdEl.hidden || !cpEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !soEl.hidden || !tdEl.hidden || !cpEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -15274,7 +16080,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !cpEl.hidden && cpFound() ? cpFound() : !tdEl.hidden && tdFound() ? tdFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !cpEl.hidden && cpFound() ? cpFound() : !tdEl.hidden && tdFound() ? tdFound() : !soEl.hidden && soFound() ? soFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -15337,6 +16143,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'so') { soAgain(); return; }
     if (resultAction === 'td') { tdAgain(); return; }
     if (resultAction === 'cp') { cpAgain(); return; }
     if (resultAction === 'al') { alAgain(); return; }
@@ -15372,10 +16179,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  soWire();
   tdWire();
   cpWire();
   alWire();
