@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar e Gratta e scopri con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2714,6 +2714,204 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 @media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
   .gvs { --cw: min(420px, (100dvh - 230px) * .72); }
 }
+/* ---------- Album delle figurine ---------- */
+/* the home: the album spans the whole row under the games, with its progress and the packs waiting */
+.home .gp-tiles > .gp-tile.al-tile { grid-column: 1 / -1; grid-template-columns: auto minmax(0, 1fr); justify-items: stretch; align-items: center; text-align: left; gap: 12px; padding: 10px 18px 11px 12px; }
+.home .gp-tiles > .gp-tile.al-tile .gp-text { justify-items: start; gap: 2px; }
+.home .gp-tiles > .gp-tile.al-tile .gp-tag { display: block; font-size: 13px; }
+.home .gp-tiles > .gp-tile.al-tile .gp-ic-svg { height: 46px; max-width: none; }
+.home .gp-tiles > .gp-tile.al-tile .gp-new { top: -8px; right: 42px; }
+.al-tbar, .al-bar { display: block; width: 100%; height: 6px; border-radius: 3px; overflow: hidden; background: rgba(201, 164, 105, .18); box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .28); }
+.al-tbar { max-width: 340px; height: 5px; margin-top: 4px; }
+.al-tbar i, .al-bar i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #d4aa62, #f6e2ad 55%, #c99d5c); transition: width .7s cubic-bezier(.2, .8, .3, 1); }
+.al-tdot { position: absolute; top: -9px; left: 12px; min-width: 24px; height: 24px; padding: 0 7px; border-radius: 12px; display: grid; place-items: center;
+  font: 700 12.5px/1 var(--font-num); color: #4a3314; background: radial-gradient(circle at 35% 30%, #fff6dc, #e6c88a 60%, #c99d5c);
+  box-shadow: 0 0 0 2px #fffaf2, 0 4px 10px -3px rgba(150, 108, 48, .8); animation: alDot 2.4s ease-in-out infinite; }
+@keyframes alDot { 50% { transform: scale(1.12); } }
+
+/* the setup under the games */
+.al-sbox { display: grid; gap: 10px; }
+.al-s-packs { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--ink); }
+.al-s-ic svg { display: block; width: 22px; height: 29px; filter: drop-shadow(0 3px 4px rgba(150, 108, 48, .35)); }
+
+/* on every result: the pack it gave */
+.res-album { display: flex; align-items: center; gap: 11px; width: 100%; margin: 12px auto 2px; padding: 8px 12px 8px 12px; border-radius: 16px; cursor: pointer;
+  border: 1px solid rgba(201, 164, 105, .55); background: linear-gradient(135deg, #fffdf8, #fbf0d9); color: var(--ink); text-align: left;
+  box-shadow: 0 8px 18px -12px rgba(150, 108, 48, .7); animation: alPillIn .5s .35s cubic-bezier(.2, 1.3, .4, 1) both; }
+.res-album .ra-pack { flex: none; width: 25px; height: 34px; animation: alPackBob 2.2s ease-in-out infinite; }
+.res-album .ra-text { display: grid; gap: 1px; flex: 1; min-width: 0; }
+.ra-main { font-weight: 600; font-size: 15px; line-height: 1.25; }
+.ra-sub { font-size: 12.5px; line-height: 1.3; color: var(--muted); }
+.res-album .ra-go { color: #a07a3c; }
+.res-album.static { cursor: default; }
+.res-album.static .ra-go { display: none; }
+.res-album:disabled { opacity: 1; }
+@keyframes alPillIn { from { opacity: 0; transform: translateY(8px) scale(.96); } }
+@keyframes alPackBob { 50% { transform: translateY(-2px) rotate(-5deg); } }
+
+/* the album */
+.als { overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 14px max(18px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 30% at 50% 0%, rgba(255, 236, 214, .9), rgba(255, 236, 214, 0) 72%), radial-gradient(60% 34% at 0% 62%, rgba(240, 226, 250, .7), rgba(240, 226, 250, 0) 70%),
+    radial-gradient(50% 30% at 100% 92%, rgba(214, 241, 231, .6), rgba(214, 241, 231, 0) 70%), #fbf8f4; }
+.als > .rw-head { grid-area: auto; max-width: 1180px; margin: 0 auto; }
+.al-wrap { max-width: 1180px; margin: 10px auto 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.al-sum { display: grid; gap: 9px; padding: 13px 16px 14px; border-radius: 20px; background: rgba(255, 253, 249, .84);
+  box-shadow: 0 0 0 1px rgba(201, 164, 105, .35), 0 16px 34px -26px rgba(72, 52, 84, .6); }
+.al-prog { margin: 0; display: flex; align-items: baseline; gap: 6px; }
+.al-num { font: italic 700 36px/1 var(--font-display); color: #8a6738; }
+.al-of { font: 500 15px var(--font-num); color: var(--muted); }
+.al-pages { margin: 0; font-size: 13.5px; color: var(--muted); }
+.al-open-btn { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 2px; }
+.al-cnt { min-width: 26px; height: 26px; padding: 0 7px; border-radius: 13px; display: grid; place-items: center; font: 700 13px/1 var(--font-num); letter-spacing: 0;
+  color: #7a5520; background: #fffaf0; box-shadow: inset 0 0 0 1px rgba(160, 120, 60, .45); }
+.al-open-btn:disabled { filter: grayscale(.5); opacity: .55; }
+.al-hint { margin: 0; font-size: 13px; line-height: 1.4; color: var(--muted); text-align: center; }
+.al-dup { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 9px; border-top: 1px solid rgba(201, 164, 105, .25); }
+.al-dups { font-size: 14px; color: var(--ink); }
+.al-swap { min-height: 38px; padding: 7px 14px; font-size: 13.5px; }
+.al-swap:disabled { opacity: .45; }
+
+.al-tabs { position: relative; display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; padding: 9px 4px 6px;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent); mask: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent); }
+.al-tabs::-webkit-scrollbar { display: none; }
+.al-tab { position: relative; flex: none; display: flex; align-items: center; gap: 7px; min-height: 36px; padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(201, 164, 105, .42); background: rgba(255, 253, 249, .88); color: var(--ink); font-size: 14px; white-space: nowrap; }
+.al-tc { font: 500 11.5px var(--font-num); color: var(--muted); }
+.al-tc svg { display: block; width: 15px; height: 15px; fill: none; stroke: #a07a3c; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.al-tab.full { border-color: #d9b878; background: linear-gradient(135deg, #fffaf0, #f7e8c8); }
+.al-tab[aria-pressed="true"] { border-color: transparent; background: var(--champ); font-weight: 600; box-shadow: 0 6px 14px -8px rgba(150, 108, 48, .8); }
+.al-tab[aria-pressed="true"] .al-tc { color: #6b4c22; }
+.al-tab.has-new::after { content: ""; position: absolute; top: -3px; right: 0; width: 10px; height: 10px; border-radius: 50%; background: #e2a64a; box-shadow: 0 0 0 2px #fffaf2; }
+
+.al-page { position: relative; padding: 14px 12px 10px; border-radius: 20px;
+  background: radial-gradient(circle at 1px 1px, rgba(201, 164, 105, .14) 1px, transparent 1.5px) 0 0 / 14px 14px, linear-gradient(170deg, #fffdf8, #f9f0e4);
+  box-shadow: inset 0 0 0 1px rgba(201, 164, 105, .55), inset 0 0 0 5px #fffdf8, inset 0 0 0 6px rgba(201, 164, 105, .32), 0 22px 40px -28px rgba(72, 52, 84, .65); }
+.al-page.turn-r { animation: alTurnR .4s cubic-bezier(.2, .8, .3, 1); }
+.al-page.turn-l { animation: alTurnL .4s cubic-bezier(.2, .8, .3, 1); }
+@keyframes alTurnR { from { opacity: .15; transform: translateX(28px); } }
+@keyframes alTurnL { from { opacity: .15; transform: translateX(-28px); } }
+.al-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "no c" "t t"; align-items: baseline; gap: 0 10px; padding: 2px 6px 10px; }
+.al-pno { grid-area: no; font: 700 10.5px var(--font-caps); letter-spacing: .2em; text-transform: uppercase; color: #a78a5a; }
+.al-pc { grid-area: c; font: 500 13px var(--font-num); color: var(--muted); }
+.al-pt { grid-area: t; margin: 2px 0 0; font: 400 36px/1.12 var(--font-script, cursive); color: #8a6738; overflow-wrap: anywhere; }
+.al-seal { position: absolute; top: -11px; right: 14px; display: flex; align-items: center; gap: 4px; padding: 5px 11px 5px 8px; border-radius: 999px; transform: rotate(4deg);
+  font: 700 10.5px/1 var(--font-caps); letter-spacing: .14em; text-transform: uppercase; color: #5a3e14; background: linear-gradient(135deg, #fff1c8, #e2bf7a);
+  box-shadow: 0 0 0 2px #fffaf2, 0 6px 14px -6px rgba(150, 108, 48, .8); }
+.al-seal svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.al-page.full { box-shadow: inset 0 0 0 1px #d9b878, inset 0 0 0 5px #fffdf8, inset 0 0 0 6px #e2c58c, 0 0 26px -6px rgba(226, 191, 122, .55), 0 22px 40px -28px rgba(72, 52, 84, .65); }
+
+.al-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px 8px; padding: 4px 2px 2px; touch-action: pan-y; }
+.al-slot, .al-st { position: relative; aspect-ratio: 3 / 4; border-radius: 8px; }
+.al-slot { display: grid; place-items: center; border: 1.5px dashed rgba(190, 150, 86, .62);
+  background: repeating-linear-gradient(135deg, rgba(234, 222, 246, .55) 0 6px, rgba(255, 252, 247, .55) 6px 12px); }
+.al-sn { font: italic 600 clamp(19px, 5.6vw, 27px)/1 var(--font-display); color: rgba(160, 122, 60, .72); }
+.al-st { display: block; padding: 3px; border: 0; cursor: zoom-in; background: #fffefb; box-shadow: 0 0 0 1px rgba(201, 164, 105, .38), 0 6px 12px -7px rgba(72, 52, 84, .6); transition: transform .15s; }
+.al-st:active { transform: scale(.97); }
+@media (hover: hover) { .al-st:hover { transform: translateY(-2px) rotate(-1deg); } }
+.al-sp { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 5px; background: #efe6f3; }
+.al-sp img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.al-no { position: absolute; left: 6px; bottom: 6px; min-width: 21px; height: 18px; padding: 0 5px; border-radius: 9px; display: grid; place-items: center;
+  font: 600 10.5px/1 var(--font-num); color: #5a4630; background: rgba(255, 252, 245, .93); box-shadow: 0 1px 3px rgba(72, 52, 84, .25); }
+.al-x { position: absolute; top: -6px; right: -6px; min-width: 22px; height: 20px; padding: 0 5px; border-radius: 10px; display: grid; place-items: center;
+  font: 700 10.5px/1 var(--font-num); color: #4b3a63; background: linear-gradient(135deg, #f4eefc, #dacdef); box-shadow: 0 0 0 1.5px #fffaf2, 0 2px 5px rgba(72, 52, 84, .3); }
+.al-nw { position: absolute; top: -7px; left: 50%; transform: translateX(-50%); padding: 3px 7px; border-radius: 999px; white-space: nowrap;
+  font: 700 8.5px/1 var(--font-caps); letter-spacing: .12em; text-transform: uppercase; color: #5a3e14; background: linear-gradient(135deg, #fff1c8, #e2bf7a); box-shadow: 0 0 0 1.5px #fffaf2; }
+.al-st.gold { background: linear-gradient(135deg, #f6e2ad, #c99d5c 40%, #fff3d0 60%, #b48a48); box-shadow: 0 0 0 1px #c9a469, 0 0 12px rgba(226, 191, 122, .55), 0 6px 12px -7px rgba(72, 52, 84, .6); }
+.al-st.gold .al-sp::after, .al-card.gold .al-cph::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, .55) 45%, rgba(255, 226, 160, .45) 52%, transparent 66%) 0 0 / 260% 100% no-repeat; animation: alHolo 3.2s linear infinite; }
+@keyframes alHolo { from { background-position: 130% 0; } to { background-position: -130% 0; } }
+.al-st.stick { z-index: 1; animation: alStickIn .75s cubic-bezier(.2, 1.3, .4, 1) both; }
+@keyframes alStickIn { 0% { opacity: 0; transform: scale(1.55) rotate(-10deg); box-shadow: 0 30px 40px -20px rgba(72, 52, 84, .6); } 55% { opacity: 1; } }
+.al-pnav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 12px; }
+.al-pn { min-width: 60px; text-align: center; font: 500 13px var(--font-num); color: var(--muted); }
+.al-pnav .icon-btn:disabled { opacity: .35; cursor: default; }
+@media (min-width: 560px) { .al-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 13px 11px; } }
+
+/* a pack being opened */
+.al-open { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; overflow-y: auto; overscroll-behavior: contain;
+  padding: max(14px, env(safe-area-inset-top, 0px)) 14px max(16px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(60% 46% at 50% 42%, rgba(255, 245, 222, .97), rgba(251, 248, 244, .94) 72%), rgba(251, 248, 244, .92);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: fadeIn .25s ease; }
+.al-pk-close { position: absolute; top: max(12px, env(safe-area-inset-top, 0px)); right: 14px; }
+.al-pk-in { width: min(100%, 780px); display: grid; justify-items: center; gap: 8px; text-align: center; }
+.al-pk-kick { margin: 0; font: 700 11px var(--font-caps); letter-spacing: .2em; text-transform: uppercase; color: #a78a5a; }
+.al-pk-title { margin: 0; font: italic 700 27px/1.1 var(--font-display); color: var(--ink); }
+.al-pk { position: relative; width: min(58vw, 236px, (100dvh - 300px) * .72); aspect-ratio: 200 / 276; margin: 10px 0 6px; padding: 0; border: 0; background: none; cursor: pointer;
+  filter: drop-shadow(0 18px 20px rgba(120, 84, 32, .32)); }
+.al-pk.in { animation: alPackIn .6s cubic-bezier(.2, 1.3, .4, 1) both, alWobble 3s .6s ease-in-out infinite; }
+.al-pk:disabled { cursor: default; }
+.al-pk svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.al-pk-top { position: absolute; left: 0; right: 0; top: 0; height: calc(100% * 36 / 276); transform-origin: 90% 100%; transition: transform .5s cubic-bezier(.4, 0, .6, 1), opacity .45s; }
+.al-pk-body { position: absolute; left: 0; right: 0; bottom: 0; height: calc(100% * 240 / 276); transition: transform .42s .26s ease-in, opacity .38s .3s; }
+.al-pk-logo { position: absolute; left: 50%; top: 38.3%; width: 62%; height: auto; transform: translate(-50%, -50%); pointer-events: none; }
+.al-pk-n { position: absolute; left: 50%; top: 71.3%; transform: translate(-50%, -50%); white-space: nowrap; font: 700 clamp(9px, 2.9vw, 11.5px)/1 var(--font-caps); letter-spacing: .16em; text-transform: uppercase; color: #8a6738; }
+.al-pk-shine { animation: alShine 3.6s 1s ease-in-out infinite; }
+.al-pk.tear { animation: none; }
+.al-pk.tear .al-pk-top { transform: translate(16%, -130%) rotate(24deg); opacity: 0; }
+.al-pk.tear .al-pk-body { transform: translateY(14%) scale(.9); opacity: 0; }
+@keyframes alShine { 0% { transform: translateX(0); } 55%, 100% { transform: translateX(400px); } }
+@keyframes alPackIn { from { opacity: 0; transform: translateY(34px) scale(.85) rotate(-7deg); } }
+@keyframes alWobble { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg) translateY(-3px); } }
+
+.al-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px 10px; width: min(100%, 470px, (100dvh - 300px) * 1.08); margin: 14px 0 4px; perspective: 1100px; }
+.al-cards:empty { display: none; }
+.al-cards > .al-card { grid-column: span 2; }
+.al-cards > .al-card:nth-child(4) { grid-column: 2 / span 2; }
+.al-cards[data-n="1"] { grid-template-columns: minmax(0, 1fr); width: min(56vw, 210px); }
+.al-cards[data-n="1"] > .al-card { grid-column: auto; }
+.al-card { position: relative; aspect-ratio: 3 / 4; padding: 0; border: 0; background: none; cursor: pointer;
+  animation: alDealIn .5s calc(var(--i, 0) * 90ms) cubic-bezier(.2, 1.2, .4, 1) both; }
+@keyframes alDealIn { from { opacity: 0; transform: translateY(70px) scale(.55) rotate(calc(var(--i, 0) * 7deg - 14deg)); } }
+.al-ci { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .65s cubic-bezier(.3, 1.3, .5, 1); }
+.al-card.open .al-ci { transform: rotateY(180deg); }
+@media (hover: hover) { .al-card:not(.open):hover .al-ci { transform: translateY(-4px) rotate(-1.5deg); } }
+.al-cb, .al-cf { position: absolute; inset: 0; border-radius: 10px; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.al-cb { display: grid; place-items: center;
+  background: radial-gradient(circle, rgba(201, 164, 105, .22) 1px, transparent 1.6px) 0 0 / 11px 11px, radial-gradient(circle at 50% 40%, #fffaf0, #f2e6f6 72%);
+  box-shadow: inset 0 0 0 2px #e2c58c, inset 0 0 0 5px #fffaf2, inset 0 0 0 6px rgba(201, 164, 105, .6), 0 10px 18px -10px rgba(72, 52, 84, .6); }
+.al-cb b { font: 700 clamp(30px, 9vw, 46px)/1 var(--font-caps); color: #c9a469; text-shadow: 0 1px 0 #fff; }
+.al-cf { transform: rotateY(180deg); display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 4px; padding: 5px 5px 4px; background: #fffefb;
+  box-shadow: 0 0 0 1px rgba(201, 164, 105, .45), 0 12px 22px -12px rgba(72, 52, 84, .7); }
+.al-cph { position: relative; display: block; overflow: hidden; border-radius: 7px; background: #efe6f3; }
+.al-cph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.al-cno { position: absolute; left: 9px; bottom: 25px; min-width: 22px; height: 19px; padding: 0 5px; border-radius: 10px; display: grid; place-items: center;
+  font: 600 11px/1 var(--font-num); color: #5a4630; background: rgba(255, 252, 245, .93); box-shadow: 0 1px 3px rgba(72, 52, 84, .25); }
+.al-cpn { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 600 9px/1.4 var(--font-caps); letter-spacing: .08em; text-transform: uppercase; color: #8a6738; }
+.al-cbadge { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+  font: 700 9.5px/1 var(--font-caps); letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 0 2px #fffaf2, 0 4px 10px -4px rgba(72, 52, 84, .5); }
+.al-cbadge.new { color: #5a3e14; background: linear-gradient(135deg, #fff1c8, #e2bf7a); }
+.al-cbadge.dup { color: #4b3a63; background: linear-gradient(135deg, #f5f0fc, #ddd2f0); }
+.al-cbadge.gold { color: #4a3314; background: linear-gradient(110deg, #f0d391, #fff8e2 40%, #e2bf7a 60%, #fff3d0) 0 0 / 200% 100%; animation: alHolo 2.6s linear infinite; }
+.al-card.open.new .al-cf { box-shadow: 0 0 0 2px #e2bf7a, 0 0 24px rgba(226, 191, 122, .85), 0 12px 22px -12px rgba(72, 52, 84, .7); }
+.al-card.gold .al-cf { background: linear-gradient(135deg, #f6e2ad, #c99d5c 40%, #fff3d0 60%, #b48a48); }
+.al-card.gold .al-cpn { color: #4a3314; }
+.al-card.open:not(.new) .al-cph img { filter: saturate(.8) brightness(.98); }
+.al-pk-msg { margin: 6px 0 0; min-height: 1.3em; font: italic 600 18px/1.3 var(--font-display); color: #4a3d52; }
+.al-pk-act { display: grid; gap: 8px; width: min(100%, 340px); }
+.al-pk-act [hidden] { display: none; }
+@media (min-width: 700px) {
+  .al-cards { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; width: min(100%, 760px, (100dvh - 330px) * 3.4); }
+  .al-cards > .al-card, .al-cards > .al-card:nth-child(4) { grid-column: auto; }
+}
+
+/* a computer: the summary and the page index on the left, the page on the right */
+@media (min-width: 900px) and (min-aspect-ratio: 5 / 4) {
+  .als { padding-inline: 28px; }
+  .al-wrap { grid-template-columns: 290px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "sum page" "tabs page"; align-items: start; gap: 14px 24px; }
+  .al-sum { grid-area: sum; }
+  .al-tabs { grid-area: tabs; flex-direction: column; overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; max-height: max(200px, calc(100dvh - 410px)); padding: 6px 6px 18px 2px;
+    -webkit-mask: linear-gradient(180deg, #000 calc(100% - 26px), transparent); mask: linear-gradient(180deg, #000 calc(100% - 26px), transparent); }
+  .al-tab { justify-content: space-between; border-radius: 12px; min-height: 34px; }
+  .al-page { grid-area: page; padding: 18px 20px 14px; }
+  .al-pt { font-size: 42px; }
+  .al-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px 14px; }
+}
+@media (min-width: 1240px) and (min-aspect-ratio: 5 / 4) { .al-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) {
+  .al-pk.in, .al-card, .al-st.stick, .al-page.turn-r, .al-page.turn-l, .al-tdot, .res-album, .res-album .ra-pack, .al-pk-shine { animation: none !important; }
+  .al-ci, .al-pk-top, .al-pk-body { transition-duration: .01s !important; }
+}
 </style>
 </head>
 <body>
@@ -2795,6 +2993,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
             <!--more-tiles-->
+            <button type="button" class="gp-tile gp-wide al-tile" data-game="al" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="alil" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f1e4f6"/></linearGradient><linearGradient id="alir" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f6ead8"/></linearGradient><linearGradient id="alig" x1="0" x2="1"><stop offset="0" stop-color="#b48a48"/><stop offset=".5" stop-color="#f6e2ad"/><stop offset="1" stop-color="#a77a35"/></linearGradient></defs><path d="M3 15.5 Q20 11 38 13 Q56 11 73 15.5 V56 Q56 53.6 38 56.4 Q20 53.6 3 56Z" fill="url(#alig)"/><path d="M5.5 14.6 Q21 11.4 37.4 13.2 V54.4 Q21 52.6 5.5 54Z" fill="url(#alil)" stroke="#c9a469" stroke-width=".9"/><path d="M70.5 14.6 Q55 11.4 38.6 13.2 V54.4 Q55 52.6 70.5 54Z" fill="url(#alir)" stroke="#c9a469" stroke-width=".9"/><path d="M38 13.2V54.4" stroke="#d9c095" stroke-width=".8"/><rect x="10" y="18.2" width="10.5" height="14" rx="1.6" fill="#e9c3d2" stroke="#fffaf2" stroke-width="1.3"/><rect x="23.4" y="17.6" width="10.5" height="14" rx="1.6" fill="#c9e2d8" stroke="#fffaf2" stroke-width="1.3"/><rect x="10" y="35.6" width="10.5" height="14" rx="1.6" fill="#f0d8a6" stroke="#fffaf2" stroke-width="1.3"/><rect x="23.4" y="35" width="10.5" height="14" rx="1.6" fill="#d8cbef" stroke="#fffaf2" stroke-width="1.3"/><rect x="42.1" y="17.6" width="10.5" height="14" rx="1.6" fill="#f3c9b8" stroke="#fffaf2" stroke-width="1.3"/><rect x="55.5" y="18.2" width="10.5" height="14" rx="1.6" fill="#fffaf4" stroke="#d6b46f" stroke-width=".9" stroke-dasharray="2.1 1.6"/><rect x="42.1" y="35" width="10.5" height="14" rx="1.6" fill="#fffaf4" stroke="#d6b46f" stroke-width=".9" stroke-dasharray="2.1 1.6"/><g transform="rotate(13 61 43)"><rect x="54.6" y="34" width="12.6" height="16.4" rx="1.8" fill="#fffaf2" stroke="#c9a469" stroke-width=".9"/><rect x="56.2" y="35.6" width="9.4" height="11" rx="1.1" fill="#e5b3c5"/><circle cx="60.9" cy="39.6" r="2" fill="#fbe8ee"/><path d="M57.4 46.6c.6-2.6 2-3.8 3.5-3.8s2.9 1.2 3.5 3.8z" fill="#fbe8ee"/></g><path d="M69.6 24.6l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z" fill="#e2c07c"/><path d="M48.6 8.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="#e2c07c"/></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameAl"></span><span class="gp-tag"></span><span class="al-tbar" aria-hidden="true"><i></i></span></span>
+              <span class="al-tdot" hidden></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
           </div>
         </div>
         <button type="button" class="fan closed" id="fan" data-i18n-attr="aria-label:fanLabel">
@@ -3048,6 +3253,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           
           <button type="button" class="btn primary play-btn" id="btn-gv-play" data-i18n="play"></button>
           <p class="record-line" id="gv-record"></p>
+        </div>
+        <div class="setup-part" id="setup-al" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><linearGradient id="alml" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f1e4f6"/></linearGradient><linearGradient id="almr" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f6ead8"/></linearGradient><linearGradient id="almg" x1="0" x2="1"><stop offset="0" stop-color="#b48a48"/><stop offset=".5" stop-color="#f6e2ad"/><stop offset="1" stop-color="#a77a35"/></linearGradient></defs><path d="M3 15.5 Q20 11 38 13 Q56 11 73 15.5 V56 Q56 53.6 38 56.4 Q20 53.6 3 56Z" fill="url(#almg)"/><path d="M5.5 14.6 Q21 11.4 37.4 13.2 V54.4 Q21 52.6 5.5 54Z" fill="url(#alml)" stroke="#c9a469" stroke-width=".9"/><path d="M70.5 14.6 Q55 11.4 38.6 13.2 V54.4 Q55 52.6 70.5 54Z" fill="url(#almr)" stroke="#c9a469" stroke-width=".9"/><path d="M38 13.2V54.4" stroke="#d9c095" stroke-width=".8"/><rect x="10" y="18.2" width="10.5" height="14" rx="1.6" fill="#e9c3d2" stroke="#fffaf2" stroke-width="1.3"/><rect x="23.4" y="17.6" width="10.5" height="14" rx="1.6" fill="#c9e2d8" stroke="#fffaf2" stroke-width="1.3"/><rect x="10" y="35.6" width="10.5" height="14" rx="1.6" fill="#f0d8a6" stroke="#fffaf2" stroke-width="1.3"/><rect x="23.4" y="35" width="10.5" height="14" rx="1.6" fill="#d8cbef" stroke="#fffaf2" stroke-width="1.3"/><rect x="42.1" y="17.6" width="10.5" height="14" rx="1.6" fill="#f3c9b8" stroke="#fffaf2" stroke-width="1.3"/><rect x="55.5" y="18.2" width="10.5" height="14" rx="1.6" fill="#fffaf4" stroke="#d6b46f" stroke-width=".9" stroke-dasharray="2.1 1.6"/><rect x="42.1" y="35" width="10.5" height="14" rx="1.6" fill="#fffaf4" stroke="#d6b46f" stroke-width=".9" stroke-dasharray="2.1 1.6"/><g transform="rotate(13 61 43)"><rect x="54.6" y="34" width="12.6" height="16.4" rx="1.8" fill="#fffaf2" stroke="#c9a469" stroke-width=".9"/><rect x="56.2" y="35.6" width="9.4" height="11" rx="1.1" fill="#e5b3c5"/><circle cx="60.9" cy="39.6" r="2" fill="#fbe8ee"/><path d="M57.4 46.6c.6-2.6 2-3.8 3.5-3.8s2.9 1.2 3.5 3.8z" fill="#fbe8ee"/></g><path d="M69.6 24.6l1 2.7 2.7 1-2.7 1-1 2.7-1-2.7-2.7-1 2.7-1z" fill="#e2c07c"/><path d="M48.6 8.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="#e2c07c"/></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="alTitle"></span><span class="hunt-sub" data-i18n="alIntro"></span></span>
+          </div>
+          <div class="count-box al-sbox">
+            <div class="count-head"><span class="count-label" data-i18n="alProgress"></span><span class="count-tag" id="al-s-tag"></span></div>
+            <span class="al-bar"><i id="al-s-fill"></i></span>
+            <p class="al-s-packs"><span class="al-s-ic" aria-hidden="true"><svg class="" viewBox="0 0 24 32" aria-hidden="true"><defs><linearGradient id="alps" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e3b8"/><stop offset=".35" stop-color="#e2bf7a"/><stop offset=".55" stop-color="#fff4da"/><stop offset=".8" stop-color="#d8ab6a"/><stop offset="1" stop-color="#f0d7a6"/></linearGradient></defs><path d="M2 3.4l1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6V28.6l-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6z" fill="url(#alps)" stroke="#b48a48" stroke-width=".7" stroke-linejoin="round"/><path d="M2 7h20M2 25h20" stroke="#fff6df" stroke-width=".8" stroke-dasharray="1.2 1"/><ellipse cx="12" cy="16" rx="6.2" ry="5.4" fill="#fffaf2" stroke="#c9a469" stroke-width=".7"/><text x="12" y="19.2" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="8.4" fill="#a07a3c">H</text></svg></span><span id="al-s-packs"></span></p>
+          </div>
+          <button type="button" class="btn primary play-btn" id="btn-al-play" data-i18n="alOpenAlbum"></button>
+          <p class="record-line" id="al-record"></p>
         </div>
         <!--more-setups-->
 
@@ -3379,6 +3597,54 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     </div>
   </section>
 
+  <section id="al" class="screen als" hidden data-i18n-attr="aria-label:alTitle">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="al-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="alTitle"></h2><span class="uc-sub" id="al-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-al" aria-pressed="true"></button>
+    </header>
+    <div class="al-wrap">
+      <div class="al-sum">
+        <p class="al-prog"><span class="al-num" id="al-num"></span><span class="al-of" id="al-of"></span></p>
+        <span class="al-bar"><i id="al-fill"></i></span>
+        <p class="al-pages" id="al-pages"></p>
+        <button type="button" class="btn primary al-open-btn" id="al-open"><span data-i18n="alOpenPack"></span><b class="al-cnt" id="al-cnt"></b></button>
+        <p class="al-hint" id="al-hint"></p>
+        <div class="al-dup"><span class="al-dups" id="al-dups"></span><button type="button" class="btn al-swap" id="al-swap"></button></div>
+      </div>
+      <div class="al-tabs" id="al-tabs" role="group" data-i18n-attr="aria-label:alIndex"></div>
+      <article class="al-page" id="al-page" aria-labelledby="al-pt">
+        <header class="al-head">
+          <span class="al-pno" id="al-pno"></span>
+          <h3 class="al-pt" id="al-pt"></h3>
+          <span class="al-pc" id="al-pc"></span>
+          <span class="al-seal" id="al-seal" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span data-i18n="alComplete"></span></span>
+        </header>
+        <div class="al-grid" id="al-grid"></div>
+        <footer class="al-pnav">
+          <button type="button" class="icon-btn" id="al-prev" data-i18n-attr="aria-label:alPrev"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <span class="al-pn" id="al-pn"></span>
+          <button type="button" class="icon-btn" id="al-next" data-i18n-attr="aria-label:alNext"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </footer>
+      </article>
+    </div>
+    <div class="al-open" id="al-pack" hidden role="dialog" aria-modal="true" aria-labelledby="al-pk-title">
+      <button type="button" class="icon-btn al-pk-close" id="al-pk-close" data-i18n-attr="aria-label:alLater"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <div class="al-pk-in">
+        <p class="al-pk-kick" id="al-pk-kick"></p>
+        <h3 class="al-pk-title" id="al-pk-title"></h3>
+        <button type="button" class="al-pk" id="al-pk" data-i18n-attr="aria-label:alTapPack"><span class="al-pk-top"><svg viewBox="0 0 200 36" aria-hidden="true"><defs><linearGradient id="alpkt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e3b8"/><stop offset=".22" stop-color="#e2bf7a"/><stop offset=".42" stop-color="#fff4da"/><stop offset=".6" stop-color="#d9ac6c"/><stop offset=".8" stop-color="#f3ddb0"/><stop offset="1" stop-color="#e3bd7c"/></linearGradient></defs><path d="M0 36 V8 L5 2 L10 8 L15 2 L20 8 L25 2 L30 8 L35 2 L40 8 L45 2 L50 8 L55 2 L60 8 L65 2 L70 8 L75 2 L80 8 L85 2 L90 8 L95 2 L100 8 L105 2 L110 8 L115 2 L120 8 L125 2 L130 8 L135 2 L140 8 L145 2 L150 8 L155 2 L160 8 L165 2 L170 8 L175 2 L180 8 L185 2 L190 8 L195 2 L200 8 V36 Z" fill="url(#alpkt)" stroke="#b48a48" stroke-width="1.2" stroke-linejoin="round"/><g stroke="#fff8e6" stroke-width="1.1" opacity=".55"><path d="M6 12V33" /><path d="M12 12V33" /><path d="M18 12V33" /><path d="M24 12V33" /><path d="M30 12V33" /><path d="M36 12V33" /><path d="M42 12V33" /><path d="M48 12V33" /><path d="M54 12V33" /><path d="M60 12V33" /><path d="M66 12V33" /><path d="M72 12V33" /><path d="M78 12V33" /><path d="M84 12V33" /><path d="M90 12V33" /><path d="M96 12V33" /><path d="M102 12V33" /><path d="M108 12V33" /><path d="M114 12V33" /><path d="M120 12V33" /><path d="M126 12V33" /><path d="M132 12V33" /><path d="M138 12V33" /><path d="M144 12V33" /><path d="M150 12V33" /><path d="M156 12V33" /><path d="M162 12V33" /><path d="M168 12V33" /><path d="M174 12V33" /><path d="M180 12V33" /><path d="M186 12V33" /><path d="M192 12V33" /><path d="M198 12V33" /></g><path d="M2 35H198" stroke="#9c7637" stroke-width="1.2" stroke-dasharray="4 3"/></svg></span><span class="al-pk-body"><svg viewBox="0 0 200 240" aria-hidden="true"><defs><linearGradient id="alpkf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e3b8"/><stop offset=".22" stop-color="#e2bf7a"/><stop offset=".42" stop-color="#fff4da"/><stop offset=".6" stop-color="#d9ac6c"/><stop offset=".8" stop-color="#f3ddb0"/><stop offset="1" stop-color="#e3bd7c"/></linearGradient><radialGradient id="alpkm" cx=".4" cy=".3" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fbf5ee"/><stop offset="1" stop-color="#eadff2"/></radialGradient><linearGradient id="alpks" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="alpkc"><path d="M0 0 H200 V232 L195 238 L190 232 L185 238 L180 232 L175 238 L170 232 L165 238 L160 232 L155 238 L150 232 L145 238 L140 232 L135 238 L130 232 L125 238 L120 232 L115 238 L110 232 L105 238 L100 232 L95 238 L90 232 L85 238 L80 232 L75 238 L70 232 L65 238 L60 232 L55 238 L50 232 L45 238 L40 232 L35 238 L30 232 L25 238 L20 232 L15 238 L10 232 L5 238 L0 232 Z"/></clipPath></defs><path d="M0 0 H200 V232 L195 238 L190 232 L185 238 L180 232 L175 238 L170 232 L165 238 L160 232 L155 238 L150 232 L145 238 L140 232 L135 238 L130 232 L125 238 L120 232 L115 238 L110 232 L105 238 L100 232 L95 238 L90 232 L85 238 L80 232 L75 238 L70 232 L65 238 L60 232 L55 238 L50 232 L45 238 L40 232 L35 238 L30 232 L25 238 L20 232 L15 238 L10 232 L5 238 L0 232 Z" fill="url(#alpkf)" stroke="#b48a48" stroke-width="1.2" stroke-linejoin="round"/><g clip-path="url(#alpkc)"><path class="al-pk-shine" d="M-60 0h36l-90 240h-36z" fill="url(#alpks)"/><g fill="#fff8e8" opacity=".5"><circle cx="22" cy="24" r="1.4"/><circle cx="176" cy="30" r="1.2"/><circle cx="30" cy="190" r="1.2"/><circle cx="168" cy="196" r="1.5"/><circle cx="100" cy="16" r="1"/></g></g><rect x="9" y="7" width="182" height="200" rx="10" fill="none" stroke="#fff6df" stroke-width="1.4" opacity=".85"/><rect x="13" y="11" width="174" height="192" rx="8" fill="none" stroke="#b48a48" stroke-width=".8" opacity=".6"/><ellipse cx="100" cy="92" rx="74" ry="60" fill="url(#alpkm)" stroke="#c9a469" stroke-width="2"/><ellipse cx="100" cy="92" rx="67" ry="53" fill="none" stroke="#e2c58c" stroke-width=".8"/><path d="M24 160h152l-8 11 8 11H24l8-11z" fill="#fffaf2" stroke="#c9a469" stroke-width="1.2"/><path d="M40 50l2 5.4 5.4 2-5.4 2-2 5.4-2-5.4-5.4-2 5.4-2z M163 120l1.6 4.2 4.2 1.6-4.2 1.6-1.6 4.2-1.6-4.2-4.2-1.6 4.2-1.6z" fill="#e2c07c"/><g stroke="#fff8e6" stroke-width="1.1" opacity=".5"><path d="M6 212V230" /><path d="M12 212V230" /><path d="M18 212V230" /><path d="M24 212V230" /><path d="M30 212V230" /><path d="M36 212V230" /><path d="M42 212V230" /><path d="M48 212V230" /><path d="M54 212V230" /><path d="M60 212V230" /><path d="M66 212V230" /><path d="M72 212V230" /><path d="M78 212V230" /><path d="M84 212V230" /><path d="M90 212V230" /><path d="M96 212V230" /><path d="M102 212V230" /><path d="M108 212V230" /><path d="M114 212V230" /><path d="M120 212V230" /><path d="M126 212V230" /><path d="M132 212V230" /><path d="M138 212V230" /><path d="M144 212V230" /><path d="M150 212V230" /><path d="M156 212V230" /><path d="M162 212V230" /><path d="M168 212V230" /><path d="M174 212V230" /><path d="M180 212V230" /><path d="M186 212V230" /><path d="M192 212V230" /><path d="M198 212V230" /></g></svg><img class="al-pk-logo" src="a/logo.webp" alt="" width="638" height="189" decoding="async"><span class="al-pk-n" data-i18n="alFive"></span></span></button>
+        <div class="al-cards" id="al-cards"></div>
+        <p class="al-pk-msg" id="al-pk-msg" aria-live="polite"></p>
+        <div class="al-pk-act">
+          <button type="button" class="btn" id="al-all" data-i18n="alRevealAll"></button>
+          <button type="button" class="btn primary" id="al-stick" data-i18n="alStick" hidden></button>
+          <button type="button" class="btn" id="al-more" hidden></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
     <div class="onl-inner">
       <header class="onl-head">
@@ -3468,6 +3734,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     <p class="res-record" id="res-record" hidden data-i18n="newRecord"></p>
     <dl class="res-stats" id="res-stats"></dl>
     <div class="res-strip" id="res-strip" hidden aria-hidden="true"></div>
+    <button type="button" class="res-album" id="res-album" hidden><svg class="ra-pack" viewBox="0 0 24 32" aria-hidden="true"><defs><linearGradient id="alpr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e3b8"/><stop offset=".35" stop-color="#e2bf7a"/><stop offset=".55" stop-color="#fff4da"/><stop offset=".8" stop-color="#d8ab6a"/><stop offset="1" stop-color="#f0d7a6"/></linearGradient></defs><path d="M2 3.4l1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6 1.5-1.6 1.5 1.6V28.6l-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6-1.5 1.6-1.5-1.6z" fill="url(#alpr)" stroke="#b48a48" stroke-width=".7" stroke-linejoin="round"/><path d="M2 7h20M2 25h20" stroke="#fff6df" stroke-width=".8" stroke-dasharray="1.2 1"/><ellipse cx="12" cy="16" rx="6.2" ry="5.4" fill="#fffaf2" stroke="#c9a469" stroke-width=".7"/><text x="12" y="19.2" text-anchor="middle" font-family="Cinzel, Times New Roman, serif" font-weight="700" font-size="8.4" fill="#a07a3c">H</text></svg><span class="ra-text"><span class="ra-main" id="ra-main"></span><span class="ra-sub" id="ra-sub"></span></span><svg class="i ra-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
     <div class="res-actions">
       <button type="button" class="btn primary" id="btn-again"></button>
       <button type="button" class="btn" id="btn-photos" data-i18n="photos"></button>
@@ -3812,6 +4079,27 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Album delle figurine ----
+      gameAl: 'Album', gpAlTag: 'Le figurine di Hande', ledeAl: 'Ogni partita finita ti regala una bustina di figurine: aprila, incolla le foto di Hande nell\'album e completa tutte le pagine.',
+      alIntro: 'Tutte le foto di Hande diventano figurine. Ogni partita finita, a qualsiasi gioco, ti regala una bustina da cinque; le foto che vinci nei giochi si incollano da sole.',
+      alTitle: 'Album delle figurine', alSub: '{n} figurine su {t}', alOpenAlbum: 'Apri l\'album', alOpenPack: 'Apri una bustina', alFive: '5 figurine',
+      alProgress: 'Figurine incollate', alPagesDone: 'Pagine complete: {d} su {t}', alPacksN: 'Bustine da aprire: {n}', alPacks1: 'Una bustina da aprire', alPacks0: 'Nessuna bustina da aprire: finisci una partita per averne una',
+      alHintEarn: 'Finisci una partita a qualsiasi gioco per avere un\'altra bustina. Domani ce n\'è una in regalo.',
+      alDups: 'Doppie: {n}', alSwapBtn: 'Scambia {n} doppie', alSwapNeed: 'Ogni {n} doppie ricevi una figurina che ti manca, prima quelle della pagina aperta', alSwapGot: 'Ecco la figurina numero {n}',
+      alSwapKick: 'Scambio di doppie', alSwapTitle: 'Una figurina che ti mancava',
+      alIndex: 'Pagine dell\'album', alPageNo: 'Pagina {n}', alComplete: 'Completa', alPrev: 'Pagina precedente', alNext: 'Pagina successiva',
+      alStAria: 'Figurina {n}, apri la foto', alMissAria: 'Figurina {n}, ti manca', alNew: 'Nuova', alDup: 'Doppia', alGold: 'Brillante', alCopies: '{n} doppie',
+      alPackKick: 'Bustine da aprire: {n}', alPackKickGift: 'Bustine da aprire: {n}, con quella in regalo oggi', alPackTitle: 'Una bustina di figurine', alTapPack: 'Tocca la bustina per aprirla', alTapCards: 'Tocca le figurine per girarle', alTapCard: 'Tocca la figurina per girarla', alCardHidden: 'Figurina coperta {i}', alCardAria: 'Figurina {n}, {page}: {state}',
+      alRevealAll: 'Girale tutte', alStick: 'Incolla nell\'album', alNextPack: 'Apri la prossima ({n})', alLater: 'Più tardi',
+      alPackSum: 'Nuove: {n} · doppie: {d}', alPackSumAll: 'Tutte nuove!', alPackSumNone: 'Tutte doppie: tienile per uno scambio',
+      alDaily: 'Ecco la bustina di oggi!', alDailySub: 'Domani ce n\'è un\'altra', alFromGames: 'Foto vinte nei giochi', alFromGamesSub: '{n} incollate nell\'album', alFromGamesSub1: 'Una incollata nell\'album',
+      alPageFull: 'Pagina completa: {name}!', alPageGift: 'In regalo una bustina', alFull: 'Album completato!', alFullSub: 'Hai tutte le {t} figurine di Hande',
+      alResPack: '+1 bustina per l\'album', alResStuck: '{n} foto vinte incollate', alResStuck1: 'Una foto vinta incollata', alResOpen: 'Tocca per aprirla', alResOnline: 'Aprila dall\'album',
+      alRecord: 'Pagine complete: {d} su {t} · doppie: {n}', alRecordNone: 'Ancora nessuna figurina: apri la prima bustina', alTileTag: '{n} su {t} figurine',
+      aAlStart: 'Album delle figurine: {n} figurine su {t}. Bustine da aprire: {p}.',
+      alPages: { libreria: 'La libreria', parigi: 'Parigi', moda: 'La settimana della moda', maneggio: 'Il maneggio', mare: 'Il set al mare', suite: 'La suite bianca', corridoio: 'Il corridoio dorato',
+        tappeto: 'Il tappeto rosso', gala: 'La serata in nero', cinema: 'Il cinema', feste: 'Cene e feste', mosca: 'Mosca', grigio: 'Il tailleur grigio', terrazza: 'La terrazza', selfie: 'Selfie',
+        storie: 'Le storie', viaggio: 'In viaggio', specchio: 'Allo specchio', nero: 'Total black', quinte: 'Dietro le quinte', gioielli: 'La serata dei gioielli', extra: 'Extra' },
       // ---- Gratta e scopri ----
       gameGv: 'Gratta e scopri', gpGvTag: 'Gratta e trova il tris', ledeGv: 'Gratta i biglietti col dito: sotto c\'è una foto di Hande. Trova tre simboli uguali e la foto è tua.',
       gvIntro: 'Cinque biglietti a partita. Gratta col dito o col mouse: sotto ogni biglietto ci sono una foto di Hande e nove simboli. Con tre simboli uguali la foto è tua.',
@@ -4123,6 +4411,27 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- Çıkartma albümü ----
+      gameAl: 'Albüm', gpAlTag: 'Hande çıkartmaları', ledeAl: 'Biten her oyun sana bir paket çıkartma kazandırır: paketi aç, Hande\'nin fotoğraflarını albüme yapıştır ve bütün sayfaları tamamla.',
+      alIntro: 'Hande\'nin bütün fotoğrafları çıkartma oluyor. Hangi oyun olursa olsun, biten her oyun beşli bir paket kazandırır; oyunlarda kazandığın fotoğraflar albüme kendiliğinden yapışır.',
+      alTitle: 'Çıkartma albümü', alSub: '{t} çıkartmadan {n} tanesi', alOpenAlbum: 'Albümü aç', alOpenPack: 'Bir paket aç', alFive: '5 çıkartma',
+      alProgress: 'Yapıştırılan çıkartmalar', alPagesDone: 'Tamamlanan sayfalar: {d}/{t}', alPacksN: 'Açılacak paket: {n}', alPacks1: 'Açılacak bir paket var', alPacks0: 'Açılacak paket yok: yeni bir paket için bir oyun bitir',
+      alHintEarn: 'Yeni bir paket için herhangi bir oyunu bitir. Yarın hediye bir paket var.',
+      alDups: 'Çiftler: {n}', alSwapBtn: '{n} çifti takas et', alSwapNeed: 'Her {n} çifte eksik bir çıkartma alırsın, önce açık sayfadakiler', alSwapGot: 'İşte {n} numaralı çıkartma',
+      alSwapKick: 'Çift takası', alSwapTitle: 'Eksik olan bir çıkartma',
+      alIndex: 'Albüm sayfaları', alPageNo: 'Sayfa {n}', alComplete: 'Tamam', alPrev: 'Önceki sayfa', alNext: 'Sonraki sayfa',
+      alStAria: '{n} numaralı çıkartma, fotoğrafı aç', alMissAria: '{n} numaralı çıkartma, eksik', alNew: 'Yeni', alDup: 'Çift', alGold: 'Parlak', alCopies: '{n} çift',
+      alPackKick: 'Açılacak paket: {n}', alPackKickGift: 'Açılacak paket: {n}, bugünün hediyesiyle', alPackTitle: 'Bir paket çıkartma', alTapPack: 'Açmak için pakete dokun', alTapCards: 'Çevirmek için çıkartmalara dokun', alTapCard: 'Çevirmek için çıkartmaya dokun', alCardHidden: '{i}. kapalı çıkartma', alCardAria: '{n} numaralı çıkartma, {page}: {state}',
+      alRevealAll: 'Hepsini çevir', alStick: 'Albüme yapıştır', alNextPack: 'Sonrakini aç ({n})', alLater: 'Sonra',
+      alPackSum: 'Yeni: {n} · çift: {d}', alPackSumAll: 'Hepsi yeni!', alPackSumNone: 'Hepsi çift: takas için sakla',
+      alDaily: 'İşte bugünün paketi!', alDailySub: 'Yarın bir tane daha var', alFromGames: 'Oyunlarda kazanılan fotoğraflar', alFromGamesSub: '{n} tanesi albüme yapıştırıldı', alFromGamesSub1: 'Biri albüme yapıştırıldı',
+      alPageFull: 'Sayfa tamam: {name}!', alPageGift: 'Hediye bir paket', alFull: 'Albüm tamamlandı!', alFullSub: 'Hande\'nin {t} çıkartmasının hepsi sende',
+      alResPack: 'Albüm için +1 paket', alResStuck: 'Kazanılan {n} fotoğraf yapıştırıldı', alResStuck1: 'Kazanılan bir fotoğraf yapıştırıldı', alResOpen: 'Açmak için dokun', alResOnline: 'Albümden açabilirsin',
+      alRecord: 'Tamamlanan sayfalar: {d}/{t} · çiftler: {n}', alRecordNone: 'Henüz çıkartma yok: ilk paketi aç', alTileTag: '{t} çıkartmadan {n} tanesi',
+      aAlStart: 'Çıkartma albümü: {t} çıkartmadan {n} tanesi. Açılacak paket: {p}.',
+      alPages: { libreria: 'Kitapçı', parigi: 'Paris', moda: 'Moda haftası', maneggio: 'At çiftliği', mare: 'Deniz kenarı', suite: 'Beyaz süit', corridoio: 'Altın koridor',
+        tappeto: 'Kırmızı halı', gala: 'Siyah gece', cinema: 'Sinema', feste: 'Yemekler ve kutlamalar', mosca: 'Moskova', grigio: 'Gri takım', terrazza: 'Teras', selfie: 'Selfie',
+        storie: 'Hikâyeler', viaggio: 'Yolculukta', specchio: 'Aynada', nero: 'Simsiyah', quinte: 'Kamera arkası', gioielli: 'Mücevher gecesi', extra: 'Ekstra' },
       // ---- Kazı ve bul ----
       gameGv: 'Kazı ve bul', gpGvTag: 'Kazı, üçlüyü bul', ledeGv: 'Biletleri parmağınla kazı: altında bir Hande fotoğrafı var. Üç aynı sembol bulursan fotoğraf senin.',
       gvIntro: 'Her oyunda beş bilet. Parmağınla ya da fareyle kazı: her biletin altında bir Hande fotoğrafı ve dokuz sembol var. Üç aynı sembolde fotoğraf senin.',
@@ -4682,13 +4991,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    alRelang();
     gvRelang();
     gbRelang();
     scRelang();
@@ -4820,7 +5130,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -5010,7 +5320,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -5112,7 +5422,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -5578,6 +5888,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     const strip = $('#res-strip'); strip.textContent = ''; strip.hidden = !o.strip;
     if (o.strip) o.strip.forEach((x) => { const sp = document.createElement('span'); if (!x.open) sp.className = 'no'; const im = document.createElement('img'); im.alt = ''; im.src = cardSrc(PHOTO_BY_ID.get(x.id) || PHOTOS[0]); sp.appendChild(im); strip.appendChild(sp); });
     $('#btn-photos').textContent = o.photosLabel || t('photos');
+    alResult(o);
     $('#result').classList.toggle('pz', o.action === 'pz');
     $('#btn-again').hidden = !o.again; $('#btn-again').disabled = !!o.againOff; if (o.again) $('#btn-again').textContent = o.again;
     $('#btn-menu').textContent = o.menuLabel || t('toMenu');
@@ -5613,7 +5924,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -6113,7 +6424,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -6213,17 +6524,18 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-al').hidden = gs !== 'al';
     $('#setup-gv').hidden = gs !== 'gv';
     $('#setup-gb').hidden = gs !== 'gb';
     $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -6240,7 +6552,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -6518,7 +6830,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -7062,7 +7374,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -7285,7 +7597,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
@@ -7433,7 +7745,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -7706,7 +8018,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -8552,7 +8864,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -9014,7 +9326,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -10170,7 +10482,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -10240,7 +10552,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -10305,7 +10617,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -10759,7 +11071,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -10967,7 +11279,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -11353,7 +11665,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -12167,7 +12479,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
     const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
     const c = cfg && cfg.col ? cfg.col : 'w';
     SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
@@ -12464,7 +12776,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function gbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me', keep: 0, build: 1 }].concat(GB_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
@@ -12896,7 +13208,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function gvStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
     GV = { photos: gvPick(GV_TICKETS), n: 0, wins: 0, res: [], found: [], ticket: null, timers: [], over: false, scratchT: 0 };
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gvEl.hidden = false;
@@ -13087,6 +13399,514 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     window.addEventListener('resize', () => { const g = GV; if (g && !gvEl.hidden && g.ticket && !g.ticket.done) gvPaint(g); });
   }
 
+  /* ---------- Album delle figurine: every photo of Hande is a sticker ----------
+     The stickers sit on pages, one per photo shoot (the small ones share a page), numbered in album order.
+     Each finished game, whatever the game, gives a pack of five; there is a pack a day, three to start and one more
+     for every full page. Every pack has at least one sticker you miss. Four doubles swap for a missing sticker,
+     first from the page you are looking at. The photos won in the games go straight into the album. */
+  const alEl = $('#al');
+  const AL_PAGES = [
+    { id: 'libreria', sets: ['libreria'] },
+    { id: 'parigi', sets: ['parigi', 'fontana'] },
+    { id: 'moda', sets: ['moda'] },
+    { id: 'maneggio', sets: ['maneggio', 'notte'] },
+    { id: 'mare', sets: ['elle'] },
+    { id: 'suite', sets: ['hotel'] },
+    { id: 'corridoio', sets: ['corridoio'] },
+    { id: 'tappeto', sets: ['pizzo'] },
+    { id: 'gala', sets: ['abito-nero', 'bianco-nero', 'giallo'] },
+    { id: 'cinema', sets: ['prima', 'extra-prima'] },
+    { id: 'feste', sets: ['compleanno', 'torta', 'cena', 'amica'] },
+    { id: 'mosca', sets: ['mosca-prima', 'mosca-bianco', 'mosca-pelliccia'] },
+    { id: 'grigio', sets: ['grigio'] },
+    { id: 'terrazza', sets: ['rosso'] },
+    { id: 'selfie', sets: ['selfie', 'casual'] },
+    { id: 'storie', sets: ['storie', 'inverno'] },
+    { id: 'viaggio', sets: ['viaggio', 'dubai'] },
+    { id: 'specchio', sets: ['specchio', 'specchi'] },
+    { id: 'nero', sets: ['hotel-nero'] },
+    { id: 'quinte', sets: ['backstage', 'camicia', 'campagna'] },
+    { id: 'gioielli', sets: ['pomellato'] },
+  ];
+  AL_PAGES.forEach((pg) => { pg.ids = pg.sets.flatMap((s) => PHOTOS.filter((p) => p.set === s).map((p) => p.id)); });
+  (() => { // photos of a shoot added later get a page of their own at the end
+    const placed = new Set(AL_PAGES.flatMap((pg) => pg.ids));
+    const rest = PHOTOS.filter((p) => p.set !== 'locandine' && !placed.has(p.id)).map((p) => p.id);
+    if (rest.length) AL_PAGES.push({ id: 'extra', sets: [], ids: rest });
+    for (let i = AL_PAGES.length - 1; i >= 0; i--) if (!AL_PAGES[i].ids.length) AL_PAGES.splice(i, 1);
+  })();
+  const AL_IDS = AL_PAGES.flatMap((pg) => pg.ids);
+  const AL_NO = new Map(AL_IDS.map((id, i) => [id, i + 1]));
+  const AL_PAGE_OF = new Map(); AL_PAGES.forEach((pg, i) => pg.ids.forEach((id) => AL_PAGE_OF.set(id, i)));
+  const AL_PACK = 5, AL_SWAP = 4, AL_SHINY = 1 / 16, AL_START = 3;
+  const AL_CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>';
+  let AL = null, alSpeed = 1; // AL: the album on screen; alSpeed: only the tests change it
+
+  function alStats() {
+    const st = store.get('hm-al', null);
+    const o = Object.assign({ own: {}, gold: [], packs: AL_START, day: '', opened: 0, earned: 0, swaps: 0, done: [], cheer: [], unseen: [], full: false }, st && typeof st === 'object' ? st : {});
+    if (!o.own || typeof o.own !== 'object' || Array.isArray(o.own)) o.own = {};
+    ['gold', 'done', 'cheer', 'unseen'].forEach((k) => { if (!Array.isArray(o[k])) o[k] = []; });
+    o.packs = Math.max(0, Math.floor(+o.packs || 0));
+    return o;
+  }
+  const alSave = (st) => store.set('hm-al', st);
+  const alHas = (st, id) => (st.own[id] || 0) > 0;
+  const alCount = (st) => AL_IDS.reduce((n, id) => n + (alHas(st, id) ? 1 : 0), 0);
+  const alDups = (st) => AL_IDS.reduce((n, id) => n + Math.max(0, (st.own[id] || 0) - 1), 0);
+  const alHave = (st, pg) => pg.ids.reduce((n, id) => n + (alHas(st, id) ? 1 : 0), 0);
+  const alFullPages = (st) => AL_PAGES.filter((pg) => alHave(st, pg) === pg.ids.length).length;
+  const alPageName = (pg) => (t('alPages') || {})[pg.id] || pg.id;
+  const alToday = () => { const d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); };
+  function alLater(ms, fn) {
+    const a = AL; if (!a) return;
+    const id = setTimeout(() => { a.timers = a.timers.filter((x) => x !== id); if (AL === a) fn(); }, ms / alSpeed);
+    a.timers.push(id);
+  }
+
+  // the photos won in the games: every game keeps them in its own record (the puzzle keeps the ones it finished)
+  function alWonIds() {
+    const ids = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (!/^hm-[a-z]{2}$/.test(k)) continue;
+        const v = store.get(k, null);
+        if (!v || typeof v !== 'object') continue;
+        if (Array.isArray(v.found)) v.found.forEach((x) => { if (typeof x === 'string') ids.push(x); });
+        if (k === 'hm-pz' && Array.isArray(v.done)) v.done.forEach((x) => { if (typeof x === 'string') ids.push(x); });
+      }
+    } catch (e) { /* storage unavailable */ }
+    return ids;
+  }
+  // stick the photos won in the games that are not in the album yet; they stay marked as new until the album is opened
+  function alSync(st, extra) {
+    const got = [];
+    alWonIds().concat(extra || []).forEach((id) => { if (AL_NO.has(id) && !alHas(st, id)) { st.own[id] = 1; got.push(id); } });
+    got.forEach((id) => { if (!st.unseen.includes(id)) st.unseen.push(id); });
+    return got;
+  }
+  // the pages that just got full: a pack each, and a celebration when the album is on screen
+  function alCheck(st) {
+    const now = [];
+    AL_PAGES.forEach((pg) => {
+      if (!st.done.includes(pg.id) && pg.ids.every((id) => alHas(st, id))) { st.done.push(pg.id); st.packs++; st.cheer.push(pg.id); now.push(pg.id); }
+    });
+    if (!st.full && AL_IDS.every((id) => alHas(st, id))) { st.full = true; st.cheer.push('*'); }
+    return now;
+  }
+  // five different stickers, at least one you miss while the album is not full; now and then a shiny one
+  function alDeal(st, n = AL_PACK) {
+    const pick = shuffle(AL_IDS.slice()).slice(0, n);
+    if (!pick.some((id) => !alHas(st, id))) {
+      const miss = AL_IDS.filter((id) => !alHas(st, id));
+      if (miss.length) pick[Math.floor(Math.random() * pick.length)] = pickOne(miss);
+    }
+    return pick.map((id) => ({ id, gold: Math.random() < AL_SHINY }));
+  }
+  function alOpenPack() {
+    const st = alStats();
+    if (st.packs < 1) return null;
+    st.packs--; st.opened++;
+    const cards = alDeal(st).map((c) => {
+      const isNew = !alHas(st, c.id), had = st.gold.includes(c.id), gold = c.gold && !had;
+      st.own[c.id] = (st.own[c.id] || 0) + 1;
+      if (gold) st.gold.push(c.id);
+      return { id: c.id, isNew, gold, up: gold && !isNew };
+    });
+    alCheck(st); alSave(st);
+    return { cards };
+  }
+  // four doubles (the ones you have most copies of go first) for a missing sticker, from the given page if it has one
+  function alSwap(page) {
+    const st = alStats();
+    if (alDups(st) < AL_SWAP) return null;
+    const pg = AL_PAGES[page];
+    let miss = pg ? pg.ids.filter((id) => !alHas(st, id)) : [];
+    if (!miss.length) miss = AL_IDS.filter((id) => !alHas(st, id));
+    if (!miss.length) return null;
+    for (let k = 0; k < AL_SWAP; k++) {
+      let best = null;
+      AL_IDS.forEach((id) => { if ((st.own[id] || 0) > 1 && (!best || st.own[id] > st.own[best])) best = id; });
+      st.own[best]--;
+    }
+    const id = pickOne(miss);
+    st.own[id] = 1; st.swaps++;
+    alCheck(st); alSave(st);
+    return { cards: [{ id, isNew: true, gold: false, up: false }] };
+  }
+  // every result of every game: a pack, and the photos won stuck in the album
+  function alAfterResult(o) {
+    const st = alStats();
+    const got = alSync(st, (o.strip || []).filter((x) => x && x.open).map((x) => x.id));
+    st.packs++; st.earned++;
+    alCheck(st); alSave(st);
+    return { got, packs: st.packs };
+  }
+  function alResult(o) {
+    const el = $('#res-album');
+    let r = null;
+    try { r = alAfterResult(o); } catch (e) { r = null; }
+    el.hidden = !r;
+    if (!r) return;
+    $('#ra-main').textContent = t('alResPack');
+    $('#ra-sub').textContent = r.got.length > 1 ? t('alResStuck', { n: r.got.length }) : r.got.length ? t('alResStuck1') : N ? t('alResOnline') : t('alResOpen');
+    el.disabled = !!N; el.classList.toggle('static', !!N);
+  }
+
+  /* ---------- the album on screen ---------- */
+  function alStart(openPack) {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; alEl.hidden = false;
+    const st = alStats();
+    alSync(st);
+    const gift = st.day !== alToday();
+    if (gift) { st.day = alToday(); st.packs++; }
+    const won = st.unseen.filter((id) => AL_NO.has(id) && alHas(st, id));
+    st.unseen = [];
+    alCheck(st); alSave(st);
+    let page = +store.get('hm-al-page', 0);
+    if (!(page >= 0 && page < AL_PAGES.length)) page = 0;
+    if (won.length) page = AL_PAGE_OF.get(won[0]);
+    AL = { page, fresh: new Set(won), anim: new Set(won), pack: null, timers: [], swiped: false, jump: null };
+    alEl.scrollTop = 0;
+    $('#al-pack').hidden = true;
+    alRender();
+    announce(t('aAlStart', { n: alCount(st), t: AL_IDS.length, p: st.packs }));
+    const news = [];
+    if (won.length) news.push(() => { FX.banner(t('alFromGames'), won.length > 1 ? t('alFromGamesSub', { n: won.length }) : t('alFromGamesSub1'), 'long'); Sound.snap(); });
+    if (gift) news.push(() => { FX.banner(t('alDaily'), t('alDailySub'), 'long'); Sound.chest(); const r = $('#al-open').getBoundingClientRect(); if (r.width) FX.burst(r.left + r.width / 2, r.top + r.height / 2, 26, true); });
+    if (openPack && st.packs) { alPackShow(gift); return; }
+    news.forEach((fn, k) => alLater(350 + k * 2200, fn));
+    alLater(350 + news.length * 2200, alCheer);
+  }
+  function alStop() {
+    const a = AL; AL = null;
+    if (a) a.timers.forEach(clearTimeout);
+    alEl.hidden = true; $('#al-pack').hidden = true;
+  }
+  function alRequestExit() { goHome(); }
+  function alRender() {
+    if (!AL) return;
+    const st = alStats(), n = alCount(st), tot = AL_IDS.length, d = alDups(st);
+    $('#al-sub').textContent = t('alSub', { n, t: tot });
+    $('#al-num').textContent = n; $('#al-of').textContent = '/ ' + tot;
+    $('#al-fill').style.width = (n / tot * 100) + '%';
+    $('#al-pages').textContent = t('alPagesDone', { d: alFullPages(st), t: AL_PAGES.length });
+    $('#al-cnt').textContent = st.packs;
+    $('#al-open').disabled = st.packs < 1;
+    $('#al-hint').textContent = st.packs ? '' : t('alHintEarn');
+    $('#al-hint').hidden = !!st.packs;
+    $('#al-dups').textContent = t('alDups', { n: d });
+    const sw = $('#al-swap');
+    sw.textContent = t('alSwapBtn', { n: AL_SWAP });
+    sw.disabled = d < AL_SWAP || n === tot;
+    sw.title = t('alSwapNeed', { n: AL_SWAP });
+    alRenderTabs(st);
+    alRenderPage(st, 0);
+  }
+  function alRenderTabs(st) {
+    const box = $('#al-tabs');
+    if (box.children.length !== AL_PAGES.length) {
+      box.textContent = '';
+      AL_PAGES.forEach((pg, i) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'al-tab';
+        b.innerHTML = '<span class="al-tn"></span><span class="al-tc"></span>';
+        b.addEventListener('click', () => { if (AL && i !== AL.page) { Sound.flip(); alGo(i); } });
+        box.appendChild(b);
+      });
+    }
+    AL_PAGES.forEach((pg, i) => {
+      const b = box.children[i], have = alHave(st, pg), all = pg.ids.length;
+      b.classList.toggle('full', have === all);
+      b.classList.toggle('has-new', pg.ids.some((id) => AL.fresh.has(id)));
+      b.setAttribute('aria-pressed', String(i === AL.page));
+      b.firstChild.textContent = alPageName(pg);
+      if (have === all) b.lastChild.innerHTML = AL_CHECK; else b.lastChild.textContent = have + '/' + all;
+    });
+    // keep the open page in view: a row on a phone, a column on a computer (at once when the album opens)
+    const cur = box.children[AL.page], behavior = AL.tabsAt === undefined || reduceMotion.matches ? 'auto' : 'smooth';
+    AL.tabsAt = AL.page;
+    if (!cur) return;
+    if (box.scrollHeight > box.clientHeight + 2) box.scrollTo({ top: Math.max(0, cur.offsetTop - (box.clientHeight - cur.offsetHeight) / 2), behavior });
+    else box.scrollTo({ left: Math.max(0, cur.offsetLeft - (box.clientWidth - cur.offsetWidth) / 2), behavior });
+  }
+  function alRenderPage(st, dir) {
+    const pg = AL_PAGES[AL.page], have = alHave(st, pg), all = pg.ids.length;
+    $('#al-pno').textContent = t('alPageNo', { n: AL.page + 1 });
+    $('#al-pt').textContent = alPageName(pg);
+    $('#al-pc').textContent = have + ' / ' + all;
+    $('#al-seal').hidden = have < all;
+    const page = $('#al-page');
+    page.classList.toggle('full', have === all);
+    if (dir) { page.classList.remove('turn-l', 'turn-r'); void page.offsetWidth; page.classList.add(dir > 0 ? 'turn-r' : 'turn-l'); }
+    const grid = $('#al-grid');
+    grid.textContent = '';
+    const owned = pg.ids.filter((id) => alHas(st, id));
+    pg.ids.forEach((id) => {
+      const no = AL_NO.get(id);
+      if (!alHas(st, id)) {
+        const sp = document.createElement('span'); sp.className = 'al-slot'; sp.setAttribute('role', 'img');
+        sp.setAttribute('aria-label', t('alMissAria', { n: no }));
+        sp.innerHTML = '<span class="al-sn"></span>'; sp.firstChild.textContent = no;
+        grid.appendChild(sp);
+        return;
+      }
+      const extra = st.own[id] - 1, gold = st.gold.includes(id), fresh = AL.fresh.has(id);
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'al-st'; b.dataset.id = id;
+      if (gold) b.classList.add('gold');
+      if (AL.anim.has(id)) { b.classList.add('stick'); AL.anim.delete(id); }
+      b.setAttribute('aria-label', t('alStAria', { n: no }) + (gold ? ', ' + t('alGold') : '') + (fresh ? ', ' + t('alNew') : '') + (extra > 0 ? ', ' + t('alCopies', { n: extra }) : ''));
+      b.innerHTML = '<span class="al-sp"><img alt="" loading="lazy" decoding="async" draggable="false"></span><span class="al-no"></span>';
+      $('img', b).src = cardSrc(PHOTO_BY_ID.get(id));
+      $('.al-no', b).textContent = no;
+      if (extra > 0) { const x = document.createElement('span'); x.className = 'al-x'; x.textContent = '+' + extra; b.appendChild(x); }
+      if (fresh) { const x = document.createElement('span'); x.className = 'al-nw'; x.textContent = t('alNew'); b.appendChild(x); }
+      b.addEventListener('click', () => {
+        if (!AL || AL.swiped) return;
+        lbList = owned.map((x) => PHOTO_BY_ID.get(x)).filter(Boolean);
+        openLightbox(Math.max(0, owned.indexOf(id)));
+      });
+      grid.appendChild(b);
+    });
+    $('#al-pn').textContent = (AL.page + 1) + ' / ' + AL_PAGES.length;
+    $('#al-prev').disabled = AL.page === 0;
+    $('#al-next').disabled = AL.page === AL_PAGES.length - 1;
+  }
+  function alGo(i) {
+    if (!AL) return;
+    i = Math.max(0, Math.min(AL_PAGES.length - 1, i));
+    if (i === AL.page) return;
+    const dir = i > AL.page ? 1 : -1;
+    AL.page = i; store.set('hm-al-page', i);
+    const st = alStats();
+    alRenderTabs(st); alRenderPage(st, dir);
+    // a page turned from the bottom of a long page starts from its top
+    const top = alEl.getBoundingClientRect().top, r = $('#al-tabs').getBoundingClientRect();
+    if (r.top < top) alEl.scrollTo({ top: alEl.scrollTop + r.top - top - 10, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+  }
+
+  /* ---------- opening a pack ---------- */
+  function alPackShow(gift) {
+    if (!AL || AL.pack) return;
+    const st = alStats();
+    if (st.packs < 1) { alRender(); return; }
+    AL.pack = { kind: 'pack', stage: 'closed', cards: [], open: [] };
+    const ov = $('#al-pack');
+    ov.hidden = false; ov.dataset.stage = 'closed';
+    $('#al-pk-kick').textContent = t(gift ? 'alPackKickGift' : 'alPackKick', { n: st.packs });
+    $('#al-pk-title').textContent = t('alPackTitle');
+    const pk = $('#al-pk');
+    pk.hidden = false; pk.disabled = false; pk.classList.remove('tear', 'in'); void pk.offsetWidth; pk.classList.add('in');
+    $('#al-cards').textContent = '';
+    $('#al-pk-msg').textContent = t('alTapPack');
+    $('#al-all').hidden = true; $('#al-stick').hidden = true; $('#al-more').hidden = true; $('#al-pk-close').hidden = false;
+    setTimeout(() => { if (AL && AL.pack && AL.pack.stage === 'closed') pk.focus({ preventScroll: true }); }, 60);
+  }
+  function alTear() {
+    const P = AL && AL.pack;
+    if (!P || P.stage !== 'closed') return;
+    const r = alOpenPack();
+    if (!r) { alPackClose(); return; }
+    P.stage = 'tear'; P.cards = r.cards; P.open = r.cards.map(() => false);
+    const pk = $('#al-pk');
+    pk.classList.add('tear'); pk.disabled = true;
+    $('#al-pk-close').hidden = true;
+    $('#al-pk-kick').textContent = t('alPackKick', { n: alStats().packs });
+    Sound.paper(); buzz(14);
+    preload(r.cards.map((c) => cardSrc(PHOTO_BY_ID.get(c.id))), 2500);
+    alLater(620, alDealCards);
+  }
+  function alDealCards() {
+    const P = AL && AL.pack;
+    if (!P) return;
+    P.stage = 'cards';
+    $('#al-pack').dataset.stage = 'cards';
+    $('#al-pk').hidden = true;
+    const box = $('#al-cards');
+    box.textContent = ''; box.dataset.n = P.cards.length;
+    P.cards.forEach((c, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'al-card' + (c.gold ? ' gold' : '');
+      b.style.setProperty('--i', i);
+      b.setAttribute('aria-label', t('alCardHidden', { i: i + 1 }));
+      b.innerHTML = '<span class="al-ci"><span class="al-cb"><b>H</b></span><span class="al-cf"><span class="al-cph"><img alt="" draggable="false"></span><span class="al-cno"></span><span class="al-cpn"></span><span class="al-cbadge"></span></span></span>';
+      $('img', b).src = cardSrc(PHOTO_BY_ID.get(c.id));
+      $('.al-cno', b).textContent = AL_NO.get(c.id);
+      $('.al-cpn', b).textContent = alPageName(AL_PAGES[AL_PAGE_OF.get(c.id)]);
+      const badge = $('.al-cbadge', b), kind = c.gold ? 'gold' : c.isNew ? 'new' : 'dup';
+      badge.classList.add(kind); badge.textContent = t(kind === 'gold' ? 'alGold' : kind === 'new' ? 'alNew' : 'alDup');
+      b.addEventListener('click', () => alFlip(i));
+      box.appendChild(b);
+      alLater(60 + i * 90, () => Sound.deal());
+    });
+    $('#al-pk-msg').textContent = t(P.cards.length > 1 ? 'alTapCards' : 'alTapCard');
+    $('#al-all').hidden = P.cards.length < 2;
+    alLater(120, () => { const f = $('#al-cards .al-card'); if (f) f.focus({ preventScroll: true }); });
+  }
+  function alFlip(i) {
+    const P = AL && AL.pack;
+    if (!P || P.stage !== 'cards' || P.open[i]) return;
+    P.open[i] = true;
+    const c = P.cards[i], b = $('#al-cards').children[i];
+    b.classList.add('open');
+    if (c.isNew || c.gold) b.classList.add('new');
+    b.setAttribute('aria-label', t('alCardAria', { n: AL_NO.get(c.id), page: alPageName(AL_PAGES[AL_PAGE_OF.get(c.id)]), state: t(c.gold ? 'alGold' : c.isNew ? 'alNew' : 'alDup') }));
+    if (c.gold) Sound.golden(); else if (c.isNew) Sound.sparkle(); else Sound.flip();
+    if (c.gold || c.isNew) alLater(300, () => { const r = b.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height / 2, c.gold ? 28 : 12, true); });
+    if (P.open.every(Boolean)) alLater(700, alPackDone);
+  }
+  function alRevealAll() {
+    const P = AL && AL.pack;
+    if (!P || P.stage !== 'cards') return;
+    let k = 0;
+    P.open.forEach((o, i) => { if (!o) { alLater(k * 150, () => alFlip(i)); k++; } });
+  }
+  function alPackDone() {
+    const P = AL && AL.pack;
+    if (!P || P.stage !== 'cards') return;
+    P.stage = 'done';
+    $('#al-pack').dataset.stage = 'done';
+    const nNew = P.cards.filter((c) => c.isNew).length, nDup = P.cards.length - nNew;
+    $('#al-pk-msg').textContent = P.kind === 'swap' ? t('alSwapGot', { n: AL_NO.get(P.cards[0].id) }) : !nDup ? t('alPackSumAll') : !nNew ? t('alPackSumNone') : t('alPackSum', { n: nNew, d: nDup });
+    $('#al-all').hidden = true;
+    const st = alStats(), more = $('#al-more'), stick = $('#al-stick');
+    stick.hidden = false;
+    more.hidden = !(P.kind === 'pack' && st.packs > 0);
+    more.textContent = t('alNextPack', { n: st.packs });
+    stick.focus({ preventScroll: true });
+  }
+  // the new stickers go on their page: the album opens there and they settle in place
+  function alStick(next) {
+    const P = AL && AL.pack;
+    if (!P || P.stage !== 'done') return;
+    const news = P.cards.filter((c) => c.isNew || c.up).map((c) => c.id);
+    news.forEach((id) => { AL.fresh.add(id); AL.anim.add(id); });
+    if (news.length && !AL.jump) AL.jump = news[0];
+    AL.pack = null;
+    if (next && alStats().packs > 0) { Sound.pickup(); alRender(); alPackShow(); return; }
+    $('#al-pack').hidden = true;
+    if (AL.jump) Sound.snap();
+    alShowNew();
+    alLater(500, alCheer);
+  }
+  // back to the album after one pack or more: it opens where the first new sticker went
+  function alShowNew() {
+    const id = AL.jump;
+    AL.jump = null;
+    if (id) { AL.page = AL_PAGE_OF.get(id); store.set('hm-al-page', AL.page); }
+    alRender();
+    const top = alEl.getBoundingClientRect().top, r = $('#al-tabs').getBoundingClientRect();
+    if (id && r.top < top) alEl.scrollTo({ top: alEl.scrollTop + r.top - top - 10, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    $('#al-open').focus({ preventScroll: true });
+  }
+  function alPackClose() {
+    const P = AL && AL.pack;
+    if (!P || P.stage !== 'closed') return;
+    AL.pack = null;
+    $('#al-pack').hidden = true;
+    alShowNew();
+    alCheer();
+  }
+  function alSwapGo() {
+    if (!AL || AL.pack) return;
+    const r = alSwap(AL.page);
+    if (!r) return;
+    AL.pack = { kind: 'swap', stage: 'tear', cards: r.cards, open: [false] };
+    $('#al-pack').hidden = false;
+    $('#al-pk-kick').textContent = t('alSwapKick');
+    $('#al-pk-title').textContent = t('alSwapTitle');
+    $('#al-pk-close').hidden = true; $('#al-stick').hidden = true; $('#al-more').hidden = true;
+    Sound.whoosh();
+    alRender();
+    alDealCards();
+  }
+  // full pages (and a full album), one at a time
+  function alCheer() {
+    if (!AL || AL.pack) return;
+    const st = alStats();
+    if (!st.cheer.length) return;
+    const list = st.cheer.slice();
+    st.cheer = []; alSave(st);
+    list.forEach((id, k) => alLater(k * 2400, () => {
+      if (!AL) return;
+      if (id === '*') { celebrate(); FX.banner(t('alFull'), t('alFullSub', { t: AL_IDS.length }), 'long'); return; }
+      const i = AL_PAGES.findIndex((pg) => pg.id === id);
+      if (i < 0) return;
+      if (i !== AL.page) alGo(i);
+      alRender();
+      Sound.win(); buzz([20, 40, 20]);
+      FX.banner(t('alPageFull', { name: alPageName(AL_PAGES[i]) }), t('alPageGift'), 'long');
+      const r = $('#al-pt').getBoundingClientRect();
+      if (r.width) FX.burst(r.left + r.width / 2, r.top + r.height / 2, 40, true);
+    }));
+  }
+
+  /* ---------- the home ---------- */
+  function alRenderSetup() {
+    const st = alStats();
+    if (alSync(st).length) { alCheck(st); alSave(st); }
+    const n = alCount(st), tot = AL_IDS.length, pct = (n / tot * 100) + '%';
+    const avail = st.packs + (st.day !== alToday() ? 1 : 0);
+    const tile = $('.gp-tile[data-game="al"]');
+    if (tile) {
+      $('.gp-tag', tile).textContent = t('alTileTag', { n, t: tot });
+      const dot = $('.al-tdot', tile);
+      dot.hidden = !avail; dot.textContent = avail;
+      $('.al-tbar i', tile).style.width = pct;
+    }
+    $('#al-s-tag').textContent = n + ' / ' + tot;
+    $('#al-s-fill').style.width = pct;
+    $('#al-s-packs').textContent = avail > 1 ? t('alPacksN', { n: avail }) : avail ? t('alPacks1') : t('alPacks0');
+    $('#al-record').textContent = n ? t('alRecord', { d: alFullPages(st), t: AL_PAGES.length, n: alDups(st) }) : t('alRecordNone');
+  }
+  function alRelang() { if (AL && !AL.pack) alRender(); }
+  function alFound() { return null; }
+  function alAgain() { alStart(false); }
+  function alWire() {
+    $('#btn-al-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); alStart(false); });
+    $('#al-exit').addEventListener('click', alRequestExit);
+    $('#al-open').addEventListener('click', () => { if (AL && !AL.pack) { Sound.pickup(); alPackShow(); } });
+    $('#al-swap').addEventListener('click', alSwapGo);
+    $('#al-prev').addEventListener('click', () => { if (AL) { Sound.flip(); alGo(AL.page - 1); } });
+    $('#al-next').addEventListener('click', () => { if (AL) { Sound.flip(); alGo(AL.page + 1); } });
+    $('#al-pk').addEventListener('click', alTear);
+    $('#al-all').addEventListener('click', alRevealAll);
+    $('#al-stick').addEventListener('click', () => alStick(false));
+    $('#al-more').addEventListener('click', () => alStick(true));
+    $('#al-pk-close').addEventListener('click', alPackClose);
+    $('#res-album').addEventListener('click', () => { if (N) return; AudioCore.get(); Sound.pickup(); goHome(); alStart(true); });
+    // a swipe on the page turns it
+    const grid = $('#al-grid');
+    let sw = null;
+    grid.addEventListener('pointerdown', (e) => { sw = { x: e.clientX, y: e.clientY }; });
+    grid.addEventListener('pointercancel', () => { sw = null; });
+    grid.addEventListener('pointerup', (e) => {
+      if (!sw || !AL) return;
+      const dx = e.clientX - sw.x, dy = e.clientY - sw.y;
+      sw = null;
+      if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * .6) return;
+      const to = AL.page + (dx < 0 ? 1 : -1);
+      if (to < 0 || to >= AL_PAGES.length) return;
+      AL.swiped = true; setTimeout(() => { if (AL) AL.swiped = false; }, 350);
+      Sound.flip(); alGo(to);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (alEl.hidden || !AL || !$('#lightbox').hidden || !$('#confirm').hidden) return;
+      const P = AL.pack;
+      if (P) {
+        if (e.key !== 'Escape') return;
+        e.preventDefault();
+        if (P.stage === 'closed') alPackClose(); else if (P.stage === 'cards') alRevealAll(); else if (P.stage === 'done') alStick(false);
+        return;
+      }
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === 'ArrowLeft' && AL.page > 0) { e.preventDefault(); Sound.flip(); alGo(AL.page - 1); }
+      else if (e.key === 'ArrowRight' && AL.page < AL_PAGES.length - 1) { e.preventDefault(); Sound.flip(); alGo(AL.page + 1); }
+    });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -13097,13 +13917,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -13119,7 +13939,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -13182,6 +14002,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'al') { alAgain(); return; }
     if (resultAction === 'gv') { gvAgain(); return; }
     if (resultAction === 'gb') { gbAgain(); return; }
     if (resultAction === 'sc') { scAgain(); return; }
@@ -13214,10 +14035,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  alWire();
   gvWire();
   gbWire();
   scWire();
