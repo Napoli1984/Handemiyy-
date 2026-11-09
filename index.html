@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Handemiyy</title>
-<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze e Scopa con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
+<meta name="description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze, Scopa e Tavla con le foto di Hande, e l'album delle figurine da completare. Fan game in italiano e in turco.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Handemiyy">
 <meta property="og:title" content="Handemiyy">
-<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze e Scopa con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta property="og:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze, Scopa e Tavla con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://napoli1984.github.io/Handemiyy-/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Handemiyy">
-<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze e Scopa con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
+<meta name="twitter:description" content="Memory, Ultima carta, Puzzle, Bowling, Ruota della fortuna, Tombola, Quiz del milione, Pioggia di perle, Poker, Scacchi, Gran Bazar, Gratta e scopri, Collana di perle, Trova le differenze, Scopa e Tavla con le foto di Hande, e l'album delle figurine da completare. Gioca da solo o con gli amici.">
 <meta name="twitter:image" content="https://napoli1984.github.io/Handemiyy-/og.jpg?v=3">
 <meta name="twitter:image:alt" content="Hande sorride in una cornice d’oro accanto alla scritta Handemiyy: Memory, Ultima carta, Puzzle e Bowling">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3074,6 +3074,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   .td-hud { width: min(100%, 640px); }
 }
 @media (prefers-reduced-motion: reduce) { .td-mark, .td-miss, .tds.low .td-tv { animation: none !important; } }
+.home .td-seg { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.home .td-seg button { padding: 9px 4px; white-space: nowrap; }
 /* ---------- Scopa ---------- */
 .sos {
   --tw: min(58px, (100vw - 64px) / 5.3);
@@ -3196,6 +3198,69 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 }
 @media (prefers-reduced-motion: reduce) { .so-hand .so-card { transition: none; } }
 .so-hand .so-card:disabled { opacity: 1; color: #4a3557; }
+/* ---------- Tavla ---------- */
+.tvs {
+  display: flex; flex-direction: column; gap: 8px;
+  overflow: hidden; -webkit-user-select: none; user-select: none;
+  padding: max(8px, env(safe-area-inset-top, 0px)) 10px max(12px, env(safe-area-inset-bottom, 0px));
+  background: radial-gradient(70% 30% at 50% 0%, rgba(255, 236, 214, .9), rgba(255, 236, 214, 0) 72%), radial-gradient(60% 30% at 50% 100%, rgba(240, 226, 250, .85), rgba(240, 226, 250, 0) 70%), #fbf8f4;
+}
+.tvs > * { min-width: 0; flex: none; }
+.tvs > .rw-head { width: 100%; }
+#tv-them { margin-top: auto; }
+.tv-ctrl { margin-bottom: auto; }
+/* the players */
+.tv-side { align-self: center; display: flex; align-items: center; gap: 8px; max-width: 100%; padding: 4px 14px 4px 6px; border-radius: 999px;
+  background: rgba(255, 253, 249, .88); box-shadow: 0 0 0 1px rgba(201, 164, 105, .35); transition: box-shadow .3s, opacity .3s; }
+.tv-side.turn { box-shadow: 0 0 0 2px #c9a469, 0 0 14px rgba(226, 191, 122, .6); }
+.tv-side.away { opacity: .5; }
+.tv-side .so-av svg { width: 28px; height: 28px; }
+.tv-side .so-nm { font-size: 16px; min-width: 0; }
+.tv-chip { flex: none; width: 14px; height: 14px; border-radius: 50%; }
+.tv-chip.k0 { background: radial-gradient(circle at 38% 32%, #fff, #f7f1f8 55%, #cdbcda); box-shadow: 0 0 0 1px #a593b8; }
+.tv-chip.k1 { background: radial-gradient(circle at 36% 30%, #a796b8, #5d4a6c 45%, #271e30); box-shadow: 0 0 0 1px #1f1828; }
+.tv-pp { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.tv-side .so-pt { white-space: nowrap; }
+/* the board */
+.tv-stage { position: relative; align-self: center; width: min(100%, 920px, (100dvh - 300px) * 1.25); aspect-ratio: 600 / 480; }
+.tv-board { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: visible; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 14px 16px rgba(72, 52, 84, .2)); }
+.tv-board:focus { outline: none; }
+.tv-board:focus-visible .tv-frame { stroke: #6b4f8a; stroke-width: 3; }
+.tv-nums text { font: 600 8px var(--font-num, system-ui); fill: #9a7a4a; }
+.tv-ck, .tv-slab, .tv-nums, .tv-pt { pointer-events: none; }
+.tv-hit { fill: transparent; cursor: pointer; }
+.tv-can { fill: none; stroke: #c9a469; stroke-width: 2.4; stroke-dasharray: 4 3; pointer-events: none; }
+.tv-can.on { stroke: #a8752a; stroke-width: 3.4; stroke-dasharray: none; }
+.tv-dest { fill: rgba(226, 191, 122, .5); stroke: #b48a48; stroke-width: 1.5; pointer-events: none; animation: tvPulse 1s ease-in-out infinite alternate; }
+@keyframes tvPulse { from { opacity: .5; } to { opacity: 1; } }
+.tv-cur { fill: none; stroke: #6b4f8a; stroke-width: 3; pointer-events: none; }
+.tv-die-in { transform-box: fill-box; transform-origin: center; }
+.tv-dice.roll .tv-die-in { animation: tvRoll .5s cubic-bezier(.2, .9, .3, 1.15); }
+@keyframes tvRoll { from { transform: rotate(-220deg) scale(.35); opacity: 0; } 55% { opacity: 1; } to { transform: none; } }
+.tv-die { pointer-events: none; transition: opacity .25s; }
+.tv-die.used { opacity: .35; }
+/* the words and the buttons */
+.tv-msg { margin: 0; min-height: 2.6em; display: grid; place-items: center; text-align: center; font: italic 600 17px/1.3 var(--font-display); color: #4a3d52; }
+.tv-ctrl { display: flex; justify-content: center; gap: 10px; }
+.tv-ctrl .btn { min-width: 150px; }
+.tv-ctrl .btn[hidden] { display: none; }
+.tv-end-s { margin: 0 0 4px; font: italic 700 20px/1.2 var(--font-display); color: #8a6738; }
+.home .tv-seg { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.home .tv-seg button { font-size: 17px; padding: 9px 4px; }
+.tv-ctrl .btn:disabled { opacity: .5; cursor: default; }
+/* a phone held sideways: the board on the left, the rest beside it */
+@media (orientation: landscape) and (max-height: 620px) {
+  .tvs { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto auto auto minmax(0, 1fr); column-gap: 14px; row-gap: 8px; }
+  .tvs > .rw-head { grid-column: 1 / -1; grid-row: 1; }
+  .tv-stage { grid-column: 1; grid-row: 2 / 8; width: min(62vw, (100dvh - 84px) * 1.25); }
+  #tv-them { grid-column: 2; grid-row: 3; margin: 0; justify-self: center; }
+  .tv-msg { grid-column: 2; grid-row: 4; }
+  .tv-ctrl { grid-column: 2; grid-row: 5; margin: 0; flex-wrap: wrap; }
+  .tv-ctrl .btn { min-width: 0; }
+  #tv-me { grid-column: 2; grid-row: 6; justify-self: center; }
+}
+@media (prefers-reduced-motion: reduce) { .tv-dest { animation: none; } .tv-dice.roll .tv-die-in { animation: none; } }
 </style>
 </head>
 <body>
@@ -3291,6 +3356,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
             <button type="button" class="gp-tile gp-wide" data-game="so" aria-pressed="false">
               <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="soic" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff4cf"/><stop offset=".55" stop-color="#e8c272"/><stop offset="1" stop-color="#b8862e"/></radialGradient><linearGradient id="soip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9f0"/><stop offset=".5" stop-color="#e7a6bf"/><stop offset="1" stop-color="#b8648a"/></linearGradient><linearGradient id="sois" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8f0fa"/><stop offset=".5" stop-color="#a9bdd6"/><stop offset="1" stop-color="#6f88a8"/></linearGradient><linearGradient id="soiw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9b48a"/><stop offset=".5" stop-color="#a88b58"/><stop offset="1" stop-color="#7c6438"/></linearGradient></defs><g transform="translate(12 12) rotate(-12 14 21)"><rect x="0" y="0" width="28" height="42" rx="3.6" fill="#fffdf8" stroke="#c9a469" stroke-width="1.2"/><g transform="translate(5 11) scale(.9)"><path d="M3.6 3.4h12.8c0 4.6-2.2 7.6-5.1 8.4v2.6c1.6.3 3 1 3.6 2.4H5.1c.6-1.4 2-2.1 3.6-2.4v-2.6C5.8 11 3.6 8 3.6 3.4z" fill="url(#soip)" stroke="#8f4d6b" stroke-width=".9" stroke-linejoin="round"/><path d="M3.9 5.6h12.2" stroke="#fff4da" stroke-width=".9"/><circle cx="10" cy="7.9" r="1.5" fill="#d7c4f2" stroke="#7b5aa8" stroke-width=".5"/></g></g><g transform="translate(34 8) rotate(9 14 21)"><rect x="0" y="0" width="28" height="42" rx="3.6" fill="#fffdf8" stroke="#c9a469" stroke-width="1.2"/><g transform="translate(4.5 4.5) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 4.5) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(4.5 15.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 15.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(4.5 26.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(16.7 26.6) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g><g transform="translate(10.6 10) scale(.34)"><circle cx="10" cy="10" r="9" fill="url(#soic)" stroke="#9b6f22" stroke-width=".9"/><circle cx="10" cy="10" r="6.4" fill="none" stroke="#fff3c8" stroke-width=".8"/><path d="M10 4.6l1.3 3.4 3.6.3-2.8 2.3.9 3.5-3-2-3 2 .9-3.5-2.8-2.3 3.6-.3z" fill="#fff0bd" stroke="#a87a2a" stroke-width=".5"/></g></g><path d="M14 54.5c6 2.6 14 3.2 22 1.6" stroke="#c9a469" stroke-width="1" fill="none" stroke-dasharray="2 2"/></svg>
               <span class="gp-text"><span class="gp-name" data-i18n="gameSo"></span><span class="gp-tag" data-i18n="gpSoTag"></span></span>
+              <span class="gp-new" data-i18n="rwNew"></span>
+              <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            </button>
+            <button type="button" class="gp-tile gp-wide" data-game="tv" aria-pressed="false">
+              <svg class="gp-ic-svg" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="tviw" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f6f0f8"/><stop offset="1" stop-color="#cbbad8"/></radialGradient><radialGradient id="tvib" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#9c8aae"/><stop offset=".5" stop-color="#5b4868"/><stop offset="1" stop-color="#2e2438"/></radialGradient><linearGradient id="tvid" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#efe3f3"/></linearGradient></defs><rect x="5" y="4" width="48" height="54" rx="4" fill="#fbf4e6" stroke="#c9a469" stroke-width="1.4"/><path d="M9.0 54L13.5 30L18.0 54Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><path d="M18.5 54L23.0 30L27.5 54Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M28.0 54L32.5 30L37.0 54Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><path d="M37.5 54L42.0 30L46.5 54Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M9.0 8L13.5 32L18.0 8Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M18.5 8L23.0 32L27.5 8Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><path d="M28.0 8L32.5 32L37.0 8Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M37.5 8L42.0 32L46.5 8Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><circle cx="13.5" cy="48" r="4.4" fill="url(#tviw)" stroke="#a593b8" stroke-width=".6"/><circle cx="13.5" cy="39.5" r="4.4" fill="url(#tviw)" stroke="#a593b8" stroke-width=".6"/><circle cx="32.5" cy="13.6" r="4.4" fill="url(#tvib)" stroke="#2e2438" stroke-width=".6"/><circle cx="32.5" cy="22" r="4.4" fill="url(#tvib)" stroke="#2e2438" stroke-width=".6"/><g transform="rotate(-12 57 33)"><rect x="50" y="26" width="14" height="14" rx="3.2" fill="url(#tvid)" stroke="#b48a48" stroke-width=".9"/><circle cx="53.6" cy="29.6" r="1.35" fill="#5b4868"/><circle cx="57" cy="33" r="1.35" fill="#5b4868"/><circle cx="60.4" cy="36.4" r="1.35" fill="#5b4868"/></g><g transform="rotate(10 65 47)"><rect x="58" y="40" width="14" height="14" rx="3.2" fill="url(#tvid)" stroke="#b48a48" stroke-width=".9"/><circle cx="61.6" cy="43.6" r="1.35" fill="#5b4868"/><circle cx="68.4" cy="43.6" r="1.35" fill="#5b4868"/><circle cx="61.6" cy="50.4" r="1.35" fill="#5b4868"/><circle cx="68.4" cy="50.4" r="1.35" fill="#5b4868"/></g></svg>
+              <span class="gp-text"><span class="gp-name" data-i18n="gameTv"></span><span class="gp-tag" data-i18n="gpTvTag"></span></span>
               <span class="gp-new" data-i18n="rwNew"></span>
               <span class="gp-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
             </button>
@@ -3622,6 +3693,35 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
           <button type="button" class="btn primary play-btn" id="btn-so-play" data-i18n="play"></button>
           <button type="button" class="btn online-btn" data-net-game="so" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
           <p class="record-line" id="so-record"></p>
+        </div>
+        <div class="setup-part" id="setup-tv" hidden>
+          <div class="uc-intro">
+            <span class="bw-mini tb-mini" aria-hidden="true"><svg class="" viewBox="0 0 76 62" aria-hidden="true"><defs><radialGradient id="tvmw" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f6f0f8"/><stop offset="1" stop-color="#cbbad8"/></radialGradient><radialGradient id="tvmb" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#9c8aae"/><stop offset=".5" stop-color="#5b4868"/><stop offset="1" stop-color="#2e2438"/></radialGradient><linearGradient id="tvmd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#efe3f3"/></linearGradient></defs><rect x="5" y="4" width="48" height="54" rx="4" fill="#fbf4e6" stroke="#c9a469" stroke-width="1.4"/><path d="M9.0 54L13.5 30L18.0 54Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><path d="M18.5 54L23.0 30L27.5 54Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M28.0 54L32.5 30L37.0 54Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><path d="M37.5 54L42.0 30L46.5 54Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M9.0 8L13.5 32L18.0 8Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M18.5 8L23.0 32L27.5 8Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><path d="M28.0 8L32.5 32L37.0 8Z" fill="#d8c8e6" stroke="#c9a469" stroke-width=".5"/><path d="M37.5 8L42.0 32L46.5 8Z" fill="#ecd3a2" stroke="#c9a469" stroke-width=".5"/><circle cx="13.5" cy="48" r="4.4" fill="url(#tvmw)" stroke="#a593b8" stroke-width=".6"/><circle cx="13.5" cy="39.5" r="4.4" fill="url(#tvmw)" stroke="#a593b8" stroke-width=".6"/><circle cx="32.5" cy="13.6" r="4.4" fill="url(#tvmb)" stroke="#2e2438" stroke-width=".6"/><circle cx="32.5" cy="22" r="4.4" fill="url(#tvmb)" stroke="#2e2438" stroke-width=".6"/><g transform="rotate(-12 57 33)"><rect x="50" y="26" width="14" height="14" rx="3.2" fill="url(#tvmd)" stroke="#b48a48" stroke-width=".9"/><circle cx="53.6" cy="29.6" r="1.35" fill="#5b4868"/><circle cx="57" cy="33" r="1.35" fill="#5b4868"/><circle cx="60.4" cy="36.4" r="1.35" fill="#5b4868"/></g><g transform="rotate(10 65 47)"><rect x="58" y="40" width="14" height="14" rx="3.2" fill="url(#tvmd)" stroke="#b48a48" stroke-width=".9"/><circle cx="61.6" cy="43.6" r="1.35" fill="#5b4868"/><circle cx="68.4" cy="43.6" r="1.35" fill="#5b4868"/><circle cx="61.6" cy="50.4" r="1.35" fill="#5b4868"/><circle cx="68.4" cy="50.4" r="1.35" fill="#5b4868"/></g></svg></span>
+            <span class="hunt-text"><span class="hunt-title" data-i18n="gameTv"></span><span class="hunt-sub" data-i18n="tvIntro"></span></span>
+          </div>
+          <div class="count-box">
+            <div class="count-head"><span class="count-label" id="tv-bot-label" data-i18n="tvBotLabel"></span><span class="count-tag" id="tv-bot-tag"></span></div>
+            <div class="so-opp-pick tv-bot-pick" role="group" aria-labelledby="tv-bot-label">
+              <button type="button" data-tv-bot="0" aria-pressed="false"><span class="avs"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-cat"/></svg></span><span class="n" data-i18n="tvCat"></span><span class="l" data-i18n="tvEasy"></span></button>
+              <button type="button" data-tv-bot="1" aria-pressed="true"><span class="avs"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-fox"/></svg></span><span class="n" data-i18n="tvFox"></span><span class="l" data-i18n="tvMid"></span></button>
+              <button type="button" data-tv-bot="2" aria-pressed="false"><span class="avs"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#av-owl"/></svg></span><span class="n" data-i18n="tvOwl"></span><span class="l" data-i18n="tvHard"></span></button>
+            </div>
+          </div>
+          <div class="count-box">
+            <div class="count-head"><span class="count-label" id="tv-to-label" data-i18n="tvToLabel"></span><span class="count-tag" id="tv-to-tag"></span></div>
+            <div class="seg tv-seg" role="group" aria-labelledby="tv-to-label">
+              <button type="button" data-tv-to="1" aria-pressed="false">1</button>
+              <button type="button" data-tv-to="3" aria-pressed="true">3</button>
+              <button type="button" data-tv-to="5" aria-pressed="false">5</button>
+            </div>
+          </div>
+          <details class="uc-rules tv-rules">
+            <summary data-i18n="tvRulesTitle"></summary>
+            <ol id="tv-rules-list"></ol>
+          </details>
+          <button type="button" class="btn primary play-btn" id="btn-tv-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="tv" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
+          <p class="record-line" id="tv-record"></p>
         </div>
         <!--more-setups-->
 
@@ -4086,6 +4186,31 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     <div class="rw-prize" id="so-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="so-prize-t"></p></div>
   </section>
 
+  <section id="tv" class="screen tvs" hidden data-i18n-attr="aria-label:gameTv">
+    <header class="rw-head">
+      <button type="button" class="icon-btn" id="tv-exit" data-i18n-attr="aria-label:exit"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="uc-titles"><h2 class="uc-title" data-i18n="gameTv"></h2><span class="uc-sub" id="tv-sub"></span></div>
+      <button type="button" class="icon-btn audio-btn" id="audio-tv" aria-pressed="true"></button>
+    </header>
+    <div class="tv-side them" id="tv-them"></div>
+    <div class="tv-stage"><svg class="tv-board" id="tv-board" viewBox="0 0 600 480" role="application" tabindex="0" data-i18n-attr="aria-label:tvBoardAria"></svg></div>
+    <div class="tv-side me" id="tv-me"></div>
+    <p class="tv-msg" id="tv-msg" aria-live="polite"></p>
+    <div class="tv-ctrl">
+      <button type="button" class="btn" id="tv-undo" data-i18n="tvUndo"></button>
+      <button type="button" class="btn primary" id="tv-roll" data-i18n="tvRoll"></button>
+    </div>
+    <div class="so-round tv-end" id="tv-end" hidden role="dialog" aria-modal="true" aria-labelledby="tv-end-t">
+      <div class="so-round-in">
+        <p class="so-round-k" id="tv-end-k"></p>
+        <h3 class="so-round-t" id="tv-end-t"></h3>
+        <p class="tv-end-s" id="tv-end-s"></p>
+        <button type="button" class="btn primary" id="tv-next"></button>
+      </div>
+    </div>
+    <div class="rw-prize" id="tv-prize" hidden><div class="rw-prize-rays"></div><div class="rw-prize-card"><div class="rw-prize-in"><span class="face back"><span class="mono">H</span></span><span class="face front"><img alt="" draggable="false"></span></div></div><p class="rw-prize-t" id="tv-prize-t"></p></div>
+  </section>
+
   <section id="online" class="screen onl" hidden data-i18n-attr="aria-label:netLabel">
     <div class="onl-inner">
       <header class="onl-head">
@@ -4520,6 +4645,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Una foto di Hande è tua', mqPhotoMillion: 'UN MILIONE! La foto più bella è tua', mqKicker: 'Quiz del milione', mqMillion: 'Hai vinto un milione!', mqWon: 'Hai vinto {m}',
       mqZero: 'Peccato, niente premio', mqRowRight: 'Risposte giuste', mqRowPrize: 'Vincita', mqRowHelps: 'Aiuti usati', mqLadder: 'La scala dei premi',
       aMqStart: 'Quiz del milione: rispondi a quindici domande.', aMqQ: 'Domanda {n}: {q}',
+      // ---- Tavla ----
+      gameTv: 'Tavla', gpTvTag: 'Il backgammon turco', ledeTv: 'La tavla, il backgammon come si gioca in Turchia: perle bianche contro perle nere, due dadi e quindici pedine da portare a casa. Ogni partita vinta ti regala una foto di Hande.',
+      tvIntro: 'Muovi le tue quindici perle bianche verso casa, in basso a destra, e portale fuori prima dell\'avversario. Ogni partita vinta vale una foto di Hande, il mars due.',
+      tvBotLabel: 'Avversario', tvCat: 'Gatto', tvFox: 'Volpe', tvOwl: 'Civetta', tvEasy: 'facile', tvMid: 'normale', tvHard: 'difficile', tvBotTag: ['Gioca un po\' a caso', 'Gioca bene', 'Gioca molto bene'],
+      tvToLabel: 'Partita a', tvToTag: '{n} punti', tvToTag1: 'Una partita',
+      tvRulesTitle: 'Le regole', tvRules: ['Si tirano due dadi e si muovono le pedine del valore di ciascun dado; con un doppio si muove quattro volte.', 'Una pedina non può fermarsi dove l\'avversario ne ha due o più; se ne ha una sola la mangia e la manda sulla barra.', 'Chi ha pedine sulla barra deve farle rientrare per prime, nella casa dell\'avversario.', 'Quando tutte le tue pedine sono a casa (in basso a destra) puoi portarle fuori.', 'Se si possono giocare tutti e due i dadi bisogna farlo; se se ne può giocare uno solo, quello più alto.', 'Chi porta fuori tutte le quindici pedine vince la partita: un punto, due (mars) se l\'altro non ne ha portata fuori nessuna.'],
+      tvSub: 'Partita {g} · a {t} punti', tvSub1: 'Una partita', tvYou: 'Tu', tvPips: '{n} al traguardo', tvScore: '{n} pt', tvOff: '{n} fuori',
+      tvBoardAria: 'Il tavoliere: tocca una tua pedina e poi la punta dove portarla', tvRoll: 'Lancia i dadi', tvUndo: 'Annulla mossa',
+      tvOpenMsg: 'Lanciate un dado a testa: chi fa di più comincia', tvOpenGo: '{a} {x} · {b} {y}: comincia {who}', tvOpenYou: 'tu', tvRollMe: 'Tocca a te: lancia i dadi', tvMoveMe: 'Muovi: {dice}',
+      tvTurnOf: 'Tocca a {name}', tvTurnOfAd: 'Tocca ad {name}', tvRolled: '{name} tira {dice}', tvNone: 'Con {dice} non c\'è nessuna mossa', tvNoneMe: 'Con {dice} non puoi muovere', tvHit: 'Mangiata!', tvHitMe: 'Ti ha mangiato una pedina!',
+      tvPick: 'Dove la porti?', tvOff1: 'Fuori!', tvWinT: 'Hai vinto la partita!', tvLoseT: 'Vince {name}', tvMars: 'Mars: due punti!', tvEndScore: '{a} {x} · {b} {y}', tvNext: 'Partita successiva', tvSeeEnd: 'Vedi com\'è finita', tvWaitNext: 'Aspetta {name}…',
+      tvPrize: 'Partita vinta! La foto è tua', tvPrizeMars: 'Mars! Un\'altra foto per te', tvKicker: 'Tavla · sfida a {n} punti', tvNetWatch: 'A tavla si gioca in due: gli altri guardano la partita.', tvMatchWin: 'Hai vinto la sfida!', tvMatchLose: 'Vince {name}', tvRowScore: 'Punti', tvRowPhotos: 'Foto vinte', tvAgain: 'Un\'altra sfida',
+      tvRecord: 'Sfide vinte: {w} su {p} · mars: {m}', tvWatch: 'Guardi la partita', aTvStart: 'Tavla: le tue pedine sono le perle bianche e vanno verso casa, in basso a destra.',
       // ---- Scopa ----
       gameSo: 'Scopa', gpSoTag: 'Le carte napoletane', ledeSo: 'La scopa con le carte napoletane: prendi le carte dal tavolo e fai scopa. Ogni scopa ti regala una foto di Hande; i Fanti, i Cavalli e i Re hanno il suo ritratto.',
       soIntro: 'Prendi dal tavolo la carta dello stesso valore, o più carte che sommate fanno il suo valore. Ogni scopa vale un punto e una foto di Hande. Vince chi arriva per primo a 11.',
@@ -4891,6 +5029,19 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       mqPhotoSafe: '{m}! Bir Hande fotoğrafı senin', mqPhotoMillion: 'BİR MİLYON! En güzel fotoğraf senin', mqKicker: 'Milyon Yarışması', mqMillion: 'Bir milyon kazandın!', mqWon: '{m} kazandın',
       mqZero: 'Yazık, ödül yok', mqRowRight: 'Doğru cevap', mqRowPrize: 'Ödül', mqRowHelps: 'Kullanılan joker', mqLadder: 'Ödül merdiveni',
       aMqStart: 'Milyon Yarışması: on beş soruyu cevapla.', aMqQ: 'Soru {n}: {q}',
+      // ---- Tavla ----
+      gameTv: 'Tavla', gpTvTag: 'Türk tavlası', ledeTv: 'Türkiye\'de oynandığı gibi tavla: beyaz incilere karşı siyah inciler, iki zar ve eve götürülecek on beş pul. Kazandığın her oyun sana bir Hande fotoğrafı kazandırır.',
+      tvIntro: 'On beş beyaz incini sağ alttaki evine götür ve rakipten önce topla. Kazanılan her oyun bir Hande fotoğrafı, mars iki fotoğraf.',
+      tvBotLabel: 'Rakip', tvCat: 'Kedi', tvFox: 'Tilki', tvOwl: 'Baykuş', tvEasy: 'kolay', tvMid: 'normal', tvHard: 'zor', tvBotTag: ['Biraz rastgele oynar', 'İyi oynar', 'Çok iyi oynar'],
+      tvToLabel: 'Oyun', tvToTag: '{n} sayıya kadar', tvToTag1: 'Tek oyun',
+      tvRulesTitle: 'Kurallar', tvRules: ['İki zar atılır ve pullar her zarın değeri kadar ilerletilir; çift gelirse dört kez oynanır.', 'Rakibin iki ya da daha fazla pulu olan haneye girilemez; tek pulu varsa kırılır ve ortaya gider.', 'Kırık pulu olan önce onu rakibin evinden içeri sokmalıdır.', 'Bütün pulların evdeyken (sağ altta) toplamaya başlayabilirsin.', 'İki zar da oynanabiliyorsa oynanmalıdır; yalnızca biri oynanabiliyorsa büyüğü.', 'On beş pulunu ilk toplayan oyunu kazanır: bir sayı, rakip hiç pul toplamadıysa iki (mars).'],
+      tvSub: 'Oyun {g} · {t} sayıya', tvSub1: 'Tek oyun', tvYou: 'Sen', tvPips: 'bitişe {n}', tvScore: '{n} sayı', tvOff: '{n} toplandı',
+      tvBoardAria: 'Tavla: pullarından birine, sonra götüreceğin haneye dokun', tvRoll: 'Zar at', tvUndo: 'Hamleyi geri al',
+      tvOpenMsg: 'Herkes bir zar atar: büyük atan başlar', tvOpenGo: '{a} {x} · {b} {y}: {who} başlıyor', tvOpenYou: 'sen', tvRollMe: 'Sıra sende: zar at', tvMoveMe: 'Oyna: {dice}',
+      tvTurnOf: 'Sıra {name} oyuncusunda', tvTurnOfAd: 'Sıra {name} oyuncusunda', tvRolled: '{name} {dice} attı', tvNone: '{dice} ile oynanacak hamle yok', tvNoneMe: '{dice} ile oynayamıyorsun', tvHit: 'Kırıldı!', tvHitMe: 'Pulun kırıldı!',
+      tvPick: 'Nereye götürüyorsun?', tvOff1: 'Toplandı!', tvWinT: 'Oyunu kazandın!', tvLoseT: '{name} kazandı', tvMars: 'Mars: iki sayı!', tvEndScore: '{a} {x} · {b} {y}', tvNext: 'Sonraki oyun', tvSeeEnd: 'Sonucu gör', tvWaitNext: '{name} bekleniyor…',
+      tvPrize: 'Oyunu kazandın! Fotoğraf senin', tvPrizeMars: 'Mars! Bir fotoğraf daha senin', tvKicker: 'Tavla · {n} sayılık maç', tvNetWatch: 'Tavla iki kişiyle oynanır: diğerleri oyunu izler.', tvMatchWin: 'Maçı kazandın!', tvMatchLose: '{name} kazandı', tvRowScore: 'Sayı', tvRowPhotos: 'Kazanılan fotoğraf', tvAgain: 'Yeni bir maç',
+      tvRecord: 'Kazanılan maç: {p} maçta {w} · mars: {m}', tvWatch: 'Oyunu izliyorsun', aTvStart: 'Tavla: senin pulların beyaz inciler, sağ alttaki eve gidiyorlar.',
       // ---- Scopa ----
       gameSo: 'Scopa', gpSoTag: 'Napoli kartları', ledeSo: 'Napoli kartlarıyla scopa: masadaki kartları al ve masayı süpür. Her scopa sana bir Hande fotoğrafı kazandırır; uşakların, atlıların ve kralların üstünde onun portresi var.',
       soIntro: 'Masadan aynı değerdeki kartı ya da toplamı kartının değerini tutan kartları al. Her scopa bir puan ve bir Hande fotoğrafı. 11 puana ilk ulaşan kazanır.',
@@ -5510,13 +5661,14 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     renderAudio(); renderCount(); renderHuntCard();
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gameSel]);
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tvRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
     $('#dp-grid').textContent = ''; applyDeck();
     if (P) { pzRenderAids(); pzRenderHead(); }
     if (BG) bwRenderHud(BG);
     if (RG) rwRelang();
     if (TG) tbRender();
     mqBuildLadder(); if (MG) mqRender();
+    tvRelang();
     soRelang();
     tdRelang();
     cpRelang();
@@ -5652,7 +5804,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $$('.seg button[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
     $('#duo-setup').hidden = m !== 'duo';
     $('#timed-row').hidden = m === 'duo';
-    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    renderRecordLine(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tvRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
   function setCards(n) { cards = clampCards(n); store.set('hm-cards', cards); renderCount(); }
   function renderCount() {
@@ -5842,7 +5994,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function showMap() {
     if (!hunt) newHunt();
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = ''; boardMsg.hidden = true;
     home.hidden = true; game.hidden = true; ucEl.hidden = true; mapEl.hidden = false;
     mapEl.scrollTop = 0;
@@ -5944,7 +6096,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       current: 0,
     };
 
-    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
+    pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); home.hidden = true; mapEl.hidden = true; ucEl.hidden = true; game.hidden = false;
     $('#hud-level').textContent = cfg.hunt ? stopName(cfg.hunt.stop) : t('hudCards', { n: cfg.cards });
     $('#hud-stats').hidden = cfg.duo;
     renderChips(2); $('#btn-peek').hidden = false; board.classList.remove('waiting'); onlineEl.hidden = true;
@@ -6446,7 +6598,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const UC_BOTS = [{ key: 'volpe', av: 'fox' }, { key: 'gatto', av: 'cat' }, { key: 'civetta', av: 'owl' }];
   const ucEl = $('#uc'), ucHandEl = $('#uc-hand');
   let ucOpp = Math.min(3, Math.max(1, Math.round(+store.get('hm-uc-opp', 3) || 3)));
-  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'so', 'td', 'cp', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
+  let gameSel = ['uc', 'pz', 'bw', 'rw', 'tb', 'mq', 'tv', 'so', 'td', 'cp', 'al', 'gv', 'gb', 'sc', 'pk', 'pp'].includes(store.get('hm-game', 'memory')) ? store.get('hm-game', 'memory') : 'memory';
   let U = null, ucSession = null, ucPickDone = null, ucMiniPhotos = null;
   const ucWild = (c) => c.kind === 'jolly' || c.kind === 'jolly4';
   const ucPoints = (c) => (c.kind === 'num' ? c.value : ucWild(c) ? 50 : 20);
@@ -6946,7 +7098,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   async function ucStart(fresh) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     $$('.uc-fly').forEach((e) => e.remove());
     if (fresh || !ucSession) ucSession = { nOpp: ucOpp, round: 0, totals: new Array(ucOpp + 1).fill(0), wins: new Array(ucOpp + 1).fill(0) };
     const ses = ucSession; ses.round++;
@@ -7046,6 +7198,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-rw').hidden = gs !== 'rw';
     $('#setup-tb').hidden = gs !== 'tb';
     $('#setup-mq').hidden = gs !== 'mq';
+    $('#setup-tv').hidden = gs !== 'tv';
     $('#setup-so').hidden = gs !== 'so';
     $('#setup-td').hidden = gs !== 'td';
     $('#setup-cp').hidden = gs !== 'cp';
@@ -7055,12 +7208,12 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#setup-sc').hidden = gs !== 'sc';
     $('#setup-pk').hidden = gs !== 'pk';
     $('#setup-pp').hidden = gs !== 'pp';
-    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'so' ? 'ledeSo' : gs === 'td' ? 'ledeTd' : gs === 'cp' ? 'ledeCp' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
+    const lede = $('.lede'); lede.dataset.i18n = gs === 'uc' ? 'ledeUc' : gs === 'pz' ? 'ledePz' : gs === 'bw' ? 'ledeBw' : gs === 'rw' ? 'ledeRw' : gs === 'tb' ? 'ledeTb' : gs === 'mq' ? 'ledeMq' : gs === 'tv' ? 'ledeTv' : gs === 'so' ? 'ledeSo' : gs === 'td' ? 'ledeTd' : gs === 'cp' ? 'ledeCp' : gs === 'al' ? 'ledeAl' : gs === 'gv' ? 'ledeGv' : gs === 'gb' ? 'ledeGb' : gs === 'sc' ? 'ledeSc' : gs === 'pk' ? 'ledePk' : gs === 'pp' ? 'ledePp' : 'lede';
     lede.textContent = t(lede.dataset.i18n, { photos: PHOTOS.length });
     $('#mh-game').textContent = ' ' + t(GAME_NAME[gs]);
     $('#fan').classList.toggle('uc-style', gs === 'uc');
     $('#fan').hidden = gs === 'pz'; $('#pz-hero-wrap').hidden = gs !== 'pz';
-    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tvRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
   }
 
   /* ---------- Puzzle: a photo cut into real jigsaw pieces ----------
@@ -7077,7 +7230,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     [[.40, .10], [.22, .32], [.78, .32], [.60, .10]],
     [[.60, .10], [.546, .034], [.70, 0], [1, 0]],
   ];
-  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', so: 'gameSo', td: 'gameTd', cp: 'gameCp', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
+  const GAME_NAME = { memory: 'gameMemory', uc: 'gameUc', pz: 'gamePz', bw: 'gameBw', rw: 'gameRw', tb: 'gameTb', mq: 'gameMq', tv: 'gameTv', so: 'gameSo', td: 'gameTd', cp: 'gameCp', al: 'gameAl', gv: 'gameGv', gb: 'gameGb', sc: 'gameSc', pk: 'gamePk', pp: 'gamePp' };
   const pzEl = $('#pz'), pzStage = $('#pz-stage'), pzBoard = $('#pz-board'), pzCanvas = $('#pz-canvas'), pzFxCv = $('#pz-fx');
   const pzLayer = $('#pz-layer'), pzTray = $('#pz-tray'), pzTrayIn = $('#pz-tray-in'), pzDragLayer = $('#pz-drag');
   const pzHitCtx = document.createElement('canvas').getContext('2d');
@@ -7355,7 +7508,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   async function pzStart(photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); Music.setEnergy(false); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     if (!photo) photo = pzSurprise();
     const size = PZ_SIZES.find((s) => s.n === Math.min(pzN, pzMaxN())) || PZ_SIZES[1];
     const cut = pzCut(size.cols, size.rows, (Math.random() * 2147483647) | 0);
@@ -7899,7 +8052,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   /* entering: create a room, or open the one a link points to */
   function netShow(mode) {
-    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = false;
     onlineEl.scrollTop = 0;
     $('#onl-intro').hidden = mode !== 'intro';
@@ -8088,6 +8241,9 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
       if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, wins: N.players.map(() => 0) };
       N.ses.round++; N.ses.counted = false;
       N.eng = rwNet(N.players.length, N.ses);
+    } else if (N.game === 'tv') {
+      N.ses = { target: tvStats().to, score: [0, 0], game: 1 };
+      N.eng = tvNet(N.ses);
     } else if (N.game === 'so') {
       N.ses = { n: N.players.length, round: 1, dealer: Math.floor(Math.random() * N.players.length), score: null, target: SO_TARGET };
       N.eng = soNet(N.players.length, N.ses);
@@ -8125,11 +8281,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
@@ -8184,6 +8340,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     $('#onl-start').hidden = !host;
     $('#onl-start').disabled = !enough;
     $('#onl-status').textContent = host ? t(enough ? 'netStatusHost' : 'netStatusHost1') : t('netStatusGuest', { name: hostName });
+    if (v.game === 'tv' && v.players.length > 2) $('#onl-status').textContent += ' ' + t('tvNetWatch');
   }
   async function netShare() {
     if (!N) return;
@@ -8273,7 +8430,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function mnSetup(v) {
     const g = v.g;
-    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     onlineEl.hidden = true; home.hidden = true; mapEl.hidden = true; game.hidden = false;
     const s = S = {
       online: true, gid: g.gid, duo: true, cfg: { pairs: g.pairs, cards: g.n, timed: false, duo: true, specials: false, key: null },
@@ -8546,7 +8703,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function unSetup(v) {
     const g = v.g, n = g.n, me = v.you;
-    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    closeOverlays(); FX.clear(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     onlineEl.hidden = true; home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = false;
     $$('.uc-fly').forEach((e) => e.remove());
@@ -9392,7 +9549,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function bwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, names = duo ? [netClean(cfg.names[0]) || t('player1'), netClean(cfg.names[1]) || t('player2')] : [''];
     const photos = bwPickPhotos(10 * names.length);
     const players = names.map((name, i) => ({ name, st: bwNewState(), photos: photos.slice(i * 10, i * 10 + 10).map((p) => p.id), level: new Array(10).fill(0), on: true }));
@@ -9854,7 +10011,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function bwnApply(v) { bwChain = bwChain.then(() => bwnProcess(v)).catch(() => { /* a broken animation must not stop the game */ }); }
   function bwnSetup(v) {
     const gv = v.g;
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     S = null; board.textContent = '';
     const players = v.players.map((p, s) => ({ name: p.name, on: p.on, rolls: gv.rolls[s] || [], photos: gv.photos[s] || [], st: null }));
     const g = BG = bwMake({ online: true, gid: gv.gid, players, me: v.you, avoid: [].concat(...gv.photos) });
@@ -11010,7 +11167,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* a game on this phone */
   function rwStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const duo = !!cfg.duo, bots = t('ucBots');
     const players = duo
       ? [{ name: netClean(cfg.names[0]) || t('player1') }, { name: netClean(cfg.names[1]) || t('player2') }]
@@ -11080,7 +11237,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   function rwnSetup(v) {
     const gv = v.g;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     board.textContent = '';
     const players = v.players.map((p, i) => ({ name: p.name, av: NET_AV[i % NET_AV.length], on: p.on }));
     const g = RG = rwMake({ online: true, gid: gv.gid, me: v.you, lang: gv.lang, players });
@@ -11145,7 +11302,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, cfg.n || 2)), bots = t('ucBots');
     const players = [{ name: t('ucYou'), av: 'me', n }, { name: bots.volpe, av: 'fox', n: 2 }, { name: bots.gatto, av: 'cat', n: 2 }]
       .map((p) => Object.assign(p, { cards: Array.from({ length: p.n }, tbCard), won: [] }));
@@ -11599,7 +11756,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function mqStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const st = mqStats(), seen = new Set(st.found);
     const photos = shuffle(MQ_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, 3).map((p) => p.id);
     MG = { level: 0, q: null, sel: null, gone: [], used: {}, asked: [], cats: [], math: false, photos, found: [], state: 'ask', timers: [], right: 0 };
@@ -11807,7 +11964,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function ppStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     PP = { grid: Array.from({ length: PP_H }, () => new Array(PP_W).fill(0)), bag: [], score: 0, lines: 0, level: 1, part: 0, found: [], over: false, paused: false,
       t: 0, fall: 0, lockT: 0, lockMoves: 0, soft: false, clearing: null, raf: 0, last: 0, rep: null };
     PP.cur = ppPiece(ppBag(PP)); PP.next = ppBag(PP);
@@ -12193,7 +12350,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function pkStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me' }].concat(PK_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
@@ -13007,7 +13164,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
     const lv = Math.min(2, Math.max(0, cfg && cfg.lv != null ? cfg.lv : 1));
     const c = cfg && cfg.col ? cfg.col : 'w';
     SG = { P: scFromFEN(SC_START), lv, col: c, you: c === 'b' || (c === 'r' && Math.random() < .5) ? 8 : 0, sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1,
@@ -13304,7 +13461,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function gbStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
     const n = Math.min(3, Math.max(1, (cfg && cfg.n) || 3));
     const players = [{ key: 'me', av: 'me', keep: 0, build: 1 }].concat(GB_BOTS.slice(0, n).map((b) => Object.assign({}, b)))
       .map((p) => Object.assign(p, { cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
@@ -13736,7 +13893,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function gvStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); ppStop(); pkStop(); scStop(); gbStop();
     GV = { photos: gvPick(GV_TICKETS), n: 0, wins: 0, res: [], found: [], ticket: null, timers: [], over: false, scratchT: 0 };
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gvEl.hidden = false;
@@ -14085,7 +14242,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   /* ---------- the album on screen ---------- */
   function alStart(openPack) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop();
     closeOverlays(); FX.clear(); Music.setEnergy(false);
     home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; alEl.hidden = false;
     const st = alStats();
@@ -14708,7 +14865,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function cpStart(n, photo) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop();
     const st = cpStats();
     if (n == null) n = st.sel;
     const lv = cpLevel(n), seen = new Set(st.found);
@@ -15094,7 +15251,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 
   function tdStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop();
     const st = tdStats(), lv = TD_LV[st.lv], seen = new Set(st.found);
     const photo = pickOne(TD_PHOTOS.filter((p) => !seen.has(p.id))) || pickOne(TD_PHOTOS);
     DF = { lv: st.lv, conf: lv, photo, img: null, diffs: [], got: 0, t0: 0, limit: lv.s * 1000, penalty: 0, hints: 0, wrong: 0, over: false, won: false, ready: false,
@@ -15667,7 +15824,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   }
   function soStart() {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
-    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop(); tdStop();
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop(); tdStop();
     const st = soStats(), n = st.opp + 1;
     const bots = [[], ['fox'], ['fox', 'cat'], ['fox', 'owl', 'cat']][st.opp], botName = { fox: 'volpe', cat: 'gatto', owl: 'civetta' };
     const ses = { round: 1, dealer: Math.floor(Math.random() * n), score: null, target: SO_TARGET };
@@ -16048,6 +16205,696 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !soEl.hidden && !$('#so-pick').hidden) { e.preventDefault(); soPickClose(); } });
   }
 
+  /* ---------- Tavla: the rules (the same on this device and in an online room) ----------
+     Backgammon as it is played in Turkey: fifteen checkers each, two dice, doubles count four times. A single checker
+     can be hit and goes to the bar, from where it must come back in first; once all of a player's checkers are home
+     they bear off. Both dice must be played when possible (else the higher one). The first to bear off all fifteen
+     wins the game: one point, two (mars) if the other has not borne off any. A match goes to 1, 3 or 5 points.
+     Points are kept for each player in its own order (relative point 0 is its last point before bearing off, 23 the
+     farthest); the board keeps them as seen by the first player: plus for its checkers, minus for the other's. */
+  const TV_START = [[23, 2], [12, 5], [7, 3], [5, 5]]; // relative point, checkers: the same for both
+  const tvAbs = (p, r) => (p === 0 ? r : 23 - r);
+  const tvMine = (S, p, r) => { const v = S.b[tvAbs(p, r)]; return p === 0 ? Math.max(0, v) : Math.max(0, -v); };
+  const tvTheirs = (S, p, r) => { const v = S.b[tvAbs(p, r)]; return p === 0 ? Math.max(0, -v) : Math.max(0, v); };
+  const tvCopy = (S) => ({ b: S.b.slice(), bar: S.bar.slice(), off: S.off.slice() });
+  const tvKey = (S) => S.b.join(',') + '|' + S.bar.join(',') + '|' + S.off.join(',');
+  function tvInit() {
+    const S = { b: new Array(24).fill(0), bar: [0, 0], off: [0, 0] };
+    TV_START.forEach(([r, n]) => { S.b[tvAbs(0, r)] += n; S.b[tvAbs(1, r)] -= n; });
+    return S;
+  }
+  const tvHome = (S, p) => !S.bar[p] && Array.from({ length: 18 }, (_, k) => k + 6).every((r) => !tvMine(S, p, r));
+  // the moves of one checker with one die; a move is { from, to, d } in the player's own points (from 24 = the bar, to -1 = off)
+  function tvSingles(S, p, d) {
+    const out = [];
+    if (S.bar[p]) { const t = 24 - d; if (tvTheirs(S, p, t) <= 1) out.push({ from: 24, to: t, d }); return out; }
+    const home = tvHome(S, p);
+    let top = -1;
+    for (let r = 23; r >= 0; r--) if (tvMine(S, p, r)) { top = r; break; }
+    for (let r = 0; r < 24; r++) {
+      if (!tvMine(S, p, r)) continue;
+      const t = r - d;
+      if (t >= 0) { if (tvTheirs(S, p, t) <= 1) out.push({ from: r, to: t, d }); }
+      else if (home && (t === -1 || r === top)) out.push({ from: r, to: -1, d });
+    }
+    return out;
+  }
+  function tvApply(S, p, m) {
+    const N = tvCopy(S), sg = p === 0 ? 1 : -1;
+    if (m.from === 24) N.bar[p]--; else N.b[tvAbs(p, m.from)] -= sg;
+    if (m.to < 0) { N.off[p]++; return N; }
+    const i = tvAbs(p, m.to);
+    if (tvTheirs(N, p, m.to) === 1) { N.b[i] = 0; N.bar[1 - p]++; m.hit = true; }
+    N.b[i] += sg;
+    return N;
+  }
+  const tvLeftKey = (left) => left.slice().sort((a, b) => a - b).join('');
+  // how many of the dice left can still be played from here
+  function tvMax(S, p, left, memo) {
+    if (!left.length) return 0;
+    const k = tvKey(S) + '#' + tvLeftKey(left);
+    if (memo.has(k)) return memo.get(k);
+    let best = 0;
+    const tried = new Set();
+    for (let i = 0; i < left.length && best < left.length; i++) {
+      if (tried.has(left[i])) continue;
+      tried.add(left[i]);
+      const rest = left.slice(0, i).concat(left.slice(i + 1));
+      for (const m of tvSingles(S, p, left[i])) { best = Math.max(best, 1 + tvMax(tvApply(S, p, m), p, rest, memo)); if (best === left.length) break; }
+    }
+    memo.set(k, best);
+    return best;
+  }
+  // the moves that may be made now: they must keep as many dice playable as possible (and the higher die first if only one can be)
+  function tvSteps(S, p, left, memo) {
+    memo = memo || new Map();
+    const need = tvMax(S, p, left, memo);
+    if (!need) return [];
+    let out = [];
+    const tried = new Set();
+    left.forEach((d, i) => {
+      if (tried.has(d)) return;
+      tried.add(d);
+      const rest = left.slice(0, i).concat(left.slice(i + 1));
+      tvSingles(S, p, d).forEach((m) => { if (1 + tvMax(tvApply(S, p, m), p, rest, memo) === need) out.push(m); });
+    });
+    if (need === 1 && left.length === 2 && left[0] !== left[1]) { const hi = Math.max(...left); if (out.some((m) => m.d === hi)) out = out.filter((m) => m.d === hi); }
+    return out;
+  }
+  // every way to play the dice left to the end, one per final position
+  function tvPlans(S, p, left0) {
+    const memo = new Map(), plans = new Map();
+    const rec = (st, left, path) => {
+      const steps = left.length ? tvSteps(st, p, left, memo) : [];
+      if (!steps.length) { const k = tvKey(st); if (!plans.has(k)) plans.set(k, { S: st, path }); return; }
+      steps.forEach((m) => { const i = left.indexOf(m.d); rec(tvApply(st, p, m), left.slice(0, i).concat(left.slice(i + 1)), path.concat([{ from: m.from, to: m.to, d: m.d }])); });
+    };
+    rec(S, left0, []);
+    return [...plans.values()];
+  }
+  const tvPips = (S, p) => { let n = S.bar[p] * 25; for (let r = 0; r < 24; r++) n += tvMine(S, p, r) * (r + 1); return n; };
+  const TV_SHOT = [0, 11, 12, 14, 15, 15, 17, 6, 6, 5, 3, 2, 3, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1];
+  // how good a position is for p (higher is better): the race, blots that can be hit, points made, primes, the bar
+  function tvEval(S, p) {
+    const q = 1 - p;
+    if (S.off[p] === 15) return 1000;
+    let v = (tvPips(S, q) - tvPips(S, p)) * .1 + (S.off[p] - S.off[q]) * .25;
+    // still in contact? (some checker of p behind some checker of q)
+    let myBack = S.bar[p] ? 24 : -1, theirBack = S.bar[q] ? 24 : -1;
+    for (let r = 23; r >= 0 && myBack < 0; r--) if (tvMine(S, p, r)) myBack = r;
+    for (let r = 23; r >= 0 && theirBack < 0; r--) if (tvTheirs(S, p, 23 - r)) theirBack = r;
+    const contact = myBack + theirBack >= 23;
+    if (!contact) return v * 1.6 + S.off[p] * .4;
+    v += S.bar[q] * 1.6 - S.bar[p] * 1.8;
+    // shots at each of p's blots, from q's checkers (q's own points run the other way)
+    for (let r = 0; r < 24; r++) {
+      if (tvMine(S, p, r) !== 1) continue;
+      let miss = 1;
+      // q runs up p's points: a checker of q at s < r hits with r - s; from the bar q comes in at d - 1
+      for (let s = 0; s < r; s++) { const n = tvTheirs(S, p, s); if (n) { const d = r - s; if (d < TV_SHOT.length) miss *= Math.pow(1 - TV_SHOT[d] / 36, Math.min(n, 2)); } }
+      if (S.bar[q]) { const d = r + 1; if (d < TV_SHOT.length) miss *= 1 - TV_SHOT[d] / 36; }
+      v -= (1 - miss) * (1.4 + (23 - r) * .09);
+    }
+    let run = 0, best = 0;
+    for (let r = 0; r < 24; r++) {
+      const n = tvMine(S, p, r);
+      if (n >= 2) {
+        v += r <= 5 ? (r === 4 || r === 3 ? 1.2 : r === 0 ? .4 : .9) + (S.bar[q] ? .35 : 0) : r === 6 ? .8 : r >= 18 ? .45 : .4;
+        run++; best = Math.max(best, run);
+      } else run = 0;
+      if (n > 3) v -= (n - 3) * .18;
+    }
+    v += Math.pow(Math.max(0, best - 1), 1.5) * .55;
+    return v;
+  }
+  // the computer's play: the best final position for the owl; the fox now and then takes the second or third best,
+  // the cat judges roughly and sometimes plays anything
+  function tvBot(S, p, left, skill) {
+    const plans = tvPlans(S, p, left);
+    if (!plans.length) return [];
+    if (skill === 0 && Math.random() < .3) return pickOne(plans).path;
+    const noise = [1.6, .6, .02][skill] ?? .6;
+    plans.forEach((pl) => { pl.v = tvEval(pl.S, p) + (Math.random() - .5) * noise; });
+    plans.sort((a, b) => b.v - a.v);
+    if (skill === 1 && plans.length > 1 && Math.random() < .3) return plans[1 + Math.floor(Math.random() * Math.min(2, plans.length - 1))].path;
+    return plans[0].path;
+  }
+  // a game: o = { ses: { target, score, game }, rnd, away(seat), gid }
+  function tvNew(o) {
+    const ses = o.ses, die = () => 1 + Math.floor((E.rnd || Math.random)() * 6);
+    if (!Array.isArray(ses.score)) ses.score = [0, 0];
+    const E = { gid: o.gid || '', ses, rnd: o.rnd || null, S: tvInit(), turn: -1, phase: 'open', dice: [], left: [], done: [], start: null, open: null, ev: [], en: 0, winner: -1, pts: 0, plan: null, botAt: Date.now() + 1800 };
+    const push = (e) => { e.n = ++E.en; E.ev.push(e); if (E.ev.length > 20) E.ev.shift(); };
+    const begin = (p, dice) => {
+      E.turn = p; E.dice = dice; E.left = dice[0] === dice[1] ? [dice[0], dice[0], dice[0], dice[0]] : dice.slice(); E.done = []; E.start = tvCopy(E.S); E.plan = null;
+      if (!tvSteps(E.S, p, E.left).length) { push({ k: 'none', p, dice }); pass(); return; }
+      E.phase = 'move';
+    };
+    const pass = () => { E.turn = 1 - E.turn; E.phase = 'roll'; E.dice = []; E.left = []; E.done = []; E.plan = null; E.botAt = Date.now() + 1400; };
+    const finish = (p) => {
+      E.winner = p; E.pts = E.S.off[1 - p] === 0 ? 2 : 1;
+      ses.score[p] += E.pts;
+      E.phase = ses.score[p] >= ses.target ? 'match' : 'over';
+      push({ k: 'win', p, pts: E.pts });
+    };
+    E.act = (seat, a) => {
+      if (!a || typeof a !== 'object') return false;
+      if (a.t === 'roll') {
+        if (E.phase === 'open') {
+          if (seat !== 0 && seat !== 1) return false;
+          let d0, d1;
+          do { d0 = die(); d1 = die(); } while (d0 === d1);
+          E.open = [d0, d1];
+          push({ k: 'open', dice: [d0, d1] });
+          begin(d0 > d1 ? 0 : 1, [d0, d1]);
+          E.botAt = Date.now() + 2200;
+          return true;
+        }
+        if (E.phase !== 'roll' || seat !== E.turn) return false;
+        const dice = [die(), die()];
+        push({ k: 'roll', p: seat, dice });
+        begin(seat, dice);
+        E.botAt = Date.now() + 1200;
+        return true;
+      }
+      if (a.t === 'move') {
+        if (E.phase !== 'move' || seat !== E.turn) return false;
+        // bearing off from one point may be done with more than one die: the one asked for, else the lowest
+        const ms = tvSteps(E.S, seat, E.left).filter((x) => x.from === a.from && x.to === a.to).sort((x, y) => x.d - y.d);
+        const m = ms.find((x) => x.d === a.d) || ms[0];
+        if (!m) return false;
+        E.S = tvApply(E.S, seat, m);
+        E.left.splice(E.left.indexOf(m.d), 1);
+        E.done.push({ from: m.from, to: m.to, d: m.d, hit: !!m.hit });
+        push({ k: 'move', p: seat, from: m.from, to: m.to, d: m.d, hit: !!m.hit });
+        E.botAt = Date.now() + 650;
+        if (E.S.off[seat] === 15) { finish(seat); return true; }
+        if (!E.left.length || !tvSteps(E.S, seat, E.left).length) { push({ k: 'end', p: seat }); pass(); }
+        return true;
+      }
+      if (a.t === 'undo') {
+        if (E.phase !== 'move' || seat !== E.turn || !E.done.length) return false;
+        const done = E.done.slice(0, -1);
+        E.S = tvCopy(E.start); E.left = E.dice[0] === E.dice[1] ? [E.dice[0], E.dice[0], E.dice[0], E.dice[0]] : E.dice.slice(); E.done = [];
+        done.forEach((x) => { const m = { from: x.from, to: x.to, d: x.d }; E.S = tvApply(E.S, seat, m); E.left.splice(E.left.indexOf(m.d), 1); E.done.push({ from: m.from, to: m.to, d: m.d, hit: !!m.hit }); });
+        push({ k: 'undo', p: seat });
+        return true;
+      }
+      if (a.t === 'next') {
+        if (E.phase !== 'over' || seat !== 0) return false;
+        ses.game++;
+        E.S = tvInit(); E.turn = -1; E.phase = 'open'; E.dice = []; E.left = []; E.done = []; E.open = null; E.winner = -1; E.pts = 0;
+        push({ k: 'game', game: ses.game });
+        E.botAt = Date.now() + 1800;
+        return true;
+      }
+      return false;
+    };
+    E.view = (seat) => ({
+      gid: E.gid, me: seat, b: E.S.b.slice(), bar: E.S.bar.slice(), off: E.S.off.slice(), turn: E.turn, phase: E.phase, dice: E.dice.slice(), left: E.left.slice(), done: E.done.slice(),
+      open: E.open, score: ses.score.slice(), target: ses.target, game: ses.game, winner: E.winner, pts: E.pts, ev: E.ev.slice(), en: E.en,
+      pips: [tvPips(E.S, 0), tvPips(E.S, 1)],
+    });
+    // the computer: for a player who has gone online, or the opponent here (one step at a time)
+    E.botStep = (seat, skill) => {
+      if (E.phase === 'open' || (E.phase === 'roll' && seat === E.turn)) return E.act(seat, { t: 'roll' });
+      if (E.phase !== 'move' || seat !== E.turn) return false;
+      if (!E.plan || !E.plan.length) E.plan = tvBot(E.S, seat, E.left, skill);
+      const m = E.plan.shift();
+      if (!m || !E.act(seat, { t: 'move', from: m.from, to: m.to, d: m.d })) { const s = tvSteps(E.S, seat, E.left)[0]; E.plan = null; return s ? E.act(seat, { t: 'move', from: s.from, to: s.to }) : false; }
+      return true;
+    };
+    E.tick = () => {
+      if (!o.away || Date.now() < E.botAt) return false;
+      const s = E.phase === 'open' ? (o.away(0) ? 0 : o.away(1) ? 1 : -1) : E.turn;
+      if (s < 0 || !o.away(s) || !['open', 'roll', 'move'].includes(E.phase)) return false;
+      return E.botStep(s, 1);
+    };
+    return E;
+  }
+  /* ---------- Tavla: the screen ----------
+     The board is drawn for whoever looks at it: their checkers go to the bottom right. White pearls for the first
+     player, black pearls for the second. A move: tap one of your checkers (or the bar), then where it goes. */
+  const tvEl = $('#tv');
+  const TV_PHOTOS = PHOTOS.filter((p) => p.fh > p.fw * 1.15 && p.set !== 'locandine');
+  const TV_DOTS = { 1: [[.5, .5]], 2: [[.27, .27], [.73, .73]], 3: [[.27, .27], [.5, .5], [.73, .73]], 4: [[.27, .27], [.73, .27], [.27, .73], [.73, .73]], 5: [[.27, .27], [.73, .27], [.5, .5], [.27, .73], [.73, .73]], 6: [[.27, .25], [.73, .25], [.27, .5], [.73, .5], [.27, .75], [.73, .75]] };
+  let TV = null, tvSpeed = 1, tvChain = Promise.resolve(); // tvSpeed: only the tests change it
+
+  function tvStats() {
+    const st = store.get('hm-tv', null);
+    const o = Object.assign({ played: 0, wins: 0, mars: 0, bot: 1, to: 3, found: [] }, st && typeof st === 'object' ? st : {});
+    if (!Array.isArray(o.found)) o.found = [];
+    if (![0, 1, 2].includes(o.bot)) o.bot = 1;
+    if (![1, 3, 5].includes(o.to)) o.to = 3;
+    return o;
+  }
+  function tvWait(ms) {
+    const g = TV;
+    return new Promise((res) => { const id = setTimeout(() => { if (g) g.timers = g.timers.filter((x) => x !== id); res(); }, ms / tvSpeed); if (g) g.timers.push(id); });
+  }
+  const tvName = (g, s) => (s === g.me ? t('tvYou') : g.online ? ((g.players[s] && g.players[s].name) || '') : g.names[s]);
+  const tvDiceText = (d) => (d[0] === d[1] ? d[0] + ' + ' + d[0] + ' (×2)' : d[0] + ' + ' + d[1]);
+  const tvView = (g) => (g.me >= 2 ? 0 : g.me); // whose side the board shows
+
+  /* ---------- the board ---------- */
+  function tvXY(r) {
+    if (r <= 5) return [514 - r * 40, true];
+    if (r <= 11) return [234 - (r - 6) * 40, true];
+    if (r <= 17) return [34 + (r - 12) * 40, false];
+    return [314 + (r - 18) * 40, false];
+  }
+  // the centre of the k-th checker of n on point r
+  function tvSpot(r, k, n) {
+    const [x, bottom] = tvXY(r), step = n <= 5 ? 36 : 148 / (n - 1);
+    return [x, bottom ? 448 - k * step : 32 + k * step];
+  }
+  const tvBarSpot = (mine, k) => [274, mine ? 312 + k * 30 : 168 - k * 30];
+  function tvChecker(x, y, owner, cls) {
+    return `<g class="tv-ck ${owner ? 'k1' : 'k0'}${cls ? ' ' + cls : ''}" transform="translate(${x} ${y})"><circle r="17.5" fill="url(#tvc${owner})" stroke="${owner ? '#1f1828' : '#a593b8'}" stroke-width="1.2"/>`
+      + `<circle r="11.5" fill="none" stroke="${owner ? 'rgba(255,255,255,.18)' : 'rgba(165,147,184,.55)'}" stroke-width="1"/><ellipse cx="-6" cy="-7" rx="5.5" ry="3.4" transform="rotate(-30 -6 -7)" fill="#fff" opacity="${owner ? .28 : .85}"/></g>`;
+  }
+  function tvDie(x, y, s, n, used) {
+    return `<g class="tv-die${used ? ' used' : ''}" transform="translate(${x} ${y})"><g class="tv-die-in"><rect x="${-s / 2}" y="${-s / 2}" width="${s}" height="${s}" rx="${s * .2}" fill="url(#tvdg)" stroke="#b48a48" stroke-width="1.3"/>`
+      + TV_DOTS[n].map(([a, b]) => `<circle cx="${(a - .5) * s}" cy="${(b - .5) * s}" r="${s * .085}" fill="#4a3557"/>`).join('') + '</g></g>';
+  }
+  const TV_DEFS = '<defs><radialGradient id="tvc0" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#f7f1f8"/><stop offset="1" stop-color="#cdbcda"/></radialGradient>'
+    + '<radialGradient id="tvc1" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#a796b8"/><stop offset=".45" stop-color="#5d4a6c"/><stop offset="1" stop-color="#271e30"/></radialGradient>'
+    + '<linearGradient id="tvdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffefb"/><stop offset="1" stop-color="#efe4f3"/></linearGradient>'
+    + '<linearGradient id="tvpa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1d9a8"/><stop offset="1" stop-color="#e2c084"/></linearGradient>'
+    + '<linearGradient id="tvpb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2d4ee"/><stop offset="1" stop-color="#cdb9e0"/></linearGradient>'
+    + '<linearGradient id="tvfr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3dfb3"/><stop offset=".5" stop-color="#d9b46e"/><stop offset="1" stop-color="#f1d9a6"/></linearGradient></defs>';
+  // the whole board for a view; sel: the point picked, dest: where it can go, last: the move to animate
+  function tvDraw(g, v) {
+    const P = tvView(g), Q = 1 - P, S = { b: v.b, bar: v.bar, off: v.off };
+    let h = TV_DEFS + '<rect class="tv-frame" x="1" y="1" width="598" height="478" rx="16" fill="url(#tvfr)"/><rect x="12" y="12" width="576" height="456" rx="8" fill="#fbf4e7" stroke="#b48a48" stroke-width="1"/>'
+      + '<rect x="254" y="12" width="40" height="456" fill="#efe1c4" stroke="#c9a469" stroke-width=".8"/><rect x="538" y="12" width="50" height="456" fill="#f4e9d4" stroke="#c9a469" stroke-width=".8"/>'
+      + '<path d="M538 240h50" stroke="#c9a469" stroke-width=".8" stroke-dasharray="3 3"/>';
+    for (let r = 0; r < 24; r++) {
+      const [x, bottom] = tvXY(r), tip = bottom ? 276 : 204, base = bottom ? 466 : 14;
+      h += `<path class="tv-pt" d="M${x - 19} ${base}L${x} ${tip}L${x + 19} ${base}Z" fill="url(#${(r % 2) ? 'tvpb' : 'tvpa'})" stroke="#c9a469" stroke-width=".7"/>`;
+    }
+    h += '<g class="tv-nums">' + Array.from({ length: 24 }, (_, r) => { const [x, bottom] = tvXY(r); return `<text x="${x}" y="${bottom ? 476 : 10}" text-anchor="middle">${r + 1}</text>`; }).join('') + '</g>';
+    // the checkers: on the points, on the bar, off the board
+    const pos = {};
+    for (let r = 0; r < 24; r++) {
+      const mine = tvMine(S, P, r), theirs = tvTheirs(S, P, r), n = mine || theirs, owner = mine ? P : Q;
+      for (let k = 0; k < n; k++) {
+        const [x, y] = tvSpot(r, k, n), top = k === n - 1;
+        h += tvChecker(x, y, owner, top ? 'top r' + r : '');
+      }
+      pos[r] = n;
+    }
+    for (let k = 0; k < v.bar[P]; k++) { const [x, y] = tvBarSpot(true, k); h += tvChecker(x, y, P, k === v.bar[P] - 1 ? 'top bar-me' : ''); }
+    for (let k = 0; k < v.bar[Q]; k++) { const [x, y] = tvBarSpot(false, k); h += tvChecker(x, y, Q, k === v.bar[Q] - 1 ? 'top bar-them' : ''); }
+    for (let k = 0; k < v.off[P]; k++) h += `<rect class="tv-slab k${P}" x="543" y="${457 - k * 10.4}" width="40" height="8.6" rx="3" fill="url(#tvc${P})" stroke="${P ? '#1f1828' : '#a593b8'}" stroke-width=".8"/>`;
+    for (let k = 0; k < v.off[Q]; k++) h += `<rect class="tv-slab k${Q}" x="543" y="${15 + k * 10.4}" width="40" height="8.6" rx="3" fill="url(#tvc${Q})" stroke="${Q ? '#1f1828' : '#a593b8'}" stroke-width=".8"/>`;
+    // what can be picked and where it can go
+    const sel = g.sel, mineTurn = v.phase === 'move' && v.turn === g.me && g.me < 2 && !g.busy;
+    const steps = mineTurn ? tvSteps(S, P, v.left) : [];
+    g.steps = steps;
+    if (mineTurn) {
+      const froms = [...new Set(steps.map((m) => m.from))];
+      froms.forEach((f) => {
+        const [x, y] = f === 24 ? tvBarSpot(true, Math.max(0, v.bar[P] - 1)) : tvSpot(f, Math.max(0, pos[f] - 1), pos[f]);
+        h += `<circle class="tv-can${f === sel ? ' on' : ''}" cx="${x}" cy="${y}" r="21"/>`;
+      });
+      if (sel != null) steps.filter((m) => m.from === sel).forEach((m) => {
+        if (m.to < 0) { h += '<rect class="tv-dest" x="540" y="244" width="46" height="222" rx="6"/>'; return; }
+        const n = tvMine(S, P, m.to), [x, y] = tvSpot(m.to, n, Math.max(5, n + 1));
+        h += `<circle class="tv-dest" cx="${x}" cy="${y}" r="15"/>`;
+      });
+    }
+    // the dice: on the right half for whoever looks, on the left half for the other one
+    if (v.dice.length) {
+      const right = v.turn === P, cx = right ? 414 : 134, ds = v.dice[0] === v.dice[1] ? [v.dice[0], v.dice[0], v.dice[0], v.dice[0]] : v.dice.slice(), s = ds.length > 2 ? 30 : 38;
+      const left = v.left.slice();
+      const used = ds.map((d) => { const i = left.indexOf(d); if (i >= 0) { left.splice(i, 1); return false; } return true; });
+      h += `<g class="tv-dice${g.rolled ? ' roll' : ''}">` + ds.map((d, i) => tvDie(cx + (i - (ds.length - 1) / 2) * (s + 8), 240, s, d, used[i] && v.phase === 'move')).join('') + '</g>';
+    } else if (v.open && v.phase === 'open') {
+      h += '<g class="tv-dice">' + tvDie(414, 240, 38, v.open[P]) + tvDie(134, 240, 38, v.open[Q]) + '</g>';
+    }
+    // where a tap lands
+    for (let r = 0; r < 24; r++) { const [x, bottom] = tvXY(r); h += `<rect class="tv-hit" data-r="${r}" x="${x - 20}" y="${bottom ? 240 : 12}" width="40" height="228"/>`; }
+    h += '<rect class="tv-hit" data-r="24" x="254" y="12" width="40" height="456"/><rect class="tv-hit" data-r="-1" x="538" y="12" width="50" height="456"/>';
+    const svg = $('#tv-board');
+    svg.innerHTML = h;
+    g.rolled = false;
+  }
+  // a checker that has just moved slides from where it was
+  function tvSlide(g, v, e, before) {
+    const P = tvView(g), mover = e.p, own = mover === P;
+    const r0 = e.from === 24 ? null : own ? e.from : 23 - e.from, r1 = e.to < 0 ? null : own ? e.to : 23 - e.to;
+    let from;
+    if (e.from === 24) from = tvBarSpot(own, Math.max(0, before.bar[mover] - 1));
+    else { const n0 = Math.max(1, (own ? tvMine(before, P, r0) : tvTheirs(before, P, r0))); from = tvSpot(r0, n0 - 1, n0); }
+    const svg = $('#tv-board');
+    const el = r1 == null ? null : $(`.tv-ck.top.r${r1}`, svg);
+    if (el) {
+      const n1 = own ? tvMine(v, P, r1) : tvTheirs(v, P, r1), to = tvSpot(r1, n1 - 1, n1);
+      el.animate([{ transform: `translate(${from[0]}px, ${from[1]}px) scale(1.1)` }, { transform: `translate(${to[0]}px, ${to[1]}px)` }], { duration: 380 / tvSpeed, easing: 'cubic-bezier(.3, .8, .4, 1)' });
+    } else if (e.to < 0) {
+      const slab = $$('.tv-slab.k' + mover, svg).pop();
+      if (slab) slab.animate([{ opacity: 0, transform: 'translateX(-30px)' }, { opacity: 1, transform: 'none' }], { duration: 380 / tvSpeed });
+    }
+    if (e.hit && r1 != null) {
+      const victimOwn = !own, bar = $(victimOwn ? '.tv-ck.top.bar-me' : '.tv-ck.top.bar-them', svg);
+      if (bar) {
+        const n = v.bar[1 - mover], to = tvBarSpot(victimOwn, n - 1), at = tvSpot(r1, 0, 1);
+        bar.animate([{ transform: `translate(${at[0]}px, ${at[1]}px)` }, { transform: `translate(${to[0]}px, ${to[1]}px)` }], { duration: 520 / tvSpeed, delay: 160 / tvSpeed, easing: 'cubic-bezier(.4, 0, .3, 1)', fill: 'backwards' });
+      }
+    }
+  }
+  // a word over the board, where a move ended
+  function tvFloat(g, e, text) {
+    const svg = $('#tv-board'), m = svg.getScreenCTM && svg.getScreenCTM();
+    if (!m) return;
+    const P = tvView(g), r = e.to < 0 ? null : e.p === P ? e.to : 23 - e.to;
+    const [x, y] = r == null ? [563, e.p === P ? 380 : 100] : tvSpot(r, 0, 1);
+    const pt = new DOMPoint(x, y).matrixTransform(m);
+    FX.float(text, pt.x, pt.y - 26, e.hit && e.p !== g.me ? '' : 'gold');
+  }
+  function tvSides(g, v) {
+    const P = tvView(g), Q = 1 - P;
+    const side = (box, s, mine) => {
+      const turn = (v.phase === 'roll' || v.phase === 'move' || v.phase === 'show') && v.turn === s;
+      box.className = 'tv-side ' + (mine ? 'me' : 'them') + (turn ? ' turn' : '') + (g.online && g.players[s] && !g.players[s].on ? ' away' : '');
+      box.innerHTML = '<span class="so-av">' + svgUse('av-' + (g.avs[s] || 'fox'), '', '0 0 40 40') + '</span><span class="tv-chip k' + s + '"></span><b class="so-nm"></b>'
+        + '<span class="tv-pp"></span><span class="so-pt"></span>';
+      $('.so-nm', box).textContent = tvName(g, s);
+      $('.tv-pp', box).textContent = v.off[s] ? t('tvOff', { n: v.off[s] }) : t('tvPips', { n: v.pips[s] });
+      $('.so-pt', box).textContent = t('tvScore', { n: v.score[s] });
+    };
+    side($('#tv-them'), Q, false);
+    side($('#tv-me'), P, true);
+    $('#tv-sub').textContent = v.target > 1 ? t('tvSub', { g: v.game, t: v.target }) : t('tvSub1');
+  }
+  function tvControls(g) {
+    const v = g.v;
+    if (!v) return;
+    const me = g.me < 2, myRoll = me && !g.busy && (v.phase === 'open' || (v.phase === 'roll' && v.turn === g.me));
+    $('#tv-roll').disabled = !myRoll;
+    $('#tv-roll').hidden = v.phase === 'move' && v.turn === g.me;
+    $('#tv-undo').hidden = !(v.phase === 'move' && v.turn === g.me);
+    $('#tv-undo').disabled = g.busy || !v.done.length;
+    if (g.busy) return;
+    $('#tv-msg').textContent = tvTurnText(g, v);
+  }
+  function tvTurnText(g, v) {
+    const name = tvName(g, v.turn), mine = v.turn === g.me && g.me < 2;
+    if (v.phase === 'open') return g.me < 2 ? t('tvOpenMsg') : t('tvWatch');
+    if (v.phase === 'roll') return mine ? t('tvRollMe') : t(lang === 'it' && /^[aà]/i.test(name) ? 'tvTurnOfAd' : 'tvTurnOf', { name });
+    if (v.phase === 'move') return mine ? (g.sel != null ? t('tvPick') : t('tvMoveMe', { dice: v.left.join(' · ') })) : t('tvRolled', { name, dice: tvDiceText(v.dice) });
+    return '';
+  }
+  // a new view: what happened since the last one, then the board as it is now
+  async function tvShow(g, v) {
+    const news = v.ev.filter((e) => e.n > g.en), prev = g.v;
+    g.en = v.en;
+    // the board as it was before each move, to slide the checker from there
+    let before = prev ? { b: prev.b.slice(), bar: prev.bar.slice(), off: prev.off.slice() } : null;
+    if (!news.length || !prev) { g.v = v; tvDraw(g, v); tvSides(g, v); return; }
+    for (const e of news) {
+      if (TV !== g) return;
+      if (e.k === 'move') {
+        const after = tvApply(before, e.p, { from: e.from, to: e.to, d: e.d });
+        const sv = Object.assign({}, v, { b: after.b, bar: after.bar, off: after.off, pips: [tvPips(after, 0), tvPips(after, 1)] });
+        g.v = sv; tvDraw(g, sv); tvSides(g, sv);
+        tvSlide(g, sv, e, before);
+        if (e.to < 0) Sound.sparkle(); else Sound.tick2();
+        if (e.hit) { Sound.wrong(); buzz(25); tvFloat(g, e, e.p === g.me || g.me >= 2 ? t('tvHit') : t('tvHitMe')); }
+        else if (e.to < 0 && e.p === g.me && after.off[e.p] === 1) tvFloat(g, e, t('tvOff1'));
+        before = after;
+        await tvWait(e.p === g.me ? 260 : 460);
+      } else if (e.k === 'roll' || e.k === 'open') {
+        g.rolled = true;
+        const sv = Object.assign({}, v, before ? { b: before.b, bar: before.bar, off: before.off } : {});
+        if (e.k === 'open') { sv.dice = []; sv.phase = 'open'; sv.open = e.dice; sv.left = []; }
+        else { sv.dice = e.dice; sv.left = e.dice[0] === e.dice[1] ? [e.dice[0], e.dice[0], e.dice[0], e.dice[0]] : e.dice.slice(); sv.turn = e.p; sv.phase = 'show'; }
+        g.v = sv; tvDraw(g, sv); tvSides(g, sv);
+        Sound.deal(); setTimeout(() => Sound.deal(), 110 / tvSpeed);
+        if (e.k === 'open') {
+          const P = tvView(g), first = e.dice[0] > e.dice[1] ? 0 : 1;
+          $('#tv-msg').textContent = t('tvOpenGo', { a: tvName(g, P), x: e.dice[P], b: tvName(g, 1 - P), y: e.dice[1 - P], who: first === g.me ? t('tvOpenYou') : tvName(g, first) });
+          await tvWait(1500);
+        } else {
+          if (e.p !== g.me) $('#tv-msg').textContent = t('tvRolled', { name: tvName(g, e.p), dice: tvDiceText(e.dice) });
+          await tvWait(e.p === g.me ? 450 : 750);
+        }
+      } else if (e.k === 'none') {
+        $('#tv-msg').textContent = e.p === g.me ? t('tvNoneMe', { dice: tvDiceText(e.dice) }) : t('tvNone', { dice: tvDiceText(e.dice) });
+        Sound.wrong();
+        await tvWait(1400);
+      } else if (e.k === 'undo') {
+        before = { b: v.b.slice(), bar: v.bar.slice(), off: v.off.slice() };
+      } else if (e.k === 'game') {
+        before = { b: v.b.slice(), bar: v.bar.slice(), off: v.off.slice() };
+      }
+    }
+    if (TV !== g) return;
+    g.v = v; tvDraw(g, v); tvSides(g, v);
+  }
+
+  /* ---------- playing here ---------- */
+  function tvShowScreen() {
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; tvEl.hidden = false;
+    $('#tv-end').hidden = true; $('#tv-prize').hidden = true;
+  }
+  function tvStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); ppStop(); pkStop(); scStop(); gbStop(); gvStop(); alStop(); cpStop(); tdStop(); soStop();
+    const st = tvStats(), bot = ['cat', 'fox', 'owl'][st.bot], botName = { fox: 'volpe', cat: 'gatto', owl: 'civetta' }[bot];
+    TV = { online: false, E: tvNew({ ses: { target: st.to, score: [0, 0], game: 1 }, gid: 'local' }), me: 0, names: [t('tvYou'), (t('ucBots') || {})[botName] || bot], bot: botName, avs: ['bunny', bot], skill: st.bot,
+      v: null, en: 0, timers: [], busy: true, sel: null, steps: [], found: [], over: false, rolled: false, mars: 0, cur: -2 };
+    tvShowScreen();
+    announce(t('aTvStart'));
+    tvLoop();
+  }
+  function tvStop() {
+    const g = TV; TV = null;
+    if (g) g.timers.forEach(clearTimeout);
+    tvEl.hidden = true; $('#tv-end').hidden = true; $('#tv-prize').hidden = true;
+  }
+  function tvRequestExit() {
+    const g = TV;
+    if (g && g.online) { openConfirm(true); return; }
+    if (g && !g.over && g.v && (g.v.phase !== 'open' || g.v.game > 1)) openConfirm(false); else goHome();
+  }
+  async function tvLoop() {
+    const g = TV;
+    if (!g || g.online) return;
+    while (TV === g) {
+      const E = g.E;
+      g.busy = true;
+      await tvShow(g, E.view(0));
+      if (TV !== g) return;
+      if (E.phase === 'over' || E.phase === 'match') { await tvGameEnd(g); return; }
+      if (E.phase === 'open' || E.turn === 0) {
+        g.busy = false; g.sel = null;
+        if (E.phase === 'move') { const fr = [...new Set(tvSteps(E.S, 0, E.left).map((m) => m.from))]; if (fr.length === 1) g.sel = fr[0]; }
+        tvDraw(g, g.v); tvControls(g);
+        return;
+      }
+      tvControls(g);
+      if (E.phase === 'roll') $('#tv-msg').textContent = tvTurnText(g, g.v);
+      await tvWait(E.phase === 'roll' ? 650 : 420);
+      if (TV !== g) return;
+      E.botStep(1, g.skill);
+    }
+  }
+  function tvAct(a) {
+    const g = TV;
+    if (!g || g.busy || g.me >= 2) return;
+    g.busy = true; g.sel = null;
+    $('#tv-roll').disabled = true; $('#tv-undo').disabled = true;
+    if (g.online) { netAct(a); return; }
+    if (!g.E.act(0, a)) { g.busy = false; tvControls(g); return; }
+    tvLoop();
+  }
+  // a tap on the board: pick a checker, or put the picked one down
+  function tvTap(r) {
+    const g = TV, v = g && g.v;
+    if (!g || g.busy || !v || v.phase !== 'move' || v.turn !== g.me) return;
+    const steps = g.steps || [];
+    if (g.sel != null) {
+      const m = steps.find((x) => x.from === g.sel && x.to === r);
+      if (m) { tvAct({ t: 'move', from: m.from, to: m.to }); return; }
+    }
+    if (steps.some((x) => x.from === r) && g.sel !== r) { g.sel = r; Sound.tick2(); }
+    else if (g.sel === r) g.sel = null;
+    else {
+      // a tap where only one checker could go (the tray too): move that one there
+      const to = steps.filter((x) => x.to === r);
+      if (to.length && new Set(to.map((x) => x.from)).size === 1) { tvAct({ t: 'move', from: to[0].from, to: r }); return; }
+      g.sel = null;
+    }
+    tvDraw(g, v); tvControls(g);
+  }
+  // the end of a game: the photo, the score, the next game or the end of the match
+  async function tvGameEnd(g) {
+    const v = g.v, won = v.winner === g.me, mars = v.pts === 2;
+    g.sel = null; tvControls(g);
+    $('#tv-msg').textContent = won ? t('tvWinT') : t('tvLoseT', { name: tvName(g, v.winner) });
+    if (won) {
+      celebrate();
+      const n = mars ? 2 : 1;
+      if (mars) g.mars++;
+      for (let k = 0; k < n; k++) {
+        const id = tvAward(g);
+        await tvPrize(g, id, k ? t('tvPrizeMars') : t('tvPrize'));
+        if (TV !== g) return;
+      }
+    } else if (g.me < 2) Sound.lose();
+    const P = tvView(g);
+    $('#tv-end-k').textContent = mars ? t('tvMars') : '';
+    $('#tv-end-t').textContent = won ? t('tvWinT') : t('tvLoseT', { name: tvName(g, v.winner) });
+    $('#tv-end-s').textContent = t('tvEndScore', { a: tvName(g, P), x: v.score[P], b: tvName(g, 1 - P), y: v.score[1 - P] });
+    const next = $('#tv-next'), host = !g.online || (N && N.host);
+    next.textContent = v.phase === 'match' ? t('tvSeeEnd') : host ? t('tvNext') : t('tvWaitNext', { name: tvName(g, 0) });
+    next.disabled = v.phase !== 'match' && !host;
+    $('#tv-end').hidden = false;
+    setTimeout(() => { if (!next.disabled) next.focus({ preventScroll: true }); }, 60);
+  }
+  function tvNext() {
+    const g = TV, v = g && g.v;
+    if (!g || !v) return;
+    if (v.phase === 'match') { $('#tv-end').hidden = true; tvMatchEnd(g); return; }
+    if (v.phase !== 'over') return;
+    $('#tv-end').hidden = true;
+    if (g.online) { if (N && N.host) netAct({ t: 'next' }); return; }
+    g.E.act(0, { t: 'next' });
+    tvLoop();
+  }
+  function tvAward(g) {
+    const st = tvStats(), have = new Set(st.found.concat(g.found.map((p) => p.id)));
+    const p = pickOne(TV_PHOTOS.filter((x) => !have.has(x.id))) || pickOne(TV_PHOTOS);
+    g.found.push(p);
+    st.found = Array.from(new Set(st.found.concat([p.id]))).slice(-200);
+    store.set('hm-tv', st);
+    return p.id;
+  }
+  function tvPrize(g, id, text) {
+    return new Promise((resolve) => {
+      const p = PHOTO_BY_ID.get(id), box = $('#tv-prize');
+      if (!p || TV !== g) { resolve(); return; }
+      $('img', box).src = cardSrc(p);
+      $('#tv-prize-t').textContent = text;
+      box.classList.remove('open'); box.hidden = false;
+      Sound.whoosh();
+      let done = false;
+      const finish = () => { if (done) return; done = true; box.hidden = true; box.onclick = null; resolve(); };
+      setTimeout(() => {
+        if (TV !== g) { finish(); return; }
+        box.classList.add('open'); Sound.sparkle();
+        const r = $('.rw-prize-card', box).getBoundingClientRect();
+        FX.burst(r.left + r.width / 2, r.top + r.height / 2, 50, true);
+      }, 420 / tvSpeed);
+      box.onclick = () => { if (box.classList.contains('open')) finish(); };
+      setTimeout(finish, 3300 / tvSpeed);
+    });
+  }
+  function tvMatchEnd(g) {
+    if (g.over) return;
+    g.over = true;
+    const v = g.v, P = tvView(g), won = v.winner === g.me && g.me < 2;
+    if (g.me < 2) {
+      const st = tvStats();
+      st.played++; if (won) st.wins++; st.mars += g.mars;
+      store.set('hm-tv', st);
+    }
+    const host = g.online && N && N.host;
+    showResult({ kicker: v.target > 1 ? t('tvKicker', { n: v.target }) : t('gameTv') + ' · ' + t('tvSub1'), title: won ? t('tvMatchWin') : t('tvMatchLose', { name: tvName(g, v.winner) }), stars: null, score: null, record: false,
+      photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: g.online ? (host ? t('netAgain') : t('netWaitAgain', { name: tvName(g, 0) })) : t('tvAgain'), againOff: g.online && !host,
+      action: g.online ? 'net' : 'tv', menuLabel: g.online ? t('netLeave') : undefined,
+      rows: [[tvName(g, P), String(v.score[P])], [tvName(g, 1 - P), String(v.score[1 - P])], [t('tvRowPhotos'), String(g.found.length)]],
+      strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
+    if (!won) Sound.lose();
+  }
+
+  /* ---------- online: two players, the room's device keeps the game ---------- */
+  function tvNet(ses) { return tvNew({ ses, gid: netRand(6, NET_CODE), away: (s) => !N || !N.players[s] || !N.players[s].on }); }
+  function tvNetApply(v) { tvChain = tvChain.then(() => tvOnline(v)).catch(() => { /* a broken animation must not stop the game */ }); }
+  async function tvOnline(v) {
+    if (!N || !v.g) return;
+    let g = TV;
+    if (!g || !g.online || g.gid !== v.g.gid) {
+      tvStop(); soStop(); ucStop(); pzStop(); bwStop(); rwStop();
+      S = null; board.textContent = '';
+      g = TV = { online: true, gid: v.g.gid, me: v.you, players: v.players, avs: NET_AV.slice(), v: null, en: 0, timers: [], busy: true, sel: null, steps: [], found: [], over: false, rolled: false, mars: 0, cur: -2 };
+      tvShowScreen();
+    }
+    g.players = v.players; g.me = v.you;
+    g.busy = true;
+    await tvShow(g, v.g);
+    if (TV !== g) return;
+    const gv = v.g;
+    if (gv.phase === 'over' || gv.phase === 'match') { if ($('#tv-end').hidden && !g.over) await tvGameEnd(g); return; }
+    $('#tv-end').hidden = true;
+    g.busy = false;
+    if (gv.phase === 'move' && gv.turn === g.me) { const fr = [...new Set(tvSteps({ b: gv.b, bar: gv.bar, off: gv.off }, g.me, gv.left).map((m) => m.from))]; g.sel = fr.length === 1 ? fr[0] : null; }
+    else g.sel = null;
+    tvDraw(g, gv); tvControls(g);
+  }
+
+  /* ---------- the home ---------- */
+  function tvRenderSetup() {
+    const st = tvStats();
+    $$('[data-tv-bot]').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.tvBot === st.bot)));
+    $('#tv-bot-tag').textContent = (t('tvBotTag') || [])[st.bot] || '';
+    $$('[data-tv-to]').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.tvTo === st.to)));
+    $('#tv-to-tag').textContent = st.to > 1 ? t('tvToTag', { n: st.to }) : t('tvToTag1');
+    const ol = $('#tv-rules-list'); ol.textContent = '';
+    (t('tvRules') || []).forEach((r) => { const li = document.createElement('li'); li.textContent = r; ol.appendChild(li); });
+    $('#tv-record').textContent = st.played ? t('tvRecord', { w: st.wins, p: st.played, m: st.mars }) : t('rwRecordNone');
+  }
+  function tvRelang() {
+    const g = TV;
+    if (!g || !g.v) return;
+    if (!g.online) g.names = [t('tvYou'), (t('ucBots') || {})[g.bot] || g.names[1]];
+    tvSides(g, g.v);
+    if (!g.busy) $('#tv-msg').textContent = tvTurnText(g, g.v);
+  }
+  function tvFound() { return TV && TV.found.length ? TV.found : null; }
+  function tvAgain() { tvStart(); }
+  function tvWire() {
+    $('#btn-tv-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tvStart(); });
+    $('#tv-exit').addEventListener('click', tvRequestExit);
+    $$('[data-tv-bot]').forEach((b) => b.addEventListener('click', () => { const st = tvStats(); st.bot = +b.dataset.tvBot; store.set('hm-tv', st); Sound.flip(); tvRenderSetup(); }));
+    $$('[data-tv-to]').forEach((b) => b.addEventListener('click', () => { const st = tvStats(); st.to = +b.dataset.tvTo; store.set('hm-tv', st); Sound.flip(); tvRenderSetup(); }));
+    $('#tv-roll').addEventListener('click', () => tvAct({ t: 'roll' }));
+    $('#tv-undo').addEventListener('click', () => tvAct({ t: 'undo' }));
+    $('#tv-next').addEventListener('click', tvNext);
+    const svg = $('#tv-board');
+    svg.addEventListener('click', (e) => {
+      const g = TV, v = g && g.v;
+      if (!g || !v || g.busy) return;
+      if (g.me < 2 && (v.phase === 'open' || (v.phase === 'roll' && v.turn === g.me))) { tvAct({ t: 'roll' }); return; }
+      const h = e.target.closest('.tv-hit');
+      if (h) tvTap(+h.dataset.r);
+    });
+    // the keys: arrows go through the checkers that can move (then through where the picked one can go), Enter picks or puts down
+    svg.addEventListener('keydown', (e) => {
+      const g = TV, v = g && g.v;
+      if (!g || !v || g.busy) return;
+      if ((e.key === 'Enter' || e.key === ' ') && (v.phase === 'roll' || v.phase === 'open') && (v.phase === 'open' || v.turn === g.me)) { e.preventDefault(); tvAct({ t: 'roll' }); return; }
+      if (v.phase !== 'move' || v.turn !== g.me) return;
+      const list = g.sel == null ? [...new Set((g.steps || []).map((m) => m.from))] : (g.steps || []).filter((m) => m.from === g.sel).map((m) => m.to);
+      if (!list.length) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const i = list.indexOf(g.cur), d = e.key === 'ArrowRight' ? 1 : -1;
+        g.cur = list[((i < 0 ? (d > 0 ? -1 : 0) : i) + d + list.length) % list.length];
+        announce(g.cur === 24 ? t('tvBoardAria') : g.cur < 0 ? t('tvOff1') : String(g.cur + 1));
+        $$('.tv-cur', svg).forEach((x) => x.remove());
+        const [x, y] = g.cur === 24 ? [274, 312] : g.cur < 0 ? [563, 360] : tvSpot(g.cur, 0, 1);
+        svg.insertAdjacentHTML('beforeend', `<circle class="tv-cur" cx="${x}" cy="${y}" r="22"/>`);
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (list.includes(g.cur)) tvTap(g.cur);
+      } else if (e.key === 'Escape' && g.sel != null) { e.preventDefault(); g.sel = null; tvDraw(g, v); tvControls(g); }
+    });
+  }
+
   /* ---------- navigation ---------- */
   function closeOverlays() {
     if (ucPickDone) ucPickDone(null);
@@ -16058,13 +16905,13 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     onlineEl.hidden = true; $('#net-gone').hidden = true;
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); }
     S = null;
-    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
+    closeOverlays(); ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); FX.clear(); Music.setEnergy(false);
     board.textContent = ''; boardMsg.hidden = true;
     game.hidden = true; mapEl.hidden = true; home.hidden = false;
-    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
-    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'so' ? '#btn-so-play' : gameSel === 'td' ? '#btn-td-play' : gameSel === 'cp' ? '#btn-cp-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
+    renderCount(); renderHuntCard(); ucRenderSetup(); pzRenderSetup(); bwRenderSetup(); rwRenderSetup(); tbRenderSetup(); mqRenderSetup(); tvRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup();
+    $(gameSel === 'uc' ? '#btn-uc-play' : gameSel === 'pz' ? '#btn-pz-play' : gameSel === 'bw' ? '#btn-bw-play' : gameSel === 'rw' ? '#btn-rw-play' : gameSel === 'tb' ? '#btn-tb-play' : gameSel === 'mq' ? '#btn-mq-play' : gameSel === 'tv' ? '#btn-tv-play' : gameSel === 'so' ? '#btn-so-play' : gameSel === 'td' ? '#btn-td-play' : gameSel === 'cp' ? '#btn-cp-play' : gameSel === 'al' ? '#btn-al-play' : gameSel === 'gv' ? '#btn-gv-play' : gameSel === 'gb' ? '#btn-gb-play' : gameSel === 'sc' ? '#btn-sc-play' : gameSel === 'pk' ? '#btn-pk-play' : gameSel === 'pp' ? '#btn-pp-play' : '#btn-play').focus({ preventScroll: true });
   }
-  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !soEl.hidden || !tdEl.hidden || !cpEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
+  function leaveGame() { if (N || !ucEl.hidden || !pzEl.hidden || !bwEl.hidden || !rwEl.hidden || !tbEl.hidden || !mqEl.hidden || !tvEl.hidden || !soEl.hidden || !tdEl.hidden || !cpEl.hidden || !alEl.hidden || !gvEl.hidden || !gbEl.hidden || !scEl.hidden || !pkEl.hidden || !ppEl.hidden) { goHome(); return; } if (S && S.cfg.hunt) showMap(); else goHome(); }
   function openConfirm(online) {
     $('#cf-title').textContent = t(online ? 'netCfTitle' : 'cfTitle');
     $('#confirm .cf-text').textContent = t(online ? (N && N.host ? 'netCfTextHost' : 'netCfText') : 'cfText');
@@ -16080,7 +16927,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   let lbIndex = 0, lbList = [];
   function openGallery() {
     if (!pzEl.hidden && P) { lbList = [P.photo]; openLightbox(0); return; }
-    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !cpEl.hidden && cpFound() ? cpFound() : !tdEl.hidden && tdFound() ? tdFound() : !soEl.hidden && soFound() ? soFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
+    const list = !ppEl.hidden && ppFound() ? ppFound() : !pkEl.hidden && pkFound() ? pkFound() : !scEl.hidden && scFound() ? scFound() : !gbEl.hidden && gbFound() ? gbFound() : !gvEl.hidden && gvFound() ? gvFound() : !alEl.hidden && alFound() ? alFound() : !cpEl.hidden && cpFound() ? cpFound() : !tdEl.hidden && tdFound() ? tdFound() : !soEl.hidden && soFound() ? soFound() : !tvEl.hidden && tvFound() ? tvFound() : !mqEl.hidden && MG ? MG.found : !tbEl.hidden && TG ? TG.found : !rwEl.hidden && RG ? RG.found : !bwEl.hidden && BG ? BG.found : !ucEl.hidden && U ? U.photos : S ? S.photos : null;
     if (!list) return;
     lbList = list.slice();
     const grid = $('#gal-grid'); grid.textContent = '';
@@ -16143,6 +16990,7 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
     if (resultAction === 'uc') { ucStart(false); return; }
     if (resultAction === 'pz') { pzStart(pzSurprise(P && P.photo)); return; }
     if (resultAction === 'mq') { mqStart(); return; }
+    if (resultAction === 'tv') { tvAgain(); return; }
     if (resultAction === 'so') { soAgain(); return; }
     if (resultAction === 'td') { tdAgain(); return; }
     if (resultAction === 'cp') { cpAgain(); return; }
@@ -16179,10 +17027,11 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
   $('#btn-rw-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); rwStart({ duo: mode === 'duo', names: [$('#rw-p1').value, $('#rw-p2').value] }); });
   $('#rw-exit').addEventListener('click', rwRequestExit);
   $('#btn-tb-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); tbStart({ n: store.get('hm-tb-n', 2) }); });
-  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
+  $$('#setup-tb .tb-seg button').forEach((b) => b.addEventListener('click', () => { store.set('hm-tb-n', +b.dataset.tbn); Sound.flip(); tbRenderSetup(); mqRenderSetup(); tvRenderSetup(); soRenderSetup(); tdRenderSetup(); cpRenderSetup(); alRenderSetup(); gvRenderSetup(); gbRenderSetup(); scRenderSetup(); pkRenderSetup(); ppRenderSetup(); }));
   $('#tb-exit').addEventListener('click', tbRequestExit);
   $('#btn-mq-play').addEventListener('click', () => { AudioCore.get(); Sound.flip(); mqStart(); });
   $('#mq-exit').addEventListener('click', mqRequestExit);
+  tvWire();
   soWire();
   tdWire();
   cpWire();
