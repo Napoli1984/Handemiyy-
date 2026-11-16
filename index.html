@@ -3308,6 +3308,58 @@ a.gp-tile { text-decoration: none; }
 .sc-board .sq.capt::after { box-shadow: inset 0 0 0 calc(100cqw / 8 * .075) rgba(255, 234, 170, .92); }
 .pc.w { color: #fffaf0; -webkit-text-stroke: 1.2px #3a2a1c; text-shadow: 0 2px 2px rgba(30, 15, 5, .55); }
 .pc.b { color: #1c1418; -webkit-text-stroke: 1.3px #f6ead0; paint-order: stroke fill; text-shadow: 0 2px 2px rgba(30, 15, 5, .55); }
+
+/* ============ Real materials for the other games: cloth, wood, foil, depth ============ */
+/* Memory: the cards lie on a velvet table with a wooden rail */
+.board-wrap::before { content: ""; position: absolute; inset: -9px -8px; border-radius: 24px; pointer-events: none;
+  border: 8px solid transparent;
+  background: url(a/felt.jpg) padding-box 0 0 / 200px, radial-gradient(120% 90% at 50% 35%, #c9afd6, #a98bb9 60%, #8d6f9f) padding-box, url(a/wood-dark.jpg) border-box 0 0 / 256px;
+  background-blend-mode: multiply, normal, normal;
+  box-shadow: inset 0 0 0 1.5px rgba(50, 28, 62, .5), inset 0 8px 16px -6px rgba(44, 24, 56, .5), inset 0 0 50px rgba(50, 28, 62, .25), 0 0 0 1.5px #4a2c16, 0 24px 40px -24px rgba(40, 24, 10, .6); }
+.card .lift { filter: drop-shadow(0 5px 4px rgba(36, 18, 46, .5)); }
+
+/* Puzzle: a wooden tray lined with linen, and a wooden drawer for the pieces */
+.pz-board { background: url(a/felt.jpg) 0 0 / 200px, linear-gradient(160deg, #fbf4e6, #f1e6d0); background-blend-mode: soft-light;
+  box-shadow: inset 0 0 0 1px rgba(60, 36, 20, .45), inset 0 6px 14px -6px rgba(60, 36, 20, .5), 0 0 0 1.5px #e3c88f, 0 0 0 8px #6b452a, 0 0 0 9px #3c2414, 0 24px 40px -22px rgba(40, 24, 10, .65); }
+.pz-drawer { background: linear-gradient(rgba(255, 250, 240, .55), rgba(255, 250, 240, .55)), url(a/wood-light.jpg) 0 0 / 256px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .6), inset 0 10px 18px -10px rgba(60, 36, 20, .45), 0 -1.5px 0 #b48a48; }
+.pz-piece { filter: drop-shadow(0 2.5px 2px rgba(40, 24, 10, .45)); }
+
+/* Tombola: the cards lie on a green cloth, the drawn number is a polished ball */
+.tb-cards { border-radius: 18px; padding: 10px 8px; border: 7px solid transparent;
+  background: url(a/felt.jpg) padding-box 0 0 / 200px, radial-gradient(120% 90% at 50% 30%, #86c08c, #63a36c 68%, #4b8a56) padding-box, url(a/wood-dark.jpg) border-box 0 0 / 256px;
+  background-blend-mode: multiply, normal, normal; background-attachment: local, local, scroll;
+  box-shadow: inset 0 0 0 1.5px rgba(14, 40, 18, .5), inset 0 8px 16px -6px rgba(10, 36, 14, .5), 0 0 0 1.5px #4a2c16, 0 20px 34px -22px rgba(40, 24, 10, .6); }
+.tb-card { box-shadow: 0 0 0 1.5px #dcc08a, 0 0 0 4px #fffaf2, 0 0 0 5px rgba(201, 164, 105, .4), 0 2px 0 5px #d6c9b2, 0 12px 14px -4px rgba(10, 30, 14, .55); }
+.tb-ball { background: radial-gradient(circle at 32% 26%, #fff 0, #fffaf3 18%, #f1e3c8 52%, #cfae78 84%, #a8834c);
+  box-shadow: inset 0 -8px 14px -6px rgba(90, 58, 20, .55), inset 0 3px 6px rgba(255, 255, 255, .9), 0 0 0 2px #b48a48, 0 16px 22px -10px rgba(60, 36, 20, .6); }
+
+/* Quiz: glass lozenges that catch the light */
+.mq-lz::before { background: linear-gradient(180deg, #ffffff 0, #fdf8ee 46%, #efe4d0 54%, #f9f2e4 100%); }
+.mq-ans, .mq-q { filter: drop-shadow(0 8px 7px rgba(72, 52, 84, .3)); }
+.mq-stage::before { content: ""; position: absolute; inset: -6% -10%; z-index: -1; pointer-events: none;
+  background: radial-gradient(60% 34% at 50% 26%, rgba(255, 244, 214, .9), rgba(255, 244, 214, 0) 70%), radial-gradient(70% 40% at 50% 70%, rgba(233, 214, 245, .7), rgba(233, 214, 245, 0) 72%); }
+
+/* Pioggia di perle, Collana di perle: a jewel box in polished wood */
+.pp-stage canvas { box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 7px #6b452a, 0 0 0 8px #3c2414, inset 0 0 0 1px rgba(60, 36, 20, .4), 0 24px 40px -22px rgba(40, 24, 10, .65); }
+.cp-board { box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 7px #6b452a, 0 0 0 8px #3c2414, 0 26px 44px -22px rgba(40, 24, 10, .65); }
+.cp-board::after { content: ""; position: absolute; inset: 0; z-index: 9; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(60, 36, 20, .45), inset 0 8px 16px -8px rgba(40, 20, 60, .5); }
+
+/* Gran Bazar: a board game on the table */
+.gb-board { box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 7px #6b452a, 0 0 0 8px #3c2414, 0 24px 40px -22px rgba(40, 24, 10, .65); }
+.gb-mid { background: url(a/felt.jpg) 0 0 / 200px, radial-gradient(90% 80% at 50% 45%, #fbf6fe, #eee0f7 70%, #e0cdee); background-blend-mode: soft-light;
+  box-shadow: inset 0 0 0 1px rgba(120, 90, 150, .45), inset 0 8px 16px -8px rgba(60, 40, 80, .4); }
+.gb-cell { background: linear-gradient(160deg, #fffdf8, #f8f0e2); }
+
+/* Gratta e scopri: a ticket of thick paper */
+.gv-card { background: url(a/felt.jpg) 0 0 / 260px, linear-gradient(160deg, #fffdf8, #f5ebf8); background-blend-mode: soft-light;
+  box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 5px #fffaf0, 0 0 0 6px rgba(201, 164, 105, .45), 0 3px 0 6px #d9ccb6, 0 30px 40px -20px rgba(60, 40, 70, .6); }
+.gv-area { box-shadow: inset 0 0 0 1px rgba(120, 100, 140, .55), inset 0 3px 8px rgba(60, 40, 80, .35); }
+
+/* Trova le differenze: two framed prints */
+.td-pic { box-shadow: 0 0 0 1.5px #e3c88f, 0 0 0 6px #6b452a, 0 0 0 7px #3c2414, 0 18px 26px -14px rgba(40, 24, 10, .65); }
+.td-pic::after { content: ""; position: absolute; inset: 0; z-index: 4; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(40, 24, 10, .5), inset 0 5px 10px -5px rgba(20, 10, 0, .55);
+  background: linear-gradient(125deg, rgba(255, 255, 255, .16) 0, rgba(255, 255, 255, 0) 32%); }
 </style>
 </head>
 <body>
@@ -13998,8 +14050,9 @@ a.gp-tile { text-decoration: none; }
     c.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.W = W; g.H = H; g.R = Math.max(13, W * .062);
     const gr = c.createLinearGradient(0, 0, W, H);
-    gr.addColorStop(0, '#f4eef7'); gr.addColorStop(.42, '#ddd2e8'); gr.addColorStop(.5, '#f8f3fa'); gr.addColorStop(.58, '#dcd0e7'); gr.addColorStop(1, '#efe7f3');
+    gr.addColorStop(0, '#eef0f4'); gr.addColorStop(.2, '#c3c8d2'); gr.addColorStop(.38, '#f6f7fa'); gr.addColorStop(.5, '#b4bac6'); gr.addColorStop(.64, '#f1f2f6'); gr.addColorStop(.82, '#bfc4cf'); gr.addColorStop(1, '#e6e8ee');
     c.fillStyle = gr; c.fillRect(0, 0, W, H);
+    for (let k = 0; k < 1500; k++) { c.fillStyle = k % 2 ? 'rgba(255,255,255,.28)' : 'rgba(70,76,92,.16)'; c.fillRect(Math.random() * W, Math.random() * H, 1 + Math.random() * 2.4, .7); }
     for (let k = 0; k < 70; k++) { c.fillStyle = 'rgba(255,255,255,' + (.35 + Math.random() * .5).toFixed(2) + ')'; const s = .8 + Math.random() * 1.8; c.fillRect(Math.random() * W, Math.random() * H, s, s); }
     const fam = getComputedStyle(document.body).getPropertyValue('--font-display') || 'serif';
     for (let i = 0; i < 9; i++) {
