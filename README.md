@@ -4,19 +4,19 @@ Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima cart
 
 Gioca qui: https://napoli1984.github.io/Handemiyy-/
 
-Nel **Bowling** si gioca dieci turni su una pista dorata, in una sala con le foto di Hande alle pareti: ogni birillo che cade scopre un po' della foto in fondo alla pista, e con uno strike o uno spare la foto si scopre tutta. Si gioca da soli, in due sullo stesso telefono oppure online.
+Nel **Bowling**, in 3D, si gioca dieci turni su una pista dorata, in una galleria con le foto di Hande alle pareti: ogni birillo che cade scopre un po' della foto in fondo alla pista, e con uno strike o uno spare la foto si scopre tutta. La telecamera segue la palla fino ai birilli, e gli strike di fila diventano doppio e tacchino. Si gioca da soli, contro Sofia, Marco o Elif, in due sullo stesso telefono oppure online.
 
 Per Memory e Ultima carta si può scegliere tra dieci **modelli di carte** (Avorio, Damasco, Art déco, Marmo, Classico, Polaroid, Cipria, Notte, Nazar e Oro, il premio della caccia al tesoro).
 
-Nella **Ruota della fortuna** si gira la ruota, si scelgono le consonanti, si comprano le vocali e si indovina la frase: le frasi parlano del mondo di Hande, di proverbi, film, canzoni, città e della Turchia. Ogni frase indovinata regala una foto di Hande, e chi vince gioca il gran finale. Si gioca contro la Volpe e il Gatto, in due sullo stesso telefono oppure online.
+Nella **Ruota della fortuna** si gira la ruota, si scelgono le consonanti, si comprano le vocali e si indovina la frase: le frasi parlano del mondo di Hande, di proverbi, film, canzoni, città e della Turchia. Ogni frase indovinata regala una foto di Hande, e chi vince gioca il gran finale. Si gioca contro Marco e Sofia, in due sullo stesso telefono oppure online.
 
 Nella **Collana di perle** si scambiano le gemme vicine per allinearne tre uguali: sotto c'è una foto di Hande coperta da un velo di perle, e ogni gemma allineata ne toglie un pezzo. Quattro in fila fanno un filo di perle, una L o una T una spilla, cinque un diamante. Dieci livelli, e ogni foto scoperta è tua.
 
 In **Trova le differenze** ci sono due foto di Hande quasi uguali: nella seconda ci sono cinque differenze da trovare prima che finisca il tempo (facile, normale o difficile). Trovale tutte e la foto è tua.
 
-La **Scopa** si gioca con le carte napoletane, e i Fanti, i Cavalli e i Re hanno il ritratto di Hande: contro la Volpe, il Gatto e la Civetta (in quattro si gioca in coppia) oppure online con gli amici. Ogni scopa regala una foto di Hande, e si arriva a 11 punti.
+La **Scopa** si gioca con le carte napoletane, e i Fanti, i Cavalli e i Re hanno il ritratto di Hande: contro Marco, Sofia ed Elif (in quattro si gioca in coppia) oppure online con gli amici. Ogni scopa regala una foto di Hande, e si arriva a 11 punti.
 
-La **Tavla** è il backgammon come si gioca in Turchia, con perle bianche contro perle nere: contro il Gatto, la Volpe o la Civetta, a 1, 3 o 5 punti, oppure online in due (gli altri amici nella stanza guardano). Ogni partita vinta regala una foto di Hande, il mars due.
+La **Tavla** è il backgammon come si gioca in Turchia, con perle bianche contro perle nere: contro Sofia, Marco o Elif, a 1, 3 o 5 punti, oppure online in due (gli altri amici nella stanza guardano). Ogni partita vinta regala una foto di Hande, il mars due.
 
 Il **Tennis 3D** si gioca nella pagina `tennis/`: Handemiyy sfida cinque rivali (Lia, Sofia, Maya, Elif e Regina) sul campo blu del club, con l'arbitro sulla sedia e il pubblico in tribuna. Ci si muove trascinando il dito e si colpisce premendo **Colpo** al momento giusto; chi vince alza la coppa, e ogni partita vinta regala una bustina per l'album.
 
