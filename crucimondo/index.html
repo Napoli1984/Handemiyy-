@@ -1,0 +1,2538 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Crucimondo, il cruciverba di Handemiyy in italiano e in turco: 14 mondi a tema, il cruciverba del giorno, sfide con le emoji e le parole turche, e una bustina per l'album di Hande a ogni cruciverba nuovo.">
+<meta name="theme-color" content="#fbeee6">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<script>window.HM_ALBUM="../";</script>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Crucimondo · Handemiyy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Fredoka:wght@500;600;700&display=swap">
+<style>
+/* Layout: a one-screen game over an illustrated scene that changes with each world. Home scrolls one column
+   (logo, daily card, special games, world cards); a world is a climbing path of six levels; play stacks header,
+   secret word, board, clue bar and keyboard, with the clue list beside the board on wide screens. One light look, by choice. */
+:root {
+  --ink: #1c2541; --ink-2: #4b5675; --ink-3: #8b93aa;
+  --tile: #fffcf5; --tile-2: #efe6d6; --edge: rgba(96, 74, 40, .17);
+  --glass: rgba(255, 255, 255, .82); --glass-2: rgba(255, 255, 255, .5); --line: rgba(255, 255, 255, .9);
+  --gold: #f3b931; --gold-2: #ffe7a6; --gold-d: #875700; --warn: #f29b38; --warn-l: #ffe3c2;
+  --acc: #4d7de0; --acc-d: #3460c0; --acc-l: #e2eaff;
+  --sh: 28 37 65;
+  --f-display: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --f-ui: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+html { height: 100%; box-sizing: border-box; background: #fbeee6; }
+*, *::before, *::after { box-sizing: inherit; }
+[hidden] { display: none !important; }
+body { height: 100%; margin: 0; overflow: hidden; background: #fbeee6; color: var(--ink); font: 500 15px/1.4 var(--f-ui); -webkit-tap-highlight-color: transparent; }
+button { font: inherit; color: inherit; }
+button:focus-visible, .cell:focus-visible { outline: 3px solid var(--acc-d); outline-offset: 2px; }
+.i { width: 22px; height: 22px; flex: none; }
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+#app { position: relative; z-index: 1; height: 100%; }
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* ---------- shared pieces ---------- */
+.chip { height: 40px; min-width: 40px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); display: inline-flex; align-items: center; justify-content: center; gap: 6px; font: 600 16px/1 var(--f-display); color: var(--ink); box-shadow: 0 8px 18px -12px rgba(var(--sh) / .5); cursor: pointer; font-variant-numeric: tabular-nums; }
+.chip .i { width: 21px; height: 21px; }
+.chip.coins { cursor: default; }
+#play .chip.coins { padding: 0 11px 0 8px; gap: 5px; }
+.chip.bump { animation: bump .45s ease; }
+@keyframes bump { 35% { transform: scale(1.14); } }
+.icon-btn { width: 42px; height: 42px; flex: none; border-radius: 50%; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); display: grid; place-items: center; color: var(--ink); box-shadow: 0 8px 18px -12px rgba(var(--sh) / .5); cursor: pointer; position: relative; }
+.bar { flex: none; display: flex; align-items: center; gap: 10px; padding-block: 12px 8px; }
+.titles { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.titles b { font: 600 20px/1.15 var(--f-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.titles small { font: 600 13px/1.3 var(--f-ui); color: var(--ink-2); display: flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums; }
+.titles small .i { width: 16px; height: 16px; }
+#pSubL { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#pClock { flex: none; }
+.btn { border: 0; border-radius: 999px; padding: 13px 22px; font: 600 17px/1 var(--f-display); cursor: pointer; background: linear-gradient(180deg, var(--acc), var(--acc-d)); color: #fff; box-shadow: 0 4px 0 rgba(var(--sh) / .22), 0 12px 22px -12px var(--acc-d); touch-action: manipulation; }
+.btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(var(--sh) / .22); }
+.btn.soft { background: var(--acc-l); color: var(--acc-d); box-shadow: 0 3px 0 rgba(var(--sh) / .12); }
+.btn.gold { background: linear-gradient(180deg, #ffd765, var(--gold)); color: var(--gold-d); box-shadow: 0 4px 0 #c98b12, 0 12px 22px -12px #c98b12; }
+
+/* ---------- home ---------- */
+#home { overflow-y: auto; -webkit-overflow-scrolling: touch; padding-block: 14px 30px; }
+.wrap { width: 100%; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.logo { display: flex; flex-direction: column; gap: 5px; padding-top: 2px; }
+.logo .lr { display: flex; gap: 4px; }
+.logo .lr + .lr { margin-left: 24px; }
+.lt { --r: 0deg; width: 33px; height: 37px; border-radius: 9px; display: grid; place-items: center; font: 600 22px/1 var(--f-display); color: var(--ink); background: linear-gradient(180deg, #fff, var(--tile) 55%, var(--tile-2)); box-shadow: inset 0 -3px 0 var(--edge), 0 3px 0 rgba(120, 96, 60, .2), 0 8px 14px -8px rgba(var(--sh) / .5); transform: rotate(var(--r)); animation: bob 4s ease-in-out infinite; }
+.lt.g { background: linear-gradient(180deg, #fff3cc, var(--gold-2) 45%, var(--gold)); color: var(--gold-d); }
+.lt.a { background: linear-gradient(180deg, #8fb2ff, var(--acc)); color: #fff; }
+@keyframes bob { 50% { transform: translateY(-3px) rotate(var(--r)); } }
+.chips { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+.tagline { margin: -4px 0 0; max-width: 34em; font: 600 16px/1.45 var(--f-ui); color: var(--ink-2); text-wrap: pretty; }
+.sec-t { margin: 4px 0 -6px; font: 600 21px/1.2 var(--f-display); color: var(--ink); text-wrap: balance; }
+
+.daily { width: 100%; border: 1px solid var(--line); border-radius: 26px; padding: 14px; display: flex; align-items: center; gap: 14px; text-align: left; cursor: pointer; background: linear-gradient(135deg, rgba(255, 255, 255, .93), rgba(255, 246, 228, .9)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 22px 40px -26px rgba(var(--sh) / .65); }
+.cal { flex: none; width: 66px; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 2px 0 rgba(120, 96, 60, .18), 0 10px 18px -10px rgba(var(--sh) / .5); text-align: center; }
+.cal i { display: block; font: 700 11px/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: #fff; padding: 6px 0 5px; background: linear-gradient(180deg, #f8b84a, #e28e1c); font-style: normal; }
+.cal b { display: block; font: 600 34px/1 var(--f-display); padding: 7px 0 9px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.d-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.d-txt b { font: 600 19px/1.15 var(--f-display); }
+.d-txt small { font: 600 13px/1.3 var(--f-ui); color: var(--ink-2); }
+.week { display: flex; gap: 5px; }
+.week span { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 700 10.5px/1 var(--f-ui); color: var(--ink-3); background: rgba(28, 37, 65, .06); }
+.week span.on { background: linear-gradient(180deg, var(--gold-2), var(--gold)); color: var(--gold-d); }
+.week span.now { box-shadow: 0 0 0 2px #e28e1c; color: var(--ink); }
+.d-go { flex: none; align-self: center; padding: 11px 16px; border-radius: 999px; font: 600 16px/1 var(--f-display); color: #fff; background: linear-gradient(180deg, #f8b84a, #e28e1c); box-shadow: 0 3px 0 #b86d12; white-space: nowrap; }
+.d-go.done { background: #eef0f4; color: var(--ink-2); box-shadow: none; }
+
+.modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.mode { border: 1px solid var(--line); border-radius: 22px; padding: 12px 11px 11px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; cursor: pointer; background: var(--glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 16px 30px -24px rgba(var(--sh) / .7); min-width: 0; }
+.mode svg { width: 42px; height: 42px; }
+.mode b { font: 600 16px/1.15 var(--f-display); }
+.mode small { font: 500 12.5px/1.3 var(--f-ui); color: var(--ink-2); }
+.mode em { margin-top: auto; font: 700 11.5px/1 var(--f-ui); font-style: normal; color: var(--ink-3); letter-spacing: .02em; }
+
+.worlds { display: grid; grid-template-columns: repeat(auto-fill, minmax(156px, 1fr)); gap: 12px; }
+.wcard { --c: var(--acc); --cd: var(--acc-d); position: relative; border: 0; padding: 0; border-radius: 22px; overflow: hidden; background: #fff; text-align: left; cursor: pointer; box-shadow: 0 0 0 1px rgba(255, 255, 255, .9), 0 16px 30px -22px rgba(var(--sh) / .75); display: flex; flex-direction: column; }
+.wcard canvas { display: block; width: 100%; aspect-ratio: 16 / 10; max-width: 100%; }
+.wcard .wt { padding: 9px 12px 12px; display: flex; flex-direction: column; gap: 7px; }
+.wcard b { font: 600 17px/1.15 var(--f-display); color: var(--ink); }
+.wmeta { display: flex; align-items: center; gap: 5px; font: 700 12.5px/1 var(--f-ui); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.wmeta .i { width: 15px; height: 15px; }
+.wmeta .cr { margin-left: auto; color: var(--gold-d); }
+.wbar { height: 6px; border-radius: 9px; background: #eef0f4; overflow: hidden; }
+.wbar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--c), var(--cd)); }
+.backlink { align-self: flex-start; display: inline-flex; align-items: center; gap: 3px; margin-bottom: -6px; padding: 6px 13px 6px 7px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 8px 18px -12px rgba(var(--sh) / .5); font: 600 14px/1 var(--f-ui); color: var(--ink-2); text-decoration: none; }
+.backlink .i { width: 18px; height: 18px; }
+.packlink { width: 100%; display: flex; align-items: center; gap: 13px; padding: 10px 14px; border-radius: 18px; text-align: left; text-decoration: none; background: linear-gradient(135deg, #fff8e2, #ffe6a6); box-shadow: inset 0 0 0 1.5px #efc35a, 0 12px 22px -16px #c98b12; animation: rise .5s .5s cubic-bezier(.2, .9, .3, 1.25) both; }
+.packlink .pk-ic { flex: none; width: 38px; height: 46px; border-radius: 7px; display: grid; place-items: center; transform: rotate(-7deg); font: italic 700 22px/1 Georgia, 'Times New Roman', serif; color: #a87412; background: linear-gradient(160deg, #fffdf6, #f3d993); box-shadow: inset 0 0 0 1.5px #dcae48, 0 4px 8px -4px rgba(150, 100, 20, .6); }
+.packlink .pk-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.packlink b { font: 600 17px/1.15 var(--f-display); color: var(--ink); }
+.packlink small { font: 700 12.5px/1.2 var(--f-ui); color: var(--gold-d); }
+.foot { margin: 6px 0 0; font: 500 12.5px/1.5 var(--f-ui); color: var(--ink-2); max-width: 40em; }
+
+/* ---------- world: a path of six levels ---------- */
+.wscroll { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 24px; }
+.path { position: relative; width: min(420px, 100%); margin: 0 auto; }
+.trail { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+.node { position: absolute; width: 82px; height: 82px; margin: -41px 0 0 -41px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; display: grid; place-items: center; color: #fff; background: radial-gradient(ellipse 46% 34% at 38% 24%, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0)), linear-gradient(180deg, var(--acc), var(--acc-d)); box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .12), 0 0 0 6px rgba(255, 255, 255, .9), 0 16px 26px -12px var(--acc-d); }
+.node b { font: 700 34px/1 var(--f-display); text-shadow: 0 2px 0 var(--acc-d), 0 0 10px rgba(0, 0, 0, .12); }
+.node.done { background: radial-gradient(ellipse 46% 34% at 38% 24%, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0)), linear-gradient(180deg, #ffd45e, #e3a01c); }
+.node.done b { color: #fff; text-shadow: 0 2px 0 #a86f05, 0 0 10px rgba(120, 70, 0, .2); }
+.node.lock { cursor: default; color: var(--ink-3); background: radial-gradient(circle at 34% 28%, #fff, #eceaf1 60%, #d9d6e2); box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .06), 0 0 0 6px rgba(255, 255, 255, .75); }
+.node.lock .i { width: 26px; height: 26px; }
+.node.next::after { content: ""; position: absolute; inset: -14px; border-radius: 50%; border: 3px solid var(--acc); opacity: .6; animation: ring 1.8s ease-out infinite; }
+@keyframes ring { 0% { transform: scale(.82); opacity: .7; } 100% { transform: scale(1.12); opacity: 0; } }
+.node .st { position: absolute; top: 100%; left: 50%; transform: translate(-50%, 12px); display: flex; gap: 1px; }
+.node .st .i { width: 19px; height: 19px; }
+.node .tag { position: absolute; top: 50%; transform: translateY(-50%); white-space: nowrap; padding: 6px 10px; border-radius: 999px; background: var(--glass); border: 1px solid var(--line); font: 700 12.5px/1 var(--f-ui); color: var(--ink-2); box-shadow: 0 8px 16px -12px rgba(var(--sh) / .6); }
+.node .tag.r { left: calc(100% + 16px); }
+.node .tag.l { right: calc(100% + 16px); }
+.node .tag em { font-style: normal; color: var(--acc-d); }
+
+/* ---------- play ---------- */
+.pbody { flex: 1; min-height: 0; display: flex; gap: 22px; justify-content: center; }
+.pmain { flex: 1; min-width: 0; max-width: 600px; display: flex; flex-direction: column; gap: 8px; padding-bottom: 6px; }
+.pside { display: none; width: 330px; flex: none; align-self: flex-start; max-height: calc(100% - 14px); overflow-y: auto; padding: 8px 8px 14px; border-radius: 24px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 18px 36px -26px rgba(var(--sh) / .6); }
+.hintbtn { color: #9a6400; background: linear-gradient(180deg, #fff8dd, #ffe7a3); }
+.hintbtn .badge { position: absolute; top: -3px; right: -3px; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px; background: var(--acc); color: #fff; font: 700 11px/19px var(--f-ui); text-align: center; font-style: normal; box-shadow: 0 0 0 2px #fff; }
+
+.secret { flex: none; display: flex; align-items: center; gap: 10px; padding: 7px 10px 7px 13px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 10px 22px -18px rgba(var(--sh) / .6); cursor: pointer; text-align: left; width: 100%; }
+.sx-l { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.sx-l b { font: 700 11.5px/1.2 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--acc-d); }
+.sx-l span { font: 600 13px/1.25 var(--f-ui); color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sx-l span.emo { font-size: 20px; line-height: 1.15; }
+.sx-s { flex: none; display: flex; gap: 4px; }
+.sx-s i { width: 27px; height: 27px; border-radius: 50%; display: grid; place-items: center; font: 600 15px/1 var(--f-display); font-style: normal; color: var(--ink); background: #fff; box-shadow: inset 0 0 0 2px var(--acc-l), 0 2px 0 rgba(var(--sh) / .08); }
+.sx-s i.ok { background: linear-gradient(180deg, var(--gold-2), var(--gold)); color: var(--gold-d); box-shadow: 0 2px 0 #c98b12; }
+.sx-s i.cur { box-shadow: inset 0 0 0 2px var(--acc); }
+.secret.long .sx-s { gap: 3px; }
+.secret.long .sx-s i { width: 24px; height: 24px; font-size: 13.5px; }
+.secret.guess { box-shadow: 0 0 0 3px var(--acc), 0 10px 22px -18px rgba(var(--sh) / .6); }
+.secret.won .sx-l b { color: var(--gold-d); }
+.secret.no { animation: shake .45s; }
+
+.stage { flex: 1; min-height: 0; position: relative; }
+.board { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 22px; background: rgba(255, 255, 255, .3); border: 1px solid rgba(255, 255, 255, .78); -webkit-backdrop-filter: blur(8px) saturate(1.15); backdrop-filter: blur(8px) saturate(1.15); box-shadow: 0 26px 50px -32px rgba(var(--sh) / .7), inset 0 1px 0 rgba(255, 255, 255, .6); touch-action: manipulation; }
+.cell { --t: 32px; position: absolute; width: var(--t); height: var(--t); border-radius: calc(var(--t) * .22); display: grid; place-items: center; cursor: pointer; user-select: none; -webkit-user-select: none; font: 600 calc(var(--t) * .56)/1 var(--f-display); color: var(--ink); background: linear-gradient(180deg, #fff 0%, var(--tile) 55%, var(--tile-2) 100%); box-shadow: inset 0 -2px 0 var(--edge), 0 2px 0 rgba(120, 96, 60, .2), 0 7px 10px -7px rgba(var(--sh) / .5); transition: transform .14s ease, background .18s ease, color .18s ease; }
+.cell .n { position: absolute; left: 11%; top: 8%; font: 800 calc(var(--t) * .2)/1 var(--f-ui); color: rgba(28, 37, 65, .48); }
+.cell .l { display: block; }
+.cell.giv { color: var(--ink-2); background: linear-gradient(180deg, #fbf8f2, #ece4d4); }
+.cell.hin { color: var(--acc-d); }
+.cell.w { background: linear-gradient(180deg, #fff, var(--acc-l)); }
+.cell.ok { color: var(--gold-d); background: linear-gradient(180deg, #fff5d6 0%, var(--gold-2) 48%, var(--gold) 100%); box-shadow: inset 0 -2px 0 rgba(150, 92, 0, .25), 0 2px 0 rgba(160, 104, 10, .35), 0 7px 10px -7px rgba(160, 104, 10, .6); }
+.cell.ok .n { color: rgba(135, 87, 0, .6); }
+.cell.w.ok { box-shadow: 0 0 0 2px var(--acc), 0 2px 0 rgba(160, 104, 10, .35); }
+.cell.c { z-index: 2; color: #fff; transform: translateY(-2px) scale(1.06); background: linear-gradient(180deg, var(--acc), var(--acc-d)); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .14), 0 3px 0 rgba(var(--sh) / .2), 0 10px 16px -8px var(--acc-d); }
+.cell.c .n { color: rgba(255, 255, 255, .78); }
+.cell.c.ok { color: var(--gold-d); background: linear-gradient(180deg, #fff5d6, var(--gold-2) 48%, var(--gold)); box-shadow: 0 0 0 3px var(--acc), 0 10px 16px -8px var(--acc-d); }
+.cell.sec::before { content: ""; position: absolute; inset: 10%; border-radius: 50%; border: 2px solid var(--acc); opacity: .5; pointer-events: none; }
+.cell.c.sec::before { border-color: #fff; opacity: .75; }
+.cell.ok.sec::before { border-color: var(--gold-d); opacity: .45; }
+.cell.bad { animation: shake .45s ease; color: #8a4b00; background: linear-gradient(180deg, #fff, var(--warn-l)); box-shadow: 0 0 0 2px var(--warn), 0 7px 10px -7px rgba(var(--sh) / .5); }
+.cell.bad .n { color: rgba(138, 75, 0, .55); }
+.cell.pop .l { animation: pop .22s ease; }
+.cell.flip { animation: flip .5s ease both; }
+.plus { position: absolute; z-index: 5; pointer-events: none; transform: translate(-50%, -50%); font: 700 19px/1 var(--f-display); color: var(--gold-d); text-shadow: 0 1px 0 #fff, 0 0 8px #fff; white-space: nowrap; animation: plus 1s ease-out forwards; }
+@keyframes plus { 0% { transform: translate(-50%, -30%) scale(.5); opacity: 0; } 20% { transform: translate(-50%, -90%) scale(1.15); opacity: 1; } 100% { transform: translate(-50%, -190%) scale(1); opacity: 0; } }
+@keyframes pop { 0% { transform: scale(.4); } 70% { transform: scale(1.15); } }
+@keyframes flip { 0% { transform: rotateX(0); } 50% { transform: rotateX(90deg) scale(.96); } 100% { transform: rotateX(0); } }
+@keyframes shake { 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(3px); } }
+
+.cluebar { flex: none; display: flex; align-items: stretch; gap: 6px; min-height: 58px; }
+.cb-nav { width: 40px; flex: none; border-radius: 16px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); display: grid; place-items: center; cursor: pointer; color: var(--acc-d); }
+.cb-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 10px 22px -18px rgba(var(--sh) / .6); text-align: left; cursor: pointer; }
+.cb-tag { flex: none; padding: 5px 8px; border-radius: 10px; background: linear-gradient(180deg, var(--acc), var(--acc-d)); color: #fff; font: 600 15px/1 var(--f-display); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cluebar.done .cb-tag { background: linear-gradient(180deg, #ffd765, var(--gold)); color: var(--gold-d); }
+.cb-txt { min-width: 0; font: 600 15.5px/1.28 var(--f-ui); color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cb-txt.emo { font-size: 30px; line-height: 1.15; }
+.cb-txt.word { font: 600 19px/1.2 var(--f-display); }
+.en { margin-left: 6px; font: 700 12.5px/1 var(--f-ui); letter-spacing: .02em; color: var(--ink-3); white-space: nowrap; vertical-align: .12em; }
+
+.kb { flex: none; display: flex; flex-direction: column; gap: 6px; padding: 8px 6px 6px; margin-inline: -8px; border-radius: 20px; background: var(--glass-2); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .6); }
+.krow { display: flex; gap: 5px; justify-content: center; }
+.key { flex: 1 1 0; max-width: 46px; min-width: 0; height: clamp(40px, 6.2vh, 50px); padding: 0; border: 0; border-radius: 10px; cursor: pointer; touch-action: manipulation; font: 600 clamp(17px, 2.6vh, 21px)/1 var(--f-display); color: var(--ink); background: linear-gradient(180deg, #fff, #f6f2ea); box-shadow: 0 2px 0 rgba(var(--sh) / .2), 0 5px 10px -7px rgba(var(--sh) / .45); }
+.key.fn { flex: 1.45 1 0; max-width: 66px; color: var(--acc-d); background: linear-gradient(180deg, #fff, var(--acc-l)); display: grid; place-items: center; }
+.key.down { transform: translateY(2px); box-shadow: 0 0 0 rgba(var(--sh) / .2); background: var(--acc-l); }
+
+/* ---------- overlays ---------- */
+.hintpop { position: fixed; z-index: 30; right: max(16px, env(safe-area-inset-right, 0px)); top: calc(66px + env(safe-area-inset-top, 0px)); width: min(310px, calc(100% - 32px)); padding: 10px; border-radius: 22px; background: rgba(255, 255, 255, .97); box-shadow: 0 24px 50px -24px rgba(var(--sh) / .7), 0 0 0 1px rgba(var(--sh) / .06); display: flex; flex-direction: column; gap: 6px; }
+.hintpop button { display: flex; align-items: center; gap: 11px; width: 100%; padding: 12px; border: 0; border-radius: 15px; background: var(--acc-l); text-align: left; cursor: pointer; font: 600 16px/1.2 var(--f-display); color: var(--ink); }
+.hp-ic { flex: none; min-width: 34px; height: 34px; padding: 0 6px; border-radius: 9px; display: grid; place-items: center; font: 600 17px/1 var(--f-display); color: var(--gold-d); background: linear-gradient(180deg, #fff5d6, var(--gold-2) 50%, var(--gold)); }
+.hp-t { flex: 1; min-width: 0; }
+.cost { flex: none; display: inline-flex; align-items: center; gap: 4px; font: 700 15px/1 var(--f-ui); color: var(--gold-d); font-variant-numeric: tabular-nums; }
+.cost .i { width: 18px; height: 18px; }
+.cost.free { color: var(--acc-d); }
+.hintpop p { margin: 2px 6px 0; font: 500 12.5px/1.4 var(--f-ui); color: var(--ink-2); }
+
+.sheet { position: fixed; inset: 0; z-index: 40; display: flex; align-items: flex-end; justify-content: center; background: rgba(28, 37, 65, .3); }
+.sheet-card { width: min(600px, 100%); max-height: 80%; display: flex; flex-direction: column; border-radius: 26px 26px 0 0; background: #fffdf9; box-shadow: 0 -20px 40px -20px rgba(var(--sh) / .5); padding: 14px max(16px, env(safe-area-inset-left, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-right, 0px)); animation: up .28s cubic-bezier(.2, .9, .3, 1); }
+@keyframes up { from { transform: translateY(40px); opacity: 0; } }
+.sheet-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 6px; }
+.sheet-top b { font: 600 20px/1.2 var(--f-display); }
+.cl-wrap { overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.cl h3 { margin: 6px 4px 4px; font: 700 12px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--acc-d); }
+.cl button { display: flex; align-items: baseline; gap: 10px; width: 100%; padding: 9px 10px; border: 0; border-radius: 13px; background: transparent; text-align: left; cursor: pointer; font: 500 15px/1.35 var(--f-ui); color: var(--ink); }
+.cl button.on { background: var(--acc-l); }
+.cl .num { flex: none; min-width: 24px; font: 600 15px/1 var(--f-display); color: var(--acc-d); font-variant-numeric: tabular-nums; }
+.cl .tx { flex: 1; min-width: 0; }
+.cl .tx.emo { font-size: 24px; line-height: 1.1; }
+.cl .tx.word { font: 600 16px/1.3 var(--f-display); }
+.cl .ans { flex: none; font: 600 13px/1 var(--f-display); letter-spacing: .06em; color: var(--gold-d); background: linear-gradient(180deg, #fff5d6, var(--gold-2)); padding: 5px 7px; border-radius: 8px; }
+.cl button.done .tx { color: var(--ink-3); }
+
+.end, .coach { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: rgba(28, 37, 65, .28); }
+.end-card, .coach-card { width: min(380px, 100%); max-height: 100%; overflow-y: auto; border-radius: 30px; background: #fffdf8; padding: 22px 20px 18px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; box-shadow: 0 34px 70px -30px rgba(var(--sh) / .8); animation: rise .5s cubic-bezier(.2, .9, .3, 1.25); }
+@keyframes rise { from { transform: translateY(30px) scale(.94); opacity: 0; } }
+.e-stars { display: flex; align-items: flex-end; gap: 4px; margin-top: 2px; }
+.e-stars .i { width: 54px; height: 54px; opacity: .25; transform: scale(.6); transition: transform .35s cubic-bezier(.2, .9, .3, 1.6), opacity .2s; }
+.e-stars .i:nth-child(2) { width: 68px; height: 68px; }
+.e-stars .i.on { opacity: 1; transform: scale(1); }
+.end-card h2 { margin: 0; font: 600 30px/1.1 var(--f-display); color: var(--ink); text-wrap: balance; }
+.e-sub { margin: -4px 0 0; font: 600 14px/1.4 var(--f-ui); color: var(--ink-2); }
+.e-secret { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.e-secret small { font: 700 11.5px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--acc-d); }
+.e-secret .tiles { display: flex; gap: 4px; }
+.e-secret .tiles i { width: 30px; height: 33px; border-radius: 8px; display: grid; place-items: center; font: 600 18px/1 var(--f-display); font-style: normal; color: var(--gold-d); background: linear-gradient(180deg, #fff5d6, var(--gold-2) 48%, var(--gold)); box-shadow: 0 2px 0 #c98b12; }
+.e-stats { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.e-stats div { border-radius: 16px; background: #f6f2ea; padding: 10px 6px; display: flex; flex-direction: column; gap: 5px; }
+.e-stats small { font: 700 11px/1.2 var(--f-ui); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
+.e-stats b { font: 600 21px/1 var(--f-display); color: var(--ink); font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.e-stats b .i { width: 19px; height: 19px; }
+.e-btns { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-top: 2px; }
+.e-btns .row { display: flex; gap: 8px; }
+.e-btns .row .btn { flex: 1; }
+.coach-art { display: flex; gap: 4px; }
+.coach-card p { margin: 0; font: 600 15.5px/1.5 var(--f-ui); color: var(--ink-2); }
+
+.toast { position: fixed; z-index: 60; left: 50%; top: calc(74px + env(safe-area-inset-top, 0px)); transform: translate(-50%, -8px); max-width: calc(100% - 32px); padding: 10px 17px; border-radius: 999px; background: var(--ink); color: #fff; font: 600 15px/1.25 var(--f-display); text-align: center; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; box-shadow: 0 14px 30px -16px rgba(var(--sh) / .8); }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+.toast.gold { background: linear-gradient(180deg, #ffe39b, var(--gold)); color: var(--gold-d); }
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 55; pointer-events: none; }
+
+@media (min-width: 980px) and (min-height: 620px) {
+  .pside { display: block; }
+  .kb { max-width: 560px; align-self: center; width: 100%; }
+}
+@media (max-height: 700px) {
+  .bar { padding-block: 8px 4px; }
+  .cluebar { min-height: 50px; }
+  .cb-txt { font-size: 14.5px; }
+  .secret { padding-block: 5px; }
+  .sx-s i { width: 24px; height: 24px; font-size: 13.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffeaa8"/><stop offset=".55" stop-color="#f6c23f"/><stop offset="1" stop-color="#df981a"/></linearGradient>
+    <linearGradient id="g-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#ffbf3a"/></linearGradient>
+  </defs>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.4" fill="url(#g-gold)" stroke="#c98510" stroke-width="1.2"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="#fff2c2" stroke-width="1.3" opacity=".9"/><path d="M12 7.8l1.25 2.6 2.85.4-2.07 2 .5 2.83L12 14.27l-2.53 1.36.5-2.83-2.07-2 2.85-.4z" fill="#fff6d8"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.4l2.95 5.98 6.6.96-4.78 4.65 1.13 6.57L12 17.46l-5.9 3.1 1.13-6.57-4.78-4.65 6.6-.96z" fill="url(#g-gold)" stroke="#cf8a10" stroke-width="1.1" stroke-linejoin="round"/></symbol>
+  <symbol id="i-star0" viewBox="0 0 24 24"><path d="M12 2.4l2.95 5.98 6.6.96-4.78 4.65 1.13 6.57L12 17.46l-5.9 3.1 1.13-6.57-4.78-4.65 6.6-.96z" fill="#ffffff" fill-opacity=".75" stroke="#c9c3d6" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M14.5 5.5L8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9.5 5.5L16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M12 2.8a6.6 6.6 0 0 0-3.9 11.9c.7.5 1.1 1.3 1.1 2.1v.6h5.6v-.6c0-.8.4-1.6 1.1-2.1A6.6 6.6 0 0 0 12 2.8z" fill="#ffd34d" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.6 19.6h4.8M10.6 22h2.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M10 9.2a2.4 2.4 0 0 1 2.2-2" fill="none" stroke="#fff8d6" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10.5" rx="2.8" fill="currentColor"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5" fill="none" stroke="currentColor" stroke-width="2.3"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.3h3.6L12.2 5v14l-4.6-4.3H4z" fill="currentColor"/><path d="M15.6 9a4.2 4.2 0 0 1 0 6M18.2 6.4a7.8 7.8 0 0 1 0 11.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.3h3.6L12.2 5v14l-4.6-4.3H4z" fill="currentColor"/><path d="M16 9.6l4.8 4.8M20.8 9.6L16 14.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-del" viewBox="0 0 24 24"><path d="M9 5.2h10.6a1.6 1.6 0 0 1 1.6 1.6v10.4a1.6 1.6 0 0 1-1.6 1.6H9L3.2 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9.4l5.2 5.2M17.2 9.4L12 14.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 8.5h13l-3.4-3.4M19 15.5H6l3.4 3.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 7h11M9 12h11M9 17h11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="4.6" cy="7" r="1.4" fill="currentColor"/><circle cx="4.6" cy="12" r="1.4" fill="currentColor"/><circle cx="4.6" cy="17" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.6v12.8a1 1 0 0 0 1.5.86l10-6.4a1 1 0 0 0 0-1.72l-10-6.4A1 1 0 0 0 8 5.6z" fill="currentColor"/></symbol>
+  <symbol id="m-emoji" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="url(#g-sun)" stroke="#e39b16" stroke-width="1.6"/><ellipse cx="17.5" cy="20" rx="2.4" ry="3.2" fill="#5b3a0a"/><ellipse cx="30.5" cy="20" rx="2.4" ry="3.2" fill="#5b3a0a"/><path d="M14.5 27.5c2.2 4.4 5.6 6.4 9.5 6.4s7.3-2 9.5-6.4z" fill="#5b3a0a"/><path d="M18 31.6c1.8 1.4 3.8 2 6 2s4.2-.6 6-2c-1.6-1.3-3.7-1.9-6-1.9s-4.4.6-6 1.9z" fill="#ff9fbf"/><circle cx="12.5" cy="26" r="2.4" fill="#ffb2a6" opacity=".7"/><circle cx="35.5" cy="26" r="2.4" fill="#ffb2a6" opacity=".7"/></symbol>
+  <symbol id="m-bi" viewBox="0 0 48 48"><rect x="2" y="6" width="29" height="21" rx="8" fill="#4d8fe0"/><path d="M8 27l-2 7 8-7z" fill="#4d8fe0"/><text x="16.5" y="20.8" text-anchor="middle" font-family="Fredoka, Trebuchet MS, sans-serif" font-weight="600" font-size="11" fill="#fff">Ciao</text><rect x="15" y="19" width="31" height="21" rx="8" fill="#13a3a0" stroke="#fff" stroke-width="1.5"/><path d="M40 40l2 6-8-6z" fill="#13a3a0"/><text x="30.5" y="33.6" text-anchor="middle" font-family="Fredoka, Trebuchet MS, sans-serif" font-weight="600" font-size="10.5" fill="#fff">Selam</text></symbol>
+  <symbol id="m-quick" viewBox="0 0 48 48"><rect x="20" y="3" width="8" height="5" rx="2" fill="#7b68dd"/><path d="M36.5 11.5l3 3" stroke="#7b68dd" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="27" r="17" fill="#fff" stroke="#7b68dd" stroke-width="3"/><path d="M26.6 14.5L18 29h6.2l-2.8 10.5L31 24.5h-6.4z" fill="#ffc83d" stroke="#d98e0f" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+</svg>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<main id="app">
+  <section id="home" class="screen" aria-labelledby="logoName">
+    <div class="wrap">
+      <a class="backlink" id="hHome" href="../" hidden><svg class="i" aria-hidden="true"><use href="#i-back"/></svg><span id="hHomeT"></span></a>
+      <div class="top">
+        <div class="logo" id="logo" role="img" aria-label="Crucimondo">
+          <span id="logoName" hidden>Crucimondo</span>
+          <div class="lr"><span class="lt" style="--r:-4deg">C</span><span class="lt" style="--r:3deg;animation-delay:-.6s">R</span><span class="lt a" style="--r:-2deg;animation-delay:-1.2s">U</span><span class="lt" style="--r:4deg;animation-delay:-1.8s">C</span><span class="lt" style="--r:-3deg;animation-delay:-2.4s">I</span></div>
+          <div class="lr"><span class="lt" style="--r:3deg;animation-delay:-.3s">M</span><span class="lt g" style="--r:-4deg;animation-delay:-.9s">O</span><span class="lt" style="--r:2deg;animation-delay:-1.5s">N</span><span class="lt" style="--r:-3deg;animation-delay:-2.1s">D</span><span class="lt g" style="--r:4deg;animation-delay:-2.7s">O</span></div>
+        </div>
+        <div class="chips">
+          <span class="chip coins" id="hCoins"><svg class="i" aria-hidden="true"><use href="#i-coin"/></svg><b class="coinsN">0</b></span>
+          <button type="button" class="chip" id="hLang"></button>
+          <button type="button" class="chip" id="hSound"></button>
+        </div>
+      </div>
+      <p class="tagline" id="tagline"></p>
+      <button type="button" class="daily" id="daily">
+        <span class="cal"><i id="dMon"></i><b id="dDay"></b></span>
+        <span class="d-txt"><b id="dTitle"></b><small id="dDate"></small><span class="week" id="dWeek"></span><small id="dStreak"></small></span>
+        <span class="d-go" id="dGo"></span>
+      </button>
+      <h2 class="sec-t" id="lblModes"></h2>
+      <div class="modes">
+        <button type="button" class="mode" id="mEmoji"><svg aria-hidden="true"><use href="#m-emoji"/></svg><b></b><small></small><em></em></button>
+        <button type="button" class="mode" id="mBi"><svg aria-hidden="true"><use href="#m-bi"/></svg><b></b><small></small><em></em></button>
+        <button type="button" class="mode" id="mQuick"><svg aria-hidden="true"><use href="#m-quick"/></svg><b></b><small></small><em></em></button>
+      </div>
+      <h2 class="sec-t" id="lblWorlds"></h2>
+      <div class="worlds" id="worlds"></div>
+      <p class="foot" id="foot"></p>
+    </div>
+  </section>
+
+  <section id="world" class="screen" hidden>
+    <header class="bar">
+      <button type="button" class="icon-btn" id="wBack"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></button>
+      <div class="titles"><b id="wTitle"></b><small id="wSub"></small></div>
+      <span class="chip coins"><svg class="i" aria-hidden="true"><use href="#i-coin"/></svg><b class="coinsN">0</b></span>
+    </header>
+    <div class="wscroll" id="wScroll"><div class="path" id="path"></div></div>
+  </section>
+
+  <section id="play" class="screen" hidden>
+    <header class="bar">
+      <button type="button" class="icon-btn" id="pBack"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></button>
+      <div class="titles"><b id="pTitle"></b><small id="pSub"><span id="pSubL"></span><span id="pClock"></span></small></div>
+      <span class="chip coins"><svg class="i" aria-hidden="true"><use href="#i-coin"/></svg><b class="coinsN">0</b></span>
+      <button type="button" class="icon-btn hintbtn" id="pHint"><svg class="i" aria-hidden="true"><use href="#i-bulb"/></svg><i class="badge" id="pFree" hidden>1</i></button>
+    </header>
+    <div class="pbody">
+      <div class="pmain">
+        <button type="button" class="secret" id="pSecret" hidden><span class="sx-l"><b id="sxTitle"></b><span id="sxHint"></span></span><span class="sx-s" id="sxSlots"></span></button>
+        <div class="stage" id="stage"><div class="board" id="board" aria-hidden="true"></div></div>
+        <div class="cluebar" id="clueBar">
+          <button type="button" class="cb-nav" id="cPrev"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></button>
+          <button type="button" class="cb-main" id="cMain" aria-live="polite"><span class="cb-tag" id="cTag"></span><span class="cb-txt" id="cTxt"></span></button>
+          <button type="button" class="cb-nav" id="cNext"><svg class="i" aria-hidden="true"><use href="#i-next"/></svg></button>
+        </div>
+        <div class="kb" id="kb"></div>
+      </div>
+      <aside class="pside" id="pSide"><div class="cl-wrap" id="sideList"></div></aside>
+    </div>
+  </section>
+</main>
+
+<div class="hintpop" id="hintPop" hidden>
+  <button type="button" id="hLetter"><span class="hp-ic">A</span><span class="hp-t" id="hLetterT"></span><span class="cost" id="hLetterC"></span></button>
+  <button type="button" id="hWord"><span class="hp-ic">ABC</span><span class="hp-t" id="hWordT"></span><span class="cost" id="hWordC"></span></button>
+  <button type="button" id="hList"><span class="hp-ic"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg></span><span class="hp-t" id="hListT"></span></button>
+  <p id="hNote"></p>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="shTitle">
+    <div class="sheet-top"><b id="shTitle"></b><button type="button" class="icon-btn" id="shClose"><svg class="i" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <div class="cl-wrap" id="clList"></div>
+  </div>
+</div>
+
+<div class="end" id="end" hidden>
+  <div class="end-card" role="dialog" aria-modal="true" aria-labelledby="eTitle">
+    <div class="e-stars" id="eStars"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg><svg class="i" aria-hidden="true"><use href="#i-star"/></svg><svg class="i" aria-hidden="true"><use href="#i-star"/></svg></div>
+    <h2 id="eTitle"></h2>
+    <p class="e-sub" id="eSub"></p>
+    <div class="e-secret" id="eSecret" hidden><small id="eSecretL"></small><span class="tiles" id="eSecretT"></span></div>
+    <div class="e-stats">
+      <div><small id="eL1"></small><b id="eV1"></b></div>
+      <div><small id="eL2"></small><b id="eV2"></b></div>
+      <div><small id="eL3"></small><b id="eV3"></b></div>
+    </div>
+    <a class="packlink" id="ePack" href="../" hidden><span class="pk-ic" aria-hidden="true">H</span><span class="pk-t"><b id="ePackT"></b><small id="ePackS"></small></span></a>
+    <div class="e-btns" id="eBtns"></div>
+  </div>
+</div>
+
+<div class="coach" id="coach" hidden>
+  <div class="coach-card" role="dialog" aria-modal="true" aria-labelledby="coachTxt">
+    <div class="coach-art" id="coachArt"></div>
+    <p id="coachTxt"></p>
+    <button type="button" class="btn" id="coachOk"></button>
+  </div>
+</div>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+/* ---- content.js ---- */
+/* Crucimondo: the fourteen worlds. Each row: Italian word, Italian clue, Turkish word, Turkish clue, emoji.
+   An empty word means that language skips the row (too short, or no good word). Italian is written without accents, as in crosswords. */
+const CM_THEMES = [
+{ id: "animali", it: "Animali", tr: "Hayvanlar", acc: "#36a266", accD: "#23804e", accL: "#dcf2e4", scene: "savana", w: [
+["GATTO", "Fa le fusa sul divano", "KEDİ", "Kanepede mırlayan ev dostu", "🐱"],
+["CANE", "Il migliore amico dell'uomo", "KÖPEK", "İnsanın en iyi dostu", "🐶"],
+["LEONE", "Il re della savana", "ASLAN", "Ormanlar kralı", "🦁"],
+["ELEFANTE", "Ha la proboscide e una memoria di ferro", "FİL", "Hortumlu dev hayvan", "🐘"],
+["GIRAFFA", "Ha il collo più lungo di tutti", "ZÜRAFA", "Boynu en uzun hayvan", "🦒"],
+["DELFINO", "Mammifero marino che salta tra le onde", "YUNUS", "Dalgalarda zıplayan deniz memelisi", "🐬"],
+["FARFALLA", "Prima di volare era un bruco", "KELEBEK", "Uçmadan önce tırtıldı", "🦋"],
+["TARTARUGA", "Porta la casa sulla schiena", "KAPLUMBAĞA", "Evini sırtında taşır", "🐢"],
+["APE", "Fa il miele", "ARI", "Bal yapan böcek", "🐝"],
+["SERPENTE", "Striscia e sibila", "YILAN", "Sürünerek ilerler, tıslar", "🐍"],
+["VOLPE", "Furba, con la coda folta", "TİLKİ", "Kurnazlığıyla bilinen hayvan", "🦊"],
+["LUPO", "Ulula alla luna", "KURT", "Aya uluyan hayvan", "🐺"],
+["ORSO", "Dorme tutto l'inverno", "AYI", "Kış boyunca uyur", "🐻"],
+["CONIGLIO", "Orecchie lunghe e passione per le carote", "TAVŞAN", "Uzun kulaklı, havuç sever", "🐰"],
+["CAVALLO", "Nitrisce e galoppa", "", "", "🐴"],
+["MUCCA", "Ci dà il latte", "İNEK", "Bize süt verir", "🐄"],
+["PECORA", "Ha la lana e bela", "KOYUN", "Yünü olan, meleyen hayvan", "🐑"],
+["MAIALE", "Si rotola nel fango", "DOMUZ", "Çamurda yuvarlanır", "🐷"],
+["GUFO", "Uccello notturno dai grandi occhi", "BAYKUŞ", "İri gözlü gece kuşu", "🦉"],
+["PINGUINO", "Uccello in frac che non vola", "PENGUEN", "Frak giymiş gibi duran, uçamayan kuş", "🐧"],
+["SQUALO", "Ha la pinna e tanti denti", "KÖPEKBALIĞI", "Keskin dişli deniz avcısı", "🦈"],
+["POLPO", "Ha otto tentacoli", "AHTAPOT", "Sekiz kollu deniz canlısı", "🐙"],
+["ZEBRA", "Cavallo a strisce", "ZEBRA", "Çizgili at", "🦓"],
+["SCIMMIA", "Si arrampica e mangia banane", "MAYMUN", "Ağaçlara tırmanır, muz sever", "🐒"],
+["COCCODRILLO", "Piange lacrime finte", "TİMSAH", "Sahte gözyaşı döken sürüngen", "🐊"],
+["PAPPAGALLO", "Ripete quello che sente", "PAPAĞAN", "Duyduğunu tekrar eden kuş", "🦜"],
+["CAMMELLO", "Ha le gobbe e attraversa il deserto", "DEVE", "Hörgüçlü çöl hayvanı", "🐪"],
+["SCOIATTOLO", "Nasconde le ghiande per l'inverno", "SİNCAP", "Kış için fındık saklar", "🐿️"],
+["RICCIO", "È tutto aculei", "KİRPİ", "Dikenli küçük hayvan", "🦔"],
+["CIGNO", "Elegante uccello bianco del lago", "KUĞU", "Gölün zarif beyaz kuşu", "🦢"],
+["FORMICA", "Piccola e laboriosa", "KARINCA", "Küçük ve çalışkan böcek", "🐜"],
+["LUMACA", "Lenta, con la casetta", "SALYANGOZ", "Ağır ağır giden kabuklu canlı", "🐌"],
+["TIGRE", "Grande felino a strisce", "KAPLAN", "Çizgili büyük kedi", "🐯"],
+["CANGURO", "Salta con il cucciolo nel marsupio", "KANGURU", "Yavrusunu kesesinde taşır", "🦘"],
+["AQUILA", "Regina dei cieli", "KARTAL", "Göklerin hakimi", "🦅"]
+]},
+{ id: "cucina", it: "In cucina", tr: "Mutfakta", acc: "#e39a17", accD: "#b8760a", accL: "#fff0cc", scene: "maiolica", w: [
+["PIZZA", "Margherita o capricciosa", "PİZZA", "Napoli'nin meşhur hamur işi", "🍕"],
+["PASTA", "Si cuoce al dente", "MAKARNA", "Al dente pişirilir", "🍝"],
+["PANE", "Si compra dal fornaio", "EKMEK", "Fırından taze alınır", "🍞"],
+["FORMAGGIO", "I topi ne vanno matti", "PEYNİR", "Farelerin bayıldığı yiyecek", "🧀"],
+["LATTE", "Si beve a colazione con i biscotti", "SÜT", "Kahvaltıda bisküviyle içilir", "🥛"],
+["UOVO", "Lo fa la gallina", "YUMURTA", "Tavuk yapar", "🥚"],
+["MELA", "Una al giorno toglie il medico di torno", "ELMA", "Kırmızısı da yeşili de olur", "🍎"],
+["LIMONE", "Agrume giallo e aspro", "LİMON", "Sarı ve ekşi meyve", "🍋"],
+["FRAGOLA", "Frutto rosso con i semini fuori", "ÇİLEK", "Tohumları dışında olan kırmızı meyve", "🍓"],
+["BANANA", "Frutto giallo amato dalle scimmie", "MUZ", "Maymunların sevdiği sarı meyve", "🍌"],
+["ANGURIA", "Verde fuori, rossa dentro, d'estate", "KARPUZ", "Dışı yeşil, içi kırmızı yaz meyvesi", "🍉"],
+["CIOCCOLATO", "Fondente o al latte", "ÇİKOLATA", "Bitter ya da sütlü", "🍫"],
+["GELATO", "Si gusta nel cono", "DONDURMA", "Külahta yenir", "🍦"],
+["TORTA", "Ci si mettono le candeline", "PASTA", "Üstüne mumlar dikilir", "🎂"],
+["CAFFE", "Espresso al banco del bar", "KAHVE", "Telvesine fal bakılır", "☕"],
+["MIELE", "Lo producono le api", "BAL", "Arıların yaptığı tatlı", "🍯"],
+["CAROTA", "Arancione, piace ai conigli", "HAVUÇ", "Tavşanların sevdiği turuncu sebze", "🥕"],
+["POMODORO", "Base della salsa per la pasta", "DOMATES", "Salçanın ana malzemesi", "🍅"],
+["PATATA", "Fritta, lessa o al forno", "PATATES", "Kızartması pek sevilir", "🥔"],
+["CIPOLLA", "Fa piangere chi la taglia", "SOĞAN", "Doğrayanı ağlatır", "🧅"],
+["AGLIO", "Tiene lontani i vampiri", "SARIMSAK", "Vampirleri uzak tutar", "🧄"],
+["FORCHETTA", "Ha i rebbi", "ÇATAL", "Dişli sofra aracı", "🍴"],
+["CUCCHIAIO", "Serve per il brodo", "KAŞIK", "Çorba içmeye yarar", "🥄"],
+["PENTOLA", "Ci bolle l'acqua della pasta", "TENCERE", "İçinde yemek pişirilir", ""],
+["FORNO", "Ci si cuoce la pizza", "FIRIN", "Ekmeğin piştiği yer", ""],
+["INSALATA", "Si condisce con olio e aceto", "SALATA", "Zeytinyağı ve limonla hazırlanır", "🥗"],
+["BISCOTTO", "Si inzuppa nel latte", "BİSKÜVİ", "Süte batırılır", "🍪"],
+["ZUCCHERO", "Dolcifica il caffè", "ŞEKER", "Kahveyi tatlandırır", ""],
+["SALE", "Si mette nell'acqua della pasta", "TUZ", "Yemeğe lezzet katar", "🧂"],
+["OLIO", "Extravergine d'oliva", "ZEYTİNYAĞI", "Zeytinden sıkılır", ""],
+["ARANCIA", "Agrume da spremere", "PORTAKAL", "Sıkılıp suyu içilir", "🍊"],
+["UVA", "Si raccoglie con la vendemmia", "ÜZÜM", "Bağdan toplanır", "🍇"],
+["CILIEGIA", "Una tira l'altra", "KİRAZ", "Küpe gibi çift çift sallanır", "🍒"],
+["PANINO", "Si porta in gita", "SANDVİÇ", "İki dilim ekmek arasında", "🥪"],
+["RISO", "Ingrediente del risotto", "PİRİNÇ", "Pilavın ana malzemesi", "🍚"]
+]},
+{ id: "natura", it: "Natura", tr: "Doğa", acc: "#2f9a72", accD: "#1f7756", accL: "#d8f1e7", scene: "alpi", w: [
+["ALBERO", "Ha tronco, rami e foglie", "AĞAÇ", "Gövdesi, dalları ve yaprakları var", "🌳"],
+["FIORE", "Sboccia in primavera", "ÇİÇEK", "İlkbaharda açar", "🌸"],
+["ROSA", "Ha le spine e un profumo inebriante", "GÜL", "Dikenli ve güzel kokulu", "🌹"],
+["GIRASOLE", "Segue il sole", "AYÇİÇEĞİ", "Başını güneşe çevirir", "🌻"],
+["FOGLIA", "Cade in autunno", "YAPRAK", "Sonbaharda düşer", "🍂"],
+["MONTAGNA", "Si scala fino alla vetta", "DAĞ", "Zirvesine tırmanılır", "⛰️"],
+["FIUME", "Scorre verso il mare", "NEHİR", "Denize doğru akar", ""],
+["LAGO", "Specchio d'acqua tra le montagne", "GÖL", "Etrafı karayla çevrili su", ""],
+["BOSCO", "Pieno di alberi", "ORMAN", "Ağaçlarla dolu yer", "🌲"],
+["PIOGGIA", "Ci si ripara con l'ombrello", "YAĞMUR", "Şemsiyeyle korunuruz", "🌧️"],
+["NEVE", "Bianca e fredda, cade d'inverno", "KAR", "Kışın yağan beyaz örtü", "❄️"],
+["ARCOBALENO", "Ha sette colori", "GÖKKUŞAĞI", "Yedi renkli kemer", "🌈"],
+["NUVOLA", "Bianca e soffice nel cielo", "BULUT", "Gökyüzünde pamuk gibi", "☁️"],
+["SOLE", "Ci scalda di giorno", "GÜNEŞ", "Gündüz bizi ısıtır", "☀️"],
+["VENTO", "Fa girare i mulini", "RÜZGAR", "Değirmenleri döndürür", "🌬️"],
+["FULMINE", "Lampo nel temporale", "ŞİMŞEK", "Fırtınada çakar", "⚡"],
+["VULCANO", "Erutta lava", "YANARDAĞ", "Lav püskürtür", "🌋"],
+["DESERTO", "Sabbia a perdita d'occhio", "ÇÖL", "Göz alabildiğine kum", "🏜️"],
+["CACTUS", "Pianta spinosa del deserto", "KAKTÜS", "Çölün dikenli bitkisi", "🌵"],
+["FUNGO", "Spunta nel bosco dopo la pioggia", "MANTAR", "Yağmurdan sonra ormanda biter", "🍄"],
+["ERBA", "Il verde del prato", "ÇİMEN", "Bahçenin yeşil örtüsü", ""],
+["CASCATA", "Acqua che cade dall'alto", "ŞELALE", "Yüksekten dökülen su", ""],
+["ISOLA", "Terra circondata dal mare", "ADA", "Denizle çevrili kara", "🏝️"],
+["GROTTA", "Cavità nella roccia", "MAĞARA", "Kayanın içindeki oyuk", ""],
+["QUERCIA", "Albero delle ghiande", "MEŞE", "Palamut veren ağaç", ""],
+["TULIPANO", "Fiore simbolo dell'Olanda", "LALE", "İstanbul'un simgesi olan çiçek", "🌷"],
+["MARGHERITA", "Fiore del m'ama, non m'ama", "PAPATYA", "Seviyor, sevmiyor diye yaprakları koparılır", "🌼"],
+["TRAMONTO", "Il sole se ne va", "GÜNBATIMI", "Güneşin ufukta kayboluşu", ""],
+["ALBA", "Il sole sorge", "ŞAFAK", "Günün ilk ışıkları", "🌅"],
+["COLLINA", "Piccolo rilievo", "TEPE", "Küçük yükselti", ""],
+["PRATO", "Distesa d'erba", "ÇAYIR", "Otlarla kaplı düzlük", ""],
+["SEME", "Diventerà una pianta", "TOHUM", "Toprağa ekilir, filiz verir", "🌱"]
+]},
+{ id: "mare", it: "Al mare", tr: "Deniz kenarı", acc: "#1aa8d0", accD: "#0f83a6", accL: "#d6f1fa", scene: "mare", w: [
+["SPIAGGIA", "Ci si stende al sole", "PLAJ", "Güneşlenilen kumsal", "🏖️"],
+["ONDA", "Si infrange sugli scogli", "DALGA", "Kayalara çarpar", "🌊"],
+["SABBIA", "Ci si costruiscono castelli", "KUM", "Üstünde kale yapılır", ""],
+["CONCHIGLIA", "Avvicinala all'orecchio e senti il mare", "DENİZ KABUĞU", "Kulağına tutunca denizi duyarsın", "🐚"],
+["BARCA", "Va a vela o a remi", "TEKNE", "Yelkenle ya da kürekle gider", "⛵"],
+["FARO", "Guida le navi di notte", "FENER", "Gece gemilere yol gösterir", ""],
+["OMBRELLONE", "Ripara dal sole in spiaggia", "ŞEMSİYE", "Plajda güneşten korur", "⛱️"],
+["COSTUME", "Si indossa per nuotare", "MAYO", "Yüzerken giyilir", "👙"],
+["GRANCHIO", "Cammina di lato", "YENGEÇ", "Yan yan yürür", "🦀"],
+["MEDUSA", "Trasparente e urticante", "DENİZANASI", "Saydam ve yakıcı deniz canlısı", ""],
+["ANCORA", "Tiene ferma la nave", "ÇAPA", "Gemiyi olduğu yerde tutar", "⚓"],
+["NAVE", "Grande imbarcazione", "GEMİ", "Büyük deniz taşıtı", "🚢"],
+["PORTO", "Ci attraccano le navi", "LİMAN", "Gemilerin yanaştığı yer", ""],
+["SURF", "Si cavalcano le onde sulla tavola", "SÖRF", "Dalgalar üstünde tahtayla kayılır", "🏄"],
+["SCOGLIO", "Roccia in mezzo al mare", "KAYA", "Denizdeki büyük taş", ""],
+["GABBIANO", "Uccello del porto", "MARTI", "Limanın kuşu", ""],
+["PESCE", "Nuota e respira con le branchie", "BALIK", "Solungaçlarıyla nefes alır", "🐟"],
+["CORALLO", "Forma la barriera tropicale", "MERCAN", "Tropik resifleri oluşturur", ""],
+["TUFFO", "Salto in acqua", "DALIŞ", "Suya atlayış", ""],
+["MASCHERA", "Per guardare sott'acqua", "MASKE", "Su altını görmek için takılır", "🤿"],
+["PINNE", "Ai piedi del sub", "PALET", "Dalgıcın ayağındakiler", ""],
+["VELA", "Si gonfia col vento", "YELKEN", "Rüzgarla şişer", ""],
+["SALVAGENTE", "Ti tiene a galla", "CAN SİMİDİ", "Suda batmamanı sağlar", ""],
+["ESTATE", "La stagione del mare", "YAZ", "Deniz mevsimi", ""],
+["CREMA", "Solare, protegge la pelle", "KREM", "Güneşten cildi korur", ""],
+["ASCIUGAMANO", "Ci si asciuga dopo il bagno", "HAVLU", "Denizden çıkınca onunla kurulanırız", ""],
+["SDRAIO", "Sedia pieghevole da spiaggia", "ŞEZLONG", "Plaj sandalyesi", ""],
+["SECCHIELLO", "Con la paletta, per i castelli", "KOVA", "Kumda kürekle birlikte kullanılır", ""],
+["MAREA", "Sale e scende con la luna", "GELGİT", "Ayın etkisiyle alçalır, yükselir", ""],
+["GOLFO", "Il mare che entra nella costa", "KÖRFEZ", "Denizin karaya girdiği yer", ""],
+["RIVA", "Dove il mare tocca la terra", "KIYI", "Denizin karayla buluştuğu yer", ""]
+]},
+{ id: "citta", it: "In città", tr: "Şehirde", acc: "#7b68dd", accD: "#5a48bb", accL: "#e8e3fb", scene: "skyline", w: [
+["PIAZZA", "Cuore della città, spesso con la fontana", "MEYDAN", "Şehrin kalbi, geniş açık alan", ""],
+["STRADA", "Ci passano le auto", "YOL", "Arabaların geçtiği yer", ""],
+["SEMAFORO", "Rosso, giallo e verde", "", "", "🚦"],
+["AUTOBUS", "Si aspetta alla fermata", "OTOBÜS", "Durakta beklenir", "🚌"],
+["TAXI", "Auto gialla a pagamento", "TAKSİ", "Sarı, ücretli araba", "🚕"],
+["METRO", "Viaggia sotto terra", "METRO", "Yerin altından gider", "🚇"],
+["BICICLETTA", "Due ruote e i pedali", "BİSİKLET", "İki tekerlekli, pedallı", "🚲"],
+["PONTE", "Unisce le due rive", "KÖPRÜ", "İki kıyıyı birleştirir", "🌉"],
+["MUSEO", "Ci sono quadri e statue", "MÜZE", "Tablolar ve heykeller sergilenir", "🏛️"],
+["NEGOZIO", "Ha la vetrina", "DÜKKAN", "Vitrini olan yer", ""],
+["BANCA", "Ci si deposita il denaro", "BANKA", "Para yatırılan yer", "🏦"],
+["OSPEDALE", "Ci lavorano medici e infermieri", "HASTANE", "Doktorlar ve hemşireler çalışır", "🏥"],
+["SCUOLA", "Ci si va con lo zaino", "OKUL", "Sırt çantasıyla gidilir", "🏫"],
+["TEATRO", "Si apre il sipario", "TİYATRO", "Perde açılır, oyun başlar", "🎭"],
+["PARCO", "Verde pubblico con le panchine", "PARK", "Bankları olan yeşil alan", ""],
+["FONTANA", "Ci si gettano le monetine", "ÇEŞME", "İçinden su akar", "⛲"],
+["GRATTACIELO", "Edificio altissimo", "GÖKDELEN", "Çok yüksek bina", "🏙️"],
+["STAZIONE", "Ci arrivano e partono i treni", "İSTASYON", "Trenler gelir ve gider", "🚉"],
+["TRENO", "Corre sui binari", "TREN", "Raylarda gider", "🚆"],
+["AEREO", "Vola nel cielo", "UÇAK", "Gökyüzünde uçar", "✈️"],
+["AEROPORTO", "Ci decollano gli aerei", "HAVALİMANI", "Uçakların kalktığı yer", ""],
+["BAR", "Per un caffè al volo", "KAFE", "Bir kahve içip çıkılır", ""],
+["MERCATO", "Bancarelle di frutta e verdura", "PAZAR", "Meyve sebze tezgahları", ""],
+["FARMACIA", "Ci si comprano le medicine", "ECZANE", "İlaç alınan yer", ""],
+["MARCIAPIEDE", "Riservato ai pedoni", "KALDIRIM", "Yayaların yürüdüğü yer", ""],
+["TORRE", "Quella di Pisa pende", "KULE", "Galata'da ünlü bir tanesi var", "🗼"],
+["HOTEL", "Ci si dorme in vacanza", "OTEL", "Tatilde kalınan yer", "🏨"],
+["RISTORANTE", "Si ordina dal menù", "RESTORAN", "Menüden sipariş verilir", ""],
+["BIBLIOTECA", "Ci si prendono libri in prestito", "KÜTÜPHANE", "Ödünç kitap alınır", ""],
+["CLACSON", "Lo suona l'automobilista impaziente", "KORNA", "Sabırsız sürücü çalar", ""],
+["TRAFFICO", "Ingorgo all'ora di punta", "TRAFİK", "Akşam saatlerinde sıkışır", ""],
+["QUARTIERE", "Zona della città", "MAHALLE", "Şehrin bir bölgesi", ""]
+]},
+{ id: "casa", it: "Casa dolce casa", tr: "Evim güzel evim", acc: "#e7834b", accD: "#c0622b", accL: "#fde5d6", scene: "interno", w: [
+["LETTO", "Ci si dorme", "YATAK", "Üstünde uyunur", "🛏️"],
+["DIVANO", "Ci si sdraia davanti alla TV", "KANEPE", "Televizyon karşısında uzanılır", "🛋️"],
+["SEDIA", "Quattro gambe e lo schienale", "SANDALYE", "Dört ayaklı ve arkalıklı", "🪑"],
+["TAVOLO", "Si apparecchia per il pranzo", "MASA", "Yemek için kurulur", ""],
+["FINESTRA", "Si apre per cambiare l'aria", "PENCERE", "Hava almak için açılır", ""],
+["PORTA", "Si bussa prima di entrare", "KAPI", "Girmeden önce çalınır", "🚪"],
+["CHIAVE", "Apre la serratura", "ANAHTAR", "Kilidi açar", "🔑"],
+["LAMPADA", "Fa luce sul comodino", "LAMBA", "Komodinde ışık verir", "💡"],
+["SPECCHIO", "Riflette la tua immagine", "AYNA", "Görüntünü yansıtır", ""],
+["TAPPETO", "Quello persiano è prezioso", "HALI", "Yere serilen desenli dokuma", ""],
+["CUSCINO", "Ci si appoggia la testa", "YASTIK", "Başımızı koyarız", ""],
+["COPERTA", "Ti scalda nel letto", "BATTANİYE", "Yatakta ısıtır", ""],
+["ARMADIO", "Ci si appendono i vestiti", "DOLAP", "Elbiseler içinde asılı durur", ""],
+["CUCINA", "La stanza dei fornelli", "MUTFAK", "Yemek pişirilen oda", ""],
+["BAGNO", "C'è la vasca", "BANYO", "Küveti olan oda", "🛁"],
+["DOCCIA", "Getto d'acqua per lavarsi", "DUŞ", "Yıkanmak için akan su", "🚿"],
+["TETTO", "Copre la casa", "ÇATI", "Evin üstünü örter", ""],
+["GIARDINO", "Ci crescono fiori e piante", "BAHÇE", "Çiçekler ve bitkiler yetişir", ""],
+["BALCONE", "Affaccio con la ringhiera", "BALKON", "Korkuluklu çıkıntı", ""],
+["SCALA", "Ha i gradini", "MERDİVEN", "Basamakları vardır", ""],
+["OROLOGIO", "Segna le ore sulla parete", "SAAT", "Duvarda zamanı gösterir", "🕰️"],
+["CAMINO", "Ci si accende il fuoco d'inverno", "ŞÖMİNE", "Kışın içinde ateş yakılır", ""],
+["TELEVISORE", "Si accende col telecomando", "TELEVİZYON", "Kumandayla açılır", "📺"],
+["FRIGORIFERO", "Tiene il cibo al fresco", "BUZDOLABI", "Yiyecekleri soğuk tutar", ""],
+["VASO", "Ci si mettono i fiori", "VAZO", "İçine çiçek konur", ""],
+["QUADRO", "Si appende alla parete", "TABLO", "Duvara asılır", "🖼️"],
+["CANDELA", "Si accende per una cena romantica", "MUM", "Romantik yemekte yakılır", "🕯️"],
+["TENDA", "Si tira davanti alla finestra", "PERDE", "Pencerenin önüne çekilir", ""],
+["CAMPANELLO", "Si suona alla porta", "ZİL", "Kapıda çalınır", "🔔"],
+["SVEGLIA", "Suona al mattino", "ÇALAR SAAT", "Sabah erkenden çalar", "⏰"],
+["CASSETTO", "Si apre tirandolo", "ÇEKMECE", "Çekilerek açılır", ""]
+]},
+{ id: "sport", it: "Sport", tr: "Spor", acc: "#2c9b50", accD: "#1d773a", accL: "#daf2e1", scene: "stadio", w: [
+["CALCIO", "Undici contro undici", "FUTBOL", "On bire karşı on bir", "⚽"],
+["TENNIS", "Si gioca con la racchetta", "TENİS", "Raketle oynanır", "🎾"],
+["PALLAVOLO", "Si schiaccia sopra la rete", "VOLEYBOL", "File üstünden smaç vurulur", "🏐"],
+["BASKET", "Si tira a canestro", "BASKETBOL", "Potaya atış yapılır", "🏀"],
+["NUOTO", "Stile libero o a farfalla", "YÜZME", "Serbest ya da kelebek stil", "🏊"],
+["CORSA", "Gara a piedi", "KOŞU", "Ayakla yapılan yarış", "🏃"],
+["SCI", "Si fa sulla neve", "KAYAK", "Karda yapılır", "⛷️"],
+["GOLF", "Si mette in buca con la mazza", "GOLF", "Sopayla topu deliğe sokma oyunu", "⛳"],
+["BOXE", "Si combatte con i guantoni", "BOKS", "Eldivenlerle dövüşülür", "🥊"],
+["CICLISMO", "Il Giro d'Italia", "", "", "🚴"],
+["PALESTRA", "Ci si allena con i pesi", "SPOR SALONU", "Ağırlık çalışılan yer", "🏋️"],
+["ARBITRO", "Fischia il fallo", "HAKEM", "Faulü düdükle bildirir", ""],
+["PORTIERE", "Para i rigori", "KALECİ", "Penaltıları kurtarır", ""],
+["GOL", "Il pallone in rete", "GOL", "Topun ağlara gitmesi", ""],
+["MEDAGLIA", "D'oro, d'argento o di bronzo", "MADALYA", "Altın, gümüş ya da bronz", "🏅"],
+["COPPA", "Si alza dopo la vittoria", "KUPA", "Zaferden sonra kaldırılır", "🏆"],
+["STADIO", "Ci si va a tifare", "STADYUM", "Taraftarların gittiği yer", "🏟️"],
+["SQUADRA", "Gruppo di giocatori", "TAKIM", "Oyunculardan oluşan grup", ""],
+["ALLENATORE", "Prepara la squadra", "ANTRENÖR", "Takımı hazırlar", ""],
+["PALLONE", "Si prende a calci", "TOP", "Ayakla vurulur", ""],
+["RETE", "Divide il campo da tennis", "FİLE", "Tenis kortunu ikiye böler", ""],
+["MARATONA", "Corsa di 42 chilometri", "MARATON", "42 kilometrelik koşu", ""],
+["OLIMPIADI", "Ogni quattro anni, con cinque cerchi", "OLİMPİYAT", "Dört yılda bir, beş halkalı", ""],
+["SKATE", "Tavola con le rotelle", "KAYKAY", "Tekerlekli tahta", "🛹"],
+["YOGA", "Respiro e posizioni", "YOGA", "Nefes ve duruşlarla yapılır", "🧘"],
+["EQUITAZIONE", "Sport a cavallo", "BİNİCİLİK", "Atla yapılan spor", "🏇"],
+["SCHERMA", "Si tira di fioretto", "ESKRİM", "Flöreyle yapılır", "🤺"],
+["TIFOSO", "Sostiene la squadra dagli spalti", "TARAFTAR", "Tribünden takımını destekler", ""],
+["CAMPIONE", "Vince tutto", "ŞAMPİYON", "Her şeyi kazanır", ""],
+["RIGORE", "Si batte dal dischetto", "PENALTI", "Beyaz noktadan atılır", ""]
+]},
+{ id: "musica", it: "Musica", tr: "Müzik", acc: "#9561e3", accD: "#7140c2", accL: "#efe5fd", scene: "pentagramma", w: [
+["CHITARRA", "Ha sei corde", "GİTAR", "Altı telli çalgı", "🎸"],
+["PIANOFORTE", "Tasti bianchi e neri", "PİYANO", "Siyah beyaz tuşlu çalgı", "🎹"],
+["VIOLINO", "Si suona con l'archetto", "KEMAN", "Yayla çalınır", "🎻"],
+["TAMBURO", "Si suona con le bacchette", "DAVUL", "Tokmakla çalınır", "🥁"],
+["TROMBA", "Ottone squillante del jazz", "TROMPET", "Cazın parlak sesli üflemelisi", "🎺"],
+["SASSOFONO", "Strumento ad ancia del jazz", "SAKSAFON", "Cazın kamışlı nefesli çalgısı", "🎷"],
+["FLAUTO", "Strumento a fiato traverso", "FLÜT", "Yan tutulan üflemeli çalgı", ""],
+["CANZONE", "Strofe e ritornello", "ŞARKI", "Nakaratı olan beste", "🎵"],
+["CANTANTE", "Si esibisce al microfono", "ŞARKICI", "Mikrofonla şarkı söyler", "🎤"],
+["MICROFONO", "Amplifica la voce", "MİKROFON", "Sesi yükseltir", "🎙️"],
+["CONCERTO", "Musica dal vivo sul palco", "KONSER", "Sahnede canlı müzik", ""],
+["RITMO", "Lo segue chi balla", "RİTİM", "Dans edenler onu takip eder", ""],
+["MELODIA", "Note da canticchiare", "MELODİ", "Mırıldanılan nota dizisi", ""],
+["NOTA", "Do, re, mi...", "NOTA", "Do, re, mi...", "🎶"],
+["ORCHESTRA", "La dirige il maestro", "ORKESTRA", "Şef yönetir", ""],
+["CORO", "Canta in gruppo", "KORO", "Topluca şarkı söyler", ""],
+["VINILE", "Gira sul giradischi", "PLAK", "Pikapta döner", ""],
+["CUFFIE", "Per ascoltare senza disturbare", "KULAKLIK", "Kimseyi rahatsız etmeden dinlemek için", "🎧"],
+["PALCO", "Ci salgono gli artisti", "SAHNE", "Sanatçıların çıktığı yer", ""],
+["APPLAUSO", "Il pubblico batte le mani", "ALKIŞ", "Seyirci el çırpar", "👏"],
+["BALLO", "Si fa in pista", "DANS", "Pistte yapılır", "💃"],
+["VALZER", "Ballo in tre tempi", "VALS", "Üç zamanlı dans", ""],
+["TANGO", "Ballo argentino", "TANGO", "Arjantin dansı", ""],
+["RAP", "Rime veloci su una base", "RAP", "Altyapı üstüne hızlı kafiyeler", ""],
+["ARPA", "Lo strumento degli angeli", "ARP", "Meleklerin çalgısı", ""],
+["FISARMONICA", "Si apre e si chiude come un mantice", "AKORDEON", "Körük gibi açılıp kapanır", ""],
+["SAZ", "Strumento a corde della tradizione turca", "SAZ", "Türk halk müziğinin telli çalgısı", ""],
+["RADIO", "Trasmette canzoni e notizie", "RADYO", "Şarkı ve haber yayınlar", "📻"],
+["SPARTITO", "Ci sono scritte le note", "PARTİSYON", "Notaların yazıldığı kağıt", "🎼"],
+["KARAOKE", "Si canta sul testo che scorre", "KARAOKE", "Akan sözlerle şarkı söylenir", ""],
+["ARIA", "Brano d'opera per voce solista", "ARYA", "Operada tek sesli bölüm", ""]
+]},
+{ id: "spazio", it: "Nello spazio", tr: "Uzayda", acc: "#5b74ea", accD: "#3c55cb", accL: "#e2e8fe", scene: "cosmo", w: [
+["LUNA", "Ha le fasi e illumina la notte", "", "", "🌙"],
+["STELLA", "Brilla nel cielo notturno", "YILDIZ", "Gece gökyüzünde parlar", "⭐"],
+["PIANETA", "Gira intorno a una stella", "GEZEGEN", "Bir yıldızın etrafında döner", ""],
+["TERRA", "Il nostro pianeta", "DÜNYA", "Yaşadığımız gezegen", "🌍"],
+["MARTE", "Il pianeta rosso", "MARS", "Kızıl gezegen", ""],
+["SATURNO", "Ha gli anelli", "SATÜRN", "Halkalı gezegen", "🪐"],
+["GIOVE", "Il pianeta più grande", "JÜPİTER", "En büyük gezegen", ""],
+["VENERE", "Porta il nome della dea dell'amore", "VENÜS", "Adını aşk tanrıçasından alır", ""],
+["RAZZO", "Parte col conto alla rovescia", "ROKET", "Geri sayımla fırlatılır", "🚀"],
+["ASTRONAUTA", "Cammina nello spazio", "ASTRONOT", "Uzayda yürür", ""],
+["COMETA", "Ha la coda luminosa", "", "", "☄️"],
+["GALASSIA", "La nostra è la Via Lattea", "GALAKSİ", "Bizimki Samanyolu", "🌌"],
+["SATELLITE", "Orbita intorno a un pianeta", "UYDU", "Bir gezegenin etrafında döner", "🛰️"],
+["TELESCOPIO", "Per osservare le stelle", "TELESKOP", "Yıldızları gözlemlemek için", "🔭"],
+["ORBITA", "Percorso intorno al sole", "YÖRÜNGE", "Güneş etrafındaki yol", ""],
+["ECLISSI", "Il sole si oscura di giorno", "TUTULMA", "Güneş gündüz kararır", ""],
+["METEORA", "Stella cadente", "METEOR", "Kayan yıldız", "🌠"],
+["ALIENO", "Viene da un altro pianeta", "UZAYLI", "Başka gezegenden gelir", "👽"],
+["UFO", "Disco volante", "UFO", "Uçan daire", "🛸"],
+["GRAVITA", "Ci tiene coi piedi per terra", "YERÇEKİMİ", "Ayaklarımızı yere bastırır", ""],
+["BUCO NERO", "Inghiotte persino la luce", "KARA DELİK", "Işığı bile yutar", ""],
+["ASTEROIDE", "Roccia che vaga nello spazio", "ASTEROİT", "Uzayda dolaşan kaya", ""],
+["NEBULOSA", "Nube di gas tra le stelle", "BULUTSU", "Yıldızlar arasındaki gaz bulutu", ""],
+["CRATERE", "Buca lasciata da un meteorite", "KRATER", "Göktaşının açtığı çukur", ""],
+["MERCURIO", "Il pianeta più vicino al sole", "MERKÜR", "Güneşe en yakın gezegen", ""],
+["NETTUNO", "Pianeta blu e lontano", "NEPTÜN", "Uzak mavi gezegen", ""],
+["NAVICELLA", "Mezzo per viaggiare nello spazio", "UZAY GEMİSİ", "Uzay yolculuğu aracı", ""],
+["COSMO", "L'universo intero", "EVREN", "Her şeyi kapsayan bütün", ""],
+["CASCO", "Lo indossa l'astronauta", "KASK", "Astronotun başında durur", ""]
+]},
+{ id: "cinema", it: "Cinema e serie", tr: "Sinema ve dizi", acc: "#d2579b", accD: "#ad3a7a", accL: "#fbe0ee", scene: "cinema", w: [
+["FILM", "Si guarda al cinema", "FİLM", "Sinemada izlenir", "🎞️"],
+["ATTRICE", "Interpreta un personaggio", "OYUNCU", "Bir karakteri canlandırır", ""],
+["REGISTA", "Grida azione sul set", "YÖNETMEN", "Sette motor diye bağırır", ""],
+["SCENA", "Parte di un film", "SAHNE", "Filmin bir parçası", ""],
+["SERIE", "Si guarda una puntata dopo l'altra", "DİZİ", "Bölüm bölüm izlenir", ""],
+["PUNTATA", "Episodio di una serie", "BÖLÜM", "Dizinin bir parçası", ""],
+["POPCORN", "Si sgranocchia in sala", "", "", "🍿"],
+["BIGLIETTO", "Si compra alla cassa", "BİLET", "Gişeden alınır", "🎟️"],
+["SCHERMO", "Grande e bianco in sala", "EKRAN", "Salondaki büyük beyaz yüzey", ""],
+["CIAK", "Si batte prima di girare", "KLAKET", "Çekimden önce vurulur", "🎬"],
+["TRAMA", "La storia del film", "KONU", "Filmin hikayesi", ""],
+["FINALE", "L'ultima scena", "FİNAL", "Son sahne", ""],
+["COPIONE", "Ci sono scritte le battute", "SENARYO", "Repliklerin yazılı olduğu metin", ""],
+["OSCAR", "Statuetta d'oro di Hollywood", "OSCAR", "Hollywood'un altın heykelciği", ""],
+["TELECAMERA", "Riprende le scene", "KAMERA", "Sahneleri kaydeder", "🎥"],
+["COMMEDIA", "Fa ridere", "KOMEDİ", "Güldüren film türü", ""],
+["ROMANTICO", "Genere delle storie d'amore", "ROMANTİK", "Aşk hikayelerinin türü", ""],
+["HORROR", "Fa paura", "KORKU", "Korkutan film türü", ""],
+["CARTONE", "Animato, per bambini", "ÇİZGİ FİLM", "Çocuklar için animasyon", ""],
+["FESTIVAL", "Quello di Cannes o di Venezia", "FESTİVAL", "Cannes ya da Venedik'teki", ""],
+["SOTTOTITOLI", "Si leggono in fondo allo schermo", "ALTYAZI", "Ekranın altında okunur", ""],
+["DOPPIAGGIO", "Le voci in un'altra lingua", "DUBLAJ", "Başka dilde seslendirme", ""],
+["TRAILER", "Anteprima del film", "FRAGMAN", "Filmin tanıtımı", ""],
+["SET", "Dove si gira il film", "SET", "Filmin çekildiği yer", ""],
+["SOAP", "Serie sentimentale senza fine", "PEMBE DİZİ", "Bitmek bilmeyen duygusal dizi", ""],
+["RUOLO", "Parte da interpretare", "ROL", "Oyuncunun canlandırdığı karakter", ""],
+["SIGLA", "Musica d'apertura della serie", "JENERİK", "Dizinin açılış müziği", ""],
+["DIVA", "Stella del red carpet", "", "", ""],
+["CINEMA", "Sala con il grande schermo", "SİNEMA", "Büyük perdeli salon", ""]
+]},
+{ id: "moda", it: "Moda", tr: "Moda", acc: "#bd5fc0", accD: "#98429c", accL: "#f6e2f6", scene: "atelier", w: [
+["ABITO", "Lungo per la sera", "ELBİSE", "Gece için uzun olanı seçilir", "👗"],
+["GONNA", "Mini o lunga", "ETEK", "Mini ya da uzun", ""],
+["BORSA", "A tracolla o a mano", "ÇANTA", "Omuza ya da ele alınır", "👜"],
+["SCARPE", "Si comprano in paio", "AYAKKABI", "Çift olarak alınır", "👟"],
+["TACCHI", "Slanciano la figura", "TOPUKLU", "Boyu uzun gösteren ayakkabı", "👠"],
+["ROSSETTO", "Colora le labbra", "RUJ", "Dudakları boyar", "💄"],
+["PROFUMO", "Si spruzza sul collo", "PARFÜM", "Boyna sıkılır", ""],
+["OCCHIALI", "Da sole o da vista", "GÖZLÜK", "Güneş için ya da numaralı", "🕶️"],
+["COLLANA", "Si indossa al collo", "KOLYE", "Boyna takılır", ""],
+["ANELLO", "Si mette al dito", "YÜZÜK", "Parmağa takılır", "💍"],
+["ORECCHINI", "Pendono dai lobi", "KÜPE", "Kulaktan sarkar", ""],
+["CAPPELLO", "Si porta in testa", "ŞAPKA", "Başa takılır", "👒"],
+["SCIARPA", "Avvolge il collo d'inverno", "ATKI", "Kışın boyna sarılır", "🧣"],
+["GIACCA", "Si mette sopra la camicia", "CEKET", "Gömleğin üstüne giyilir", ""],
+["CAPPOTTO", "Pesante, per l'inverno", "PALTO", "Kışın giyilen kalın giysi", "🧥"],
+["JEANS", "Pantaloni di denim", "KOT", "Denim pantolon", "👖"],
+["MAGLIONE", "Di lana, per il freddo", "KAZAK", "Yünlü, soğukta giyilir", ""],
+["CAMICIA", "Colletto e bottoni", "GÖMLEK", "Yakalı ve düğmeli", "👔"],
+["CRAVATTA", "Si annoda al collo", "KRAVAT", "Boyna bağlanır", ""],
+["SFILATA", "Le modelle in passerella", "DEFİLE", "Mankenler podyumda yürür", ""],
+["MODELLA", "Sfila in passerella", "MANKEN", "Podyumda yürür", ""],
+["STILISTA", "Disegna gli abiti", "TASARIMCI", "Kıyafetleri tasarlar", ""],
+["TRUCCO", "Fondotinta, ombretto e mascara", "MAKYAJ", "Fondöten, far ve rimel", ""],
+["SMALTO", "Colora le unghie", "OJE", "Tırnakları boyar", "💅"],
+["PETTINE", "Districa i capelli", "TARAK", "Saçları açar", ""],
+["SETA", "Tessuto prezioso del baco", "İPEK", "Böceğin ördüğü değerli kumaş", ""],
+["VELLUTO", "Tessuto morbido per la sera", "KADİFE", "Yumuşak, tüylü kumaş", ""],
+["GUANTI", "Riscaldano le mani", "ELDİVEN", "Elleri ısıtır", "🧤"],
+["STIVALI", "Alti fino al ginocchio", "ÇİZME", "Dize kadar uzanır", "👢"],
+["PASSERELLA", "Ci sfilano le modelle", "PODYUM", "Mankenlerin yürüdüğü yer", ""],
+["BIKINI", "Due pezzi da spiaggia", "BİKİNİ", "İki parçalı mayo", ""]
+]},
+{ id: "emozioni", it: "Emozioni", tr: "Duygular", acc: "#e8628f", accD: "#c3426f", accL: "#fde0ea", scene: "cuori", w: [
+["AMORE", "Fa battere forte il cuore", "AŞK", "Kalbi hızlı attırır", "💘"],
+["CUORE", "Batte nel petto", "KALP", "Göğsümüzde atar", "❤️"],
+["BACIO", "Si dà con le labbra", "ÖPÜCÜK", "Dudaklarla verilir", "💋"],
+["ABBRACCIO", "Stretta affettuosa", "SARILMA", "Sevgi dolu kucaklaşma", "🤗"],
+["SORRISO", "Illumina il viso", "GÜLÜMSEME", "Yüzü aydınlatır", "😊"],
+["LACRIMA", "Scende quando si piange", "GÖZYAŞI", "Ağlayınca akar", ""],
+["GIOIA", "Grande felicità", "SEVİNÇ", "Büyük mutluluk", "😄"],
+["TRISTEZZA", "Il contrario della gioia", "HÜZÜN", "Sevincin tersi", "😢"],
+["PAURA", "La fanno venire i film horror", "KORKU", "Karanlıkta içimizi saran duygu", "😱"],
+["RABBIA", "Fa perdere le staffe", "ÖFKE", "Kontrolü kaybettiren duygu", "😠"],
+["SPERANZA", "È l'ultima a morire", "UMUT", "Fakirin ekmeği, derler", ""],
+["SOGNO", "Si fa dormendo", "RÜYA", "Uyurken görülür", ""],
+["NOSTALGIA", "Si prova per ciò che manca", "ÖZLEM", "Uzaktakine duyulur", ""],
+["GELOSIA", "Il mostro dagli occhi verdi", "KISKANÇLIK", "Sevdiğini kimseyle paylaşamamak", ""],
+["AMICIZIA", "Lega due amici", "DOSTLUK", "İki dostu birbirine bağlar", ""],
+["FIDUCIA", "Si dà a chi la merita", "GÜVEN", "Hak edene verilir", ""],
+["TIMIDEZZA", "Fa arrossire", "UTANGAÇLIK", "Yanakları kızartır", "😳"],
+["CORAGGIO", "Non manca all'eroe", "CESARET", "Kahramanda eksik olmaz", ""],
+["CALMA", "Pace interiore", "HUZUR", "İç barışı", "😌"],
+["SORPRESA", "Festa inaspettata", "SÜRPRİZ", "Beklenmedik kutlama", "😮"],
+["RISATA", "Esplode dopo una battuta", "KAHKAHA", "Bir espriyle patlar", "😂"],
+["NOIA", "Fa sbadigliare", "", "", "🥱"],
+["PROMESSA", "Va mantenuta", "SÖZ", "Tutulması gerekir", "🤞"],
+["DESIDERIO", "Si esprime con una stella cadente", "DİLEK", "Kayan yıldıza tutulur", ""],
+["TENEREZZA", "Sentimento dolce verso un cucciolo", "ŞEFKAT", "Yavruya duyulan yumuşak duygu", "🥰"],
+["EMOZIONE", "Fa venire la pelle d'oca", "HEYECAN", "Tüyleri diken diken eder", ""],
+["GRATITUDINE", "Si esprime con un grazie", "MİNNET", "Teşekkürle dile gelir", "🙏"],
+["MALINCONIA", "Dolce tristezza", "MELANKOLİ", "Tatlı hüzün", ""],
+["PASSIONE", "Amore ardente", "TUTKU", "Ateşli bağlılık", "🔥"],
+["FELICITA", "Il sogno di tutti", "MUTLULUK", "Herkesin aradığı his", ""]
+]},
+{ id: "italia", it: "Italia", tr: "İtalya", acc: "#2f86d6", accD: "#1d67b1", accL: "#dbedfc", scene: "costiera", w: [
+["ROMA", "La capitale", "ROMA", "İtalya'nın başkenti", ""],
+["VENEZIA", "Città dei canali", "VENEDİK", "Kanallar şehri", ""],
+["GONDOLA", "Barca dei canali veneziani", "GONDOL", "Venedik kanallarının kayığı", ""],
+["COLOSSEO", "Arena dei gladiatori", "KOLEZYUM", "Gladyatörlerin arenası", ""],
+["FIRENZE", "Città del David e del Duomo", "FLORANSA", "Davut heykelinin şehri", ""],
+["MILANO", "Capitale della moda", "MİLANO", "Modanın başkenti", ""],
+["NAPOLI", "Città della pizza e del Vesuvio", "NAPOLİ", "Pizzanın ve Vezüv'ün şehri", ""],
+["VESUVIO", "Vulcano sul golfo di Napoli", "VEZÜV", "Napoli Körfezi'ndeki yanardağ", ""],
+["ETNA", "Il vulcano della Sicilia", "ETNA", "Sicilya'nın yanardağı", ""],
+["SICILIA", "La più grande isola italiana", "SİCİLYA", "İtalya'nın en büyük adası", ""],
+["SARDEGNA", "L'isola dei nuraghi", "SARDİNYA", "Akdeniz'in büyük İtalyan adalarından", ""],
+["ESPRESSO", "Caffè ristretto al banco", "ESPRESSO", "Kısa ve yoğun İtalyan kahvesi", ""],
+["CAPPUCCINO", "Caffè con latte schiumato", "KAPUÇİNO", "Köpüklü sütlü kahve", ""],
+["LASAGNA", "Strati di pasta, ragù e besciamella", "LAZANYA", "Kat kat makarna, kıyma ve beşamel", ""],
+["TIRAMISU", "Dolce con mascarpone e caffè", "TİRAMİSU", "Maskarponeli, kahveli tatlı", ""],
+["MOZZARELLA", "Formaggio filante della pizza", "MOZZARELLA", "Pizzanın uzayan peyniri", ""],
+["CARBONARA", "Pasta con guanciale e uovo", "KARBONARA", "Yumurtalı ünlü makarna sosu", ""],
+["PISA", "Ha la torre pendente", "PİZA", "Eğik kulesiyle ünlü şehir", ""],
+["DANTE", "Scrisse la Divina Commedia", "DANTE", "İlahi Komedya'nın yazarı", ""],
+["VERDI", "Compose l'Aida", "VERDİ", "Aida operasının bestecisi", ""],
+["TEVERE", "Il fiume di Roma", "TİBER", "Roma'dan geçen nehir", ""],
+["ALPI", "Le montagne del nord", "ALPLER", "Kuzeydeki sıradağlar", ""],
+["VESPA", "Scooter italiano leggendario", "VESPA", "Efsanevi İtalyan skuteri", "🛵"],
+["GELATERIA", "Coni e coppette a ogni angolo", "DONDURMACI", "Her köşede külah satan dükkan", ""],
+["POSITANO", "Perla della costiera amalfitana", "POSİTANO", "Amalfi kıyısının incisi", ""],
+["TOSCANA", "La terra del Chianti", "TOSKANA", "Bağlarıyla ünlü bölge", ""],
+["MANDOLINO", "Strumento delle serenate napoletane", "MANDOLİN", "Napoli serenatlarının çalgısı", ""],
+["PANETTONE", "Dolce natalizio milanese", "PANETTONE", "Milano'nun Noel keki", ""],
+["BOLOGNA", "La dotta, la grassa e la rossa", "BOLONYA", "Avrupa'nın en eski üniversitesinin şehri", ""],
+["GENOVA", "La città del pesto", "CENOVA", "Pestonun memleketi", ""],
+["PESTO", "Salsa al basilico", "PESTO", "Fesleğenli sos", ""],
+["SPAGHETTI", "Lunghi, si arrotolano sulla forchetta", "SPAGETTİ", "Çatala sarılarak yenir", ""]
+]},
+{ id: "turchia", it: "Turchia", tr: "Türkiye", acc: "#139795", accD: "#0b7472", accL: "#d4f0ef", scene: "bosforo", w: [
+["ISTANBUL", "A cavallo tra Europa e Asia", "İSTANBUL", "Avrupa ile Asya arasındaki şehir", ""],
+["ANKARA", "La capitale turca", "ANKARA", "Türkiye'nin başkenti", ""],
+["BOSFORO", "Lo stretto di Istanbul", "BOĞAZ", "İstanbul'u ikiye ayıran su", ""],
+["CAPPADOCIA", "Camini delle fate e mongolfiere", "KAPADOKYA", "Peribacaları ve balonlar diyarı", ""],
+["BAKLAVA", "Dolce di pasta fillo e pistacchi", "BAKLAVA", "Fıstıklı, şerbetli tatlı", ""],
+["KEBAB", "Carne cotta allo spiedo", "KEBAP", "Şişte pişen et", ""],
+["SIMIT", "Ciambella al sesamo", "SİMİT", "Susamlı halka", "🥯"],
+["", "", "ÇAY", "İnce belli bardakta içilir", "🍵"],
+["HAMMAM", "Il bagno turco", "HAMAM", "Kese ve köpükle yıkanılan yer", ""],
+["BAZAR", "Il Gran ... di Istanbul", "ÇARŞI", "Kapalı... (İstanbul'da)", ""],
+["MOSCHEA", "Ha la cupola e i minareti", "CAMİ", "Kubbesi ve minaresi olur", "🕌"],
+["MINARETO", "Torre slanciata della moschea", "MİNARE", "Caminin ince kulesi", ""],
+["EFESO", "Antica città della Biblioteca di Celso", "EFES", "Celsus Kütüphanesi'nin antik kenti", ""],
+["TROIA", "Città del cavallo di legno", "TRUVA", "Tahta atın şehri", ""],
+["PAMUKKALE", "Terrazze bianche di calcare", "PAMUKKALE", "Bembeyaz traverten teraslar", ""],
+["ANTALYA", "Perla della riviera turca", "ANTALYA", "Türk Rivierası'nın incisi", ""],
+["BODRUM", "Località di mare sull'Egeo", "BODRUM", "Ege'nin ünlü tatil beldesi", ""],
+["IZMIR", "La perla dell'Egeo", "İZMİR", "Ege'nin incisi", ""],
+["LIRA", "La moneta turca", "LİRA", "Türk parası", ""],
+["NAZAR", "Occhio blu portafortuna", "NAZAR", "Mavi boncuk, kem gözden korur", "🧿"],
+["DERVISCIO", "Danza ruotando su se stesso", "SEMAZEN", "Kendi etrafında dönerek sema eder", ""],
+["LOKUM", "La delizia turca", "LOKUM", "Güllü, fıstıklı şekerleme", ""],
+["GALATA", "Torre e ponte di Istanbul", "GALATA", "Kulesi ve köprüsüyle ünlü semt", ""],
+["ARARAT", "Il monte dell'arca di Noè", "AĞRI", "Nuh'un gemisinin oturduğu dağ (… Dağı)", ""],
+["KARAGOZ", "Eroe del teatro delle ombre", "KARAGÖZ", "Gölge oyununun kahramanı", ""],
+["DOLMA", "Verdure ripiene di riso", "DOLMA", "Pirinçle doldurulmuş sebze", ""],
+["AYRAN", "Bevanda di yogurt salato", "AYRAN", "Tuzlu yoğurt içeceği", ""],
+["KUNEFE", "Dolce filante al formaggio", "KÜNEFE", "Peynirli, şerbetli tatlı", ""],
+["MONGOLFIERA", "Vola all'alba sulla Cappadocia", "BALON", "Kapadokya'da şafakta uçar", "🎈"],
+["TOPKAPI", "Il palazzo dei sultani", "TOPKAPI", "Sultanların sarayı", ""],
+["SULTANO", "Regnava a Topkapi", "SULTAN", "Topkapı'da hüküm sürerdi", ""],
+["TURCHESE", "Il colore delle maioliche di Iznik", "TURKUAZ", "İznik çinilerinin rengi", ""]
+]}
+];
+/* More words for every world, so the six levels of a world repeat fewer answers. Same row format as above;
+   an emoji already used by another row is dropped so the emoji game never shows two answers for one picture. */
+const CM_MORE = {
+animali: [
+["RANA", "Gracida nello stagno", "KURBAĞA", "Gölette vıraklar", "🐸"],
+["TOPO", "Ha paura del gatto", "FARE", "Kediden korkar, peyniri sever", "🐭"],
+["BALENA", "Il più grande animale del mare", "BALİNA", "Denizin en büyük hayvanı", "🐳"],
+["GALLINA", "Fa le uova nel pollaio", "TAVUK", "Kümeste yumurtlar", "🐔"],
+["ANATRA", "Fa qua qua nello stagno", "ÖRDEK", "Gölde vak vak der", "🦆"],
+["CERVO", "Ha corna ramificate", "GEYİK", "Dallı boynuzlu orman hayvanı", "🦌"],
+["PANDA", "Orso bianco e nero goloso di bambù", "PANDA", "Bambu yiyen siyah beyaz ayı", "🐼"],
+["KOALA", "Dorme abbracciato all'eucalipto", "KOALA", "Okaliptüs ağacına sarılıp uyur", "🐨"],
+["FENICOTTERO", "Uccello rosa su una zampa sola", "FLAMİNGO", "Tek ayak üstünde duran pembe kuş", "🦩"],
+["PAVONE", "Apre la coda a ventaglio", "TAVUS KUŞU", "Kuyruğunu yelpaze gibi açar", "🦚"],
+["CAPRA", "Bela e si arrampica sulle rocce", "KEÇİ", "Kayalara tırmanan, meleyen hayvan", "🐐"],
+["GALLO", "Canta all'alba", "HOROZ", "Sabah erkenden öter", "🐓"],
+["LEOPARDO", "Felino a macchie che dorme sugli alberi", "LEOPAR", "Ağaçta uyuyan benekli kedigil", "🐆"],
+["CRICETO", "Corre nella ruota della gabbietta", "HAMSTER", "Kafesindeki çarkta koşar", "🐹"]
+],
+cucina: [
+["PERA", "Frutto a forma di goccia", "ARMUT", "Damla biçimli meyve", "🍐"],
+["PESCA", "Frutto estivo dalla buccia vellutata", "ŞEFTALİ", "Kadife kabuklu yaz meyvesi", "🍑"],
+["ANANAS", "Frutto tropicale con la corona", "ANANAS", "Taçlı tropik meyve", "🍍"],
+["COLTELLO", "Taglia la carne nel piatto", "BIÇAK", "Eti keser", "🔪"],
+["PIATTO", "Ci si serve la pasta", "TABAK", "Yemeğin konduğu kap", "🍽️"],
+["BICCHIERE", "Ci si versa l'acqua a tavola", "BARDAK", "Sofrada su doldurulur", ""],
+["BURRO", "Si spalma sul pane a colazione", "TEREYAĞI", "Kahvaltıda ekmeğe sürülür", "🧈"],
+["FARINA", "Polvere bianca per pane e dolci", "", "", ""],
+["MAIS", "Pannocchia dai chicchi gialli", "MISIR", "Sarı taneli koçan", "🌽"],
+["ZUPPA", "Si mangia calda col cucchiaio", "ÇORBA", "Kaşıkla sıcak içilir", "🥣"],
+["MELANZANA", "Ortaggio viola della parmigiana", "PATLICAN", "Karnıyarığın mor sebzesi", "🍆"],
+["PEPERONE", "Ortaggio rosso, giallo o verde", "BİBER", "Kırmızı, sarı ya da yeşil sebze", "🫑"],
+["FRITTATA", "Uova sbattute cotte in padella", "OMLET", "Tavada pişen çırpılmış yumurta", "🍳"],
+["PADELLA", "Ci si frigge l'uovo", "TAVA", "Yumurta kızartılan kap", ""],
+["NOCE", "Frutto secco dal guscio duro", "CEVİZ", "Sert kabuklu kuruyemiş", ""]
+],
+natura: [
+["RAMO", "Il braccio dell'albero", "DAL", "Ağacın kolu", ""],
+["RADICE", "Sta sotto terra e nutre la pianta", "KÖK", "Toprağın altında bitkiyi besler", ""],
+["PIETRA", "Sasso", "TAŞ", "Küçük kaya parçası", "🪨"],
+["STAGNO", "Piccolo specchio d'acqua delle rane", "GÖLET", "Kurbağaların yaşadığı küçük su", ""],
+["GHIACCIAIO", "Fiume di ghiaccio tra le vette", "BUZUL", "Dağlarda yavaşça akan buz kütlesi", ""],
+["TEMPORALE", "Pioggia forte con tuoni e lampi", "FIRTINA", "Gök gürültülü, şimşekli sert hava", "⛈️"],
+["NEBBIA", "Nuvola bassa che non fa vedere", "SİS", "Görüşü kapatan alçak bulut", "🌫️"],
+["LUCCIOLA", "Insetto che brilla nelle sere d'estate", "ATEŞBÖCEĞİ", "Yaz gecelerinde ışıldayan böcek", ""],
+["PALMA", "Albero delle spiagge tropicali", "PALMİYE", "Tropik sahillerin ağacı", "🌴"],
+["PINO", "Albero con le pigne", "ÇAM", "Kozalaklı, hep yeşil ağaç", "🌲"],
+["TERREMOTO", "Scossa che fa tremare la terra", "DEPREM", "Yerin sarsılması", ""],
+["AUTUNNO", "Stagione delle foglie che cadono", "SONBAHAR", "Yaprakların döküldüğü mevsim", "🍂"],
+["PRIMAVERA", "Stagione in cui sbocciano i fiori", "İLKBAHAR", "Çiçeklerin açtığı mevsim", ""],
+["INVERNO", "La stagione più fredda", "KIŞ", "En soğuk mevsim", ""],
+["STAGIONE", "Sono quattro in un anno", "MEVSİM", "Bir yılda dört tane var", ""]
+],
+mare: [
+["ALGA", "Pianta verde del mare", "YOSUN", "Denizdeki yeşil bitki", ""],
+["PESCATORE", "Esce in barca con la rete all'alba", "BALIKÇI", "Şafakta ağıyla denize açılır", ""],
+["CASTELLO", "Quello di sabbia lo fanno i bambini", "KUM KALESİ", "Çocukların sahilde kovayla yaptığı yapı", "🏰"],
+["BAGNINO", "Sorveglia i bagnanti dalla torretta", "CANKURTARAN", "Plajda yüzenleri gözetir", ""],
+["CAPITANO", "Comanda la nave", "KAPTAN", "Gemiyi yönetir", ""],
+["LAGUNA", "Lo specchio d'acqua di Venezia", "LAGÜN", "Denizden kum setiyle ayrılmış sığ su", ""],
+["MOLO", "Ci attraccano le barche", "İSKELE", "Teknelerin yanaştığı yer", ""],
+["REMO", "Spinge la barchetta", "KÜREK", "Kayığı yürütmeye yarar", ""],
+["CANOA", "Barca stretta da pagaiare", "KANO", "Tek kürekle yürütülen dar tekne", "🛶"],
+["TINTARELLA", "Colore che si prende al sole", "BRONZ TEN", "Güneşte kalınca kazanılan renk", ""],
+["OCEANO", "Molto più grande di un mare", "OKYANUS", "Denizden çok daha büyük", ""],
+["PIRATA", "Naviga sotto la bandiera nera", "KORSAN", "Kara bayraklı gemide yaşar", ""],
+["SOTTOMARINO", "Naviga sott'acqua", "DENİZALTI", "Su altında yol alan gemi", ""]
+],
+citta: [
+["POLIZIA", "Agenti che mantengono l'ordine", "POLİS", "Düzeni sağlayan memur", "🚓"],
+["POMPIERI", "Spengono gli incendi", "İTFAİYE", "Yangını söndürür", "🚒"],
+["AMBULANZA", "Corre a sirene spiegate verso l'ospedale", "AMBULANS", "Sireniyle hastaneye koşar", "🚑"],
+["POSTA", "Ci si spediscono lettere e pacchi", "POSTANE", "Mektup ve koli gönderilen yer", "📮"],
+["CHIESA", "Ha il campanile", "KİLİSE", "Çan kulesi olan ibadethane", "⛪"],
+["ZOO", "Ci vivono animali di tutto il mondo", "", "", ""],
+["MOTORINO", "Due ruote per sfrecciare nel traffico", "MOTOSİKLET", "İki tekerlekli motorlu taşıt", "🛵"],
+["PARCHEGGIO", "Dove si lascia l'auto", "OTOPARK", "Arabaların bırakıldığı yer", "🅿️"],
+["SINDACO", "Guida il comune", "", "", ""],
+["INCROCIO", "Dove si incontrano due strade", "KAVŞAK", "İki yolun kesiştiği yer", ""],
+["PANCHINA", "Ci si siede al parco", "BANK", "Parkta oturulan uzun koltuk", ""],
+["TRAM", "Corre sulle rotaie in città", "TRAMVAY", "Şehirde raylarda giden araç", "🚋"],
+["ASCENSORE", "Ti porta all'ultimo piano", "ASANSÖR", "Seni en üst kata çıkarır", ""],
+["PALAZZO", "Edificio con tanti appartamenti", "APARTMAN", "İçinde birçok daire olan yapı", ""]
+],
+casa: [
+["SCOPA", "Si usa per spazzare", "SÜPÜRGE", "Yerleri temizlemeye yarar", "🧹"],
+["LAVATRICE", "Lava i panni da sola", "", "", ""],
+["CANTINA", "Stanza fresca sotto terra", "MAHZEN", "Yeraltındaki serin oda", ""],
+["SOFFITTA", "Stanza sotto il tetto", "TAVAN ARASI", "Çatının hemen altındaki oda", ""],
+["MURO", "Ci si appendono i quadri", "DUVAR", "Tabloları astığımız yer", ""],
+["PAVIMENTO", "Ci si cammina sopra", "ZEMİN", "Üzerinde yürüdüğümüz yüzey", ""],
+["LAVANDINO", "Ci si lavano le mani", "LAVABO", "Ellerimizi yıkadığımız yer", ""],
+["VASCA", "Ci si fa il bagno con la schiuma", "KÜVET", "Köpüklü banyo yapılan yer", "🛁"],
+["SAPONE", "Fa la schiuma", "SABUN", "Köpük yapar", "🧼"],
+["MENSOLA", "Ci si mettono i libri", "RAF", "Kitapların dizildiği tahta", ""],
+["CAMERETTA", "La stanza dei bambini", "ÇOCUK ODASI", "Oyuncakların ve küçük yatağın olduğu yer", ""],
+["CORRIDOIO", "Collega le stanze", "KORİDOR", "Odaları birbirine bağlar", ""],
+["GARAGE", "Ci dorme la macchina", "GARAJ", "Arabanın uyuduğu yer", ""],
+["CUCCIA", "La casetta del cane", "KULÜBE", "Köpeğin bahçedeki evi", ""]
+],
+sport: [
+["RUGBY", "Palla ovale e mischie", "RAGBİ", "Oval toplu sert oyun", "🏉"],
+["JUDO", "Arte marziale giapponese con la cintura", "JUDO", "Kuşaklı Japon dövüş sanatı", "🥋"],
+["KARATE", "Colpi di mano e di piede in kimono", "KARATE", "Kimonoyla yapılan dövüş sporu", ""],
+["ARRAMPICATA", "Si sale sulle pareti di roccia", "TIRMANIŞ", "Kaya duvarlarına çıkılır", "🧗"],
+["PATTINAGGIO", "Si scivola sul ghiaccio", "PATEN", "Buzda kayılan spor", "⛸️"],
+["RACCHETTA", "Serve per giocare a tennis", "RAKET", "Tenis oynamaya yarar", ""],
+["CANESTRO", "Ci si tira la palla nel basket", "POTA", "Basketbolda topun atıldığı çember", ""],
+["FISCHIO", "Lo usa l'arbitro", "DÜDÜK", "Hakemin çaldığı alet", ""],
+["PODIO", "Ci salgono i primi tre", "KÜRSÜ", "İlk üçün çıktığı yer", ""],
+["SCACCHI", "Re, regina e cavallo sulla scacchiera", "SATRANÇ", "Şah, vezir ve atlı oyun", "♟️"],
+["TRAGUARDO", "La linea d'arrivo", "FİNİŞ", "Yarışın bitiş çizgisi", "🏁"],
+["ATLETICA", "Corsa, salto e lancio", "ATLETİZM", "Koşu, atlama ve atma sporları", ""],
+["PING PONG", "Tennis da tavolo", "MASA TENİSİ", "Raketle, küçük topla, file üstünden oynanır", "🏓"]
+],
+musica: [
+["BATTERIA", "Piatti, rullante e grancassa", "BATERİ", "Zilleri ve davullarıyla ritim seti", ""],
+["VIOLONCELLO", "Grande violino suonato da seduti", "VİYOLONSEL", "Oturarak çalınan büyük keman", ""],
+["DIRETTORE", "Guida l'orchestra con la bacchetta", "ŞEF", "Orkestrayı yöneten kişi", ""],
+["GRUPPO", "Musicisti che suonano insieme", "GRUP", "Birlikte çalan müzisyenler", ""],
+["ALBUM", "Raccolta di canzoni", "ALBÜM", "Şarkı koleksiyonu", ""],
+["ROCK", "Genere delle chitarre elettriche", "ROCK", "Elektro gitarlı müzik türü", ""],
+["JAZZ", "Musica nata a New Orleans", "CAZ", "New Orleans'ta doğan müzik", ""],
+["OPERA", "Si canta alla Scala", "OPERA", "Sahnede şarkıyla anlatılan oyun", ""],
+["DISCOTECA", "Si balla fino a tardi", "DİSKO", "Gece geç saatlere kadar dans edilen yer", ""],
+["ACCORDO", "Più note suonate insieme", "AKOR", "Birlikte çalınan notalar", ""],
+["TASTIERA", "Strumento elettronico con i tasti", "ORG", "Tuşlu elektronik çalgı", ""],
+["XILOFONO", "Si suona con due bacchette sulle lamelle", "KSİLOFON", "Tokmakla vurulan çubuklu çalgı", ""],
+["INNO", "Si canta prima della partita", "MARŞ", "Törenlerde hep birlikte söylenir", ""],
+["BALLERINA", "Danza sulle punte", "BALERİN", "Parmak uçlarında dans eder", "🩰"]
+],
+spazio: [
+["URANO", "Pianeta che ruota coricato", "URANÜS", "Yan yatmış dönen gezegen", ""],
+["PLUTONE", "Oggi è un pianeta nano", "PLÜTON", "Artık cüce gezegen sayılır", ""],
+["LANCIO", "La partenza del razzo", "FIRLATMA", "Roketin havalanması", ""],
+["SUPERNOVA", "Stella che esplode", "SÜPERNOVA", "Patlayan yıldız", ""],
+["ANNO LUCE", "Unità per le distanze tra le stelle", "IŞIK YILI", "Uzaydaki büyük mesafelerin birimi", ""],
+["VIA LATTEA", "La galassia in cui viviamo", "SAMANYOLU", "İçinde yaşadığımız galaksi", "🌌"],
+["ROBOT", "Macchina che esplora i pianeti", "ROBOT", "Gezegenleri keşfeden makine", "🤖"],
+["CIELO", "Di notte è pieno di stelle", "GÖKYÜZÜ", "Geceleri yıldızlarla dolar", ""],
+["ASTRONOMO", "Studia le stelle", "ASTRONOM", "Yıldızları inceleyen bilim insanı", ""],
+["MISSIONE", "Viaggio spaziale con un obiettivo", "GÖREV", "Uzaya amaçlı yolculuk", ""],
+["MARZIANO", "Abitante immaginario del pianeta rosso", "MARSLI", "Kızıl gezegenin hayali sakini", ""],
+["SOLE", "La stella più vicina a noi", "GÜNEŞ", "Bize en yakın yıldız", ""]
+],
+cinema: [
+["ATTORE", "Recita nei film", "AKTÖR", "Filmlerde rol alan erkek", ""],
+["EROE", "Il buono della storia", "KAHRAMAN", "Hikâyenin iyi karakteri", ""],
+["CATTIVO", "Il nemico dell'eroe", "KÖTÜ ADAM", "Kahramanın baş düşmanı", "🦹"],
+["SEQUEL", "Il film che continua la storia", "DEVAM FİLMİ", "Hikâyeyi sürdüren yeni yapım", ""],
+["", "", "BELGESEL", "Gerçek olayları anlatan yapım", ""],
+["ANIMAZIONE", "Disegni che prendono vita", "ANİMASYON", "Çizimlerin canlandığı tür", ""],
+["SUPEREROE", "Ha poteri speciali e il mantello", "", "", "🦸"],
+["WESTERN", "Film di cowboy, saloon e duelli", "KOVBOY FİLMİ", "Vahşi Batı'da geçen atlı hikâye", ""],
+["GIALLO", "Storia con un mistero da risolvere", "POLİSİYE", "Çözülecek bir cinayet hikâyesi", ""],
+["MUSICAL", "Film in cui si canta e si balla", "MÜZİKAL", "Şarkılı, danslı tür", ""],
+["PRIMA", "La serata in cui il film esce", "GALA", "Bir filmin ilk gösterim gecesi", ""],
+["POLTRONA", "Ci si siede in sala", "KOLTUK", "Salonda oturduğumuz yer", ""],
+["RECENSIONE", "Il giudizio del critico", "ELEŞTİRİ", "Eleştirmenin yazdığı yorum", ""],
+["TELECOMANDO", "Serve per cambiare canale", "KUMANDA", "Kanal değiştirmeye yarar", ""],
+["STUNTMAN", "Gira le scene pericolose al posto dell'attore", "DUBLÖR", "Tehlikeli sahnelerde oyuncunun yerine geçer", ""]
+],
+moda: [
+["PANTALONI", "Hanno due gambe", "PANTOLON", "İki paçalı giysi", ""],
+["CINTURA", "Tiene su i pantaloni", "KEMER", "Pantolonu belde tutar", ""],
+["BRACCIALE", "Gioiello per il polso", "BİLEZİK", "Bileğe takılan takı", ""],
+["CALZINI", "Si mettono prima delle scarpe", "ÇORAP", "Ayakkabıdan önce giyilir", "🧦"],
+["PIGIAMA", "Si indossa per dormire", "PİJAMA", "Uyurken giyilir", ""],
+["FELPA", "Maglia sportiva col cappuccio", "KAPÜŞONLU", "Başlıklı spor üst", ""],
+["SANDALI", "Scarpe aperte per l'estate", "SANDALET", "Yazın giyilen açık ayakkabı", "👡"],
+["MASCARA", "Allunga le ciglia", "RİMEL", "Kirpikleri uzatır", ""],
+["BOTTONE", "Chiude la camicia", "DÜĞME", "Gömleği iliklemeye yarar", ""],
+["CERNIERA", "Si apre e si chiude con un colpo", "FERMUAR", "Bir çekişte açılıp kapanır", ""],
+["TAGLIA", "S, M, L o XL", "BEDEN", "S, M, L ya da XL", ""],
+["SARTO", "Cuce e aggiusta i vestiti", "TERZİ", "Giysi diker ve onarır", ""],
+["VETRINA", "Mostra i vestiti in negozio", "VİTRİN", "Dükkânın camlı bölmesi", ""],
+["ZAINO", "Borsa da portare sulle spalle", "SIRT ÇANTASI", "Okula giderken omuzlara takılır", "🎒"]
+],
+emozioni: [
+["ORGOGLIO", "Si prova dopo un grande risultato", "GURUR", "Büyük bir başarıdan sonra duyulur", ""],
+["VERGOGNA", "Fa diventare rossi in viso", "UTANÇ", "Yüzü kızartır", "😳"],
+["ENTUSIASMO", "Grande voglia di fare", "COŞKU", "Büyük heves", "🤩"],
+["PAZIENZA", "La virtù di chi sa aspettare", "SABIR", "Beklemeyi bilenin erdemi", ""],
+["ALLEGRIA", "Buonumore contagioso", "NEŞE", "Bulaşıcı iyi keyif", "😄"],
+["ANSIA", "Preoccupazione che agita", "KAYGI", "İnsanı huzursuz eden endişe", "😰"],
+["STUPORE", "Meraviglia davanti all'inatteso", "HAYRET", "Beklenmedik karşısında şaşkınlık", "😮"],
+["AFFETTO", "Il bene che si vuole a qualcuno", "SEVGİ", "Birine duyulan sıcak yakınlık", ""],
+["CURIOSITA", "Voglia di sapere", "MERAK", "Öğrenme isteği", "🧐"],
+["SOLITUDINE", "Lo stare da soli", "YALNIZLIK", "Tek başına olma hâli", ""],
+["EMPATIA", "Mettersi nei panni degli altri", "EMPATİ", "Kendini başkasının yerine koymak", ""],
+["RIMPIANTO", "Dispiacere per ciò che non si è fatto", "PİŞMANLIK", "Yapılmayanın bıraktığı üzüntü", ""],
+["BRIVIDO", "Ti fa venire la pelle d'oca", "ÜRPERTİ", "Tüyleri diken diken eder", ""],
+["PACE", "Il contrario della guerra", "BARIŞ", "Savaşın tersi", "☮️"],
+["SIMPATIA", "Piacere a prima vista", "SEMPATİ", "İlk görüşte duyulan yakınlık", ""]
+],
+italia: [
+["TORINO", "Città della Mole Antonelliana", "TORİNO", "Mole Antonelliana'nın şehri", ""],
+["VERONA", "Città di Romeo e Giulietta", "VERONA", "Romeo ve Juliet'in şehri", ""],
+["ARNO", "Il fiume di Firenze", "ARNO", "Floransa'dan geçen nehir", ""],
+["DOLOMITI", "Montagne che diventano rosa al tramonto", "DOLOMİTLER", "Gün batımında pembeleşen İtalyan dağları", ""],
+["LEONARDO", "Dipinse la Gioconda", "LEONARDO", "Mona Lisa'yı yapan dâhi", ""],
+["GALILEO", "Puntò il cannocchiale verso Giove", "GALİLEO", "Teleskobunu Jüpiter'e çeviren bilgin", ""],
+["PINOCCHIO", "Gli cresce il naso quando mente", "PİNOKYO", "Yalan söyleyince burnu uzar", "🤥"],
+["RISOTTO", "Riso mantecato alla milanese", "RİSOTTO", "Kremamsı İtalyan pirinç yemeği", ""],
+["FOCACCIA", "Pane basso e unto, vanto di Genova", "FOKAÇA", "Zeytinyağlı yassı İtalyan ekmeği", ""],
+["GARDA", "Il lago più grande d'Italia", "GARDA", "İtalya'nın en büyük gölü", ""],
+["CAPRI", "Isola dei Faraglioni", "KAPRİ", "Faraglioni kayalıklarıyla ünlü ada", ""],
+["CARNEVALE", "A Venezia si festeggia in maschera", "KARNAVAL", "Venedik'te maskelerle kutlanır", ""],
+["PALIO", "Corsa di cavalli in piazza a Siena", "PALİO", "Siena'da meydanda yapılan at yarışı", ""],
+["GIULIETTA", "Il suo balcone è a Verona", "JULİET", "Verona'daki ünlü balkonun sahibi", ""],
+["PIZZAIOLO", "Inforna la margherita", "PİZZACI", "Pizzayı fırına veren usta", ""],
+["AMALFI", "La costiera dei limoni", "AMALFİ", "Limonlarıyla ünlü kıyı", ""]
+],
+turchia: [
+["ATATURK", "Fondatore della Turchia moderna", "ATATÜRK", "Türkiye Cumhuriyeti'nin kurucusu", ""],
+["TREBISONDA", "Città sul Mar Nero", "TRABZON", "Karadeniz kıyısında, hamsisiyle ünlü şehir", ""],
+["BURSA", "Città della seta e dell'Iskender", "BURSA", "İpeği ve İskender kebabıyla ünlü şehir", ""],
+["KONYA", "Città dei dervisci rotanti", "KONYA", "Semazenlerin şehri", ""],
+["RUMI", "Poeta mistico sepolto a Konya", "MEVLANA", "Konya'da yatan büyük mutasavvıf", ""],
+["PIDE", "Pizza turca a forma di barca", "PİDE", "Kayık biçimli fırın lezzeti", ""],
+["LAHMACUN", "Sfoglia sottile con carne macinata", "LAHMACUN", "İnce hamur üstünde kıymalı lezzet", ""],
+["KILIM", "Tappeto tessuto a mano", "KİLİM", "El dokuması desenli yaygı", ""],
+["NARGHILE", "Pipa ad acqua", "NARGİLE", "Suyla içilen tütün", ""],
+["BACKGAMMON", "Si gioca con dadi e pedine", "TAVLA", "Zarlarla oynanan kahvehane oyunu", ""],
+["BOREK", "Sfoglia ripiena di formaggio o spinaci", "BÖREK", "Peynirli ya da ıspanaklı yufka", ""],
+["EGEO", "Mare tra Turchia e Grecia", "EGE", "Türkiye ile Yunanistan arasındaki deniz", ""],
+["MAR NERO", "Mare a nord della Turchia", "KARADENİZ", "Türkiye'nin kuzeyindeki deniz", ""],
+["ANATOLIA", "La parte asiatica della Turchia", "ANADOLU", "Türkiye'nin Asya'daki yarımadası", ""]
+]
+};
+(function () {
+  const seen = new Set();
+  CM_THEMES.forEach((th) => th.w.forEach((r) => { if (r[4]) seen.add(r[4]); }));
+  CM_THEMES.forEach((th) => (CM_MORE[th.id] || []).forEach((r) => {
+    if (r[2]) r[2] = r[2].normalize("NFC");
+    if (r[4] && seen.has(r[4])) r[4] = ""; else if (r[4]) seen.add(r[4]);
+    th.w.push(r);
+  }));
+})();
+if (typeof module !== "undefined") module.exports = { CM_THEMES };
+
+/* ---- gen.js ---- */
+/* Crucimondo: crossword generator. Free-form grids where every word crosses another; the same seed always gives the same grid. */
+function cmHash(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  h ^= h >>> 13; h = Math.imul(h, 0x5bd1e995); h ^= h >>> 15;
+  return h >>> 0;
+}
+function cmRng(seed) {
+  let a = (seed >>> 0) || 1;
+  return function () {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function cmShuffle(a, rnd) {
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+
+/* letters of a word as they go in the grid (spaces and punctuation dropped) */
+function cmChars(s) { return Array.from(String(s).normalize("NFC").replace(/[^A-ZÇĞİÖŞÜ]/g, "")); }
+function cmEntry(word, clue, emoji, key) {
+  const ch = cmChars(word), parts = String(word).trim().split(/\s+/);
+  return { key, word, ch, ans: ch.join(""), clue, emoji: emoji || "", enumr: parts.length > 1 ? parts.map((p) => cmChars(p).length).join(", ") : "" };
+}
+/* the rows of a world as puzzle entries for one language and one way of playing:
+   std = word with its clue, emoji = word with its emoji, bi = word in the other language */
+function cmThemeEntries(th, lang, mode) {
+  const out = [];
+  th.w.forEach((r, i) => {
+    const it = r[0], trw = r[2], em = r[4] || "";
+    let word, clue;
+    if (mode === "emoji") { if (!em) return; word = lang === "it" ? it : trw; clue = em; }
+    else if (mode === "bi") { if (!it || !trw) return; word = lang === "it" ? trw : it; clue = lang === "it" ? it : trw; }
+    else { word = lang === "it" ? it : trw; clue = lang === "it" ? r[1] : r[3]; }
+    if (!word) return;
+    const e = cmEntry(word, clue, em, th.id + ":" + i);
+    if (e.ch.length < 3 || e.ch.length > 11) return;
+    e.theme = th.id;
+    out.push(e);
+  });
+  return out;
+}
+/* entries from every world, one per answer (and one per emoji in the emoji game) */
+function cmAllEntries(themes, lang, mode) {
+  const seen = new Set(), seenEm = new Set(), out = [];
+  for (const th of themes) for (const e of cmThemeEntries(th, lang, mode)) {
+    if (seen.has(e.ans)) continue;
+    if (mode === "emoji") { if (seenEm.has(e.emoji)) continue; seenEm.add(e.emoji); }
+    seen.add(e.ans); out.push(e);
+  }
+  return out;
+}
+
+const CM_LEVELS = [
+  { n: 6, w: 8, h: 9, reveal: 0.3, maxLen: 8 },
+  { n: 7, w: 9, h: 10, reveal: 0.24, maxLen: 9 },
+  { n: 8, w: 9, h: 11, reveal: 0.17, maxLen: 9 },
+  { n: 9, w: 10, h: 11, reveal: 0.11, maxLen: 10 },
+  { n: 10, w: 10, h: 12, reveal: 0.06, maxLen: 10 },
+  { n: 11, w: 11, h: 13, reveal: 0, maxLen: 11 }
+];
+const CM_MODES = {
+  daily: { n: 12, w: 11, h: 13, reveal: 0.08, maxLen: 11 },
+  quick: { n: 9, w: 10, h: 12, reveal: 0.12, maxLen: 10 },
+  emoji: { n: 8, w: 10, h: 11, reveal: 0.14, maxLen: 9 },
+  bi: { n: 8, w: 10, h: 11, reveal: 0.18, maxLen: 9 }
+};
+
+/* one try: the words go in one by one, each crossing a letter already on the board */
+function cmAttempt(list, opt, rnd) {
+  const cells = new Map(), words = [];
+  let x0 = 0, x1 = -1, y0 = 0, y1 = -1;
+  const K = (x, y) => (x + 100) * 512 + (y + 100);
+  const at = (x, y) => cells.get(K(x, y));
+  const ratio = opt.w / opt.h;
+  function fits(ch, sx, sy, dir) {
+    const L = ch.length, dx = dir ? 0 : 1, dy = dir ? 1 : 0;
+    if (at(sx - dx, sy - dy) || at(sx + dx * L, sy + dy * L)) return -1;
+    let inter = 0;
+    for (let k = 0; k < L; k++) {
+      const x = sx + dx * k, y = sy + dy * k, c = at(x, y);
+      if (c) {
+        if (c.ch !== ch[k] || (dir ? c.v : c.h) >= 0) return -1;
+        inter++;
+      } else if (dir ? (at(x - 1, y) || at(x + 1, y)) : (at(x, y - 1) || at(x, y + 1))) return -1;
+    }
+    const nx0 = Math.min(x0, sx), nx1 = Math.max(x1, sx + dx * (L - 1)), ny0 = Math.min(y0, sy), ny1 = Math.max(y1, sy + dy * (L - 1));
+    if (nx1 - nx0 + 1 > opt.w || ny1 - ny0 + 1 > opt.h) return -1;
+    return inter;
+  }
+  function put(e, sx, sy, dir) {
+    const ch = e.ch, L = ch.length, dx = dir ? 0 : 1, dy = dir ? 1 : 0, id = words.length;
+    for (let k = 0; k < L; k++) {
+      const x = sx + dx * k, y = sy + dy * k;
+      let c = at(x, y);
+      if (!c) { c = { ch: ch[k], h: -1, v: -1, x, y }; cells.set(K(x, y), c); }
+      if (dir) c.v = id; else c.h = id;
+    }
+    words.push({ e, x: sx, y: sy, dir, len: L });
+    x0 = Math.min(x0, sx); x1 = Math.max(x1, sx + dx * (L - 1)); y0 = Math.min(y0, sy); y1 = Math.max(y1, sy + dy * (L - 1));
+  }
+  function tryPlace(e) {
+    let best = null, bs = -1e9;
+    const L = e.ch.length;
+    for (const c of cells.values()) {
+      for (let dir = 0; dir < 2; dir++) {
+        if ((dir ? c.v : c.h) >= 0) continue;
+        for (let i = 0; i < L; i++) {
+          if (e.ch[i] !== c.ch) continue;
+          const sx = dir ? c.x : c.x - i, sy = dir ? c.y - i : c.y;
+          const inter = fits(e.ch, sx, sy, dir);
+          if (inter <= 0) continue;
+          const dx = dir ? 0 : 1, dy = dir ? 1 : 0;
+          const W = Math.max(x1, sx + dx * (L - 1)) - Math.min(x0, sx) + 1, H = Math.max(y1, sy + dy * (L - 1)) - Math.min(y0, sy) + 1;
+          const s = inter * 14 - W * H * 0.35 - Math.abs(Math.log((W / H) / ratio)) * 10 + rnd() * 7;
+          if (s > bs) { bs = s; best = [sx, sy, dir]; }
+        }
+      }
+    }
+    if (!best) return false;
+    put(e, best[0], best[1], best[2]);
+    return true;
+  }
+  const first = list[0];
+  const canH = first.ch.length <= opt.w, canV = first.ch.length <= opt.h;
+  if (!canH && !canV) return null;
+  put(first, 0, 0, canH && canV ? (rnd() < 0.5 ? 0 : 1) : (canH ? 0 : 1));
+  let rest = list.slice(1);
+  for (let pass = 0; pass < 3 && words.length < opt.n && rest.length; pass++) {
+    const skipped = [];
+    for (const e of rest) {
+      if (words.length >= opt.n) break;
+      if (!tryPlace(e)) skipped.push(e);
+    }
+    rest = skipped;
+  }
+  // how well it hangs together: crossings, density, words crossed more than once
+  let inter = 0;
+  for (const c of cells.values()) if (c.h >= 0 && c.v >= 0) inter++;
+  let multi = 0;
+  for (const w of words) {
+    let k = 0;
+    for (let j = 0; j < w.len; j++) { const c = at(w.dir ? w.x : w.x + j, w.dir ? w.y + j : w.y); if (c.h >= 0 && c.v >= 0) k++; }
+    if (k >= 2) multi++;
+  }
+  const W = x1 - x0 + 1, H = y1 - y0 + 1;
+  const score = words.length * 1000 + inter * 22 + (cells.size / (W * H)) * 120 + multi * 8 - Math.abs(Math.log((W / H) / ratio)) * 30;
+  return { cells, words, x0, x1, y0, y1, score };
+}
+
+function cmFinish(r, opt, rnd) {
+  const W = r.x1 - r.x0 + 1, H = r.y1 - r.y0 + 1;
+  const grid = new Array(W * H).fill(null);
+  for (const c of r.cells.values()) {
+    const x = c.x - r.x0, y = c.y - r.y0, i = y * W + x;
+    grid[i] = { i, x, y, ch: c.ch, h: -1, v: -1, num: 0, given: false, sec: -1 };
+  }
+  const words = r.words.map((w, id) => {
+    const x = w.x - r.x0, y = w.y - r.y0, idx = [];
+    for (let k = 0; k < w.len; k++) {
+      const i = w.dir ? (y + k) * W + x : y * W + x + k;
+      idx.push(i);
+      if (w.dir) grid[i].v = id; else grid[i].h = id;
+    }
+    return { id, e: w.e, x, y, dir: w.dir, cells: idx, num: 0 };
+  });
+  let num = 0;
+  for (let i = 0; i < W * H; i++) {
+    const c = grid[i]; if (!c) continue;
+    const sh = c.h >= 0 && words[c.h].cells[0] === i, sv = c.v >= 0 && words[c.v].cells[0] === i;
+    if (sh || sv) { num++; c.num = num; if (sh) words[c.h].num = num; if (sv) words[c.v].num = num; }
+  }
+  // letters given for free: crossings first, never more than half of a word
+  const all = grid.filter(Boolean), target = Math.round(all.length * (opt.reveal || 0));
+  if (target > 0) {
+    const order = cmShuffle(all.slice(), rnd);
+    order.sort((a, b) => (b.h >= 0 && b.v >= 0 ? 1 : 0) - (a.h >= 0 && a.v >= 0 ? 1 : 0));
+    const cnt = words.map(() => 0);
+    let done = 0;
+    for (const c of order) {
+      if (done >= target) break;
+      const ws = [c.h, c.v].filter((k) => k >= 0);
+      if (ws.some((k) => cnt[k] + 1 > Math.floor(words[k].cells.length / 2))) continue;
+      c.given = true; ws.forEach((k) => cnt[k]++); done++;
+    }
+  }
+  return { W, H, grid, words, secret: null };
+}
+
+/* the secret word: its letters sit in circled squares and read in order, left to right and top to bottom */
+function cmSecret(pz, pool, rnd, fallback, seen) {
+  const used = new Set(pz.words.map((w) => w.e.ans));
+  const seq = pz.grid.filter((c) => c && !c.given), n = seq.length;
+  const maxLen = Math.min(7, Math.floor(n / 3));
+  const ok = (e) => !used.has(e.ans) && e.ch.length >= 4 && e.ch.length <= maxLen;
+  // words of the same world first, then any other word in the game
+  const first = cmShuffle(pool.filter(ok), rnd), mine = new Set(first.map((e) => e.ans));
+  if (seen && seen.size) first.sort((x, y) => (seen.get(x.ans) || 0) - (seen.get(y.ans) || 0));
+  const cands = first.concat(cmShuffle((fallback || []).filter((e) => ok(e) && !mine.has(e.ans)), rnd));
+  for (const e of cands) {
+    const ch = e.ch, k = ch.length, last = new Array(k);
+    let p = n - 1, ok = true;
+    for (let j = k - 1; j >= 0; j--) {
+      while (p >= 0 && seq[p].ch !== ch[j]) p--;
+      if (p < 0) { ok = false; break; }
+      last[j] = p; p--;
+    }
+    if (!ok) continue;
+    const pos = [];
+    let prev = -1;
+    for (let j = 0; j < k; j++) {
+      const target = (j + 0.5) * n / k;
+      let bp = -1, bd = 1e9;
+      for (let q = prev + 1; q <= last[j]; q++) {
+        if (seq[q].ch !== ch[j]) continue;
+        const d = Math.abs(q - target) + rnd() * 2;
+        if (d < bd) { bd = d; bp = q; }
+      }
+      if (bp < 0) { ok = false; break; }
+      pos.push(bp); prev = bp;
+    }
+    if (!ok) continue;
+    const cells = pos.map((q) => seq[q].i);
+    cells.forEach((ci, j) => { pz.grid[ci].sec = j; });
+    return { e, cells };
+  }
+  return null;
+}
+
+/* a whole puzzle: a pool from the entries, the best of many tries, free letters, the secret word */
+function cmMake(entries, secretPool, opt, seed, fallback) {
+  const rnd = cmRng(seed);
+  const fit = entries.filter((e) => e.ch.length <= Math.min(opt.maxLen, Math.max(opt.w, opt.h)));
+  cmShuffle(fit, rnd);
+  // words the player met in earlier levels of the same world go to the back of the queue
+  if (opt.used && opt.used.size) fit.sort((x, y) => (opt.used.get(x.ans) || 0) - (opt.used.get(y.ans) || 0));
+  const pool = fit.slice(0, Math.max(opt.n * 2 + 6, 18));
+  let best = null;
+  const tries = opt.tries || 140;
+  for (let t = 0; t < tries; t++) {
+    const keyed = cmShuffle(pool.slice(), rnd).map((e) => [e, e.ch.length + rnd() * 4]);
+    keyed.sort((a, b) => b[1] - a[1]);
+    const r = cmAttempt(keyed.map((k) => k[0]), opt, rnd);
+    if (r && (!best || r.score > best.score)) best = r;
+  }
+  if (!best) return null;
+  const pz = cmFinish(best, opt, rnd);
+  pz.secret = cmSecret(pz, secretPool || entries, rnd, fallback, opt.used);
+  return pz;
+}
+
+if (typeof module !== "undefined") module.exports = { cmHash, cmRng, cmShuffle, cmChars, cmEntry, cmThemeEntries, cmAllEntries, cmMake, CM_LEVELS, CM_MODES };
+
+/* ---- app.js ---- */
+/* Crucimondo: the game */
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+  const RM = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  const ico = (id, cls) => '<svg class="' + (cls || 'i') + '" aria-hidden="true"><use href="#i-' + id + '"/></svg>';
+
+  /* ---------- what the game remembers, on this device only ---------- */
+  const KEY = 'crucimondo.v1';
+  const S = (function () {
+    let s = null;
+    try { s = JSON.parse(localStorage.getItem(KEY)); } catch (e) { s = null; }
+    if (!s || typeof s !== 'object' || Array.isArray(s)) s = {};
+    const d = { coins: 120, sound: true, stars: {}, daily: {}, wins: {}, prog: {}, cur: {}, bonus: '', coach: false };
+    for (const k in d) if (s[k] == null || typeof s[k] !== typeof d[k]) s[k] = d[k];
+    if (!isFinite(s.coins) || s.coins < 0) s.coins = 120;
+    if (s.lang !== 'it' && s.lang !== 'tr') s.lang = null;
+    return s;
+  })();
+  let saveT = 0;
+  function save(now) {
+    clearTimeout(saveT);
+    const go = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* storage can be off; the game still works */ } };
+    if (now) go(); else saveT = setTimeout(go, 300);
+  }
+  // inside the Handemiyy site (the page sets window.HM_ALBUM): the site's language, a pack for the album, a way back
+  const ALBUM = typeof window.HM_ALBUM === 'string' ? window.HM_ALBUM : null;
+  function siteLang() { if (!ALBUM) return null; try { const v = JSON.parse(localStorage.getItem('hm-lang')); return v === 'it' || v === 'tr' ? v : null; } catch (e) { return null; } }
+  function grantPack() {
+    if (!ALBUM) return false;
+    try {
+      let st = JSON.parse(localStorage.getItem('hm-al'));
+      if (!st || typeof st !== 'object' || Array.isArray(st)) st = {};
+      st.packs = Math.max(0, Math.floor(+(st.packs == null ? 3 : st.packs) || 0)) + 1; st.earned = (+st.earned || 0) + 1;
+      localStorage.setItem('hm-al', JSON.stringify(st)); return true;
+    } catch (e) { return false; }
+  }
+  let lang = S.lang || siteLang() || (/^tr/i.test(navigator.language || '') ? 'tr' : 'it');
+
+  /* ---------- words on screen ---------- */
+  const T = {
+    it: {
+      tagline: 'Parole crociate a tema: quattordici mondi da sei livelli, sfide speciali e un cruciverba nuovo ogni giorno.',
+      daily: 'Cruciverba del giorno', dailySub: 'Sfida di oggi', play: 'Gioca', cont: 'Continua', doneToday: 'Fatto',
+      streak: (n) => (n ? (n === 1 ? 'Serie: 1 giorno' : 'Serie: ' + n + ' giorni di fila') : 'Gioca oggi per iniziare la serie'),
+      modes: 'Sfide speciali', worlds: 'Mondi',
+      emoji: 'Emoji', emojiSub: 'Al posto delle definizioni ci sono le faccine', bi: 'Parole turche', biSub: 'Leggi la parola in italiano, scrivila in turco', quick: 'Partita veloce', quickSub: 'Un mondo a sorpresa, subito', won: (n) => 'Vinte: ' + n,
+      foot: 'Il gioco salva da solo i progressi su questo dispositivo.',
+      level: (n) => 'Livello ' + n, words: (n) => n + ' parole', locked: 'Prima completa il livello precedente', inprog: 'in corso',
+      across: 'Orizzontali', down: 'Verticali', clues: 'Definizioni',
+      secret: 'Parola segreta', clue: 'Indizio', secretTap: 'Tocca qui quando pensi di averla capita', secretType: 'Scrivi la parola segreta',
+      secretOk: (n) => 'Parola segreta indovinata! +' + n, secretNo: 'Non è questa: riprova più avanti', secretDone: (w) => 'Parola segreta completata: ' + w,
+      hLetter: 'Rivela una lettera', hWord: 'Rivela la parola', hList: 'Tutte le definizioni', free: 'Gratis',
+      hNote: 'Senza aiuti prendi tre stelle. Ogni parola risolta da solo vale monete.',
+      noCoins: 'Monete finite: risolvi qualche parola per guadagnarne', wrong: 'Non è ancora giusta', combo: (n) => n + ' parole di fila! +' + n,
+      titles: { 3: ['Perfetto!', 'Fantastico!', 'Che mente!'], 2: ['Bravissimo!', 'Grande!', 'Ottimo lavoro!'], 1: ['Ce l\'hai fatta!', 'Ben fatto!', 'Completato!'] },
+      emojiPlay: 'Tutti i mondi', biTitle: 'Parole turche', biPlay: 'Scrivi in turco',
+      endLevel: (n, w) => w + ' · livello ' + n + ' completato', endDaily: 'Hai completato il cruciverba di oggi', endFree: 'Cruciverba completato',
+      time: 'Tempo', hints: 'Aiuti', coins: 'Monete',
+      next: 'Livello successivo', replay: 'Rigioca', map: 'Mappa', menu: 'Menu', another: 'Un altro', tomorrow: 'Domani arriva un cruciverba nuovo',
+      bonus: (n) => 'Bonus del giorno: +' + n + ' monete',
+      coach: 'Tocca una casella e scrivi con la tastiera. Tocca di nuovo la stessa casella per cambiare direzione. Le parole giuste diventano d\'oro.', coachOk: 'Ho capito',
+      sound: 'Suono acceso', soundOff: 'Suono spento', lang: 'Lingua: italiano. Tocca per passare al turco', back: 'Indietro', prev: 'Definizione precedente', nextClue: 'Definizione successiva',
+      swap: 'Cambia direzione', del: 'Cancella', hintsBtn: 'Aiuti', close: 'Chiudi', coinsLbl: (n) => n + ' monete', fail: 'Non riesco a preparare questo schema',
+      pack: '+1 bustina per l\'album', packSub: 'Tocca per aprirla', home: 'Tutti i giochi'
+    },
+    tr: {
+      tagline: 'Temalı bulmacalar: altışar seviyeli on dört dünya, özel oyunlar ve her gün yeni bir bulmaca.',
+      daily: 'Günün bulmacası', dailySub: 'Günün bulmacası', play: 'Oyna', cont: 'Devam et', doneToday: 'Bitti',
+      streak: (n) => (n ? 'Seri: ' + n + ' gün üst üste' : 'Seriyi başlatmak için bugün oyna'),
+      modes: 'Özel oyunlar', worlds: 'Dünyalar',
+      emoji: 'Emoji', emojiSub: 'İpuçlarının yerinde emojiler var', bi: 'İtalyanca kelimeler', biSub: 'Kelimeyi Türkçe oku, İtalyanca yaz', quick: 'Hızlı oyun', quickSub: 'Sürpriz bir dünya, hemen', won: (n) => 'Kazanılan: ' + n,
+      foot: 'Oyun ilerlemeni bu cihazda kendiliğinden kaydeder.',
+      level: (n) => 'Seviye ' + n, words: (n) => n + ' kelime', locked: 'Önce bir önceki seviyeyi bitir', inprog: 'devam ediyor',
+      across: 'Soldan sağa', down: 'Yukarıdan aşağıya', clues: 'İpuçları',
+      secret: 'Gizli kelime', clue: 'İpucu', secretTap: 'Bildiğini düşünüyorsan buraya dokun', secretType: 'Gizli kelimeyi yaz',
+      secretOk: (n) => 'Gizli kelimeyi bildin! +' + n, secretNo: 'Bu değil, biraz sonra tekrar dene', secretDone: (w) => 'Gizli kelime tamamlandı: ' + w,
+      hLetter: 'Bir harf aç', hWord: 'Kelimeyi aç', hList: 'Tüm ipuçları', free: 'Ücretsiz',
+      hNote: 'Yardım almadan üç yıldız alırsın. Kendi çözdüğün her kelime altın kazandırır.',
+      noCoins: 'Altının bitti: birkaç kelime çözerek kazan', wrong: 'Henüz doğru değil', combo: (n) => 'Üst üste ' + n + ' kelime! +' + n,
+      titles: { 3: ['Mükemmel!', 'Müthiş!', 'Süpersin!'], 2: ['Harika!', 'Bravo!', 'Çok iyi!'], 1: ['Başardın!', 'Aferin!', 'Tamamlandı!'] },
+      emojiPlay: 'Tüm dünyalar', biTitle: 'İtalyanca', biPlay: 'İtalyanca yaz',
+      endLevel: (n, w) => w + ' · ' + n + '. seviye tamamlandı', endDaily: 'Bugünün bulmacasını bitirdin', endFree: 'Bulmaca tamamlandı',
+      time: 'Süre', hints: 'Yardım', coins: 'Altın',
+      next: 'Sonraki seviye', replay: 'Tekrar oyna', map: 'Harita', menu: 'Menü', another: 'Bir tane daha', tomorrow: 'Yarın yeni bir bulmaca var',
+      bonus: (n) => 'Günlük ödül: +' + n + ' altın',
+      coach: 'Bir kareye dokun ve klavyeyle yaz. Yön değiştirmek için aynı kareye tekrar dokun. Doğru kelimeler altın rengine döner.', coachOk: 'Anladım',
+      sound: 'Ses açık', soundOff: 'Ses kapalı', lang: 'Dil: Türkçe. İtalyancaya geçmek için dokun', back: 'Geri', prev: 'Önceki ipucu', nextClue: 'Sonraki ipucu',
+      swap: 'Yön değiştir', del: 'Sil', hintsBtn: 'Yardım', close: 'Kapat', coinsLbl: (n) => n + ' altın', fail: 'Bu bulmaca hazırlanamadı',
+      pack: 'Albüm için +1 paket', packSub: 'Açmak için dokun', home: 'Tüm oyunlar'
+    }
+  };
+  const t = (k, ...a) => { const v = T[lang][k]; return typeof v === 'function' ? v(...a) : v; };
+  const TH = {};
+  CM_THEMES.forEach((th) => { TH[th.id] = th; });
+  const loc = (l) => ((l || lang) === 'tr' ? 'tr-TR' : 'it-IT');
+  function nice(word, l) { const s = String(word).toLocaleLowerCase(loc(l)); return s.charAt(0).toLocaleUpperCase(loc(l)) + s.slice(1); }
+  function dkey(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function fromKey(k) { const p = String(k).split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+  function longDate(d) { try { const s = new Intl.DateTimeFormat(loc(), { weekday: 'long', day: 'numeric', month: 'long' }).format(d); return s.charAt(0).toLocaleUpperCase(loc()) + s.slice(1); } catch (e) { return dkey(d); } }
+  function shortDate(d) { try { return new Intl.DateTimeFormat(loc(), { day: 'numeric', month: 'long' }).format(d); } catch (e) { return dkey(d); } }
+  function clock(s) { s = Math.max(0, Math.round(s)); const m = Math.floor(s / 60); return m + ':' + String(s % 60).padStart(2, '0'); }
+
+  /* ---------- sound and touch feedback ---------- */
+  let AC = null;
+  function audio() {
+    if (!S.sound) return null;
+    try {
+      if (!AC) { const A = window.AudioContext || window.webkitAudioContext; if (A) AC = new A(); }
+      if (AC && AC.state === 'suspended') AC.resume();
+    } catch (e) { AC = null; }
+    return AC;
+  }
+  function tone(f, d, type, vol, at, slide) {
+    const a = audio(); if (!a) return;
+    try {
+      const t0 = a.currentTime + (at || 0), o = a.createOscillator(), g = a.createGain();
+      o.type = type || 'sine'; o.frequency.setValueAtTime(f, t0);
+      if (slide) o.frequency.exponentialRampToValueAtTime(slide, t0 + d);
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(vol || 0.06, t0 + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t0 + d);
+      o.connect(g); g.connect(a.destination); o.start(t0); o.stop(t0 + d + 0.03);
+    } catch (e) { /* no sound is fine */ }
+  }
+  const SFX = {
+    key() { tone(640 + Math.random() * 90, 0.05, 'triangle', 0.045); },
+    del() { tone(330, 0.06, 'triangle', 0.04); },
+    tap() { tone(520, 0.04, 'sine', 0.03); },
+    word() { [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.2, 'triangle', 0.06, i * 0.06)); },
+    wrong() { tone(260, 0.12, 'sine', 0.06); tone(200, 0.2, 'sine', 0.05, 0.1); },
+    hint() { tone(988, 0.1, 'sine', 0.05); tone(1480, 0.18, 'sine', 0.04, 0.07); },
+    secret() { [784, 988, 1175, 1568, 1976].forEach((f, i) => tone(f, 0.24, 'sine', 0.05, i * 0.07)); },
+    win() { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, 0.3, 'triangle', 0.065, i * 0.1)); [523, 659, 784].forEach((f) => tone(f, 1.1, 'sine', 0.035, 0.55)); },
+    star(i) { tone(740 + i * 200, 0.22, 'triangle', 0.06); tone(1480 + i * 400, 0.12, 'sine', 0.025, 0.04); }
+  };
+  function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) { /* not on this device */ } }
+
+  /* ---------- painted scenes, one per world ---------- */
+  function lin(g, x0, y0, x1, y1, stops) { const gr = g.createLinearGradient(x0, y0, x1, y1); stops.forEach((c, i) => gr.addColorStop(i / (stops.length - 1), c)); return gr; }
+  function fillSky(g, w, h, stops) { g.fillStyle = lin(g, 0, 0, 0, h, stops); g.fillRect(0, 0, w, h); }
+  function glow(g, x, y, r, c) { const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, c); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); }
+  function disc(g, x, y, r, c) { g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fillStyle = c; g.fill(); }
+  function cloud(g, x, y, s, a) {
+    g.fillStyle = 'rgba(255,255,255,' + a + ')';
+    [[0, 0, 1], [0.95, -0.4, 0.85], [1.9, 0, 0.95], [0.95, 0.25, 1.05], [-0.85, 0.2, 0.7], [2.75, 0.25, 0.68]].forEach((p) => { g.beginPath(); g.arc(x + p[0] * s, y + p[1] * s, s * p[2], 0, Math.PI * 2); g.fill(); });
+  }
+  function ridge(g, w, h, y0, amp, c, r) {
+    const p1 = r() * 6, p2 = r() * 6, f1 = (1.2 + r()) * Math.PI * 2 / w, f2 = (3 + r() * 2) * Math.PI * 2 / w;
+    g.beginPath(); g.moveTo(0, h);
+    for (let x = 0; x <= w + 8; x += 8) g.lineTo(x, y0 + amp * (Math.sin(x * f1 + p1) * 0.65 + Math.sin(x * f2 + p2) * 0.35));
+    g.lineTo(w + 8, h); g.closePath(); g.fillStyle = c; g.fill();
+  }
+  function sparkle(g, x, y, s, c) { g.beginPath(); g.moveTo(x, y - s); g.quadraticCurveTo(x, y, x + s, y); g.quadraticCurveTo(x, y, x, y + s); g.quadraticCurveTo(x, y, x - s, y); g.quadraticCurveTo(x, y, x, y - s); g.fillStyle = c; g.fill(); }
+  function rrect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  function heart(g, x, y, s, c, rot) { g.save(); g.translate(x, y); g.rotate(rot || 0); g.beginPath(); g.moveTo(0, s * 0.9); g.bezierCurveTo(-s * 1.25, 0, -s * 0.95, -s * 1.1, 0, -s * 0.42); g.bezierCurveTo(s * 0.95, -s * 1.1, s * 1.25, 0, 0, s * 0.9); g.fillStyle = c; g.fill(); g.restore(); }
+  function waves(g, w, y0, y1, n, r, m, a) {
+    g.strokeStyle = 'rgba(255,255,255,' + (a || 0.6) + ')'; g.lineWidth = Math.max(1.4, m * 0.005); g.lineCap = 'round';
+    for (let i = 0; i < n; i++) { const y = y0 + r() * (y1 - y0), x = r() * w, s = m * (0.025 + r() * 0.03); g.beginPath(); g.moveTo(x - s, y); g.quadraticCurveTo(x - s / 2, y - s * 0.35, x, y); g.quadraticCurveTo(x + s / 2, y - s * 0.35, x + s, y); g.stroke(); }
+  }
+  function birds(g, x0, y0, w0, h0, n, s0, r, c) {
+    g.strokeStyle = c; g.lineWidth = Math.max(1.2, s0 * 0.16); g.lineCap = 'round';
+    for (let i = 0; i < n; i++) { const x = x0 + r() * w0, y = y0 + r() * h0, s = s0 * (0.7 + r() * 0.6); g.beginPath(); g.moveTo(x - s, y - s * 0.3); g.quadraticCurveTo(x - s * 0.45, y - s * 0.65, x, y); g.quadraticCurveTo(x + s * 0.45, y - s * 0.65, x + s, y - s * 0.3); g.stroke(); }
+  }
+  function mountains(g, w, base, height, c, snow, r, n) {
+    for (let i = 0; i < n; i++) {
+      const cx = -w * 0.1 + (i + 0.5) * (w * 1.2) / n + (r() - 0.5) * w * 0.08, hh = height * (0.65 + r() * 0.45), bw = w * (0.18 + r() * 0.12);
+      g.beginPath(); g.moveTo(cx - bw, base); g.lineTo(cx, base - hh); g.lineTo(cx + bw, base); g.closePath(); g.fillStyle = c; g.fill();
+      g.beginPath(); g.moveTo(cx, base - hh); g.lineTo(cx - bw * 0.24, base - hh * 0.76); g.lineTo(cx - bw * 0.1, base - hh * 0.8); g.lineTo(cx, base - hh * 0.72); g.lineTo(cx + bw * 0.1, base - hh * 0.79); g.lineTo(cx + bw * 0.24, base - hh * 0.76); g.closePath(); g.fillStyle = snow; g.fill();
+    }
+  }
+  function pine(g, x, y, s, c) {
+    g.fillStyle = '#8a6b4f'; g.fillRect(x - s * 0.06, y - s * 0.22, s * 0.12, s * 0.24);
+    g.fillStyle = c;
+    for (let k = 0; k < 3; k++) { const yy = y - s * 0.18 - k * s * 0.3, ww = s * (0.48 - k * 0.11); g.beginPath(); g.moveTo(x - ww, yy); g.lineTo(x, yy - s * 0.52); g.lineTo(x + ww, yy); g.closePath(); g.fill(); }
+  }
+  function buildings(g, w, base, maxH, c, r, win) {
+    let x = -6;
+    while (x < w + 6) {
+      const bw = Math.max(18, w * (0.05 + r() * 0.07)), bh = maxH * (0.35 + r() * 0.65);
+      g.fillStyle = c; g.fillRect(x, base - bh, bw, bh + 2);
+      if (r() < 0.25) g.fillRect(x + bw / 2 - 1, base - bh - maxH * 0.1, 2, maxH * 0.1);
+      if (win) {
+        g.fillStyle = 'rgba(255,246,214,.92)';
+        const cs = Math.max(3, bw * 0.13), gp = cs * 0.9;
+        for (let yy = base - bh + gp; yy < base - gp * 2; yy += cs * 1.4 + gp) for (let xx = x + gp; xx < x + bw - cs - gp * 0.5; xx += cs + gp) if (r() < 0.5) g.fillRect(xx, yy, cs, cs * 1.4);
+      }
+      x += bw + (r() < 0.3 ? 4 : 0);
+    }
+  }
+  function boat(g, x, y, s) {
+    g.fillStyle = '#3f5b8c'; g.beginPath(); g.moveTo(x - s * 0.6, y); g.lineTo(x + s * 0.6, y); g.lineTo(x + s * 0.42, y + s * 0.22); g.lineTo(x - s * 0.42, y + s * 0.22); g.closePath(); g.fill();
+    g.fillStyle = '#ffffff'; g.beginPath(); g.moveTo(x - s * 0.04, y - s * 0.05); g.lineTo(x - s * 0.04, y - s * 1.1); g.lineTo(x + s * 0.52, y - s * 0.08); g.closePath(); g.fill();
+    g.fillStyle = '#ffd6e8'; g.beginPath(); g.moveTo(x - s * 0.12, y - s * 0.05); g.lineTo(x - s * 0.12, y - s * 0.84); g.lineTo(x - s * 0.52, y - s * 0.08); g.closePath(); g.fill();
+  }
+  function note(g, x, y, s, c, flag) {
+    g.fillStyle = c; g.strokeStyle = c; g.lineWidth = Math.max(1.4, s * 0.14);
+    g.beginPath(); g.ellipse(x, y, s * 0.62, s * 0.44, -0.4, 0, Math.PI * 2); g.fill();
+    g.beginPath(); g.moveTo(x + s * 0.55, y - s * 0.1); g.lineTo(x + s * 0.55, y - s * 2.6); g.stroke();
+    if (flag) { g.beginPath(); g.moveTo(x + s * 0.55, y - s * 2.6); g.quadraticCurveTo(x + s * 1.45, y - s * 2, x + s * 1.1, y - s * 1.15); g.stroke(); }
+  }
+  function mosque(g, x, y, s, c) {
+    g.fillStyle = c;
+    g.fillRect(x - s * 1.1, y - s * 0.5, s * 2.2, s * 0.52);
+    g.beginPath(); g.arc(x, y - s * 0.5, s * 0.62, Math.PI, 0); g.fill();
+    g.fillRect(x - s * 0.03, y - s * 1.3, s * 0.06, s * 0.2);
+    g.beginPath(); g.arc(x - s * 0.72, y - s * 0.5, s * 0.32, Math.PI, 0); g.fill();
+    g.beginPath(); g.arc(x + s * 0.72, y - s * 0.5, s * 0.32, Math.PI, 0); g.fill();
+    [-1.3, 1.3].forEach((d) => { const mx = x + d * s; g.fillRect(mx - s * 0.06, y - s * 1.85, s * 0.12, s * 1.85); g.beginPath(); g.moveTo(mx - s * 0.085, y - s * 1.85); g.lineTo(mx, y - s * 2.25); g.lineTo(mx + s * 0.085, y - s * 1.85); g.closePath(); g.fill(); g.fillRect(mx - s * 0.11, y - s * 1.38, s * 0.22, s * 0.05); });
+  }
+
+  const SC = {
+    home(g, w, h, r, m) {
+      fillSky(g, w, h, ['#ffe7d6', '#fde4ef', '#e5edff']);
+      glow(g, w * 0.82, h * 0.1, Math.max(w, h) * 0.45, 'rgba(255,232,186,.95)');
+      glow(g, w * 0.08, h * 0.75, Math.max(w, h) * 0.5, 'rgba(210,228,255,.85)');
+      for (let i = 0; i < 6; i++) cloud(g, r() * w, h * (0.06 + r() * 0.7), m * (0.035 + r() * 0.04), 0.5);
+      const L = 'CRUCIMONDOPAROLEŞĞÇ';
+      for (let i = 0; i < 16; i++) {
+        const s = m * (0.06 + r() * 0.08), x = r() * w, y = r() * h;
+        g.save(); g.translate(x, y); g.rotate((r() - 0.5) * 0.7); g.globalAlpha = 0.3 + r() * 0.25;
+        rrect(g, -s / 2, -s / 2, s, s, s * 0.22); g.fillStyle = i % 5 === 0 ? '#ffe39b' : '#ffffff'; g.fill();
+        g.fillStyle = 'rgba(28,37,65,.55)'; g.font = '600 ' + Math.round(s * 0.58) + 'px Fredoka, Trebuchet MS, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(L[i % L.length], 0, s * 0.05);
+        g.restore();
+      }
+    },
+    savana(g, w, h, r, m) {
+      fillSky(g, w, h, ['#fff3cf', '#ffe6b8', '#ffd9ae']);
+      glow(g, w * 0.72, h * 0.32, m * 0.6, 'rgba(255,212,140,.85)'); disc(g, w * 0.72, h * 0.32, m * 0.1, '#ffeab0');
+      for (let i = 0; i < 3; i++) cloud(g, r() * w, h * (0.07 + r() * 0.16), m * (0.03 + r() * 0.03), 0.6);
+      birds(g, w * 0.4, h * 0.12, w * 0.5, h * 0.16, 5, m * 0.018, r, 'rgba(110,84,60,.45)');
+      ridge(g, w, h, h * 0.6, h * 0.03, '#dfeaa9', r);
+      ridge(g, w, h, h * 0.69, h * 0.035, '#bcdc88', r);
+      for (let i = 0; i < 3; i++) {
+        const x = w * (0.12 + i * 0.34 + r() * 0.1), y = h * (0.7 + r() * 0.02), s = m * (0.07 + r() * 0.035);
+        g.strokeStyle = '#7a6248'; g.lineWidth = s * 0.12; g.lineCap = 'round';
+        g.beginPath(); g.moveTo(x, y); g.lineTo(x, y - s * 0.9); g.moveTo(x, y - s * 0.6); g.lineTo(x - s * 0.5, y - s * 1.05); g.moveTo(x, y - s * 0.65); g.lineTo(x + s * 0.45, y - s * 1.05); g.stroke();
+        g.fillStyle = '#6f9e4c'; g.beginPath(); g.ellipse(x, y - s * 1.1, s * 1.1, s * 0.28, 0, 0, Math.PI * 2); g.fill();
+        g.fillStyle = 'rgba(255,255,255,.16)'; g.beginPath(); g.ellipse(x - s * 0.2, y - s * 1.18, s * 0.7, s * 0.11, 0, 0, Math.PI * 2); g.fill();
+      }
+      ridge(g, w, h, h * 0.8, h * 0.04, '#95c96c', r);
+      ridge(g, w, h, h * 0.9, h * 0.03, '#7cb95b', r);
+    },
+    maiolica(g, w, h, r, m) {
+      g.fillStyle = '#f6fbff'; g.fillRect(0, 0, w, h);
+      const s = Math.max(56, m * 0.17);
+      for (let y = -s / 2, row = 0; y < h + s; y += s, row++) {
+        for (let x = -s / 2, col = 0; x < w + s; x += s, col++) {
+          g.fillStyle = (row + col) % 2 ? '#ffffff' : '#f8fcff'; g.fillRect(x + 1, y + 1, s - 2, s - 2);
+          const cx = x + s / 2, cy = y + s / 2;
+          if ((row + col) % 2 === 0) {
+            g.fillStyle = '#ffe27a'; g.beginPath(); g.ellipse(cx, cy, s * 0.16, s * 0.12, -0.5, 0, Math.PI * 2); g.fill();
+            g.fillStyle = '#fff3b5'; g.beginPath(); g.ellipse(cx - s * 0.04, cy - s * 0.03, s * 0.06, s * 0.035, -0.5, 0, Math.PI * 2); g.fill();
+            g.fillStyle = '#8dcf8b'; g.beginPath(); g.ellipse(cx + s * 0.13, cy - s * 0.13, s * 0.08, s * 0.035, -0.9, 0, Math.PI * 2); g.fill();
+          } else {
+            g.fillStyle = '#8cc5ec';
+            for (let k = 0; k < 4; k++) { const a = k * Math.PI / 2 + Math.PI / 4; g.beginPath(); g.ellipse(cx + Math.cos(a) * s * 0.1, cy + Math.sin(a) * s * 0.1, s * 0.085, s * 0.045, a, 0, Math.PI * 2); g.fill(); }
+            disc(g, cx, cy, s * 0.045, '#ffd257');
+          }
+        }
+      }
+      g.strokeStyle = '#aed6f1'; g.lineWidth = s * 0.055;
+      for (let y = -s / 2; y < h + s; y += s) for (let x = -s / 2; x < w + s; x += s) { g.beginPath(); g.arc(x, y, s * 0.27, 0, Math.PI * 2); g.stroke(); }
+      g.strokeStyle = 'rgba(150,175,200,.35)'; g.lineWidth = 1.5;
+      for (let x = -s / 2; x < w + s; x += s) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); }
+      for (let y = -s / 2; y < h + s; y += s) { g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke(); }
+      g.fillStyle = lin(g, 0, 0, 0, h, ['rgba(255,255,255,.2)', 'rgba(255,255,255,.55)', 'rgba(255,255,255,.25)']); g.fillRect(0, 0, w, h);
+    },
+    alpi(g, w, h, r, m) {
+      fillSky(g, w, h, ['#dcf1ff', '#eef9f4', '#f6fbe9']);
+      glow(g, w * 0.2, h * 0.18, m * 0.55, 'rgba(255,246,210,.9)');
+      for (let i = 0; i < 4; i++) cloud(g, r() * w, h * (0.06 + r() * 0.2), m * (0.03 + r() * 0.03), 0.7);
+      mountains(g, w, h * 0.67, h * 0.3, '#cadcef', '#ffffff', r, 5);
+      mountains(g, w, h * 0.67, h * 0.22, '#a8c6e1', '#f3f8ff', r, 4);
+      g.fillStyle = lin(g, 0, h * 0.665, 0, h * 0.77, ['#d2f1f7', '#b4e3ee']); g.fillRect(0, h * 0.665, w, h * 0.11);
+      g.strokeStyle = 'rgba(255,255,255,.75)'; g.lineWidth = 2; g.lineCap = 'round';
+      for (let i = 0; i < 7; i++) { const y = h * (0.68 + r() * 0.08), x = r() * w; g.beginPath(); g.moveTo(x, y); g.lineTo(x + m * (0.04 + r() * 0.08), y); g.stroke(); }
+      ridge(g, w, h, h * 0.77, h * 0.015, '#c2e6b3', r);
+      const ps = [];
+      for (let i = 0; i < 16; i++) ps.push([r() * w, h * (0.8 + r() * 0.18), m * (0.05 + r() * 0.05), r() < 0.5 ? '#5aa877' : '#4b9468']);
+      ps.sort((a, b) => a[1] - b[1]).forEach((p) => pine(g, p[0], p[1], p[2], p[3]));
+    },
+    mare(g, w, h, r, m) {
+      const hz = h * 0.5;
+      fillSky(g, w, h, ['#bfeefd', '#e6f8ff', '#fff1df']);
+      glow(g, w * 0.28, hz - m * 0.02, m * 0.55, 'rgba(255,226,170,.85)'); disc(g, w * 0.28, hz - m * 0.03, m * 0.075, '#fff0c4');
+      for (let i = 0; i < 3; i++) cloud(g, r() * w, h * (0.08 + r() * 0.2), m * (0.03 + r() * 0.03), 0.8);
+      birds(g, w * 0.45, h * 0.12, w * 0.45, h * 0.2, 4, m * 0.018, r, 'rgba(80,100,130,.45)');
+      g.fillStyle = lin(g, 0, hz, 0, h * 0.83, ['#95dce7', '#5fc7d7', '#45b5cb']); g.fillRect(0, hz, w, h * 0.83 - hz);
+      for (let i = 0; i < 10; i++) { const y = hz + (i + 1) * (h * 0.28) / 11, ww = m * (0.05 + 0.025 * i); g.fillStyle = 'rgba(255,246,214,' + (0.65 - i * 0.055) + ')'; g.fillRect(w * 0.28 - ww / 2 + (r() - 0.5) * m * 0.03, y, ww, 2.2); }
+      waves(g, w, hz + h * 0.04, h * 0.78, 14, r, m, 0.65);
+      boat(g, w * 0.7, hz + h * 0.07, m * 0.07); boat(g, w * 0.88, hz + h * 0.035, m * 0.04);
+      g.beginPath(); g.moveTo(0, h); g.lineTo(0, h * 0.84);
+      for (let x = 0; x <= w + 10; x += 10) g.lineTo(x, h * 0.825 + Math.sin(x / w * 6 + 1) * h * 0.012);
+      g.lineTo(w + 10, h); g.closePath(); g.fillStyle = lin(g, 0, h * 0.8, 0, h, ['#fcefd0', '#f3d9a8']); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.85)'; g.lineWidth = Math.max(2, m * 0.007); g.beginPath();
+      for (let x = 0; x <= w + 10; x += 10) { const y = h * 0.825 + Math.sin(x / w * 6 + 1) * h * 0.012 - 1; if (x) g.lineTo(x, y); else g.moveTo(x, y); }
+      g.stroke();
+      for (let i = 0; i < 12; i++) disc(g, r() * w, h * (0.86 + r() * 0.12), m * (0.004 + r() * 0.006), 'rgba(214,170,110,.45)');
+    },
+    skyline(g, w, h, r, m) {
+      fillSky(g, w, h, ['#ece6ff', '#fbe9f3', '#ffefe2']);
+      glow(g, w * 0.7, h * 0.32, m * 0.55, 'rgba(255,226,196,.85)');
+      for (let i = 0; i < 4; i++) cloud(g, r() * w, h * (0.06 + r() * 0.22), m * (0.03 + r() * 0.03), 0.7);
+      buildings(g, w, h * 0.78, h * 0.34, '#ddd3f6', r, false);
+      buildings(g, w, h * 0.85, h * 0.42, '#bcaef0', r, true);
+      g.fillStyle = '#a99be6'; g.fillRect(0, h * 0.85, w, h * 0.15);
+      g.fillStyle = 'rgba(255,255,255,.6)'; for (let x = r() * 30; x < w; x += 64) g.fillRect(x, h * 0.92, 30, 4);
+    },
+    interno(g, w, h, r, m) {
+      g.fillStyle = '#fff3ea'; g.fillRect(0, 0, w, h);
+      const sw = Math.max(18, w * 0.045);
+      for (let x = 0; x < w; x += sw * 2) { g.fillStyle = '#ffe8da'; g.fillRect(x, 0, sw, h); }
+      for (let y = sw, row = 0; y < h * 0.8; y += sw * 2.2, row++) for (let x = sw * (row % 2 ? 2.5 : 0.5); x < w; x += sw * 4) {
+        g.fillStyle = '#f7c9ad'; for (let k = 0; k < 5; k++) { const a = k * Math.PI * 2 / 5; disc(g, x + Math.cos(a) * sw * 0.16, y + Math.sin(a) * sw * 0.16, sw * 0.11, '#f7c9ad'); }
+        disc(g, x, y, sw * 0.08, '#ffe08a');
+      }
+      const ww = Math.min(w * 0.42, h * 0.36), wh = ww * 1.2, wx = w * 0.5 - ww / 2, wy = h * 0.12;
+      rrect(g, wx - 9, wy - 9, ww + 18, wh + 18, 14); g.fillStyle = '#ffffff'; g.fill();
+      rrect(g, wx, wy, ww, wh, 8); g.fillStyle = lin(g, 0, wy, 0, wy + wh, ['#cdeeff', '#fff6e6']); g.fill();
+      cloud(g, wx + ww * 0.28, wy + wh * 0.32, ww * 0.07, 0.95);
+      g.fillStyle = '#ffffff'; g.fillRect(wx + ww / 2 - 3, wy, 6, wh); g.fillRect(wx, wy + wh * 0.46 - 3, ww, 6);
+      g.fillStyle = lin(g, 0, h * 0.82, 0, h, ['#f5dcbc', '#ebc79c']); g.fillRect(0, h * 0.82, w, h * 0.18);
+      g.strokeStyle = 'rgba(180,130,80,.22)'; g.lineWidth = 2; for (let y = h * 0.86; y < h; y += h * 0.045) { g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke(); }
+      const px = w * 0.15, py = h * 0.82, ps = m * 0.16;
+      g.fillStyle = '#9cc7b4'; g.beginPath(); g.moveTo(px - ps * 0.3, py - ps * 0.42); g.lineTo(px + ps * 0.3, py - ps * 0.42); g.lineTo(px + ps * 0.22, py); g.lineTo(px - ps * 0.22, py); g.closePath(); g.fill();
+      for (let k = 0; k < 7; k++) { const a = -Math.PI / 2 + (k - 3) * 0.32; g.fillStyle = k % 2 ? '#69b38a' : '#58a37b'; g.save(); g.translate(px, py - ps * 0.42); g.rotate(a + Math.PI / 2); g.beginPath(); g.ellipse(0, -ps * 0.42, ps * 0.09, ps * 0.42, 0, 0, Math.PI * 2); g.fill(); g.restore(); }
+      const lx = w * 0.86, ly = h * 0.82, ls = m * 0.22;
+      g.fillStyle = '#c9a77f'; g.fillRect(lx - 2, ly - ls * 0.95, 4, ls * 0.95); g.fillRect(lx - ls * 0.14, ly - 4, ls * 0.28, 4);
+      glow(g, lx, ly - ls * 0.92, ls * 0.75, 'rgba(255,226,160,.7)');
+      g.fillStyle = '#fff1d6'; g.beginPath(); g.moveTo(lx - ls * 0.14, ly - ls * 1.18); g.lineTo(lx + ls * 0.14, ly - ls * 1.18); g.lineTo(lx + ls * 0.24, ly - ls * 0.92); g.lineTo(lx - ls * 0.24, ly - ls * 0.92); g.closePath(); g.fill();
+    },
+    stadio(g, w, h, r, m) {
+      const top = h * 0.22;
+      fillSky(g, w, h, ['#e3f5ff', '#f2fbf4']);
+      glow(g, w * 0.06, h * 0.03, m * 0.38, 'rgba(255,255,226,.95)'); glow(g, w * 0.94, h * 0.03, m * 0.38, 'rgba(255,255,226,.95)');
+      g.fillStyle = '#d4e5d8'; g.fillRect(0, top - h * 0.06, w, h * 0.06);
+      const cs = ['#f6c6d9', '#bfe0f6', '#ffe39a', '#d9ccf7', '#ffffff', '#c9eccf'];
+      for (let i = 0; i < 260; i++) disc(g, r() * w, top - h * 0.055 + r() * h * 0.05, 1.6 + r() * 1.6, cs[i % cs.length]);
+      g.fillStyle = lin(g, 0, top, 0, h, ['#b8e7a1', '#8fd27a']); g.fillRect(0, top, w, h - top);
+      for (let i = 0, y = top; y < h; i++, y += h * 0.07) if (i % 2) { g.fillStyle = 'rgba(255,255,255,.09)'; g.fillRect(0, y, w, h * 0.07); }
+      g.strokeStyle = 'rgba(255,255,255,.78)'; g.lineWidth = Math.max(2, m * 0.008);
+      g.strokeRect(w * 0.07, top + h * 0.04, w * 0.86, h * 0.9);
+      g.beginPath(); g.moveTo(w * 0.07, h * 0.6); g.lineTo(w * 0.93, h * 0.6); g.stroke();
+      g.beginPath(); g.arc(w * 0.5, h * 0.6, m * 0.13, 0, Math.PI * 2); g.stroke();
+      disc(g, w * 0.5, h * 0.6, Math.max(2.5, m * 0.008), 'rgba(255,255,255,.85)');
+      g.strokeRect(w * 0.3, top + h * 0.04, w * 0.4, h * 0.12);
+      g.fillStyle = '#9aa8b6'; g.fillRect(w * 0.06 - 2, 0, 4, h * 0.12); g.fillRect(w * 0.94 - 2, 0, 4, h * 0.12);
+    },
+    pentagramma(g, w, h, r, m) {
+      fillSky(g, w, h, ['#f2e8ff', '#fbe7f6', '#ffeedd']);
+      glow(g, w * 0.25, h * 0.25, m * 0.6, 'rgba(255,255,255,.75)'); glow(g, w * 0.8, h * 0.7, m * 0.55, 'rgba(230,214,255,.85)');
+      for (let s = 0; s < 2; s++) {
+        const y0 = h * (0.3 + s * 0.38), amp = h * 0.04, ph = r() * 6, gap = Math.max(7, m * 0.022);
+        g.strokeStyle = 'rgba(149,97,227,.32)'; g.lineWidth = 1.6;
+        for (let k = 0; k < 5; k++) { g.beginPath(); for (let x = 0; x <= w + 8; x += 8) { const y = y0 + k * gap + Math.sin(x / w * Math.PI * 2 + ph) * amp; if (x) g.lineTo(x, y); else g.moveTo(x, y); } g.stroke(); }
+        for (let i = 0; i < 7; i++) { const x = w * (0.07 + i * 0.13 + r() * 0.04), k = Math.floor(r() * 5), y = y0 + k * gap + Math.sin(x / w * Math.PI * 2 + ph) * amp; note(g, x, y, gap * 1.05, 'rgba(118,78,210,.72)', r() < 0.45); }
+      }
+      for (let i = 0; i < 18; i++) sparkle(g, r() * w, r() * h, m * (0.008 + r() * 0.012), 'rgba(255,205,110,.9)');
+    },
+    cosmo(g, w, h, r, m) {
+      fillSky(g, w, h, ['#dde4ff', '#ebe3ff', '#fbe9f4']);
+      for (let i = 0; i < 70; i++) sparkle(g, r() * w, r() * h, m * (0.004 + r() * 0.01), 'rgba(255,255,255,' + (0.6 + r() * 0.4).toFixed(2) + ')');
+      for (let i = 0; i < 12; i++) sparkle(g, r() * w, r() * h, m * (0.01 + r() * 0.012), 'rgba(170,146,255,.55)');
+      const px = w * 0.76, py = h * 0.24, pr = m * 0.16;
+      glow(g, px, py, pr * 2.4, 'rgba(196,180,255,.55)');
+      g.save(); g.translate(px, py); g.rotate(-0.35); g.strokeStyle = 'rgba(255,214,160,.9)'; g.lineWidth = pr * 0.13; g.beginPath(); g.ellipse(0, 0, pr * 1.7, pr * 0.42, 0, Math.PI, Math.PI * 2); g.stroke(); g.restore();
+      g.fillStyle = lin(g, px - pr, py - pr, px + pr, py + pr, ['#ddd3ff', '#a794f0']); g.beginPath(); g.arc(px, py, pr, 0, Math.PI * 2); g.fill();
+      g.save(); g.beginPath(); g.arc(px, py, pr, 0, Math.PI * 2); g.clip(); g.fillStyle = 'rgba(255,255,255,.2)'; g.fillRect(px - pr, py - pr * 0.32, pr * 2, pr * 0.18); g.fillRect(px - pr, py + pr * 0.16, pr * 2, pr * 0.12); g.restore();
+      g.save(); g.translate(px, py); g.rotate(-0.35); g.strokeStyle = 'rgba(255,214,160,.95)'; g.lineWidth = pr * 0.13; g.beginPath(); g.ellipse(0, 0, pr * 1.7, pr * 0.42, 0, 0, Math.PI); g.stroke(); g.restore();
+      const qx = w * 0.18, qy = h * 0.66, qr = m * 0.075;
+      glow(g, qx, qy, qr * 2.2, 'rgba(160,236,226,.55)');
+      g.fillStyle = lin(g, qx - qr, qy - qr, qx + qr, qy + qr, ['#c4f5ec', '#7fd6cb']); g.beginPath(); g.arc(qx, qy, qr, 0, Math.PI * 2); g.fill();
+      disc(g, qx - qr * 0.3, qy - qr * 0.2, qr * 0.18, 'rgba(255,255,255,.35)');
+      disc(g, w * 0.34, h * 0.16, m * 0.025, '#ffd7a8');
+      const cx = w * 0.58, cy = h * 0.46;
+      g.strokeStyle = lin(g, cx - m * 0.26, cy - m * 0.13, cx, cy, ['rgba(255,255,255,0)', 'rgba(255,255,255,.95)']); g.lineWidth = m * 0.013; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(cx - m * 0.26, cy - m * 0.13); g.lineTo(cx, cy); g.stroke(); disc(g, cx, cy, m * 0.013, '#ffffff');
+    },
+    cinema(g, w, h, r, m) {
+      fillSky(g, w, h, ['#ffeff6', '#ffeef0', '#fff4e4']);
+      const beam = (x0, y0, x1, wd, c) => { g.fillStyle = lin(g, x0, y0, x1, 0, [c, 'rgba(255,255,255,0)']); g.beginPath(); g.moveTo(x0 - wd * 0.15, y0); g.lineTo(x1 - wd, 0); g.lineTo(x1 + wd, 0); g.lineTo(x0 + wd * 0.15, y0); g.closePath(); g.fill(); };
+      beam(w * 0.1, h, w * 0.42, m * 0.28, 'rgba(255,255,255,.75)'); beam(w * 0.9, h, w * 0.62, m * 0.28, 'rgba(255,238,200,.7)');
+      const bh = m * 0.16, y0 = h * 0.44, cols = ['#ffd7e6', '#ffe7c2', '#e3dbff', '#d4f1ff'];
+      for (let x = -bh, i = 0; x < w + bh; x += bh * 0.92, i++) {
+        const y = y0 + Math.sin(x / w * Math.PI * 1.6) * h * 0.06, a = Math.cos(x / w * Math.PI * 1.6) * 0.22;
+        g.save(); g.translate(x, y); g.rotate(a);
+        g.fillStyle = '#3d4060'; g.fillRect(-bh * 0.48, -bh / 2, bh * 0.96, bh);
+        g.fillStyle = cols[i % 4]; g.fillRect(-bh * 0.36, -bh * 0.3, bh * 0.72, bh * 0.6);
+        g.fillStyle = '#fff7fb'; for (let k = 0; k < 3; k++) { g.fillRect(-bh * 0.4 + k * bh * 0.3, -bh * 0.45, bh * 0.14, bh * 0.08); g.fillRect(-bh * 0.4 + k * bh * 0.3, bh * 0.37, bh * 0.14, bh * 0.08); }
+        g.restore();
+      }
+      for (let i = 0; i < 16; i++) sparkle(g, r() * w, r() * h, m * (0.008 + r() * 0.014), 'rgba(255,200,100,.85)');
+    },
+    atelier(g, w, h, r, m) {
+      fillSky(g, w, h, ['#fff0f6', '#fbeaff', '#fff3ea']);
+      g.strokeStyle = 'rgba(214,150,200,.12)'; g.lineWidth = 2;
+      for (let x = -h; x < w; x += 18) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x + h, h); g.stroke(); }
+      const cs = ['255,190,220', '255,214,160', '222,200,255', '255,235,240'];
+      for (let i = 0; i < 24; i++) { const x = r() * w, y = r() * h, rr = m * (0.03 + r() * 0.09), c = cs[i % 4], gr = g.createRadialGradient(x, y, 0, x, y, rr); gr.addColorStop(0, 'rgba(' + c + ',.6)'); gr.addColorStop(0.75, 'rgba(' + c + ',.35)'); gr.addColorStop(1, 'rgba(' + c + ',0)'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, rr, 0, Math.PI * 2); g.fill(); }
+      for (let k = 0; k < 2; k++) {
+        const y0 = h * (0.16 + k * 0.5), sag = h * 0.13, n = 30;
+        for (let i = 0; i <= n; i++) { const tt = i / n, x = w * (-0.05 + tt * 1.1), y = y0 + sag * 4 * tt * (1 - tt), pr = Math.max(3, m * 0.013); const gr = g.createRadialGradient(x - pr * 0.35, y - pr * 0.35, 0, x, y, pr); gr.addColorStop(0, '#ffffff'); gr.addColorStop(1, '#ead9c6'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, pr, 0, Math.PI * 2); g.fill(); }
+      }
+      for (let i = 0; i < 14; i++) sparkle(g, r() * w, r() * h, m * (0.008 + r() * 0.012), 'rgba(232,180,90,.85)');
+    },
+    cuori(g, w, h, r, m) {
+      fillSky(g, w, h, ['#fff1ea', '#ffe6f0', '#f2e8ff']);
+      glow(g, w * 0.5, h * 0.3, m * 0.65, 'rgba(255,255,255,.75)');
+      for (let i = 0; i < 5; i++) cloud(g, r() * w, h * (0.08 + r() * 0.7), m * (0.03 + r() * 0.03), 0.55);
+      const cs = ['#ffb3cf', '#d9c2ff', '#ffd0b5', '#ffc9e0'];
+      for (let i = 0; i < 24; i++) { g.globalAlpha = 0.35 + r() * 0.45; heart(g, r() * w, r() * h, m * (0.025 + r() * 0.06), cs[i % 4], (r() - 0.5) * 0.6); }
+      g.globalAlpha = 1;
+    },
+    costiera(g, w, h, r, m) {
+      fillSky(g, w, h, ['#d5efff', '#eef8ff', '#fff3df']);
+      glow(g, w * 0.2, h * 0.18, m * 0.5, 'rgba(255,236,190,.95)'); disc(g, w * 0.2, h * 0.18, m * 0.065, '#fff3c9');
+      for (let i = 0; i < 3; i++) cloud(g, r() * w, h * (0.06 + r() * 0.16), m * (0.03 + r() * 0.025), 0.75);
+      g.fillStyle = lin(g, 0, h * 0.52, 0, h, ['#a6dcf2', '#6fbfe6', '#4ea9da']); g.fillRect(0, h * 0.52, w, h * 0.48);
+      waves(g, w * 0.62, h * 0.56, h * 0.96, 14, r, m, 0.6);
+      boat(g, w * 0.16, h * 0.66, m * 0.06);
+      const top = (x) => h * (0.3 + 0.7 * Math.pow(1 - clamp((x - w * 0.34) / (w * 0.72), 0, 1), 1.7));
+      g.beginPath(); g.moveTo(w * 0.3, h); for (let x = w * 0.3; x <= w + 6; x += 6) g.lineTo(x, top(x)); g.lineTo(w + 6, h); g.closePath();
+      g.fillStyle = lin(g, 0, h * 0.3, 0, h, ['#f4e3bf', '#e9cf9e']); g.fill();
+      const cols = ['#ffe7a1', '#ffd2b3', '#fff6ea', '#cfe8f7', '#d8efd7', '#ffe0cc', '#f6d9ef', '#fff1c2'], hs = [];
+      for (let i = 0; i < 90; i++) { const x = w * (0.4 + r() * 0.62), bw = m * (0.04 + r() * 0.03), bh = bw * (0.75 + r() * 0.6), y0 = top(x + bw * 0.5) + bh * 0.25; if (y0 > h * 0.97) continue; hs.push([x, y0 + r() * (h - y0) * 0.9, bw, bh, cols[Math.floor(r() * cols.length)]]); }
+      hs.sort((a, b) => a[1] - b[1]).forEach((p) => { const [x, y, bw, bh, c] = p; g.fillStyle = c; g.fillRect(x, y - bh, bw, bh); g.fillStyle = 'rgba(110,145,190,.5)'; g.fillRect(x + bw * 0.18, y - bh * 0.72, bw * 0.2, bh * 0.26); g.fillRect(x + bw * 0.6, y - bh * 0.72, bw * 0.2, bh * 0.26); g.fillStyle = 'rgba(80,60,30,.08)'; g.fillRect(x, y - bh * 0.1, bw, bh * 0.1); });
+      for (let i = 0; i < 4; i++) { const x = w * (0.46 + r() * 0.5), y = top(x) + m * 0.015; g.fillStyle = '#5c9a6a'; g.beginPath(); g.ellipse(x, y - m * 0.05, m * 0.016, m * 0.06, 0, 0, Math.PI * 2); g.fill(); }
+    },
+    bosforo(g, w, h, r, m) {
+      fillSky(g, w, h, ['#d1f0f3', '#eaf7f2', '#fff0dd']);
+      glow(g, w * 0.7, h * 0.45, m * 0.6, 'rgba(255,222,168,.9)'); disc(g, w * 0.7, h * 0.47, m * 0.07, '#fff0c8');
+      for (let i = 0; i < 3; i++) cloud(g, r() * w, h * (0.06 + r() * 0.2), m * (0.03 + r() * 0.03), 0.75);
+      birds(g, w * 0.1, h * 0.12, w * 0.5, h * 0.2, 5, m * 0.02, r, 'rgba(70,96,120,.45)');
+      const base1 = h * 0.62, base2 = h * 0.665;
+      ridge(g, w, base1 + h * 0.04, base1 - h * 0.02, h * 0.012, '#c5d3ec', r);
+      for (let i = 0; i < 3; i++) mosque(g, w * (0.12 + i * 0.34 + r() * 0.06), base1 - h * 0.01, m * (0.06 + r() * 0.02), '#c5d3ec');
+      ridge(g, w, base2 + h * 0.04, base2 - h * 0.025, h * 0.015, '#9db1dc', r);
+      mosque(g, w * 0.32, base2 - h * 0.015, m * 0.1, '#9db1dc');
+      const gx = w * 0.78, gy = base2 - h * 0.02, gs = m * 0.05;
+      g.fillStyle = '#9db1dc'; g.fillRect(gx - gs * 0.5, gy - gs * 3.2, gs, gs * 3.2);
+      g.beginPath(); g.moveTo(gx - gs * 0.62, gy - gs * 3.2); g.lineTo(gx, gy - gs * 4.3); g.lineTo(gx + gs * 0.62, gy - gs * 3.2); g.closePath(); g.fill();
+      buildings(g, w, base2 + h * 0.01, h * 0.05, '#9db1dc', r, false);
+      g.fillStyle = lin(g, 0, base2, 0, h, ['#a5e0e5', '#6cc6cf', '#4fb3c0']); g.fillRect(0, base2, w, h - base2);
+      for (let i = 0; i < 9; i++) { const y = base2 + (i + 1) * (h - base2) / 11, ww = m * (0.05 + 0.025 * i); g.fillStyle = 'rgba(255,240,206,' + (0.6 - i * 0.055) + ')'; g.fillRect(w * 0.7 - ww / 2 + (r() - 0.5) * m * 0.03, y, ww, 2.2); }
+      waves(g, w, base2 + h * 0.03, h * 0.97, 16, r, m, 0.6);
+      const fx = w * 0.3, fy = h * 0.8, fs = m * 0.09;
+      g.fillStyle = '#ffffff'; g.fillRect(fx - fs, fy - fs * 0.22, fs * 2, fs * 0.22); g.fillStyle = '#2f4f86'; g.fillRect(fx - fs * 0.94, fy, fs * 1.88, fs * 0.16);
+      g.fillStyle = '#ffffff'; g.fillRect(fx - fs * 0.6, fy - fs * 0.42, fs * 1.1, fs * 0.2); g.fillStyle = '#e9eef6'; g.fillRect(fx - fs * 0.05, fy - fs * 0.62, fs * 0.16, fs * 0.2);
+    }
+  };
+  function paint(cv, name) {
+    const w = cv.clientWidth, h = cv.clientHeight;
+    if (!w || !h) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    try { (SC[name] || SC.home)(g, w, h, cmRng(cmHash('scene|' + name)), Math.min(w, h)); } catch (e) { g.fillStyle = '#fbeee6'; g.fillRect(0, 0, w, h); }
+  }
+  const sky = $('#sky');
+  let skyName = '';
+  function scene(name, force) { if (name === skyName && !force) return; skyName = name; paint(sky, name); }
+
+  /* ---------- screens ---------- */
+  const ACC = { home: ['#4d7de0', '#3460c0', '#e2eaff'], daily: ['#e2902a', '#b86d12', '#fff0d6'], emoji: ['#e86f9e', '#c24d7b', '#fde3ee'] };
+  const thAcc = (th) => [th.acc, th.accD, th.accL];
+  function setAcc(a) { const st = document.documentElement.style; st.setProperty('--acc', a[0]); st.setProperty('--acc-d', a[1]); st.setProperty('--acc-l', a[2]); }
+  let screen = 'home', worldId = null;
+  function show(id) { ['home', 'world', 'play'].forEach((s) => { $('#' + s).hidden = s !== id; }); screen = id; closePops(); }
+  function starsOf(id) { const a = S.stars[lang + ':' + id]; return Array.isArray(a) && a.length === 6 ? a.map((n) => n | 0) : [0, 0, 0, 0, 0, 0]; }
+  function streak() { const rec = S.daily[lang] || {}, d = new Date(); if (rec[dkey(d)] == null) d.setDate(d.getDate() - 1); let n = 0; while (rec[dkey(d)] != null && n < 3650) { n++; d.setDate(d.getDate() - 1); } return n; }
+  function coinsUi(bump) {
+    $$('.coinsN').forEach((e) => { e.textContent = S.coins; });
+    $$('.chip.coins').forEach((c) => { c.setAttribute('aria-label', t('coinsLbl', S.coins)); if (bump) { c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump'); } });
+  }
+  function soundUi() { const b = $('#hSound'); b.innerHTML = ico(S.sound ? 'sound' : 'mute'); b.setAttribute('aria-label', S.sound ? t('sound') : t('soundOff')); b.setAttribute('aria-pressed', S.sound ? 'true' : 'false'); }
+  function earn(n) { S.coins += n; if (G) G.won += n; coinsUi(true); save(); }
+
+  function renderHome() {
+    stopPlay();
+    show('home'); setAcc(ACC.home); scene('home');
+    document.documentElement.lang = lang;
+    $('#tagline').textContent = t('tagline');
+    const hl = $('#hHome'); hl.hidden = !ALBUM; if (ALBUM) { hl.href = ALBUM; $('#hHomeT').textContent = t('home'); }
+    const lb = $('#hLang'); lb.textContent = lang === 'it' ? 'IT' : 'TR'; lb.setAttribute('aria-label', t('lang'));
+    soundUi(); coinsUi();
+    const now = new Date(), k = dkey(now), rec = S.daily[lang] || {}, done = rec[k] != null, inprog = !!S.prog[lang + ':daily:' + k];
+    let mon = '';
+    try { mon = new Intl.DateTimeFormat(loc(), { month: 'short' }).format(now).replace('.', ''); } catch (e) { mon = String(now.getMonth() + 1); }
+    $('#dMon').textContent = mon; $('#dDay').textContent = now.getDate();
+    $('#dTitle').textContent = t('daily'); $('#dDate').textContent = longDate(now);
+    const go = $('#dGo'); go.textContent = done ? t('doneToday') : inprog ? t('cont') : t('play'); go.classList.toggle('done', done);
+    const week = $('#dWeek'); week.innerHTML = '';
+    let fmt = null; try { fmt = new Intl.DateTimeFormat(loc(), { weekday: 'narrow' }); } catch (e) { fmt = null; }
+    for (let i = 6; i >= 0; i--) { const d = new Date(now); d.setDate(d.getDate() - i); week.appendChild(el('span', (rec[dkey(d)] != null ? 'on' : '') + (i === 0 ? ' now' : ''), fmt ? fmt.format(d) : '')); }
+    $('#dStreak').textContent = t('streak', streak());
+    $('#lblModes').textContent = t('modes'); $('#lblWorlds').textContent = t('worlds'); $('#foot').textContent = t('foot');
+    modeCard('#mEmoji', t('emoji'), t('emojiSub'), S.wins.emoji | 0);
+    modeCard('#mBi', t('bi'), t('biSub'), S.wins.bi | 0);
+    modeCard('#mQuick', t('quick'), t('quickSub'), S.wins.quick | 0);
+    renderWorldCards();
+  }
+  function modeCard(sel, title, sub, n) { const b = $(sel); $('b', b).textContent = title; $('small', b).textContent = sub; $('em', b).textContent = t('won', n); }
+  let cardsBuilt = false;
+  function renderWorldCards() {
+    const box = $('#worlds');
+    if (!cardsBuilt) {
+      cardsBuilt = true; box.innerHTML = '';
+      CM_THEMES.forEach((th) => {
+        const b = el('button', 'wcard'); b.type = 'button'; b.dataset.id = th.id;
+        b.style.setProperty('--c', th.acc); b.style.setProperty('--cd', th.accD);
+        const cv = el('canvas'); cv.setAttribute('aria-hidden', 'true'); b.appendChild(cv);
+        const tx = el('span', 'wt'); tx.appendChild(el('b')); tx.appendChild(el('span', 'wmeta')); const bar = el('span', 'wbar'); bar.appendChild(el('i')); tx.appendChild(bar); b.appendChild(tx);
+        b.addEventListener('click', () => { SFX.tap(); openWorld(th.id); });
+        box.appendChild(b);
+      });
+      requestAnimationFrame(paintCards);
+    }
+    $$('.wcard', box).forEach((b) => {
+      const th = TH[b.dataset.id], st = starsOf(th.id), tot = st.reduce((a, c) => a + c, 0), lv = st.filter(Boolean).length;
+      $('b', b).textContent = th[lang];
+      $('.wmeta', b).innerHTML = ico('star') + '<span>' + tot + ' / 18</span><span class="cr">' + lv + ' / 6</span>';
+      $('.wbar i', b).style.width = Math.round((tot / 18) * 100) + '%';
+      b.setAttribute('aria-label', th[lang] + ', ' + tot + ' / 18');
+    });
+  }
+  function paintCards() { $$('.wcard').forEach((b) => paint($('canvas', b), TH[b.dataset.id].scene)); }
+
+  function openWorld(id) {
+    stopPlay();
+    const th = TH[id]; worldId = id;
+    show('world'); setAcc(thAcc(th)); scene(th.scene); coinsUi();
+    $('#wBack').setAttribute('aria-label', t('back'));
+    $('#wTitle').textContent = th[lang];
+    const st = starsOf(id), tot = st.reduce((a, c) => a + c, 0);
+    $('#wSub').innerHTML = ico('star') + '<span>' + tot + ' / 18</span>';
+    const path = $('#path'), sc = $('#wScroll'); path.innerHTML = '';
+    // the six stops fill the screen when they can, and scroll when the screen is short
+    const top = 70, step = clamp(Math.floor((sc.clientHeight - 24 - top - 116) / 5), 100, 132);
+    const W = path.clientWidth || 340, H = top + 5 * step + 116, xs = [0.3, 0.7, 0.3, 0.7, 0.3, 0.7];
+    path.style.height = H + 'px';
+    const pts = xs.map((x, k) => [Math.round(x * W), top + (5 - k) * step + 10]);
+    let d = 'M' + pts[0][0] + ' ' + pts[0][1];
+    for (let k = 1; k < 6; k++) { const a = pts[k - 1], b = pts[k], my = (a[1] + b[1]) / 2; d += ' C' + a[0] + ' ' + my + ' ' + b[0] + ' ' + my + ' ' + b[0] + ' ' + b[1]; }
+    const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'trail'); svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('aria-hidden', 'true');
+    [['rgba(255,255,255,.8)', '18', ''], [th.acc, '4.5', '1 13']].forEach((s) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', s[0]); p.setAttribute('stroke-width', s[1]); p.setAttribute('stroke-linecap', 'round'); if (s[2]) p.setAttribute('stroke-dasharray', s[2]); svg.appendChild(p); });
+    path.appendChild(svg);
+    const next = st.findIndex((s) => !s);
+    pts.forEach((p, k) => {
+      const open = k === 0 || st[k - 1] > 0, prog = !!S.prog[lang + ':lv:' + id + ':' + k];
+      const b = el('button', 'node' + (st[k] ? ' done' : '') + (open ? '' : ' lock') + (k === next && open ? ' next' : '')); b.type = 'button';
+      b.style.left = p[0] + 'px'; b.style.top = p[1] + 'px';
+      b.innerHTML = open ? '<b>' + (k + 1) + '</b>' : ico('lock');
+      b.setAttribute('aria-label', t('level', k + 1) + (open ? ', ' + st[k] + ' / 3' : ', ' + t('locked')));
+      if (open) { const s = el('span', 'st'); for (let j = 0; j < 3; j++) s.insertAdjacentHTML('beforeend', ico(j < st[k] ? 'star' : 'star0')); b.appendChild(s); }
+      const tag = el('span', 'tag ' + (xs[k] < 0.5 ? 'r' : 'l')); tag.textContent = t('words', CM_LEVELS[k].n);
+      if (prog && !st[k]) { tag.appendChild(document.createTextNode(' · ')); tag.appendChild(el('em', null, t('inprog'))); }
+      b.appendChild(tag);
+      b.addEventListener('click', () => { if (!open) { toast(t('locked')); SFX.wrong(); return; } SFX.tap(); startPlay({ kind: 'level', theme: id, level: k }); });
+      path.appendChild(b);
+    });
+    const target = next >= 0 ? pts[next][1] : pts[5][1];
+    // build the next puzzle while the player looks at the map, so tapping it opens at once
+    const idle = window.requestIdleCallback || ((f) => setTimeout(f, 80)), want = next >= 0 ? next : 5, L0 = lang;
+    idle(() => { try { levelPuzzle(L0, id, want); } catch (e) { /* built on tap instead */ } });
+    sc.scrollTop = Math.max(0, target - sc.clientHeight * 0.55);
+  }
+
+  /* ---------- a puzzle ---------- */
+  let G = null, timerI = 0;
+  const entCache = {}, lvCache = new Map();
+  function ents(L, mode) { const k = L + ':' + mode; return entCache[k] || (entCache[k] = cmAllEntries(CM_THEMES, L, mode)); }
+  // a world's levels are fixed puzzles; each one prefers words the earlier levels of that world did not use
+  function levelPuzzle(L, id, k) {
+    const key = L + ':' + id + ':' + k;
+    if (lvCache.has(key)) return lvCache.get(key);
+    const own = cmThemeEntries(TH[id], L, 'std'), used = new Map();
+    for (let j = 0; j < k; j++) {
+      const p = levelPuzzle(L, id, j); if (!p) continue;
+      p.words.forEach((w) => used.set(w.e.ans, (used.get(w.e.ans) || 0) + 1));
+      if (p.secret) used.set(p.secret.e.ans, (used.get(p.secret.e.ans) || 0) + 1);
+    }
+    let pz = null;
+    try { pz = cmMake(own, own, Object.assign({}, CM_LEVELS[k], { used }), cmHash(L + '|lv|' + id + '|' + k + '|1'), ents(L, 'std')); } catch (e) { pz = null; }
+    lvCache.set(key, pz);
+    return pz;
+  }
+  function prep(spec) {
+    const L = lang, o = { ansLang: L, clue: 'text' };
+    if (spec.kind === 'level' || spec.kind === 'quick') {
+      const th = TH[spec.theme];
+      o.entries = cmThemeEntries(th, L, 'std'); o.fallback = ents(L, 'std'); o.scene = th.scene; o.acc = thAcc(th);
+      if (spec.kind === 'level') { o.make = () => levelPuzzle(L, th.id, spec.level); o.seed = cmHash(L + '|lv|' + th.id + '|' + spec.level + '|1'); o.pid = L + ':lv:' + th.id + ':' + spec.level; o.title = th[L]; o.sub = t('level', spec.level + 1); }
+      else { o.opt = CM_MODES.quick; o.seed = spec.seed; o.pid = L + ':quick:' + spec.seed; o.title = t('quick'); o.sub = th[L]; }
+    } else if (spec.kind === 'daily') {
+      o.entries = ents(L, 'std'); o.fallback = o.entries; o.opt = CM_MODES.daily; o.seed = cmHash(L + '|daily|' + spec.date);
+      o.pid = L + ':daily:' + spec.date; o.title = shortDate(fromKey(spec.date)); o.sub = t('dailySub'); o.scene = 'home'; o.acc = ACC.daily;
+    } else if (spec.kind === 'emoji') {
+      o.entries = ents(L, 'emoji'); o.fallback = o.entries; o.opt = CM_MODES.emoji; o.seed = spec.seed; o.pid = L + ':emoji:' + spec.seed;
+      o.title = t('emoji'); o.sub = t('emojiPlay'); o.scene = 'cuori'; o.acc = ACC.emoji; o.clue = 'emoji';
+    } else {
+      o.entries = ents(L, 'bi'); o.fallback = o.entries; o.opt = CM_MODES.bi; o.seed = spec.seed; o.pid = L + ':bi:' + spec.seed;
+      o.ansLang = L === 'it' ? 'tr' : 'it'; o.clue = 'word'; o.title = t('biTitle'); o.sub = t('biPlay');
+      const th = TH[L === 'it' ? 'turchia' : 'italia']; o.scene = th.scene; o.acc = thAcc(th);
+    }
+    return o;
+  }
+  function startPlay(spec) {
+    stopPlay();
+    const o = prep(spec);
+    let pz = null;
+    try { pz = o.make ? o.make() : cmMake(o.entries, o.entries, o.opt, o.seed, o.fallback); } catch (e) { pz = null; }
+    if (!pz) { toast(t('fail')); return; }
+    const sol = pz.grid.map((c) => (c ? c.ch : ''));
+    G = { spec, o, pz, sol, key: cmHash(sol.join(',')), entry: sol.map(() => ''), lock: sol.map(() => false), hint: sol.map(() => false),
+      done: pz.words.map(() => false), whint: pz.words.map(() => false), cur: -1, dir: 0, hints: 0, free: 1, wrong: 0, combo: 0,
+      elapsed: 0, t0: null, over: false, sDone: false, sEarly: false, guess: null, won: 0, els: [], replay: spec.kind === 'level' && starsOf(spec.theme)[spec.level] > 0 };
+    pz.grid.forEach((c, i) => { if (c && c.given) { G.entry[i] = c.ch; G.lock[i] = true; } });
+    restore();
+    show('play'); setAcc(o.acc); scene(o.scene); coinsUi();
+    $('#pTitle').textContent = o.title; $('#pSubL').textContent = o.sub;
+    $('#pBack').setAttribute('aria-label', t('back')); $('#pHint').setAttribute('aria-label', t('hintsBtn'));
+    $('#cPrev').setAttribute('aria-label', t('prev')); $('#cNext').setAttribute('aria-label', t('nextClue')); $('#shClose').setAttribute('aria-label', t('close'));
+    buildBoard(); buildKb(o.ansLang);
+    const first = order().find((w) => !G.done[w]);
+    if (first != null) { const W = pz.words[first]; G.dir = W.dir; G.cur = firstOpen(W); } else G.cur = pz.words[0].cells[0];
+    G.t0 = performance.now();
+    clearInterval(timerI); timerI = setInterval(tick, 1000); tick();
+    render(); layout();
+    requestAnimationFrame(() => { layout(); render(); });
+    if (!S.coach) showCoach();
+  }
+  function restore() {
+    const sv = S.prog[G.o.pid];
+    if (!sv || sv.k !== G.key) return;
+    const e = Array.from(String(sv.e || '')), n = G.sol.length, l = String(sv.l || ''), h = String(sv.h || ''), d = String(sv.d || ''), wh = String(sv.wh || '');
+    if (e.length !== n) return;
+    for (let i = 0; i < n; i++) {
+      if (!G.pz.grid[i]) continue;
+      const c = e[i];
+      if (c && c !== '.' && c !== ' ') G.entry[i] = c;
+      G.lock[i] = G.lock[i] || l[i] === '1'; G.hint[i] = h[i] === '1';
+    }
+    G.done = G.done.map((x, w) => d[w] === '1'); G.whint = G.whint.map((x, w) => wh[w] === '1');
+    G.hints = sv.hn | 0; G.free = sv.fr == null ? 1 : sv.fr | 0; G.elapsed = +sv.t || 0; G.sDone = !!sv.sd; G.sEarly = !!sv.se; G.won = sv.cw | 0; G.wrong = sv.w | 0;
+  }
+  function persist() {
+    if (!G || G.over) return;
+    const g = G.pz.grid;
+    S.prog[G.o.pid] = { k: G.key, e: g.map((c, i) => (c ? G.entry[i] || '.' : ' ')).join(''), l: G.lock.map((b) => (b ? 1 : 0)).join(''), h: G.hint.map((b) => (b ? 1 : 0)).join(''),
+      d: G.done.map((b) => (b ? 1 : 0)).join(''), wh: G.whint.map((b) => (b ? 1 : 0)).join(''), hn: G.hints, fr: G.free, t: Math.round(elapsed()),
+      sd: G.sDone ? 1 : 0, se: G.sEarly ? 1 : 0, cw: G.won, w: G.wrong, at: Date.now() };
+    const ks = Object.keys(S.prog);
+    if (ks.length > 24) ks.sort((a, b) => (S.prog[a].at || 0) - (S.prog[b].at || 0)).slice(0, ks.length - 24).forEach((k) => { delete S.prog[k]; });
+    save();
+  }
+  function elapsed() { return G ? G.elapsed + (G.t0 != null && !G.over ? (performance.now() - G.t0) / 1000 : 0) : 0; }
+  function tick() { if (G) $('#pClock').textContent = '· ' + clock(elapsed()); }
+  function pauseClock() { if (G && G.t0 != null) { G.elapsed = elapsed(); G.t0 = null; } }
+  function stopPlay() { if (G) { pauseClock(); persist(); save(true); } clearInterval(timerI); G = null; $('#end').hidden = true; }
+
+  function buildBoard() {
+    const b = $('#board'); b.innerHTML = '';
+    G.els = G.pz.grid.map((c, i) => {
+      if (!c) return null;
+      const d = el('div', 'cell' + (c.sec >= 0 ? ' sec' : '')); d.dataset.i = i;
+      if (c.num) d.appendChild(el('span', 'n', String(c.num)));
+      d.appendChild(el('span', 'l'));
+      b.appendChild(d);
+      return d;
+    });
+  }
+  function layout() {
+    if (!G || screen !== 'play') return;
+    const r = $('#stage').getBoundingClientRect(), pz = G.pz;
+    if (!r.width || !r.height) return;
+    const pad = r.width < 420 ? 9 : 14;
+    const cs = Math.max(14, Math.floor(Math.min((r.width - pad * 2 + 3) / pz.W, (r.height - pad * 2 + 3) / pz.H, 58)));
+    const gap = Math.max(2, Math.round(cs * 0.08)), tw = cs - gap, b = $('#board');
+    b.style.width = pad * 2 + pz.W * cs - gap + 'px'; b.style.height = pad * 2 + pz.H * cs - gap + 'px';
+    b.style.borderRadius = Math.round(Math.min(24, cs * 0.6)) + 'px';
+    G.els.forEach((d, i) => { if (!d) return; const c = pz.grid[i]; d.style.left = pad + c.x * cs + 'px'; d.style.top = pad + c.y * cs + 'px'; d.style.setProperty('--t', tw + 'px'); });
+  }
+  const KB = { it: ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'], tr: ['ERTYUIOPĞÜ', 'ASDFGHJKLŞİ', 'ZCVBNMÖÇ'] };
+  function fnKey(k, label) { const b = el('button', 'key fn'); b.type = 'button'; b.tabIndex = -1; b.dataset.k = k; b.innerHTML = ico(k); b.setAttribute('aria-label', label); return b; }
+  function buildKb(L) {
+    const kb = $('#kb'); kb.innerHTML = '';
+    KB[L].forEach((row, ri) => {
+      const r = el('div', 'krow');
+      if (ri === 2) r.appendChild(fnKey('swap', t('swap')));
+      Array.from(row).forEach((ch) => { const b = el('button', 'key', ch); b.type = 'button'; b.tabIndex = -1; b.dataset.k = ch; r.appendChild(b); });
+      if (ri === 2) r.appendChild(fnKey('del', t('del')));
+      kb.appendChild(r);
+    });
+  }
+
+  /* where the cursor is */
+  function curWord() { if (!G || G.cur < 0) return -1; const c = G.pz.grid[G.cur]; const w = G.dir ? c.v : c.h; return w >= 0 ? w : G.dir ? c.h : c.v; }
+  function cellOk(i) { const c = G.pz.grid[i]; return (c.h >= 0 && G.done[c.h]) || (c.v >= 0 && G.done[c.v]); }
+  function order() { return G.pz.words.map((w, i) => i).sort((a, b) => { const A = G.pz.words[a], B = G.pz.words[b]; return A.dir - B.dir || A.num - B.num; }); }
+  function firstOpen(W) { let i = W.cells.find((ci) => !G.lock[ci] && !G.entry[ci]); if (i == null) i = W.cells.find((ci) => !G.lock[ci]); if (i == null) i = W.cells[0]; return i; }
+  function goWord(w) { const W = G.pz.words[w]; G.dir = W.dir; G.cur = firstOpen(W); G.guess = null; render(); }
+  function step(delta) {
+    if (!G) return;
+    const ord = order(), n = ord.length, p = ord.indexOf(curWord());
+    for (let s = 1; s <= n; s++) { const q = ord[(((p + delta * s) % n) + n) % n]; if (!G.done[q]) { goWord(q); return; } }
+    goWord(ord[(((p + delta) % n) + n) % n]);
+  }
+  function nextOpenAfter(w) {
+    const ord = order(), n = ord.length, p = ord.indexOf(w);
+    for (let s = 1; s <= n; s++) { const q = ord[(p + s) % n]; if (!G.done[q]) { const W = G.pz.words[q]; G.dir = W.dir; G.cur = firstOpen(W); return; } }
+  }
+
+  /* drawing the board, the clue and the secret word */
+  function clueMain(W) { return G.o.clue === 'word' ? nice(W.e.clue, lang) : W.e.clue; }
+  function clueText(W) { return clueMain(W) + (W.e.enumr ? ' (' + W.e.enumr + ')' : ''); }
+  function fillClue(node, W) { node.textContent = clueMain(W); if (W.e.enumr) node.appendChild(el('small', 'en', '(' + W.e.enumr + ')')); }
+  function secretClue(e) { if (G.o.clue === 'emoji') return e.emoji || e.clue; if (G.o.clue === 'word') return t('clue') + ': ' + nice(e.clue, lang); return t('clue') + ': ' + e.clue; }
+  function render() {
+    if (!G) return;
+    const pz = G.pz, w = curWord(), guessing = G.guess != null, ws = new Set(w >= 0 && !guessing ? pz.words[w].cells : []);
+    pz.grid.forEach((c, i) => {
+      if (!c) return;
+      const d = G.els[i], ok = cellOk(i);
+      d.classList.toggle('w', ws.has(i)); d.classList.toggle('c', i === G.cur && !guessing);
+      d.classList.toggle('ok', ok); d.classList.toggle('giv', c.given && !ok); d.classList.toggle('hin', G.hint[i] && !ok);
+      const l = d.lastChild, v = G.entry[i] || '';
+      if (l.textContent !== v) l.textContent = v;
+    });
+    const tag = $('#cTag'), tx = $('#cTxt');
+    if (w >= 0) {
+      const W = pz.words[w];
+      tag.textContent = W.num + (W.dir ? ' ↓' : ' →');
+      fillClue(tx, W); tx.className = 'cb-txt' + (G.o.clue === 'emoji' ? ' emo' : G.o.clue === 'word' ? ' word' : '');
+      $('#clueBar').classList.toggle('done', G.done[w]);
+      $('#cMain').setAttribute('aria-label', (W.dir ? t('down') : t('across')) + ' ' + W.num + ': ' + clueText(W));
+    }
+    renderSecret();
+    $('#pFree').hidden = !(G.free > 0);
+    if (sideOn()) renderList($('#sideList'));
+  }
+  function renderSecret() {
+    const s = G.pz.secret, box = $('#pSecret');
+    if (!s) { box.hidden = true; return; }
+    box.hidden = false;
+    const slots = $('#sxSlots'), guessing = G.guess != null;
+    if (slots.children.length !== s.cells.length) { slots.innerHTML = ''; s.cells.forEach(() => slots.appendChild(el('i'))); }
+    s.cells.forEach((ci, j) => {
+      const it = slots.children[j];
+      let v = '', cls = '';
+      if (guessing) { v = G.guess[j] || ''; cls = j === G.guess.length ? 'cur' : ''; }
+      else { v = G.entry[ci] || ''; if (G.sDone || (G.lock[ci] && cellOk(ci))) cls = 'ok'; }
+      if (it.textContent !== v) it.textContent = v;
+      it.className = cls;
+    });
+    $('#sxTitle').textContent = guessing ? t('secretType') : t('secret');
+    const hint = $('#sxHint');
+    hint.textContent = guessing ? '' : G.sDone ? s.e.word : secretClue(s.e);
+    hint.className = !guessing && !G.sDone && G.o.clue === 'emoji' ? 'emo' : '';
+    box.classList.toggle('guess', guessing); box.classList.toggle('won', G.sDone); box.classList.toggle('long', s.cells.length >= 6);
+    box.setAttribute('aria-label', t('secret') + '. ' + (G.sDone ? s.e.word : secretClue(s.e) + '. ' + t('secretTap')));
+  }
+  function sideOn() { return window.matchMedia && window.matchMedia('(min-width: 980px) and (min-height: 620px)').matches; }
+  function renderList(box) {
+    box.innerHTML = '';
+    const cw = curWord();
+    [0, 1].forEach((d) => {
+      const ids = G.pz.words.map((w, i) => i).filter((i) => G.pz.words[i].dir === d).sort((a, b) => G.pz.words[a].num - G.pz.words[b].num);
+      if (!ids.length) return;
+      const sec = el('section', 'cl'); sec.appendChild(el('h3', null, d ? t('down') : t('across')));
+      ids.forEach((i) => {
+        const W = G.pz.words[i], b = el('button', (i === cw ? 'on ' : '') + (G.done[i] ? 'done' : '')); b.type = 'button';
+        b.appendChild(el('span', 'num', String(W.num)));
+        const tx = el('span', 'tx' + (G.o.clue === 'emoji' ? ' emo' : G.o.clue === 'word' ? ' word' : '')); fillClue(tx, W); b.appendChild(tx);
+        if (G.done[i]) b.appendChild(el('span', 'ans', W.e.word));
+        b.addEventListener('click', () => { if (!G) return; goWord(i); $('#sheet').hidden = true; });
+        sec.appendChild(b);
+      });
+      box.appendChild(sec);
+    });
+  }
+  function popCell(i) { const d = G.els[i]; if (!d) return; d.classList.remove('pop'); void d.offsetWidth; d.classList.add('pop'); }
+  function flipCell(i, delay) {
+    const d = G.els[i]; if (!d || RM.matches) return;
+    d.style.animationDelay = delay + 'ms'; d.classList.remove('flip'); void d.offsetWidth; d.classList.add('flip');
+    clearTimeout(d._ft); d._ft = setTimeout(() => { d.classList.remove('flip'); d.style.animationDelay = ''; }, delay + 560);
+  }
+
+  /* playing */
+  function tap(i) {
+    if (!G || G.over) return;
+    G.guess = null;
+    const c = G.pz.grid[i];
+    if (i === G.cur && c.h >= 0 && c.v >= 0) G.dir = 1 - G.dir;
+    else if (i !== G.cur) {
+      let d = G.dir;
+      if (d === 0 && c.h < 0) d = 1; else if (d === 1 && c.v < 0) d = 0;
+      if (c.h >= 0 && c.v >= 0) { const a = d ? c.v : c.h, b = d ? c.h : c.v; if (G.done[a] && !G.done[b]) d = 1 - d; }
+      G.dir = d;
+    }
+    G.cur = i; SFX.tap(); render();
+  }
+  function typeCh(ch, again) {
+    if (!G || G.over) return;
+    if (G.guess != null) { guessType(ch); return; }
+    const w = curWord(); if (w < 0) return;
+    const cells = G.pz.words[w].cells;
+    let i = G.cur;
+    if (G.lock[i]) {
+      const k0 = cells.indexOf(i);
+      let nx = null;
+      for (let j = k0 + 1; j < cells.length; j++) if (!G.lock[cells[j]]) { nx = cells[j]; break; }
+      if (nx == null) for (let j = 0; j < cells.length; j++) if (!G.lock[cells[j]]) { nx = cells[j]; break; }
+      if (nx == null) { step(1); if (!again && curWord() !== w) typeCh(ch, true); return; }
+      i = nx;
+    }
+    G.entry[i] = ch; G.cur = i;
+    popCell(i); SFX.key(); buzz(5);
+    checkAt(i);
+    if (!G || G.over) return;
+    if (G.done[w]) nextOpenAfter(w);
+    else {
+      const k = cells.indexOf(i);
+      let nx = null;
+      for (let j = k + 1; j < cells.length; j++) if (!G.lock[cells[j]] && !G.entry[cells[j]]) { nx = cells[j]; break; }
+      if (nx == null) for (let j = k + 1; j < cells.length; j++) if (!G.lock[cells[j]]) { nx = cells[j]; break; }
+      if (nx == null) for (let j = 0; j < k; j++) if (!G.lock[cells[j]] && !G.entry[cells[j]]) { nx = cells[j]; break; }
+      if (nx != null) G.cur = nx;
+    }
+    render(); persist();
+  }
+  function back() {
+    if (!G || G.over) return;
+    if (G.guess != null) { G.guess.pop(); SFX.del(); renderSecret(); return; }
+    const w = curWord(); if (w < 0) return;
+    const cells = G.pz.words[w].cells, k = cells.indexOf(G.cur);
+    if (!G.lock[G.cur] && G.entry[G.cur]) G.entry[G.cur] = '';
+    else for (let j = k - 1; j >= 0; j--) { const ci = cells[j]; if (!G.lock[ci]) { G.cur = ci; G.entry[ci] = ''; break; } }
+    SFX.del(); render(); persist();
+  }
+  function swapDir() { if (!G || G.cur < 0 || G.over) return; const c = G.pz.grid[G.cur]; if (c.h >= 0 && c.v >= 0) { G.dir = 1 - G.dir; SFX.tap(); render(); } }
+  function arrow(k) {
+    if (!G || G.cur < 0) return;
+    const pz = G.pz, c = pz.grid[G.cur], d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[k], want = d[0] ? 0 : 1;
+    if (G.dir !== want && (want ? c.v : c.h) >= 0) { G.dir = want; render(); return; }
+    let x = c.x + d[0], y = c.y + d[1];
+    while (x >= 0 && y >= 0 && x < pz.W && y < pz.H) {
+      const j = y * pz.W + x;
+      if (pz.grid[j]) { G.cur = j; if ((want ? pz.grid[j].v : pz.grid[j].h) >= 0) G.dir = want; render(); return; }
+      x += d[0]; y += d[1];
+    }
+  }
+  // quiet: letters that arrived from elsewhere (a revealed secret word) never flag a word as wrong
+  function checkAt(i, quiet) { const c = G.pz.grid[i]; if (c.h >= 0) checkWord(c.h, quiet); if (G && !G.over && c.v >= 0) checkWord(c.v, quiet); }
+  function checkWord(w, quiet) {
+    if (!G || G.over || G.done[w]) return;
+    const cells = G.pz.words[w].cells;
+    if (cells.some((ci) => !G.entry[ci])) return;
+    if (cells.every((ci) => G.entry[ci] === G.sol[ci])) solveWord(w, false); else if (!quiet) wrongWord(w);
+  }
+  function plusAt(ci, txt) {
+    const d = G.els[ci]; if (!d || RM.matches) return;
+    const p = el('div', 'plus', txt);
+    p.style.left = d.offsetLeft + d.offsetWidth / 2 + 'px'; p.style.top = d.offsetTop + 'px';
+    $('#board').appendChild(p);
+    setTimeout(() => p.remove(), 1100);
+  }
+  function solveWord(w, byHint) {
+    if (G.done[w]) return;
+    G.done[w] = true;
+    const W = G.pz.words[w];
+    W.cells.forEach((ci, k) => { G.entry[ci] = G.sol[ci]; G.lock[ci] = true; flipCell(ci, k * 55); });
+    if (!byHint && !G.whint[w]) {
+      G.combo++; earn(3);
+      const bonus = [3, 5, 8, 12].indexOf(G.combo) >= 0 ? G.combo : 0;
+      plusAt(W.cells[W.cells.length - 1], '+' + (3 + bonus));
+      if (bonus) { earn(bonus); toast(t('combo', G.combo), 'gold'); }
+    } else G.combo = 0;
+    SFX.word(); buzz([8, 40, 8]);
+    W.cells.forEach((ci) => { const c = G.pz.grid[ci], o = W.dir ? c.h : c.v; if (o >= 0) checkWord(o); });
+    if (!G || G.over) return;
+    secretCheck();
+    if (G.done.every(Boolean)) finish();
+  }
+  function wrongWord(w) {
+    G.wrong++; G.combo = 0;
+    G.pz.words[w].cells.forEach((ci) => { const d = G.els[ci]; d.classList.remove('bad'); void d.offsetWidth; d.classList.add('bad'); clearTimeout(d._bt); d._bt = setTimeout(() => d.classList.remove('bad'), 950); });
+    SFX.wrong(); buzz(35); toast(t('wrong'));
+  }
+
+  /* help */
+  const COST = { letter: 10, word: 30 };
+  function pay(cost, freeOk) {
+    if (freeOk && G.free > 0) { G.free--; return true; }
+    if (S.coins < cost) { toast(t('noCoins')); SFX.wrong(); return false; }
+    S.coins -= cost; coinsUi(true); save(); return true;
+  }
+  function hintLetter() {
+    if (!G || G.over) return;
+    closePops();
+    const w = curWord(); if (w < 0) return;
+    const cells = G.pz.words[w].cells;
+    let i = G.cur;
+    if (G.lock[i] || G.entry[i] === G.sol[i]) { i = cells.find((ci) => !G.lock[ci] && G.entry[ci] !== G.sol[ci]); if (i == null) i = cells.find((ci) => !G.lock[ci]); }
+    if (i == null) { step(1); return; }
+    if (!pay(COST.letter, true)) return;
+    G.entry[i] = G.sol[i]; G.lock[i] = true; G.hint[i] = true; G.hints += 1; G.combo = 0;
+    const c = G.pz.grid[i]; if (c.h >= 0) G.whint[c.h] = true; if (c.v >= 0) G.whint[c.v] = true;
+    flipCell(i, 0); SFX.hint(); buzz(10);
+    G.cur = i; checkAt(i);
+    if (!G || G.over) return;
+    secretCheck();
+    if (G.done[w]) nextOpenAfter(w); else { const nx = cells.find((ci) => !G.lock[ci] && !G.entry[ci]); if (nx != null) G.cur = nx; }
+    render(); persist();
+  }
+  function hintWord() {
+    if (!G || G.over) return;
+    closePops();
+    const w = curWord(); if (w < 0) return;
+    if (G.done[w]) { step(1); return; }
+    if (!pay(COST.word, false)) return;
+    G.hints += 2; G.combo = 0; G.whint[w] = true;
+    const W = G.pz.words[w];
+    W.cells.forEach((ci) => { if (G.lock[ci]) return; G.hint[ci] = true; const c = G.pz.grid[ci], o = W.dir ? c.h : c.v; if (o >= 0) G.whint[o] = true; });
+    SFX.hint();
+    solveWord(w, true);
+    if (!G || G.over) return;
+    nextOpenAfter(w); render(); persist();
+  }
+
+  /* the secret word */
+  function secretCheck() {
+    const s = G.pz.secret; if (!s || G.sDone) return;
+    if (s.cells.every((ci) => G.lock[ci] && G.entry[ci] === G.sol[ci] && cellOk(ci))) { G.sDone = true; earn(5); SFX.secret(); toast(t('secretDone', s.e.word), 'gold'); }
+  }
+  function startGuess() {
+    if (!G || G.over || !G.pz.secret || G.sDone) return;
+    closePops();
+    G.guess = G.guess == null ? [] : null;
+    SFX.tap(); render();
+  }
+  function guessType(ch) {
+    const s = G.pz.secret; if (G.guess.length >= s.cells.length) return;
+    G.guess.push(ch); SFX.key(); renderSecret();
+    if (G.guess.length === s.cells.length) setTimeout(evalGuess, 220);
+  }
+  function evalGuess() {
+    if (!G || G.guess == null || G.over) return;
+    const s = G.pz.secret;
+    if (G.guess.join('') !== s.e.ans) {
+      G.guess = null; SFX.wrong(); buzz(35);
+      const b = $('#pSecret'); b.classList.remove('no'); void b.offsetWidth; b.classList.add('no');
+      toast(t('secretNo')); render(); return;
+    }
+    const missing = s.cells.filter((ci) => !(G.lock[ci] && G.entry[ci] === G.sol[ci])).length, bonus = Math.max(10, missing * 6);
+    G.guess = null; G.sDone = true; G.sEarly = true;
+    s.cells.forEach((ci, k) => { if (!G.lock[ci]) { G.entry[ci] = G.sol[ci]; G.lock[ci] = true; flipCell(ci, k * 70); } });
+    earn(bonus); SFX.secret(); buzz([10, 40, 10, 40, 10]); toast(t('secretOk', bonus), 'gold'); burst(0.45);
+    s.cells.forEach((ci) => { if (G && !G.over) checkAt(ci, true); });
+    if (!G || G.over) return;
+    const w = curWord(); if (w >= 0 && G.done[w]) nextOpenAfter(w);
+    render(); persist();
+  }
+
+  /* the end of a puzzle */
+  function finish() {
+    if (G.over) return;
+    G.elapsed = elapsed(); G.t0 = null; G.over = true; G.guess = null;
+    clearInterval(timerI);
+    const sp = G.spec, stars = G.hints === 0 ? 3 : G.hints <= 2 ? 2 : 1;
+    let bonus = 20 + stars * 10;
+    if (sp.kind === 'level') { const a = starsOf(sp.theme).slice(); a[sp.level] = Math.max(a[sp.level], stars); S.stars[lang + ':' + sp.theme] = a; if (G.replay) bonus = Math.round(bonus / 3); }
+    else if (sp.kind === 'daily') { const rec = S.daily[lang] || (S.daily[lang] = {}); rec[sp.date] = Math.max(rec[sp.date] | 0, stars); bonus += 40; }
+    else { S.wins[sp.kind] = (S.wins[sp.kind] | 0) + 1; delete S.cur[lang + ':' + sp.kind]; }
+    delete S.prog[G.o.pid];
+    // a new crossword done: a pack of Hande's stickers (replaying a level already won gives none)
+    G.pack = !!ALBUM && !(sp.kind === 'level' && G.replay) && grantPack();
+    earn(bonus); save(true);
+    tick();
+    render();
+    G.pz.grid.forEach((c, i) => { if (c) flipCell(i, (c.x + c.y) * 45); });
+    SFX.win(); buzz([20, 60, 20, 60, 40]);
+    setTimeout(() => burst(1), RM.matches ? 0 : 450);
+    const g = G;
+    setTimeout(() => { if (G === g) showEnd(stars); }, RM.matches ? 200 : 1400);
+  }
+  function showEnd(stars) {
+    const sp = G.spec, box = $('#end'), titles = t('titles');
+    const words = titles[stars] || titles[1];
+    $('#eTitle').textContent = words[((G.o.seed >>> 0) + G.wrong) % words.length];
+    $('#eSub').textContent = sp.kind === 'level' ? t('endLevel', sp.level + 1, TH[sp.theme][lang]) : sp.kind === 'daily' ? t('endDaily') : t('endFree');
+    const s = G.pz.secret, sec = $('#eSecret');
+    if (s) { sec.hidden = false; $('#eSecretL').textContent = t('secret'); const tl = $('#eSecretT'); tl.innerHTML = ''; s.e.ch.forEach((c) => tl.appendChild(el('i', null, c))); } else sec.hidden = true;
+    $('#eL1').textContent = t('time'); $('#eV1').textContent = clock(G.elapsed);
+    $('#eL2').textContent = t('hints'); $('#eV2').textContent = G.hints;
+    $('#eL3').textContent = t('coins'); $('#eV3').innerHTML = ico('coin') + '<span>+' + G.won + '</span>';
+    const pk = $('#ePack'); pk.hidden = !G.pack;
+    if (G.pack) { pk.href = ALBUM + '?album=pack'; $('#ePackT').textContent = t('pack'); $('#ePackS').textContent = t('packSub'); }
+    const bx = $('#eBtns'); bx.innerHTML = '';
+    const btn = (txt, cls, fn) => { const b = el('button', 'btn ' + (cls || ''), txt); b.type = 'button'; b.addEventListener('click', () => { SFX.tap(); box.hidden = true; fn(); }); return b; };
+    if (sp.kind === 'level') {
+      if (sp.level < 5) bx.appendChild(btn(t('next'), 'gold', () => startPlay({ kind: 'level', theme: sp.theme, level: sp.level + 1 })));
+      const row = el('div', 'row');
+      row.appendChild(btn(t('replay'), 'soft', () => startPlay({ kind: 'level', theme: sp.theme, level: sp.level })));
+      row.appendChild(btn(t('map'), sp.level < 5 ? 'soft' : 'gold', () => openWorld(sp.theme)));
+      bx.appendChild(row);
+    } else if (sp.kind === 'daily') {
+      bx.appendChild(el('p', 'e-sub', t('tomorrow')));
+      bx.appendChild(btn(t('menu'), 'gold', renderHome));
+    } else {
+      bx.appendChild(btn(t('another'), 'gold', () => startMode(sp.kind)));
+      bx.appendChild(btn(t('menu'), 'soft', renderHome));
+    }
+    box.hidden = false;
+    const st = $$('#eStars .i');
+    st.forEach((s0, j) => { s0.classList.remove('on'); s0.innerHTML = '<use href="#i-' + (j < stars ? 'star' : 'star0') + '"/>'; });
+    st.forEach((s0, j) => { if (j < stars) setTimeout(() => { s0.classList.add('on'); SFX.star(j); }, 260 + j * 300); else s0.classList.add('on'); });
+    setTimeout(() => { const f = $('.btn', bx); if (f) f.focus({ preventScroll: true }); }, 60);
+  }
+  function startMode(kind) {
+    const key = lang + ':' + kind;
+    let cur = S.cur[key];
+    if (!cur || typeof cur.seed !== 'number') {
+      cur = { seed: Math.floor(Math.random() * 2147483000) + 1 };
+      if (kind === 'quick') cur.theme = CM_THEMES[Math.floor(Math.random() * CM_THEMES.length)].id;
+      S.cur[key] = cur; save();
+    }
+    if (kind === 'quick' && !TH[cur.theme]) cur.theme = CM_THEMES[0].id;
+    startPlay({ kind, seed: cur.seed, theme: cur.theme });
+  }
+
+  /* ---------- small overlays ---------- */
+  let toastT = 0;
+  function toast(msg, kind) {
+    const e = $('#toast'); e.textContent = msg; e.className = 'toast ' + (kind || ''); void e.offsetWidth; e.className = 'toast on ' + (kind || '');
+    clearTimeout(toastT); toastT = setTimeout(() => { e.className = 'toast ' + (kind || ''); }, 1900);
+  }
+  function closePops() { $('#hintPop').hidden = true; $('#sheet').hidden = true; }
+  function openList() { if (!G) return; $('#shTitle').textContent = t('clues'); renderList($('#clList')); $('#sheet').hidden = false; }
+  function showCoach() {
+    const art = $('#coachArt'); art.innerHTML = '';
+    const word = lang === 'tr' ? 'SELAM' : 'CIAO';
+    Array.from(word).forEach((c, i) => { const s = el('span', 'lt' + (i >= word.length - 2 ? ' g' : ''), c); s.style.setProperty('--r', (i % 2 ? 3 : -3) + 'deg'); s.style.animationDelay = -i * 0.4 + 's'; art.appendChild(s); });
+    $('#coachTxt').textContent = t('coach'); $('#coachOk').textContent = t('coachOk');
+    $('#coach').hidden = false;
+  }
+  const fx = $('#fx');
+  let parts = [], fxOn = false;
+  function burst(k) {
+    if (RM.matches) return;
+    const w = window.innerWidth, h = window.innerHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    fx.width = Math.round(w * dpr); fx.height = Math.round(h * dpr);
+    const acc = getComputedStyle(document.documentElement).getPropertyValue('--acc').trim() || '#4d7de0';
+    const cols = ['#f5bd3c', '#ffe08a', '#f58fc0', '#b49cf5', '#6cc3f2', '#7ed9b0', acc];
+    for (let i = 0, n = Math.round(150 * k); i < n; i++) {
+      const a = -Math.PI / 2 + (Math.random() - 0.5) * 1.9, v = 380 + Math.random() * 540;
+      parts.push({ x: w / 2 + (Math.random() - 0.5) * w * 0.3, y: h * 0.62, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: Math.random() * 6, vr: (Math.random() - 0.5) * 12, s: 5 + Math.random() * 6, c: cols[i % cols.length], life: 1 + Math.random() * 0.6 });
+    }
+    if (fxOn) return;
+    fxOn = true;
+    const g = fx.getContext('2d');
+    let last = performance.now();
+    const loop = (now) => {
+      const dt = Math.min(0.033, (now - last) / 1000); last = now;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+      parts = parts.filter((p) => p.life > 0 && p.y < h + 40);
+      parts.forEach((p) => { p.vy += 900 * dt; p.vx *= 0.99; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt; p.life -= dt * 0.55; g.save(); g.globalAlpha = Math.min(1, p.life); g.translate(p.x, p.y); g.rotate(p.r); g.fillStyle = p.c; g.fillRect(-p.s / 2, -p.s * 0.3, p.s, p.s * 0.6); g.restore(); });
+      if (parts.length) requestAnimationFrame(loop); else { g.clearRect(0, 0, w, h); fxOn = false; }
+    };
+    requestAnimationFrame(loop);
+  }
+
+  /* ---------- wiring ---------- */
+  $('#board').addEventListener('pointerdown', (e) => { const d = e.target.closest('.cell'); if (!d || !G) return; e.preventDefault(); audio(); tap(+d.dataset.i); });
+  $('#kb').addEventListener('pointerdown', (e) => {
+    const b = e.target.closest('.key'); if (!b) return;
+    e.preventDefault(); audio();
+    const k = b.dataset.k; b.classList.add('down'); setTimeout(() => b.classList.remove('down'), 110);
+    if (k === 'del') back(); else if (k === 'swap') swapDir(); else typeCh(k);
+  });
+  function normKey(k, L) {
+    if (L === 'tr') { const u = k.toLocaleUpperCase('tr-TR'); return /^[ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ]$/.test(u) ? u : null; }
+    const u = k.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase(); return /^[A-Z]$/.test(u) ? u : null;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (screen !== 'play' || !G || !$('#end').hidden || !$('#coach').hidden || e.ctrlKey || e.metaKey || e.altKey) return;
+    const k = e.key;
+    if (k === 'Escape') { if (G.guess != null) { G.guess = null; render(); } closePops(); return; }
+    if (!$('#sheet').hidden) return;
+    if (k === 'Backspace') { e.preventDefault(); back(); return; }
+    if (k.indexOf('Arrow') === 0) { e.preventDefault(); arrow(k); return; }
+    if (k === 'Tab' || k === 'Enter') { e.preventDefault(); step(e.shiftKey ? -1 : 1); return; }
+    if (k === ' ') { e.preventDefault(); swapDir(); return; }
+    if (k.length === 1) { const ch = normKey(k, G.o.ansLang); if (ch) { e.preventDefault(); typeCh(ch); } }
+  });
+  $('#pSecret').addEventListener('click', startGuess);
+  $('#cPrev').addEventListener('click', () => { SFX.tap(); step(-1); });
+  $('#cNext').addEventListener('click', () => { SFX.tap(); step(1); });
+  $('#cMain').addEventListener('click', () => { SFX.tap(); openList(); });
+  $('#shClose').addEventListener('click', () => { $('#sheet').hidden = true; });
+  $('#sheet').addEventListener('click', (e) => { if (e.target.id === 'sheet') $('#sheet').hidden = true; });
+  $('#pHint').addEventListener('click', () => {
+    const p = $('#hintPop');
+    if (!p.hidden) { p.hidden = true; return; }
+    if (!G || G.over) return;
+    clearTimeout(toastT); $('#toast').className = 'toast';
+    $('#hLetterT').textContent = t('hLetter'); $('#hWordT').textContent = t('hWord'); $('#hListT').textContent = t('hList');
+    const lc = $('#hLetterC'); if (G.free > 0) { lc.textContent = t('free'); lc.classList.add('free'); } else { lc.innerHTML = ico('coin') + COST.letter; lc.classList.remove('free'); }
+    $('#hWordC').innerHTML = ico('coin') + COST.word; $('#hNote').textContent = t('hNote');
+    p.hidden = false; SFX.tap();
+  });
+  $('#hLetter').addEventListener('click', hintLetter);
+  $('#hWord').addEventListener('click', hintWord);
+  $('#hList').addEventListener('click', () => { closePops(); openList(); });
+  document.addEventListener('pointerdown', (e) => { const p = $('#hintPop'); if (!p.hidden && !p.contains(e.target) && !e.target.closest('#pHint')) p.hidden = true; });
+  $('#pBack').addEventListener('click', () => { SFX.tap(); const sp = G && G.spec; stopPlay(); if (sp && sp.kind === 'level') openWorld(sp.theme); else renderHome(); });
+  $('#wBack').addEventListener('click', () => { SFX.tap(); renderHome(); });
+  $('#daily').addEventListener('click', () => { const k = dkey(new Date()); if ((S.daily[lang] || {})[k] != null) { toast(t('tomorrow')); return; } audio(); SFX.tap(); startPlay({ kind: 'daily', date: k }); });
+  $('#mEmoji').addEventListener('click', () => { audio(); SFX.tap(); startMode('emoji'); });
+  $('#mBi').addEventListener('click', () => { audio(); SFX.tap(); startMode('bi'); });
+  $('#mQuick').addEventListener('click', () => { audio(); SFX.tap(); startMode('quick'); });
+  $('#hLang').addEventListener('click', () => { lang = lang === 'it' ? 'tr' : 'it'; S.lang = lang; save(); SFX.tap(); renderHome(); });
+  $('#hSound').addEventListener('click', () => { S.sound = !S.sound; save(); soundUi(); if (S.sound) SFX.tap(); });
+  $('#coachOk').addEventListener('click', () => { $('#coach').hidden = true; S.coach = true; save(); SFX.tap(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { pauseClock(); persist(); save(true); } else if (G && !G.over && G.t0 == null && screen === 'play') G.t0 = performance.now(); });
+  let rzT = 0;
+  window.addEventListener('resize', () => {
+    clearTimeout(rzT);
+    rzT = setTimeout(() => { scene(skyName, true); if (screen === 'play') { layout(); render(); } else if (screen === 'world' && worldId) openWorld(worldId); else paintCards(); }, 150);
+  });
+
+  // the board refits whenever the space between the secret word and the clue bar changes
+  if (window.ResizeObserver) { try { new ResizeObserver(() => { if (screen === 'play' && G) layout(); }).observe($('#stage')); } catch (e) { /* window resizes still refit it */ } }
+
+  /* ---------- start ---------- */
+  function dailyBonus() {
+    const k = dkey(new Date());
+    if (S.bonus === k) return;
+    const first = !S.bonus; S.bonus = k;
+    if (!first) { S.coins += 30; setTimeout(() => { toast(t('bonus', 30), 'gold'); coinsUi(true); }, 700); }
+    save();
+  }
+  function boot(data) {
+    dailyBonus();
+    renderHome();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { scene(skyName, true); if (screen === 'home') paintCards(); if (screen === 'play') { layout(); render(); } });
+    try { if (data && data.spec) startPlay(data.spec); else if (data && data.world && TH[data.world]) openWorld(data.world); } catch (e) { renderHome(); }
+  }
+  const hot = window.claude && window.claude.hot;
+  try { if (hot && hot.snapshot) hot.snapshot(() => { if (G) { persist(); save(true); } return { spec: G && !G.over ? G.spec : null, world: screen === 'world' ? worldId : null }; }); } catch (e) { /* not in a viewer */ }
+  if (hot && hot.ready) hot.ready(boot); else boot((hot && hot.data) || {});
+
+  /* for automated checks */
+  window.__crucimondo = { get G() { return G; }, get S() { return S; }, typeCh, startPlay, startMode, renderHome, openWorld, hintLetter, hintWord, startGuess, setLang(l) { lang = l; S.lang = l; renderHome(); } };
+})();
+</script>
+</body>
+</html>

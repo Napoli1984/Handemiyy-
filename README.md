@@ -1,6 +1,6 @@
 # Handemiyy
 
-Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna**, **Tombola**, **Quiz del milione**, **Pioggia di perle**, **Poker**, **Scacchi**, **Gran Bazar**, **Gratta e scopri**, **Collana di perle**, **Trova le differenze**, **Scopa**, **Tavla** e **Tennis 3D**, più l'**Album delle figurine**: ogni partita regala una bustina. In italiano e in turco.
+Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna**, **Tombola**, **Quiz del milione**, **Pioggia di perle**, **Poker**, **Scacchi**, **Gran Bazar**, **Gratta e scopri**, **Collana di perle**, **Trova le differenze**, **Scopa**, **Tavla**, **Tennis 3D** e **Crucimondo**, più l'**Album delle figurine**: ogni partita regala una bustina. In italiano e in turco.
 
 Gioca qui: https://napoli1984.github.io/Handemiyy-/
 
@@ -19,6 +19,8 @@ La **Scopa** si gioca con le carte napoletane, e i Fanti, i Cavalli e i Re hanno
 La **Tavla** è il backgammon come si gioca in Turchia, con perle bianche contro perle nere: contro Sofia, Marco o Elif, a 1, 3 o 5 punti, oppure online in due (gli altri amici nella stanza guardano). Ogni partita vinta regala una foto di Hande, il mars due.
 
 Il **Tennis 3D** si gioca nella pagina `tennis/`: Handemiyy sfida cinque rivali (Lia, Sofia, Maya, Elif e Regina) sul campo blu del club, con l'arbitro sulla sedia e il pubblico in tribuna. Ci si muove trascinando il dito e si colpisce premendo **Colpo** al momento giusto; chi vince alza la coppa, e ogni partita vinta regala una bustina per l'album.
+
+**Crucimondo** è il cruciverba, nella pagina `crucimondo/`: quattordici mondi a tema (animali, cucina, mare, spazio, cinema, Italia, Turchia e altri) da sei livelli ciascuno, un cruciverba nuovo ogni giorno e tre sfide speciali (emoji, parole turche e partita veloce), con la parola segreta nelle caselle cerchiate. Si gioca in italiano o in turco, e ogni cruciverba nuovo completato regala una bustina per l'album.
 
 Nell'**Album delle figurine** ogni foto di Hande è una figurina, in 21 pagine: ogni partita finita, a qualsiasi gioco, regala una bustina da cinque, ce n'è una in regalo ogni giorno, e le foto vinte nei giochi si incollano da sole. Con quattro doppie si prende una figurina che manca, e ogni pagina completa vale un'altra bustina.
 
