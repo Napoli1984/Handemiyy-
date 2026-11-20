@@ -1,0 +1,1328 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Romanzi · Handemiyy</title>
+<meta name="description" content="I romanzi di Handemiyy da leggere e da ascoltare, in italiano e in turco: Terk Ettiğiniz Kız, venti capitoli con lettura ad alta voce e download in PDF, EPUB e Word.">
+<meta name="theme-color" content="#f6f1ea">
+<meta property="og:type" content="book">
+<meta property="og:title" content="Terk Ettiğiniz Kız · Romanzi di Handemiyy">
+<meta property="og:description" content="Un romanzo in venti capitoli da leggere e da ascoltare, in italiano e in turco.">
+<meta property="og:image" content="https://napoli1984.github.io/Handemiyy-/romanzi/terk-ettiginiz-kiz/copertina.jpg">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Cinzel:wght@500;600&family=Jost:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<link rel="preload" as="image" href="terk-ettiginiz-kiz/copertina.webp">
+<style>
+/* One light look, like the rest of Handemiyy: pearl and champagne, a photo of Hande behind the book, the cover in front.
+   The page has two views on the same scroll: the book (cover, actions, story, contents) and the reader (one chapter).
+   Reading aloud uses the voices of the device (speechSynthesis), sentence by sentence, with the sentence lit in the text. */
+:root {
+  --bg: #f6f1ea; --paper: #fbf7f0; --surface: #fffdf9;
+  --ink: #2a211e; --ink-2: #4b3e37; --muted: #7b6d65; --line: rgba(66, 48, 36, .12);
+  --gold: #c39a55; --gold-soft: #e6cd98; --accent-ink: #8f6630; --plum: #5b4868;
+  --glass: rgba(255, 253, 249, .74); --glass-line: rgba(255, 255, 255, .85);
+  --champ: linear-gradient(180deg, #f4e4c0 0%, #dcbf86 46%, #c49f60 100%);
+  --shadow: 74 54 38;
+  --nb-paper: #f2f6fc; --nb-edge: #d6e1f1; --nb-ink: #2c3446; --nb-label: #64789c; --nb-margin: #a5badc;
+  --font-display: "Bodoni Moda", "Bodoni 72", Didot, "Times New Roman", serif;
+  --font-ui: "Jost", Futura, "Century Gothic", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-caps: "Cinzel", "Trajan Pro", Optima, "Times New Roman", serif;
+  --font-text: "Lora", Georgia, "Times New Roman", serif;
+  --banner: min(58svh, 600px);
+  --fs: 18px;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100svh; color: var(--ink); font: 400 16px/1.5 var(--font-ui);
+  background:
+    radial-gradient(46% 30% at 0% 64%, rgba(232, 220, 248, .7), rgba(232, 220, 248, 0) 72%),
+    radial-gradient(40% 26% at 100% 82%, rgba(214, 241, 231, .65), rgba(214, 241, 231, 0) 72%),
+    radial-gradient(52% 30% at 30% 100%, rgba(252, 228, 213, .7), rgba(252, 228, 213, 0) 72%),
+    var(--bg);
+  background-attachment: fixed;
+  -webkit-tap-highlight-color: transparent;
+}
+body.reading { background: var(--paper); }
+button { font: inherit; color: inherit; touch-action: manipulation; cursor: pointer; }
+a { color: inherit; }
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+svg.i { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+svg.i.f { fill: currentColor; stroke: none; }
+
+/* ---------- the photo behind the book ---------- */
+.bg { position: absolute; top: 0; left: 0; right: 0; height: var(--banner); z-index: 0; overflow: hidden; pointer-events: none; }
+.bg img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; display: block; filter: saturate(.95); transform-origin: 50% 30%; animation: bgZoom 28s ease-out both;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 50%, rgba(0, 0, 0, .55) 72%, transparent 96%); mask-image: linear-gradient(180deg, #000 0%, #000 50%, rgba(0, 0, 0, .55) 72%, transparent 96%);
+}
+@keyframes bgZoom { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+.bg::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(246, 241, 234, .66) 0%, rgba(246, 241, 234, .14) 15%, rgba(246, 241, 234, 0) 27%);
+}
+body.reading .bg { display: none; }
+
+/* ---------- shared pieces ---------- */
+.chip {
+  height: 42px; min-width: 42px; padding: 0 15px 0 11px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--glass-line); background: var(--glass); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: 0 10px 22px -16px rgb(var(--shadow) / .7); font: 500 15px/1 var(--font-ui); text-decoration: none; color: var(--ink);
+}
+.lang { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; border: 1px solid var(--glass-line); background: var(--glass); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); box-shadow: 0 10px 22px -16px rgb(var(--shadow) / .7); }
+.lang button { height: 34px; min-width: 44px; padding: 0 10px; border-radius: 999px; border: 0; background: none; font: 600 13px/1 var(--font-ui); letter-spacing: .08em; color: var(--muted); }
+.lang button[aria-pressed="true"] { background: var(--champ); color: var(--ink); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 4px 10px -6px rgba(150, 108, 48, .8); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 52px; padding: 0 20px; border-radius: 999px;
+  font: 600 16px/1.1 var(--font-ui); letter-spacing: .01em; color: var(--ink); text-decoration: none; text-align: center;
+  background: rgba(255, 253, 249, .9); border: 1px solid rgba(201, 164, 105, .55); box-shadow: 0 10px 20px -16px rgb(var(--shadow) / .7);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn.primary { background: var(--champ); border-color: transparent; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 16px 28px -16px rgba(150, 108, 48, .95); }
+.icon-btn { width: 44px; height: 44px; flex: none; border-radius: 50%; border: 0; background: none; display: grid; place-items: center; color: var(--ink); }
+.card {
+  background: var(--glass); border: 1px solid var(--glass-line); border-radius: 26px;
+  -webkit-backdrop-filter: blur(22px) saturate(1.35); backdrop-filter: blur(22px) saturate(1.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 18px 40px -26px rgb(var(--shadow) / .55);
+}
+.sec-title { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font: 600 12px/1.2 var(--font-caps); letter-spacing: .22em; text-transform: uppercase; color: var(--accent-ink); }
+.sec-title::before, .sec-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(195, 154, 85, 0), rgba(195, 154, 85, .65)); }
+.sec-title::after { transform: scaleX(-1); }
+.diamond { display: inline-block; width: 6px; height: 6px; transform: rotate(45deg); background: var(--gold); }
+
+/* ---------- the book ---------- */
+.wrap { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: calc(env(safe-area-inset-top, 0px) + 12px) max(14px, env(safe-area-inset-right, 0px)) calc(120px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.topbar .where { font: italic 500 22px/1 var(--font-display); color: var(--ink); text-shadow: 0 1px 12px rgba(255, 250, 240, .9); }
+.book { display: grid; justify-items: center; margin-top: calc(var(--banner) * .62 - 58px); }
+.cover {
+  position: relative; z-index: 2; display: block; width: min(54vw, 260px); aspect-ratio: 2 / 3; padding: 0; border: 0; background: #1b2433; border-radius: 3px 9px 9px 3px;
+  box-shadow: 0 34px 50px -30px rgba(30, 22, 18, .85), 0 18px 26px -18px rgb(var(--shadow) / .6), 0 0 0 1px rgba(255, 255, 255, .25);
+  transform: perspective(1100px) rotateY(-7deg) rotateX(1deg); transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+}
+.cover:hover { transform: perspective(1100px) rotateY(-2deg); }
+.cover img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
+.cover::before { /* the spine and a little shine */
+  content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, .38) 0, rgba(255, 255, 255, .2) 1.6%, rgba(0, 0, 0, .14) 3.4%, rgba(0, 0, 0, 0) 8%),
+              linear-gradient(115deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, 0) 32%);
+}
+.cover::after { /* the pages on the side */
+  content: ""; position: absolute; top: 1.8%; bottom: 1.8%; right: -6px; width: 7px; z-index: -1; border-radius: 0 3px 3px 0;
+  background: repeating-linear-gradient(90deg, #fbf6ec 0 1px, #e2d6c1 1px 2px);
+}
+.book-card { width: 100%; margin-top: -58px; padding: 76px 20px 22px; text-align: center; }
+.meta { margin: 0; font: 600 11.5px/1.3 var(--font-caps); letter-spacing: .22em; text-transform: uppercase; color: var(--accent-ink); }
+.b-title { margin: 8px 0 0; font: 500 clamp(32px, 9vw, 44px)/1.08 var(--font-display); letter-spacing: -.01em; }
+.b-sub { margin: 8px 0 0; font: italic 400 18px/1.35 var(--font-text); color: var(--ink-2); }
+.prog { margin: 18px auto 0; max-width: 340px; }
+.prog-bar { height: 5px; border-radius: 3px; background: rgba(66, 48, 36, .1); overflow: hidden; }
+.prog-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #e6cd98, #c39a55); }
+.prog p { margin: 7px 0 0; font: 500 13.5px/1.3 var(--font-ui); color: var(--muted); }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.actions .primary { grid-column: 1 / -1; }
+.times { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.times li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 9px; border-radius: 999px; background: rgba(255, 253, 249, .7); border: 1px solid var(--line); font: 500 13px/1.2 var(--font-ui); color: var(--ink-2); }
+.times svg.i { width: 17px; height: 17px; color: var(--accent-ink); }
+.block { margin-top: 14px; padding: 22px 20px; }
+.blurb { margin: 0; font: 400 17px/1.65 var(--font-text); color: var(--ink-2); text-wrap: pretty; }
+.blurb::first-letter { font-family: var(--font-display); font-size: 2.6em; float: left; line-height: .9; margin: .04em .08em 0 0; color: var(--accent-ink); }
+.toc { margin: 0; padding: 0; list-style: none; }
+.toc li + li { border-top: 1px solid var(--line); }
+.ch-row { width: 100%; display: grid; grid-template-columns: 34px minmax(0, 1fr) 24px; align-items: center; gap: 12px; padding: 11px 4px; border: 0; background: none; text-align: left; border-radius: 12px; }
+.ch-row:hover { background: rgba(255, 255, 255, .5); }
+.ch-no { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: italic 500 16px/1 var(--font-display); color: var(--accent-ink); border: 1px solid rgba(201, 164, 105, .55); background: rgba(255, 253, 249, .8); }
+.ch-tt b { display: block; font: 500 16.5px/1.3 var(--font-text); color: var(--ink); }
+.ch-tt small { display: block; margin-top: 2px; font: 400 13px/1.3 var(--font-ui); color: var(--muted); }
+.ch-ic { color: var(--gold); display: grid; place-items: center; }
+.ch-row.done .ch-no { background: var(--champ); border-color: transparent; color: var(--ink); }
+.ch-row.cur .ch-no { background: var(--plum); border-color: var(--plum); color: #fff; }
+.ch-row.cur small { color: var(--plum); font-weight: 500; }
+.note { margin: 0; font: 400 15.5px/1.6 var(--font-ui); color: var(--ink-2); }
+.note + .note { margin-top: 8px; }
+.note.soft { color: var(--muted); font-size: 14.5px; }
+.foot { margin: 22px 0 0; text-align: center; font: 400 12.5px/1.5 var(--font-ui); color: var(--muted); }
+
+/* wide screens: the photo stays on the left, the book on the right */
+@media (min-width: 900px) {
+  .bg { position: fixed; top: 0; bottom: 0; height: auto; right: auto; width: 46vw; }
+  .bg img { object-position: 50% 18%; -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%); }
+  .bg::after { background: linear-gradient(180deg, rgba(246, 241, 234, .35), rgba(246, 241, 234, 0) 18%); }
+  .wrap { max-width: none; margin: 0 0 0 38vw; padding: 26px clamp(28px, 4vw, 64px) 140px; }
+  .wrap > * { max-width: 780px; }
+  .book { grid-template-columns: auto minmax(0, 1fr); align-items: center; justify-items: stretch; margin-top: 46px; }
+  .cover { width: 250px; margin-right: -54px; }
+  .book-card { margin-top: 0; padding: 30px 28px 26px 84px; text-align: left; }
+  .prog { margin-left: 0; }
+  .times { justify-content: flex-start; }
+}
+
+/* ---------- the reader ---------- */
+.r-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; gap: 4px;
+  padding: calc(env(safe-area-inset-top, 0px) + 6px) max(6px, env(safe-area-inset-right, 0px)) 6px max(6px, env(safe-area-inset-left, 0px));
+  background: rgba(251, 247, 240, .92); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+  transition: transform .3s ease;
+}
+.r-bar.away { transform: translateY(-105%); }
+.r-where { opacity: 0; transition: opacity .25s ease; }
+.r-bar.titled .r-where { opacity: 1; }
+.r-where { flex: 1; min-width: 0; text-align: center; padding: 0 4px; }
+.r-where span { display: block; font: 600 10.5px/1.3 var(--font-caps); letter-spacing: .2em; text-transform: uppercase; color: var(--accent-ink); }
+.r-where b { display: block; font: italic 500 16.5px/1.3 var(--font-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.r-prog { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; overflow: hidden; }
+.r-prog i { display: block; height: 100%; background: linear-gradient(90deg, #e6cd98, #c39a55); transform-origin: 0 50%; transform: scaleX(0); }
+.reader { padding: calc(env(safe-area-inset-top, 0px) + 66px) 0 calc(150px + env(safe-area-inset-bottom, 0px)); }
+.text {
+  max-width: 35em; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px));
+  font: 400 var(--fs)/1.7 var(--font-text); color: #2b2420; text-align: left; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word;
+}
+@media (min-width: 700px) { .text { text-align: justify; } }
+.text p { margin: 0; text-indent: 1.4em; }
+.text p.first { text-indent: 0; }
+.text p.lead + * { clear: left; }   /* a one-line opening paragraph does not let the big letter push into the next one */
+.text p.lead:not(.nolead)::first-letter { float: left; font-family: var(--font-display); font-weight: 500; font-size: 3.3em; line-height: .84; margin: .07em .1em 0 0; color: var(--accent-ink); }
+.ch-head { text-align: center; padding: clamp(26px, 7vh, 64px) 0 1.7em; }
+.ch-num { margin: 0 0 14px; font: 600 12px/1 var(--font-caps); letter-spacing: .26em; text-transform: uppercase; color: var(--accent-ink); text-indent: 0; }
+.ch-title { margin: 0; font: italic 500 clamp(30px, 7.6vw, 42px)/1.12 var(--font-display); color: var(--ink); text-wrap: balance; -webkit-hyphens: manual; hyphens: manual; }
+.orn { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 18px auto 0; width: 150px; }
+.orn::before, .orn::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(195, 154, 85, 0), rgba(195, 154, 85, .8)); }
+.orn::after { transform: scaleX(-1); }
+.brk { display: flex; justify-content: center; gap: 14px; margin: 1.35em 0; }
+.brk i { width: 5px; height: 5px; transform: rotate(45deg); background: var(--gold); opacity: .85; }
+.nb {
+  position: relative; margin: 1.5em 0 1.8em; padding: 1.05em 1.1em .7em 1.55em; border-radius: 5px 16px 16px 5px;
+  background: linear-gradient(180deg, #f7f9fd, var(--nb-paper)); border: 1px solid var(--nb-edge); color: var(--nb-ink);
+  font-style: italic; text-align: left; box-shadow: 0 14px 26px -22px rgba(44, 52, 70, .55);
+}
+.nb::before { content: ""; position: absolute; top: 10px; bottom: 10px; left: .72em; width: 1.5px; border-radius: 1px; background: var(--nb-margin); }
+.text .nb p { text-indent: 0; margin: 0 0 .55em; }
+.text .nb p.nb-label { margin-bottom: .85em; font: 600 .62em/1.3 var(--font-caps); font-style: normal; letter-spacing: .2em; text-transform: uppercase; color: var(--nb-label); }
+.nb.nb-final { margin-top: 2.6em; }
+.s.on, .u.on.nb-label {
+  background: rgba(236, 211, 152, .5); border-radius: 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  box-shadow: 0 0 0 2px rgba(236, 211, 152, .5);
+}
+.ch-head.on .ch-title { color: var(--accent-ink); }
+.audio-on .text .u { cursor: pointer; }
+.ch-end { margin: 2.6em auto 0; max-width: 35em; padding: 0 20px; text-align: center; }
+.ch-end .end-t { margin: 16px 0 0; font: italic 500 18px/1.3 var(--font-display); color: var(--ink-2); }
+.ch-end .end-big { margin: 18px 0 0; font: italic 500 46px/1 var(--font-display); }
+.ch-end .end-note { margin: 10px auto 0; max-width: 26em; font: 400 15.5px/1.55 var(--font-ui); color: var(--muted); }
+.ch-end .end-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; }
+.r-msg { max-width: 30em; margin: 30vh auto 0; padding: 0 24px; text-align: center; font: 400 16px/1.6 var(--font-ui); color: var(--muted); }
+.r-msg .btn { margin-top: 16px; }
+.spin { width: 30px; height: 30px; margin: 0 auto 14px; border-radius: 50%; border: 2px solid rgba(195, 154, 85, .25); border-top-color: var(--gold); animation: spin .9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.fab {
+  position: fixed; z-index: 25; right: max(14px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 8px; height: 54px; padding: 0 22px 0 17px; border-radius: 999px; border: 0;
+  background: var(--champ); color: var(--ink); font: 600 16px/1 var(--font-ui);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 18px 30px -14px rgba(150, 108, 48, .95);
+  transition: transform .3s ease, opacity .3s ease;
+}
+.ui-away .fab { transform: translateY(140%); opacity: 0; pointer-events: none; }
+
+/* ---------- the player ---------- */
+.player {
+  position: fixed; z-index: 30; left: 50%; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  width: min(560px, calc(100% - 20px)); padding: 8px 12px 12px; border-radius: 26px;
+  background: rgba(255, 252, 246, .92); -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid rgba(201, 164, 105, .5); box-shadow: 0 24px 44px -24px rgba(60, 44, 32, .7), 0 4px 14px -8px rgba(60, 44, 32, .35);
+}
+.pl-head { display: flex; align-items: center; gap: 6px; }
+.pl-where { flex: 1; min-width: 0; padding: 6px 4px; border: 0; background: none; text-align: left; font: 500 13.5px/1.3 var(--font-ui); color: var(--ink-2); }
+.pl-where b, .pl-where small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-where b { font: italic 500 15.5px/1.3 var(--font-display); color: var(--ink); }
+.pl-where small { font-size: 12.5px; color: var(--muted); }
+.pl-ctl { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 2px; }
+.pl-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); display: grid; place-items: center; color: var(--ink); position: relative; }
+.pl-btn.rate { font: 600 14.5px/1 var(--font-ui); font-variant-numeric: tabular-nums; }
+.pl-btn .badge { position: absolute; top: -4px; right: -6px; padding: 2px 6px; border-radius: 999px; background: var(--plum); color: #fff; font: 600 10px/1.2 var(--font-ui); }
+.pl-play { width: 64px; height: 64px; border-radius: 50%; border: 0; display: grid; place-items: center; color: var(--ink); background: var(--champ); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 12px 22px -12px rgba(150, 108, 48, .95); }
+.pl-play svg.i { width: 28px; height: 28px; }
+.pl-msg { margin: 8px 4px 0; padding: 10px 12px; border-radius: 14px; background: #f3eee5; font: 400 13.5px/1.45 var(--font-ui); color: var(--ink-2); }
+
+/* ---------- sheets ---------- */
+.sheet { position: fixed; inset: 0; z-index: 50; display: grid; align-items: end; justify-items: center; background: rgba(46, 34, 26, 0); transition: background .25s ease; }
+.sheet.open { background: rgba(46, 34, 26, .36); }
+.sheet-panel {
+  width: min(560px, 100%); max-height: 88svh; overflow: auto; overscroll-behavior: contain; outline: none;
+  padding: 10px 18px calc(20px + env(safe-area-inset-bottom, 0px)); border-radius: 26px 26px 0 0; background: #fffcf7;
+  box-shadow: 0 -20px 40px -20px rgba(46, 34, 26, .5); transform: translateY(100%); transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+.sheet.open .sheet-panel { transform: none; }
+@media (min-width: 700px) {
+  .sheet { align-items: center; }
+  .sheet-panel { border-radius: 26px; opacity: 0; transform: translateY(18px) scale(.98); transition: transform .25s ease, opacity .25s ease; }
+  .sheet.open .sheet-panel { opacity: 1; transform: none; }
+}
+.grab { width: 42px; height: 5px; margin: 0 auto 8px; border-radius: 3px; background: rgba(66, 48, 36, .16); }
+.sh-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.sh-head h2 { flex: 1; margin: 0; font: italic 500 24px/1.2 var(--font-display); }
+.sh-intro { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+.sh-label { margin: 18px 0 8px; font: 600 11px/1.2 var(--font-caps); letter-spacing: .2em; text-transform: uppercase; color: var(--accent-ink); }
+.dl-group + .dl-group { margin-top: 6px; }
+.dl-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 10px 12px 10px 10px; margin-top: 8px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); text-decoration: none; }
+.dl-row:hover { border-color: rgba(201, 164, 105, .8); }
+.dl-badge { width: 44px; height: 54px; border-radius: 5px 12px 5px 5px; display: grid; align-items: end; justify-items: center; padding-bottom: 8px; color: #fff; font: 600 9.5px/1 var(--font-ui); letter-spacing: .08em; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35); }
+.dl-badge.pdf { background: linear-gradient(160deg, #d8b371, #a7803f); }
+.dl-badge.epub { background: linear-gradient(160deg, #8b78a0, #5b4868); }
+.dl-badge.docx { background: linear-gradient(160deg, #7f97c2, #4f6693); }
+.dl-tx b { display: block; font: 600 16px/1.25 var(--font-ui); }
+.dl-tx small { display: block; margin-top: 2px; font-size: 13.5px; line-height: 1.35; color: var(--muted); }
+.dl-end { display: grid; justify-items: end; gap: 4px; color: var(--accent-ink); font: 500 12.5px/1 var(--font-ui); }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg button { min-height: 42px; padding: 0 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font: 500 15px/1 var(--font-ui); }
+.seg button[aria-pressed="true"] { background: var(--champ); border-color: transparent; font-weight: 600; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6); }
+.vo-list { display: grid; gap: 6px; max-height: 260px; overflow: auto; }
+.vo-list button { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); text-align: left; font: 500 15px/1.25 var(--font-ui); }
+.vo-list button small { display: block; color: var(--muted); font-size: 12.5px; font-weight: 400; }
+.vo-list button[aria-pressed="true"] { border-color: var(--gold); background: #fbf3e2; }
+.vo-list .dot { width: 18px; height: 18px; flex: none; border-radius: 50%; border: 1.5px solid rgba(143, 102, 48, .5); }
+.vo-list button[aria-pressed="true"] .dot { border: 5px solid var(--gold); }
+.fs-row { display: flex; align-items: center; gap: 12px; }
+.fs-row button { width: 56px; height: 48px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); font: 500 18px/1 var(--font-text); }
+.fs-row button:first-child { font-size: 14px; }
+.fs-row button:last-child { font-size: 22px; }
+.fs-row output { flex: 1; text-align: center; font: 400 var(--fs-prev, 18px)/1.4 var(--font-text); color: var(--ink-2); }
+.sh-note { margin: 14px 0 0; padding: 12px 14px; border-radius: 14px; background: #f3eee5; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+.toc-sheet .ch-row:hover { background: #f6efe3; }
+
+/* ---------- the cover, large ---------- */
+.lightbox { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 24px; background: rgba(246, 241, 234, .9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; box-shadow: 0 30px 60px -30px rgba(30, 22, 18, .8); }
+.lightbox .icon-btn { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); right: 10px; background: var(--glass); border: 1px solid var(--line); }
+
+.toast { position: fixed; z-index: 70; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 14px); transform: translate(-50%, -20px); opacity: 0; pointer-events: none; max-width: calc(100% - 28px); padding: 10px 16px; border-radius: 14px; background: #2f2622; color: #fff8ec; font: 500 14px/1.4 var(--font-ui); transition: opacity .25s, transform .25s; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+.view { animation: viewIn .35s ease both; }
+@keyframes viewIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .bg img, .view, .spin { animation: none; }
+  .cover, .cover:hover { transform: none; }
+  .r-bar, .r-where, .fab, .sheet, .sheet-panel, .toast { transition: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.6C10.2 5.3 7.7 4.6 4.5 4.6v13c3.2 0 5.7.7 7.5 2 1.8-1.3 4.3-2 7.5-2v-13c-3.2 0-5.7.7-7.5 2zM12 6.6v13"/></symbol>
+  <symbol id="i-ear" viewBox="0 0 24 24"><path d="M4.5 16v-3.5a7.5 7.5 0 0 1 15 0V16"/><path d="M4.5 14.5H7a1 1 0 0 1 1 1V19a1 1 0 0 1-1 1H6a1.5 1.5 0 0 1-1.5-1.5zM19.5 14.5H17a1 1 0 0 0-1 1V19a1 1 0 0 0 1 1h1a1.5 1.5 0 0 0 1.5-1.5z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8.5 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4c.6-.4.6-1.4 0-1.8l-10-6.4c-.7-.4-1.6.1-1.6.9z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><rect x="5" y="6" width="2.4" height="12" rx="1.1"/><path d="M18.6 6.9v10.2c0 .8-.9 1.3-1.6.8l-7.3-5.1a1 1 0 0 1 0-1.6L17 6.1c.7-.5 1.6 0 1.6.8z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><rect x="16.6" y="6" width="2.4" height="12" rx="1.1"/><path d="M5.4 6.9v10.2c0 .8.9 1.3 1.6.8l7.3-5.1a1 1 0 0 0 0-1.6L7 6.1c-.7-.5-1.6 0-1.6.8z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 7h11M9 12h11M9 17h11M4.5 7h.01M4.5 12h.01M4.5 17h.01"/></symbol>
+  <symbol id="i-aa" viewBox="0 0 24 24"><path d="M3 18l4.6-12h.8L13 18M4.7 14h6.6M14.5 18l3.1-7.5h.8L21.5 18M15.6 15.6h4.8"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-tune" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A7.6 7.6 0 0 1 9.4 4.5a7.6 7.6 0 1 0 10.1 10.1z"/></symbol>
+</svg>
+
+<div class="bg" aria-hidden="true"><img src="../f/089.jpg" alt="" decoding="async"></div>
+
+<main id="v-book" class="view" hidden>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="chip" href="../"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg><span data-t="games"></span></a>
+      <span class="where" data-t="title"></span>
+      <div class="lang" role="group" data-t-aria="langLabel">
+        <button type="button" data-lang="it" aria-pressed="false">IT</button>
+        <button type="button" data-lang="tr" aria-pressed="false">TR</button>
+      </div>
+    </header>
+
+    <article class="book" aria-labelledby="b-title">
+      <button type="button" class="cover" id="b-cover" data-t-aria="zoom">
+        <img src="terk-ettiginiz-kiz/copertina.webp" srcset="terk-ettiginiz-kiz/copertina-360.webp 360w, terk-ettiginiz-kiz/copertina.webp 720w" sizes="(min-width: 900px) 250px, 54vw" width="720" height="1080" alt="" id="b-cover-img">
+      </button>
+      <div class="book-card card">
+        <p class="meta" id="b-meta"></p>
+        <h1 class="b-title" id="b-title">Terk Ettiğiniz Kız</h1>
+        <p class="b-sub" id="b-sub"></p>
+        <div class="prog" id="b-prog" hidden><div class="prog-bar"><i></i></div><p></p></div>
+        <div class="actions">
+          <button type="button" class="btn primary" id="b-read"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span></span></button>
+          <button type="button" class="btn" id="b-listen"><svg class="i" aria-hidden="true"><use href="#i-ear"/></svg><span data-t="listen"></span></button>
+          <button type="button" class="btn" id="b-dl"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg><span data-t="download"></span></button>
+        </div>
+        <ul class="times" id="b-times"></ul>
+      </div>
+    </article>
+
+    <section class="block card" aria-labelledby="h-story">
+      <h2 class="sec-title" id="h-story" data-t="story"></h2>
+      <p class="blurb" id="b-blurb"></p>
+    </section>
+
+    <section class="block card" aria-labelledby="h-toc">
+      <h2 class="sec-title" id="h-toc" data-t="toc"></h2>
+      <ol class="toc" id="b-toc"></ol>
+    </section>
+
+    <section class="block card" aria-labelledby="h-audio">
+      <h2 class="sec-title" id="h-audio" data-t="audioTitle"></h2>
+      <p class="note" id="b-audio-text"></p>
+      <p class="note soft" id="b-audio-tip"></p>
+    </section>
+
+    <p class="foot" data-t="foot"></p>
+  </div>
+</main>
+
+<main id="v-read" class="view reader" hidden>
+  <header class="r-bar" id="r-bar">
+    <button type="button" class="icon-btn" id="r-back" data-t-aria="back"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></button>
+    <div class="r-where" aria-live="polite"><span id="r-num"></span><b id="r-title"></b></div>
+    <button type="button" class="icon-btn" id="r-textset" data-t-aria="textSet"><svg class="i" aria-hidden="true"><use href="#i-aa"/></svg></button>
+    <button type="button" class="icon-btn" id="r-toc" data-t-aria="toc"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg></button>
+    <div class="r-prog" aria-hidden="true"><i id="r-pbar"></i></div>
+  </header>
+  <article class="text" id="r-text"></article>
+  <div id="r-end"></div>
+  <button type="button" class="fab" id="r-listen" hidden><svg class="i" aria-hidden="true"><use href="#i-ear"/></svg><span data-t="listen"></span></button>
+</main>
+
+<div class="player" id="player" role="region" data-t-aria="audioTitle" hidden>
+  <div class="pl-head">
+    <button type="button" class="pl-where" id="pl-where"><b></b><small></small></button>
+    <button type="button" class="icon-btn" id="pl-close" data-t-aria="closeAudio"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="pl-ctl">
+    <button type="button" class="pl-btn rate" id="pl-rate" data-t-aria="speed">1×</button>
+    <button type="button" class="pl-btn" id="pl-prev" data-t-aria="prevP"><svg class="i f" aria-hidden="true"><use href="#i-prev"/></svg></button>
+    <button type="button" class="pl-play" id="pl-play"><svg class="i f" aria-hidden="true"><use href="#i-play"/></svg></button>
+    <button type="button" class="pl-btn" id="pl-next" data-t-aria="nextP"><svg class="i f" aria-hidden="true"><use href="#i-next"/></svg></button>
+    <button type="button" class="pl-btn" id="pl-more" data-t-aria="voiceSet"><svg class="i" aria-hidden="true"><use href="#i-tune"/></svg><span class="badge" id="pl-timer" hidden></span></button>
+  </div>
+  <p class="pl-msg" id="pl-msg" hidden></p>
+</div>
+
+<div class="sheet" id="sh-dl" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="dl-title" tabindex="-1">
+    <div class="grab"></div>
+    <div class="sh-head"><h2 id="dl-title" data-t="dlTitle"></h2><button type="button" class="icon-btn" data-close data-t-aria="close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <p class="sh-intro" data-t="dlIntro"></p>
+    <div id="dl-list"></div>
+  </div>
+</div>
+
+<div class="sheet toc-sheet" id="sh-toc" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="toc-title" tabindex="-1">
+    <div class="grab"></div>
+    <div class="sh-head"><h2 id="toc-title" data-t="toc"></h2><button type="button" class="icon-btn" data-close data-t-aria="close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <ol class="toc" id="sh-toc-list"></ol>
+  </div>
+</div>
+
+<div class="sheet" id="sh-text" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="tx-title" tabindex="-1">
+    <div class="grab"></div>
+    <div class="sh-head"><h2 id="tx-title" data-t="textSet"></h2><button type="button" class="icon-btn" data-close data-t-aria="close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <p class="sh-label" data-t="size"></p>
+    <div class="fs-row">
+      <button type="button" id="fs-dn" data-t-aria="smaller">A</button>
+      <output id="fs-out">Aa</output>
+      <button type="button" id="fs-up" data-t-aria="larger">A</button>
+    </div>
+    <p class="sh-label" data-t="textLang"></p>
+    <div class="seg" id="tx-lang">
+      <button type="button" data-lang="it" aria-pressed="false">Italiano</button>
+      <button type="button" data-lang="tr" aria-pressed="false">Türkçe</button>
+    </div>
+  </div>
+</div>
+
+<div class="sheet" id="sh-voice" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="vo-title" tabindex="-1">
+    <div class="grab"></div>
+    <div class="sh-head"><h2 id="vo-title" data-t="voiceSet"></h2><button type="button" class="icon-btn" data-close data-t-aria="close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <p class="sh-label" data-t="voice"></p>
+    <div class="vo-list" id="vo-list"></div>
+    <p class="sh-label" data-t="speed"></p>
+    <div class="seg" id="vo-rate"></div>
+    <p class="sh-label" data-t="timer"></p>
+    <div class="seg" id="vo-timer"></div>
+    <p class="sh-note" id="vo-note" hidden></p>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <img alt="" id="lb-img">
+  <button type="button" class="icon-btn" data-t-aria="close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const icon = (id, f) => '<svg class="i' + (f ? ' f' : '') + '" aria-hidden="true"><use href="#i-' + id + '"/></svg>';
+
+  /* ---------- the novel: chapters, sizes and files are written here by the build script ---------- */
+  const FACTS = /*BOOK-FACTS*/{"id":"terk-ettiginiz-kiz","words":{"it":35016,"tr":26205},"chars":{"it":[10284,11704,10278,10305,9659,10122,9045,10051,10209,9987,10010,7775,8953,10815,8627,8597,9965,13340,16663,9675],"tr":[9374,10770,9252,9565,9054,9500,8757,8967,9528,9347,9209,7235,8471,10126,8043,8161,9240,12381,15263,8838]},"chapters":{"it":[["Capitolo 1","La valigia color miele"],["Capitolo 2","Quattro persone al cancello"],["Capitolo 3","La stanza sul cortile"],["Capitolo 4","Un posto a tavola"],["Capitolo 5","Il rumore del legno"],["Capitolo 6","Trentaquattro candeline"],["Capitolo 7","La Casa dei Tigli"],["Capitolo 8","La fotografia sul tavolo"],["Capitolo 9","La riga sotto la firma"],["Capitolo 10","Le parole della febbre"],["Capitolo 11","Le casse vuote"],["Capitolo 12","Il viaggio di Ayla"],["Capitolo 13","Il nome sullo schermo"],["Capitolo 14","Quello che si può perdere"],["Capitolo 15","Non firmare per paura"],["Capitolo 16","La sera delle nove"],["Capitolo 17","La figlia maggiore"],["Capitolo 18","Quando potevate tornare"],["Capitolo 19","Le chiavi sul tavolo"],["Capitolo 20","Questa volta dentro"]],"tr":[["Bölüm 1","Bal Rengi Bavul"],["Bölüm 2","Kapıdaki Dört Kişi"],["Bölüm 3","Avluya Bakan Oda"],["Bölüm 4","Sofrada Bir Yer"],["Bölüm 5","Tahtanın Sesi"],["Bölüm 6","Otuz Dört Mum"],["Bölüm 7","Ihlamurlar Evi"],["Bölüm 8","Masadaki Fotoğraf"],["Bölüm 9","İmzanın Altındaki Satır"],["Bölüm 10","Ateşin Söyledikleri"],["Bölüm 11","Boş Sandıklar"],["Bölüm 12","Ayla'nın Yolculuğu"],["Bölüm 13","Ekrandaki İsim"],["Bölüm 14","Kaybedilebilecekler"],["Bölüm 15","Korkudan İmza Atma"],["Bölüm 16","Akşam Saat Dokuz"],["Bölüm 17","Büyük Kız"],["Bölüm 18","Dönebileceğiniz Zaman"],["Bölüm 19","Masadaki Anahtarlar"],["Bölüm 20","Bu Kez İçeride"]]},"files":{"it":{"pdf":["Terk_Ettiginiz_Kiz_italiano.pdf","1,1 MB"],"epub":["Terk_Ettiginiz_Kiz_italiano.epub","357 KB"],"docx":["Terk_Ettiginiz_Kiz_italiano.docx","393 KB"]},"tr":{"pdf":["Terk_Ettiginiz_Kiz_turkce.pdf","1,1 MB"],"epub":["Terk_Ettiginiz_Kiz_turkce.epub","358 KB"],"docx":["Terk_Ettiginiz_Kiz_turkce.docx","393 KB"]}}}/*END-BOOK-FACTS*/;
+  const BOOK = {
+    id: 'terk-ettiginiz-kiz', dir: 'terk-ettiginiz-kiz/', title: 'Terk Ettiğiniz Kız',
+    sub: { it: 'La ragazza che avete abbandonato', tr: '' },
+    blurb: {
+      it: 'A quattro anni Hande viene lasciata alla Casa dei Tigli con una valigia color miele e una fibbia che non chiude. Trent’anni dopo, al cancello della casa dove lavora, si presentano quattro persone in cerca di un lavoro e di un tetto: un padre, una madre, due sorelle. Sono la famiglia che quella sera non è tornata.',
+      tr: 'Hande dört yaşındayken, tokası kapanmayan bal rengi bir bavulla Ihlamurlar Evi’ne bırakılır. Otuz yıl sonra, çalıştığı evin kapısına iş ve kalacak yer arayan dört kişi gelir: bir baba, bir anne, iki kız kardeş. Onlar, o akşam geri dönmeyen ailesidir.',
+    },
+  };
+  const NCH = FACTS.chapters.it.length;
+  const NB = { it: ['Dal quaderno blu', 'Dal quaderno blu · ultima pagina'], tr: ['Mavi defterden', 'Mavi defterden · son sayfa'] };
+  const TRY = { it: 'Ciao, sono la voce che ti leggerà il romanzo.', tr: 'Merhaba, romanı sana ben okuyacağım.' };
+  const RATES = [0.8, 0.9, 1, 1.1, 1.25, 1.5];
+  const TIMERS = [0, 15, 30, 60, 'end'];
+
+  /* ---------- words on screen ---------- */
+  const T = {
+    it: {
+      games: 'Giochi', title: 'Romanzi', langLabel: 'Lingua',
+      meta: (n) => 'Romanzo · ' + n + ' capitoli',
+      read: 'Inizia a leggere', readOn: 'Continua a leggere', readAgain: 'Rileggi dall’inizio',
+      listen: 'Ascolta', download: 'Scarica',
+      prog: (c, n, p) => 'Capitolo ' + c + ' di ' + n + ' · ' + p + '%', progDone: 'Letto fino all’ultima pagina',
+      readTime: (x) => 'circa ' + x + ' di lettura', listenTime: (x) => 'circa ' + x + ' di ascolto',
+      story: 'La storia', toc: 'Indice', min: (n) => n + ' min', here: 'Segnalibro',
+      audioTitle: 'Ascoltare il romanzo',
+      audioText: 'Premi «Ascolta» e il telefono legge il romanzo ad alta voce, frase per frase, illuminando nel testo il punto in cui sei. Usa le voci del tuo dispositivo, quindi funziona anche senza connessione. Puoi scegliere la voce e la velocità, e mettere un timer se vuoi addormentarti ascoltando.',
+      audioTip: 'Mentre ascolti, tocca un paragrafo per ripartire da lì.',
+      noSpeech: 'Questo browser non sa leggere ad alta voce: prova con Chrome o Safari aggiornati.',
+      foot: 'Il segnalibro si salva da solo, su questo dispositivo.',
+      zoom: 'Ingrandisci la copertina', close: 'Chiudi',
+      dlTitle: 'Scarica il romanzo', dlIntro: 'Con la copertina, in italiano e in turco.',
+      pdf: 'PDF', pdfSub: 'Si apre su ogni telefono e computer', epub: 'E-book (EPUB)', epubSub: 'Per Apple Libri, Google Play Libri e gli e-reader', docx: 'Word', docxSub: 'Da stampare o da modificare',
+      langName: { it: 'Italiano', tr: 'Turco' },
+      back: 'Torna al libro', textSet: 'Testo e lingua', size: 'Dimensione del testo', smaller: 'Testo più piccolo', larger: 'Testo più grande', textLang: 'Lingua del romanzo',
+      endCh: (n) => 'Fine del capitolo ' + n, nextCh: (n) => 'Capitolo ' + n, prevCh: 'Precedente', end: 'Fine',
+      endNote: 'Hai letto tutto il romanzo. Grazie per averlo seguito fino all’ultima pagina.', toBook: 'Torna al libro',
+      loading: 'Apro il libro…', loadErr: 'Il testo non si è caricato. Controlla la connessione e riprova.', retry: 'Riprova',
+      voiceSet: 'Voce, velocità e timer', voice: 'Voce', speed: 'Velocità', timer: 'Timer',
+      timerOpt: (m) => (m === 0 ? 'No' : m === 'end' ? 'A fine capitolo' : m + ' min'),
+      devVoice: 'Voce del dispositivo', tryVoice: 'Prova', play: 'Ascolta', pause: 'Pausa',
+      prevP: 'Paragrafo precedente', nextP: 'Paragrafo successivo', closeAudio: 'Chiudi l’ascolto', openText: 'Tocca per aprire il testo',
+      timerLeft: (n) => 'Si ferma tra ' + n + ' min', timerEnd: 'Si ferma a fine capitolo',
+      stopped: 'Il timer ha fermato la lettura.', voiceErr: 'La voce non risponde: prova a sceglierne un’altra.',
+      noVoice: (lg) => (lg === 'it' ? 'Su questo dispositivo non c’è una voce italiana.' : 'Su questo dispositivo non c’è una voce turca.') + ' Puoi aggiungerla dalle impostazioni del telefono, nella sintesi vocale (su iPhone: Accessibilità › Contenuto letto ad alta voce › Voci).',
+      voicesNote: 'Le voci sono quelle del tuo telefono: se ne aggiungi una nelle impostazioni, la trovi qui.',
+      tapHint: 'Tocca un paragrafo per ascoltare da lì',
+      dec: ',',
+    },
+    tr: {
+      games: 'Oyunlar', title: 'Romanlar', langLabel: 'Dil',
+      meta: (n) => 'Roman · ' + n + ' bölüm',
+      read: 'Okumaya başla', readOn: 'Okumaya devam et', readAgain: 'Baştan oku',
+      listen: 'Dinle', download: 'İndir',
+      prog: (c, n, p) => 'Bölüm ' + c + ' / ' + n + ' · %' + p, progDone: 'Son sayfasına kadar okundu',
+      readTime: (x) => 'yaklaşık ' + x + ' okuma', listenTime: (x) => 'yaklaşık ' + x + ' dinleme',
+      story: 'Hikâye', toc: 'İçindekiler', min: (n) => n + ' dk', here: 'Ayraç',
+      audioTitle: 'Romanı dinlemek',
+      audioText: '“Dinle”ye bas, telefonun romanı cümle cümle sesli okusun; metinde bulunduğun yer parlar. Cihazının seslerini kullandığı için internet olmadan da çalışır. Sesi ve hızı seçebilir, dinlerken uyumak istersen bir zamanlayıcı kurabilirsin.',
+      audioTip: 'Dinlerken bir paragrafa dokunursan okuma oradan devam eder.',
+      noSpeech: 'Bu tarayıcı sesli okuyamıyor: güncel bir Chrome ya da Safari ile dene.',
+      foot: 'Ayraç bu cihazda kendiliğinden kaydedilir.',
+      zoom: 'Kapağı büyüt', close: 'Kapat',
+      dlTitle: 'Romanı indir', dlIntro: 'Kapağıyla birlikte, İtalyanca ve Türkçe.',
+      pdf: 'PDF', pdfSub: 'Her telefonda ve bilgisayarda açılır', epub: 'E-kitap (EPUB)', epubSub: 'Apple Kitaplar, Google Play Kitaplar ve e-kitap okuyucular için', docx: 'Word', docxSub: 'Yazdırmak ya da düzenlemek için',
+      langName: { it: 'İtalyanca', tr: 'Türkçe' },
+      back: 'Kitaba dön', textSet: 'Yazı ve dil', size: 'Yazı boyutu', smaller: 'Yazıyı küçült', larger: 'Yazıyı büyüt', textLang: 'Romanın dili',
+      endCh: (n) => n + '. bölümün sonu', nextCh: (n) => 'Bölüm ' + n, prevCh: 'Önceki', end: 'Son',
+      endNote: 'Romanın tamamını okudun. Son sayfasına kadar eşlik ettiğin için teşekkürler.', toBook: 'Kitaba dön',
+      loading: 'Kitap açılıyor…', loadErr: 'Metin yüklenemedi. Bağlantını kontrol edip yeniden dene.', retry: 'Yeniden dene',
+      voiceSet: 'Ses, hız ve zamanlayıcı', voice: 'Ses', speed: 'Hız', timer: 'Zamanlayıcı',
+      timerOpt: (m) => (m === 0 ? 'Kapalı' : m === 'end' ? 'Bölüm sonunda' : m + ' dk'),
+      devVoice: 'Cihazın sesi', tryVoice: 'Dene', play: 'Dinle', pause: 'Duraklat',
+      prevP: 'Önceki paragraf', nextP: 'Sonraki paragraf', closeAudio: 'Dinlemeyi kapat', openText: 'Metni açmak için dokun',
+      timerLeft: (n) => n + ' dk sonra duracak', timerEnd: 'Bölüm sonunda duracak',
+      stopped: 'Zamanlayıcı okumayı durdurdu.', voiceErr: 'Ses yanıt vermiyor: başka bir ses seçmeyi dene.',
+      noVoice: (lg) => (lg === 'it' ? 'Bu cihazda İtalyanca ses yok.' : 'Bu cihazda Türkçe ses yok.') + ' Telefonun ayarlarındaki metin okuma bölümünden ekleyebilirsin (iPhone’da: Erişilebilirlik › Seslendirilen İçerik › Sesler).',
+      voicesNote: 'Sesler telefonuna ait: ayarlardan yeni bir ses eklersen burada görünür.',
+      tapHint: 'Oradan dinlemek için bir paragrafa dokun',
+      dec: ',',
+    },
+  };
+
+  /* ---------- what the page remembers ---------- */
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage can be off: the page still works */ } },
+  };
+  let lang = store.get('hm-lang', null);   // the site's language, shared with the games
+  if (lang !== 'it' && lang !== 'tr') lang = /^tr\b/i.test(navigator.language || '') ? 'tr' : 'it';
+  const ST = (() => {
+    const s = store.get('hm-rm', null);
+    const d = { pos: {}, fs: 18, rate: 1, voice: {} };
+    if (!s || typeof s !== 'object') return d;
+    for (const k in d) if (s[k] == null || typeof s[k] !== typeof d[k]) s[k] = d[k];
+    if (!(s.fs >= 15 && s.fs <= 25)) s.fs = 18;
+    if (RATES.indexOf(s.rate) < 0) s.rate = 1;
+    return s;
+  })();
+  const save = () => store.set('hm-rm', ST);
+  const t = (k, ...a) => { const v = T[lang][k]; return typeof v === 'function' ? v(...a) : v; };
+  const pos = () => {
+    const p = ST.pos[BOOK.id];
+    return p && p.ch >= 0 && p.ch < NCH ? p : null;
+  };
+
+  /* ---------- numbers ---------- */
+  const readMin = (c) => Math.max(1, Math.round(c / 1250));
+  const total = (lg) => FACTS.chars[lg].reduce((a, b) => a + b, 0);
+  function duration(m) {
+    const h = Math.floor(m / 60), r = m % 60;
+    if (lang === 'tr') return (h ? h + ' sa' : '') + (h && r ? ' ' : '') + (r ? r + ' dk' : '');
+    return (h ? (h === 1 ? '1 ora' : h + ' ore') : '') + (h && r ? ' e ' : '') + (r ? r + ' min' : '');
+  }
+  const rateLabel = (r) => String(r).replace('.', t('dec')) + '×';
+
+  /* ---------- the text, loaded once per language ---------- */
+  const TEXT = {};
+  function loadText(lg) {
+    if (!TEXT[lg]) {
+      TEXT[lg] = fetch(BOOK.dir + lg + '.json', { cache: 'no-cache' })
+        .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .catch((e) => { delete TEXT[lg]; throw e; });
+    }
+    return TEXT[lg];
+  }
+
+  /* ---------- views and addresses: #/leggi/3 is chapter 3 ---------- */
+  const vBook = $('#v-book'), vRead = $('#v-read');
+  let view = '', bookY = 0, pending = null, fromBook = false;
+  function showView(v) {
+    if (v === view) return;
+    if (view === 'book') bookY = scrollY;
+    view = v;
+    vBook.hidden = v !== 'book';
+    vRead.hidden = v !== 'read';
+    document.body.classList.toggle('reading', v === 'read');
+    if (v === 'book') {
+      fromBook = false;
+      renderBook();
+      document.title = t('title') + ' · Handemiyy';
+      requestAnimationFrame(() => scrollTo(0, bookY));
+    }
+    renderPlayer();
+  }
+  function route() {
+    const m = /^#\/leggi\/(\d{1,2})$/.exec(location.hash);
+    if (!m) { closeSheets(); showView('book'); return; }
+    const ci = Math.min(NCH, Math.max(1, +m[1])) - 1;
+    const p = pending; pending = null;
+    showView('read');
+    const sp = pos();
+    const u = p ? p.u : (sp && sp.ch === ci ? sp.u : 0);
+    showChapter(ci, u).then((ok) => { if (ok && p && p.play) listen(segAt(u)); });
+  }
+  function goRead(ci, u, play) {
+    pending = { u, play: !!play };
+    fromBook = view === 'book';
+    const h = '#/leggi/' + (ci + 1);
+    if (location.hash === h) route(); else location.hash = h;
+  }
+  function backToBook() {
+    if (fromBook) { history.back(); return; }
+    history.replaceState(null, '', location.pathname + location.search);
+    route();
+  }
+
+  /* ---------- the book ---------- */
+  function applyLang() {
+    document.documentElement.lang = lang;
+    $$('[data-t]').forEach((n) => { n.textContent = t(n.dataset.t); });
+    $$('[data-t-aria]').forEach((n) => { n.setAttribute('aria-label', t(n.dataset.tAria)); });
+    $$('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    $('#b-cover-img').alt = BOOK.title;
+    $('#lb-img').alt = BOOK.title;
+  }
+  function renderBook() {
+    applyLang();
+    $('#b-meta').textContent = t('meta', NCH);
+    const sub = BOOK.sub[lang];
+    $('#b-sub').textContent = sub; $('#b-sub').hidden = !sub;
+    $('#b-blurb').textContent = BOOK.blurb[lang];
+    const p = pos();
+    const prog = $('#b-prog');
+    prog.hidden = !p;
+    if (p) {
+      $('i', prog).style.width = (p.done ? 100 : Math.max(2, p.pct || 0)) + '%';
+      $('p', prog).textContent = p.done ? t('progDone') : t('prog', p.ch + 1, NCH, p.pct || 0);
+    }
+    $('#b-read span').textContent = !p ? t('read') : p.done ? t('readAgain') : t('readOn');
+    $('#b-listen').hidden = !TTS.ok;
+    const tl = total(lang);
+    $('#b-times').innerHTML =
+      '<li>' + icon('book') + esc(t('readTime', duration(Math.round(tl / 1250 / 5) * 5))) + '</li>' +
+      (TTS.ok ? '<li>' + icon('ear') + esc(t('listenTime', duration(Math.round(tl / 900 / 15) * 15))) + '</li>' : '');
+    renderToc($('#b-toc'));
+    $('#b-audio-text').textContent = TTS.ok ? t('audioText') : t('noSpeech');
+    $('#b-audio-tip').textContent = t('audioTip');
+    $('#b-audio-tip').hidden = !TTS.ok;
+  }
+  function renderToc(list) {
+    const p = pos();
+    list.innerHTML = FACTS.chapters[lang].map(([, title], i) => {
+      const st = p ? (p.done || i < p.ch ? 'done' : i === p.ch ? 'cur' : '') : '';
+      return '<li><button type="button" class="ch-row ' + st + '" data-ch="' + i + '">' +
+        '<span class="ch-no">' + (i + 1) + '</span>' +
+        '<span class="ch-tt"><b>' + esc(title) + '</b><small>' + esc(t('min', readMin(FACTS.chars[lang][i]))) + (st === 'cur' ? ' · ' + esc(t('here')) : '') + '</small></span>' +
+        '<span class="ch-ic">' + icon(st === 'done' ? 'check' : 'chev') + '</span></button></li>';
+    }).join('');
+  }
+  function renderDownloads() {
+    const order = lang === 'tr' ? ['tr', 'it'] : ['it', 'tr'];
+    $('#dl-list').innerHTML = order.map((lg) => '<section class="dl-group"><p class="sh-label">' + esc(t('langName')[lg]) + '</p>' +
+      ['pdf', 'epub', 'docx'].map((ext) => {
+        const [file, size] = FACTS.files[lg][ext];
+        return '<a class="dl-row" href="' + BOOK.dir + file + '" download="' + file + '">' +
+          '<span class="dl-badge ' + ext + '">' + (ext === 'docx' ? 'WORD' : ext.toUpperCase()) + '</span>' +
+          '<span class="dl-tx"><b>' + esc(t(ext)) + '</b><small>' + esc(t(ext + 'Sub')) + '</small></span>' +
+          '<span class="dl-end">' + icon('down') + esc(size) + '</span></a>';
+      }).join('') + '</section>').join('');
+  }
+
+  /* ---------- the reader: one chapter on screen, cut into units (heading, paragraphs, breaks)
+     and sentences; units line up between the two languages, so the place is kept when the language changes ---------- */
+  let R = { ch: -1, lang: '', units: [], segs: [], prefix: [], data: null };
+  let showTok = 0;
+  const segmenters = {};
+  function sentences(text, lg) {
+    if (!(lg in segmenters)) { try { segmenters[lg] = new Intl.Segmenter(lg, { granularity: 'sentence' }); } catch (e) { segmenters[lg] = null; } }
+    const sg = segmenters[lg];
+    const parts = sg ? Array.from(sg.segment(text), (x) => x.segment) : (text.match(/[^.!?…]+(?:[.!?…]+[»”’"')\]]*\s*|$)/g) || [text]).filter(Boolean);
+    const out = [];
+    for (const s of parts) {
+      // a piece that starts in lower case goes on with the sentence before («È lei?» domandò…)
+      if (out.length && (/^[\s«»“”"'’(—–-]*\p{Ll}/u.test(s) || s.trim().length < 3)) out[out.length - 1] += s;
+      else out.push(s);
+    }
+    return out;
+  }
+  function speechChunks(s) {   // long sentences go to the voice in pieces: some voices stop after ~15 seconds
+    s = s.replace(/\s+/g, ' ').trim();
+    if (!s) return [];
+    const out = [];
+    while (s.length > 220) {
+      let cut = -1;
+      const re = /[,;:—–](?=\s)/g;
+      let m;
+      while ((m = re.exec(s)) && m.index < 200) cut = m.index + 1;
+      if (cut < 60) { cut = s.lastIndexOf(' ', 200); if (cut < 60) cut = 200; }
+      out.push(s.slice(0, cut).trim());
+      s = s.slice(cut).trim();
+    }
+    if (s) out.push(s);
+    return out;
+  }
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function renderChapter(data, ci) {
+    const lg = data.lang, ch = data.ch[ci];
+    const root = $('#r-text');
+    root.textContent = '';
+    root.lang = lg;
+    R = { ch: ci, lang: lg, units: [], segs: [], prefix: [], data };
+    let chars = 0;
+    const unit = (n, len) => { n.classList.add('u'); n.dataset.u = R.units.length; R.units.push(n); R.prefix.push(chars); chars += len; };
+    const fill = (p, text) => {
+      const u = R.units.length;
+      for (const s of sentences(text, lg)) {
+        const sp = el('span', 's', s);
+        p.append(sp);
+        for (const c of speechChunks(s)) R.segs.push({ u, el: sp, text: c });
+      }
+    };
+    const frag = document.createDocumentFragment();
+    const head = el('header', 'ch-head');
+    head.append(el('p', 'ch-num', ch.n), el('h2', 'ch-title', ch.t), el('div', 'orn'));
+    $('.orn', head).innerHTML = '<span class="diamond"></span>';
+    R.segs.push({ u: 0, el: head, text: ch.n + '. ' + ch.t + '.' });
+    unit(head, 0);
+    frag.append(head);
+    let after = 'head', lead = true;
+    for (const b of ch.b) {
+      if (b === 0) {
+        const d = el('div', 'brk');
+        d.setAttribute('aria-hidden', 'true');
+        d.innerHTML = '<i></i><i></i><i></i>';
+        unit(d, 0);
+        frag.append(d);
+        after = 'break';
+        continue;
+      }
+      if (typeof b === 'string') {
+        const p = el('p', after === 'p' ? '' : 'first');
+        if (lead) { p.classList.add('lead'); if (!/^\p{L}/u.test(b)) p.classList.add('nolead'); lead = false; }
+        fill(p, b);
+        unit(p, b.length);
+        frag.append(p);
+        after = 'p';
+        continue;
+      }
+      const fin = !!b.f, paras = b.f || b.q;
+      const box = el('aside', 'nb' + (fin ? ' nb-final' : ''));
+      const label = el('p', 'nb-label', NB[lg][fin ? 1 : 0]);
+      R.segs.push({ u: R.units.length, el: label, text: NB[lg][fin ? 1 : 0] + '.' });
+      unit(label, 0);
+      box.append(label);
+      for (const tx of paras) {
+        const p = el('p');
+        fill(p, tx);
+        unit(p, tx.length);
+        box.append(p);
+      }
+      frag.append(box);
+      after = 'nb';
+    }
+    root.append(frag);
+    renderChapterEnd();
+    document.title = ch.n + ' · ' + BOOK.title;
+    marked = null;
+  }
+  function renderChapterEnd() {
+    const last = R.ch === NCH - 1, box = $('#r-end');
+    box.className = 'ch-end';
+    box.innerHTML = '<div class="orn"><span class="diamond"></span></div>' +
+      (last
+        ? '<p class="end-big">' + esc(t('end')) + '</p><p class="end-note">' + esc(t('endNote')) + '</p>' +
+          '<div class="end-nav"><button type="button" class="btn primary" data-go="book">' + icon('book') + esc(t('toBook')) + '</button>' +
+          '<button type="button" class="btn" data-go="dl">' + icon('down') + esc(t('download')) + '</button></div>'
+        : '<p class="end-t">' + esc(t('endCh', R.ch + 1)) + '</p>' +
+          '<div class="end-nav">' + (R.ch > 0 ? '<button type="button" class="btn" data-go="prev">' + icon('back') + esc(t('prevCh')) + '</button>' : '') +
+          '<button type="button" class="btn primary" data-go="next">' + esc(t('nextCh', R.ch + 2)) + icon('chev') + '</button></div>');
+  }
+  function setReaderMsg(html) {
+    $('#r-text').innerHTML = '<div class="r-msg">' + html + '</div>';
+    $('#r-end').innerHTML = '';
+  }
+  // opens chapter ci in the current language and goes to unit u; while listening, the voice follows the page
+  async function showChapter(ci, u, opts) {
+    opts = opts || {};
+    const tok = ++showTok;
+    const changed = R.ch !== ci || R.lang !== lang;
+    if (changed) {
+      if (!R.data || R.lang !== lang) setReaderMsg('<div class="spin"></div>' + esc(t('loading')));
+      let data;
+      try { data = await loadText(lang); } catch (e) {
+        if (tok === showTok) {
+          setReaderMsg(esc(t('loadErr')) + '<br><button type="button" class="btn" id="r-retry">' + esc(t('retry')) + '</button>');
+          R = { ch: -1, lang: '', units: [], segs: [], prefix: [], data: null };
+          $('#r-retry').onclick = () => showChapter(ci, u, opts);
+        }
+        return false;
+      }
+      if (tok !== showTok) return false;
+      renderChapter(data, ci);
+    }
+    $('#r-num').textContent = R.data.ch[ci].n;
+    $('#r-title').textContent = R.data.ch[ci].t;
+    if (view === 'read' && opts.scroll !== false) {
+      requestAnimationFrame(() => { goUnit(u); readProgress(); $('#r-bar').classList.toggle('titled', u > 0); });
+      uiAway(false);
+    }
+    if (TTS.active && changed && !opts.byVoice) {
+      const k = segAt(u);
+      if (TTS.playing) play(k); else { TTS.i = k; mark(k, false); }
+    }
+    if (!TTS.active || !TTS.playing) savePos(ci, u);
+    renderPlayer();
+    return true;
+  }
+  const barH = () => ($('#r-bar').classList.contains('away') ? 0 : $('#r-bar').offsetHeight);
+  function uiAway(on) {
+    $('#r-bar').classList.toggle('away', on);
+    document.body.classList.toggle('ui-away', on);
+  }
+  function goUnit(u, smooth) {
+    const n = R.units[Math.max(0, Math.min(u, R.units.length - 1))];
+    if (!n || u <= 0) { ownScroll = Date.now(); scrollTo(0, 0); return; }
+    const y = n.getBoundingClientRect().top + scrollY - $('#r-bar').offsetHeight - 16;
+    ownScroll = Date.now();
+    scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+  }
+  function topUnit() {   // the first unit that can still be seen under the bar
+    const top = barH() + 6;
+    let lo = 0, hi = R.units.length - 1, ans = 0;
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      if (R.units[mid].getBoundingClientRect().bottom > top) { ans = mid; hi = mid - 1; } else lo = mid + 1;
+    }
+    return ans;
+  }
+  function segAt(u) {
+    const k = R.segs.findIndex((s) => s.u >= u);
+    return k < 0 ? Math.max(0, R.segs.length - 1) : k;
+  }
+  function savePos(ci, u, done) {
+    if (ci < 0) return;
+    const before = FACTS.chars[R.lang || lang].slice(0, ci).reduce((a, b) => a + b, 0);
+    const within = R.ch === ci && R.prefix[u] != null ? R.prefix[u] : 0;
+    const old = pos();
+    const isDone = !!done || (!!(old && old.done) && ci === NCH - 1);
+    ST.pos[BOOK.id] = { ch: ci, u, pct: isDone ? 100 : Math.min(99, Math.round((before + within) / total(R.lang || lang) * 100)), done: isDone };
+    save();
+  }
+  function readProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    $('#r-pbar').style.transform = 'scaleX(' + (max > 0 ? Math.min(1, scrollY / max) : 0) + ')';
+  }
+  function setFont(px) {
+    ST.fs = Math.max(15, Math.min(25, px));
+    save();
+    const u = view === 'read' ? topUnit() : 0;
+    document.documentElement.style.setProperty('--fs', ST.fs + 'px');
+    $('#fs-out').style.fontSize = ST.fs + 'px';
+    if (view === 'read') goUnit(u);
+  }
+  async function setLang(l) {
+    if (l === lang) return;
+    lang = l;
+    store.set('hm-lang', l);
+    applyLang();
+    if (view === 'book') renderBook();
+    if (!$('#sh-dl').hidden) renderDownloads();
+    if (R.ch >= 0 && (view === 'read' || TTS.active)) {
+      const u = TTS.active && R.segs[TTS.i] ? R.segs[TTS.i].u : topUnit();
+      const was = TTS.playing;
+      if (was) pause(true);
+      const ok = await showChapter(R.ch, u, { byVoice: true });
+      if (ok && was) play(segAt(u));
+      else if (ok && TTS.active) { TTS.i = segAt(u); mark(TTS.i, false); }
+    }
+    renderPlayer();
+    if (!$('#sh-voice').hidden) renderVoiceSheet();
+  }
+
+  /* ---------- reading aloud with the voices of the device ---------- */
+  const synth = 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function' ? window.speechSynthesis : null;
+  const TTS = { ok: !!synth, active: false, playing: false, i: 0, next: 0, gen: 0, keep: [], voices: [], errs: 0, unlocked: false, timer: { mode: 0, until: 0 } };
+  const TAG = { it: 'it-IT', tr: 'tr-TR' };
+  let marked = null, lastUser = 0, lastSave = 0, wl = null, ownScroll = 0;
+  const vlang = (v) => String(v.lang || '').replace('_', '-').toLowerCase();
+  function rank(v, lg) {
+    const n = String(v.name || '').toLowerCase();
+    let s = 0;
+    if (/natural|neural|premium|enhanced|migliorat|avanzat|geliştiril|wavenet|studio|online/.test(n)) s += 40;
+    if (/google/.test(n)) s += 14;
+    if (/microsoft/.test(n)) s += 6;
+    if (vlang(v) === TAG[lg].toLowerCase()) s += 5;
+    if (v.localService === false) s += 3;
+    if (v.default) s += 2;
+    if (/compact|espeak|eloquence|eddy|flo\b|grandma|grandpa|reed|rocko|sandy|shelley|nonna|nonno|büyükanne|büyükbaba/.test(n)) s -= 30;
+    return s;
+  }
+  const voicesFor = (lg) => TTS.voices.filter((v) => vlang(v).startsWith(lg)).sort((a, b) => rank(b, lg) - rank(a, lg));
+  function voiceFor(lg) {
+    const list = voicesFor(lg), want = ST.voice[lg];
+    return list.find((v) => v.voiceURI === want) || list.find((v) => v.name === want) || list[0] || null;
+  }
+  function loadVoices() {
+    if (!synth) return;
+    try { TTS.voices = synth.getVoices() || []; } catch (e) { TTS.voices = []; }
+    if (!$('#sh-voice').hidden) renderVoiceSheet();
+    renderPlayer();
+  }
+  if (synth) {
+    loadVoices();
+    if (synth.addEventListener) synth.addEventListener('voiceschanged', loadVoices); else synth.onvoiceschanged = loadVoices;
+    setTimeout(loadVoices, 700);
+    setTimeout(loadVoices, 2500);
+  }
+  // the first words must start from a tap (iPhone): a silent one, said during the tap, opens the way for the rest
+  function unlock() {
+    if (!synth || TTS.unlocked) return;
+    try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; u.lang = TAG[lang]; synth.speak(u); TTS.unlocked = true; } catch (e) { /* nothing to open */ }
+  }
+  function listen(k) {
+    if (!synth) return;
+    TTS.active = true;
+    play(k);
+  }
+  function play(k) {
+    if (!R.segs.length) return;
+    const g = ++TTS.gen;
+    TTS.playing = true;
+    TTS.i = Math.max(0, Math.min(k, R.segs.length - 1));
+    TTS.next = TTS.i;
+    TTS.keep = [];
+    TTS.errs = 0;
+    const busy = synth.speaking || synth.pending;
+    synth.cancel();
+    setTimeout(() => { if (g === TTS.gen) feed(g); }, busy ? 150 : 0);
+    mark(TTS.i, true);
+    wake(true);
+    renderPlayer();
+  }
+  function feed(g) {   // three sentences wait in the device's queue, so the voice goes on even if the page is slowed down
+    const lg = R.lang, v = voiceFor(lg);
+    while (TTS.next < R.segs.length && TTS.next - TTS.i < 3) {
+      const k = TTS.next++;
+      let u;
+      try {
+        u = new SpeechSynthesisUtterance(R.segs[k].text);
+        u.lang = v ? v.lang : TAG[lg];
+        if (v) u.voice = v;
+        u.rate = ST.rate;
+        u.pitch = 1;
+      } catch (e) { pause(); showMsg(t('voiceErr')); return; }
+      u.onstart = () => { if (g === TTS.gen) { TTS.i = k; mark(k, true); } };
+      u.onend = () => { if (g === TTS.gen) said(k, g, null); };
+      u.onerror = (e) => {
+        if (g !== TTS.gen) return;
+        const why = e && e.error;
+        if (why === 'interrupted' || why === 'canceled') return;
+        if (why === 'not-allowed') { pause(); return; }
+        said(k, g, why || 'error');
+      };
+      TTS.keep.push(u);
+      if (TTS.keep.length > 8) TTS.keep.shift();
+      try { synth.speak(u); } catch (e) { pause(); showMsg(t('voiceErr')); return; }
+    }
+  }
+  function said(k, g, err) {
+    if (err) {
+      if (++TTS.errs >= 3) { pause(); showMsg(t('voiceErr')); return; }
+    } else TTS.errs = 0;
+    if (TTS.timer.mode && TTS.timer.mode !== 'end' && Date.now() >= TTS.timer.until) {
+      TTS.timer = { mode: 0, until: 0 };
+      pause();
+      toast(t('stopped'));
+      return;
+    }
+    if (k >= R.segs.length - 1) { chapterDone(g); return; }
+    if (TTS.i <= k) { TTS.i = k + 1; mark(TTS.i, true); }
+    feed(g);
+  }
+  async function chapterDone(g) {
+    if (TTS.timer.mode === 'end') {
+      TTS.timer = { mode: 0, until: 0 };
+      pause();
+      toast(t('stopped'));
+      return;
+    }
+    if (R.ch >= NCH - 1) { pause(); savePos(R.ch, R.units.length - 1, true); return; }
+    const nx = R.ch + 1;
+    if (view === 'read') history.replaceState(null, '', '#/leggi/' + (nx + 1));
+    const ok = await showChapter(nx, 0, { byVoice: true });
+    if (ok && g === TTS.gen && TTS.playing) play(0);
+  }
+  function pause(quiet) {
+    TTS.gen++;
+    TTS.playing = false;
+    if (synth) synth.cancel();
+    wake(false);
+    if (R.segs[TTS.i]) savePos(R.ch, R.segs[TTS.i].u);
+    if (!quiet) renderPlayer();
+  }
+  function closeAudio() {
+    pause(true);
+    TTS.active = false;
+    TTS.timer = { mode: 0, until: 0 };
+    if (marked) marked.classList.remove('on');
+    marked = null;
+    hideMsg();
+    renderPlayer();
+  }
+  function skip(dir) {
+    const cur = R.segs[TTS.i];
+    if (!cur) return;
+    let k;
+    if (dir > 0) {
+      k = R.segs.findIndex((s) => s.u > cur.u);
+      if (k < 0) {
+        if (R.ch >= NCH - 1) return;
+        const was = TTS.playing;
+        if (was) pause(true);
+        if (view === 'read') history.replaceState(null, '', '#/leggi/' + (R.ch + 2));
+        showChapter(R.ch + 1, 0, { byVoice: true }).then((ok) => { if (ok) { if (was) play(0); else { TTS.i = 0; mark(0, true); renderPlayer(); } } });
+        return;
+      }
+    } else {
+      const first = R.segs.findIndex((s) => s.u === cur.u);
+      if (TTS.i > first) k = first;
+      else {
+        let j = first - 1;
+        while (j > 0 && R.segs[j - 1].u === R.segs[j].u) j--;
+        k = Math.max(0, j);
+      }
+    }
+    if (TTS.playing) play(k);
+    else { TTS.i = k; mark(k, true); savePos(R.ch, R.segs[k].u); }
+  }
+  function mark(k, follow) {
+    const s = R.segs[k];
+    if (!s) return;
+    if (marked !== s.el) {
+      if (marked) marked.classList.remove('on');
+      marked = s.el;
+      marked.classList.add('on');
+    }
+    if (follow && view === 'read' && Date.now() - lastUser > 5000) {
+      const r = s.el.getBoundingClientRect();
+      const top = barH() + 16, bottom = innerHeight - playerH() - 20;
+      if (r.top < top || r.bottom > bottom) {
+        const room = Math.max(120, bottom - top);
+        ownScroll = Date.now();
+        scrollTo({ top: scrollY + r.top - top - Math.min(room * 0.25, 160), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }
+    }
+    if (TTS.playing && Date.now() - lastSave > 2000) { lastSave = Date.now(); savePos(R.ch, s.u); }
+    renderWhere();
+  }
+  const playerH = () => ($('#player').hidden ? 0 : $('#player').offsetHeight + 16);
+  let wantWake = false;
+  async function wake(on) {   // keep the screen on while the voice reads
+    wantWake = on;
+    try {
+      if (on && !wl && 'wakeLock' in navigator && document.visibilityState === 'visible') {
+        const w = await navigator.wakeLock.request('screen');
+        if (!wantWake || wl) { w.release(); return; }   // paused meanwhile, or asked twice
+        wl = w;
+        w.addEventListener('release', () => { if (wl === w) wl = null; });
+      } else if (!on && wl) { const w = wl; wl = null; await w.release(); }
+    } catch (e) { /* not allowed here: the screen may go to sleep */ }
+  }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && TTS.playing) wake(true); });
+
+  /* ---------- the player ---------- */
+  function renderWhere() {
+    if (!TTS.active || !R.data) return;
+    const ch = R.data.ch[R.ch];
+    $('#pl-where b').textContent = ch.n + ' · ' + ch.t;
+    $('#pl-where small').textContent = view === 'book' ? t('openText') : timerText() || t('tapHint');
+  }
+  function timerText() {
+    if (TTS.timer.mode === 'end') return t('timerEnd');
+    if (TTS.timer.mode) return t('timerLeft', Math.max(1, Math.ceil((TTS.timer.until - Date.now()) / 60000)));
+    return '';
+  }
+  function renderPlayer() {
+    const show = TTS.active && !!R.data;
+    $('#player').hidden = !show;
+    document.body.classList.toggle('audio-on', show);
+    $('#r-listen').hidden = !TTS.ok || show || view !== 'read' || !R.data;
+    if (!show) return;
+    $('#pl-play').innerHTML = icon(TTS.playing ? 'pause' : 'play', true);
+    $('#pl-play').setAttribute('aria-label', t(TTS.playing ? 'pause' : 'play'));
+    $('#pl-rate').textContent = rateLabel(ST.rate);
+    const tm = $('#pl-timer');
+    tm.hidden = !TTS.timer.mode;
+    if (TTS.timer.mode) tm.textContent = TTS.timer.mode === 'end' ? '⏾' : Math.max(1, Math.ceil((TTS.timer.until - Date.now()) / 60000)) + '′';
+    if (TTS.voices.length && !voicesFor(R.lang).length) showMsg(t('noVoice', R.lang));
+    else if ($('#pl-msg').dataset.kind === 'voice') hideMsg();
+    renderWhere();
+  }
+  function showMsg(text) { const m = $('#pl-msg'); m.textContent = text; m.hidden = false; m.dataset.kind = text === t('noVoice', R.lang) ? 'voice' : 'err'; }
+  function hideMsg() { const m = $('#pl-msg'); m.hidden = true; m.dataset.kind = ''; }
+  setInterval(() => { if (TTS.active && TTS.timer.mode && TTS.timer.mode !== 'end') renderPlayer(); }, 30000);
+  function renderVoiceSheet() {
+    const lg = R.lang || lang, list = voicesFor(lg).slice(0, 10), cur = voiceFor(lg);
+    $('#vo-list').innerHTML = (list.length ? list : [null]).map((v) =>
+      '<button type="button" data-v="' + (v ? esc(v.voiceURI || v.name) : '') + '" aria-pressed="' + String(!v || v === cur) + '"><span class="dot"></span>' +
+      '<span>' + esc(v ? v.name : t('devVoice')) + (v ? '<small>' + esc(v.lang) + '</small>' : '') + '</span></button>').join('');
+    $('#vo-rate').innerHTML = RATES.map((r) => '<button type="button" data-r="' + r + '" aria-pressed="' + String(r === ST.rate) + '">' + rateLabel(r) + '</button>').join('');
+    $('#vo-timer').innerHTML = TIMERS.map((m) => '<button type="button" data-m="' + m + '" aria-pressed="' + String(m === TTS.timer.mode) + '">' + esc(t('timerOpt', m)) + '</button>').join('');
+    const note = $('#vo-note');
+    note.textContent = TTS.voices.length && !list.length ? t('noVoice', lg) : t('voicesNote');
+    note.hidden = false;
+  }
+  function trySay(lg) {
+    const v = voiceFor(lg);
+    const u = new SpeechSynthesisUtterance(TRY[lg]);
+    u.lang = v ? v.lang : TAG[lg];
+    if (v) u.voice = v;
+    u.rate = ST.rate;
+    TTS.keep.push(u);
+    synth.speak(u);
+  }
+
+  /* ---------- sheets, cover, toast ---------- */
+  let lastFocus = null;
+  function openSheet(id) {
+    const s = $('#' + id);
+    lastFocus = document.activeElement;
+    s.hidden = false;
+    requestAnimationFrame(() => { s.classList.add('open'); $('.sheet-panel', s).focus({ preventScroll: true }); });
+  }
+  function closeSheet(s) {
+    if (s.hidden) return;
+    s.classList.remove('open');
+    setTimeout(() => { if (!s.classList.contains('open')) s.hidden = true; }, 280);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  const closeSheets = () => $$('.sheet').forEach(closeSheet);
+  $$('.sheet').forEach((s) => s.addEventListener('click', (e) => { if (e.target === s || e.target.closest('[data-close]')) closeSheet(s); }));
+  let toastT = 0;
+  function toast(text) {
+    const n = $('#toast');
+    n.textContent = text;
+    n.classList.add('on');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => n.classList.remove('on'), 3200);
+  }
+  $('#b-cover').addEventListener('click', () => {
+    $('#lb-img').src = BOOK.dir + 'copertina.jpg';
+    $('#lightbox').hidden = false;
+  });
+  $('#lightbox').addEventListener('click', () => { $('#lightbox').hidden = true; });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!$('#lightbox').hidden) { $('#lightbox').hidden = true; return; }
+    closeSheets();
+  });
+
+  /* ---------- wiring ---------- */
+  $$('.lang button, #tx-lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  $('#b-read').addEventListener('click', () => {
+    const p = pos();
+    if (p && p.done) { ST.pos[BOOK.id] = { ch: 0, u: 0, pct: 0, done: false }; save(); goRead(0, 0); return; }
+    goRead(p ? p.ch : 0, p ? p.u : 0);
+  });
+  $('#b-listen').addEventListener('click', () => {
+    unlock();
+    const p = pos();
+    if (TTS.active && R.data) { goRead(R.ch, R.segs[TTS.i] ? R.segs[TTS.i].u : 0); if (!TTS.playing) play(TTS.i); return; }
+    if (p && p.done) goRead(0, 0, true); else goRead(p ? p.ch : 0, p ? p.u : 0, true);
+  });
+  $('#b-dl').addEventListener('click', () => { renderDownloads(); openSheet('sh-dl'); });
+  $('#b-toc').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ch]');
+    if (!b) return;
+    const ci = +b.dataset.ch, p = pos();
+    goRead(ci, p && p.ch === ci && !p.done ? p.u : 0);   // the chapter with the bookmark opens at the bookmark
+  });
+  $('#sh-toc-list').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ch]');
+    if (!b) return;
+    closeSheet($('#sh-toc'));
+    const ci = +b.dataset.ch;
+    history.replaceState(null, '', '#/leggi/' + (ci + 1));
+    showChapter(ci, 0);
+  });
+  $('#r-back').addEventListener('click', backToBook);
+  $('#r-toc').addEventListener('click', () => { renderToc($('#sh-toc-list')); openSheet('sh-toc'); });
+  $('#r-textset').addEventListener('click', () => { $('#fs-out').style.fontSize = ST.fs + 'px'; openSheet('sh-text'); });
+  $('#fs-dn').addEventListener('click', () => setFont(ST.fs - 1));
+  $('#fs-up').addEventListener('click', () => setFont(ST.fs + 1));
+  $('#r-end').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (!b) return;
+    const go = b.dataset.go;
+    if (go === 'book') { backToBook(); return; }
+    if (go === 'dl') { renderDownloads(); openSheet('sh-dl'); return; }
+    const ci = R.ch + (go === 'next' ? 1 : -1);
+    if (ci < 0 || ci >= NCH) return;
+    history.replaceState(null, '', '#/leggi/' + (ci + 1));
+    showChapter(ci, 0);
+  });
+  $('#r-listen').addEventListener('click', () => { unlock(); listen(segAt(topUnit())); });
+  $('#r-text').addEventListener('click', (e) => {   // while listening, a tap on a paragraph reads from there
+    const sel = window.getSelection && String(window.getSelection());
+    if (sel) return;
+    if (!TTS.active) { if (scrollY > 160) uiAway(!$('#r-bar').classList.contains('away')); return; }
+    const sp = e.target.closest('.s'), un = e.target.closest('.u');
+    let k = sp ? R.segs.findIndex((s) => s.el === sp) : -1;
+    if (k < 0 && un) k = segAt(+un.dataset.u);
+    if (k < 0) return;
+    unlock();
+    lastUser = 0;
+    play(k);
+  });
+  $('#pl-play').addEventListener('click', () => { if (TTS.playing) pause(); else { unlock(); hideMsg(); lastUser = 0; play(TTS.i); } });
+  $('#pl-prev').addEventListener('click', () => { lastUser = 0; skip(-1); });
+  $('#pl-next').addEventListener('click', () => { lastUser = 0; skip(1); });
+  $('#pl-close').addEventListener('click', closeAudio);
+  $('#pl-rate').addEventListener('click', () => {
+    ST.rate = RATES[(RATES.indexOf(ST.rate) + 1) % RATES.length];
+    save();
+    if (TTS.playing) play(TTS.i); else renderPlayer();
+  });
+  $('#pl-more').addEventListener('click', () => { renderVoiceSheet(); openSheet('sh-voice'); });
+  $('#pl-where').addEventListener('click', () => {   // back to the sentence being read
+    if (!R.segs[TTS.i]) return;
+    if (view === 'book') { goRead(R.ch, R.segs[TTS.i].u); return; }
+    lastUser = 0;
+    mark(TTS.i, true);
+  });
+  $('#vo-list').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b || !synth) return;
+    const lg = R.lang || lang;
+    ST.voice[lg] = b.dataset.v;
+    save();
+    renderVoiceSheet();
+    hideMsg();
+    unlock();
+    if (TTS.playing) play(TTS.i); else { synth.cancel(); trySay(lg); }
+  });
+  $('#vo-rate').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-r]');
+    if (!b) return;
+    ST.rate = +b.dataset.r;
+    save();
+    renderVoiceSheet();
+    if (TTS.playing) play(TTS.i); else renderPlayer();
+  });
+  $('#vo-timer').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-m]');
+    if (!b) return;
+    const m = b.dataset.m === 'end' ? 'end' : +b.dataset.m;
+    TTS.timer = { mode: m, until: typeof m === 'number' && m ? Date.now() + m * 60000 : 0 };
+    renderVoiceSheet();
+    renderPlayer();
+  });
+
+  // the bar steps aside while reading down and comes back when going up; the place is kept as the page moves
+  let lastY = 0, posT = 0;
+  addEventListener('scroll', () => {
+    if (view !== 'read') return;
+    readProgress();
+    const y = scrollY;
+    if (Date.now() - ownScroll > 900) {
+      if (y > lastY + 8 && y > 160 && !TTS.active) uiAway(true);
+      else if (y < lastY - 8 || y < 160) uiAway(false);
+    }
+    $('#r-bar').classList.toggle('titled', y > 150);
+    lastY = y;
+    if (TTS.active && TTS.playing) return;
+    clearTimeout(posT);
+    posT = setTimeout(() => {
+      if (R.ch < 0 || !R.units.length) return;
+      const endSeen = $('#r-end').getBoundingClientRect().top < innerHeight;
+      savePos(R.ch, topUnit(), endSeen && R.ch === NCH - 1);
+    }, 300);
+  }, { passive: true });
+  ['wheel', 'touchmove', 'keydown'].forEach((ev) => addEventListener(ev, () => { lastUser = Date.now(); }, { passive: true }));
+  addEventListener('hashchange', route);
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  document.documentElement.style.setProperty('--fs', ST.fs + 'px');
+  applyLang();
+  route();
+  // the text of the book's language comes in the background, so «Read» opens at once
+  setTimeout(() => { loadText(lang).catch(() => {}); }, 900);
+})();
+</script>
+</body>
+</html>
