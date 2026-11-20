@@ -260,6 +260,10 @@ body.reading .bg { display: none; }
 .pl-bar input::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: #fffdf8; border: 1px solid rgba(143, 102, 48, .5); box-shadow: 0 2px 6px rgba(74, 54, 38, .35); }
 .player.busy .pl-play { animation: busy 1.1s ease-in-out infinite; }
 @keyframes busy { 50% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65), 0 0 0 7px rgba(230, 205, 152, .45); } }
+.pl-embed { display: block; width: 100%; height: 200px; border: 0; border-radius: 12px; background: #fff; }
+.pl-emb-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+.pl-emb-btn { font: 500 13.5px var(--font-ui); padding: 7px 12px; border-radius: 999px; border: 1px solid #e3dbcd; background: #fff; color: var(--ink); }
+.pl-emb-btn:disabled { opacity: .4; }
 .pl-msg { margin: 8px 4px 0; padding: 10px 12px; border-radius: 14px; background: #f3eee5; font: 400 13.5px/1.45 var(--font-ui); color: var(--ink-2); }
 
 /* ---------- sheets ---------- */
@@ -533,6 +537,7 @@ body.reading .bg { display: none; }
       closeAudio: 'Chiudi l’ascolto', openText: 'Tocca per aprire il testo',
       timerLeft: (n) => 'Si ferma tra ' + n + ' min', timerEnd: 'Si ferma a fine capitolo',
       stopped: 'Il timer ha fermato la lettura.', chNoAudio: 'Questo capitolo non è ancora registrato.',
+      embPrev: 'Parte prima', embNext: 'Parte dopo',
       audioErr: 'La registrazione non si carica: controlla la connessione e premi di nuovo ▶.',
       tapHint: 'Tocca un paragrafo per ascoltare da lì', bookEnd: 'Fine del romanzo.',
       dec: ',',
@@ -566,6 +571,7 @@ body.reading .bg { display: none; }
       closeAudio: 'Dinlemeyi kapat', openText: 'Metni açmak için dokun',
       timerLeft: (n) => n + ' dk sonra duracak', timerEnd: 'Bölüm sonunda duracak',
       stopped: 'Zamanlayıcı okumayı durdurdu.', chNoAudio: 'Bu bölüm henüz kaydedilmedi.',
+      embPrev: 'Önceki kısım', embNext: 'Sonraki kısım',
       audioErr: 'Kayıt yüklenemedi: bağlantını kontrol edip ▶ tuşuna yeniden bas.',
       tapHint: 'Oradan dinlemek için bir paragrafa dokun', bookEnd: 'Romanın sonu.',
       dec: ',',
@@ -969,7 +975,7 @@ body.reading .bg { display: none; }
       if (pr && pr.catch) pr.catch((e) => {
         if (e && e.name === 'AbortError') return;   // a new source was set meanwhile (e.g. the second server)
         A.playing = false; renderPlayer();
-        if (!(e && e.name === 'NotAllowedError')) showMsg(t('audioErr'));
+        if (!(e && e.name === 'NotAllowedError')) showEmbed();
       });
     }
     prefetch(pi + 1);
@@ -1017,9 +1023,41 @@ body.reading .bg { display: none; }
     if (!A.active || AU.muted) return;
     A.playing = false;
     $('#player').classList.remove('busy');
-    showMsg(t('audioErr'));
+    showEmbed();
     renderPlayer();
   });
+  // when the recording can't be played here, Suno's own player plays the same part inside the page
+  function showEmbed() {
+    const p = A.parts[A.pi];
+    if (!p) { showMsg(t('audioErr')); return; }
+    AU.pause();
+    const m = $('#pl-msg');
+    const last = A.pi + 1 >= A.parts.length;
+    m.innerHTML = '<iframe class="pl-embed" src="https://suno.com/embed/' + p.id + '" allow="autoplay; encrypted-media" loading="lazy" title="Suno"></iframe>' +
+      '<span class="pl-emb-row">' +
+      '<button type="button" class="pl-emb-btn" data-emb="-1"' + (A.pi ? '' : ' disabled') + '>‹ ' + esc(t('embPrev')) + '</button>' +
+      '<small>' + (A.pi + 1) + ' / ' + A.parts.length + '</small>' +
+      '<button type="button" class="pl-emb-btn" data-emb="1"' + (last ? ' disabled' : '') + '>' + esc(t('embNext')) + ' ›</button></span>';
+    m.hidden = false;
+    A.embed = true;
+  }
+  $('#pl-msg').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-emb]');
+    if (!b) return;
+    const i = A.pi + Number(b.dataset.emb);
+    if (i < 0 || i >= A.parts.length) return;
+    A.pi = i;
+    const p = A.parts[i];
+    if (R.ch === A.ch) markUnit(p.u0, true);
+    showEmbed();
+  });
+  // a recording that is asked to play but doesn't move for a while: use Suno's player instead
+  setInterval(() => {
+    if (!A.active || !A.playing || AU.muted || A.embed) { A.stuck = 0; A.lastT = AU.currentTime; return; }
+    if (AU.currentTime !== A.lastT) { A.stuck = 0; A.lastT = AU.currentTime; return; }
+    A.stuck = (A.stuck || 0) + 1;
+    if (A.stuck >= 5) { A.stuck = 0; A.playing = false; $('#player').classList.remove('busy'); showEmbed(); renderPlayer(); }
+  }, 2000);
   async function partEnded() {
     if (!A.active) return;
     if (A.pi + 1 < A.parts.length) { loadPart(A.pi + 1, 0, -1, true); return; }
@@ -1171,7 +1209,7 @@ body.reading .bg { display: none; }
     renderTime();
   }
   function showMsg(text) { const m = $('#pl-msg'); m.textContent = text; m.hidden = false; }
-  function hideMsg() { $('#pl-msg').hidden = true; }
+  function hideMsg() { $('#pl-msg').hidden = true; A.embed = false; }
   setInterval(() => { if (A.active && A.timer.mode && A.timer.mode !== 'end') renderPlayer(); }, 30000);
   function renderMoreSheet() {
     $('#vo-rate').innerHTML = RATES.map((r) => '<button type="button" data-r="' + r + '" aria-pressed="' + String(r === ST.rate) + '">' + rateLabel(r) + '</button>').join('');
