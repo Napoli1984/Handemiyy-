@@ -1005,9 +1005,11 @@ body.reading .bg { display: none; }
   AU.addEventListener('error', () => {
     // the same recording is also on Suno's second server: try it once before giving up
     const id = AU.dataset.id;
-    if (id && AU.src.indexOf('cdn1.suno.ai') >= 0) {
+    const alt = !id ? '' : AU.src.indexOf('cdn1.suno.ai') >= 0 ? 'https://cdn2.suno.ai/' + id + '.mp3'
+      : AU.src.indexOf('cdn2.suno.ai') >= 0 ? 'https://audiopipe.suno.ai/?item_id=' + id : '';
+    if (alt) {
       const t0 = AU.currentTime || 0, wasPlaying = A.playing;
-      AU.src = 'https://cdn2.suno.ai/' + id + '.mp3';
+      AU.src = alt;
       if (A.at < 0 && A.atU < 0 && t0 > 0) A.at = t0;
       if (wasPlaying && !AU.muted) AU.play().catch(() => {});
       return;
