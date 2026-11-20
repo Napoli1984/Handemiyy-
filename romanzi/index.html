@@ -959,14 +959,18 @@ body.reading .bg { display: none; }
     A.pi = pi;
     const p = A.parts[pi];
     A.at = at; A.atU = atU;
-    if (AU.dataset.id !== p.id) { AU.dataset.id = p.id; AU.src = fileOf(p.id); }
+    if (AU.dataset.id !== p.id || AU.error) { AU.dataset.id = p.id; AU.src = fileOf(p.id); }
     else if (AU.readyState >= 1) placeHead();
     AU.muted = false;
     AU.playbackRate = ST.rate;
     if (play) {
       A.playing = true;
       const pr = AU.play();
-      if (pr && pr.catch) pr.catch((e) => { if (e && e.name === 'NotAllowedError') { A.playing = false; renderPlayer(); } });
+      if (pr && pr.catch) pr.catch((e) => {
+        if (e && e.name === 'AbortError') return;   // a new source was set meanwhile (e.g. the second server)
+        A.playing = false; renderPlayer();
+        if (!(e && e.name === 'NotAllowedError')) showMsg(t('audioErr'));
+      });
     }
     prefetch(pi + 1);
     renderPlayer();
