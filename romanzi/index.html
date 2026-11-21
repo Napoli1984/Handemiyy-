@@ -266,6 +266,17 @@ body.reading .bg { display: none; }
 .pl-emb-btn:disabled { opacity: .4; }
 .pl-msg { margin: 8px 4px 0; padding: 10px 12px; border-radius: 14px; background: #f3eee5; font: 400 13.5px/1.45 var(--font-ui); color: var(--ink-2); }
 
+
+/* The Suno player owns playback; the page only chooses the chapter and part. */
+.listen-fields { display: grid; gap: 12px; margin: 16px 0; }
+.listen-fields label { display: grid; gap: 6px; font: 500 14px/1.4 var(--font-ui); }
+.listen-fields select { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: 400 16px/1.4 var(--font-ui); }
+.listen-frame { width: 100%; height: 200px; display: block; border: 0; border-radius: 16px; background: #151515; }
+.listen-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; }
+.listen-nav button { flex: 1; min-height: 46px; }
+.listen-nav button:disabled { opacity: .4; cursor: default; }
+.listen-source { display: block; width: fit-content; margin: 16px auto 0; font: 500 14px var(--font-ui); color: var(--ink-2); }
+
 /* ---------- sheets ---------- */
 .sheet { position: fixed; inset: 0; z-index: 50; display: grid; align-items: end; justify-items: center; background: rgba(46, 34, 26, 0); transition: background .25s ease; }
 .sheet.open { background: rgba(46, 34, 26, .36); }
@@ -368,7 +379,7 @@ body.reading .bg { display: none; }
         <div class="prog" id="b-prog" hidden><div class="prog-bar"><i></i></div><p></p></div>
         <div class="actions">
           <button type="button" class="btn primary" id="b-read"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><span></span></button>
-          <button type="button" class="btn" id="b-listen"><svg class="i" aria-hidden="true"><use href="#i-ear"/></svg><span data-t="listen"></span></button>
+          <button type="button" class="btn" id="b-listen"><svg class="i" aria-hidden="true"><use href="#i-ear"/></svg><span data-t="listenTr"></span></button>
           <button type="button" class="btn" id="b-dl"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg><span data-t="download"></span></button>
         </div>
         <ul class="times" id="b-times"></ul>
@@ -385,7 +396,7 @@ body.reading .bg { display: none; }
       <ol class="toc" id="b-toc"></ol>
     </section>
 
-    <section class="block card" aria-labelledby="h-audio" hidden>
+    <section class="block card" aria-labelledby="h-audio">
       <h2 class="sec-title" id="h-audio" data-t="audioTitle"></h2>
       <p class="note" id="b-audio-text"></p>
       <p class="note soft" id="b-audio-tip"></p>
@@ -406,7 +417,7 @@ body.reading .bg { display: none; }
   </header>
   <article class="text" id="r-text"></article>
   <div id="r-end"></div>
-  <button type="button" class="fab" id="r-listen" hidden><svg class="i" aria-hidden="true"><use href="#i-ear"/></svg><span data-t="listen"></span></button>
+  <button type="button" class="fab" id="r-listen" hidden><svg class="i" aria-hidden="true"><use href="#i-ear"/></svg><span data-t="listenTr"></span></button>
 </main>
 
 <div class="player" id="player" role="region" data-t-aria="audioTitle" hidden>
@@ -427,6 +438,22 @@ body.reading .bg { display: none; }
     <button type="button" class="pl-btn" id="pl-more" data-t-aria="moreSet"><svg class="i" aria-hidden="true"><use href="#i-tune"/></svg><span class="badge" id="pl-timer" hidden></span></button>
   </div>
   <p class="pl-msg" id="pl-msg" hidden></p>
+</div>
+
+
+<div class="sheet" id="sh-listen" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="listen-title" tabindex="-1">
+    <div class="grab"></div>
+    <div class="sh-head"><h2 id="listen-title" data-t="listenTr"></h2><button type="button" class="icon-btn" data-close data-t-aria="close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="listen-fields">
+      <label><span id="listen-ch-label" data-t="audioChapter"></span><select id="listen-ch" aria-labelledby="listen-ch-label"></select></label>
+      <label><span id="listen-part-label" data-t="audioPart"></span><select id="listen-part" aria-labelledby="listen-part-label"></select></label>
+    </div>
+    <div id="listen-frame"></div>
+    <div class="listen-nav"><button type="button" class="btn" id="listen-prev" data-t="audioPrev"></button><button type="button" class="btn" id="listen-next" data-t="audioNext"></button></div>
+    <p class="note soft" data-t="audioTip"></p>
+    <a class="listen-source" id="listen-source" target="_blank" rel="noopener noreferrer" data-t="audioOpen"></a>
+  </div>
 </div>
 
 <div class="sheet" id="sh-dl" hidden>
@@ -492,7 +519,7 @@ body.reading .bg { display: none; }
   /* ---------- the novel: chapters, sizes and files are written here by the build script ---------- */
   const FACTS = /*BOOK-FACTS*/{"id":"terk-ettiginiz-kiz","words":{"it":35016,"tr":26205},"chars":{"it":[10284,11704,10278,10305,9659,10122,9045,10051,10209,9987,10010,7775,8953,10815,8627,8597,9965,13340,16663,9675],"tr":[9374,10770,9252,9565,9054,9500,8757,8967,9528,9347,9209,7235,8471,10126,8043,8161,9240,12381,15263,8838]},"chapters":{"it":[["Capitolo 1","La valigia color miele"],["Capitolo 2","Quattro persone al cancello"],["Capitolo 3","La stanza sul cortile"],["Capitolo 4","Un posto a tavola"],["Capitolo 5","Il rumore del legno"],["Capitolo 6","Trentaquattro candeline"],["Capitolo 7","La Casa dei Tigli"],["Capitolo 8","La fotografia sul tavolo"],["Capitolo 9","La riga sotto la firma"],["Capitolo 10","Le parole della febbre"],["Capitolo 11","Le casse vuote"],["Capitolo 12","Il viaggio di Ayla"],["Capitolo 13","Il nome sullo schermo"],["Capitolo 14","Quello che si può perdere"],["Capitolo 15","Non firmare per paura"],["Capitolo 16","La sera delle nove"],["Capitolo 17","La figlia maggiore"],["Capitolo 18","Quando potevate tornare"],["Capitolo 19","Le chiavi sul tavolo"],["Capitolo 20","Questa volta dentro"]],"tr":[["Bölüm 1","Bal Rengi Bavul"],["Bölüm 2","Kapıdaki Dört Kişi"],["Bölüm 3","Avluya Bakan Oda"],["Bölüm 4","Sofrada Bir Yer"],["Bölüm 5","Tahtanın Sesi"],["Bölüm 6","Otuz Dört Mum"],["Bölüm 7","Ihlamurlar Evi"],["Bölüm 8","Masadaki Fotoğraf"],["Bölüm 9","İmzanın Altındaki Satır"],["Bölüm 10","Ateşin Söyledikleri"],["Bölüm 11","Boş Sandıklar"],["Bölüm 12","Ayla'nın Yolculuğu"],["Bölüm 13","Ekrandaki İsim"],["Bölüm 14","Kaybedilebilecekler"],["Bölüm 15","Korkudan İmza Atma"],["Bölüm 16","Akşam Saat Dokuz"],["Bölüm 17","Büyük Kız"],["Bölüm 18","Dönebileceğiniz Zaman"],["Bölüm 19","Masadaki Anahtarlar"],["Bölüm 20","Bu Kez İçeride"]]},"files":{"it":{"pdf":["Terk_Ettiginiz_Kiz_italiano.pdf","1,1 MB"],"epub":["Terk_Ettiginiz_Kiz_italiano.epub","357 KB"],"docx":["Terk_Ettiginiz_Kiz_italiano.docx","393 KB"]},"tr":{"pdf":["Terk_Ettiginiz_Kiz_turkce.pdf","1,1 MB"],"epub":["Terk_Ettiginiz_Kiz_turkce.epub","358 KB"],"docx":["Terk_Ettiginiz_Kiz_turkce.docx","393 KB"]}}}/*END-BOOK-FACTS*/;
   // the narration recorded with Suno: per language, the parts of each chapter (k of n), the units they read and their length
-  const AUDIO = /*AUDIO*/{"it":[],"tr":[]}/*END-AUDIO*/;
+  const AUDIO = /*AUDIO*/{"it":[],"tr":[{"ch":0,"k":0,"n":6,"u0":0,"u1":29,"d":204.68,"id":"537adaad-9195-4c5e-bd33-b908ee847f5e"},{"ch":0,"k":1,"n":6,"u0":30,"u1":61,"d":177.32,"id":"a1b969ce-e0c0-4f68-89b6-7b6da5673b1b"},{"ch":0,"k":2,"n":6,"u0":62,"u1":75,"d":151.6,"id":"4658f317-4d77-4427-989e-4818e7c0389c"},{"ch":0,"k":3,"n":6,"u0":76,"u1":99,"d":149.8,"id":"a87afa32-1a5e-4e9d-baf0-bba9c170a250"},{"ch":0,"k":4,"n":6,"u0":100,"u1":115,"d":160.04,"id":"fba42c75-fc83-4554-b98f-c5008ba93351"},{"ch":0,"k":5,"n":6,"u0":116,"u1":140,"d":152.72,"id":"889f7688-cd8b-4bab-86ce-834b85b9fe36"},{"ch":1,"k":0,"n":7,"u0":0,"u1":19,"d":185.96,"id":"e6a2a880-d617-4094-a590-a2a6380d7fcf"},{"ch":1,"k":1,"n":7,"u0":20,"u1":48,"d":184.72,"id":"5d56ecad-7bda-4d16-bd44-c0c5d258990a"},{"ch":1,"k":2,"n":7,"u0":49,"u1":71,"d":135.92,"id":"395660ba-5816-4acd-a44a-8584427b011f"},{"ch":1,"k":3,"n":7,"u0":72,"u1":95,"d":157.6,"id":"5efd14a1-e0e7-433e-864a-f6a3f77e6b3e"},{"ch":1,"k":4,"n":7,"u0":96,"u1":126,"d":182.48,"id":"18f61247-95d0-4ac5-a551-5137ca057dcc"},{"ch":1,"k":5,"n":7,"u0":127,"u1":154,"d":178.64,"id":"41b5409d-5d1a-4220-b583-cdc26f186bd5"},{"ch":1,"k":6,"n":7,"u0":155,"u1":171,"d":128.16,"id":"5714418a-8314-44be-a126-7ae1f001e9fd"},{"ch":2,"k":0,"n":6,"u0":0,"u1":26,"d":168.36,"id":"06dfbb50-67de-46fa-92b2-1215b728ae99"},{"ch":2,"k":1,"n":6,"u0":27,"u1":52,"d":182.4,"id":"244794cf-5f2c-49d4-a241-b5bb37b4520b"},{"ch":2,"k":2,"n":6,"u0":53,"u1":80,"d":149.4,"id":"b65f1221-632c-4de7-8f5e-079344a4e57d"},{"ch":2,"k":3,"n":6,"u0":81,"u1":105,"d":164.76,"id":"8a8dd485-975c-4709-ab26-4d9a7794d1cd"},{"ch":2,"k":4,"n":6,"u0":106,"u1":134,"d":188.8,"id":"675cea4e-9878-48c6-8f80-e1bfaeb7ead0"},{"ch":2,"k":5,"n":6,"u0":135,"u1":158,"d":157.8,"id":"79d7432b-9d8b-495e-81e3-978acd0c8672"},{"ch":3,"k":0,"n":7,"u0":0,"u1":31,"d":162.48,"id":"975d00c9-eb64-44dc-9aa3-8dabad69894c"},{"ch":3,"k":1,"n":7,"u0":32,"u1":59,"d":183.6,"id":"791a8aab-decc-4219-a377-72a1a1a0823c"},{"ch":3,"k":2,"n":7,"u0":60,"u1":87,"d":155,"id":"455f89b6-3ee4-47d7-bc23-39c5dba05ee0"},{"ch":3,"k":3,"n":7,"u0":88,"u1":112,"d":182.92,"id":"a72919d3-5f7d-426e-a40c-ad187ad6767f"},{"ch":3,"k":4,"n":7,"u0":113,"u1":134,"d":176.36,"id":"f2b31430-010a-4611-908e-1f22add6dece"},{"ch":3,"k":5,"n":7,"u0":135,"u1":160,"d":134.8,"id":"206b8914-2a5c-484a-be32-bfe18df458fd"},{"ch":3,"k":6,"n":7,"u0":161,"u1":165,"d":21.72,"id":"dd1e9c92-0edb-4c0e-924d-294876dd09c1"},{"ch":4,"k":0,"n":7,"u0":0,"u1":26,"d":149.68,"id":"486c34c4-1221-4beb-be00-eccf6d8ba77b"},{"ch":4,"k":1,"n":7,"u0":27,"u1":38,"d":116.24,"id":"d160d79e-cf47-47d0-855b-0f5cad5c8fb9"},{"ch":4,"k":2,"n":7,"u0":39,"u1":46,"d":63.2,"id":"e818b718-549b-4901-aa9e-6c8430f74b8a"},{"ch":4,"k":3,"n":7,"u0":47,"u1":78,"d":166.8,"id":"b84d40e1-a1c5-45c8-bd65-abae52ba3f5c"},{"ch":4,"k":4,"n":7,"u0":79,"u1":102,"d":193.2,"id":"380cf4f3-5059-4ef7-9811-301aba8e9ff9"},{"ch":4,"k":5,"n":7,"u0":103,"u1":130,"d":185.8,"id":"366cbf15-8060-45f3-8e7b-2e9d89c7d0af"},{"ch":4,"k":6,"n":7,"u0":131,"u1":154,"d":137.88,"id":"b785c99b-9676-4e49-9859-0bcbc930245e"},{"ch":5,"k":0,"n":7,"u0":0,"u1":28,"d":169.96,"id":"947f7f9a-3e18-4ace-82ae-7399df859088"},{"ch":5,"k":1,"n":7,"u0":29,"u1":60,"d":179.56,"id":"32acdf81-aacb-4b9a-b2af-8e43bd51d82d"},{"ch":5,"k":2,"n":7,"u0":61,"u1":92,"d":181.6,"id":"85ba1232-2437-4f0b-b777-5bf11875c90f"},{"ch":5,"k":3,"n":7,"u0":93,"u1":123,"d":187.96,"id":"428f6535-0ba6-4843-aea3-b57f5f7cfefe"},{"ch":5,"k":4,"n":7,"u0":124,"u1":146,"d":177.56,"id":"9d580aa6-0063-4149-b40e-e677906de4f8"},{"ch":5,"k":5,"n":7,"u0":147,"u1":160,"d":193.6,"id":"b66fb667-abf4-43dd-811a-8da5002401a6"},{"ch":5,"k":6,"n":7,"u0":161,"u1":161,"d":14,"id":"7c3d014e-ab73-4f04-8e6a-6a4521bdc133"},{"ch":6,"k":0,"n":6,"u0":0,"u1":20,"d":189.88,"id":"f1262dc4-aae4-465d-ab7b-6c9ca691cd0a"},{"ch":6,"k":1,"n":6,"u0":21,"u1":41,"d":189.28,"id":"c27da25a-6291-40a7-aba8-fcb0c6411408"},{"ch":6,"k":2,"n":6,"u0":42,"u1":63,"d":162.68,"id":"289ffce1-e1d0-40eb-8abf-f4546d4abd20"},{"ch":6,"k":3,"n":6,"u0":64,"u1":91,"d":180,"id":"c3f7b9c0-9ab7-4d83-a17d-fdac4b1cf892"},{"ch":6,"k":4,"n":6,"u0":92,"u1":119,"d":189.6,"id":"49d79778-3f4e-4572-9649-9301f363fed5"},{"ch":6,"k":5,"n":6,"u0":120,"u1":125,"d":98.92,"id":"36c5412e-4f45-4783-8ebf-7f5e9b8af256"},{"ch":7,"k":0,"n":6,"u0":0,"u1":22,"d":164,"id":"29ccb183-c86c-44fd-a164-afa006249e7a"},{"ch":7,"k":1,"n":6,"u0":23,"u1":46,"d":182.84,"id":"c90c9d1d-5d24-4811-a500-c7c7135551fa"},{"ch":7,"k":2,"n":6,"u0":47,"u1":56,"d":184.88,"id":"74b06a11-67b3-4558-b959-a3c0b9f8b240"},{"ch":7,"k":3,"n":6,"u0":57,"u1":75,"d":178,"id":"fc1fa146-ebaa-4f0d-918e-dc128c47f0b7"},{"ch":7,"k":4,"n":6,"u0":76,"u1":94,"d":175.96,"id":"251442ce-4109-4ba6-8b52-6866f03f6ba3"},{"ch":7,"k":5,"n":6,"u0":95,"u1":116,"d":117.24,"id":"e35af4ce-b68b-4949-a4bf-43104601e556"},{"ch":8,"k":0,"n":7,"u0":0,"u1":19,"d":177.6,"id":"d0bc1e16-d7ec-448e-9aa7-01bb89a5a928"},{"ch":8,"k":1,"n":7,"u0":20,"u1":35,"d":169.88,"id":"d7e9ea32-2321-4d58-b447-49624486fbf5"},{"ch":8,"k":2,"n":7,"u0":36,"u1":59,"d":179.32,"id":"4c0d7f65-d3a2-4339-a7be-954db1540300"},{"ch":8,"k":3,"n":7,"u0":60,"u1":88,"d":171.12,"id":"ce84588e-d344-4f60-8888-c96cd31c5e8d"},{"ch":8,"k":4,"n":7,"u0":89,"u1":110,"d":188.28,"id":"b78333fb-d74b-4c69-9abb-bc7ca7d90159"},{"ch":8,"k":5,"n":7,"u0":111,"u1":135,"d":178.68,"id":"ef46822a-eaee-40e6-a746-2d377eec3e3a"},{"ch":8,"k":6,"n":7,"u0":136,"u1":136,"d":14.44,"id":"a4db0275-7ac7-4cf9-bdb1-62c0a2ff9a0e"},{"ch":9,"k":0,"n":6,"u0":0,"u1":25,"d":189.48,"id":"70001fee-7347-4a09-a675-7d8fee077f05"},{"ch":9,"k":1,"n":6,"u0":26,"u1":44,"d":166.32,"id":"3bcfe6d0-8700-4cc8-90e8-0aaa2d776566"},{"ch":9,"k":2,"n":6,"u0":45,"u1":68,"d":178.84,"id":"512237a7-bb48-49c8-af9d-ea24a163c580"},{"ch":9,"k":3,"n":6,"u0":69,"u1":95,"d":178.72,"id":"0700327b-9517-4931-8dbe-9b07957cea1f"},{"ch":9,"k":4,"n":6,"u0":96,"u1":128,"d":194.8,"id":"5fa71de6-cf56-4214-824e-3f9dc8e32c39"},{"ch":9,"k":5,"n":6,"u0":129,"u1":146,"d":182.48,"id":"ea14577f-c797-4405-971d-5e94bf91d774"},{"ch":10,"k":0,"n":6,"u0":0,"u1":28,"d":183,"id":"bfc166a8-19e3-4704-9047-3d7b1b4c4666"},{"ch":10,"k":1,"n":6,"u0":29,"u1":48,"d":181.2,"id":"6059d15b-a754-475a-bac0-660161f3fa20"},{"ch":10,"k":2,"n":6,"u0":49,"u1":76,"d":181.16,"id":"82763307-b992-41f9-8880-edc1aea77ba7"},{"ch":10,"k":3,"n":6,"u0":77,"u1":97,"d":177.16,"id":"c60ee2f2-d597-4aed-9af0-6c406bf535c7"},{"ch":10,"k":4,"n":6,"u0":98,"u1":113,"d":182.56,"id":"686014a5-4d1a-4a82-bb26-41167ab5f330"},{"ch":10,"k":5,"n":6,"u0":114,"u1":138,"d":184.48,"id":"5f602e43-3a48-44ca-aabd-00d09530d4f9"},{"ch":11,"k":0,"n":5,"u0":0,"u1":20,"d":188.72,"id":"b6531210-45e5-4811-917f-367f3bb700ca"},{"ch":11,"k":1,"n":5,"u0":21,"u1":51,"d":193.2,"id":"e7979336-2f4d-4182-9761-8a911a46620a"},{"ch":11,"k":2,"n":5,"u0":52,"u1":75,"d":208.56,"id":"cabb18a9-6e37-44b2-86da-b142522cf962"},{"ch":11,"k":3,"n":5,"u0":76,"u1":109,"d":183.76,"id":"89ff2523-4c8b-4f64-84b7-cac3ef63a27d"},{"ch":11,"k":4,"n":5,"u0":110,"u1":124,"d":85.96,"id":"9ab03ceb-e8b7-456a-adee-bb837112c9a9"},{"ch":12,"k":0,"n":6,"u0":0,"u1":17,"d":198.76,"id":"14f2e263-c165-406a-8f87-89802b68c0cb"},{"ch":12,"k":1,"n":6,"u0":18,"u1":47,"d":190,"id":"9f0b07eb-f749-46be-b121-1a7ce23eff45"},{"ch":12,"k":2,"n":6,"u0":48,"u1":71,"d":169.56,"id":"bf69f2b6-2b06-48b3-84af-ca2fa450f49e"},{"ch":12,"k":3,"n":6,"u0":72,"u1":94,"d":213.36,"id":"ef4936e3-b7dd-4f9e-894c-a725f81a8ae6"},{"ch":12,"k":4,"n":6,"u0":95,"u1":127,"d":175.48,"id":"52664a60-9e83-4985-870a-57392e604579"},{"ch":12,"k":5,"n":6,"u0":128,"u1":135,"d":59.92,"id":"b3d65fc4-3a39-494b-8b77-6b41ce5a3a60"},{"ch":13,"k":0,"n":7,"u0":0,"u1":25,"d":188,"id":"54bd7440-1ea0-4502-970a-8f90db46b1eb"},{"ch":13,"k":1,"n":7,"u0":26,"u1":43,"d":177.76,"id":"5ab888d8-7c73-4144-8884-1618c62d2291"},{"ch":13,"k":2,"n":7,"u0":44,"u1":66,"d":178.92,"id":"dd803a6a-1978-45d5-981d-23b097ade45f"},{"ch":13,"k":3,"n":7,"u0":67,"u1":89,"d":197.24,"id":"75bedf1b-9d01-417a-b848-4de2270a8992"},{"ch":13,"k":4,"n":7,"u0":90,"u1":129,"d":189.56,"id":"3434297c-ae28-4205-a873-b682486c3758"},{"ch":13,"k":5,"n":7,"u0":130,"u1":155,"d":184.88,"id":"0e0d8636-5e66-4a91-9fda-c2405f42f857"},{"ch":13,"k":6,"n":7,"u0":156,"u1":163,"d":81.16,"id":"2b37774c-2b6c-4f3a-b617-072b7f3137d7"},{"ch":14,"k":0,"n":6,"u0":0,"u1":20,"d":153.12,"id":"83e44b5a-c156-4510-9a8b-9f934286b8fd"},{"ch":14,"k":1,"n":6,"u0":21,"u1":47,"d":177.56,"id":"3278f04d-fea1-4121-851a-f1aa07ebbdda"},{"ch":14,"k":2,"n":6,"u0":48,"u1":76,"d":192.76,"id":"d4add6e5-f17b-440c-b1ad-085c5fab9c82"},{"ch":14,"k":3,"n":6,"u0":77,"u1":106,"d":161.72,"id":"525afa40-5868-4279-91e4-cd7347de40ef"},{"ch":14,"k":4,"n":6,"u0":107,"u1":126,"d":193.92,"id":"5862f246-f812-4d20-b081-2448631f6a56"},{"ch":14,"k":5,"n":6,"u0":127,"u1":131,"d":25.96,"id":"957bd8a4-a816-4340-b303-7b44f97a0a88"},{"ch":15,"k":0,"n":6,"u0":0,"u1":26,"d":193.68,"id":"bcf1ddc9-b249-429d-9d04-f1621ecae021"},{"ch":15,"k":1,"n":6,"u0":27,"u1":41,"d":188.8,"id":"36bbdf46-a920-4d90-a3aa-57779b368758"},{"ch":15,"k":2,"n":6,"u0":42,"u1":57,"d":188.96,"id":"e249826b-3f14-4355-9236-9deea4e6e197"},{"ch":15,"k":3,"n":6,"u0":58,"u1":96,"d":205,"id":"1d25467a-e923-4bbf-b40a-2d78163f10f5"},{"ch":15,"k":4,"n":6,"u0":97,"u1":122,"d":184.92,"id":"74210eb3-602c-4a97-82f6-a6418bb8348f"},{"ch":15,"k":5,"n":6,"u0":123,"u1":126,"d":24.24,"id":"c23b6b9b-dae3-4f2c-860e-c53d83d5dd08"},{"ch":16,"k":0,"n":6,"u0":0,"u1":19,"d":188.92,"id":"290b65c9-009e-4977-b089-b8120534b720"},{"ch":16,"k":1,"n":6,"u0":20,"u1":61,"d":199.2,"id":"b5f841dd-994c-4473-8913-0650f1d7817f"},{"ch":16,"k":2,"n":6,"u0":62,"u1":85,"d":193.16,"id":"f174b22f-74af-459f-9611-67bd733cdf12"},{"ch":16,"k":3,"n":6,"u0":86,"u1":123,"d":204.72,"id":"640771db-a8b9-47fc-ae74-6b771106551b"},{"ch":16,"k":4,"n":6,"u0":124,"u1":153,"d":203.52,"id":"ad7b8761-ca69-40ed-9405-60a25884bbcc"},{"ch":16,"k":5,"n":6,"u0":154,"u1":177,"d":139.16,"id":"17babf05-ac03-490c-b521-7ddac63c73ab"},{"ch":17,"k":0,"n":8,"u0":0,"u1":31,"d":187.96,"id":"3f1d1811-dade-4141-9d3b-9d832e7f265c"},{"ch":17,"k":1,"n":8,"u0":32,"u1":63,"d":199.84,"id":"507dd30d-c870-47be-8105-3cd0abe26d1a"},{"ch":17,"k":2,"n":8,"u0":64,"u1":90,"d":216.76,"id":"db287255-8333-4666-aba9-5dc159ef0b29"},{"ch":17,"k":3,"n":8,"u0":91,"u1":116,"d":152,"id":"5b78f26e-08c7-4f68-a3cc-225b88efe74c"},{"ch":17,"k":4,"n":8,"u0":117,"u1":144,"d":197.96,"id":"a3e6e25c-831c-4185-b665-36a8f0764f62"},{"ch":17,"k":5,"n":8,"u0":145,"u1":179,"d":194,"id":"e470530b-f68e-4453-b351-9fa885a66cab"},{"ch":17,"k":6,"n":8,"u0":180,"u1":205,"d":179.92,"id":"f147dedf-7b71-4b93-9a0b-725521b4ec9c"},{"ch":17,"k":7,"n":8,"u0":206,"u1":229,"d":179.48,"id":"431e239c-68e5-4e4e-a311-9182cd7dd2fd"},{"ch":18,"k":0,"n":10,"u0":0,"u1":25,"d":189.84,"id":"0601fa48-5023-4dc5-9f2b-1b93bb2a4692"},{"ch":18,"k":1,"n":10,"u0":26,"u1":42,"d":183.88,"id":"18299b41-7980-463c-b590-35acffd6e87d"},{"ch":18,"k":2,"n":10,"u0":43,"u1":56,"d":198.76,"id":"aa0ff74e-05c9-4610-b4b8-d56c5fb42abe"},{"ch":18,"k":3,"n":10,"u0":57,"u1":67,"d":192.36,"id":"acd24eb3-59ca-447f-aa9a-dab6b2144b06"},{"ch":18,"k":4,"n":10,"u0":68,"u1":82,"d":183.88,"id":"b56ae2ea-f407-45ab-8a81-a31bf4a99cd3"},{"ch":18,"k":5,"n":10,"u0":83,"u1":99,"d":192.76,"id":"17bd1207-d2d2-4d04-ba22-bafd7f605b8a"},{"ch":18,"k":6,"n":10,"u0":100,"u1":126,"d":182.36,"id":"ad6abce7-d26f-4dce-ae46-acc91819a417"},{"ch":18,"k":7,"n":10,"u0":127,"u1":141,"d":172.52,"id":"0c1059d0-c529-47e8-a9c0-1369b8790b12"},{"ch":18,"k":8,"n":10,"u0":142,"u1":167,"d":183,"id":"2e8d6c18-6801-428e-bb70-a57a3422420c"},{"ch":18,"k":9,"n":10,"u0":168,"u1":182,"d":137.52,"id":"3c819bc2-65c3-4417-b73b-1d4c705fd5af"},{"ch":19,"k":0,"n":6,"u0":0,"u1":13,"d":192.4,"id":"6e50a2c8-b483-433e-a63b-6ca5d956517a"},{"ch":19,"k":1,"n":6,"u0":14,"u1":29,"d":178,"id":"b25448a5-4b8e-4dfa-b5f5-8ce7b65f9de9"},{"ch":19,"k":2,"n":6,"u0":30,"u1":46,"d":183.2,"id":"d4e5d600-ac75-43ed-b88b-5c3095df17fe"},{"ch":19,"k":3,"n":6,"u0":47,"u1":63,"d":181.84,"id":"31ec5af5-b778-4217-8148-94fe6b820484"},{"ch":19,"k":4,"n":6,"u0":64,"u1":83,"d":194.68,"id":"aed94723-08ab-4be1-b351-d1b97546383d"},{"ch":19,"k":5,"n":6,"u0":84,"u1":97,"d":123.6,"id":"7bd6c42e-105d-40a7-917f-b44d3a96a9d0"}]}/*END-AUDIO*/;
   const BOOK = {
     id: 'terk-ettiginiz-kiz', dir: 'terk-ettiginiz-kiz/', title: 'Terk Ettiğiniz Kız',
     sub: { it: 'La ragazza che avete abbandonato', tr: '' },
@@ -509,6 +536,7 @@ body.reading .bg { display: none; }
   /* ---------- words on screen ---------- */
   const T = {
     it: {
+      listenTr: 'Ascolta in turco', audioChapter: 'Capitolo', audioPart: 'Parte', audioOpen: 'Apri su Suno', audioPrev: 'Parte precedente', audioNext: 'Parte successiva', audioOf: 'di',
       games: 'Giochi', title: 'Romanzi', langLabel: 'Lingua',
       meta: (n) => 'Romanzo · ' + n + ' capitoli',
       read: 'Inizia a leggere', readOn: 'Continua a leggere', readAgain: 'Rileggi dall’inizio',
@@ -517,8 +545,8 @@ body.reading .bg { display: none; }
       readTime: (x) => 'circa ' + x + ' di lettura', listenTime: (x) => x + ' di ascolto', listenTimeAbout: (x) => 'circa ' + x + ' di ascolto',
       story: 'La storia', toc: 'Indice', min: (n) => n + ' min', here: 'Segnalibro',
       audioTitle: 'Ascoltare il romanzo',
-      audioText: 'Il romanzo letto da una narratrice, con le pause e le emozioni della storia. Mentre ascolti, il paragrafo che senti si illumina nel testo, e puoi continuare anche a schermo spento. Puoi cambiare la velocità e mettere un timer se vuoi addormentarti ascoltando.',
-      audioTip: 'Mentre ascolti, tocca un paragrafo per ripartire da lì.',
+      audioText: 'Ascolta la narrazione in turco, con la voce creata su Suno. Scegli un capitolo e una parte: il lettore si apre qui, senza lasciare il romanzo.',
+      audioTip: 'Premi ▶ nel lettore. Alla fine di una parte, scegli la successiva e premi di nuovo ▶. Il capitolo e la parte vengono ricordati su questo dispositivo.',
       audioVoice: 'La voce della narratrice è creata con Suno.',
       audioSoon: 'La versione da ascoltare è in preparazione: arriva qui, capitolo dopo capitolo.',
       audioPartial: (n, m) => 'Registrati finora: ' + n + ' capitoli su ' + m + '. Gli altri arrivano presto.',
@@ -543,6 +571,7 @@ body.reading .bg { display: none; }
       dec: ',',
     },
     tr: {
+      listenTr: 'Türkçe dinle', audioChapter: 'Bölüm', audioPart: 'Kısım', audioOpen: 'Suno’da aç', audioPrev: 'Önceki kısım', audioNext: 'Sonraki kısım', audioOf: '/',
       games: 'Oyunlar', title: 'Romanlar', langLabel: 'Dil',
       meta: (n) => 'Roman · ' + n + ' bölüm',
       read: 'Okumaya başla', readOn: 'Okumaya devam et', readAgain: 'Baştan oku',
@@ -551,8 +580,8 @@ body.reading .bg { display: none; }
       readTime: (x) => 'yaklaşık ' + x + ' okuma', listenTime: (x) => x + ' dinleme', listenTimeAbout: (x) => 'yaklaşık ' + x + ' dinleme',
       story: 'Hikâye', toc: 'İçindekiler', min: (n) => n + ' dk', here: 'Ayraç',
       audioTitle: 'Romanı dinlemek',
-      audioText: 'Roman, hikâyenin duraklarını ve duygularını taşıyan bir anlatıcının sesiyle. Dinlerken duyduğun paragraf metinde parlar; ekran kapalıyken de dinlemeye devam edebilirsin. Hızı değiştirebilir, dinlerken uyumak istersen bir zamanlayıcı kurabilirsin.',
-      audioTip: 'Dinlerken bir paragrafa dokunursan okuma oradan devam eder.',
+      audioText: 'Suno ile oluşturulan anlatıcı sesiyle romanı Türkçe dinle. Bir bölüm ve kısım seç; oynatıcı roman sayfasında açılır.',
+      audioTip: 'Oynatıcıda ▶ tuşuna bas. Her kısmın sonunda sonraki kısmı seçip yeniden ▶ tuşuna bas. Bölüm ve kısım bu cihazda hatırlanır.',
       audioVoice: 'Anlatıcının sesi Suno ile oluşturuldu.',
       audioSoon: 'Dinlenecek hâli hazırlanıyor: bölüm bölüm burada olacak.',
       audioPartial: (n, m) => 'Şimdiye kadar kaydedilen: ' + m + ' bölümden ' + n + '. Diğerleri yakında.',
@@ -697,13 +726,13 @@ body.reading .bg { display: none; }
       $('p', prog).textContent = p.done ? t('progDone') : t('prog', p.ch + 1, NCH, p.pct || 0);
     }
     $('#b-read span').textContent = !p ? t('read') : p.done ? t('readAgain') : t('readOn');
-    const nrec = recordedCount(lang);
+    const nrec = recordedCount('tr');
     $('#b-listen').hidden = !nrec;
     $('.actions').classList.toggle('solo', !nrec);
     const tl = total(lang);
     let listenLine = '';
     if (nrec === NCH) {
-      const secs = AUDIO[lang].reduce((a, x) => a + (x.d || 0), 0);
+      const secs = AUDIO.tr.reduce((a, x) => a + (x.d || 0), 0);
       listenLine = secs ? t('listenTime', duration(Math.round(secs / 60 / 5) * 5)) : t('listenTimeAbout', duration(Math.round(tl / 9.5 / 60 / 15) * 15));
     } else if (nrec) listenLine = t('listenTimeAbout', duration(Math.round(tl / 9.5 / 60 / 15) * 15));
     $('#b-times').innerHTML =
@@ -1196,7 +1225,7 @@ body.reading .bg { display: none; }
     const show = A.active && !!R.data && A.ch >= 0;
     $('#player').hidden = !show;
     document.body.classList.toggle('audio-on', show);
-    $('#r-listen').hidden = show || view !== 'read' || !R.data || !recorded(R.lang, R.ch);
+    $('#r-listen').hidden = show || view !== 'read' || !R.data || !recorded('tr', R.ch);
     if (!show) return;
     $('#pl-play').innerHTML = icon(A.playing ? 'pause' : 'play', true);
     $('#pl-play').setAttribute('aria-label', t(A.playing ? 'pause' : 'play'));
@@ -1232,6 +1261,7 @@ body.reading .bg { display: none; }
   }
   function closeSheet(s) {
     if (s.hidden) return;
+    if (s.id === 'sh-listen') { $('#listen-frame').replaceChildren(); delete $('#listen-frame').dataset.clip; }
     s.classList.remove('open');
     setTimeout(() => { if (!s.classList.contains('open')) s.hidden = true; }, 280);
     if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
@@ -1257,6 +1287,57 @@ body.reading .bg { display: none; }
     closeSheets();
   });
 
+
+  // Link-only Suno recordings are played with Suno's share player. No CDN URLs,
+  // re-encoding, speech synthesis, or guessed playback progress are used here.
+  const rememberedListen = store.get('hm-rm-listen-tr', {});
+  const L = {
+    ch: Number.isInteger(rememberedListen.ch) && rememberedListen.ch >= 0 && rememberedListen.ch < NCH ? rememberedListen.ch : 0,
+    pi: Number.isInteger(rememberedListen.pi) && rememberedListen.pi >= 0 ? rememberedListen.pi : 0,
+  };
+  function renderListen() {
+    const ps = partsFor('tr', L.ch);
+    L.pi = Math.min(Math.max(0, L.pi), ps.length - 1);
+    const p = ps[L.pi];
+    if (!p) return;
+    $('#listen-ch').innerHTML = FACTS.chapters[lang].map((ch, i) => '<option value="' + i + '">' + (i + 1) + '. ' + esc(ch[1]) + '</option>').join('');
+    $('#listen-ch').value = String(L.ch);
+    $('#listen-part').innerHTML = ps.map((part, i) => '<option value="' + i + '">' + esc(t('audioPart')) + ' ' + (i + 1) + ' ' + esc(t('audioOf')) + ' ' + ps.length + ' · ' + clock(part.d) + '</option>').join('');
+    $('#listen-part').value = String(L.pi);
+    $('#listen-prev').disabled = L.ch === 0 && L.pi === 0;
+    $('#listen-next').disabled = L.ch === NCH - 1 && L.pi === ps.length - 1;
+    $('#listen-source').href = 'https://suno.com/song/' + p.id;
+    const holder = $('#listen-frame');
+    if (holder.dataset.clip !== p.id || !holder.firstChild) {
+      const iframe = document.createElement('iframe');
+      iframe.className = 'listen-frame';
+      iframe.title = t('listenTr') + ' · ' + t('audioChapter') + ' ' + (L.ch + 1) + ' · ' + t('audioPart') + ' ' + (L.pi + 1);
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.src = 'https://suno.com/embed/' + p.id;
+      holder.replaceChildren(iframe);
+      holder.dataset.clip = p.id;
+    }
+    store.set('hm-rm-listen-tr', { ch: L.ch, pi: L.pi });
+  }
+  function openListen(ci) {
+    if (Number.isInteger(ci)) { L.ch = ci; L.pi = 0; }
+    applyLang();
+    renderListen();
+    openSheet('sh-listen');
+  }
+  function listenStep(dir) {
+    const ps = partsFor('tr', L.ch);
+    const next = L.pi + dir;
+    if (next < 0) { if (!L.ch) return; L.ch--; L.pi = partsFor('tr', L.ch).length - 1; }
+    else if (next >= ps.length) { if (L.ch >= NCH - 1) return; L.ch++; L.pi = 0; }
+    else L.pi = next;
+    renderListen();
+  }
+  $('#listen-ch').addEventListener('change', () => { L.ch = Number($('#listen-ch').value); L.pi = 0; renderListen(); });
+  $('#listen-part').addEventListener('change', () => { L.pi = Number($('#listen-part').value); renderListen(); });
+  $('#listen-prev').addEventListener('click', () => listenStep(-1));
+  $('#listen-next').addEventListener('click', () => listenStep(1));
+
   /* ---------- wiring ---------- */
   $$('.lang button, #tx-lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
   $('#b-read').addEventListener('click', () => {
@@ -1264,15 +1345,7 @@ body.reading .bg { display: none; }
     if (p && p.done) { ST.pos[BOOK.id] = { ch: 0, u: 0, pct: 0, done: false }; save(); goRead(0, 0); return; }
     goRead(p ? p.ch : 0, p ? p.u : 0);
   });
-  $('#b-listen').addEventListener('click', () => {
-    if (A.active && R.data && A.ch >= 0) { resume(); goRead(A.ch, A.u >= 0 ? A.u : 0); return; }
-    const p = pos();
-    let ci = p && !p.done ? p.ch : 0, u = p && !p.done ? p.u : 0;
-    if (!recorded(lang, ci)) { ci = 0; u = 0; }
-    if (!recorded(lang, ci)) { toast(t('chNoAudio')); return; }
-    prime(ci, u);
-    goRead(ci, u, true);
-  });
+  $('#b-listen').addEventListener('click', () => openListen());
   $('#b-dl').addEventListener('click', () => { renderDownloads(); openSheet('sh-dl'); });
   $('#b-toc').addEventListener('click', (e) => {
     const b = e.target.closest('[data-ch]');
@@ -1304,7 +1377,7 @@ body.reading .bg { display: none; }
     history.replaceState(null, '', '#/leggi/' + (ci + 1));
     showChapter(ci, 0);
   });
-  $('#r-listen').addEventListener('click', () => { lastUser = 0; listenAt(topUnit(), true); });
+  $('#r-listen').addEventListener('click', () => openListen(R.ch));
   $('#r-text').addEventListener('click', (e) => {   // while listening, a tap on a paragraph reads from there
     const sel = window.getSelection && String(window.getSelection());
     if (sel) return;
