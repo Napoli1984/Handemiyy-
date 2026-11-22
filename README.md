@@ -1,6 +1,6 @@
 # Handemiyy
 
-Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna**, **Tombola**, **Quiz del milione**, **Pioggia di perle**, **Poker**, **Scacchi**, **Gran Bazar**, **Gratta e scopri**, **Collana di perle**, **Trova le differenze**, **Scopa**, **Tavla**, **Tennis 3D** e **Crucimondo**, più l'**Album delle figurine**: ogni partita regala una bustina. In italiano e in turco.
+Giochi con le foto di Hande: **Memory** (con la caccia al tesoro), **Ultima carta**, **Puzzle**, **Bowling**, **Ruota della fortuna**, **Tombola**, **Quiz del milione**, **Pioggia di perle**, **Poker**, **Scacchi**, **Gran Bazar**, **Gratta e scopri**, **Collana di perle**, **Trova le differenze**, **Scopa**, **Tavla**, **Tennis 3D**, **Crucimondo** e **Freccette**, più l'**Album delle figurine**: ogni partita regala una bustina. In italiano e in turco.
 
 Gioca qui: https://napoli1984.github.io/Handemiyy-/
 
@@ -22,10 +22,12 @@ Il **Tennis 3D** si gioca nella pagina `tennis/`: Handemiyy sfida cinque rivali 
 
 **Crucimondo** è il cruciverba, nella pagina `crucimondo/`: quattordici mondi a tema (animali, cucina, mare, spazio, cinema, Italia, Turchia e altri) da sei livelli ciascuno, un cruciverba nuovo ogni giorno e tre sfide speciali (emoji, parole turche e partita veloce), con la parola segreta nelle caselle cerchiate. Si gioca in italiano o in turco, e ogni cruciverba nuovo completato regala una bustina per l'album.
 
+**Freccette** è il gioco del bar di notte, nella pagina `freccette/`: 501 (con la chiusura sul doppio se vuoi), Cricket e Giro del mondo. Si tiene premuto per mirare e si lascia per lanciare: la mano è più ferma dopo un attimo, ma se aspetti troppo trema. Si gioca contro Sofia (facile), Marco (normale) ed Elif (difficile), anche tutti e tre insieme, da 2 a 4 sullo stesso telefono oppure online. Nella cornice sul muro si mette una foto di Hande, e ogni partita finita regala una bustina per l'album.
+
 Nella sezione **Romanzi**, nella pagina `romanzi/`, c'è *Terk Ettiğiniz Kız*, il romanzo in venti capitoli con la sua locandina in copertina: si legge un capitolo alla volta in italiano o in turco e si scarica in PDF, EPUB o Word. Il segnalibro si salva da solo.
 
 Nell'**Album delle figurine** ogni foto di Hande è una figurina, in 21 pagine: ogni partita finita, a qualsiasi gioco, regala una bustina da cinque, ce n'è una in regalo ogni giorno, e le foto vinte nei giochi si incollano da sole. Con quattro doppie si prende una figurina che manca, e ogni pagina completa vale un'altra bustina.
 
-Memory, Ultima carta, Bowling, Ruota della fortuna, Scopa e Tavla si possono giocare anche **online con gli amici** (da 2 a 4, ognuno sul suo telefono; a tavla si gioca in due): chi crea la stanza manda il link agli altri. I messaggi passano da un servizio MQTT pubblico e gratuito.
+Memory, Ultima carta, Bowling, Ruota della fortuna, Scopa, Tavla e Freccette si possono giocare anche **online con gli amici** (da 2 a 4, ognuno sul suo telefono; a tavla si gioca in due): chi crea la stanza manda il link agli altri. I messaggi passano da un servizio MQTT pubblico e gratuito.
 
 Fan game senza scopo di lucro: le foto appartengono ai rispettivi autori.
