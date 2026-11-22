@@ -3750,6 +3750,7 @@ body:not(.on-home) .petals { display: none; }
             <button type="button" data-tbn="3" aria-pressed="false" data-i18n="tbN3"></button>
           </div>
           <button type="button" class="btn primary play-btn" id="btn-tb-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="tb" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
           <p class="record-line" id="tb-record"></p>
         </div>
 
@@ -4857,7 +4858,7 @@ body:not(.on-home) .petals { display: none; }
       tvOpenMsg: 'Lanciate un dado a testa: chi fa di più comincia', tvOpenGo: '{a} {x} · {b} {y}: comincia {who}', tvOpenYou: 'tu', tvRollMe: 'Tocca a te: lancia i dadi', tvMoveMe: 'Muovi: {dice}',
       tvTurnOf: 'Tocca a {name}', tvTurnOfAd: 'Tocca ad {name}', tvRolled: '{name} tira {dice}', tvNone: 'Con {dice} non c\'è nessuna mossa', tvNoneMe: 'Con {dice} non puoi muovere', tvHit: 'Mangiata!', tvHitMe: 'Ti ha mangiato una pedina!',
       tvPick: 'Dove la porti?', tvOff1: 'Fuori!', tvWinT: 'Hai vinto la partita!', tvLoseT: 'Vince {name}', tvMars: 'Mars: due punti!', tvEndScore: '{a} {x} · {b} {y}', tvNext: 'Partita successiva', tvSeeEnd: 'Vedi com\'è finita', tvWaitNext: 'Aspetta {name}…',
-      tvPrize: 'Partita vinta! La foto è tua', tvPrizeMars: 'Mars! Un\'altra foto per te', tvKicker: 'Tavla · sfida a {n} punti', tvNetWatch: 'A tavla si gioca in due: gli altri guardano la partita.', scNetWatch: 'A scacchi si gioca in due: gli altri guardano la partita.', scNetSub: 'Online · {lvl}', scNetWait: 'Tocca a {name}', tvMatchWin: 'Hai vinto la sfida!', tvMatchLose: 'Vince {name}', tvRowScore: 'Punti', tvRowPhotos: 'Foto vinte', tvAgain: 'Un\'altra sfida',
+      tvPrize: 'Partita vinta! La foto è tua', tvPrizeMars: 'Mars! Un\'altra foto per te', tvKicker: 'Tavla · sfida a {n} punti', tvNetWatch: 'A tavla si gioca in due: gli altri guardano la partita.', scNetWatch: 'A scacchi si gioca in due: gli altri guardano la partita.', tbNetHost: 'Estrai tu i numeri: gli altri seguono sul loro telefono.', tbNetGuest: 'I numeri li estrae {name}.', scNetSub: 'Online · {lvl}', scNetWait: 'Tocca a {name}', tvMatchWin: 'Hai vinto la sfida!', tvMatchLose: 'Vince {name}', tvRowScore: 'Punti', tvRowPhotos: 'Foto vinte', tvAgain: 'Un\'altra sfida',
       tvRecord: 'Sfide vinte: {w} su {p} · mars: {m}', tvWatch: 'Guardi la partita', aTvStart: 'Tavla: le tue pedine sono le perle bianche e vanno verso casa, in basso a destra.',
       // ---- Scopa ----
       gameSo: 'Scopa', gpSoTag: 'Le carte napoletane', ledeSo: 'La scopa con le carte napoletane: prendi le carte dal tavolo e fai scopa. Ogni scopa ti regala una foto di Hande; i Fanti, i Cavalli e i Re hanno il suo ritratto.',
@@ -5243,7 +5244,7 @@ body:not(.on-home) .petals { display: none; }
       tvOpenMsg: 'Herkes bir zar atar: büyük atan başlar', tvOpenGo: '{a} {x} · {b} {y}: {who} başlıyor', tvOpenYou: 'sen', tvRollMe: 'Sıra sende: zar at', tvMoveMe: 'Oyna: {dice}',
       tvTurnOf: 'Sıra {name} oyuncusunda', tvTurnOfAd: 'Sıra {name} oyuncusunda', tvRolled: '{name} {dice} attı', tvNone: '{dice} ile oynanacak hamle yok', tvNoneMe: '{dice} ile oynayamıyorsun', tvHit: 'Kırıldı!', tvHitMe: 'Pulun kırıldı!',
       tvPick: 'Nereye götürüyorsun?', tvOff1: 'Toplandı!', tvWinT: 'Oyunu kazandın!', tvLoseT: '{name} kazandı', tvMars: 'Mars: iki sayı!', tvEndScore: '{a} {x} · {b} {y}', tvNext: 'Sonraki oyun', tvSeeEnd: 'Sonucu gör', tvWaitNext: '{name} bekleniyor…',
-      tvPrize: 'Oyunu kazandın! Fotoğraf senin', tvPrizeMars: 'Mars! Bir fotoğraf daha senin', tvKicker: 'Tavla · {n} sayılık maç', tvNetWatch: 'Tavla iki kişiyle oynanır: diğerleri oyunu izler.', scNetWatch: 'Satranç iki kişiyle oynanır: diğerleri oyunu izler.', scNetSub: 'Çevrimiçi · {lvl}', scNetWait: 'Sıra: {name}', tvMatchWin: 'Maçı kazandın!', tvMatchLose: '{name} kazandı', tvRowScore: 'Sayı', tvRowPhotos: 'Kazanılan fotoğraf', tvAgain: 'Yeni bir maç',
+      tvPrize: 'Oyunu kazandın! Fotoğraf senin', tvPrizeMars: 'Mars! Bir fotoğraf daha senin', tvKicker: 'Tavla · {n} sayılık maç', tvNetWatch: 'Tavla iki kişiyle oynanır: diğerleri oyunu izler.', scNetWatch: 'Satranç iki kişiyle oynanır: diğerleri oyunu izler.', tbNetHost: 'Numaraları sen çekiyorsun: diğerleri kendi telefonlarından izler.', tbNetGuest: 'Numaraları {name} çekiyor.', scNetSub: 'Çevrimiçi · {lvl}', scNetWait: 'Sıra: {name}', tvMatchWin: 'Maçı kazandın!', tvMatchLose: '{name} kazandı', tvRowScore: 'Sayı', tvRowPhotos: 'Kazanılan fotoğraf', tvAgain: 'Yeni bir maç',
       tvRecord: 'Kazanılan maç: {p} maçta {w} · mars: {m}', tvWatch: 'Oyunu izliyorsun', aTvStart: 'Tavla: senin pulların beyaz inciler, sağ alttaki eve gidiyorlar.',
       // ---- Scopa ----
       gameSo: 'Scopa', gpSoTag: 'Napoli kartları', ledeSo: 'Napoli kartlarıyla scopa: masadaki kartları al ve masayı süpür. Her scopa sana bir Hande fotoğrafı kazandırır; uşakların, atlıların ve kralların üstünde onun portresi var.',
@@ -8492,6 +8493,9 @@ body:not(.on-home) .petals { display: none; }
     } else if (N.game === 'so') {
       N.ses = { n: N.players.length, round: 1, dealer: Math.floor(Math.random() * N.players.length), score: null, target: SO_TARGET };
       N.eng = soNet(N.players.length, N.ses);
+    } else if (N.game === 'tb') {
+      const nc = Math.min(3, Math.max(1, store.get('hm-tb-n', 2)));
+      N.eng = tbNet(N.players.length, nc);
     } else if (N.game === 'sc') {
       N.ses = { games: ((N.ses && N.ses.games) || 0) + 1 };
       N.eng = scNet(N.ses);
@@ -8529,11 +8533,11 @@ body:not(.on-home) .petals { display: none; }
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden || !scEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden || !scEl.hidden || !tbEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else if (v.game === 'sc') scNetApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else if (v.game === 'sc') scNetApply(v); else if (v.game === 'tb') tbNetApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
@@ -12103,6 +12107,7 @@ body:not(.on-home) .petals { display: none; }
   }
   function tbLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (TG === g) fn(); }, ms / tbSpeed); g.timers.push(id); }
   function tbRequestExit() {
+    if (TG && TG.online) { openConfirm(true); return; }
     if (TG && TG.k > 0 && !TG.over) openConfirm(false);
     else goHome();
   }
@@ -12115,29 +12120,34 @@ body:not(.on-home) .petals { display: none; }
     $('#tb-num').textContent = last == null ? '?' : String(last);
     $('#tb-last').innerHTML = g.order.slice(Math.max(0, g.k - 6), Math.max(0, g.k - 1)).reverse().map((x) => '<i>' + x + '</i>').join('');
     $('#tb-prizes').innerHTML = TB_PRIZES.map((k, i) => {
-      const w = g.winners[i], who = w ? w.map((s) => (s === 0 ? t('tbYouShort') : g.players[s].name)).join(' · ') : '';
-      return '<span class="tb-prize-chip' + (w ? ' won' + (w.includes(0) ? ' mine' : '') : i === g.prize ? ' next' : '') + '"><b>' + t(k) + '</b>' + (who ? '<small>' + who + '</small>' : '') + '</span>';
+      const me = g.me || 0, w = g.winners[i], who = w ? w.map((s) => (s === me ? t('tbYouShort') : g.players[s].name)).join(' · ') : '';
+      return '<span class="tb-prize-chip' + (w ? ' won' + (w.includes(me) ? ' mine' : '') : i === g.prize ? ' next' : '') + '"><b>' + t(k) + '</b>' + (who ? '<small>' + who + '</small>' : '') + '</span>';
     }).join('');
     $('#tb-players').innerHTML = g.players.map((p, i) => {
       const b = tbBest(p, g.drawn), dots = [0, 1, 2, 3, 4].map((d) => '<i' + (d < b.row ? ' class="on"' : '') + '></i>').join('');
       const av = p.av === 'me' ? '<span class="av">H</span>' : '<span class="av">' + svgUse('av-' + p.av, '', '0 0 40 40') + '</span>';
-      return '<div class="tb-pl' + (i === 0 ? ' me' : '') + '">' + av + '<span class="nm">' + p.name + '</span><span class="dots" aria-label="' + t('tbRowAria', { n: b.row }) + '">' + dots + '</span>' + (p.won.length ? '<span class="pz">' + p.won.length + '</span>' : '') + '</div>';
+      return '<div class="tb-pl' + (i === (g.me || 0) ? ' me' : '') + '">' + av + '<span class="nm">' + p.name + '</span><span class="dots" aria-label="' + t('tbRowAria', { n: b.row }) + '">' + dots + '</span>' + (p.won.length ? '<span class="pz">' + p.won.length + '</span>' : '') + '</div>';
     }).join('');
     const box = $('#tb-cards');
-    if (box.dataset.gid !== String(g.order[0]) + g.cfg.n) {
-      box.dataset.gid = String(g.order[0]) + g.cfg.n;
-      box.innerHTML = g.players[0].cards.map((card, ci) => '<div class="tb-card"><div class="tb-card-h"><span>' + t('tbCardN', { n: ci + 1 }) + '</span><em>H</em></div><div class="tb-grid">' +
+    const cid = g.online ? g.gid + ':' + g.me : String(g.order[0]) + g.cfg.n;
+    if (box.dataset.gid !== cid) {
+      box.dataset.gid = cid;
+      box.innerHTML = g.players[g.me || 0].cards.map((card, ci) => '<div class="tb-card"><div class="tb-card-h"><span>' + t('tbCardN', { n: ci + 1 }) + '</span><em>H</em></div><div class="tb-grid">' +
         card.map((r) => r.map((x) => (x ? '<b data-n="' + x + '">' + x + '</b>' : '<i></i>')).join('')).join('') + '</div></div>').join('');
     }
     $$('#tb-cards b[data-n]').forEach((el) => el.classList.toggle('on', g.drawn.has(+el.dataset.n)));
     $('#tb-board-grid').innerHTML = Array.from({ length: 90 }, (_, i) => '<i' + (g.drawn.has(i + 1) ? ' class="on"' : '') + (i + 1 === last ? ' data-last' : '') + '>' + (i + 1) + '</i>').join('');
-    $('#tb-draw').disabled = g.busy || g.over;
+    const watch = g.online && !(N && N.host);
+    $('#tb-draw').disabled = g.busy || g.over || watch;
+    $('#tb-auto').disabled = watch;
     $('#tb-auto').setAttribute('aria-pressed', g.auto ? 'true' : 'false');
+    if (g.online && !g.k) $('#tb-sub').textContent = watch ? t('tbNetGuest', { name: (g.players[0] && g.players[0].name) || '' }) : t('tbNetHost');
   }
 
   /* one number out of the bag */
   async function tbNext() {
     const g = TG; if (!g || g.busy || g.over || g.k >= 90) return;
+    if (g.online) { if (N && N.host) netAct({ t: 'draw' }); return; }
     g.busy = true;
     const n = g.order[g.k++];
     g.drawn.add(n);
@@ -12207,18 +12217,106 @@ body:not(.on-home) .petals { display: none; }
   }
 
   function tbOver(g) {
-    const st = tbStats(), mine = g.players[0].won.length, won = (g.winners[4] || []).includes(0);
+    const me = g.me || 0, st = tbStats(), mine = g.players[me].won.length, won = (g.winners[4] || []).includes(me);
     st.played++; if (won) st.wins++; st.prizes += mine;
     st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
     store.set('hm-tb', st);
-    const rows = TB_PRIZES.map((k, i) => [t(k), (g.winners[i] || []).map((s) => (s === 0 ? t('ucYou') : g.players[s].name)).join(', ') || '—']);
+    const rows = TB_PRIZES.map((k, i) => [t(k), (g.winners[i] || []).map((s) => (s === me ? t('ucYou') : g.players[s].name)).join(', ') || '—']);
     rows.push([t('tbRowPhotos'), String(g.found.length)]);
-    const top = g.winners[4] || [];
+    const top = g.winners[4] || [], host = g.online && N && N.host;
     showResult({
-      kicker: t('tbKicker', { n: g.k }), title: won ? t('tbWinMe') : t('tbWinOf2', { name: top.map((s) => g.players[s].name).join(', ') }), stars: null, score: null, record: false,
-      photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'tb', rows, strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null,
+      kicker: g.online ? t('netKicker', { game: t('gameTb') }) : t('tbKicker', { n: g.k }), title: won ? t('tbWinMe') : t('tbWinOf2', { name: top.map((s) => g.players[s].name).join(', ') }), stars: null, score: null, record: false,
+      photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: g.online ? (host ? t('netAgain') : t('netWaitAgain', { name: (g.players[0] && g.players[0].name) || '' })) : t('rwAgain'), againOff: g.online && !host,
+      action: g.online ? 'net' : 'tb', menuLabel: g.online ? t('netLeave') : undefined, rows, strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null,
     });
     if (won || mine) celebrate(); else Sound.lose();
+  }
+  /* ---------- Tombola online: the room's device draws the numbers, every phone marks its own cartelle ---------- */
+  function tbNet(np, nc) {
+    const E = { gid: netRand(6, NET_CODE), nc, cards: Array.from({ length: np }, () => Array.from({ length: nc }, tbCard)), order: shuffle(Array.from({ length: 90 }, (_, i) => i + 1)),
+      k: 0, prize: 0, winners: [], auto: !!store.get('hm-tb-auto', false), nextAt: Date.now() + 2600, last: { n: 0 }, ln: 0, over: false };
+    const draw = () => {
+      if (E.over || E.k >= 90) return;
+      const num = E.order[E.k++], drawn = new Set(E.order.slice(0, E.k)), pr = [];
+      while (E.prize < 5) {
+        const need = TB_NEED[E.prize], who = [];
+        E.cards.forEach((cs, s) => { const b = tbBest({ cards: cs }, drawn); if (E.prize === 4 ? b.full : b.row >= need) who.push(s); });
+        if (!who.length) break;
+        const i = E.prize; E.winners[i] = who; E.prize++; pr.push({ i, who });
+        if (i === 4) { E.over = true; N.phase = 'over'; break; }
+      }
+      E.last = { n: ++E.ln, num, pr };
+      E.nextAt = Date.now() + 3000 + pr.length * 4300;
+    };
+    E.view = () => ({ gid: E.gid, nc, cards: E.cards, drawn: E.order.slice(0, E.k), prize: E.prize, winners: E.winners, auto: E.auto, last: E.last, over: E.over });
+    E.act = (seat, a) => {
+      if (seat !== 0 || !a) return;
+      if (a.t === 'draw' && Date.now() >= E.nextAt - 2400) draw();
+      else if (a.t === 'auto') { E.auto = !E.auto; store.set('hm-tb-auto', E.auto); if (E.auto) E.nextAt = Math.max(E.nextAt, Date.now() + 900); }
+    };
+    E.tick = () => { if (E.auto && !E.over && Date.now() >= E.nextAt) { draw(); return true; } return false; };
+    return E;
+  }
+  let tbChain = Promise.resolve();
+  function tbNetApply(v) { tbChain = tbChain.then(() => tbOnline(v)).catch(() => { /* a broken animation must not stop the game */ }); }
+  async function tbOnline(v) {
+    if (!N || !v.g) return;
+    const gv = v.g;
+    let g = TG;
+    if (!g || !g.online || g.gid !== gv.gid) {
+      if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+      ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+      g = TG = { online: true, gid: gv.gid, me: v.you, cfg: { n: gv.nc }, players: v.players.map((p, i) => ({ name: p.name, av: i === v.you ? 'me' : NET_AV[i], cards: gv.cards[i] || [], won: [] })),
+        order: [], k: 0, drawn: new Set(), prize: 0, winners: [], found: [], photos: tbPickPhotos(5), auto: gv.auto, busy: false, timers: [], over: false, ln: 0 };
+      closeOverlays(); FX.clear(); Music.setEnergy(false);
+      home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = false;
+      $('#tb-board').hidden = true; $('#tb-prize').hidden = true; $('#tb-banner').classList.remove('show'); $('#result').hidden = true;
+      announce(t('aTbStart'));
+      if (!gv.drawn.length) tbLater(g, 600, () => tbBanner(t('gameTb'), t('tbGo')));
+    }
+    g.me = v.you; g.auto = gv.auto;
+    g.players.forEach((p, i) => { if (v.players[i]) p.name = v.players[i].name; });
+    const L = gv.last || { n: 0 };
+    if (L.n === g.ln + 1 && gv.drawn.length === g.k + 1) {
+      // one new number: the ball rolls, your boxes light up, then the prizes
+      g.busy = true;
+      const n = L.num;
+      g.order.push(n); g.k++; g.drawn.add(n);
+      const ball = $('#tb-ball');
+      ball.classList.remove('roll'); void ball.offsetWidth; ball.classList.add('roll');
+      Sound.rwDing(g.k); buzz(8);
+      tbRender();
+      const mine = $$('#tb-cards b[data-n="' + n + '"]');
+      mine.forEach((el) => { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); });
+      announce(t('aTbNum', { n }) + (mine.length ? ' ' + t('aTbMine') : ''));
+      await new Promise((res) => tbLater(g, 520, res));
+      for (const { i, who } of L.pr || []) {
+        if (TG !== g) return;
+        g.winners[i] = who; g.prize = i + 1;
+        who.forEach((s) => g.players[s] && g.players[s].won.push(i));
+        tbRender();
+        const name = t(TB_PRIZES[i]);
+        if (who.includes(g.me)) {
+          const id = g.photos[i];
+          if (id) g.found.push(PHOTO_BY_ID.get(id));
+          await tbPrize(g, id, t(i === 4 ? 'tbPrizeTombola' : 'tbPrizeMe', { prize: name }));
+        } else {
+          Sound.lose();
+          const names = who.map((s) => g.players[s].name).join(' · ');
+          await tbBanner(name + '!', t(who.length > 1 ? 'tbWinMany' : 'tbWinOf', { name: names, prize: name }));
+        }
+      }
+    } else if (gv.drawn.length !== g.k) {
+      // a phone that comes back (or falls behind) takes the board as it is now
+      g.order = gv.drawn.slice(); g.k = g.order.length; g.drawn = new Set(g.order);
+      g.winners = gv.winners.map((w) => (w ? w.slice() : w)); g.prize = gv.prize;
+      g.players.forEach((p) => { p.won = []; });
+      g.winners.forEach((w, i) => { if (w) w.forEach((s) => g.players[s] && g.players[s].won.push(i)); });
+    }
+    if (TG !== g) return;
+    g.ln = L.n; g.busy = false;
+    tbRender();
+    if (gv.over && !g.over) { g.over = true; tbLater(g, 700, () => tbOver(g)); }
   }
   function tbRenderSetup() {
     const st = tbStats(), n = store.get('hm-tb-n', 2);
@@ -17910,7 +18008,7 @@ body:not(.on-home) .petals { display: none; }
     if (i >= 0 && k.length === 1) { e.preventDefault(); mqChoose(i); } else if (e.key === 'Enter' && MG.state === 'sel' && e.target.tagName !== 'BUTTON') { e.preventDefault(); mqConfirm(); } else if (e.key === 'Escape' && MG.state === 'sel') mqUnsure();
   });
   $('#tb-draw').addEventListener('click', () => { AudioCore.get(); tbNext(); });
-  $('#tb-auto').addEventListener('click', () => { const g = TG; if (!g) return; g.auto = !g.auto; store.set('hm-tb-auto', g.auto); Sound.flip(); tbRender(); if (g.auto && !g.busy) tbNext(); });
+  $('#tb-auto').addEventListener('click', () => { const g = TG; if (!g) return; if (g.online) { if (N && N.host) { Sound.flip(); netAct({ t: 'auto' }); } return; } g.auto = !g.auto; store.set('hm-tb-auto', g.auto); Sound.flip(); tbRender(); if (g.auto && !g.busy) tbNext(); });
   $('#tb-open-board').addEventListener('click', () => { $('#tb-board').hidden = false; Sound.flip(); });
   $('#tb-board-close').addEventListener('click', () => { $('#tb-board').hidden = true; });
   $('#tb-board').addEventListener('click', (e) => { if (e.target.id === 'tb-board') $('#tb-board').hidden = true; });
