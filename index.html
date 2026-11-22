@@ -3385,6 +3385,10 @@ a.gp-tile { text-decoration: none; }
 .gate.open .gate-btn { opacity: 0; transform: translateX(-50%) scale(.9); animation: none; }
 .gate.open .gate-light { animation: gateFlash 1.2s ease-out forwards; }
 @keyframes gateFlash { 0% { opacity: 1; } 30% { width: 60vw; opacity: .9; box-shadow: 0 0 120px 60px rgba(255, 236, 190, .9); } 100% { width: 100vw; opacity: 0; } }
+.gate-lang { position: absolute; top: calc(18px + env(safe-area-inset-top, 0px)); left: 50%; transform: translateX(-50%); display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255, 250, 240, .82); box-shadow: 0 10px 24px -14px rgba(110, 72, 20, .55), inset 0 0 0 1px rgba(201, 164, 105, .55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: opacity .4s; }
+.gate-lang button { border: 0; border-radius: 999px; padding: 8px 16px; background: transparent; cursor: pointer; font: 600 13px/1 var(--font-caps, sans-serif); letter-spacing: .08em; color: #7a5a2e; }
+.gate-lang button[aria-pressed="true"] { background: linear-gradient(135deg, #fbecc8, #d9b06a 55%, #f3dca8); color: #3e2a10; }
+.gate.open .gate-lang { opacity: 0; pointer-events: none; }
 .gate.gone { opacity: 0; transition: opacity .5s; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .gate-door, .gate-btn { animation: none; transition: opacity .5s; } .gate.open .gd-l, .gate.open .gd-r { transform: none; opacity: 0; } }
 
@@ -3418,6 +3422,7 @@ body:not(.on-home) .petals { display: none; }
 <div id="gate" class="gate" hidden>
   <div class="gate-door gd-l"></div><div class="gate-door gd-r"></div>
   <div class="gate-light" aria-hidden="true"></div>
+  <div class="gate-lang" role="group" aria-label="Lingua / Dil"><button type="button" data-gl="it">Italiano</button><button type="button" data-gl="tr">Türkçe</button></div>
   <button type="button" class="gate-btn" id="gate-btn"><span class="gb-t" data-i18n="gateEnter"></span><span class="gb-s" data-i18n="gateMusic"></span></button>
 </div>
 <div class="petals" id="petals" aria-hidden="true"></div>
@@ -17925,6 +17930,10 @@ body:not(.on-home) .petals { display: none; }
     const q = new URLSearchParams(location.search), gate = $('#gate');
     if (!gate || q.get('room') || q.get('album')) return;
     gate.hidden = false;
+    // she can pick the language right at the door
+    const gl = () => $$('[data-gl]', gate).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.gl === lang)));
+    $$('[data-gl]', gate).forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); if (lang !== b.dataset.gl) setLang(b.dataset.gl); gl(); }));
+    gl();
     $('#gate-btn').addEventListener('click', () => {
       AudioCore.get(); Music.start();
       try { Sound.flip(); } catch (e) { /* no sound */ }
