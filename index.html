@@ -3815,6 +3815,7 @@ body:not(.on-home) .petals { display: none; }
             <button type="button" data-gbn="3" aria-pressed="true" data-i18n="gbN3"></button>
           </div>
           <button type="button" class="btn primary play-btn" id="btn-gb-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="gb" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
           <p class="record-line" id="gb-record"></p>
         </div>
         <div class="setup-part" id="setup-gv" hidden>
@@ -8292,7 +8293,7 @@ body:not(.on-home) .petals { display: none; }
       if (!N || N.client !== client) return;
       N.online = true; netRenderLink();
       if (N.host) { netPub('host', { on: true, game: N.game, name: N.players[0].name }, true); netPublishAll(); }
-      else if (N.entered) netPub('in', { t: 'hello', pid: N.me, name: N.name });
+      else if (N.entered) netPub('in', { t: 'hello', pid: N.me, name: N.name, lang });
     });
     client.on('offline', () => { if (N && N.client === client) { N.online = false; netRenderLink(); } });
   }
@@ -8355,7 +8356,7 @@ body:not(.on-home) .petals { display: none; }
       if (!N || N.host) { netOpenJoin(netPrep.code, netPrep.b); return; }
       N.name = name; N.entered = true;
       netShow('wait'); $('#onl-wait-t').textContent = t('netConnecting');
-      netPub('in', { t: 'hello', pid: N.me, name });
+      netPub('in', { t: 'hello', pid: N.me, name, lang });
       clearInterval(N.pingT); N.pingT = setInterval(() => netPub('in', { t: 'ping', pid: N && N.me }), 12000);
       return;
     }
@@ -8401,7 +8402,7 @@ body:not(.on-home) .petals { display: none; }
     if (!N.entered) {
       // a view for this device already exists: it was in the room before a reload, so it goes straight back in
       N.entered = true; N.name = (m.players && m.players[m.you] && m.players[m.you].name) || store.get('hm-net-name', '') || t('netGuest');
-      netPub('in', { t: 'hello', pid: N.me, name: N.name });
+      netPub('in', { t: 'hello', pid: N.me, name: N.name, lang });
       clearInterval(N.pingT); N.pingT = setInterval(() => netPub('in', { t: 'ping', pid: N && N.me }), 12000);
     }
     netApply(m);
@@ -8420,10 +8421,11 @@ body:not(.on-home) .petals { display: none; }
     const p = N.players.find((x) => x.pid === m.pid);
     if (m.t === 'hello') {
       const name = netClean(m.name) || t('netGuest');
-      if (p) { p.on = true; p.seen = Date.now(); p.name = name; netPublishAll(); return; }
+      const pl = m.lang === 'tr' || m.lang === 'it' ? m.lang : null;
+      if (p) { p.on = true; p.seen = Date.now(); p.name = name; if (pl) p.lang = pl; netPublishAll(); return; }
       if (N.players.length >= NET_MAX) { netPub('to/' + m.pid, { err: 'full' }, false); return; }
       if (N.phase !== 'lobby') { netPub('to/' + m.pid, { err: 'started' }, false); return; }
-      N.players.push({ pid: m.pid, name, on: true, seat: N.players.length, seen: Date.now() });
+      N.players.push({ pid: m.pid, name, lang: pl, on: true, seat: N.players.length, seen: Date.now() });
       Sound.turn(); buzz(15);
       netPublishAll();
       return;
@@ -8494,6 +8496,8 @@ body:not(.on-home) .petals { display: none; }
     } else if (N.game === 'so') {
       N.ses = { n: N.players.length, round: 1, dealer: Math.floor(Math.random() * N.players.length), score: null, target: SO_TARGET };
       N.eng = soNet(N.players.length, N.ses);
+    } else if (N.game === 'gb') {
+      N.eng = gbNetStart();
     } else if (N.game === 'pk') {
       N.eng = pkNetStart();
     } else if (N.game === 'tb') {
@@ -8536,11 +8540,11 @@ body:not(.on-home) .petals { display: none; }
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden || !scEl.hidden || !tbEl.hidden || !pkEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden || !scEl.hidden || !tbEl.hidden || !pkEl.hidden || !gbEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else if (v.game === 'sc') scNetApply(v); else if (v.game === 'tb') tbNetApply(v); else if (v.game === 'pk') pkNetApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else if (v.game === 'sc') scNetApply(v); else if (v.game === 'tb') tbNetApply(v); else if (v.game === 'pk') pkNetApply(v); else if (v.game === 'gb') gbNetApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
@@ -14503,7 +14507,9 @@ body:not(.on-home) .petals { display: none; }
 
   const gbGroup = (gr) => GB_SP.map((s, k) => (s.k === 'p' && s.g === gr ? k : -1)).filter((k) => k >= 0);
   const gbFull = (g, o, gr) => o >= 0 && gbGroup(gr).every((k) => g.own[k] === o);
-  const gbName = (p) => (p.key === 'me' ? t('ucYou') : t('ucBots')[p.key]);
+  const gbName = (p) => (p.key === 'me' ? t('ucYou') : p.name || t('ucBots')[p.key]);
+  // a name as one phone sees it: "you" on that phone, the name on the others
+  const gbNm = (g, p, vw) => (g.players.indexOf(p) === vw ? t('ucYou') : p.name || t('ucBots')[p.key]);
   const gbPlace = (k) => t('gbPlaces')[k].replace(/­/g, '');
   function gbRent(g, k) {
     const sp = GB_SP[k], s = g.stars[k];
@@ -14547,14 +14553,24 @@ body:not(.on-home) .petals { display: none; }
   function gbLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (GB === g) fn(); }, ms / gbSpeed); g.timers.push(id); }
   const gbWait = (g, ms) => new Promise((res) => gbLater(g, ms, res));
   function gbRequestExit() {
+    if (GB && GB.online) { openConfirm(true); return; }
     if (GB && !GB.over && (GB.round > 1 || GB.turn > 0 || GB.own.some((o) => o >= 0))) openConfirm(false);
     else goHome();
   }
-  function gbSay(g, txt) { g.msg = txt; g.log.push(txt); if (g.log.length > 40) g.log.shift(); announce(txt); }
+  // what happens, written for whoever looks (vw: the seat of the phone); here it is written once for this phone
+  function gbSay(g, fn) {
+    const f = typeof fn === 'function' ? fn : () => fn;
+    if (g.guest) { g.msg = f(g.me); return; }
+    const e = { txt: f(0), fn: f };
+    g.msg = e.txt; g.msgE = e; g.log.push(e); if (g.log.length > 40) g.log.shift(); announce(e.txt);
+  }
+  const gbLogTxt = (e) => (typeof e === 'string' ? e : e.txt);
   // the buttons and the boxes in the middle of the board wait for your answer
-  function gbAsk(g, kind, opt) { return new Promise((resolve) => { g.ask = { kind, opt: opt || {}, resolve }; if (kind === 'roll' || kind === 'jail') Sound.turn(); gbRender(); }); }
+  function gbAsk(g, kind, opt, seat) { return new Promise((resolve) => { g.ask = { kind, opt: opt || {}, resolve, seat: seat || 0, t0: Date.now() }; if ((kind === 'roll' || kind === 'jail') && !seat) Sound.turn(); gbRender(); }); }
   function gbAnswer(v) {
     const g = GB; if (!g || !g.ask) return false;
+    if (g.guest) { netAct({ t: 'ans', v }); g.ask = null; g.build = false; AudioCore.get(); gbRender(); return true; }
+    if (g.ask.seat) return false;
     const a = g.ask; g.ask = null; g.build = false;
     AudioCore.get();
     a.resolve(v); gbRender();
@@ -14570,36 +14586,36 @@ body:not(.on-home) .petals { display: none; }
       do { nx = (nx + 1) % g.players.length; } while (g.players[nx].out);
       if (nx <= g.turn) {
         g.round++;
-        if (g.round > GB_ROUNDS) { gbOver(g, 'rounds'); return; }
-        if (g.round === GB_ROUNDS) gbSay(g, t('gbLastRound'));
+        if (g.round > GB_ROUNDS) { g.why = 'rounds'; gbOver(g, 'rounds'); return; }
+        if (g.round === GB_ROUNDS) gbSay(g, () => t('gbLastRound'));
       }
       g.turn = nx; gbRender();
     }
   }
   async function gbTurn(g, i) {
-    const p = g.players[i], me = i === 0;
+    const p = g.players[i], me = i === 0 || !!p.remote, nm = (vw) => gbNm(g, p, vw);
     let doubles = 0;
     for (;;) {
       if (GB !== g || p.out || g.over) return;
       let jailRoll = false;
       if (p.jail) {
-        const how = me ? await gbAsk(g, 'jail') : p.pass ? 'card' : p.cash > 400 && g.round < 12 ? 'pay' : 'roll';
+        const how = me ? await gbAsk(g, 'jail', null, i) : p.pass ? 'card' : p.cash > 400 && g.round < 12 ? 'pay' : 'roll';
         if (GB !== g) return;
-        if (how === 'card' && p.pass) { p.pass--; g.deck.push(8); p.jail = 0; gbSay(g, t(me ? 'gbPassYou' : 'gbPassOf', { name: gbName(p) })); Sound.paper(); }
-        else if (how === 'pay') { if (!(await gbPay(g, i, GB_FINE, -1))) return; p.jail = 0; gbSay(g, t(me ? 'gbFineYou' : 'gbFineOf', { name: gbName(p), n: fmtNum(GB_FINE) })); }
+        if (how === 'card' && p.pass) { p.pass--; g.deck.push(8); p.jail = 0; gbSay(g, (vw) => t(i === vw ? 'gbPassYou' : 'gbPassOf', { name: nm(vw) })); Sound.paper(); }
+        else if (how === 'pay') { if (!(await gbPay(g, i, GB_FINE, -1))) return; p.jail = 0; gbSay(g, (vw) => t(i === vw ? 'gbFineYou' : 'gbFineOf', { name: nm(vw), n: fmtNum(GB_FINE) })); }
         else jailRoll = true;
         gbRender();
-        if (!jailRoll && me) { await gbAsk(g, 'roll'); if (GB !== g) return; }
+        if (!jailRoll && me) { await gbAsk(g, 'roll', null, i); if (GB !== g) return; }
         else if (!jailRoll) await gbWait(g, 500);
-      } else if (me) { await gbAsk(g, 'roll'); if (GB !== g) return; }
+      } else if (me) { await gbAsk(g, 'roll', null, i); if (GB !== g) return; }
       else await gbWait(g, 700);
       const [a, b] = await gbRoll(g);
       if (GB !== g) return;
       const dbl = a === b;
       if (jailRoll) {
-        if (dbl) { p.jail = 0; gbSay(g, t(me ? 'gbOutYou' : 'gbOutOf', { name: gbName(p) })); }
-        else if (++p.jail > 3) { if (!(await gbPay(g, i, GB_FINE, -1))) return; p.jail = 0; gbSay(g, t(me ? 'gbFineYou' : 'gbFineOf', { name: gbName(p), n: fmtNum(GB_FINE) })); }
-        else { gbSay(g, t(me ? 'gbStayYou' : 'gbStayOf', { name: gbName(p) })); gbRender(); await gbWait(g, 900); break; }
+        if (dbl) { p.jail = 0; gbSay(g, (vw) => t(i === vw ? 'gbOutYou' : 'gbOutOf', { name: nm(vw) })); }
+        else if (++p.jail > 3) { if (!(await gbPay(g, i, GB_FINE, -1))) return; p.jail = 0; gbSay(g, (vw) => t(i === vw ? 'gbFineYou' : 'gbFineOf', { name: nm(vw), n: fmtNum(GB_FINE) })); }
+        else { gbSay(g, (vw) => t(i === vw ? 'gbStayYou' : 'gbStayOf', { name: nm(vw) })); gbRender(); await gbWait(g, 900); break; }
         gbRender(); await gbWait(g, 500);
         await gbMove(g, i, a + b);
         await gbLand(g, i);
@@ -14610,10 +14626,10 @@ body:not(.on-home) .petals { display: none; }
       if (GB !== g) return;
       await gbLand(g, i);
       if (GB !== g || p.out || g.over || p.jail || !dbl) break;
-      gbSay(g, t(me ? 'gbAgainYou' : 'gbAgainOf', { name: gbName(p) })); gbRender();
+      gbSay(g, (vw) => t(i === vw ? 'gbAgainYou' : 'gbAgainOf', { name: nm(vw) })); gbRender();
     }
     if (GB !== g || p.out || g.over) return;
-    if (me) await gbAsk(g, 'end');
+    if (me) await gbAsk(g, 'end', null, i);
     else { gbBotBuild(g, i); gbRender(); await gbWait(g, 600); }
   }
   // two dice that tumble for a moment
@@ -14630,7 +14646,7 @@ body:not(.on-home) .petals { display: none; }
     const p = g.players[i];
     for (let s = 0; s < steps; s++) {
       p.pos = (p.pos + 1) % 24;
-      if (p.pos === 0) { p.cash += GB_GO; gbSay(g, t(i ? 'gbGoOf' : 'gbGoYou', { name: gbName(p), n: fmtNum(GB_GO) })); Sound.rwBank(); }
+      if (p.pos === 0) { p.cash += GB_GO; gbSay(g, (vw) => t(i !== vw ? 'gbGoOf' : 'gbGoYou', { name: gbNm(g, p, vw), n: fmtNum(GB_GO) })); Sound.rwBank(); }
       Sound.tick(); gbRenderTokens(); gbRenderPlayers();
       await gbWait(g, 140);
       if (GB !== g) return;
@@ -14640,39 +14656,39 @@ body:not(.on-home) .petals { display: none; }
   async function gbToJail(g, i, why) {
     const p = g.players[i];
     p.pos = GB_JAIL; p.jail = 1;
-    gbSay(g, t(why, { name: gbName(p) }) + ' ' + t(i ? 'gbJailOf' : 'gbJailYou', { name: gbName(p) }));
+    gbSay(g, (vw) => t(why, { name: gbNm(g, p, vw) }) + ' ' + t(i !== vw ? 'gbJailOf' : 'gbJailYou', { name: gbNm(g, p, vw) }));
     Sound.shutter(); buzz([20, 40, 20]); gbRender();
     await gbWait(g, 1100);
   }
   // what happens on the square where the token stops
   async function gbLand(g, i) {
-    const p = g.players[i], k = p.pos, sp = GB_SP[k], me = i === 0, name = gbName(p);
+    const p = g.players[i], k = p.pos, sp = GB_SP[k], me = i === 0 || !!p.remote, nm = (vw) => gbNm(g, p, vw);
     if (sp.k === 'p') {
       const o = g.own[k];
       if (o < 0) {
-        if (p.cash < sp.price) { gbSay(g, t(me ? 'gbPoorYou' : 'gbPoorOf', { name, place: gbPlace(k) })); gbRender(); await gbWait(g, 800); return; }
-        const yes = me ? await gbAsk(g, 'buy', { k }) : gbBotBuy(g, i, k);
+        if (p.cash < sp.price) { gbSay(g, (vw) => t(i === vw ? 'gbPoorYou' : 'gbPoorOf', { name: nm(vw), place: gbPlace(k) })); gbRender(); await gbWait(g, 800); return; }
+        const yes = me ? await gbAsk(g, 'buy', { k }, i) : gbBotBuy(g, i, k);
         if (GB !== g) return;
         if (yes) await gbBuy(g, i, k);
-        else { gbSay(g, t(me ? 'gbSkipYou' : 'gbSkipOf', { name, place: gbPlace(k) })); gbRender(); if (!me) await gbWait(g, 700); }
+        else { gbSay(g, (vw) => t(i === vw ? 'gbSkipYou' : 'gbSkipOf', { name: nm(vw), place: gbPlace(k) })); gbRender(); if (!me) await gbWait(g, 700); }
       } else if (o !== i) {
         const rent = gbRent(g, k), owner = g.players[o];
-        gbSay(g, me ? t('gbRentYou', { name: gbName(owner), n: fmtNum(rent), place: gbPlace(k) }) : o === 0 ? t('gbRentToYou', { name, n: fmtNum(rent), place: gbPlace(k) }) : t('gbRentOf', { name, to: gbName(owner), n: fmtNum(rent) }));
+        gbSay(g, (vw) => (i === vw ? t('gbRentYou', { name: gbNm(g, owner, vw), n: fmtNum(rent), place: gbPlace(k) }) : o === vw ? t('gbRentToYou', { name: nm(vw), n: fmtNum(rent), place: gbPlace(k) }) : t('gbRentOf', { name: nm(vw), to: gbNm(g, owner, vw), n: fmtNum(rent) })));
         await gbPay(g, i, rent, o);
         if (o === 0) Sound.rwBank(); else if (me) Sound.miss();
         gbRender(); await gbWait(g, 900);
-      } else { gbSay(g, t(me ? 'gbHomeYou' : 'gbHomeOf', { name, place: gbPlace(k) })); gbRender(); await gbWait(g, 500); }
+      } else { gbSay(g, (vw) => t(i === vw ? 'gbHomeYou' : 'gbHomeOf', { name: nm(vw), place: gbPlace(k) })); gbRender(); await gbWait(g, 500); }
     } else if (sp.k === 'card') await gbCard(g, i);
-    else if (sp.k === 'tax') { gbSay(g, t(me ? 'gbTaxYou' : 'gbTaxOf', { name, n: fmtNum(sp.amt) })); await gbPay(g, i, sp.amt, -1); gbRender(); await gbWait(g, 900); }
-    else if (sp.k === 'bonus') { p.cash += sp.amt; gbSay(g, t(me ? 'gbBonusYou' : 'gbBonusOf', { name, n: fmtNum(sp.amt) })); Sound.rwBank(); gbRender(); await gbWait(g, 900); }
+    else if (sp.k === 'tax') { gbSay(g, (vw) => t(i === vw ? 'gbTaxYou' : 'gbTaxOf', { name: nm(vw), n: fmtNum(sp.amt) })); await gbPay(g, i, sp.amt, -1); gbRender(); await gbWait(g, 900); }
+    else if (sp.k === 'bonus') { p.cash += sp.amt; gbSay(g, (vw) => t(i === vw ? 'gbBonusYou' : 'gbBonusOf', { name: nm(vw), n: fmtNum(sp.amt) })); Sound.rwBank(); gbRender(); await gbWait(g, 900); }
     else if (sp.k === 'cops') await gbToJail(g, i, 'gbCops');
-    else if (sp.k === 'jail') { gbSay(g, t(me ? 'gbVisitYou' : 'gbVisitOf', { name })); gbRender(); await gbWait(g, 500); }
-    else if (sp.k === 'free') { gbSay(g, t(me ? 'gbCoffeeYou' : 'gbCoffeeOf', { name })); gbRender(); await gbWait(g, 500); }
+    else if (sp.k === 'jail') { gbSay(g, (vw) => t(i === vw ? 'gbVisitYou' : 'gbVisitOf', { name: nm(vw) })); gbRender(); await gbWait(g, 500); }
+    else if (sp.k === 'free') { gbSay(g, (vw) => t(i === vw ? 'gbCoffeeYou' : 'gbCoffeeOf', { name: nm(vw) })); gbRender(); await gbWait(g, 500); }
   }
   async function gbBuy(g, i, k) {
     const p = g.players[i], sp = GB_SP[k];
     p.cash -= sp.price; g.own[k] = i;
-    gbSay(g, t(i ? 'gbBuyOf' : 'gbBuyYou', { name: gbName(p), place: gbPlace(k), n: fmtNum(sp.price) }));
+    gbSay(g, (vw) => t(i !== vw ? 'gbBuyOf' : 'gbBuyYou', { name: gbNm(g, p, vw), place: gbPlace(k), n: fmtNum(sp.price) }));
     Sound.chest(); gbRender();
     // the whole colour group: a photo of Hande
     if (!i && gbFull(g, 0, sp.g) && !g.done.has(sp.g)) {
@@ -14689,10 +14705,10 @@ body:not(.on-home) .petals { display: none; }
       if (to >= 0) g.players[to].cash += p.cash;
       p.cash = 0; p.out = true;
       g.own.forEach((o, k) => { if (o === i) { g.own[k] = -1; g.stars[k] = 0; } });
-      gbSay(g, t(i ? 'gbBrokeOf' : 'gbBrokeYou', { name: gbName(p) }));
+      gbSay(g, (vw) => t(i !== vw ? 'gbBrokeOf' : 'gbBrokeYou', { name: gbNm(g, p, vw) }));
       Sound.lose(); gbRender();
       await gbWait(g, 1500);
-      gbOver(g, 'broke');
+      g.why = 'broke'; gbOver(g, 'broke');
       return false;
     }
     p.cash -= amt; if (to >= 0) g.players[to].cash += amt;
@@ -14703,22 +14719,22 @@ body:not(.on-home) .petals { display: none; }
     const p = g.players[i];
     while (p.cash < amt) {
       const st = g.own.map((o, k) => (o === i && g.stars[k] ? k : -1)).filter((k) => k >= 0).sort((a, b) => GB_STAR[GB_SP[a].g] - GB_STAR[GB_SP[b].g]);
-      if (st.length) { const k = st[0], v = GB_STAR[GB_SP[k].g] / 2; g.stars[k]--; p.cash += v; gbSay(g, t(i ? 'gbSellStarOf' : 'gbSellStarYou', { name: gbName(p), place: gbPlace(k), n: fmtNum(v) })); continue; }
+      if (st.length) { const k = st[0], v = GB_STAR[GB_SP[k].g] / 2; g.stars[k]--; p.cash += v; gbSay(g, (vw) => t(i !== vw ? 'gbSellStarOf' : 'gbSellStarYou', { name: gbNm(g, p, vw), place: gbPlace(k), n: fmtNum(v) })); continue; }
       const pl = g.own.map((o, k) => (o === i ? k : -1)).filter((k) => k >= 0).sort((a, b) => GB_SP[a].price - GB_SP[b].price);
       if (!pl.length) return;
       const k = pl[0], v = GB_SP[k].price / 2;
       g.own[k] = -1; p.cash += v;
-      gbSay(g, t(i ? 'gbSellOf' : 'gbSellYou', { name: gbName(p), place: gbPlace(k), n: fmtNum(v) }));
+      gbSay(g, (vw) => t(i !== vw ? 'gbSellOf' : 'gbSellYou', { name: gbNm(g, p, vw), place: gbPlace(k), n: fmtNum(v) }));
     }
   }
   async function gbCard(g, i) {
-    const p = g.players[i], me = i === 0, id = g.deck.shift(), c = GB_CARDS[id];
+    const p = g.players[i], me = i === 0 || !!p.remote, id = g.deck.shift(), c = GB_CARDS[id];
     Sound.paper();
-    if (me) await gbAsk(g, 'card', { id });
+    if (me) await gbAsk(g, 'card', { id }, i);
     else { g.show = { kind: 'card', id, name: gbName(p) }; gbRender(); await gbWait(g, 2000); g.show = null; }
     if (GB !== g) return;
     if (c.a !== 'pass') g.deck.push(id);
-    gbSay(g, gbName(p) + ': ' + t('gbCards')[id]);
+    gbSay(g, (vw) => gbNm(g, p, vw) + ': ' + t('gbCards')[id]);
     if (c.a === 'cash') { if (c.v > 0) { p.cash += c.v; Sound.rwBank(); } else await gbPay(g, i, -c.v, -1); }
     else if (c.a === 'goto') { await gbMoveTo(g, i, c.v); if (GB === g && c.v) await gbLand(g, i); }
     else if (c.a === 'each') {
@@ -14744,18 +14760,21 @@ body:not(.on-home) .petals { display: none; }
       for (;;) {
         const ks = gbGroup(gr).filter((k) => g.stars[k] < 3).sort((a, b) => g.stars[a] - g.stars[b]);
         if (!ks.length || p.cash - GB_STAR[gr] < p.keep * p.build) break;
-        g.stars[ks[0]]++; p.cash -= GB_STAR[gr];
-        gbSay(g, t('gbStarOf', { name: gbName(p), place: gbPlace(ks[0]) })); Sound.star(g.stars[ks[0]]);
+        const kk = ks[0];
+        g.stars[kk]++; p.cash -= GB_STAR[gr];
+        gbSay(g, (vw) => t('gbStarOf', { name: gbNm(g, p, vw), place: gbPlace(kk) })); Sound.star(g.stars[kk]);
       }
     }
   }
   // your stars: on a whole colour group, during your turn
-  function gbAddStar(k) {
-    const g = GB; if (!g || !g.ask || (g.ask.kind !== 'roll' && g.ask.kind !== 'end') || g.turn !== 0) return false;
-    const sp = GB_SP[k], me = g.players[0], cost = GB_STAR[sp.g];
-    if (g.own[k] !== 0 || !gbFull(g, 0, sp.g) || g.stars[k] >= 3 || me.cash < cost) return false;
+  function gbAddStar(k, seat) {
+    const g = GB, i = seat || 0;
+    if (g && g.guest) { if (g.ask && (g.ask.kind === 'roll' || g.ask.kind === 'end')) { netAct({ t: 'star', k }); Sound.star(1); } return false; }
+    if (!g || !g.ask || (g.ask.kind !== 'roll' && g.ask.kind !== 'end') || g.turn !== i || g.ask.seat !== i) return false;
+    const sp = GB_SP[k], me = g.players[i], cost = GB_STAR[sp.g];
+    if (g.own[k] !== i || !gbFull(g, i, sp.g) || g.stars[k] >= 3 || me.cash < cost) return false;
     g.stars[k]++; me.cash -= cost;
-    gbSay(g, t('gbStarYou', { place: gbPlace(k), n: fmtNum(cost) })); Sound.star(g.stars[k]); buzz(8);
+    gbSay(g, (vw) => (vw === i ? t('gbStarYou', { place: gbPlace(k), n: fmtNum(cost) }) : t('gbStarOf', { name: gbNm(g, me, vw), place: gbPlace(k) }))); Sound.star(g.stars[k]); buzz(8);
     gbRender();
     return true;
   }
@@ -14782,21 +14801,24 @@ body:not(.on-home) .petals { display: none; }
   function gbOver(g, why) {
     if (g.over) return;
     g.over = true; g.ask = null; g.show = null;
-    const worth = g.players.map((_, i) => gbWorth(g, i)), best = Math.max(...worth), win = worth[0] === best && !g.players[0].out;
+    if (g.online && !g.guest && N && N.host) N.phase = 'over';
+    const me = g.me || 0, worth = g.players.map((_, i) => gbWorth(g, i)), best = Math.max(...worth), win = worth[me] === best && !g.players[me].out;
     const rank = worth.map((w, i) => [w, i]).sort((a, b) => b[0] - a[0]);
     if (win) { const ph = PHOTO_BY_ID.get(g.photos[g.found.length]); if (ph) g.found.push(ph); }
     const st = gbStats();
     st.played++; if (win) st.wins++;
     st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
     store.set('hm-gb', st);
-    const top = g.players[rank[0][1]];
-    gbSay(g, win ? t('gbWinT') : t('gbWinOf', { name: gbName(top) }));
+    const top = g.players[rank[0][1]], topI = rank[0][1];
+    gbSay(g, (vw) => (topI === vw ? t('gbWinT') : t('gbWinOf', { name: gbNm(g, top, vw) })));
     gbRender();
     gbLater(g, 900, () => {
       const rows = rank.map(([w, i]) => [gbName(g.players[i]) + (g.players[i].out ? ' · ' + t('gbBroke') : ''), fmtNum(w)]);
       rows.push([t('gbRowRounds'), String(Math.min(g.round, GB_ROUNDS))], [t('rwRowPhotos'), String(g.found.length)]);
-      showResult({ kicker: t('gbKicker') + ' · ' + t(why === 'broke' ? 'gbEndBroke' : 'gbEndRounds'), title: win ? t('gbWinT') : t('gbWinOf', { name: gbName(top) }), stars: null, score: null, record: false,
-        photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'gb', rows, strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
+      const host = g.online && N && N.host, hostName = g.online && N && N.view && N.view.players[0] ? N.view.players[0].name : '';
+      showResult({ kicker: (g.online ? t('netKicker', { game: t('gameGb') }) : t('gbKicker')) + ' · ' + t(why === 'broke' ? 'gbEndBroke' : 'gbEndRounds'), title: win ? t('gbWinT') : t('gbWinOf', { name: gbName(top) }), stars: null, score: null, record: false,
+        photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: g.online ? (host ? t('netAgain') : t('netWaitAgain', { name: hostName })) : t('rwAgain'), againOff: g.online && !host,
+        action: g.online ? 'net' : 'gb', menuLabel: g.online ? t('netLeave') : undefined, rows, strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
       if (win) celebrate(); else if (g.found.length) Sound.sparkle(); else Sound.lose();
     });
   }
@@ -14831,6 +14853,7 @@ body:not(.on-home) .petals { display: none; }
   function gbRenderDice() {
     const g = GB; if (!g) return;
     $$('#gb-dice .die').forEach((d, j) => { d.dataset.v = g.dice[j]; d.innerHTML = '<i></i>'.repeat(g.dice[j]); d.classList.toggle('roll', g.rolling); });
+    if (g.online && !g.guest) netPublishAll();
   }
   function gbRenderTokens() {
     const g = GB; if (!g) return;
@@ -14838,14 +14861,17 @@ body:not(.on-home) .petals { display: none; }
       const k = +el.dataset.k, here = g.players.filter((p) => !p.out && p.pos === k);
       $('.tk', el).innerHTML = here.map((p) => '<i class="tok' + (p === g.players[g.turn] ? ' cur' : '') + '">' + (p.av === 'me' ? 'H' : svgUse('av-' + p.av, '', '0 0 40 40')) + '</i>').join('');
     });
+    if (g.online && !g.guest) netPublishAll();
   }
   function gbRenderPlayers() {
     const g = GB; if (!g) return;
-    $('#gb-players').innerHTML = g.players.map((p, i) => '<div class="gb-pl' + (i === g.turn && !g.over ? ' cur' : '') + (p.out ? ' out' : '') + (i ? '' : ' me') + '">' + gbAv(p) +
+    $('#gb-players').innerHTML = g.players.map((p, i) => '<div class="gb-pl' + (i === g.turn && !g.over ? ' cur' : '') + (p.out ? ' out' : '') + (i !== (g.me || 0) ? '' : ' me') + '">' + gbAv(p) +
       '<span class="who"><span class="nm">' + gbName(p) + '</span><span class="ch">' + fmtNum(p.cash) + '</span></span>' + (p.jail ? '<span class="jl" title="' + t('gbSpots').jail + '">' + GB_ICON.jail + '</span>' : '') + (p.pass ? '<span class="ps">' + p.pass + '</span>' : '') + '</div>').join('');
   }
   function gbDialog(g) {
-    const box = $('#gb-dlg'), a = g.ask, s = g.show;
+    const box = $('#gb-dlg'), vw = g.me || 0, a = g.ask && (g.guest || g.ask.seat === vw) ? g.ask : null;
+    // a card someone else drew: everybody reads it
+    const s = g.show || (g.ask && !a && g.ask.kind === 'card' ? { kind: 'card', id: g.ask.opt.id, name: gbNm(g, g.players[g.ask.seat], vw) } : null);
     const prop = (k) => {
       const sp = GB_SP[k], rents = [sp.rent, sp.rent * 2].concat([1, 2, 3].map((x) => sp.rent * GB_MULT[x]));
       return '<div class="gb-deed"><b class="band" style="background:' + GB_COL[sp.g] + '"></b><h3>' + gbPlace(k) + '</h3><p class="city">' + t('gbGroups')[sp.g] + '</p>' +
@@ -14858,14 +14884,14 @@ body:not(.on-home) .petals { display: none; }
       const id = a ? a.opt.id : s.id;
       html = '<div class="gb-card"><p class="kick">' + (a ? t('gbSurprise') : t('gbSurpriseOf', { name: s.name })) + '</p><p class="txt">' + t('gbCards')[id] + '</p></div>' + (a ? '<div class="gb-btns"><button type="button" class="btn primary" data-ans="1">' + t('gbOk') + '</button></div>' : '');
     } else if (a && a.kind === 'jail') {
-      const me = g.players[0];
+      const me = g.players[vw];
       html = '<div class="gb-card"><p class="kick">' + t('gbSpots').jail + '</p><p class="txt">' + t('gbJailAsk', { n: fmtNum(GB_FINE) }) + '</p></div><div class="gb-btns col">' +
         (me.pass ? '<button type="button" class="btn" data-ans="card">' + t('gbUsePass') + '</button>' : '') +
         '<button type="button" class="btn" data-ans="pay"' + (me.cash < GB_FINE ? ' disabled' : '') + '>' + t('gbPayFine', { n: fmtNum(GB_FINE) }) + '</button><button type="button" class="btn primary" data-ans="roll">' + t('gbTryDouble') + '</button></div>';
     } else if (g.build) {
-      const mine = GB_SP.map((sp, k) => (sp.k === 'p' && g.own[k] === 0 && gbFull(g, 0, sp.g) ? k : -1)).filter((k) => k >= 0);
+      const mine = GB_SP.map((sp, k) => (sp.k === 'p' && g.own[k] === vw && gbFull(g, vw, sp.g) ? k : -1)).filter((k) => k >= 0);
       html = '<div class="gb-card"><p class="kick">' + t('gbStarsT') + '</p>' + (mine.length ? '<ul class="gb-build">' + mine.map((k) => '<li><b class="dot" style="background:' + GB_COL[GB_SP[k].g] + '"></b><span>' + gbPlace(k) + '</span><em>' + '★'.repeat(g.stars[k]) + '<s>' + '★'.repeat(3 - g.stars[k]) + '</s></em>' +
-        '<button type="button" class="btn" data-star="' + k + '"' + (g.stars[k] >= 3 || g.players[0].cash < GB_STAR[GB_SP[k].g] ? ' disabled' : '') + '>+ ' + fmtNum(GB_STAR[GB_SP[k].g]) + '</button></li>').join('') + '</ul>' : '<p class="txt">' + t('gbStarsNone') + '</p>') +
+        '<button type="button" class="btn" data-star="' + k + '"' + (g.stars[k] >= 3 || g.players[vw].cash < GB_STAR[GB_SP[k].g] ? ' disabled' : '') + '>+ ' + fmtNum(GB_STAR[GB_SP[k].g]) + '</button></li>').join('') + '</ul>' : '<p class="txt">' + t('gbStarsNone') + '</p>') +
         '</div><div class="gb-btns"><button type="button" class="btn" data-close>' + t('gbClose') + '</button></div>';
     } else if (s && s.kind === 'info') {
       const k = s.k, o = g.own[k];
@@ -14883,21 +14909,104 @@ body:not(.on-home) .petals { display: none; }
       const o = g.own[k];
       $('.pr', el).textContent = o < 0 ? fmtNum(sp.price) : '';
       $('.st', el).textContent = '★'.repeat(g.stars[k]);
-      $('.ow', el).innerHTML = o < 0 ? '' : o === 0 ? '<i class="me">H</i>' : '<i>' + svgUse('av-' + g.players[o].av, '', '0 0 40 40') + '</i>';
-      el.classList.toggle('mine', o === 0);
-      el.classList.toggle('taken', o > 0);
+      const vw = g.me || 0;
+      $('.ow', el).innerHTML = o < 0 ? '' : o === vw ? '<i class="me">H</i>' : '<i>' + svgUse('av-' + g.players[o].av, '', '0 0 40 40') + '</i>';
+      el.classList.toggle('mine', o === vw);
+      el.classList.toggle('taken', o >= 0 && o !== vw);
       el.setAttribute('aria-label', gbPlace(k) + ', ' + (o < 0 ? fmtNum(sp.price) : gbName(g.players[o])));
     });
     $('#gb-msg').textContent = g.msg;
     gbRenderDice(); gbRenderTokens(); gbRenderPlayers(); gbDialog(g);
-    const a = g.ask, mine = !!a && g.turn === 0;
+    const vw = g.me || 0, a = g.ask, mine = !!a && g.turn === vw && (g.guest || a.seat === vw);
     $('#gb-roll').disabled = !(mine && a.kind === 'roll');
     $('#gb-end').disabled = !(mine && a.kind === 'end');
     $('#gb-stars').disabled = !(mine && (a.kind === 'roll' || a.kind === 'end'));
     $('#gb-stars').setAttribute('aria-pressed', g.build ? 'true' : 'false');
-    $('#gb-log').innerHTML = g.log.slice(-8).reverse().map((x) => '<li>' + x + '</li>').join('');
+    $('#gb-log').innerHTML = g.log.slice(-8).reverse().map((x) => '<li>' + gbLogTxt(x) + '</li>').join('');
+    if (g.online && !g.guest) netPublishAll();
   }
 
+  /* ---------- Gran Bazar online: the room's device rolls the dice and keeps the bank; each phone plays its own token ---------- */
+  const gbInLang = (L, fn) => { const was = lang; lang = L || was; try { return fn(); } finally { lang = was; } };
+  function gbNetStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
+    const players = N.players.map((q, i) => ({ key: i === 0 ? 'me' : 'net', name: q.name, av: i === 0 ? 'me' : NET_AV[i], remote: i > 0, keep: 0, build: 1, cash: GB_CASH, pos: 0, jail: 0, pass: 0, out: false }));
+    const g = GB = { online: true, gid: netRand(6, NET_CODE), me: 0, n: players.length - 1, players, own: new Array(24).fill(-1), stars: new Array(24).fill(0), turn: 0, round: 1, dice: [5, 2], rolling: false, deck: shuffle(GB_CARDS.map((_, k) => k)),
+      ask: null, show: null, build: false, msg: '', log: [], found: [], done: new Set(), photos: gbPickPhotos(9), timers: [], over: false, why: '' };
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gbEl.hidden = false;
+    $('#gb-prize').hidden = true; $('#result').hidden = true;
+    gbBuildBoard();
+    gbSay(g, () => t('gbHello'));
+    gbRender();
+    announce(t('aGbStart'));
+    const E = { g };
+    E.view = (seat) => {
+      const L = (N.players[seat] && N.players[seat].lang) || lang, a = g.ask;
+      return gbInLang(L, () => ({ gid: g.gid, me: seat, turn: g.turn, round: g.round, dice: g.dice.slice(), rolling: g.rolling, own: g.own.slice(), stars: g.stars.slice(), over: g.over, why: g.why,
+        players: g.players.map((p, j) => ({ key: j === seat ? 'me' : 'net', name: p.name, av: j === seat ? 'me' : NET_AV[j], cash: p.cash, pos: p.pos, jail: p.jail, pass: p.pass, out: p.out })),
+        ask: a ? { kind: a.kind, opt: a.opt, seat: a.seat } : null, show: g.show && g.show.kind === 'card' ? { kind: 'card', id: g.show.id, name: g.show.name } : null,
+        msg: g.msgE ? g.msgE.fn(seat) : g.msg, log: g.log.slice(-8).map((e) => (typeof e === 'string' ? e : e.fn(seat))) }));
+    };
+    E.act = (seat, x) => {
+      const a = g.ask;
+      if (!x || GB !== g || g.over) return;
+      if (x.t === 'star') { gbAddStar(+x.k, seat); return; }
+      if (x.t !== 'ans' || !a || a.seat !== seat) return;
+      const v = a.kind === 'buy' ? !!x.v : a.kind === 'jail' ? (['card', 'pay', 'roll'].includes(x.v) ? x.v : 'roll') : true;
+      g.ask = null; g.build = false; a.resolve(v); gbRender();
+    };
+    // a player who has gone (or waits too long) rolls, buys when it is wise and ends the turn
+    E.tick = () => {
+      const a = g.ask;
+      if (!a || !a.seat || GB !== g) return false;
+      const gone = !N.players[a.seat] || !N.players[a.seat].on, el = Date.now() - a.t0;
+      if (!((gone && el > 2000) || el > 90000)) return false;
+      const v = a.kind === 'buy' ? gbBotBuy(g, a.seat, a.opt.k) : a.kind === 'jail' ? 'roll' : true;
+      g.ask = null; a.resolve(v); gbRender();
+      return true;
+    };
+    E.stop = () => { if (GB === g) { g.timers.forEach(clearTimeout); g.over = true; } };
+    gbLater(g, 500, () => gbLoop(g));
+    return E;
+  }
+  // the other phones draw the board the room's device sends
+  function gbNetApply(v) {
+    if (!N || N.host || !v.g) return;
+    const gv = v.g;
+    let g = GB;
+    if (!g || !g.guest || g.gid !== gv.gid) {
+      if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+      ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); ppStop(); pkStop(); scStop();
+      g = GB = { guest: true, online: true, gid: gv.gid, me: gv.me, n: gv.players.length - 1, players: [], own: new Array(24).fill(-1), stars: new Array(24).fill(0), turn: 0, round: 1, dice: [5, 2], rolling: false,
+        ask: null, show: null, build: false, msg: '', log: [], found: [], done: new Set(), photos: gbPickPhotos(9), timers: [], over: false, lastAsk: '' };
+      closeOverlays(); FX.clear(); Music.setEnergy(false);
+      home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; gbEl.hidden = false;
+      $('#gb-prize').hidden = true; $('#result').hidden = true;
+      gbBuildBoard();
+      announce(t('aGbStart'));
+    }
+    const before = g.players.map((p) => p.cash), moved = g.players.some((p, i) => gv.players[i] && gv.players[i].pos !== p.pos);
+    Object.assign(g, { me: gv.me, players: gv.players.map((p) => Object.assign({}, p)), own: gv.own, stars: gv.stars, turn: gv.turn, round: gv.round, dice: gv.dice, rolling: gv.rolling, msg: gv.msg, log: gv.log, show: gv.show });
+    const mine = gv.ask && gv.ask.seat === g.me ? gv.ask : null, key = mine ? mine.kind + ':' + JSON.stringify(mine.opt) + ':' + g.round + ':' + g.turn : '';
+    if (mine && key !== g.lastAsk && (mine.kind === 'roll' || mine.kind === 'jail')) { Sound.turn(); buzz(12); }
+    g.lastAsk = key;
+    g.ask = mine ? { kind: mine.kind, opt: mine.opt, seat: g.me } : gv.ask && gv.ask.kind === 'card' ? null : null;
+    if (gv.ask && !mine && gv.ask.kind === 'card') g.show = { kind: 'card', id: gv.ask.opt.id, name: (g.players[gv.ask.seat] || {}).name || '' };
+    if (!g.ask || (g.ask.kind !== 'roll' && g.ask.kind !== 'end')) g.build = false;
+    if (moved) Sound.tick();
+    if (g.players[g.me] && before[g.me] != null && g.players[g.me].cash > before[g.me]) Sound.rwBank();
+    gbRender();
+    // a whole colour group of yours: a photo of Hande
+    for (let gr = 0; gr < 8; gr++) {
+      if (!gbFull(g, g.me, gr) || g.done.has(gr)) continue;
+      g.done.add(gr);
+      const ph = PHOTO_BY_ID.get(g.photos[g.found.length]);
+      if (ph) { g.found.push(ph); gbPrize(g, ph.id, t('gbGroupPrize')); }
+    }
+    if (gv.over && !g.over) setTimeout(() => { if (GB === g) gbOver(g, gv.why || 'rounds'); }, 1400);
+  }
   function gbRenderSetup() {
     const st = gbStats(), n = store.get('hm-gb-n', 3);
     $$('#setup-gb .gb-seg button').forEach((b) => b.setAttribute('aria-pressed', +b.dataset.gbn === n ? 'true' : 'false'));
@@ -14912,7 +15021,7 @@ body:not(.on-home) .petals { display: none; }
     $('#gb-exit').addEventListener('click', gbRequestExit);
     $('#gb-roll').addEventListener('click', () => { const g = GB; if (g && g.ask && g.ask.kind === 'roll') gbAnswer(true); });
     $('#gb-end').addEventListener('click', () => { const g = GB; if (g && g.ask && g.ask.kind === 'end') gbAnswer(true); });
-    $('#gb-stars').addEventListener('click', () => { const g = GB; if (!g || !g.ask || g.turn !== 0) return; g.build = !g.build; g.show = null; Sound.flip(); gbRender(); });
+    $('#gb-stars').addEventListener('click', () => { const g = GB; if (!g || !g.ask || g.turn !== (g.me || 0)) return; g.build = !g.build; g.show = null; Sound.flip(); gbRender(); });
     $('#gb-board').addEventListener('click', (e) => {
       const g = GB; if (!g) return;
       const ans = e.target.closest('[data-ans]');
