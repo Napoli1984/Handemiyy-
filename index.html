@@ -3799,6 +3799,7 @@ body:not(.on-home) .petals { display: none; }
             <button type="button" data-scc="r" aria-pressed="false" data-i18n="scCR"></button>
           </div>
           <button type="button" class="btn primary play-btn" id="btn-sc-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="sc" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
           <p class="record-line" id="sc-record"></p>
         </div>
         <div class="setup-part" id="setup-gb" hidden>
@@ -4856,7 +4857,7 @@ body:not(.on-home) .petals { display: none; }
       tvOpenMsg: 'Lanciate un dado a testa: chi fa di più comincia', tvOpenGo: '{a} {x} · {b} {y}: comincia {who}', tvOpenYou: 'tu', tvRollMe: 'Tocca a te: lancia i dadi', tvMoveMe: 'Muovi: {dice}',
       tvTurnOf: 'Tocca a {name}', tvTurnOfAd: 'Tocca ad {name}', tvRolled: '{name} tira {dice}', tvNone: 'Con {dice} non c\'è nessuna mossa', tvNoneMe: 'Con {dice} non puoi muovere', tvHit: 'Mangiata!', tvHitMe: 'Ti ha mangiato una pedina!',
       tvPick: 'Dove la porti?', tvOff1: 'Fuori!', tvWinT: 'Hai vinto la partita!', tvLoseT: 'Vince {name}', tvMars: 'Mars: due punti!', tvEndScore: '{a} {x} · {b} {y}', tvNext: 'Partita successiva', tvSeeEnd: 'Vedi com\'è finita', tvWaitNext: 'Aspetta {name}…',
-      tvPrize: 'Partita vinta! La foto è tua', tvPrizeMars: 'Mars! Un\'altra foto per te', tvKicker: 'Tavla · sfida a {n} punti', tvNetWatch: 'A tavla si gioca in due: gli altri guardano la partita.', tvMatchWin: 'Hai vinto la sfida!', tvMatchLose: 'Vince {name}', tvRowScore: 'Punti', tvRowPhotos: 'Foto vinte', tvAgain: 'Un\'altra sfida',
+      tvPrize: 'Partita vinta! La foto è tua', tvPrizeMars: 'Mars! Un\'altra foto per te', tvKicker: 'Tavla · sfida a {n} punti', tvNetWatch: 'A tavla si gioca in due: gli altri guardano la partita.', scNetWatch: 'A scacchi si gioca in due: gli altri guardano la partita.', scNetSub: 'Online · {lvl}', scNetWait: 'Tocca a {name}', tvMatchWin: 'Hai vinto la sfida!', tvMatchLose: 'Vince {name}', tvRowScore: 'Punti', tvRowPhotos: 'Foto vinte', tvAgain: 'Un\'altra sfida',
       tvRecord: 'Sfide vinte: {w} su {p} · mars: {m}', tvWatch: 'Guardi la partita', aTvStart: 'Tavla: le tue pedine sono le perle bianche e vanno verso casa, in basso a destra.',
       // ---- Scopa ----
       gameSo: 'Scopa', gpSoTag: 'Le carte napoletane', ledeSo: 'La scopa con le carte napoletane: prendi le carte dal tavolo e fai scopa. Ogni scopa ti regala una foto di Hande; i Fanti, i Cavalli e i Re hanno il suo ritratto.',
@@ -5242,7 +5243,7 @@ body:not(.on-home) .petals { display: none; }
       tvOpenMsg: 'Herkes bir zar atar: büyük atan başlar', tvOpenGo: '{a} {x} · {b} {y}: {who} başlıyor', tvOpenYou: 'sen', tvRollMe: 'Sıra sende: zar at', tvMoveMe: 'Oyna: {dice}',
       tvTurnOf: 'Sıra {name} oyuncusunda', tvTurnOfAd: 'Sıra {name} oyuncusunda', tvRolled: '{name} {dice} attı', tvNone: '{dice} ile oynanacak hamle yok', tvNoneMe: '{dice} ile oynayamıyorsun', tvHit: 'Kırıldı!', tvHitMe: 'Pulun kırıldı!',
       tvPick: 'Nereye götürüyorsun?', tvOff1: 'Toplandı!', tvWinT: 'Oyunu kazandın!', tvLoseT: '{name} kazandı', tvMars: 'Mars: iki sayı!', tvEndScore: '{a} {x} · {b} {y}', tvNext: 'Sonraki oyun', tvSeeEnd: 'Sonucu gör', tvWaitNext: '{name} bekleniyor…',
-      tvPrize: 'Oyunu kazandın! Fotoğraf senin', tvPrizeMars: 'Mars! Bir fotoğraf daha senin', tvKicker: 'Tavla · {n} sayılık maç', tvNetWatch: 'Tavla iki kişiyle oynanır: diğerleri oyunu izler.', tvMatchWin: 'Maçı kazandın!', tvMatchLose: '{name} kazandı', tvRowScore: 'Sayı', tvRowPhotos: 'Kazanılan fotoğraf', tvAgain: 'Yeni bir maç',
+      tvPrize: 'Oyunu kazandın! Fotoğraf senin', tvPrizeMars: 'Mars! Bir fotoğraf daha senin', tvKicker: 'Tavla · {n} sayılık maç', tvNetWatch: 'Tavla iki kişiyle oynanır: diğerleri oyunu izler.', scNetWatch: 'Satranç iki kişiyle oynanır: diğerleri oyunu izler.', scNetSub: 'Çevrimiçi · {lvl}', scNetWait: 'Sıra: {name}', tvMatchWin: 'Maçı kazandın!', tvMatchLose: '{name} kazandı', tvRowScore: 'Sayı', tvRowPhotos: 'Kazanılan fotoğraf', tvAgain: 'Yeni bir maç',
       tvRecord: 'Kazanılan maç: {p} maçta {w} · mars: {m}', tvWatch: 'Oyunu izliyorsun', aTvStart: 'Tavla: senin pulların beyaz inciler, sağ alttaki eve gidiyorlar.',
       // ---- Scopa ----
       gameSo: 'Scopa', gpSoTag: 'Napoli kartları', ledeSo: 'Napoli kartlarıyla scopa: masadaki kartları al ve masayı süpür. Her scopa sana bir Hande fotoğrafı kazandırır; uşakların, atlıların ve kralların üstünde onun portresi var.',
@@ -8491,6 +8492,9 @@ body:not(.on-home) .petals { display: none; }
     } else if (N.game === 'so') {
       N.ses = { n: N.players.length, round: 1, dealer: Math.floor(Math.random() * N.players.length), score: null, target: SO_TARGET };
       N.eng = soNet(N.players.length, N.ses);
+    } else if (N.game === 'sc') {
+      N.ses = { games: ((N.ses && N.ses.games) || 0) + 1 };
+      N.eng = scNet(N.ses);
     } else if (N.game === 'bw') {
       if (!N.ses || N.ses.n !== N.players.length) N.ses = { n: N.players.length, round: 0, wins: N.players.map(() => 0) };
       N.ses.round++;
@@ -8525,11 +8529,11 @@ body:not(.on-home) .petals { display: none; }
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden || !scEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else if (v.game === 'sc') scNetApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
@@ -8585,6 +8589,7 @@ body:not(.on-home) .petals { display: none; }
     $('#onl-start').disabled = !enough;
     $('#onl-status').textContent = host ? t(enough ? 'netStatusHost' : 'netStatusHost1') : t('netStatusGuest', { name: hostName });
     if (v.game === 'tv' && v.players.length > 2) $('#onl-status').textContent += ' ' + t('tvNetWatch');
+    if (v.game === 'sc' && v.players.length > 2) $('#onl-status').textContent += ' ' + t('scNetWatch');
   }
   async function netShare() {
     if (!N) return;
@@ -13935,7 +13940,8 @@ body:not(.on-home) .petals { display: none; }
     const seen = new Set(scStats().found);
     return shuffle(SC_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, n).map((p) => p.id);
   }
-  const scBot = (g) => t('ucBots')[SC_LEVELS[g.lv].bot];
+  const scOppSeat = (g) => (g.spect ? 1 - g.white : 1 - g.me);
+  const scBot = (g) => (g.online ? ((g.players[scOppSeat(g)] && g.players[scOppSeat(g)].name) || '') : t('ucBots')[SC_LEVELS[g.lv].bot]);
   function scStart(cfg) {
     if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
     ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
@@ -13959,6 +13965,7 @@ body:not(.on-home) .petals { display: none; }
   }
   function scLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (SG === g) fn(); }, ms / scSpeed); g.timers.push(id); }
   function scRequestExit() {
+    if (SG && SG.online) { openConfirm(true); return; }
     if (SG && !SG.over && SG.moves.length) openConfirm(false);
     else goHome();
   }
@@ -14001,20 +14008,23 @@ body:not(.on-home) .petals { display: none; }
       el.setAttribute('aria-label', scSqName(sq) + (p ? ': ' + t(p & 8 ? 'scPieceB' : 'scPieceW')[p & 7] : ''));
     });
     const L = SC_LEVELS[g.lv], lvName = t('scL' + g.lv);
-    $('#sc-sub').textContent = t(g.you ? 'scSubB' : 'scSubW', { lvl: lvName });
+    $('#sc-sub').textContent = g.spect ? t('scNetSub', { lvl: t('netRoomN', { code: N ? N.code : '' }) }) : t(g.you ? 'scSubB' : 'scSubW', { lvl: g.online ? t('netRoomN', { code: N ? N.code : '' }) : lvName });
     const capRow = (col) => { const c = scCaptured(P, col); return c.map((x) => '<i class="' + (col ? 'b' : 'w') + '">' + SC_GLYPH[x] + '</i>').join(''); };
     let lead = 0; // the material lead, in pawns
     for (let sq = 0; sq < 128; sq++) { const p = P.b[sq]; if (!(sq & 0x88) && p) lead += (p & 8 ? -1 : 1) * [0, 1, 3, 3, 5, 9, 0][p & 7]; }
     const mine = g.you ? -lead : lead;
     $('#sc-opp').className = 'sc-bar sc-opp' + (!g.over && P.side !== g.you ? ' turn' : '') + (g.busy ? ' think' : '');
-    $('#sc-opp-av').innerHTML = svgUse('av-' + L.av, '', '0 0 40 40');
+    $('#sc-opp-av').innerHTML = svgUse('av-' + (g.online ? NET_AV[scOppSeat(g)] || 'p2' : L.av), '', '0 0 40 40');
     $('#sc-opp-nm').textContent = scBot(g);
-    $('#sc-opp-lv').textContent = lvName;
+    $('#sc-opp-lv').textContent = g.online ? '' : lvName;
+    $('#sc-you .nm').textContent = g.spect ? ((g.players[g.white] && g.players[g.white].name) || '') : t('ucYou');
     $('#sc-opp-cap').innerHTML = capRow(g.you) + (mine < 0 ? '<b>+' + (-mine) + '</b>' : '');
     $('#sc-you').className = 'sc-bar sc-you' + (myTurn ? ' turn' : '');
     $('#sc-you-cap').innerHTML = capRow(g.you ^ 8) + (mine > 0 ? '<b>+' + mine + '</b>' : '');
     let msg;
     if (g.over) msg = g.endMsg;
+    else if (g.online && (g.spect || P.side !== g.you)) msg = t('scNetWait', { name: g.spect ? ((g.players[P.side ? 1 - g.white : g.white] || {}).name || '') : scBot(g) });
+    else if (g.online && g.busy) msg = '';
     else if (g.busy) msg = t('scThinking', { name: scBot(g) });
     else if (P.side === g.you) msg = g.hint ? t('scHintMsg') : chk ? t('scYouCheck') : t('scYourTurn');
     else msg = '';
@@ -14029,8 +14039,8 @@ body:not(.on-home) .petals { display: none; }
     }, []).join('') : '<em>' + t('scNoMoves') + '</em>';
     list.scrollLeft = list.scrollWidth;
     const youMoved = g.moves.some((mv, i) => (i % 2 === 0) === !g.you);
-    $('#sc-undo').disabled = !myTurn || !youMoved;
-    $('#sc-hint').disabled = !myTurn;
+    $('#sc-undo').disabled = !myTurn || !youMoved || !!g.online;
+    $('#sc-hint').disabled = !myTurn || !!g.online;
   }
   // a piece glides from its old square to the new one
   function scAnim(g, m) {
@@ -14060,12 +14070,12 @@ body:not(.on-home) .petals { display: none; }
     const end = scEnd(P);
     if (end) { scFinish(g, end, mover); return; }
     // you took the queen: a photo of Hande
-    if (mover === g.you && (taken & 7) === 5 && !g.queen) {
+    if (mover === g.you && !g.spect && (taken & 7) === 5 && !g.queen) {
       g.queen = true;
       const ph = PHOTO_BY_ID.get(g.photos[0]);
       if (ph) { g.found.push(ph); g.busy = true; await scPrize(g, ph.id, t('scQueenPrize')); if (SG !== g) return; g.busy = false; scRender(); }
     }
-    if (P.side !== g.you) scBotTurn(g, 420);
+    if (P.side !== g.you && !g.online) scBotTurn(g, 420);
   }
   function scEnd(P) {
     if (!scLegal(P).length) return scInCheck(P, P.side) ? 'mate' : 'stale';
@@ -14089,13 +14099,13 @@ body:not(.on-home) .petals { display: none; }
   }
   // your taps: a piece of yours, then one of the lit squares
   function scTap(sq) {
-    const g = SG; if (!g || g.over || g.busy || g.promo || g.P.side !== g.you) return;
+    const g = SG; if (!g || g.over || g.busy || g.promo || g.spect || g.P.side !== g.you) return;
     AudioCore.get();
     const P = g.P, p = P.b[sq];
     const mv = g.targets.filter((m) => ((m >> 7) & 127) === sq);
     if (mv.length) {
       if (mv.length > 1) { scAskPromo(g, mv); return; }
-      scPlay(g, mv[0]); return;
+      scGo(g, mv[0]); return;
     }
     if (p && (p & 8) === g.you && sq !== g.sel) {
       g.sel = sq; g.targets = scLegal(P).filter((m) => (m & 127) === sq); g.hint = 0;
@@ -14114,7 +14124,15 @@ body:not(.on-home) .petals { display: none; }
     const g = SG; if (!g || !g.promo) return;
     const m = g.promo.find((x) => ((x >> 14) & 7) === pr);
     g.promo = null; $('#sc-promo').hidden = true;
-    if (m) scPlay(g, m);
+    if (m) scGo(g, m);
+  }
+  // your move: here it is played at once, in a room it goes to the room's device first
+  function scGo(g, m) {
+    if (!g.online) { scPlay(g, m); return; }
+    g.sel = -1; g.targets = []; g.busy = true; scRender();
+    const n = g.moves.length;
+    netAct({ t: 'move', m });
+    scLater(g, 5000, () => { if (g.busy && g.moves.length === n) { g.busy = false; scRender(); } });
   }
   function scUndo() {
     const g = SG; if (!g || g.busy || g.over || g.P.side !== g.you) return;
@@ -14153,23 +14171,81 @@ body:not(.on-home) .petals { display: none; }
   }
   function scFinish(g, end, mover) {
     g.over = end; g.busy = false;
-    const won = end === 'mate' && mover === g.you, lost = end === 'mate' && mover !== g.you;
+    const won = end === 'mate' && mover === g.you && !g.spect, lost = end === 'mate' && mover !== g.you && !g.spect;
     g.winner = won ? 1 : lost ? 0 : -1;
     if (won) for (let k = 0; k < (g.lv === 2 ? 2 : 1); k++) { const ph = PHOTO_BY_ID.get(g.photos[g.found.length]); if (ph) g.found.push(ph); }
     const why = t({ mate: 'scEndMate', stale: 'scEndStale', fifty: 'scEndFifty', rep: 'scEndRep', mat: 'scEndMat' }[end]);
     g.endMsg = won ? t('scWinT') : lost ? t('scLoseT', { name: scBot(g) }) : t('scDrawT') + ': ' + why.toLowerCase();
-    const st = scStats();
-    st.played++; if (won) st.wins++; if (!won && !lost) st.draws++;
-    st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
-    store.set('hm-sc', st);
+    if (!g.spect) {
+      const st = scStats();
+      st.played++; if (won) st.wins++; if (!won && !lost) st.draws++;
+      st.found = Array.from(new Set(st.found.concat(g.found.map((p) => p.id)))).slice(-200);
+      store.set('hm-sc', st);
+    }
+    if (g.spect) { const wn = g.players[(mover & 8) ? 1 - g.white : g.white]; g.endMsg = end === 'mate' ? t('wins', { name: (wn && wn.name) || '' }) : t('scDrawT') + ': ' + why.toLowerCase(); }
     scRender();
     if (won) Sound.win(); else if (lost) Sound.lose(); else Sound.count();
     scLater(g, 1500, () => {
-      const rows = [[t('scRowEnd'), why], [t('scRowMoves'), String(Math.ceil(g.moves.length / 2))], [t('scRowLevel'), t('scL' + g.lv) + ' · ' + scBot(g)], [t('rwRowPhotos'), String(g.found.length)]];
-      showResult({ kicker: t('scKicker'), title: won ? t('scWinT') : lost ? t('scLoseT', { name: scBot(g) }) : t('scDrawT'), stars: null, score: null, record: false, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'sc', rows,
+      if (SG !== g) return;
+      const rows = [[t('scRowEnd'), why], [t('scRowMoves'), String(Math.ceil(g.moves.length / 2))], g.online ? [t('netLabel'), g.players.slice(0, 2).map((p) => p.name).join(' · ')] : [t('scRowLevel'), t('scL' + g.lv) + ' · ' + scBot(g)], [t('rwRowPhotos'), String(g.found.length)]];
+      const host = g.online && N && N.host, hostName = g.online && g.players[0] ? g.players[0].name : '';
+      showResult({ kicker: g.online ? t('netKicker', { game: t('gameSc') }) : t('scKicker'), title: g.spect ? g.endMsg : won ? t('scWinT') : lost ? t('scLoseT', { name: scBot(g) }) : t('scDrawT'), stars: null, score: null, record: false, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'),
+        again: g.online ? (host ? t('netAgain') : t('netWaitAgain', { name: hostName })) : t('rwAgain'), againOff: g.online && !host, action: g.online ? 'net' : 'sc', menuLabel: g.online ? t('netLeave') : undefined, rows,
         strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
       if (won) celebrate();
     });
+  }
+  /* ---------- online: two players, the room's device keeps the game (the others watch) ---------- */
+  function scNet(ses) {
+    const P = scFromFEN(SC_START);
+    const E = { gid: netRand(6, NET_CODE), moves: [], end: '', white: (ses.games - 1) % 2 };
+    E.view = () => ({ gid: E.gid, white: E.white, moves: E.moves.slice(), end: E.end });
+    E.act = (seat, a) => {
+      if (!a || a.t !== 'move' || E.end) return;
+      const toMove = P.side ? 1 - E.white : E.white;
+      if (seat !== toMove) return;
+      const m = a.m | 0;
+      if (!scLegal(P).includes(m)) return;
+      scMake(P, m); E.moves.push(m);
+      const end = scEnd(P);
+      if (end) { E.end = end; N.phase = 'over'; }
+    };
+    return E;
+  }
+  let scChain = Promise.resolve();
+  function scNetApply(v) { scChain = scChain.then(() => scOnline(v)).catch(() => { /* a broken animation must not stop the game */ }); }
+  async function scOnline(v) {
+    if (!N || !v.g) return;
+    const gv = v.g;
+    let g = SG;
+    if (!g || !g.online || g.gid !== gv.gid) {
+      if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+      ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); ppStop(); pkStop();
+      const col = v.you === gv.white ? 0 : v.you === 1 - gv.white ? 8 : -1;
+      g = SG = { online: true, gid: gv.gid, white: gv.white, me: v.you, players: v.players, spect: col < 0, P: scFromFEN(SC_START), lv: 1, col: 'w', you: col < 0 ? 0 : col,
+        sel: -1, targets: [], last: 0, moves: [], busy: false, over: '', winner: -1, found: [], photos: scPickPhotos(3), queen: false, hint: 0, promo: null, timers: [], anim: null };
+      closeOverlays(); FX.clear(); Music.setEnergy(false);
+      home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; scEl.hidden = false;
+      $('#sc-prize').hidden = true; $('#sc-promo').hidden = true; $('#result').hidden = true;
+      scBuild();
+      announce(t('aScStart'));
+    }
+    g.players = v.players; g.me = v.you;
+    const ms = gv.moves || [];
+    // far behind (a reload, a late arrival): the moves are played at once, only the last one glides
+    while (g.moves.length < ms.length - 1) {
+      const m = ms[g.moves.length], legal = scLegal(g.P);
+      if (!legal.includes(m)) return;
+      const san = scSAN(g.P, m, legal); scMake(g.P, m); g.moves.push({ m, san }); g.last = m;
+    }
+    if (g.moves.length < ms.length) {
+      const m = ms[ms.length - 1];
+      if (!scLegal(g.P).includes(m)) return;
+      g.busy = false;
+      await scPlay(g, m);
+    } else if (!g.over) { if (!g.promo) g.busy = false; scRender(); }
+    if (SG !== g) return;
+    if (gv.end && !g.over) scFinish(g, gv.end, g.P.side ^ 8);
   }
   function scRenderSetup() {
     const st = scStats(), lv = store.get('hm-sc-lv', 1), col = store.get('hm-sc-col', 'w');

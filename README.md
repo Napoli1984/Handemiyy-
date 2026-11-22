@@ -28,6 +28,6 @@ Nella sezione **Romanzi**, nella pagina `romanzi/`, c'è *Terk Ettiğiniz Kız*,
 
 Nell'**Album delle figurine** ogni foto di Hande è una figurina, in 21 pagine: ogni partita finita, a qualsiasi gioco, regala una bustina da cinque, ce n'è una in regalo ogni giorno, e le foto vinte nei giochi si incollano da sole. Con quattro doppie si prende una figurina che manca, e ogni pagina completa vale un'altra bustina.
 
-Memory, Ultima carta, Bowling, Ruota della fortuna, Scopa, Tavla e Freccette si possono giocare anche **online con gli amici** (da 2 a 4, ognuno sul suo telefono; a tavla si gioca in due): chi crea la stanza manda il link agli altri. I messaggi passano da un servizio MQTT pubblico e gratuito.
+Memory, Ultima carta, Bowling, Ruota della fortuna, Scopa, Tavla, Scacchi e Freccette si possono giocare anche **online con gli amici** (da 2 a 4, ognuno sul suo telefono; a tavla e a scacchi si gioca in due e gli altri guardano): chi crea la stanza manda il link agli altri. I messaggi passano da un servizio MQTT pubblico e gratuito.
 
 Fan game senza scopo di lucro: le foto appartengono ai rispettivi autori.
