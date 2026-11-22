@@ -22,7 +22,7 @@ Il **Tennis 3D** si gioca nella pagina `tennis/`: Handemiyy sfida cinque rivali 
 
 **Crucimondo** è il cruciverba, nella pagina `crucimondo/`: quattordici mondi a tema (animali, cucina, mare, spazio, cinema, Italia, Turchia e altri) da sei livelli ciascuno, un cruciverba nuovo ogni giorno e tre sfide speciali (emoji, parole turche e partita veloce), con la parola segreta nelle caselle cerchiate. Si gioca in italiano o in turco, e ogni cruciverba nuovo completato regala una bustina per l'album.
 
-Nella sezione **Romanzi**, nella pagina `romanzi/`, c'è *Terk Ettiğiniz Kız*, il romanzo in venti capitoli con la sua locandina in copertina: si legge un capitolo alla volta in italiano o in turco, si ascolta con la voce del telefono (frase per frase, con la frase illuminata nel testo, la voce e la velocità da scegliere e un timer per addormentarsi ascoltando) e si scarica in PDF, EPUB o Word. Il segnalibro si salva da solo.
+Nella sezione **Romanzi**, nella pagina `romanzi/`, c'è *Terk Ettiğiniz Kız*, il romanzo in venti capitoli con la sua locandina in copertina: si legge un capitolo alla volta in italiano o in turco e si scarica in PDF, EPUB o Word. Il segnalibro si salva da solo.
 
 Nell'**Album delle figurine** ogni foto di Hande è una figurina, in 21 pagine: ogni partita finita, a qualsiasi gioco, regala una bustina da cinque, ce n'è una in regalo ogni giorno, e le foto vinte nei giochi si incollano da sole. Con quattro doppie si prende una figurina che manca, e ogni pagina completa vale un'altra bustina.
 
