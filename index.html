@@ -3782,6 +3782,7 @@ body:not(.on-home) .petals { display: none; }
             <button type="button" data-pkn="3" aria-pressed="true" data-i18n="pkN3"></button>
           </div>
           <button type="button" class="btn primary play-btn" id="btn-pk-play" data-i18n="play"></button>
+          <button type="button" class="btn online-btn" data-net-game="pk" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.5c0-3.5 2.8-5.9 6.2-5.9s6.2 2.4 6.2 5.9"/><circle cx="17" cy="9.2" r="2.6"/><path d="M15.4 13.8c3.2 0 5.8 2.1 5.8 5.2"/></svg><span data-i18n="netPlayOnline"></span></button>
           <p class="record-line" id="pk-record"></p>
         </div>
         <div class="setup-part" id="setup-sc" hidden>
@@ -8493,6 +8494,8 @@ body:not(.on-home) .petals { display: none; }
     } else if (N.game === 'so') {
       N.ses = { n: N.players.length, round: 1, dealer: Math.floor(Math.random() * N.players.length), score: null, target: SO_TARGET };
       N.eng = soNet(N.players.length, N.ses);
+    } else if (N.game === 'pk') {
+      N.eng = pkNetStart();
     } else if (N.game === 'tb') {
       const nc = Math.min(3, Math.max(1, store.get('hm-tb-n', 2)));
       N.eng = tbNet(N.players.length, nc);
@@ -8533,11 +8536,11 @@ body:not(.on-home) .petals { display: none; }
     if (before && !N.host) netNotifyPeople(before, v);
     netRenderRoom();
     if (v.phase === 'lobby' || !v.g) {
-      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden || !scEl.hidden || !tbEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
+      if (!game.hidden || !ucEl.hidden || !bwEl.hidden || !rwEl.hidden || !soEl.hidden || !tvEl.hidden || !scEl.hidden || !tbEl.hidden || !pkEl.hidden) { S = null; ucStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop(); closeOverlays(); board.textContent = ''; game.hidden = true; }
       if (onlineEl.hidden || $('#onl-room').hidden) netShow('room');
       return;
     }
-    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else if (v.game === 'sc') scNetApply(v); else if (v.game === 'tb') tbNetApply(v); else mnApply(v);
+    if (v.game === 'uc') unApply(v); else if (v.game === 'bw') bwnApply(v); else if (v.game === 'rw') rwnApply(v); else if (v.game === 'so') soApply(v); else if (v.game === 'tv') tvNetApply(v); else if (v.game === 'sc') scNetApply(v); else if (v.game === 'tb') tbNetApply(v); else if (v.game === 'pk') pkNetApply(v); else mnApply(v);
   }
   function netNotifyPeople(a, b) {
     if (!b.g) return;
@@ -13195,7 +13198,7 @@ body:not(.on-home) .petals { display: none; }
     const seen = new Set(pkStats().found);
     return shuffle(PK_PHOTOS.slice()).sort((a, b) => (seen.has(a.id) ? 1 : 0) - (seen.has(b.id) ? 1 : 0)).slice(0, n).map((p) => p.id);
   }
-  const pkName = (p) => (p.key === 'me' ? t('ucYou') : t('ucBots')[p.key]);
+  const pkName = (p) => (p.key === 'me' ? t('ucYou') : p.name || t('ucBots')[p.key]);
   const pkIn = (g, i) => !g.players[i].out && !g.players[i].folded;
   const pkBlinds = (g) => PK_BLINDS[g.level];
   const pkPotAll = (g) => g.players.reduce((a, p) => a + p.total, 0);
@@ -13251,6 +13254,7 @@ body:not(.on-home) .petals { display: none; }
   function pkLater(g, ms, fn) { const id = setTimeout(() => { g.timers = g.timers.filter((x) => x !== id); if (PK === g) fn(); }, ms / pkSpeed); g.timers.push(id); }
   const pkWait = (g, ms) => new Promise((res) => pkLater(g, ms, res));
   function pkRequestExit() {
+    if (PK && PK.online) { openConfirm(true); return; }
     if (PK && !PK.over && PK.hand > 0) openConfirm(false);
     else goHome();
   }
@@ -13265,13 +13269,13 @@ body:not(.on-home) .petals { display: none; }
         g.ko.push(i);
         pkRender();
         // you outlasted this one (even if you went out in the same hand): a photo
-        const ph = PHOTO_BY_ID.get(g.photos[g.found.length]);
+        const ph = !g.online || !g.players[0].out ? PHOTO_BY_ID.get(g.photos[g.found.length]) : null;
         if (ph) { g.found.push(ph); await pkPrize(g, ph.id, t('pkKo', { name: pkName(p) })); } else await pkBanner(g, t('pkKoT', { name: pkName(p) }), '');
         if (PK !== g) return;
       }
       const me = g.players[0];
-      if (me.chips <= 0) { me.out = true; me.place = g.players.filter((q) => !q.out).length + 1; pkOver(g, false); return; }
-      if (g.players.filter((q) => !q.out).length === 1) { pkOver(g, true); return; }
+      if (me.chips <= 0 && !me.out) { me.out = true; me.folded = true; me.place = g.players.filter((q) => !q.out).length + 1; if (!g.online) { pkOver(g, false); return; } pkRender(); }
+      if (g.players.filter((q) => !q.out).length === 1) { g.players.forEach((q) => { if (!q.out) q.place = 1; }); pkOver(g, !me.out); return; }
       await pkHand(g);
     }
   }
@@ -13281,7 +13285,7 @@ body:not(.on-home) .petals { display: none; }
     g.hand++;
     // a clean table first
     g.players.forEach((p) => Object.assign(p, { hole: [], bet: 0, total: 0, folded: p.out, allin: false, last: p.out ? 'out' : '', show: false, win: false }));
-    Object.assign(g, { board: [], hl: null, street: 0, raises: 0, curBet: 0, msg: '', phase: 'deal', runout: false, toAct: -1 });
+    Object.assign(g, { board: [], hl: null, street: 0, raises: 0, curBet: 0, msg: '', phase: 'deal', runout: false, toAct: -1, res: null });
     if (lv > g.level) {
       g.level = lv; pkRender();
       const [s1, b1] = pkBlinds(g);
@@ -13357,6 +13361,7 @@ body:not(.on-home) .petals { display: none; }
       g.toAct = i; pkRender();
       let mv;
       if (i === 0) mv = await pkAsk(g);
+      else if (g.players[i].remote) mv = await pkRemote(g, i);
       else {
         const me = g.players[0];
         await pkWait(g, me.out || me.folded || me.allin ? 420 : 650 + Math.random() * 550);
@@ -13439,6 +13444,14 @@ body:not(.on-home) .petals { display: none; }
   }
   function pkAct(a, to) {
     const g = PK; if (!g) return false;
+    if (g.guest) {
+      if (a === 'next' || !g.wait) return false;
+      const L = pkLegal(g, 0);
+      if ((a === 'fold' && !L.toCall) || (a === 'raise' && !L.canRaise)) return false;
+      AudioCore.get(); g.wait = false; g.msg = '';
+      netAct({ t: 'act', a, to: a === 'raise' ? Math.max(L.minTo, Math.min(L.maxTo, to || g.raiseTo)) : 0 });
+      pkRender(); return true;
+    }
     if (a === 'next') { if (g.goOn) { g.goOn(); return true; } return false; }
     if (!g.wait) return false;
     const L = pkLegal(g, 0);
@@ -13473,6 +13486,7 @@ body:not(.on-home) .petals { display: none; }
       p.chips += amt; p.win = true;
       g.players.forEach((q) => { q.bet = 0; q.total = 0; });
       g.msg = w === 0 ? t('pkWinFold', { n: fmtNum(amt) }) : t('pkWinFoldOf', { name: pkName(p), n: fmtNum(amt) });
+      g.res = { ws: [w], v: null, amt: g.players.map((_, j) => (j === w ? amt : 0)) };
       if (w === 0) { Sound.rwBank(); pkBurst(0, 18); }
       announce(g.msg); pkRender();
       return;
@@ -13499,6 +13513,7 @@ body:not(.on-home) .petals { display: none; }
     g.hl = new Set();
     main.ws.forEach((j) => pkBest5(g.players[j].hole.concat(g.board)).five.forEach((c) => g.hl.add(c)));
     const h = pkHandName(main.v), w0 = main.ws[0];
+    g.res = { ws: main.ws.slice(), v: main.v, amt: won.slice() };
     g.msg = main.ws.length > 1 ? t('pkSplit', { names: main.ws.map((j) => pkName(g.players[j])).join(', '), h })
       : w0 === 0 ? t('pkWinMe', { n: fmtNum(won[0]), h }) : t('pkWinOf', { name: pkName(g.players[w0]), n: fmtNum(won[w0]), h });
     if (won[0] > 0) { Sound.rwBank(); Sound.correct(); pkBurst(0, 30); } else if (val[0] != null) Sound.miss();
@@ -13516,7 +13531,7 @@ body:not(.on-home) .petals { display: none; }
       g.phase = 'next';
       g.goOn = () => { g.goOn = null; g.phase = ''; resolve(); };
       pkRender();
-      pkLater(g, g.players[0].chips > 0 ? 5200 : 2200, () => { if (g.goOn) g.goOn(); });
+      pkLater(g, g.players[0].chips > 0 || g.online ? 5200 : 2200, () => { if (g.goOn) g.goOn(); });
     });
   }
   function pkPrize(g, id, text) {
@@ -13552,6 +13567,7 @@ body:not(.on-home) .petals { display: none; }
   function pkOver(g, won) {
     if (g.over) return;
     g.over = true; g.phase = 'over'; g.toAct = -1; g.wait = false;
+    if (g.online && N && N.host && N.eng && N.eng.g === g) N.phase = 'over';
     const me = g.players[0];
     if (won) {
       me.place = 1;
@@ -13566,7 +13582,9 @@ body:not(.on-home) .petals { display: none; }
     pkLater(g, 700, () => {
       const rows = [[t('pkRowHands'), String(g.hand)], [t('pkRowPlace'), t('pkPlaceN', { n: me.place })], [t('pkRowKo'), String(g.ko.length)],
         [t('pkRowBest'), g.best >= 0 ? pkHandName(g.best) : '—'], [t('rwRowPhotos'), String(g.found.length)]];
-      showResult({ kicker: t('pkKicker'), title: won ? t('pkWinT') : t('pkLoseT'), stars: null, score: null, record: false, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'), again: t('rwAgain'), action: 'pk', rows,
+      const host = g.online && N && N.host, hostName = g.online && N && N.view && N.view.players[0] ? N.view.players[0].name : '';
+      showResult({ kicker: g.online ? t('netKicker', { game: t('gamePk') }) : t('pkKicker'), title: won ? t('pkWinT') : t('pkLoseT'), stars: null, score: null, record: false, photos: g.found.length > 0, photosLabel: t('rwSeePhotos'),
+        again: g.online ? (host ? t('netAgain') : t('netWaitAgain', { name: hostName })) : t('rwAgain'), againOff: g.online && !host, action: g.online ? 'net' : 'pk', menuLabel: g.online ? t('netLeave') : undefined, rows,
         strip: g.found.length ? g.found.map((p) => ({ id: p.id, open: true })) : null });
       if (won) celebrate(); else if (g.found.length) Sound.sparkle(); else Sound.lose();
     });
@@ -13614,10 +13632,11 @@ body:not(.on-home) .petals { display: none; }
     $('#pk-my-d').hidden = g.dealer !== 0 || me.out;
     g.fresh.clear(); g.flip.clear();
     pkRenderActs();
+    if (g.online && !g.guest && N && N.host) netPublishAll();
   }
   function pkRenderActs() {
     const g = PK; if (!g) return;
-    const next = g.phase === 'next', my = g.wait && !next && !g.over, L = pkLegal(g, 0), me = g.players[0];
+    const next = g.phase === 'next' && !g.guest, my = g.wait && !next && !g.over, L = pkLegal(g, 0), me = g.players[0];
     $('#pk-next').hidden = !next;
     $('#pk-acts').hidden = next;
     $('#pk-size').hidden = next;
@@ -13634,6 +13653,100 @@ body:not(.on-home) .petals { display: none; }
     if (my && L.canRaise) { rg.min = L.minTo; rg.max = L.maxTo; rg.value = to; rg.disabled = L.minTo >= L.maxTo; } else rg.disabled = true;
   }
 
+  /* ---------- Poker online: the room's device deals and keeps the chips; every phone sees only its own cards ---------- */
+  function pkNetStart() {
+    if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+    ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+    const players = N.players.map((q, i) => ({ key: i === 0 ? 'me' : 'net', name: q.name, av: i === 0 ? 'me' : NET_AV[i], remote: i > 0 }))
+      .map((p) => Object.assign(p, { chips: PK_CHIPS, hole: [], bet: 0, total: 0, folded: false, allin: false, out: false, last: '', show: false, win: false, place: 0 }));
+    const g = PK = { online: true, gid: netRand(6, NET_CODE), n: players.length - 1, players, hand: 0, level: 0, dealer: Math.floor(Math.random() * players.length), board: [], deck: [], street: 0, curBet: 0, minRaise: 0, raises: 0, need: new Set(),
+      toAct: -1, wait: false, answer: null, goOn: null, raiseTo: 0, phase: 'deal', msg: '', hl: null, runout: false, found: [], photos: pkPickPhotos(players.length), ko: [], best: -1,
+      fresh: new Set(), flip: new Set(), timers: [], over: false, res: null, remoteWait: null };
+    closeOverlays(); FX.clear(); Music.setEnergy(false);
+    home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; pkEl.hidden = false;
+    $('#pk-prize').hidden = true; $('#pk-banner').classList.remove('show'); $('#result').hidden = true;
+    announce(t('aPkStart'));
+    const E = { g };
+    E.view = (seat) => {
+      const n = g.players.length, rot = (i) => (i < 0 ? -1 : (i - seat + n) % n);
+      const order = g.players.map((_, k) => (seat + k) % n);
+      return { gid: g.gid, hand: g.hand, level: g.level, dealer: rot(g.dealer), toAct: rot(g.toAct), board: g.board.slice(), hl: g.hl ? [...g.hl] : null,
+        curBet: g.curBet, minRaise: g.minRaise, raises: g.raises, phase: g.phase, over: g.over, ask: !!(g.remoteWait && g.remoteWait.i === seat),
+        res: g.res ? { ws: g.res.ws.map(rot), v: g.res.v, amt: order.map((j) => g.res.amt[j] || 0) } : null,
+        players: order.map((j) => { const p = g.players[j]; return { seat: j, key: j === seat ? 'me' : 'net', name: p.name, av: j === seat ? 'me' : NET_AV[j], chips: p.chips, bet: p.bet, total: p.total, folded: p.folded, allin: p.allin, out: p.out, last: p.last, win: p.win, place: p.place, show: p.show,
+          hole: j === seat || p.show ? p.hole.slice() : p.hole.map(() => -1) }; }) };
+    };
+    E.act = (seat, a) => {
+      const w = g.remoteWait;
+      if (!a || a.t !== 'act' || !w || w.i !== seat || PK !== g) return;
+      const L = pkLegal(g, seat);
+      let mv = a.a === 'raise' && L.canRaise ? { a: 'raise', to: Math.max(L.minTo, Math.min(L.maxTo, +a.to || L.minTo)) } : a.a === 'fold' && L.toCall ? { a: 'fold' } : { a: 'call' };
+      g.remoteWait = null; w.resolve(mv);
+    };
+    // a player who has gone (or takes too long) checks when possible, else folds
+    E.tick = () => {
+      const w = g.remoteWait;
+      if (!w || PK !== g) return false;
+      const gone = !N.players[w.i] || !N.players[w.i].on, el = Date.now() - w.t0;
+      if ((gone && el > 1500) || el > 45000) { const L = pkLegal(g, w.i); g.remoteWait = null; w.resolve(L.toCall ? { a: 'fold' } : { a: 'call' }); return true; }
+      return false;
+    };
+    E.stop = () => { if (PK === g) { g.timers.forEach(clearTimeout); g.over = true; } };
+    pkRender();
+    pkLater(g, 600, () => pkLoop(g));
+    return E;
+  }
+  function pkRemote(g, i) {
+    return new Promise((resolve) => { g.remoteWait = { i, resolve, t0: Date.now() }; g.msg = t('netTurnOf', { name: pkName(g.players[i]) }); pkRender(); });
+  }
+  function pkResMsg(g, r) {
+    const nm = (j) => pkName(g.players[j]), w = r.ws[0];
+    if (r.v == null) return w === 0 ? t('pkWinFold', { n: fmtNum(r.amt[w]) }) : t('pkWinFoldOf', { name: nm(w), n: fmtNum(r.amt[w]) });
+    const h = pkHandName(r.v);
+    if (r.ws.length > 1) return t('pkSplit', { names: r.ws.map(nm).join(', '), h });
+    return w === 0 ? t('pkWinMe', { n: fmtNum(r.amt[w]), h }) : t('pkWinOf', { name: nm(w), n: fmtNum(r.amt[w]), h });
+  }
+  // the other phones draw the table the room's device sends, with their own seat at the bottom
+  function pkNetApply(v) {
+    if (!N || N.host || !v.g) return;
+    const gv = v.g;
+    let g = PK;
+    if (!g || !g.guest || g.gid !== gv.gid) {
+      if (S) { stopClock(); if (S.pending) clearTimeout(S.pending.t); S = null; }
+      ucStop(); pzStop(); bwStop(); rwStop(); tbStop(); mqStop(); tvStop(); soStop(); tdStop(); cpStop(); alStop(); gvStop(); gbStop(); scStop(); pkStop(); ppStop();
+      g = PK = { guest: true, online: true, gid: gv.gid, n: gv.players.length - 1, players: [], board: [], fresh: new Set(), flip: new Set(), timers: [], found: [], photos: pkPickPhotos(gv.players.length), ko: [], best: -1,
+        wait: false, raiseTo: 0, over: false, seen: new Set(), outSeen: new Set(), hand: 0, level: 0, dealer: -1, toAct: -1, msg: '', hl: null, phase: '', curBet: 0, minRaise: 0, raises: 0 };
+      closeOverlays(); FX.clear(); Music.setEnergy(false);
+      home.hidden = true; game.hidden = true; mapEl.hidden = true; ucEl.hidden = true; pzEl.hidden = true; onlineEl.hidden = true; bwEl.hidden = true; rwEl.hidden = true; tbEl.hidden = true; mqEl.hidden = true; pkEl.hidden = false;
+      $('#pk-prize').hidden = true; $('#pk-banner').classList.remove('show'); $('#result').hidden = true;
+      announce(t('aPkStart'));
+    }
+    const now = new Set(gv.board.concat(...gv.players.map((p) => p.hole.filter((c) => c >= 0))));
+    const first = !g.seen.size;
+    now.forEach((c) => { if (!g.seen.has(c) && !first) g.fresh.add(c); });
+    if (gv.board.length > g.board.length || (gv.players[0].hole.length && !g.players.length) || (g.players[0] && gv.players[0].hole.length > g.players[0].hole.length)) Sound.deal();
+    const prev = g.players;
+    g.seen = now;
+    const wasWait = g.wait;
+    Object.assign(g, { players: gv.players.map((p) => Object.assign({}, p)), dealer: gv.dealer, toAct: gv.toAct, board: gv.board.slice(), hl: gv.hl ? new Set(gv.hl) : null,
+      level: gv.level, hand: gv.hand, curBet: gv.curBet, minRaise: gv.minRaise, raises: gv.raises, phase: gv.phase });
+    if (prev.length && g.players.some((p, i) => prev[i] && p.bet > prev[i].bet)) Sound.bwClack();
+    g.wait = !!gv.ask && !gv.over && !g.players[0].out;
+    if (g.wait && !wasWait) { g.raiseTo = pkSize(g, 0, g.curBet ? 'min' : 'half'); Sound.turn(); buzz(12); announce(t('pkYourTurn')); }
+    const ta = g.toAct > 0 ? g.players[g.toAct] : null;
+    g.msg = g.wait ? t('pkYourTurn') : gv.res ? pkResMsg(g, gv.res) : ta ? t('netTurnOf', { name: pkName(ta) }) : '';
+    if (gv.res && g.players[0].win && !g.resShown) { g.resShown = true; Sound.rwBank(); }
+    if (!gv.res) g.resShown = false;
+    if (g.players[0].hole.length === 2) { const val = pkScore(g.players[0].hole.concat(g.board)); if (g.board.length === 5) g.best = Math.max(g.best, val); }
+    pkRender();
+    // every player who goes out while you are still in: a photo of Hande
+    g.players.forEach((p, i) => {
+      if (!i || !p.out || g.outSeen.has(p.seat)) return;
+      g.outSeen.add(p.seat); g.ko.push(i);
+      if (!g.players[0].out) { const ph = PHOTO_BY_ID.get(g.photos[g.found.length]); if (ph) { g.found.push(ph); pkPrize(g, ph.id, t('pkKo', { name: pkName(p) })); } }
+    });
+    if (gv.over && !g.over) { const won = !g.players[0].out; setTimeout(() => { if (PK === g) pkOver(g, won); }, 1600); }
+  }
   function pkRenderSetup() {
     const st = pkStats(), n = store.get('hm-pk-n', 3);
     $$('#setup-pk .pk-seg button').forEach((b) => b.setAttribute('aria-pressed', +b.dataset.pkn === n ? 'true' : 'false'));
