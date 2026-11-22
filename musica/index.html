@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Musica · Handemiyy</title>
+<meta name="description" content="La musica per Hande: tutti gli album di Fabio Schettino da ascoltare dentro il sito Handemiyy.">
+<meta name="theme-color" content="#f6ece1">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,600;1,6..96,700&family=Cinzel:wght@600&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: a gold title, the player in a frame, the albums as golden records underneath. One light look, no red. */
+:root { --ink: #2c2128; --muted: #7d6a62; --gold: #c9a469; --gold-d: #8f6630; --ivory: #fffaf2; --line: rgba(201, 164, 105, .45);
+  --display: "Bodoni Moda", Didot, "Times New Roman", serif; --caps: Cinzel, "Bodoni Moda", serif; --ui: Jost, system-ui, -apple-system, "Segoe UI", sans-serif; color-scheme: light; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; min-height: 100vh; color: var(--ink); font: 400 15px/1.5 var(--ui);
+  background: url(../h/silk.webp) center / 520px repeat, linear-gradient(160deg, #f8ecf6, #fbf1e6 50%, #eaf5ef); background-blend-mode: multiply; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 14px max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 16px; }
+.back { align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; padding: 7px 14px 7px 10px; border-radius: 999px; text-decoration: none; color: var(--gold-d);
+  background: rgba(255, 250, 242, .85); box-shadow: inset 0 0 0 1px var(--line), 0 8px 18px -12px rgba(110, 72, 20, .5); font: 600 13px/1 var(--ui); letter-spacing: .04em; }
+.back:focus-visible, .alb:focus-visible { outline: 2px solid var(--gold-d); outline-offset: 2px; }
+header { text-align: center; }
+h1 { margin: 2px 0 0; font: italic 700 clamp(40px, 11vw, 64px)/1 var(--display); background: linear-gradient(100deg, #9a6d2c, #e8c784 35%, #a87a36 55%, #f1d79d 75%, #93672a); -webkit-background-clip: text; background-clip: text; color: transparent; text-wrap: balance; }
+.kick { margin: 8px 0 0; font: 600 12px/1.3 var(--caps); letter-spacing: .28em; text-transform: uppercase; color: var(--ink); }
+.sub { margin: 6px auto 0; max-width: 34em; color: var(--muted); font-size: 14px; }
+.stage { padding: 4px; border-radius: 26px; background: linear-gradient(140deg, #f7e9c9, #c9a469 22%, #fff5dc 46%, #b98f4f 72%, #efd8a8); box-shadow: 0 26px 50px -30px rgba(72, 52, 84, .55); }
+.screen { position: relative; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, #fff8ec, #efdcc0); display: grid; place-items: center; }
+.screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.idle { text-align: center; padding: 20px; color: var(--gold-d); }
+.idle b { display: block; font: italic 700 26px/1.2 var(--display); color: var(--ink); }
+.now { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 22px; font: 600 12px/1.3 var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-d); }
+.label { display: flex; align-items: center; gap: 12px; margin: 6px 0 0; font: 600 12.5px/1.2 var(--caps); letter-spacing: .3em; text-transform: uppercase; color: var(--ink); }
+.label::before, .label::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(201, 164, 105, 0), var(--gold)); }
+.label::after { transform: scaleX(-1); }
+.albums { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.alb { position: relative; display: grid; justify-items: center; gap: 8px; padding: 14px 10px 12px; border: 0; border-radius: 20px; cursor: pointer; font: inherit; color: inherit;
+  background: rgba(255, 250, 242, .9); box-shadow: inset 0 0 0 1px var(--line), 0 12px 24px -18px rgba(110, 72, 20, .55); transition: transform .3s cubic-bezier(.3, 1.4, .5, 1), box-shadow .3s; }
+.alb:hover { transform: translateY(-3px); }
+.alb[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--gold), 0 16px 30px -16px rgba(150, 100, 30, .6); background: linear-gradient(160deg, #fffaf0, #fbeccd); }
+.disc { position: relative; width: 92px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background: repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .0) 0 2px, rgba(255, 255, 255, .14) 2.5px 3px), conic-gradient(from 30deg, #3d3040, #6b5a70, #2f2533, #57485c, #3d3040);
+  box-shadow: 0 8px 16px -8px rgba(40, 25, 40, .6); }
+.disc::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(120deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 40%); }
+.disc i { width: 40%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; font: italic 700 17px/1 var(--display); color: #5b3d14; background: var(--c); box-shadow: inset 0 0 0 2px rgba(255, 250, 235, .7); }
+.alb[aria-pressed="true"] .disc { animation: spin 4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.alb .n { font: italic 700 19px/1.1 var(--display); }
+.alb .s { font-size: 12px; color: var(--muted); }
+.note { margin: 4px 0 0; text-align: center; font-size: 12.5px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .alb[aria-pressed="true"] .disc { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../" id="back">‹ <span data-t="home"></span></a>
+  <header>
+    <h1 data-t="title"></h1>
+    <p class="kick">Fabio Schettino</p>
+    <p class="sub" data-t="sub"></p>
+  </header>
+  <div class="stage"><div class="screen" id="screen"><div class="idle"><b data-t="pick"></b><span data-t="pickSub"></span></div></div></div>
+  <p class="now" id="now" aria-live="polite"></p>
+  <p class="label" data-t="albums"></p>
+  <div class="albums" id="albums"></div>
+  <p class="note" data-t="note"></p>
+</div>
+<script>
+(function () {
+  'use strict';
+  // the albums, in the order they were given; each is a YouTube Music album playlist
+  var LISTS = ['OLAK5uy_nPjGdXrlrzhYxeyK8aU90EqUMpkFbMMeY', 'OLAK5uy_mnG-L6FDlStYx6XtRSP-jNFCDasV5U5YU', 'OLAK5uy_lj-DMnnnu-wV6QrSMLMOuf4Jl0M8uZnPQ',
+    'OLAK5uy_lANK8DeEZjQUfL-32cVQ9XaXxHD1KbMSk', 'OLAK5uy_maUkfiD96fsK0kUwpqDEnf_IkxzHGWcXk', 'OLAK5uy_nL6LEBAcBU_JNsv4HcyoQaztT2jjRnQoU',
+    'OLAK5uy_lSV5Gqave5vk5fGKsRQ02sOqk3M5RmE8Y', 'OLAK5uy_kHIxVKxHvM7tXupvMc_5i4wDv6IcxSto8', 'OLAK5uy_kIpqzc3YOZK_sgWwjW2rucFbDMrrqUKWw',
+    'OLAK5uy_mwVkzcN86iHjSI_GcNCnnXpcf76DYd8u4', 'OLAK5uy_l7wUOl9iW_w6g2JUiGb_AliAWEsFRntRQ', 'OLAK5uy_kT4rElO-0eSGXjwMo3x82qIe1cVlLY7o8',
+    'OLAK5uy_kF1I3Vgi4EwrDWRd-tmRT3S2Ypjj9LgTw'];
+  // album names: fill in here when known; until then the albums are numbered
+  var NAMES = [];
+  var COLORS = ['#f3d99a', '#f6c9d8', '#d9cbf3', '#c9ecdc', '#fbe1c4', '#e9d3f0'];
+  var T = {
+    it: { home: 'Tutti i giochi', title: 'La musica di Hande', sub: 'Tutti gli album, da ascoltare qui. Scegli un disco: parte dal primo brano e va avanti da solo.', pick: 'Scegli un album', pickSub: 'tocca uno dei dischi qui sotto', albums: 'Gli album', album: 'Album', tracks: 'tutto l\'album', now: 'In ascolto', note: 'La musica arriva da YouTube Music.' },
+    tr: { home: 'Tüm oyunlar', title: 'Hande\'nin müziği', sub: 'Bütün albümler burada dinlenebilir. Bir plak seç: ilk şarkıdan başlar ve kendiliğinden devam eder.', pick: 'Bir albüm seç', pickSub: 'aşağıdaki plaklardan birine dokun', albums: 'Albümler', album: 'Albüm', tracks: 'albümün tamamı', now: 'Çalıyor', note: 'Müzik YouTube Music\'ten geliyor.' }
+  };
+  var lang = 'it';
+  try { var sl = JSON.parse(localStorage.getItem('hm-lang')); if (sl === 'it' || sl === 'tr') lang = sl; else if (/^tr/i.test(navigator.language || '')) lang = 'tr'; } catch (e) { if (/^tr/i.test(navigator.language || '')) lang = 'tr'; }
+  document.documentElement.lang = lang;
+  var t = function (k) { return T[lang][k]; };
+  Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function (el) { el.textContent = t(el.getAttribute('data-t')); });
+  var box = document.getElementById('albums'), screen = document.getElementById('screen'), now = document.getElementById('now');
+  var name = function (i) { return NAMES[i] || (t('album') + ' ' + (i + 1)); };
+  LISTS.forEach(function (id, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'alb'; b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span class="disc" aria-hidden="true"><i style="--c:' + COLORS[i % COLORS.length] + '">' + (i + 1) + '</i></span><span class="n"></span><span class="s"></span>';
+    b.querySelector('.n').textContent = name(i); b.querySelector('.s').textContent = t('tracks');
+    b.addEventListener('click', function () { play(i); });
+    box.appendChild(b);
+  });
+  function play(i) {
+    Array.prototype.forEach.call(box.children, function (b, k) { b.setAttribute('aria-pressed', String(k === i)); });
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/videoseries?list=' + LISTS[i] + '&autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    f.title = name(i);
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    screen.innerHTML = ''; screen.appendChild(f);
+    now.textContent = t('now') + ' · ' + name(i);
+    try { localStorage.setItem('hm-music-album', String(i)); } catch (e) { /* not saved */ }
+    if (window.matchMedia('(max-width: 700px)').matches) screen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+})();
+</script>
+</body>
+</html>
