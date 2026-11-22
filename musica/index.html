@@ -118,7 +118,8 @@ h1 { margin: 2px 0 0; font: italic 700 clamp(40px, 11vw, 64px)/1 var(--display);
   Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function (el) { el.textContent = t(el.getAttribute('data-t')); });
   var box = document.getElementById('albums'), screen = document.getElementById('screen'), now = document.getElementById('now'), detail = document.getElementById('detail');
   // what the site learns from YouTube (track ids, titles, album names), kept on this device so it is read only once
-  var KEY = 'hm-mu-meta-v1', META = {};
+  try { localStorage.removeItem('hm-mu-meta-v1'); } catch (e) { /* nothing */ }
+  var KEY = 'hm-mu-meta-v2', META = {};
   try { META = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { META = {}; }
   var saveMeta = function () { try { localStorage.setItem(KEY, JSON.stringify(META)); } catch (e) { /* not saved */ } };
   var info = function (i) { return META[LISTS[i]] || (META[LISTS[i]] = { ids: [], titles: {}, name: '' }); };
@@ -215,29 +216,34 @@ h1 { margin: 2px 0 0; font: italic 700 clamp(40px, 11vw, 64px)/1 var(--display);
         onReady: function () { ready = true; if (wantPlay) { play(wantPlay[0], wantPlay[1]); wantPlay = null; } },
         onStateChange: function (e) {
           if (e.data === 1 && playing >= 0) {
-            var k = YTP.getPlaylistIndex(), ids = YTP.getPlaylist() || [], inf = info(playing);
-            if (ids.length && !inf.ids.length) { inf.ids = ids; saveMeta(); paintCard(playing); if (cur === playing) openAlbum(playing, false); }
-            curTrack = k; markTrack();
+            curTrack = YTP.getPlaylistIndex(); markTrack();
           }
         } } });
-    var el = document.getElementById('scan');
-    scanner = new YT.Player(el, { width: '2', height: '2', host: 'https://www.youtube-nocookie.com', playerVars: { listType: 'playlist', list: LISTS[0], autoplay: 0, mute: 1 },
-      events: { onReady: function () { scanReady = true; LISTS.forEach(function (id, i) { if (!info(i).ids.length) queue.push(i); }); nextScan(); } } });
+    scanReady = true; LISTS.forEach(function (id, i) { if (!info(i).ids.length) queue.push(i); }); nextScan();
   };
   function scanNow(i) { if (queue.indexOf(i) > 0) { queue.splice(queue.indexOf(i), 1); queue.unshift(i); } else if (queue.indexOf(i) < 0 && scanning !== i) queue.unshift(i); if (scanReady && scanning < 0) nextScan(); }
+  // each album is read by its own fresh player, so one album's songs can never end up under another
+  var taken = {};
   function nextScan() {
     if (!queue.length) { scanning = -1; return; }
     var i = queue.shift(); scanning = i;
     if (info(i).ids.length) { nextScan(); return; }
-    try { scanner.cuePlaylist({ listType: 'playlist', list: LISTS[i] }); } catch (e) { /* skip */ }
-    var tries = 0, tm = setInterval(function () {
-      var ids = null; try { ids = scanner.getPlaylist(); } catch (e) { ids = null; }
-      if ((ids && ids.length) || ++tries > 30) {
-        clearInterval(tm);
-        if (ids && ids.length) { info(i).ids = ids.slice(); saveMeta(); paintCard(i); fetchTitles(i); if (cur === i) openAlbum(i, false); }
-        scanning = -1; nextScan();
-      }
-    }, 300);
+    var host = document.getElementById('scan'), el = document.createElement('div');
+    host.innerHTML = ''; host.appendChild(el);
+    var done = false, tm = 0, p = null;
+    var finish = function (ids) {
+      if (done) return; done = true; clearInterval(tm);
+      // a list already given to another album is a leftover, not this album
+      if (ids && ids.length && !taken[ids[0]]) { taken[ids[0]] = 1; info(i).ids = ids.slice(); saveMeta(); paintCard(i); fetchTitles(i); if (cur === i) openAlbum(i, false); }
+      try { p.destroy(); } catch (e) { /* gone */ }
+      scanning = -1; setTimeout(nextScan, 150);
+    };
+    p = new YT.Player(el, { width: '2', height: '2', host: 'https://www.youtube-nocookie.com', playerVars: { listType: 'playlist', list: LISTS[i], autoplay: 0, mute: 1 },
+      events: { onReady: function () {
+        var tries = 0;
+        tm = setInterval(function () { var ids = null; try { ids = p.getPlaylist(); } catch (e) { ids = null; } if ((ids && ids.length) || ++tries > 30) finish(ids); }, 300);
+      }, onError: function () { finish(null); } } });
+    setTimeout(function () { finish(null); }, 15000);
   }
   function play(i, k) {
     playing = i; curTrack = k;
